@@ -22,10 +22,13 @@ adversarial-reviewed (latest round fixed the "unknown=safe" risk-gauge blocker).
 data/master byte-identical to backup.**
 
 ## 🏃 IN PROGRESS
-- **(running) D — conservative code dedups** (`pipeline/lib.py`, `_p()`→`spine.pct()`, `scrapers/http.py`),
-  full-suite + report-diff after every change; compute() split SKIPPED (your call).
+- Nothing running. The E→git→C→D queue is complete (all committed). Awaiting your return.
 
-## ✅ DONE this run (E, git, wipeout-fold, C) — see DONE.md
+## ✅ DONE this run (E, git, wipeout-fold, C, D-safe) — see DONE.md
+- **D (conservative) — DONE (the safe, verifiable part):** `_p()`→`spine.pct_num` dedup across 19 findings,
+  VERIFIED report byte-identical (diff=0) + 77 tests. **Deferred** (need verification infra first — bundle with
+  TEST-1): `pipeline/lib.py` dedup (touches the substrate builder; needs package setup + substrate-diff) and
+  `scrapers/http.py` (untested code — can't verify safely without scraper tests). compute() split skipped (your call).
 - **C — DRHP: productionized + gated, staged NOT folded (your "review" branch).** Prototype preserved into
   `tools/drhp/` (was ephemeral /tmp) with a new `pat==op` PAT-suspect guard. DLF's suspect PAT withheld.
   16 net_sales staged but only 2 INDEPENDENTLY cross-validated + PAT unreliable → **review-needed, not folded**

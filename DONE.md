@@ -228,3 +228,15 @@ Cleanup: archived dead scratch (`archive/research_scratch/`), refreshed TODO/DON
   (systematic) → quarantined**; 25 in review queue. Nothing folded. Cross-validation + extra-source agents done
   (chittorgarh-React-render lead tested & closed; DRHP PDFs confirmed the only viable bulk source).
 - Verified after all changes: 77 tests, 29 findings, app healthy, data/master byte-identical to backup.
+
+## 2026-06-02 (autonomous 6h run) — E → git → wipeout-fold → C → D
+- **E docs cleanup:** docs/research split active/archive (29 archived), README pointer, decisions.md→discussion.md.
+- **git init — LOCAL-ONLY** (user standing instruction: never connect to a remote). Baseline + per-milestone commits.
+- **Wipeout-safety folded into data_informed score (validated):** weight 0.13; OOS re-confirmed 3y 55→77pp,
+  1y +1.9→+3.6pp, holds across splits. First signal to earn its way in under evolve-only-if-robust. Presets unchanged.
+- **C DRHP:** productionized prototype into tools/drhp/ (was ephemeral /tmp) + pat==op PAT-suspect guard; DLF's
+  suspect PAT withheld; staged NOT folded (only 2/16 net_sales independently validated → review-needed). Bulk deferred.
+- **D (conservative):** _p()→spine.pct_num dedup across 19 findings, report byte-identical, 77 tests. pipeline/lib.py
+  + scrapers/http.py dedup DEFERRED (need substrate-diff / scraper-test verification first).
+- Also fixed L3-1 live date bug (config.AS_OF_DATE single source), L3-2 (config.DEAD_MONEY_RETURN), stale doc counts
+  (29/77), requirements + .gitignore. Status files consolidated to STATUS.md.
