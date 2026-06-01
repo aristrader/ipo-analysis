@@ -1,0 +1,340 @@
+isin,company,field,old,new,severity
+INE0R6801013,Varyaa Creations Ltd.,ticker_bo,VARYAA,544168,BSE_FMT
+INE0SCB01016,Aztec Fluids & Machinery Ltd.,ticker_bo,AZTEC,544177,BSE_FMT
+INE0PZA01015,Sameera Agro & Infra Ltd.,listing_open,36,180.00,SOFT
+INE0LY301010,Share Samadhan Ltd.,ticker_bo,SSL,544251,BSE_FMT
+INE0YG001013,Star Imaging & Path Lab Ltd.,ticker_bo,STARIMAGIN,544482,BSE_FMT
+INE00TV01023,Sudarshan Pharma Industries Ltd.,ticker_bo,SUDARSHAN,543828,BSE_FMT
+INE236E01022,Ellenbarrie Industrial Gases Ltd.,listing_open,455.55,492.00,SOFT
+INE0XAY01012,Toss The Coin Ltd.,ticker_bo,TTC,544303,BSE_FMT
+INE0YRO01015,Shiv Texchem Ltd.,ticker_bo,SHIVTEXCHEM,544272,BSE_FMT
+INE0SGR01013,Shivam Chemicals Ltd.,ticker_bo,SHIVAM,544165,BSE_FMT
+INE1NQ501012,Neptune Logitek Ltd.,ticker_bo,NEPLOG,544663,BSE_FMT
+INE0POP01017,AccelerateBS India Ltd.,ticker_bo,ACCELERATE,543938,BSE_FMT
+INE0POP01017,AccelerateBS India Ltd.,listing_open,68.44,109.50,SOFT
+INE0VN801010,Rajesh Power Services Ltd.,ticker_bo,RAJESH,544291,BSE_FMT
+INE0OLH01013,Macfos Ltd.,ticker_bo,ROBU,543787,BSE_FMT
+INE0OLH01013,Macfos Ltd.,listing_open,167.27,184.00,SOFT
+INE0QJ901011,Digikore Studios Ltd.,listing_open,135,270.00,SOFT
+INE01R501028,Vikran Engineering Ltd.,issue_price,75,97.00,SOFT
+INE15XJ01010,Aptus Pharma Ltd.,ticker_bo,APPL,544529,BSE_FMT
+INE15XJ01010,Aptus Pharma Ltd.,listing_open,32.32,80.80,SOFT
+INE1IE301018,K.V.Toys India Ltd.,ticker_bo,KVTOYS,544641,BSE_FMT
+INE0NXA01015,Comrade Appliances Ltd.,ticker_bo,COMRADE,543921,BSE_FMT
+INE1ABX01018,Unified Data-Tech Solutions Ltd.,ticker_bo,UNIFIED,544406,BSE_FMT
+INE0OMZ01013,Vruddhi Engineering Works Ltd.,ticker_bo,VRUDDHI,544157,BSE_FMT
+INE1IJQ01026,Bai Kakaji Polymers Ltd.,ticker_bo,BAIKAKAJI,544670,BSE_FMT
+INE0RWU01016,GB Logistics Commerce Ltd.,ticker_bo,GBLOGISTIC,544348,BSE_FMT
+INE517M01028,Polysil Irrigation Systems Ltd.,listing_open,46.35,56.00,SOFT
+INE0OYK01010,Rudra Gas Enterprise Ltd.,ticker_bo,RUDRAGAS,544121,BSE_FMT
+INE0V0L01028,Monarch Surveyors & Engineering Consultants Ltd.,ticker_bo,MSECL,544453,BSE_FMT
+INE111601014,Icodex Publishing Solutions Ltd.,ticker_bo,ICODEX,544483,BSE_FMT
+INE0SFZ01018,Broach Lifecare Hospital Ltd.,ticker_bo,BROACH,544231,BSE_FMT
+INE0T3401029,Aelea Commodities Ltd.,ticker_bo,ACLD,544213,BSE_FMT
+INE0SUM01015,DSM Fresh Foods Ltd.,ticker_bo,ZAPPFRESH,544568,BSE_FMT
+INE0FFF01017,L.K.Mehta Polymers Ltd.,ticker_bo,LKMEHTA,544366,BSE_FMT
+INE0X4A01013,Apollo Techno Industries Ltd.,ticker_bo,ATIL,544671,BSE_FMT
+INE0QP701017,Valplast Technologies Ltd.,ticker_bo,VALPLAST,544565,BSE_FMT
+INE0YON01014,Malpani Pipes & Fittings Ltd.,ticker_bo,MALPANI,544351,BSE_FMT
+INE0P7001013,Sancode Technologies Ltd.,ticker_bo,SANCODE,543897,BSE_FMT
+INE0OKG01017,Prospect Commodities Ltd.,ticker_bo,PCL,543814,BSE_FMT
+INE0PUC01020,SAR Televenture Ltd.,listing_open,90.93,105.00,SOFT
+INE0RQZ01017,Esconet Technologies Ltd.,listing_open,248.7,290.00,SOFT
+INE0OPC01015,Interiors & More Ltd.,listing_open,135,270.00,SOFT
+INE0QIS01011,Shree Marutinandan Tubes Ltd.,ticker_bo,SHREE,544083,BSE_FMT
+INE0Q2Z01013,Benchmark Computer Solutions Ltd.,ticker_bo,BENCHMARK,544052,BSE_FMT
+INE0Q6L01014,Brisk Technovision Ltd.,ticker_bo,BRISK,544101,BSE_FMT
+INE1PJP01015,M P K Steels (I) Ltd.,ticker_bo,MPKSTEELS,544553,BSE_FMT
+INE0TI501017,Praruh Technologies Ltd.,ticker_bo,PRARUH,544538,BSE_FMT
+INE0PSJ01011,Sahara Maritime Ltd.,ticker_bo,SMARITIME,544056,BSE_FMT
+INE346R01013,Nilachal Carbo Metalicks Ltd.,ticker_bo,NCML,544510,BSE_FMT
+INE0QA901010,Rapid Multimodal Logistics Ltd.,ticker_bo,RAPID,544237,BSE_FMT
+INE1P1A01018,Umiya Mobile Ltd.,ticker_bo,UML,544464,BSE_FMT
+INE0SMW01011,Paradeep Parivahan Ltd.,ticker_bo,PPARIVAH,544383,BSE_FMT
+INE0QUL01011,Nexxus Petro Industries Ltd.,ticker_bo,NEXXUS,544265,BSE_FMT
+INE0RDR01012,Swashthik Plascon Ltd.,ticker_bo,SPL,544035,BSE_FMT
+INE0OUW01013,Durlax Top Surface Ltd.,listing_open,100.29,109.00,SOFT
+INE0QI101019,Mish Designs Ltd.,ticker_bo,MISHDESIGN,544015,BSE_FMT
+INE0NZF01019,Alphalogic Industries Ltd.,ticker_bo,ALPHAIND,543937,BSE_FMT
+INE0NZF01019,Alphalogic Industries Ltd.,listing_open,48,96.00,SOFT
+INE0LS001014,Usha Financial Services Ltd.,listing_open,82,164.00,SOFT
+INE0Y0E01012,Icon Facilitators Ltd.,ticker_bo,ICON,544426,BSE_FMT
+INE0HSD01011,Fabtech Technologies Cleanrooms Ltd.,ticker_bo,FABCLEAN,544332,BSE_FMT
+INE1U2R01013,SSMD Agrotech India Ltd.,ticker_bo,SSMD,544621,BSE_FMT
+INE1B3501014,Zelio E-Mobility Ltd.,ticker_bo,ZELIO,544563,BSE_FMT
+INE0A6N01026,Manoj Ceramic Ltd.,ticker_bo,MCPL,544073,BSE_FMT
+INE1IBY01019,Essex Marine Ltd.,ticker_bo,ESSEX,544475,BSE_FMT
+INE0WCH01015,Jungle Camps India Ltd.,ticker_bo,JUNGLECAMP,544304,BSE_FMT
+INE0OK701014,Nirman Agri Genetics Ltd.,listing_open,91.95,102.00,SOFT
+INE833Q01012,Mittal Sections Ltd.,ticker_bo,MITTALSTL,544575,BSE_FMT
+INE0LB101011,NACDAC Infrastructure Ltd.,ticker_bo,NACDAC,544313,BSE_FMT
+INE0SJX01015,Asston Pharmaceuticals Ltd.,ticker_bo,APL,544445,BSE_FMT
+INE0PTR01012,Rockingdeals Circular Economy Ltd.,listing_open,261.96,300.00,SOFT
+INE1F9M01018,Dachepalli Publishers Ltd.,ticker_bo,DACHEPALLI,544667,BSE_FMT
+INE0ON201012,Srivari Spices & Foods Ltd.,listing_open,93.43,101.50,SOFT
+INE1EUB01016,Shlokka Dyes Ltd.,ticker_bo,SHLOKKA,544582,BSE_FMT
+INE013V01011,Shelter Pharma Ltd.,ticker_bo,SHELTER,543963,BSE_FMT
+INE1I1301016,Workmates Core2Cloud Solution Ltd.,ticker_bo,WORKMATES,544610,BSE_FMT
+INE0P9J01013,AMIC Forging Ltd.,ticker_bo,AMIC,544037,BSE_FMT
+INE0QHY01011,GConnect Logitech & Supply Chain Ltd.,ticker_bo,GCONNECT,544156,BSE_FMT
+INE0PA401012,Identixweb Ltd.,ticker_bo,IDENTIXWEB,544388,BSE_FMT
+INE0O6A01019,ITCONS E-Solutions Ltd.,ticker_bo,ITCONS,543806,BSE_FMT
+INE0W4D01018,Ravelcare Ltd.,ticker_bo,RAVEL,544629,BSE_FMT
+INE0FRK01020,Motisons Jewellers Ltd.,listing_open,10.39,103.90,SOFT
+INE18PB01017,Bhavik Enterprises Ltd.,ticker_bo,BHAVIK,544551,BSE_FMT
+INE0XBS01012,Airfloa Rail Technology Ltd.,ticker_bo,AIRFLOA,544516,BSE_FMT
+INE0UJF01018,Sharvaya Metals Ltd.,ticker_bo,SHARVAYA,544506,BSE_FMT
+INE0XZB01017,Krupalu Metals Ltd.,ticker_bo,KRUPALU,544509,BSE_FMT
+INE0D8001018,Shining Tools Ltd.,ticker_bo,SHTL,544607,BSE_FMT
+INE00M901018,Interarch Building Products Ltd.,listing_open,1291.2,1222.00,SOFT
+INE0OWC01011,Khazanchi Jewellers Ltd.,ticker_bo,KHAZANCHI,543953,BSE_FMT
+INE10CM01027,Sunsky Logistics Ltd.,ticker_bo,SUNSKY,544566,BSE_FMT
+INE0O8901016,Exhicon Events Media Solutions Ltd.,ticker_bo,EXHICON,543895,BSE_FMT
+INE0SIK01014,Gujarat Peanut & Agri Products Ltd.,ticker_bo,GPAPL,544548,BSE_FMT
+INE12IB01015,Infonative Solutions Ltd.,ticker_bo,INFONATIVE,544393,BSE_FMT
+INE0ECP01024,HMA Agro Industries Ltd.,listing_open,61.5,615.00,SOFT
+INE916Y01027,Akme Fintrade (India) Ltd.,listing_open,12.57,125.70,SOFT
+INE0V8A01016,Karbonsteel Engineering Ltd.,ticker_bo,KARBON,544511,BSE_FMT
+INE13YH01017,SK Minerals & Additives Ltd.,ticker_bo,SKM,544584,BSE_FMT
+INE0LCG01010,Monika Alcobev Ltd.,ticker_bo,MONIKA,544451,BSE_FMT
+INE602W01027,Senco Gold Ltd.,listing_open,215.5,431.00,SOFT
+INE0NJ001013,CFF Fluid Control Ltd.,ticker_bo,CFF,543920,BSE_FMT
+INE0RDM01013,Deepak Chemtex Ltd.,ticker_bo,DEEPAKCHEM,544036,BSE_FMT
+INE0PPK01015,Orient Technologies Ltd.,listing_open,263.64,290.00,SOFT
+INE0NLJ01011,Labelkraft Technologies Ltd.,ticker_bo,LABELKRAFT,543830,BSE_FMT
+INE0XX801016,Sugs Lloyd Ltd.,ticker_bo,SUGSLLOYD,544501,BSE_FMT
+INE0SFA01011,Sihora Industries Ltd.,ticker_bo,SIHORA,544585,BSE_FMT
+INE12QA01010,Landmark Immigration Consultants Ltd.,ticker_bo,LGLL,544341,BSE_FMT
+INE0QSK01017,Siyaram Recycling Industries Ltd.,ticker_bo,SIYARAM,544047,BSE_FMT
+INE1CJB01013,Luxury Time Ltd.,ticker_bo,LUXURY,544635,BSE_FMT
+INE0VWL01017,Chemkart India Ltd.,ticker_bo,CHEMKART,544442,BSE_FMT
+INE1LDV01015,True Colors Ltd.,ticker_bo,TRUECOLORS,544531,BSE_FMT
+INE0VNH01014,NAPS Global India Ltd.,ticker_bo,NAPSGLOBAL,544373,BSE_FMT
+INE0KWJ01014,Retaggio Industries Ltd.,ticker_bo,RETAGGIO,544391,BSE_FMT
+INE10XS01012,Sampat Aluminium Ltd.,ticker_bo,SAMPAT,544520,BSE_FMT
+INE0RNZ01014,Shri Balaji Valve Components Ltd.,ticker_bo,SBVCL,544074,BSE_FMT
+INE0TD301017,Shanmuga Hospital Ltd.,ticker_bo,SHANMUGA,544365,BSE_FMT
+INE0M4D01010,Standard Glass Lining Technology Ltd.,ticker,SGLTL,SETL,HARD
+INE301O01023,National Securities Depository Ltd.,ticker_bo,NSDL,544467,BSE_FMT
+INE0QBD01018,Hamps Bio Ltd.,ticker_bo,HAMPS,544312,BSE_FMT
+INE0QBD01018,Hamps Bio Ltd.,listing_open,48.45,96.90,SOFT
+INE1DKT01011,Riddhi Display Equipments Ltd.,ticker_bo,RDEL,544640,BSE_FMT
+INE0S6R01027,Dindigul Farm Product Ltd.,ticker_bo,DFPL,544201,BSE_FMT
+INE0MIO01019,Organic Recycling Systems Ltd.,ticker_bo,ORGANICREC,543997,BSE_FMT
+INE0RUY01012,Astron Multigrain Ltd.,ticker_bo,ASTRONMULT,544628,BSE_FMT
+INE0U9D01019,Mahamaya Lifesciences Ltd.,ticker_bo,MAHALIFE,544611,BSE_FMT
+INE0N5O01013,Sonalis Consumer Products Ltd.,ticker_bo,SONALIS,543924,BSE_FMT
+INE0O9L01010,Shipwaves Online Ltd.,ticker_bo,SHIPWAVES,544646,BSE_FMT
+INE0Q7P01013,Kody Technolab Ltd.,listing_open,85,170.00,SOFT
+INE0XRR01010,AJC Jewel Manufacturers Ltd.,ticker_bo,AJCJEWEL,544425,BSE_FMT
+INE0O4601016,Sealmatic India Ltd.,ticker_bo,SEALMATIC,543782,BSE_FMT
+INE0O4601016,Sealmatic India Ltd.,listing_open,187.5,225.00,SOFT
+INE0NPA01011,Patron Exim Ltd.,ticker_bo,PATRON,543798,BSE_FMT
+INE1E4401010,Exato Technologies Ltd.,ticker_bo,EXATO,544626,BSE_FMT
+INE0FK501019,Indobell Insulations Ltd.,ticker_bo,INDOBELL,544334,BSE_FMT
+INE0ZN101029,Rachit Prints Ltd.,ticker_bo,RACHIT,544503,BSE_FMT
+INE0QSB01016,Amkay Products Ltd.,ticker_bo,AMKAY,544169,BSE_FMT
+INE0TIR01017,Swasth Foodtech India Ltd.,ticker_bo,SWASTH,544368,BSE_FMT
+INE0QZR01017,Methodhub Software Ltd.,ticker_bo,METHODHUB,544637,BSE_FMT
+INE0XLO01010,Admach Systems Ltd.,ticker_bo,ADMACH,544669,BSE_FMT
+INE0QMV01017,BharatRohan Airborne Innovations Ltd.,ticker_bo,BHARATROHAN,544535,BSE_FMT
+INE0U6201010,Subam Papers Ltd.,ticker_bo,SUBAM,544267,BSE_FMT
+INE471R01019,NeoPolitan Pizza & Foods Ltd.,ticker_bo,NPFL,544269,BSE_FMT
+INE0RUJ01013,GEM Enviro Management Ltd.,ticker_bo,GEMENVIRO,544199,BSE_FMT
+INE0OJZ01019,Shoora Designs Ltd.,ticker_bo,SHOORA,543970,BSE_FMT
+INE0ORA01015,Cosmic CRF Ltd.,ticker_bo,COSMICCRF,543928,BSE_FMT
+INE0QUV01010,Sattrix Information Security Ltd.,ticker_bo,SATTRIX,544189,BSE_FMT
+INE0R4W01015,Piotex Industries Ltd.,ticker_bo,PIOTEX,544178,BSE_FMT
+INE0OLZ01015,Harshdeep Hortico Ltd.,ticker_bo,HARSHDEEP,544105,BSE_FMT
+INE0YJA01011,Nanta Tech Ltd.,ticker_bo,NANTA,544668,BSE_FMT
+INE0LDI01022,Innokaiz India Ltd.,ticker_bo,INNOKAIZ,543905,BSE_FMT
+INE0EOJ01014,K K Silk Mills Ltd.,ticker_bo,KKSILK,544624,BSE_FMT
+INE623Y01011,Wise Travel India Ltd.,listing_open,233,195.00,SOFT
+INE0PTF01017,Swastika Castal Ltd.,ticker_bo,SWASTIKAAL,544452,BSE_FMT
+INE0A8401016,Citichem India Ltd.,ticker_bo,CITICHEM,544324,BSE_FMT
+INE0QQJ01021,Parmeshwar Metal Ltd.,ticker_bo,PARMESHWAR,544330,BSE_FMT
+INE0P1Q01015,Service Care Ltd.,listing_open,64.35,70.90,SOFT
+INE0RIQ01013,Associated Coaters Ltd.,ticker_bo,ASSOCIATED,544183,BSE_FMT
+INE0M8R01011,Koura Fine Diamond Jewelry Ltd.,ticker_bo,KOURA,544139,BSE_FMT
+INE0O1T01010,Maiden Forgings Ltd.,ticker_bo,MAIDEN,543874,BSE_FMT
+INE10XK01019,Prodocs Solutions Ltd.,ticker_bo,PRODOCS,544643,BSE_FMT
+INE0OJ401014,Bizotic Commercial Ltd.,ticker_bo,BIZOTIC,543926,BSE_FMT
+INE0SOY01013,TAC Infosec Ltd.,listing_open,145,290.00,SOFT
+INE0SMU01015,TGIF Agribusiness Ltd.,ticker_bo,TGIF,544175,BSE_FMT
+INE0NYN01016,ResGen Ltd.,ticker_bo,RESGEN,543805,BSE_FMT
+INE0Q0M01015,Veefin Solutions Ltd.,ticker_bo,VEEFIN,543931,BSE_FMT
+INE0AH901011,Chatha Foods Ltd.,ticker_bo,CHATHA,544151,BSE_FMT
+INE12P101018,Chiraharit Ltd.,ticker_bo,CHIRAHARIT,544561,BSE_FMT
+INE0Q5D01013,Accent Microcell Ltd.,listing_open,283.77,300.00,SOFT
+INE0JWS01017,Valiant Laboratories Ltd.,listing_open,149.43,161.00,SOFT
+INE104201012,Austere Systems Ltd.,ticker_bo,AUSTERE,544505,BSE_FMT
+INE15MX01014,Abril Paper Tech Ltd.,ticker_bo,ABRIL,544500,BSE_FMT
+INE0MGA01012,Karnika Industries Ltd.,listing_open,16.2,81.00,SOFT
+INE0Q3401017,Sodhani Academy of Fintech Enablers Ltd.,ticker_bo,SAFE,544257,BSE_FMT
+INE0PYT01018,Euphoria Infotech (India) Ltd.,ticker_bo,EUPHORIAIT,544094,BSE_FMT
+INE0N6U01018,Kalyani Cast Tech Ltd.,ticker_bo,KALYANI,544023,BSE_FMT
+INE0UZO01024,Neetu Yoshi Ltd.,ticker_bo,NEETUYOSHI,544434,BSE_FMT
+INE0TL001013,Cryogenic OGS Ltd.,ticker_bo,CRYOGENIC,544440,BSE_FMT
+INE0VYX01018,Nukleus Office Solutions Ltd.,ticker_bo,NUKLEUS,544370,BSE_FMT
+INE0PLZ01012,Sunrest Lifescience Ltd.,listing_open,74.96,84.00,SOFT
+INE0UH001016,Mother Nutri Foods Ltd.,ticker_bo,MNFL,544623,BSE_FMT
+INE0RDJ01019,Vandan Foods Ltd.,ticker_bo,VANDAN,544436,BSE_FMT
+INE1B4801017,Chatterbox Technologies Ltd.,ticker_bo,CHTR,544546,BSE_FMT
+INE0O4R01018,Kore Digital Ltd.,listing_open,67,201.00,SOFT
+INE0QZ901011,Magenta Lifecare Ltd.,ticker_bo,MAGENTA,544188,BSE_FMT
+INE1LJ801017,B.D.Industries (Pune) Ltd.,ticker_bo,BDI,544468,BSE_FMT
+INE0ABU01016,PDP Shipping & Projects Ltd.,ticker_bo,PSPL,544378,BSE_FMT
+INE1KLZ01011,Systematic Industries Ltd.,ticker_bo,SYSTEMATIC,544541,BSE_FMT
+INE1KH601014,Mehul Colours Ltd.,ticker_bo,MEHUL,544472,BSE_FMT
+INE0MRE01011,Infinium Pharmachem Ltd.,listing_open,70.75,141.50,SOFT
+INE0QOQ01013,Finelistings Technologies Ltd.,ticker_bo,FTL,544173,BSE_FMT
+INE0QXT01018,Dolphin Kitchen Utensils and Appliances Ltd.,ticker_bo,DKUAL,544170,BSE_FMT
+INE0Q9W01015,Faalcon Concepts Ltd.,ticker_bo,FAALCON,544164,BSE_FMT
+INE1DRH01011,Jay Ambe Supermarkets Ltd.,ticker_bo,CITYSQUARE,544514,BSE_FMT
+INE0SK201011,Resourceful Automobile Ltd.,ticker_bo,RAL,544236,BSE_FMT
+INE0DN001027,Asarfi Hospital Ltd.,ticker_bo,ASARFI,543943,BSE_FMT
+INE0OH401016,KK Shah Hospitals Ltd.,ticker_bo,KKSHL,544013,BSE_FMT
+INE0MNP01016,VVIP Infratech Ltd.,ticker_bo,VVIPIL,544219,BSE_FMT
+INE0PQK01013,Falcon Technoprojects India Ltd.,listing_open,60.44,84.00,SOFT
+INE0QQG01019,Royal Sense Ltd.,ticker_bo,ROYAL,544143,BSE_FMT
+INE0ITO01014,Essen Speciality Films Ltd.,listing_open,116.67,140.00,SOFT
+INE0RJ901010,Srigee DLM Ltd.,ticker_bo,SRIGEE,544399,BSE_FMT
+INE0P3N01018,Kaka Industries Ltd.,ticker_bo,KAKA,543939,BSE_FMT
+INE0SC101013,Supertech EV Ltd.,ticker_bo,SEVL,544428,BSE_FMT
+INE05DH01017,Atmastco Ltd.,listing_open,105.3,91.00,SOFT
+INE093A01041,Hexaware Technologies Ltd.,listing_open,110.3,731.00,SOFT
+INE1ITY01011,Global Ocean Logistics India Ltd.,ticker_bo,GLOBALLOG,544665,BSE_FMT
+INE1IIQ01028,Solvex Edibles Ltd.,ticker_bo,SOLVEX,544539,BSE_FMT
+INE0R4701017,Alpex Solar Ltd.,listing_open,399.7,329.00,SOFT
+INE0SVZ01015,Safecure Services Ltd.,ticker_bo,SAFECURE,544596,BSE_FMT
+INE0Q8P01029,Bondada Engineering Ltd.,ticker_bo,BONDADA,543971,BSE_FMT
+INE0Q8P01029,Bondada Engineering Ltd.,listing_open,28.5,142.50,SOFT
+INE0M7501019,City Crops Agro Ltd.,ticker_bo,CCAL,544000,BSE_FMT
+INE0W5Q01017,Justo Realfintech Ltd.,ticker_bo,JUSTO,544542,BSE_FMT
+INE0UMC01019,GLEN Industries Ltd.,ticker_bo,GLEN,544444,BSE_FMT
+INE0QZF01012,Gabriel Pet Straps Ltd.,ticker_bo,GPSL,544108,BSE_FMT
+INE0RXS01018,Shreenath Paper Products Ltd.,ticker_bo,SHREENATH,544372,BSE_FMT
+INE510U01018,Pune E-Stock Broking Ltd.,ticker_bo,PESB,544141,BSE_FMT
+INE0CFH01028,Rikhav Securities Ltd.,ticker_bo,RIKHAV,544340,BSE_FMT
+INE0P4701011,Sahaj Solar Ltd.,listing_open,171,342.00,SOFT
+INE161701011,Patel Chem Specialities Ltd.,ticker_bo,PATELCHEM,544460,BSE_FMT
+INE0Q6901013,Vrundavan Plantation Ltd.,ticker_bo,VPL,544011,BSE_FMT
+INE0ZDY01011,Abram Food Ltd.,ticker_bo,ABRFL,544422,BSE_FMT
+INE0TGG01014,Desco Infratech Ltd.,ticker_bo,DESCO,544387,BSE_FMT
+INE0ZHT01012,Technichem Organics Ltd.,ticker_bo,TECHNICHEM,544327,BSE_FMT
+INE1GUJ01014,Game Changers Texfab Ltd.,ticker_bo,TRADEUNO,544594,BSE_FMT
+INE0TJ801010,L.T.Elevator Ltd.,ticker_bo,LTELEVATOR,544518,BSE_FMT
+INE0UK501010,Three M Paper Boards Ltd.,ticker_bo,THREEMPAPE,544214,BSE_FMT
+INE10XX01012,Spinaroo Commercial Ltd.,ticker_bo,SPINAROO,544392,BSE_FMT
+INE0Q1S01010,Sunita Tools Ltd.,ticker_bo,SUNITATOOL,544001,BSE_FMT
+INE0H9P01028,Arisinfra Solutions Ltd.,ticker,ARISINFRA,ARIS,HARD
+INE1MF401019,Western Overseas Study Abroad Ltd.,ticker_bo,WOSAL,544636,BSE_FMT
+INE0OXY01013,Afcom Holdings Ltd.,ticker_bo,AFCOM,544224,BSE_FMT
+INE0NTC01019,Retina Paints Ltd.,ticker_bo,RETINA,543902,BSE_FMT
+INE14QA01016,Ameenji Rubber Ltd.,ticker_bo,AMEENJI,544555,BSE_FMT
+INE0OMI01019,Bright Outdoor Media Ltd.,ticker_bo,BRIGHT,543831,BSE_FMT
+INE0OMI01019,Bright Outdoor Media Ltd.,listing_open,100,150.00,SOFT
+INE0SRP01014,Telge Projects Ltd.,ticker_bo,TELGE,544544,BSE_FMT
+INE0S9X01011,Ace Alpha Tech Ltd.,ticker_bo,ACEALPHA,544431,BSE_FMT
+INE04T901017,Kahan Packaging Ltd.,ticker_bo,KAHAN,543979,BSE_FMT
+INE0PZB01013,Popular Foundations Ltd.,ticker_bo,PFL,544259,BSE_FMT
+INE0XCV01014,Aten Papers & Foam Ltd.,ticker_bo,ATENPAPERS,544417,BSE_FMT
+INE0KN201016,Indong Tea Co.Ltd.,ticker_bo,INDONG,543769,BSE_FMT
+INE0S0701019,Greenhitech Ventures Ltd.,ticker_bo,GVL,544163,BSE_FMT
+INE0R8Q01018,Om Metallogic Ltd.,ticker_bo,OML,544559,BSE_FMT
+INE0RU901015,Mangal Compusolution Ltd.,ticker_bo,MANGALCOMP,544287,BSE_FMT
+INE0QFT01015,AIK Pipes & Polymers Ltd.,ticker_bo,AIKPIPES,544072,BSE_FMT
+INE0O5T01011,Remus Pharmaceuticals Ltd.,listing_open,213.91,1711.25,SOFT
+INE15WN01014,Repono Ltd.,ticker_bo,REPONO,544463,BSE_FMT
+INE0RRU01016,Indian Emulsifiers Ltd.,listing_open,374.43,430.00,SOFT
+INE0N4701016,Naturewings Holidays Ltd.,ticker_bo,NHL,544245,BSE_FMT
+INE0Y8W01025,Anlon Healthcare Ltd.,listing_open,9.1,91.00,SOFT
+INE1E1V01017,HRS Aluglaze Ltd.,ticker_bo,HRS,544656,BSE_FMT
+INE0O0201019,Urban Enviro Waste Management Ltd.,listing_open,70.5,141.00,SOFT
+INE1A8F01035,Earkart Ltd.,ticker_bo,EARKART,544549,BSE_FMT
+INE0Q2L01013,Davin Sons Retail Ltd.,ticker_bo,DAVIN,544331,BSE_FMT
+INE12P601017,Globtier Infotech Ltd.,ticker_bo,GLOBTIER,544494,BSE_FMT
+INE0WXM01011,CapitalNumbers Infotech Ltd.,ticker_bo,CNINFOTECH,544343,BSE_FMT
+INE0R7301013,Rulka Electricals Ltd.,issue_price,170,235.00,SOFT
+INE0R7301013,Rulka Electricals Ltd.,listing_open,174,525.00,SOFT
+INE0JZS01010,SVJ Enterprises Ltd.,ticker_bo,SVJ,543799,BSE_FMT
+INE0W4K01013,BLT Logistics Ltd.,ticker_bo,BLT,544474,BSE_FMT
+INE0UYT01018,Mach Conferences & Events Ltd.,ticker_bo,MCEL,544248,BSE_FMT
+INE0MSS01019,Jay Kailash Namkeen Ltd.,ticker_bo,JAYKAILASH,544160,BSE_FMT
+INE16XA01017,Infinity Infoway Ltd.,ticker_bo,INFINITY,544567,BSE_FMT
+INE0DZD01015,H.M.Electro Mech Ltd.,ticker_bo,HMEML,544349,BSE_FMT
+INE0SG001011,Travels & Rentals Ltd.,ticker_bo,TRAVELS,544242,BSE_FMT
+INE0SG001011,Travels & Rentals Ltd.,listing_open,50.35,55.00,SOFT
+INE0R1601012,Presstonic Engineering Ltd.,listing_open,118.9,140.00,SOFT
+INE1BA901016,Logiciel Solutions Ltd.,ticker_bo,LOGICIEL,544625,BSE_FMT
+INE0GEN01012,New Swan Multitech Ltd.,ticker_bo,SWANAGRO,544082,BSE_FMT
+INE0MV001018,Manoj Jewellers Ltd.,ticker_bo,MANOJJEWEL,544400,BSE_FMT
+INE0P4P01011,Techknowgreen Solutions Ltd.,ticker_bo,TECHKGREEN,543991,BSE_FMT
+INE0RTI01017,Oval Projects Engineering Ltd.,ticker_bo,OVAL,544498,BSE_FMT
+INE0U2L01017,Amwill Health Care Ltd.,ticker_bo,AMWILL,544353,BSE_FMT
+INE0S0I01011,United Cotfab Ltd.,ticker_bo,COTFAB,544195,BSE_FMT
+INE0SLP01017,NSB BPO Solutions Ltd.,ticker_bo,NSBBPO,544571,BSE_FMT
+INE0SLP01017,NSB BPO Solutions Ltd.,issue_price,140,121.00,SOFT
+INE0VDK01019,Purple Wave Infocom Ltd.,ticker_bo,PURPLEWAVE,544627,BSE_FMT
+INE163701019,KVS Castings Ltd.,ticker_bo,KVSCASTING,544554,BSE_FMT
+INE0TBQ01014,Marc Loire Fashions Ltd.,ticker_bo,MARCLOIRE,544437,BSE_FMT
+INE0WRP01016,Vashishtha Luxury Fashion Ltd.,ticker_bo,VASHISHTHA,544508,BSE_FMT
+INE0N0Y01013,Udayshivakumar Infra Ltd.,listing_open,35,0.00,SOFT
+INE0QU501030,Sodhani Capital Ltd.,ticker_bo,SODHACAP,544560,BSE_FMT
+INE0R5Z01015,Mayank Cattle Food Ltd.,ticker_bo,MCFL,544106,BSE_FMT
+INE1FJE01010,Helloji Holidays Ltd.,ticker_bo,HELLOJI,544630,BSE_FMT
+INE0WDX01010,CLN Energy Ltd.,ticker_bo,CLN,544347,BSE_FMT
+INE0DQN01013,Nisus Finance Services Co.Ltd.,ticker_bo,NISUS,544296,BSE_FMT
+INE0RYC01010,Stallion India Fluorochemicals Ltd.,listing_open,102.04,120.00,SOFT
+INE0PA601017,Vivaa Tradecom Ltd.,ticker_bo,VIVAA,544002,BSE_FMT
+INE1FHV01026,Unisem Agritech Ltd.,ticker_bo,UNISEM,544648,BSE_FMT
+INE130701019,Valencia India Ltd.,ticker_bo,VALINDIA,544433,BSE_FMT
+INE16QA01011,Stanbik Agro Ltd.,ticker_bo,STANBIK,544659,BSE_FMT
+INE162901016,Meta Infotech Ltd.,ticker_bo,METAINFO,544441,BSE_FMT
+INE0NB801022,Sat Kartar Shopping Ltd.,listing_open,169.6,153.90,SOFT
+INE0W1601012,Adcounty Media India Ltd.,ticker_bo,ADCOUNTY,544435,BSE_FMT
+INE0ZOM01013,Goel Construction Co.Ltd.,ticker_bo,GOELCONS,544504,BSE_FMT
+INE0AOG01018,Kenrik Industries Ltd.,ticker_bo,KENRIK,544398,BSE_FMT
+INE0NQ401024,Avax Apparels & Ornaments Ltd.,ticker_bo,AVAX,544337,BSE_FMT
+INE0NQ401024,Avax Apparels & Ornaments Ltd.,listing_open,16.63,133.00,SOFT
+INE13VU01016,Beezaasan Explotech Ltd.,ticker_bo,BEEZAASAN,544369,BSE_FMT
+INE0NEV01011,Ahasolar Technologies Ltd.,ticker_bo,AHASOLAR,543941,BSE_FMT
+INE0QJL01014,Thaai Casting Ltd.,listing_open,214,185.90,SOFT
+INE0SDC01012,Emmforce Autotech Ltd.,ticker_bo,EMMFORCE,544166,BSE_FMT
+INE14LM01012,Pajson Agro India Ltd.,ticker_bo,PAJSON,544657,BSE_FMT
+INE0BUQ01012,Gallard Steel Ltd.,ticker_bo,GALLARD,544616,BSE_FMT
+INE0Q1R01012,Qualitek Labs Ltd.,ticker_bo,QLL,544091,BSE_FMT
+INE0G1V01016,Amanaya Ventures Ltd.,ticker_bo,AMANAYA,543804,BSE_FMT
+INE0QVH01025,KP Green Engineering Ltd.,ticker_bo,KPGEL,544150,BSE_FMT
+INE0LGX01024,Insolation Energy Ltd.,issue_price,138,38.00,SOFT
+INE0LGX01024,Insolation Energy Ltd.,listing_open,366,76.10,SOFT
+INE0TG901011,Astonea Labs Ltd.,ticker_bo,ASTONEALAB,544409,BSE_FMT
+INE463V01026,Anand Rathi Wealth Ltd.,issue_price,414,550.00,SOFT
+INE463V01026,Anand Rathi Wealth Ltd.,listing_open,432.1,602.05,SOFT
+INE00GK01023,Yash Highvoltage Ltd.,ticker_bo,YASHHV,544310,BSE_FMT
+INE0M3X01010,NIS Management Ltd.,ticker_bo,NISMGMT,544495,BSE_FMT
+INE0S9501014,Khyati Global Ventures Ltd.,ticker_bo,KGVL,544270,BSE_FMT
+INE0FMZ01045,Shree Refrigerations Ltd.,ticker_bo,SHREEREF,544458,BSE_FMT
+INE735W01017,Utkarsh Small Finance Bank Ltd.,listing_open,33.92,39.95,SOFT
+INE14OX01013,Takyon Networks Ltd.,ticker_bo,TAKYON,544471,BSE_FMT
+INE0S5T01017,Rukmani Devi Garg Agro Impex Ltd.,ticker_bo,RDGAIL,544552,BSE_FMT
+INE14VP01014,JD Cables Ltd.,ticker_bo,JDCABLES,544524,BSE_FMT
+INE00ST01011,B.R.Goyal Infrastructure Ltd.,ticker_bo,BRGIL,544335,BSE_FMT
+INE0LKQ01012,Command Polymers Ltd.,ticker_bo,COMMAND,543843,BSE_FMT
+INE0W0H01017,Solarium Green Energy Ltd.,ticker_bo,SOLARIUM,544354,BSE_FMT
+INE0GYI01028,Hemant Surgical Industries Ltd.,ticker_bo,HSIL,543916,BSE_FMT
+INE0RH001011,Leo Dryfruits & Spices Trading Ltd.,ticker_bo,VANDU,544329,BSE_FMT
+INE16IQ01014,Super Iron Foundry Ltd.,ticker_bo,SUPERIRON,544381,BSE_FMT
+INE579D01019,Safe Enterprises,PRESENCE,in_old,MISSING_in_new,HARD
+INE751R01014,Rajputana Investment,PRESENCE,in_old,MISSING_in_new,HARD
+INE856B01023,Storage Technologies,PRESENCE,in_old,MISSING_in_new,HARD
+INE997I01012,Shri Hare-Krishna,PRESENCE,in_old,MISSING_in_new,HARD
+INE811B01010,LGT Global,PRESENCE,in_old,MISSING_in_new,HARD
+INE320X01016,Dhansa Labs,PRESENCE,in_old,MISSING_in_new,HARD
+INE366H01012,Capital Infra,PRESENCE,in_old,MISSING_in_new,HARD
+INE335Q01026,3C IT Solutions,PRESENCE,in_old,MISSING_in_new,HARD
+INE139E01028,Sahaj Fashions,PRESENCE,in_old,MISSING_in_new,HARD
+INE0NIJ01025,Dev Labtech Venture,PRESENCE,in_old,MISSING_in_new,HARD
+INE548Z01017,Shanti Spintex,PRESENCE,in_old,MISSING_in_new,HARD
+INE287Z01012,Anantam Highways,PRESENCE,in_old,MISSING_in_new,HARD
+INE336H01023,Kalpataru Projects,PRESENCE,in_old,MISSING_in_new,HARD

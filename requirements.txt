@@ -1,0 +1,23 @@
+# Core scraping
+requests
+cloudscraper
+beautifulsoup4
+lxml
+curl_cffi
+
+# Data / analysis
+pandas
+numpy
+
+# App + verification
+streamlit
+playwright
+
+# Financials recovery (DRHP PDFs)
+pdfplumber
+
+# Dev / tests
+pytest
+
+# Price history (deferred — uncomment when needed)
+# yfinance

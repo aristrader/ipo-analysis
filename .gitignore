@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+logs/
+*.egg-info/
+.DS_Store
+# large regenerable raw data + manual backups — keep on disk, out of git:
+data/raw/
+data/prices/
+data/reference/bhavcopy/
+archive/

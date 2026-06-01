@@ -1,0 +1,163 @@
+"""
+Bhavcopy fetch and parse helpers for NSE/BSE daily OHLC data.
+
+Handles both old and new formats:
+  - NSE old   (listing < 2024-07-08): cm<DD><MON><YYYY>bhav.csv.zip — cols SYMBOL,OPEN
+  - NSE UDiFF (>= 2024-07-08):         BhavCopy_NSE_CM_..._YYYYMMDD_F_0000.csv.zip — ISIN,OpnPric
+  - BSE UDiFF (all dates):             BhavCopy_BSE_CM_..._YYYYMMDD_F_0000.CSV — ISIN,OpnPric
+
+Usage:
+    from scrapers.bhavcopy import first_day_open, get_bhavcopy
+    price = first_day_open('INFY', '2023-10-27')
+    lookup = get_bhavcopy('NSE', datetime(2023, 10, 27))
+"""
+
+import csv
+import io
+import logging
+import os
+import warnings
+import zipfile
+from datetime import datetime, timedelta
+
+import requests
+
+warnings.filterwarnings('ignore')
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CACHE_DIR = os.path.join(BASE_DIR, 'data', 'reference', 'bhavcopy')
+
+TOLERANCE = 10.0
+NSE_UDIFF_CUTOVER = datetime(2024, 7, 8)   # NSE switched to UDiFF format here
+
+MON = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+H = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
+                   'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+     'Accept': '*/*', 'Accept-Language': 'en-US,en;q=0.9'}
+
+log = logging.getLogger(__name__)
+
+
+# ── Bhavcopy fetch + parse → {isin: open, 'SYM:'+symbol: open} ─────────────────
+
+def _cache_path(exchange, d):
+    return os.path.join(CACHE_DIR, f'{exchange}_{d.strftime("%Y%m%d")}.csv')
+
+
+def fetch_nse(d):
+    """Return raw CSV text for NSE bhavcopy on date d, or None."""
+    if d >= NSE_UDIFF_CUTOVER:
+        url = f'https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_CM_0_0_0_{d.strftime("%Y%m%d")}_F_0000.csv.zip'
+    else:
+        url = (f'https://archives.nseindia.com/content/historical/EQUITIES/'
+               f'{d.year}/{MON[d.month-1]}/cm{d.strftime("%d")}{MON[d.month-1]}{d.year}bhav.csv.zip')
+    try:
+        r = requests.get(url, headers={**H, 'Referer': 'https://www.nseindia.com/'}, timeout=30)
+        if r.status_code == 200 and r.content[:2] == b'PK':
+            z = zipfile.ZipFile(io.BytesIO(r.content))
+            return z.read(z.namelist()[0]).decode()
+    except Exception as e:
+        log.debug(f'NSE fetch {d.date()} err {e}')
+    return None
+
+
+def fetch_bse(d):
+    """Return raw CSV text for BSE bhavcopy on date d, or None."""
+    url = f'https://www.bseindia.com/download/BhavCopy/Equity/BhavCopy_BSE_CM_0_0_0_{d.strftime("%Y%m%d")}_F_0000.CSV'
+    try:
+        r = requests.get(url, headers={**H, 'Referer': 'https://www.bseindia.com/'}, timeout=30)
+        if r.status_code == 200 and len(r.content) > 1000 and b',' in r.content[:200]:
+            return r.text
+    except Exception as e:
+        log.debug(f'BSE fetch {d.date()} err {e}')
+    return None
+
+
+def parse_bhavcopy(text, exchange, d):
+    """Return {key: open_price}. Keys: ISIN and 'SYM:'+symbol."""
+    out = {}
+    rows = list(csv.DictReader(io.StringIO(text)))
+    if not rows:
+        return out
+    cols = rows[0].keys()
+    if 'TckrSymb' in cols:        # UDiFF (NSE new + BSE)
+        for r in rows:
+            op = r.get('OpnPric', '').strip()
+            if not op:
+                continue
+            if r.get('ISIN', '').strip():
+                out[r['ISIN'].strip()] = op
+            if r.get('TckrSymb', '').strip():
+                out['SYM:' + r['TckrSymb'].strip()] = op
+    elif 'SYMBOL' in cols:        # NSE old
+        for r in rows:
+            op = r.get('OPEN', '').strip()
+            sym = r.get('SYMBOL', '').strip()
+            if sym and op:
+                out['SYM:' + sym] = op
+    return out
+
+
+def get_bhavcopy(exchange, d):
+    """Cached fetch+parse. Returns {key: open} or {} if unavailable.
+
+    Args:
+        exchange: 'NSE' or 'BSE'
+        d: datetime.date or datetime object
+
+    Returns:
+        Dict mapping ISIN or 'SYM:'+symbol to opening price string.
+    """
+    cp = _cache_path(exchange, d)
+    if os.path.exists(cp):
+        with open(cp, encoding='utf-8') as f:
+            return {row['key']: row['open'] for row in csv.DictReader(f)}
+    text = fetch_nse(d) if exchange == 'NSE' else fetch_bse(d)
+    lookup = parse_bhavcopy(text, exchange, d) if text else {}
+    os.makedirs(CACHE_DIR, exist_ok=True)
+    with open(cp, 'w', newline='', encoding='utf-8') as f:
+        w = csv.DictWriter(f, fieldnames=['key', 'open'])
+        w.writeheader()
+        for k, v in lookup.items():
+            w.writerow({'key': k, 'open': v})
+    return lookup
+
+
+# ── Verification helper ────────────────────────────────────────────────────────
+
+FWD_DAYS = 16   # forward search window — our listing_date can be several days early
+
+
+def first_day_open(ticker, listing_date):
+    """
+    Find ticker's first trading day open price in bhavcopy, searching forward
+    from listing_date (which can be days before actual first trade).
+
+    Args:
+        ticker: NSE symbol, BSE code, or ISIN.
+        listing_date: str 'YYYY-MM-DD' or datetime object.
+
+    Returns:
+        First found opening price (str) or None if not found within window.
+    """
+    if isinstance(listing_date, str):
+        base = datetime.strptime(listing_date.strip(), '%Y-%m-%d')
+    else:
+        base = listing_date
+
+    ticker = (ticker or '').strip().upper()
+    if not ticker:
+        return None
+
+    # Try both exchanges
+    for exch in ['NSE', 'BSE']:
+        for off in range(FWD_DAYS):
+            d = base + timedelta(days=off)
+            if d.weekday() >= 5:        # skip weekends
+                continue
+            lookup = get_bhavcopy(exch, d)
+            # Try ISIN key first, then symbol key
+            op = lookup.get(ticker) or lookup.get('SYM:' + ticker)
+            if op is not None:
+                return op
+    return None

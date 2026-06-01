@@ -1,0 +1,1471 @@
+isin,symbol,action_type,raw_subject,ratio_factor,ex_date,source
+INE271B01025,MAHSEAMLES,split,Fv Split Rs.10/- To Rs.5/,2.0,2006-04-18,nse_corp_actions:equities
+INE059A01026,CIPLA,bonus,Bonus 3:2,2.5,2006-04-24,nse_corp_actions:equities
+INE436A01026,ANSALAPI,split,Fv Split Rs.10/- To Rs.5/,2.0,2006-05-10,nse_corp_actions:equities
+INE551A01022,HINDDORROL,split,Fv Split Rs.10/- To Rs.2/,5.0,2006-05-26,nse_corp_actions:equities
+INE149A01025,TUBEINVEST,split,Fv Split Rs.10/- To Rs.2/,5.0,2006-05-31,nse_corp_actions:equities
+INE255A01020,EPL,split,Fv Split Rs.10/- To Rs.2/,5.0,2006-06-08,nse_corp_actions:equities
+INE003A01024,SIEMENS,split,Fv Split Rs.10/- To Rs.2/,5.0,2006-06-13,nse_corp_actions:equities
+INE203A01020,ASTRAZEN,split,Fv Split Rs.10/- To Rs.2/,5.0,2006-06-15,nse_corp_actions:equities
+INE050B01023,IVC,bonus,Agm / Div-35% / Bonus 1:2,1.5,2006-06-23,nse_corp_actions:equities
+INE009A01021,INFY,bonus,Bonus 1:1,2.0,2006-07-13,nse_corp_actions:equities
+INE036D01010,KARURVYSYA,bonus,Agm/Div - 120%/Bonus 1:1,2.0,2006-07-19,nse_corp_actions:equities
+INE176B01018,HAVELLS,bonus,Bonus 1:1,2.0,2006-07-20,nse_corp_actions:equities
+INE197A01024,JYOTISTRUC,split,Fv Split-Rs.10/-To Rs.2/-,5.0,2006-07-28,nse_corp_actions:equities
+INE467B01029,TCS,bonus,Intdiv-Rs 3persh/Bonus1:1,2.0,2006-07-28,nse_corp_actions:equities
+INE067A01029,CGPOWER,split,Fv Split Rs.10/- To Rs.2/,5.0,2006-08-10,nse_corp_actions:equities
+INE326A01029,LUPIN,bonus,Bonus 1:1,2.0,2006-08-11,nse_corp_actions:equities
+INE102D01028,GODREJCP,split,Fv Split Rs.4/- To Re.1/-,4.0,2006-08-24,nse_corp_actions:equities
+INE233A01035,GODREJIND,split,Fv Split Rs.6/- To Re.1/,6.0,2006-08-25,nse_corp_actions:equities
+INE089A01023,DRREDDY,bonus,Bonus 1:1,2.0,2006-08-28,nse_corp_actions:equities
+INE010B01027,ZYDUSLIFE,bonus,Bonus 1:1,2.0,2006-08-30,nse_corp_actions:equities
+INE662A01027,SUPERSPIN,split,Fv Split Rs.10/- To Re.1/,10.0,2006-09-01,nse_corp_actions:equities
+INE458B01028,BHAGYNAGAR,bonus,Bonus 1:1,2.0,2006-09-07,nse_corp_actions:equities
+INE302A01020,EXIDEIND,split,Fv Split Rs.10/- To Re.1/,10.0,2006-09-08,nse_corp_actions:equities
+INE059B01024,SIMPLEXINF,split,Fv Split Rs.10/- To Rs.2/,5.0,2006-09-13,nse_corp_actions:equities
+INE643A01035,JTEKTINDIA,bonus,Bonus 1:1,2.0,2006-09-14,nse_corp_actions:equities
+INE472A01039,BLUESTARCO,split,Fv Split Rs.10/- To Rs.2/,5.0,2006-09-20,nse_corp_actions:equities
+INE868B01028,NCC,bonus,Bonus 1:1,2.0,2006-09-20,nse_corp_actions:equities
+INE093B01015,ALPSINDUS,bonus,Dividend-7.50% /Bonus 1:1,2.0,2006-09-22,nse_corp_actions:equities
+INE226A01021,VOLTAS,split,Fv Split Rs.10/- To Re.1/,10.0,2006-09-22,nse_corp_actions:equities
+INE571B01028,JAYBARMARU,bonus,Bonus 1:1,2.0,2006-09-25,nse_corp_actions:equities
+INE426A01027,ALEMBICLTD,split,Fv Split Rs.10/- To Rs.2/,5.0,2006-09-26,nse_corp_actions:equities
+INE007B01023,GEOJITFSL,split,Fv Split Rs.10/- To Re.1/,10.0,2006-09-26,nse_corp_actions:equities
+INE060A01024,NAVNETEDUL,split,Split-Rs.10tors.2/Div-60%Purpose Revised,5.0,2006-09-27,nse_corp_actions:equities
+INE110D01013,GUJNRECOKE,bonus,Bonus 1:1,2.0,2006-09-28,nse_corp_actions:equities
+INE018A01030,LT,bonus,Bonus 1:1,2.0,2006-09-28,nse_corp_actions:equities
+INE463A01020,BERGEPAINT,bonus,Bonus 3:5,1.6,2006-10-12,nse_corp_actions:equities
+INE577A01027,MUNJALSHOW,split,Fv Split Rs.10/- To Rs.2/,5.0,2006-10-16,nse_corp_actions:equities
+INE205B01023,ELECON,split,Fv Split Rs.10/- To Rs.2/,5.0,2006-10-17,nse_corp_actions:equities
+INE053A01029,INDHOTEL,split,Fv Split Rs.10/- To Re.1/,10.0,2006-10-27,nse_corp_actions:equities
+INE213A01011,ONGC,bonus,Bonus 1:2,1.5,2006-10-27,nse_corp_actions:equities
+INE808B01016,OPTOCIRCUI,bonus,Bonus 1:1,2.0,2006-10-30,nse_corp_actions:equities
+INE199G01027,JAGRAN,bonus,Bonus 1:5,1.2,2006-11-02,nse_corp_actions:equities
+INE195A01010,SUPREMEIND,bonus,Bonus 1:1,2.0,2006-11-13,nse_corp_actions:equities
+INE694C01018,LAKSHVILAS,bonus,Bonus 1:2/Rights 1:1,1.5,2006-11-17,nse_corp_actions:equities
+INE551A01022,HINDDORROL,bonus,Bonus 1:5,1.2,2006-11-23,nse_corp_actions:equities
+INE062D01024,ALICON,split,Fv Split Rs.10/- To Rs.5/,2.0,2006-12-04,nse_corp_actions:equities
+INE688A01022,TCI,split,Fv Split Rs.10/- To Rs.2/,5.0,2006-12-05,nse_corp_actions:equities
+INE890C01046,SANWARIA,split,Fv Split Rs.5/- To Rs.2/,2.5,2006-12-08,nse_corp_actions:equities
+INE371A01025,GRAPHITE,split,Fv Split Rs.10/- To Rs.2/,5.0,2006-12-11,nse_corp_actions:equities
+INE623B01027,FEL,split,Fv Split Rs.10/- To Rs.2/,5.0,2006-12-12,nse_corp_actions:equities
+INE067A01029,CGPOWER,bonus,Bonus 2:5,1.4,2006-12-14,nse_corp_actions:equities
+INE878B01027,KEI,split,Fv Split Rs.10/- To Rs.2/,5.0,2006-12-21,nse_corp_actions:equities
+INE501G01024,HTMEDIA,split,Fv Split Rs.10/- To Rs.2/,5.0,2006-12-28,nse_corp_actions:equities
+INE235A01022,FINCABLES,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-01-08,nse_corp_actions:equities
+INE920A01011,DOLPHINOFF,bonus,Bonus 3:5,1.6,2007-01-11,nse_corp_actions:equities
+INE035D01012,SOTL,bonus,Bonus 2:3,1.666667,2007-01-17,nse_corp_actions:equities
+INE875G01022,NANDAN,bonus,Bonus 1:1,2.0,2007-01-18,nse_corp_actions:equities
+INE719A01017,ZANDUREALT,bonus,Bonus 1:3,1.333333,2007-01-18,nse_corp_actions:equities
+INE074B01023,PARACABLES,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-01-25,nse_corp_actions:equities
+INE887G01027,GOKEX,split,Fv Split Rs.10/- To Rs.5/,2.0,2007-02-08,nse_corp_actions:equities
+INE196A01026,MARICO,split,Fv Split Rs.10/- To Re.1/,10.0,2007-02-21,nse_corp_actions:equities
+INE964B01025,ALCHEMIST,bonus,Bonus 1:1,2.0,2007-03-08,nse_corp_actions:equities
+INE180A01020,MFSL,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-03-12,nse_corp_actions:equities
+INE137G01027,DCHL,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-03-13,nse_corp_actions:equities
+INE860A01027,HCLTECH,bonus,Bonus 1:1,2.0,2007-03-15,nse_corp_actions:equities
+INE349A01021,NRBBEARING,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-03-26,nse_corp_actions:equities
+INE701B01021,PUNJLLOYD,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-03-29,nse_corp_actions:equities
+INE436A01026,ANSALAPI,bonus,Bonus 1:1,2.0,2007-04-23,nse_corp_actions:equities
+INE771A01026,MIRZAINT,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-04-24,nse_corp_actions:equities
+INE332A01027,THOMASCOOK,split,Fv Split Rs.10/- To Re.1/,10.0,2007-05-14,nse_corp_actions:equities
+INE374A01029,GUJRATGAS,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-05-15,nse_corp_actions:equities
+INE275B01026,HUHTAMAKI,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-05-25,nse_corp_actions:equities
+INE257A01018,BHEL,bonus,Bonus 1:1,2.0,2007-05-31,nse_corp_actions:equities
+INE117A01022,ABB,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-06-28,nse_corp_actions:equities
+INE878C01033,GEMINI,bonus,Bonus 1:1,2.0,2007-07-17,nse_corp_actions:equities
+INE739A01015,MOSERBAER,bonus,Bonus 1:2,1.5,2007-07-17,nse_corp_actions:equities
+INE727D01022,KSOILS,split,Fv Split Rs.10/- To Re.1/,10.0,2007-07-18,nse_corp_actions:equities
+INE074A01025,PRAJIND,bonus,Bonus 1:1,2.0,2007-07-18,nse_corp_actions:equities
+INE268C01029,EASUNREYRL,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-07-31,nse_corp_actions:equities
+INE852F01015,GDL,bonus,Bonus 1:4,1.25,2007-08-02,nse_corp_actions:equities
+INE361B01024,DIVISLAB,split,Agm/Fv Split Rs10 To Rs2,5.0,2007-08-03,nse_corp_actions:equities
+INE096B01018,NUCLEUS,bonus,Bonus 1:1,2.0,2007-08-03,nse_corp_actions:equities
+INE320A01014,BANKRAJAS,bonus,Agm/Div-20%/Bonus 1:4,1.25,2007-08-16,nse_corp_actions:equities
+INE438A01022,APOLLOTYRE,split,Fv Split Rs.10/- To Re.1/,10.0,2007-08-17,nse_corp_actions:equities
+INE371D01029,GEODESIC,bonus,Bonus 1:2,1.5,2007-08-17,nse_corp_actions:equities
+INE184H01027,EKC,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-08-21,nse_corp_actions:equities
+INE989A01024,SANGHVIMOV,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-08-23,nse_corp_actions:equities
+INE748C01020,3IINFOTECH,bonus,Bonus 1:1,2.0,2007-08-27,nse_corp_actions:equities
+INE835D01023,HIRECT,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-08-28,nse_corp_actions:equities
+INE228A01035,USHAMART,split,Fv Split Rs.5/- To Re.1/,5.0,2007-08-29,nse_corp_actions:equities
+INE213C01025,BANCOINDIA,bonus,Bonus 1:1,2.0,2007-08-30,nse_corp_actions:equities
+INE591G01017,COFORGE,bonus,Bonus 1:2,1.5,2007-08-30,nse_corp_actions:equities
+INE775A01035,MOTHERSON,bonus,Bonus 1:2,1.5,2007-08-30,nse_corp_actions:equities
+INE694A01020,UNITECH,bonus,Bonus 1:1,2.0,2007-08-30,nse_corp_actions:equities
+INE217G01019,NORTHGATE,bonus,Bonus 1:1,2.0,2007-08-31,nse_corp_actions:equities
+INE935A01035,GLENMARK,split,Agm/Fv Split Rs.2 To Re.1,2.0,2007-09-10,nse_corp_actions:equities
+INE086A01029,ELECTCAST,split,Fv Split Rs.10/- To Re.1/,10.0,2007-09-17,nse_corp_actions:equities
+INE885A01032,ARE&M,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-09-19,nse_corp_actions:equities
+INE177C01022,BATLIBOI,split,Fv Split Rs.10/- To Rs.5/,2.0,2007-09-26,nse_corp_actions:equities
+INE776C01039,GMRAIRPORT,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-09-28,nse_corp_actions:equities
+INE624C01015,VALECHAENG,bonus,Bonus 1:2,1.5,2007-10-04,nse_corp_actions:equities
+INE242C01024,ANANTRAJ,split,Fv Split Rs.10/- To Re.2/,5.0,2007-10-08,nse_corp_actions:equities
+INE993A01026,MANINDS,split,Fv Split Rs.10/- To Rs.5/,2.0,2007-10-09,nse_corp_actions:equities
+INE205B01023,ELECON,bonus,Bonus 2:1,3.0,2007-10-10,nse_corp_actions:equities
+INE202H01019,KERNEX,bonus,Bonus 1:10,1.1,2007-10-16,nse_corp_actions:equities
+INE138A01028,PENINLAND,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-10-16,nse_corp_actions:equities
+INE889A01026,TV-18,bonus,Bonus 1:1,2.0,2007-10-17,nse_corp_actions:equities
+INE348A01023,ASHAPURMIN,bonus,Bonus 1:1,2.0,2007-10-18,nse_corp_actions:equities
+INE199C01026,ADVANIHOTR,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-10-22,nse_corp_actions:equities
+INE441A01026,ASIANELEC,split,Fv Split Rs.10/- To Rs.5/,2.0,2007-10-22,nse_corp_actions:equities
+INE350H01024,BLKASHYAP,split,Fv Split Rs.10/- To Rs.5/,2.0,2007-10-22,nse_corp_actions:equities
+INE306B01029,ICSA,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-10-23,nse_corp_actions:equities
+INE927D01010,JBMA,bonus,Bonus 1:2,1.5,2007-10-24,nse_corp_actions:equities
+INE250A01021,KIRLOSOIL,bonus,Bonus 1:1,2.0,2007-10-25,nse_corp_actions:equities
+INE808B01016,OPTOCIRCUI,bonus,Bonus 1:2,1.5,2007-10-25,nse_corp_actions:equities
+INE976A01021,WSTCSTPAPR,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-10-26,nse_corp_actions:equities
+INE619A01027,RUCHISOYA,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-10-29,nse_corp_actions:equities
+INE131A01031,GMDCLTD,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-11-08,nse_corp_actions:equities
+INE287B01021,SUBROS,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-11-20,nse_corp_actions:equities
+INE213C01025,BANCOINDIA,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-11-23,nse_corp_actions:equities
+INE455F01025,JPASSOCIAT,split,Fv Split Rs.10/- To Rs.2/,5.0,2007-12-17,nse_corp_actions:equities
+INE199G01027,JAGRAN,split,Fv Split Rs.10/- To Rs.2/,5.0,2008-01-09,nse_corp_actions:equities
+INE987C01024,CLASSIC,split,Fv Split Rs.10/- To Rs.2/,5.0,2008-01-11,nse_corp_actions:equities
+INE124G01033,DELTACORP,split,Fv Split Rs.10/- To Re.1/,10.0,2008-01-15,nse_corp_actions:equities
+INE749A01030,JINDALSTEL,split,Fv Split Rs.5/- To Re.1/-,5.0,2008-01-21,nse_corp_actions:equities
+INE040H01021,SUZLON,split,Fv Split Rs.10/- To Rs.2/,5.0,2008-01-21,nse_corp_actions:equities
+INE039B01026,CINEVISTA,split,Fv Split Rs.10/- To Rs.2/,5.0,2008-01-22,nse_corp_actions:equities
+INE491A01021,CUB,split,Fv Split Rs.10/- To Re.1/,10.0,2008-01-23,nse_corp_actions:equities
+INE293A01013,ROLTA,bonus,Bonus 1 : 1,2.0,2008-01-24,nse_corp_actions:equities
+INE538A01037,GFLLIMITED,split,Fv Split Rs.2/- To Re.1/-,2.0,2008-02-01,nse_corp_actions:equities
+INE592A01026,ORIENTPPR,split,Fv Split Rs.10/- To Re.1/,10.0,2008-02-01,nse_corp_actions:equities
+INE890C01046,SANWARIA,split,Fv Split Rs.2/- To Re.1/-,2.0,2008-02-04,nse_corp_actions:equities
+INE251H01024,GVKPIL,split,Fv Split Rs.10/- To Re.1/,10.0,2008-02-08,nse_corp_actions:equities
+INE211B01039,PHOENIXLTD,split,Fv Split Rs.10/- To Rs.2/,5.0,2008-02-13,nse_corp_actions:equities
+INE886H01027,TV18BRDCST,split,Fv Split Rs.10/- To Rs.2/,5.0,2008-02-21,nse_corp_actions:equities
+INE034D01031,PTL,split,Fv Split Rs.10/- To Rs.2/,5.0,2008-02-25,nse_corp_actions:equities
+INE003A01024,SIEMENS,bonus,Bonus 1:1,2.0,2008-02-29,nse_corp_actions:equities
+INE105C01023,3PLAND,split,Fv Split Rs.10/- To Rs.2/,5.0,2008-03-11,nse_corp_actions:equities
+INE750C01026,MARKSANS,split,Fv Split Rs.10/- To Re.1/,10.0,2008-03-11,nse_corp_actions:equities
+INE731H01025,ACE,split,Fv Split Rs.10/- To Rs.2/,5.0,2008-03-13,nse_corp_actions:equities
+INE078A01026,EMCO,split,Fv Split Rs.10/- To Rs.2/,5.0,2008-03-14,nse_corp_actions:equities
+INE524B01027,GANDHITUBE,split,Fv Split Rs.10/- To Rs.5/,2.0,2008-03-17,nse_corp_actions:equities
+INE299C01024,KGL,split,Fv Split Rs.10/- To Re.1/,10.0,2008-04-04,nse_corp_actions:equities
+INE584A01023,NMDC,split,Fv Split Rs.10/- To Re.1/,10.0,2008-04-10,nse_corp_actions:equities
+INE087H01022,RENUKA,split,Fv Split Rs.10/- To Re.1/,10.0,2008-04-10,nse_corp_actions:equities
+INE348B01021,CENTURYPLY,split,Fv Split Rs.10/- To Re.1/,10.0,2008-04-24,nse_corp_actions:equities
+INE961H01028,EVINIX,split,Fv Split Rs.10/- To Re.1/,10.0,2008-04-29,nse_corp_actions:equities
+INE483C01032,TANLA,split,Fv Split Rs.2/- To Re.1/-,2.0,2008-05-02,nse_corp_actions:equities
+INE584A01023,NMDC,bonus,Bonus 2:1,3.0,2008-05-21,nse_corp_actions:equities
+INE614G01033,RPOWER,bonus,Bonus 3:5,1.6,2008-05-30,nse_corp_actions:equities
+INE962C01027,EASTSILK,split,Fv Split Rs.10/- To Rs.2/,5.0,2008-06-27,nse_corp_actions:equities
+INE287C01029,MIC,split,Fv Split Rs.10/- To Rs.2/,5.0,2008-06-27,nse_corp_actions:equities
+INE865C01022,BIRLAMONEY,split,Fv Split Rs.10/- To Re.1/,10.0,2008-07-11,nse_corp_actions:equities
+INE771B01032,TRICOM,split,Fv Split Rs.10/- To Rs.2/,5.0,2008-07-15,nse_corp_actions:equities
+INE223B01026,MALCO,split,Fv Split Rs.10/- To Rs.2/,5.0,2008-07-17,nse_corp_actions:equities
+INE338I01027,MOTILALOFS,split,Fv Split Rs.5/- To Re.1/-,5.0,2008-07-25,nse_corp_actions:equities
+INE530B01024,IIFL,split,Fv Split Rs.10/- To Rs.2/,5.0,2008-08-08,nse_corp_actions:equities
+INE760A01029,KOKUYOCMLN,split,Fv Split Rs.10/- To Re.1/,10.0,2008-08-22,nse_corp_actions:equities
+INE660A01013,SUNDARMFIN,bonus,Bonus 1:1,2.0,2008-08-22,nse_corp_actions:equities
+INE643A01035,JTEKTINDIA,split,Fv Split Rs.2/- To Re.1/-,2.0,2008-09-02,nse_corp_actions:equities
+INE768E01024,AICHAMP,split,Fv Split Rs.10/- To Rs.5/,2.0,2008-09-11,nse_corp_actions:equities
+INE376G01013,BIOCON,bonus,Bonus 1:1,2.0,2008-09-11,nse_corp_actions:equities
+INE878C01033,GEMINI,split,Fv Split Rs.5/- To Re.1/-,5.0,2008-09-17,nse_corp_actions:equities
+INE688E01024,HERCULES,split,Fv Split Rs.10/- To Re.1/,10.0,2008-09-17,nse_corp_actions:equities
+INE320A01014,BANKRAJAS,bonus,Bonus 1: 5,1.2,2008-09-18,nse_corp_actions:equities
+INE142I01023,TAKE,split,Fv Split-Rs10/- To Re.1/-,10.0,2008-09-18,nse_corp_actions:equities
+INE210C01013,AROGRANITE,bonus,Bonus 1:2,1.5,2008-09-26,nse_corp_actions:equities
+INE890C01046,SANWARIA,bonus,Bonus 1:1,2.0,2008-09-26,nse_corp_actions:equities
+INE018A01030,LT,bonus,Bonus 1:1,2.0,2008-10-01,nse_corp_actions:equities
+INE624C01015,VALECHAENG,bonus,Bonus 1:2,1.5,2008-10-01,nse_corp_actions:equities
+INE968G01025,PROVOGUE,split,Fv Split Rs.10/- To Rs.2/,5.0,2008-10-03,nse_corp_actions:equities
+INE129A01019,GAIL,bonus,Bonus 1:2,1.5,2008-10-06,nse_corp_actions:equities
+INE212H01026,AIAENG,split,Fv Split Rs.10/- To Rs.2/Rd Date Revised,5.0,2008-10-13,nse_corp_actions:equities
+INE885A01032,ARE&M,bonus,Bonus 1:2,1.5,2008-10-14,nse_corp_actions:equities
+INE131A01031,GMDCLTD,bonus,Bonus 1:1,2.0,2008-10-16,nse_corp_actions:equities
+INE683A01015,SOUTHBANK,bonus,Bonus 1:4,1.25,2008-10-16,nse_corp_actions:equities
+INE110D01013,GUJNRECOKE,bonus,Bonus 2:5,1.4,2008-10-17,nse_corp_actions:equities
+INE200A01026,GVT&D,split,Fv Split Rs.10/- To Rs.2/Rd Date Revised,5.0,2008-10-22,nse_corp_actions:equities
+INE109A01011,SCI,bonus,Bonus 1:2,1.5,2008-10-29,nse_corp_actions:equities
+INE508G01029,TIMETECHNO,split,Fv Split Rs.10/- To Re.1/Record Date Revised,10.0,2008-10-29,nse_corp_actions:equities
+INE628A01036,UPL,bonus,Bonus 1:1,2.0,2008-10-29,nse_corp_actions:equities
+INE808B01016,OPTOCIRCUI,bonus,Bonus 7:10,1.7,2008-11-03,nse_corp_actions:equities
+INE742C01031,JINDRILL,split,Fv Split-Rs10/- To Rs5/-,2.0,2008-11-06,nse_corp_actions:equities
+INE703B01027,RATNAMANI,split,Fv Split Rs.10/- To Rs.2/,5.0,2008-11-06,nse_corp_actions:equities
+INE023H01027,NECLIFE,split,Fv Split Rs.10/- To Re.1/,10.0,2008-11-12,nse_corp_actions:equities
+INE668F01031,JYOTHYLAB,split,Fv Split Rs.5/- To Re.1/-,5.0,2008-12-12,nse_corp_actions:equities
+INE826C01016,GUJAPOLLO,bonus,Bonus 1:2,1.5,2008-12-19,nse_corp_actions:equities
+INE435C01024,TEXINFRA,split,Fv Split Rs.10/- To Re.1/,10.0,2009-01-01,nse_corp_actions:equities
+INE385B01031,REIAGROLTD,split,Fv Split Rs.10/- To Re.1/,10.0,2009-02-05,nse_corp_actions:equities
+INE108J01022,CORALHUB,split,Fv Split Rs.10/- To Re.1/,10.0,2009-02-27,nse_corp_actions:equities
+INE606A01024,AMJLAND,split,Fv Split Rs.10/- To Rs.2/,5.0,2009-03-23,nse_corp_actions:equities
+INE224B01024,BIRLAPOWER,split,Fv Split Rs.10/- To Rs.1/,10.0,2009-04-24,nse_corp_actions:equities
+INE467B01029,TCS,bonus,Bonus 1:1/Div-Rs.5 Per Sh,2.0,2009-06-16,nse_corp_actions:equities
+INE920A01011,DOLPHINOFF,bonus,Agm/ Div-Rs.3 / Bonus 2:5,1.4,2009-06-29,nse_corp_actions:equities
+INE108J01022,CORALHUB,bonus,Bonus 1:2,1.5,2009-08-06,nse_corp_actions:equities
+INE455J01027,AUSTRAL,split,Fv Split Rs.10/- To Re.1/,10.0,2009-08-07,nse_corp_actions:equities
+INE569C01020,ORIENTCER,bonus,Bonus 1:1,2.0,2009-08-12,nse_corp_actions:equities
+INE538H01024,SHREEASHTA,split,Fv Split Rs.10/- To Rs.1/,10.0,2009-08-20,nse_corp_actions:equities
+INE695B01025,COUNCODOS,bonus,Bonus 2:1,3.0,2009-09-04,nse_corp_actions:equities
+INE060A01024,NAVNETEDUL,bonus,Bonus 3:2,2.5,2009-09-08,nse_corp_actions:equities
+INE050B01023,IVC,split,Fv Split Rs.10/- To Rs.2/,5.0,2009-09-16,nse_corp_actions:equities
+INE374A01029,GUJRATGAS,bonus,Bonus 1:1,2.0,2009-09-17,nse_corp_actions:equities
+INE744I01026,MVL,split,Fv Split Rs.10/- To Rs.2/,5.0,2009-09-18,nse_corp_actions:equities
+INE776C01039,GMRAIRPORT,split,Fv Split Rs.2/- To Re.1/-,2.0,2009-10-01,nse_corp_actions:equities
+INE105A01027,SUNCLAYTON,bonus,Bonus 1:1,2.0,2009-10-09,nse_corp_actions:equities
+INE020J01029,GOKUL,split,Fv Split Rs.10/- To Rs.2/Rd Revised,5.0,2009-10-14,nse_corp_actions:equities
+INE409B01013,SWELECTES,bonus,Bonus 1:1,2.0,2009-10-14,nse_corp_actions:equities
+INE512B01022,FCSSOFT,split,Fv Split Rs.10/- To Re.1/,10.0,2009-10-15,nse_corp_actions:equities
+INE655I01024,BIRLACOT,split,Fv Split Rs.10/- To Re.1/,10.0,2009-10-23,nse_corp_actions:equities
+INE181G01025,AJRINFRA,split,Fv Split Rs.10/- To Rs.2/,5.0,2009-10-26,nse_corp_actions:equities
+INE849J01021,REISIXTEN,split,Fv Split Rs.10/- To Rs.2/,5.0,2009-10-26,nse_corp_actions:equities
+INE216H01027,EDUCOMP,split,Fv Split Rs.10/- To Rs.2/,5.0,2009-10-27,nse_corp_actions:equities
+INE242A01010,IOC,bonus,Bonus 1:1,2.0,2009-10-29,nse_corp_actions:equities
+INE378D01032,MADHUCON,split,Fv Split Rs.2/- To Re.1/,2.0,2009-11-05,nse_corp_actions:equities
+INE102I01027,ADSL,split,Fv Split Rs.10/- To Rs.5/,2.0,2009-11-11,nse_corp_actions:equities
+INE952A01022,HINDNATGLS,split,Fv Split Rs.10/- To Rs.2/,5.0,2009-11-12,nse_corp_actions:equities
+INE292B01021,HBLENGINE,split,Fv Split Rs.10/- To Re.1/,10.0,2009-11-24,nse_corp_actions:equities
+INE002A01018,RELIANCE,bonus,Bonus 1:1,2.0,2009-11-26,nse_corp_actions:equities
+INE423A01024,ADANIENT,bonus,Bonus 1:1,2.0,2009-12-10,nse_corp_actions:equities
+INE324A01024,JINDALSAW,split,Fv Split Rs.10/- To Rs.2/,5.0,2009-12-10,nse_corp_actions:equities
+INE786A01032,JKLAKSHMI,split,Fv Split Rs.10 To Rs.5,2.0,2009-12-17,nse_corp_actions:equities
+INE455F01025,JPASSOCIAT,bonus,Bonus 1:2,1.5,2009-12-17,nse_corp_actions:equities
+INE318J01027,NUTEK,split,Fv Split Rs.10 To Rs.5,2.0,2009-12-23,nse_corp_actions:equities
+INE855C01015,WEBELSOLAR,bonus,Bonus 1:1,2.0,2009-12-29,nse_corp_actions:equities
+INE785C01048,LITL,split,Fv Split Rs.10 To Re.1,10.0,2010-01-04,nse_corp_actions:equities
+INE784B01027,WINSOMYARN,split,Fv Split Rs.10 To Re.1,10.0,2010-01-21,nse_corp_actions:equities
+INE193E01025,BAJAJELEC,split,Fv Split Rs.10 To Rs.2,5.0,2010-01-28,nse_corp_actions:equities
+INE538H01024,SHREEASHTA,bonus,Bonus 4:1,5.0,2010-02-01,nse_corp_actions:equities
+INE429I01024,CCCL,split,Fv Split Rs.10 To Rs.2,5.0,2010-02-10,nse_corp_actions:equities
+INE512B01022,FCSSOFT,bonus,Bonus 1:1,2.0,2010-02-26,nse_corp_actions:equities
+INE067A01029,CGPOWER,bonus,Bonus 3:4,1.75,2010-03-08,nse_corp_actions:equities
+INE551A01022,HINDDORROL,bonus,Bonus 1:1,2.0,2010-03-15,nse_corp_actions:equities
+INE318A01026,PIDILITIND,bonus,Bonus 1:1,2.0,2010-03-15,nse_corp_actions:equities
+INE087H01022,RENUKA,bonus,Bonus 1:1,2.0,2010-03-15,nse_corp_actions:equities
+INE875A01025,IVRCLINFRA,bonus,Bonus 1:1,2.0,2010-03-18,nse_corp_actions:equities
+INE806B01028,MURLIIND,split,Fv Split Rs.10 To Rs.2,5.0,2010-03-18,nse_corp_actions:equities
+INE571A01020,IPCALAB,split,Fv Split Rs.10 To Rs.2,5.0,2010-03-22,nse_corp_actions:equities
+INE157H01023,KMSUGAR,split,Fv Split Rs.10 To Rs.2,5.0,2010-03-26,nse_corp_actions:equities
+INE101A01026,M&M,split,Fv Split Rs.10 To Rs.5,2.0,2010-03-29,nse_corp_actions:equities
+INE420C01026,SEINVEST,split,Fv Split Rs.10 To Rs.2,5.0,2010-04-05,nse_corp_actions:equities
+INE010B01027,ZYDUSLIFE,bonus,Bonus 1: 2,1.5,2010-04-05,nse_corp_actions:equities
+INE466H01028,UNITY,split,Fv Split Rs.10 To Rs.2,5.0,2010-04-07,nse_corp_actions:equities
+INE172A01019,CASTROL,bonus,Bonus 1:1,2.0,2010-04-09,nse_corp_actions:equities
+INE946H01029,VIPUL,split,Fv Split Rs.2/- To Re.1/-,2.0,2010-05-04,nse_corp_actions:equities
+INE900B01011,KABRAEXTRU,split,Face Value Split From Rs.10/- To Rs.5/-,2.0,2010-05-17,nse_corp_actions:equities
+INE420C01026,SEINVEST,bonus,Bonus 3:1,4.0,2010-05-18,nse_corp_actions:equities
+INE414I01018,IVRCLAH,bonus,Bonus 1:2,1.5,2010-05-20,nse_corp_actions:equities
+INE613A01012,RALLIS,bonus,Bonus 1: 2,1.5,2010-06-08,nse_corp_actions:equities
+INE136B01020,CYIENT,bonus,Bonus 1:1,2.0,2010-06-10,nse_corp_actions:equities
+INE775B01025,KWALITY,bonus,Bonus 5:7,1.714286,2010-06-15,nse_corp_actions:equities
+INE075A01022,WIPRO,bonus,Bonus 2:3 And Final Dividend Rs.6/- Per Share,1.666667,2010-06-15,nse_corp_actions:equities
+INE194B01029,PANORAMUNI,bonus,Bonus 5:1,6.0,2010-06-21,nse_corp_actions:equities
+INE165B01011,RSSOFTWARE,bonus,Bonus 28:100,1.28,2010-06-21,nse_corp_actions:equities
+INE268A01031,STER,bonus+split,Bonus 1:1 And Face Value Split From Rs.2/- To Re.1/-,4.0,2010-06-21,nse_corp_actions:equities
+INE727B01018,GENESYS,split,Face Value Split From Rs.10/- To Rs.5/-,2.0,2010-06-23,nse_corp_actions:equities
+INE531A01016,KANSAINER,bonus,Bonus 1:1,2.0,2010-06-23,nse_corp_actions:equities
+INE628H01015,ORBITCORP,bonus,Bonus 1:1,2.0,2010-06-29,nse_corp_actions:equities
+INE192A01025,TATACONSUM,split,Face Value Split From Rs.10/- To Re.1/-,10.0,2010-06-30,nse_corp_actions:equities
+INE122H01019,TULIP,split,Fv Split Rs.10/- To Rs.2/-,5.0,2010-07-06,nse_corp_actions:equities
+INE317F01027,NESCO,bonus,Bonus 1:1,2.0,2010-07-20,nse_corp_actions:equities
+INE548C01024,EMAMILTD,split,Dividend Rs.6/- Per Share And Face Value Split From Rs.2/- To Re.1/-,3.0,2010-07-21,nse_corp_actions:equities
+INE520A01019,ZENSARTECH,bonus,Dividend Rs.5.50 Per Share And Bonus 1:1,2.0,2010-07-21,nse_corp_actions:equities
+INE738I01010,ECLERX,bonus,Bonus 1:2,1.5,2010-07-23,nse_corp_actions:equities
+INE123F01011,MMTC,bonus+split,Bonus 1:1 And Face Value Split From Rs.10 To Re.1,20.0,2010-07-29,nse_corp_actions:equities
+INE308H01014,PRATIBHA,split,Fv Split Rs.10/- To Rs.2/-,5.0,2010-07-30,nse_corp_actions:equities
+INE154A01025,ITC,bonus,Bonus 1:1,2.0,2010-08-03,nse_corp_actions:equities
+INE532F01047,EDELWEISS,bonus+split,Face Value Split From Rs.5/- To Re.1/- And Bonus 1:1,10.0,2010-08-10,nse_corp_actions:equities
+INE549A01026,HCC,bonus,Bonus 1:1,2.0,2010-08-10,nse_corp_actions:equities
+INE028D01025,RAINBOWPAP,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2010-08-11,nse_corp_actions:equities
+INE318D01020,ZENITHSTL,bonus,Bonus 1:5,1.2,2010-08-11,nse_corp_actions:equities
+INE364A01012,JAYSREETEA,split,Face Value Split From Rs.10/- To Rs.5/-,2.0,2010-08-13,nse_corp_actions:equities
+INE511C01022,POONAWALLA,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2010-08-13,nse_corp_actions:equities
+INE208C01025,AEGISLOG,bonus,Bonus 2:3,1.666667,2010-08-18,nse_corp_actions:equities
+INE001A01028,HDFC,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2010-08-18,nse_corp_actions:equities
+INE891D01018,REDINGTON,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2010-08-20,nse_corp_actions:equities
+INE206B01013,ZODIACLOTH,bonus,Bonus 1:2,1.5,2010-08-23,nse_corp_actions:equities
+INE326A01029,LUPIN,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2010-08-27,nse_corp_actions:equities
+INE323C01022,INDIANHUME,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2010-08-30,nse_corp_actions:equities
+INE437A01016,APOLLOHOSP,split,Face Value Split From Rs.10/- To Rs.5/-,2.0,2010-09-02,nse_corp_actions:equities
+INE739E01017,CERA,bonus,Bonus 1:1,2.0,2010-09-02,nse_corp_actions:equities
+INE805C01010,KCP,split,1st Interim Dividend Rs.2.50 Per Share And Face Value Split From Rs.10/- To Re.1/- (Purpose Revised),0.25,2010-09-02,nse_corp_actions:equities
+INE349A01021,NRBBEARING,bonus,Bonus 1:1,2.0,2010-09-03,nse_corp_actions:equities
+INE900B01011,KABRAEXTRU,bonus,Bonus 1:1,2.0,2010-09-06,nse_corp_actions:equities
+INE917I01010,BAJAJ-AUTO,bonus,Bonus 1:1,2.0,2010-09-08,nse_corp_actions:equities
+INE216A01014,BRITANNIA,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2010-09-08,nse_corp_actions:equities
+INE016A01026,DABUR,bonus,Bonus 1:1,2.0,2010-09-08,nse_corp_actions:equities
+INE220B01022,KPIL,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2010-09-08,nse_corp_actions:equities
+INE494B01015,TVSMOTOR,bonus,Bonus 1:1,2.0,2010-09-08,nse_corp_actions:equities
+INE237A01010,KOTAKBANK,split,Face Value Split From Rs.10/- To Rs.5/-,2.0,2010-09-13,nse_corp_actions:equities
+INE904D01019,PDPL,bonus,Annual General Meeting/Dividend Rs.2/- Per Share/Bonus 1:3,1.333333,2010-09-13,nse_corp_actions:equities
+INE047B01011,GILLANDERS,bonus,Bonus 1:2,1.5,2010-09-14,nse_corp_actions:equities
+INE006I01012,ASTRAL,split,Face Value Split From Rs.10/- To Rs.5/-,2.0,2010-09-15,nse_corp_actions:equities
+INE774I01015,RESURGERE,bonus+split,Annual General Meeting/Bonus 2:1/Face Value Split From Rs.10/- To Re.1/-,30.0,2010-09-15,nse_corp_actions:equities
+INE036D01010,KARURVYSYA,bonus,Bonus 2:5,1.4,2010-09-16,nse_corp_actions:equities
+INE824B01021,TATASTLBSL,split,Annual General Meeting / Dividend Rs.2.50 Per Share And Face Value Split From Rs.10/- To Rs.2/-,0.25,2010-09-21,nse_corp_actions:equities
+INE742F01042,ADANIPORTS,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2010-09-23,nse_corp_actions:equities
+INE683A01015,SOUTHBANK,split,Face Value Split From Rs.10/- To Re.1/-,10.0,2010-09-23,nse_corp_actions:equities
+INE663F01024,NAUKRI,bonus,Bonus 1:1,2.0,2010-09-27,nse_corp_actions:equities
+INE846H01013,NISSAN,split,Face Value Split From Rs.10/- To Re.1/-,10.0,2010-09-27,nse_corp_actions:equities
+INE133E01013,TI,bonus,Bonus 2:1,3.0,2010-09-28,nse_corp_actions:equities
+INE655I01024,BIRLACOT,bonus,Bonus 1:5,1.2,2010-09-29,nse_corp_actions:equities
+INE350H01024,BLKASHYAP,bonus+split,Bonus 1:1 / Face Value Split From Rs. 5/- To Re. 1/-,10.0,2010-09-29,nse_corp_actions:equities
+INE544K01018,AQUA,split,Face Value Split From Rs.10/- To Re.1/-,10.0,2010-10-01,nse_corp_actions:equities
+INE176B01018,HAVELLS,bonus,Bonus 1:1,2.0,2010-10-08,nse_corp_actions:equities
+INE561H01018,PARSVNATH,split,Face Value Split From Rs.10/- To Rs.5/-,2.0,2010-10-18,nse_corp_actions:equities
+INE195A01010,SUPREMEIND,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2010-10-18,nse_corp_actions:equities
+INE224B01024,BIRLAPOWER,bonus,Bonus 1:5,1.2,2010-10-20,nse_corp_actions:equities
+INE955I01010,SEZALGLASS,split,Face Value Split From Rs.10/- To Re.1/-,10.0,2010-10-21,nse_corp_actions:equities
+INE351A01019,UNICHEMLAB,split,Interim Dividend Rs.3/- Per Share And Face Value Split From Rs.5/- To Rs.2/- (Purpose Revised),0.6,2010-10-21,nse_corp_actions:equities
+INE955D01011,GENUSPOWER,split,Face Value Split From Rs.10/- To Re.1/-,10.0,2010-10-22,nse_corp_actions:equities
+INE197D01010,JINDALPOLY,bonus,Bonus 1:1,2.0,2010-10-22,nse_corp_actions:equities
+INE104E01014,SAVERA,bonus,Bonus 1:1,2.0,2010-10-25,nse_corp_actions:equities
+INE429C01027,SINTEX,split,Face Value Split From Rs.2/- To Re.1/-,2.0,2010-10-27,nse_corp_actions:equities
+INE175A01020,JISLJALEQS,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2010-10-29,nse_corp_actions:equities
+INE367G01020,PFOCUS,split,Face Value Split From Rs.10/- To Re.1/-,10.0,2010-10-29,nse_corp_actions:equities
+INE420C01026,SEINVEST,split,Face Value Split From Rs.2/- To Re.1/-,2.0,2010-10-29,nse_corp_actions:equities
+INE731A01012,ARCHIES,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2010-11-02,nse_corp_actions:equities
+INE489H01012,NITINFIRE,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2010-11-04,nse_corp_actions:equities
+INE285H01022,ATLANTAA,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2010-11-08,nse_corp_actions:equities
+INE019C01026,HSCL,split,Face Value Split From Rs.10/- To Re.1/-,10.0,2010-11-08,nse_corp_actions:equities
+INE750A01012,ORIENTHOT,split,Face Value Split From Rs.10/- To Re.1/-,10.0,2010-11-10,nse_corp_actions:equities
+INE355A01010,SOMANYCERA,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2010-11-11,nse_corp_actions:equities
+INE256A01028,ZEEL,bonus,Bonus 1:1,2.0,2010-11-11,nse_corp_actions:equities
+INE744I01026,MVL,split,Face Value Split From Rs.2/- To Re.1/-,2.0,2010-11-16,nse_corp_actions:equities
+INE050E01019,BALAMINES,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2010-11-18,nse_corp_actions:equities
+INE224A01018,GREAVESCOT,split,Interim Dividend Rs 2/- Per Share And Face Value Split From Rs 10/- To Rs 2/-,0.2,2010-11-24,nse_corp_actions:equities
+INE044A01028,SUNPHARMA,split,Face Value Split From Rs.5/- To Re.1/-,5.0,2010-11-25,nse_corp_actions:equities
+INE127B01011,HITECHGEAR,bonus,Bonus 1:1,2.0,2010-12-01,nse_corp_actions:equities
+INE226H01018,SADBHAV,split,Face Value Split From Rs.10/- To Re.1/-,10.0,2010-12-07,nse_corp_actions:equities
+INE285A01027,ELGIEQUIP,bonus,Bonus 1:1,2.0,2010-12-14,nse_corp_actions:equities
+INE787D01018,BALKRISIND,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2010-12-20,nse_corp_actions:equities
+INE169A01023,COROMANDEL,split,Face Value Split From Rs.2/- To Re.1/-,2.0,2010-12-23,nse_corp_actions:equities
+INE126A01023,EIDPARRY,split,Face Value Split From Rs.2/- To Re.1/-,2.0,2010-12-23,nse_corp_actions:equities
+INE633B01018,POLYPLEX,bonus,Bonus 1:1,2.0,2010-12-23,nse_corp_actions:equities
+INE249G01012,SURYAPHARM,split,Face Value Split From Rs.10/- To Re.1/-,10.0,2010-12-23,nse_corp_actions:equities
+INE386C01029,ASTRAMICRO,bonus,Bonus 1:2,1.5,2010-12-30,nse_corp_actions:equities
+INE389H01014,KEC,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2010-12-30,nse_corp_actions:equities
+INE115A01018,LICHSGFIN,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2010-12-30,nse_corp_actions:equities
+INE818A01017,ANTELOPUS,bonus,Bonus 1:10,1.1,2010-12-31,nse_corp_actions:equities
+INE474I01012,TULSI,bonus,Bonus 1:10 (Record Date Revised),1.1,2011-01-07,nse_corp_actions:equities
+INE333I01010,SUJANATOW,split,Face Value Split From Rs.5/- To Re.1/-,5.0,2011-01-10,nse_corp_actions:equities
+INE498B01016,SHOPERSTOP,split,Face Value Split From Rs.10/- To Rs.5/-,2.0,2011-01-12,nse_corp_actions:equities
+INE213A01011,ONGC,bonus+split,Bonus 1:1 And Face Value Split From Rs.10/- To Rs.5/-,4.0,2011-02-08,nse_corp_actions:equities
+INE406A01029,AUROPHARMA,split,Face Value Split From Rs.5/- To Re.1/-,5.0,2011-02-10,nse_corp_actions:equities
+INE932G01013,GLODYNE,split,Face Value Split From Rs.10/- To Rs.6/-,1.666667,2011-02-10,nse_corp_actions:equities
+INE872A01014,SREINFRA,bonus,Bonus 4:5 (Pursuant To Scheme Of Amalgamation),1.8,2011-02-10,nse_corp_actions:equities
+INE093A01033,HEXAWARE,bonus,Dividend Rs 1.40 Per Share / Bonus 1:1,2.0,2011-02-24,nse_corp_actions:equities
+INE267A01017,HINDZINC,bonus+split,Bonus - 1:1 And Face Value Split From Rs. 10 To Rs. 2,5.0,2011-03-07,nse_corp_actions:equities
+INE139A01026,NATIONALUM,bonus+split,Bonus 1:1 And Face Value Split From Rs.10/- To Rs.5/-,4.0,2011-03-15,nse_corp_actions:equities
+INE890C01046,SANWARIA,bonus,Bonus 1:1,2.0,2011-04-07,nse_corp_actions:equities
+INE999A01015,KSB,bonus,Bonus 1:1,2.0,2011-04-18,nse_corp_actions:equities
+INE809I01019,ONMOBILE,bonus,Bonus 1:1,2.0,2011-05-03,nse_corp_actions:equities
+INE933K01021,BAJAJCON,split,Face Value Split From Rs.5/- To Re.1/-,5.0,2011-05-05,nse_corp_actions:equities
+INE314A01017,CMC,bonus,Dividend Rs.20/- Per Share And Bonus 1:1,2.0,2011-06-08,nse_corp_actions:equities
+INE855B01025,RAIN,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2011-06-15,nse_corp_actions:equities
+INE008I01018,COX&KINGS,split,Face Value Split From Rs.10/- To Rs.5/-,2.0,2011-06-21,nse_corp_actions:equities
+INE280A01010,TITAN,bonus+split,Bonus 1:1 / Face Value Split From Rs.10/- To Re.1/-,20.0,2011-06-23,nse_corp_actions:equities
+INE296E01026,RAJPALAYAM,bonus,Final Dividend Rs.7.50 Per Share And Special Dividend Rs.7.50 Per Share/Bonus 1:1 (Purpose Revised),2.0,2011-07-13,nse_corp_actions:equities
+INE040A01018,HDFCBANK,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2011-07-14,nse_corp_actions:equities
+INE613A01012,RALLIS,split,Face Value Split From Rs.10/- To Re.1/-,10.0,2011-07-15,nse_corp_actions:equities
+INE208A01029,ASHOKLEY,bonus,Bonus 1:1,2.0,2011-08-02,nse_corp_actions:equities
+INE956G01020,WABAG,split,Face Value Split From Rs.5/- To Rs.2/-,2.5,2011-08-16,nse_corp_actions:equities
+INE603J01014,PIIND,split,Face Value Split From Rs.10/- To Rs.5/-,2.0,2011-08-17,nse_corp_actions:equities
+INE406H01016,DHANUS,bonus,Bonus 12:5,3.4,2011-08-29,nse_corp_actions:equities
+INE189I01016,NELCAST,split,Face Value Split From Rs 10 To Rs 2,5.0,2011-09-06,nse_corp_actions:equities
+IN9155A01012,TATAMTRDVR,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2011-09-12,nse_corp_actions:equities
+INE155A01022,TMPV,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2011-09-12,nse_corp_actions:equities
+INE298A01020,CUMMINSIND,bonus,Bonus 2:5,1.4,2011-09-20,nse_corp_actions:equities
+INE092B01017,INDNIPPON,bonus,Bonus 2:5,1.4,2011-09-20,nse_corp_actions:equities
+INE489H01012,NITINFIRE,bonus,Bonus 5:2,3.5,2011-09-22,nse_corp_actions:equities
+INE826A01028,ENTEGRA,bonus,Bonus 4:13,1.307692,2011-09-26,nse_corp_actions:equities
+INE245A01013,TATAPOWER,split,Face Value Split From Rs.10/- To Re.1/-,10.0,2011-09-26,nse_corp_actions:equities
+INE839G01010,JOCIL,bonus,Bonus 1:1,2.0,2011-09-27,nse_corp_actions:equities
+INE206B01013,ZODIACLOTH,bonus,Bonus 1:2,1.5,2011-09-27,nse_corp_actions:equities
+INE007A01017,CRISIL,split,Face Value Split From Rs.10/- To Re.1/-,10.0,2011-09-28,nse_corp_actions:equities
+INE590L01019,VASWANI,bonus,Bonus 1:4,1.25,2011-09-29,nse_corp_actions:equities
+INE257A01018,BHEL,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2011-10-03,nse_corp_actions:equities
+INE120A01026,CARBORUNIV,split,Face Value Split From Rs.2/- To Re.1/-,2.0,2011-10-05,nse_corp_actions:equities
+INE274B01011,MONSANTO,bonus,Bonus 1:1,2.0,2011-10-05,nse_corp_actions:equities
+INE054A01019,VIPIND,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2011-10-31,nse_corp_actions:equities
+INE592I01029,METKORE,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2011-11-03,nse_corp_actions:equities
+INE068D01021,CASTEXTECH,bonus,Bonus 1:1,2.0,2011-11-21,nse_corp_actions:equities
+INE360C01016,DPSCLTD,bonus+split,Bonus 22:1 And Face Value Split From Rs.10/- To Re.1/-,230.0,2011-12-15,nse_corp_actions:equities
+INE672B01024,MUNJALAU,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2011-12-29,nse_corp_actions:equities
+INE225D01019,SYMPHONY,split,Face Value Split Rs.10/- To Rs.2/-,5.0,2012-02-15,nse_corp_actions:equities
+INE083C01014,PLASTIBLEN,split,Face Value Split From Rs.10/- To Rs.5/-,2.0,2012-02-29,nse_corp_actions:equities
+INE836A01035,BSOFT,bonus,Bonus 1:1,2.0,2012-03-13,nse_corp_actions:equities
+INE842C01013,MINDACORP,bonus,Bonus 1:1,2.0,2012-03-27,nse_corp_actions:equities
+INE274J01014,OIL,bonus,Bonus 3:2,2.5,2012-03-29,nse_corp_actions:equities
+INE808B01016,OPTOCIRCUI,bonus,Bonus 3:10,1.3,2012-03-29,nse_corp_actions:equities
+INE051B01021,VAKRANGEE,bonus+split,Bonus 1:1 And Face Value Split From Rs.10/- To Re.1/-,20.0,2012-04-12,nse_corp_actions:equities
+INE108E01023,SUNDARAM,bonus,Bonus 2:1,3.0,2012-04-13,nse_corp_actions:equities
+INE873D01016,INDOCO,bonus+split,Bonus 1:2 And Face Value Split From Rs.10 To Rs.2,7.5,2012-05-17,nse_corp_actions:equities
+INE024L01019,GRAVITA,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2012-05-25,nse_corp_actions:equities
+INE488D01013,AVTNPL,split,Face Value Split From Rs 10 To Re 1,10.0,2012-06-07,nse_corp_actions:equities
+INE663F01024,NAUKRI,bonus,Annual General Meeting/Dividend-Re.1/- Per Share/Bonus 1:1,2.0,2012-06-22,nse_corp_actions:equities
+INE225I01018,ZYLOG,split,Face Value Split From Rs 10 To Rs 5,2.0,2012-06-29,nse_corp_actions:equities
+INE688E01024,HERCULES,bonus,Annual General Meeting/Dividend Rs.3.50 Per Share/Bonus 1:1 (Purpose Revised),2.0,2012-07-11,nse_corp_actions:equities
+INE524A01029,GABRIEL,bonus,Bonus 1:1,2.0,2012-07-12,nse_corp_actions:equities
+INE668F01031,JYOTHYLAB,bonus,Annual General Meeting/Dividend Of Rs.2.50 Per Share/ Bonus 1:1,2.0,2012-07-12,nse_corp_actions:equities
+INE029A01011,BPCL,bonus,Annual General Meeting/ Dividend Rs 11/- Per Share/ Bonus 1:1,2.0,2012-07-13,nse_corp_actions:equities
+INE358B01012,MICROTECH,bonus,Bonus 1:1,2.0,2012-07-17,nse_corp_actions:equities
+INE580B01011,GRUH,split,Face Value Split From Rs 10 To Rs 2,5.0,2012-07-24,nse_corp_actions:equities
+INE031B01015,AJANTPHARM,split,Face Value Split From Rs. 10/- To Rs. 5/-,2.0,2012-08-09,nse_corp_actions:equities
+INE222F01011,VTMLTD,split,Face Value Split From  Rs.10/- To Re.1/-,10.0,2012-08-16,nse_corp_actions:equities
+INE172A01019,CASTROL,bonus,Bonus 1:1,2.0,2012-09-04,nse_corp_actions:equities
+INE547E01014,IMPAL,bonus,Bonus 1:1,2.0,2012-09-10,nse_corp_actions:equities
+INE026A01017,GSFC,split,Face Value Split From Rs 10 To Rs 2,5.0,2012-09-20,nse_corp_actions:equities
+INE885A01032,ARE&M,split,Face Value Split From Rs.2/- To Re.1/-,2.0,2012-09-25,nse_corp_actions:equities
+INE775A01035,MOTHERSON,bonus,Bonus 1:2,1.5,2012-10-03,nse_corp_actions:equities
+INE952D01018,BILPOWER,bonus,Bonus 1:1,2.0,2012-10-04,nse_corp_actions:equities
+INE098F01015,AMRUTANJAN,split,Face Value  Split From Rs. 10 To Rs. 2/-,5.0,2012-10-25,nse_corp_actions:equities
+INE516K01016,GOENKA,split,Face Value Split From Rs.10/- To Re.1/-,10.0,2012-10-25,nse_corp_actions:equities
+INE725E01016,ORISSAMINE,split,Face Value Split From Rs.10/- To Re.1/-,10.0,2012-10-29,nse_corp_actions:equities
+INE032A01015,BOMDYEING,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2012-10-30,nse_corp_actions:equities
+INE879E01029,KANANIIND,split,Face Value Split From Rs.5/- To Re.1/-,5.0,2012-11-01,nse_corp_actions:equities
+INE050A01017,BBTC,split,Face Value Split From Rs 10 To Rs 2,5.0,2012-11-08,nse_corp_actions:equities
+INE301D01018,RUBYMILLS,split,Face Value Split From Rs 10 To Rs 5,2.0,2012-11-22,nse_corp_actions:equities
+INE849C01018,SHALPAINTS,split,Face Value Split From Rs 10 To Rs 2,5.0,2012-11-22,nse_corp_actions:equities
+INE023M01027,SETUINFRA,split,Face Value Split From Rs 10 To Re 1,10.0,2012-12-13,nse_corp_actions:equities
+INE660A01013,SUNDARMFIN,bonus,Bonus 1:1,2.0,2012-12-13,nse_corp_actions:equities
+INE676A01019,BBOX,bonus,Bonus 1:1,2.0,2012-12-19,nse_corp_actions:equities
+INE899L01022,UJAAS,split,Face Value Split From Rs 10 To Re 1,10.0,2012-12-21,nse_corp_actions:equities
+INE861A01017,VISESHINFO,split,Face Value Split From Rs 10 To Re 1,10.0,2013-01-03,nse_corp_actions:equities
+INE181G01025,AJRINFRA,bonus,Bonus 1:34,1.029412,2013-01-23,nse_corp_actions:equities
+INE144J01019,20MICRONS,split,Face Value Split Rs 10 To Rs 5,2.0,2013-01-28,nse_corp_actions:equities
+INE879E01029,KANANIIND,bonus,Bonus 1:10,1.1,2013-02-01,nse_corp_actions:equities
+INE495J01015,PRADIP,bonus,Bonus 1:5,1.2,2013-02-12,nse_corp_actions:equities
+INE774D01016,M&MFIN,split,Face Value Split Rs 10 To Rs 2,5.0,2013-02-15,nse_corp_actions:equities
+INE213M01016,VKSPL,split,Face Value Split From Rs 10 To Re 1,10.0,2013-02-27,nse_corp_actions:equities
+INE533D01016,RAJRAYON,split,Face Value Split From Rs 10 To Re 1,10.0,2013-03-04,nse_corp_actions:equities
+INE861A01017,VISESHINFO,bonus,Bonus 1 : 10,1.1,2013-03-07,nse_corp_actions:equities
+INE904G01020,RASOYPR,bonus+split,Bonus 2:1 / Face Value Split From Rs. 5/- To Re. 1/-,15.0,2013-03-21,nse_corp_actions:equities
+INE607L01011,BILENERGY,split,Face Value Split From Rs.10/- To Re. 1/-,10.0,2013-03-26,nse_corp_actions:equities
+INE880B01015,ANSALHSG,bonus,Bonus 2:1,3.0,2013-04-10,nse_corp_actions:equities
+INE268L01020,SHEKHAWATI,split,Face Value Split From Rs.10 To Re.1,10.0,2013-04-10,nse_corp_actions:equities
+INE603J01014,PIIND,split,Face Value Split From Rs.5/- Per Share To Re.1/- Per Share,5.0,2013-04-12,nse_corp_actions:equities
+INE213M01016,VKSPL,bonus,Bonus 5:2,3.5,2013-05-03,nse_corp_actions:equities
+INE164A01016,BALMLAWRIE,bonus,Bonus 3:4,1.75,2013-05-23,nse_corp_actions:equities
+INE763I01026,TARIL,bonus,Bonus 1:9,1.111111,2013-06-13,nse_corp_actions:equities
+INE548C01024,EMAMILTD,bonus,Bonus 1:2 And Dividend Rs.8/- Per Share,1.5,2013-06-26,nse_corp_actions:equities
+INE645H01019,SUTLEJTEX,bonus,Bonus 1:2,1.5,2013-06-27,nse_corp_actions:equities
+INE442H01011,ASHOKA,bonus+split,Bonus 1:2 And Face Value Split Rs.10/- To Rs.5/-,3.0,2013-07-03,nse_corp_actions:equities
+INE859A01011,PNBGILTS,bonus,Bonus 1:3,1.333333,2013-07-03,nse_corp_actions:equities
+INE517H01010,ADVANTA,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2013-07-05,nse_corp_actions:equities
+INE586G01017,GULFPETRO,bonus,Bonus 23:19,2.210526,2013-07-09,nse_corp_actions:equities
+INE205C01013,POLYMED,bonus,Bonus 1:1,2.0,2013-07-09,nse_corp_actions:equities
+INE018A01030,LT,bonus,Bonus 1:2,1.5,2013-07-11,nse_corp_actions:equities
+INE790G01023,SHILPAMED,bonus,Annual General Meeting / Dividend - Rs 1.30/- Per Share / Bonus 1:2,1.5,2013-07-16,nse_corp_actions:equities
+INE685A01028,TORNTPHARM,bonus,Bonus 1:1,2.0,2013-07-23,nse_corp_actions:equities
+INE978A01019,HERITGFOOD,bonus,Bonus 1:1,2.0,2013-07-26,nse_corp_actions:equities
+INE044A01028,SUNPHARMA,bonus,Bonus 1:1,2.0,2013-07-29,nse_corp_actions:equities
+INE021A01018,ASIANPAINT,split,Face Value Split Rs 10 To Re 1,10.0,2013-07-30,nse_corp_actions:equities
+INE517B01013,TTML,bonus,Bonus 2:15,1.133333,2013-08-07,nse_corp_actions:equities
+INE116A01016,APCOTEXIND,split,Face Value Split From Rs.10/- To Rs.5/-,2.0,2013-08-14,nse_corp_actions:equities
+INE421D01014,CCL,bonus+split,Bonus 1:1 And Face Value Split From Rs.10/- To Rs.2/-,10.0,2013-08-19,nse_corp_actions:equities
+INE989C01012,DIAPOWER,bonus,Bonus 1:3,1.333333,2013-08-26,nse_corp_actions:equities
+INE006I01012,ASTRAL,split,Face Value Split From Rs.5/- To Rs.2/-,2.5,2013-09-05,nse_corp_actions:equities
+INE111A01017,CONCOR,bonus,Bonus 1:2,1.5,2013-09-06,nse_corp_actions:equities
+184584,VETO,bonus,BONUS 1:10,1.1,2013-09-06,nse_corp_actions:sme
+184721,THEJO,bonus,BONUS 1:1,2.0,2013-09-11,nse_corp_actions:sme
+INE031B01015,AJANTPHARM,bonus,Bonus 1:2,1.5,2013-09-17,nse_corp_actions:equities
+INE040D01012,MAYURUNIQ,split,Face Value Split From Rs.10/- To Rs.5/-,2.0,2013-09-25,nse_corp_actions:equities
+INE488D01013,AVTNPL,bonus,Bonus 1:1,2.0,2013-09-26,nse_corp_actions:equities
+INE426A01027,ALEMBICLTD,bonus,Bonus 1:1,2.0,2013-09-27,nse_corp_actions:equities
+INE043K01011,BSLIMITED,bonus,Bonus 1:1,2.0,2013-09-30,nse_corp_actions:equities
+INE283A01014,PRECOT,bonus,Bonus 1:2,1.5,2013-10-03,nse_corp_actions:equities
+INE171A01011,FEDERALBNK,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2013-10-17,nse_corp_actions:equities
+INE365D01013,ASHIANA,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2013-10-24,nse_corp_actions:equities
+INE210C01013,AROGRANITE,bonus,Bonus 1 : 2,1.5,2013-10-30,nse_corp_actions:equities
+INE800H01010,OMAXE,bonus,Bonus 10:39,1.25641,2013-11-11,nse_corp_actions:equities
+INE484J01019,GODREJPROP,split,Face Value Split From Rs.10/- To Rs.5/-,2.0,2013-11-21,nse_corp_actions:equities
+INE131B01021,RELAXO,split,Face Value Split From Rs.5/- To Re.1/-,5.0,2013-11-22,nse_corp_actions:equities
+INE775A01035,MOTHERSON,bonus,Bonus 1:2,1.5,2013-12-20,nse_corp_actions:equities
+INE050B01023,IVC,bonus,Bonus 1:2,1.5,2013-12-26,nse_corp_actions:equities
+INE043K01011,BSLIMITED,split,Face Value Split From Rs 10/- To Re 1/-,10.0,2014-01-21,nse_corp_actions:equities
+INE455I01011,KSCL,split,Face Value Split From Rs 10/- To Rs 2/-,5.0,2014-01-27,nse_corp_actions:equities
+INE665A01038,SWANCORP,split,Face Value Split From Rs 2/- To Re 1/-,2.0,2014-02-03,nse_corp_actions:equities
+INE313D01013,MOHOTAIND,bonus,Bonus 2 : 1,3.0,2014-02-06,nse_corp_actions:equities
+INE028B01011,SHARONBIO,bonus+split,Bonus 1:1 / Face Value Split From 10/- To Face Value 2/-,2.0,2014-02-20,nse_corp_actions:equities
+INE411H01024,RSYSTEMS,split,Face Value Split From Rs 10/- To Re 1/- Per Share,10.0,2014-02-26,nse_corp_actions:equities
+INE952H01019,RAJTV,bonus+split,Bonus 1:1 / Face Value Split From Rs.10/- To Rs.5/-,4.0,2014-03-25,nse_corp_actions:equities
+INE806A01020,VIKASECO,split,Face Value Split From Rs 10/- To Re 1/-,10.0,2014-03-27,nse_corp_actions:equities
+INE823A01017,KOTHARIPRO,bonus,Bonus 2 : 1,3.0,2014-03-28,nse_corp_actions:equities
+INE040D01012,MAYURUNIQ,bonus,Bonus 1 : 1,2.0,2014-03-28,nse_corp_actions:equities
+INE075D01018,GMBREW,bonus,Dividend Rs 2.50/- Per Share / Bonus 1 : 4,1.25,2014-05-16,nse_corp_actions:equities
+INE018I01017,MINDTREE,bonus,Bonus 1 : 1,2.0,2014-06-03,nse_corp_actions:equities
+INE288B01011,DEEPAKNTR,bonus+split,Bonus 1 : 1 / Face Value Split From Rs 10/- Each To Rs 2/- Each,10.0,2014-06-20,nse_corp_actions:equities
+INE337A01034,LGBBROSLTD,bonus,Annual General Meeting / Final Dividend - Rs 7/- Per Share / Bonus 1 : 1,2.0,2014-07-04,nse_corp_actions:equities
+INE633A01028,SHRENUJ,bonus,Annual General Meeting / Dividend - Re 0.60/- Per Share / Bonus 1 : 1,2.0,2014-07-15,nse_corp_actions:equities
+INE238A01026,AXISBANK,split,Face Value Split From Rs 10/- To Rs 2/- Per Share,5.0,2014-07-28,nse_corp_actions:equities
+INE988E01010,JMTAUTOLTD,bonus,Bonus 5:2,3.5,2014-07-30,nse_corp_actions:equities
+INE176B01018,HAVELLS,split,Face Value Split From Rs 5/- Per Share To Re 1/- Per Share,5.0,2014-08-26,nse_corp_actions:equities
+INE949H01015,MANINFRA,split,Annual General Meeting / Dividend - Rs 1.35/- Per Share / Face Value Split - From Rs 10/- Per Share To Rs 2/- Per Share,0.135,2014-08-28,nse_corp_actions:equities
+INE168A01017,J&KBANK,split,Face Value Split - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2014-09-04,nse_corp_actions:equities
+INE150B01013,ALKYLAMINE,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2014-09-08,nse_corp_actions:equities
+INE951D01010,ATULAUTO,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2014-09-12,nse_corp_actions:equities
+INE510K01019,SHILPI,bonus,Bonus 1:1,2.0,2014-09-16,nse_corp_actions:equities
+INE305C01011,PANAMAPET,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2014-09-19,nse_corp_actions:equities
+INE943B01011,SOUISPAT,split,Annual General Meeting And Face Value Split From Rs.10/- To Re.1/-,10.0,2014-09-22,nse_corp_actions:equities
+INE006I01012,ASTRAL,split,Face Value Split From Rs 2/- Per Share To Re 1/- Per Share,2.0,2014-09-25,nse_corp_actions:equities
+INE142K01011,LYPSAGEMS,bonus,Bonus 1:2,1.5,2014-09-29,nse_corp_actions:equities
+INE659A01015,SUDARSCHEM,bonus+split,Bonus 1 : 1 / Face Value Split From Rs 10/- To Rs 2/- Per Share,10.0,2014-09-30,nse_corp_actions:equities
+INE927D01010,JBMA,bonus+split,Bonus 1:1 And Face Value Split Rs.10/- To Rs.5/- Per Share,4.0,2014-10-08,nse_corp_actions:equities
+INE319B01014,THEBYKE,bonus,Bonus 1:1,2.0,2014-10-09,nse_corp_actions:equities
+INE637H01016,SHIVAMAUTO,split,Face Value Split From Rs.10/- To Rs.2/-,5.0,2014-10-30,nse_corp_actions:equities
+INE489H01012,NITINFIRE,bonus,Bonus 1:3,1.333333,2014-11-13,nse_corp_actions:equities
+INE806A01020,VIKASECO,bonus,Bonus 3 : 2,2.5,2014-11-13,nse_corp_actions:equities
+INE062A01012,SBIN,split,Face Value Split Rs.10/- To Re.1/- Per Share,10.0,2014-11-20,nse_corp_actions:equities
+INE272L01014,SURANASOL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2014-11-25,nse_corp_actions:equities
+INE130B01023,SURANAT&P,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share,5.0,2014-11-25,nse_corp_actions:equities
+INE260B01010,GODFRYPHLP,split,Face Value Split From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2014-11-28,nse_corp_actions:equities
+INE009A01021,INFY,bonus,Bonus 1:1,2.0,2014-12-02,nse_corp_actions:equities
+INE090A01013,ICICIBANK,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2014-12-04,nse_corp_actions:equities
+INE573A01034,JKTYRE,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2014-12-18,nse_corp_actions:equities
+INE160A01014,PNB,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2014-12-18,nse_corp_actions:equities
+INE804D01011,INFODRIVE,split,Face Value Split (Sub Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2014-12-24,nse_corp_actions:equities
+INE233A01035,GODREJIND,bonus,Bonus 1 : 1250,1.0008,2015-01-05,nse_corp_actions:equities
+INE842C01013,MINDACORP,bonus+split,Bonus 1:1 / Face Value Split From Rs 10/- Per Share To Rs 2/- Per Share,10.0,2015-01-05,nse_corp_actions:equities
+INE982F01028,HATHWAY,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2015-01-06,nse_corp_actions:equities
+INE463A01020,BERGEPAINT,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2015-01-08,nse_corp_actions:equities
+INE165B01011,RSSOFTWARE,split,Interim Dividend - Rs 1.50/- Per Share / Face Value Split - From Rs 10/- Per Share To Rs 5/- Per Share (Purpose Revised),0.15,2015-01-21,nse_corp_actions:equities
+INE028A01013,BANKBARODA,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2015-01-22,nse_corp_actions:equities
+INE112A01015,CORPBANK,split,Face Valus Split (Sub-Division) - From Rs 10/- Per To Rs 2/- Per Share,5.0,2015-01-22,nse_corp_actions:equities
+INE493A01019,TATACOFFEE,split,Face Value Split (Sub-Division): From Rs 10/- Per Share To Re 1/- Per Share,10.0,2015-01-23,nse_corp_actions:equities
+INE205C01013,POLYMED,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2015-02-02,nse_corp_actions:equities
+INE045J01018,FCL,bonus,Bonus 1:1,2.0,2015-02-12,nse_corp_actions:equities
+INE475B01014,HIKAL,split,Face Value Split (Sub-Division): From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2015-02-27,nse_corp_actions:equities
+INE262H01013,PERSISTENT,bonus,Bonus 1 : 1,2.0,2015-03-10,nse_corp_actions:equities
+INE313D01013,MOHOTAIND,bonus,Bonus 1:6,1.166667,2015-03-16,nse_corp_actions:equities
+INE860A01027,HCLTECH,bonus,Bonus 1 : 1,2.0,2015-03-19,nse_corp_actions:equities
+INE669C01028,TECHM,bonus+split,Bonus 1:1 / Face Value Split - From Rs 10/- Per Share To Rs 5/- Per Share,4.0,2015-03-19,nse_corp_actions:equities
+INE031B01015,AJANTPHARM,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Rs 2/- Per Share,2.5,2015-03-20,nse_corp_actions:equities
+INE101D01012,GRANULES,split,Face Value Split Rs 10 To Rs 1,10.0,2015-03-23,nse_corp_actions:equities
+INE767A01016,AARTIDRUGS,bonus,Bonus 1:1,2.0,2015-03-24,nse_corp_actions:equities
+INE531A01016,KANSAINER,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2015-03-26,nse_corp_actions:equities
+INE956G01020,WABAG,bonus,Bonus 1 : 1,2.0,2015-03-26,nse_corp_actions:equities
+INE216D01018,KSERASERA,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2015-03-30,nse_corp_actions:equities
+INE071D01025,MENONBE,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share,5.0,2015-04-09,nse_corp_actions:equities
+INE070I01018,INSECTICID,bonus,Bonus 1:2,1.5,2015-04-16,nse_corp_actions:equities
+INE450D01021,PITTIENG,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2015-04-16,nse_corp_actions:equities
+INE615H01020,TITAGARH,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2015-04-23,nse_corp_actions:equities
+INE370E01029,VIVIDHA,bonus,Bonus 10:1,11.0,2015-05-28,nse_corp_actions:equities
+INE045J01018,FCL,split,Face Valus Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2015-06-11,nse_corp_actions:equities
+INE009A01021,INFY,bonus,Annual General Meeting/ Dividend - Rs 29.50/- Per Share And Bonus 1:1,2.0,2015-06-15,nse_corp_actions:equities
+INE378J01013,CMAHENDRA,bonus,Bonus 1:1,2.0,2015-06-18,nse_corp_actions:equities
+INE988E01010,JMTAUTOLTD,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2015-06-25,nse_corp_actions:equities
+INE219H01039,SRSLTD,bonus,Bonus 1:1,2.0,2015-06-25,nse_corp_actions:equities
+INE131B01021,RELAXO,bonus,Bonus 1:1,2.0,2015-07-01,nse_corp_actions:equities
+INE171A01011,FEDERALBNK,bonus,Bonus 1:1,2.0,2015-07-08,nse_corp_actions:equities
+INE237A01010,KOTAKBANK,bonus,Bonus 1: 1,2.0,2015-07-08,nse_corp_actions:equities
+INE683C01011,MAITHANALL,bonus,Bonus 1:1,2.0,2015-07-15,nse_corp_actions:equities
+INE406A01029,AUROPHARMA,bonus,Bonus 1:1,2.0,2015-07-20,nse_corp_actions:equities
+INE912H01013,MBLINFRA,bonus,Bonus 1:1,2.0,2015-07-28,nse_corp_actions:equities
+INE529F01019,SIGNET,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 1/- Per Share,10.0,2015-08-17,nse_corp_actions:equities
+INE686A01026,CEMPRO,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2015-08-21,nse_corp_actions:equities
+INE202B01012,DHFL,bonus,Bonus 1:1,2.0,2015-09-09,nse_corp_actions:equities
+INE263A01016,BEL,bonus,Bonus 2:1,3.0,2015-09-14,nse_corp_actions:equities
+INE208C01025,AEGISLOG,split,Face Value Split From Rs 10 To Rs 1,10.0,2015-09-16,nse_corp_actions:equities
+INE914E01024,ALANKIT,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2015-09-23,nse_corp_actions:equities
+INE116A01016,APCOTEXIND,bonus,Bonus 1:1,2.0,2015-09-23,nse_corp_actions:equities
+INE259A01022,COLPAL,bonus,Bonus 1:1,2.0,2015-09-23,nse_corp_actions:equities
+INE361B01024,DIVISLAB,bonus,Bonus 1:1,2.0,2015-09-23,nse_corp_actions:equities
+INE010B01027,ZYDUSLIFE,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share,5.0,2015-10-06,nse_corp_actions:equities
+INE176A01010,BATAINDIA,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2015-10-07,nse_corp_actions:equities
+INE637H01016,SHIVAMAUTO,bonus,Bonus 1: 1,2.0,2015-10-08,nse_corp_actions:equities
+INE112F01014,LAMBODHARA,split,Face Value Split From Rs 10 To Rs 5,2.0,2015-10-15,nse_corp_actions:equities
+INE301D01018,RUBYMILLS,bonus,Bonus 1:1,2.0,2015-10-21,nse_corp_actions:equities
+INE453D01017,SARLAPOLY,split,Face Value Split From Rs 10 To Re 1 (Record Date Revised),10.0,2015-10-29,nse_corp_actions:equities
+INE790G01023,SHILPAMED,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2015-11-06,nse_corp_actions:equities
+INE871C01012,AVANTIFEED,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2015-11-26,nse_corp_actions:equities
+INE987B01018,NATCOPHARM,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2015-11-26,nse_corp_actions:equities
+INE039C01016,JAMNAAUTO,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2015-12-03,nse_corp_actions:equities
+INE576I01014,JKIL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2015-12-10,nse_corp_actions:equities
+INE738I01010,ECLERX,bonus,Bonus 1:3,1.333333,2015-12-17,nse_corp_actions:equities
+INE812G01017,SMSPHARMA,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2015-12-17,nse_corp_actions:equities
+INE611L01013,INDTERRAIN,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2015-12-21,nse_corp_actions:equities
+INE398A01010,VENKEYS,bonus,Bonus 1:2,1.5,2015-12-21,nse_corp_actions:equities
+INE196A01026,MARICO,bonus,Bonus 1:1,2.0,2015-12-22,nse_corp_actions:equities
+INE418H01029,ALLCARGO,bonus,Bonus 1:1,2.0,2015-12-30,nse_corp_actions:equities
+INE823A01017,KOTHARIPRO,bonus,Bonus 1:2,1.5,2016-01-05,nse_corp_actions:equities
+INE461C01020,GREENPLY,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share,5.0,2016-01-06,nse_corp_actions:equities
+INE893J01011,MOLDTKPAC,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2016-02-17,nse_corp_actions:equities
+INE696K01016,PRAKASHSTL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2016-03-03,nse_corp_actions:equities
+INE018I01017,MINDTREE,bonus,Bonus 1:1,2.0,2016-03-09,nse_corp_actions:equities
+INE230R01019,RAMASTEEL,bonus+split,Bonus 4:1/Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,10.0,2016-03-14,nse_corp_actions:equities
+INE484C01030,VEEDOL,bonus+split,Bonus 1:1/Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,4.0,2016-03-16,nse_corp_actions:equities
+INE372C01011,PRECWIRE,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2016-03-21,nse_corp_actions:equities
+INE192B01031,WELSPUNLIV,split,Interim Div - Rs 6/- Per Share + Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,0.6,2016-03-21,nse_corp_actions:equities
+INE370E01029,VIVIDHA,bonus,Bonus 1:3,1.333333,2016-03-30,nse_corp_actions:equities
+INE526G01013,VIVIMEDLAB,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2016-04-06,nse_corp_actions:equities
+INE353G01020,DISHMAN,bonus,Bonus 1:1,2.0,2016-05-02,nse_corp_actions:equities
+INE075D01018,GMBREW,bonus,Bonus 1:4,1.25,2016-05-30,nse_corp_actions:equities
+INE095N01015,NBCC,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2016-06-02,nse_corp_actions:equities
+INE150G01012,LUXIND,split,Face Value Split From Rs 10 To Rs 2,5.0,2016-06-06,nse_corp_actions:equities
+INE675G01018,PINCON,bonus,Bonus 1:1,2.0,2016-06-23,nse_corp_actions:equities
+INE154A01025,ITC,bonus,Bonus 1:2,1.5,2016-07-01,nse_corp_actions:equities
+INE029A01011,BPCL,bonus,Bonus 1:1,2.0,2016-07-13,nse_corp_actions:equities
+INE473B01035,HATSUN,bonus,Bonus 2:5,1.4,2016-07-13,nse_corp_actions:equities
+INE460C01014,GANESHHOU,bonus,Bonus 1:2,1.5,2016-07-14,nse_corp_actions:equities
+INE536A01023,GRINDWELL,bonus,Bonus 1:1,2.0,2016-07-14,nse_corp_actions:equities
+INE463A01020,BERGEPAINT,bonus,Bonus 2:5,1.4,2016-07-15,nse_corp_actions:equities
+240724,SANCO,bonus,BONUS 1:5,1.2,2016-08-10,nse_corp_actions:sme
+INE096L01017,KTIL,bonus+split,Bonus 1:25/ Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.08,2016-08-11,nse_corp_actions:equities
+INE195J01011,PNCINFRA,split,Face Value Split From Rs 10 To Rs 2,5.0,2016-08-12,nse_corp_actions:equities
+INE600A01027,PILITA,split,Face Value Split (Sub-Division) - From Rs 4/- Per Share To Re 1/- Per Share,4.0,2016-08-24,nse_corp_actions:equities
+INE134E01011,PFC,bonus,Bonus 1:1,2.0,2016-08-26,nse_corp_actions:equities
+INE071D01025,MENONBE,bonus,Bonus 1:5,1.2,2016-08-30,nse_corp_actions:equities
+INE951I01019,VGUARD,split,Face Value Split From Rs 10 To Re 1,10.0,2016-08-30,nse_corp_actions:equities
+INE725A01022,NAVA,bonus,Bonus 1:1,2.0,2016-09-01,nse_corp_actions:equities
+INE286K01024,TECHNO,bonus,Bonus 1:1,2.0,2016-09-06,nse_corp_actions:equities
+INE296A01016,BAJFINANCE,bonus+split,Bonus 1:1/Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,10.0,2016-09-08,nse_corp_actions:equities
+INE849A01012,TRENT,split,Face Value Split From Rs 10 To Re 1,10.0,2016-09-12,nse_corp_actions:equities
+INE405E01023,UNOMINDA,split,Face Value Split From Rs 10 To Rs 2,5.0,2016-09-12,nse_corp_actions:equities
+INE094A01015,HINDPETRO,bonus,Bonus 2:1,3.0,2016-09-14,nse_corp_actions:equities
+INE225D01019,SYMPHONY,bonus,Bonus 1:1,2.0,2016-09-14,nse_corp_actions:equities
+INE988E01010,JMTAUTOLTD,split,Face Value Split From Rs 2 To Re 1,2.0,2016-09-21,nse_corp_actions:equities
+INE020B01018,RECLTD,bonus,Bonus 1:1,2.0,2016-09-28,nse_corp_actions:equities
+INE217B01028,KAJARIACER,split,Face Value Split From Rs 2 To Re 1,2.0,2016-10-04,nse_corp_actions:equities
+INE047A01013,GRASIM,split,Face Value Split From Rs 10 To Re 2,5.0,2016-10-06,nse_corp_actions:equities
+INE650K01021,SECURKLOUD,bonus+split,Bonus 1:3/Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.666666,2016-10-10,nse_corp_actions:equities
+INE482J01021,SHAH,split,Face Value Split From Rs 10 To Re 1,10.0,2016-10-13,nse_corp_actions:equities
+INE242A01010,IOC,bonus,Bonus 1:1,2.0,2016-10-18,nse_corp_actions:equities
+INE914E01024,ALANKIT,bonus,Bonus 1:1,2.0,2016-10-19,nse_corp_actions:equities
+INE305H01010,SUNILHITEC,bonus+split,Bonus 1:1/Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,20.0,2016-12-01,nse_corp_actions:equities
+INE323C01022,INDIANHUME,bonus,Bonus 1:1,2.0,2016-12-09,nse_corp_actions:equities
+INE213A01011,ONGC,bonus,Bonus 1: 2,1.5,2016-12-15,nse_corp_actions:equities
+INE164A01016,BALMLAWRIE,bonus,Bonus 3:1,4.0,2016-12-26,nse_corp_actions:equities
+INE510A01010,ENGINERSIN,bonus,Bonus 1:1,2.0,2016-12-30,nse_corp_actions:equities
+INE224E01028,GATECH,bonus,Bonus 1:4,1.25,2017-01-10,nse_corp_actions:equities
+INE274J01014,OIL,bonus,Bonus 1:3,1.333333,2017-01-12,nse_corp_actions:equities
+250933,FOURTHDIM,bonus,BONUS 1:1,2.0,2017-02-02,nse_corp_actions:sme
+INE336H01015,GAYAPROJ,split,Face Value Split From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2017-02-10,nse_corp_actions:equities
+INE231G01010,ORBTEXP,bonus,Bonus 1:1/Interim Dividend Rs 2/- Per Share (Purpose Revised),2.0,2017-02-14,nse_corp_actions:equities
+INE070C01029,COMPINFO,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2017-02-16,nse_corp_actions:equities
+INE095N01015,NBCC,bonus,Bonus 1:2,1.5,2017-02-17,nse_corp_actions:equities
+INE129A01019,GAIL,bonus,Bonus 1:3,1.333333,2017-03-09,nse_corp_actions:equities
+INE251C01017,ABMINTLTD,bonus,Bonus 5:1,6.0,2017-03-15,nse_corp_actions:equities
+INE951I01019,VGUARD,bonus,Bonus 2:5,1.4,2017-03-15,nse_corp_actions:equities
+INE263A01016,BEL,split,Face Value Split From Rs 10/- Per Share To Re 1/- Per Share,10.0,2017-03-16,nse_corp_actions:equities
+INE205C01013,POLYMED,bonus,Bonus 1:1,2.0,2017-03-24,nse_corp_actions:equities
+INE111A01017,CONCOR,bonus,Bonus 1:4,1.25,2017-04-05,nse_corp_actions:equities
+INE153T01019,BLS,split,Face Value Split From Rs 10/- Per Share To Re 1/- Per Share,10.0,2017-04-26,nse_corp_actions:equities
+INE520H01014,BEARDSELL,bonus+split,Bonus 1:5/Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,6.0,2017-05-04,nse_corp_actions:equities
+INE837H01012,ADVENZYMES,split,Face Value Split From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2017-05-25,nse_corp_actions:equities
+INE310C01011,HINDCOMPOS,bonus+split,Bonus 1:2/Face Value Split (Sub-Division) From Rs 10 Per Share To Rs 5 Per Share,3.0,2017-05-25,nse_corp_actions:equities
+INE296G01013,MUTHOOTCAP,bonus,Bonus 1:10,1.1,2017-06-12,nse_corp_actions:equities
+INE075A01022,WIPRO,bonus,Bonus 1:1,2.0,2017-06-13,nse_corp_actions:equities
+INE376G01013,BIOCON,bonus,Bonus 2:1,3.0,2017-06-15,nse_corp_actions:equities
+INE090A01013,ICICIBANK,bonus,Annual General Meeting/Dividend - Rs 2.50 Per Share/Bonus 1:10 (Revised),1.1,2017-06-20,nse_corp_actions:equities
+INE574I01027,ARCOTECH,split,Face Value Split From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2017-06-22,nse_corp_actions:equities
+INE102D01028,GODREJCP,bonus,Bonus 1:1,2.0,2017-06-22,nse_corp_actions:equities
+INE602G01020,KITEX,bonus,Bonus 2:5,1.4,2017-06-22,nse_corp_actions:equities
+INE347G01014,PETRONET,bonus,Bonus 1:1,2.0,2017-07-03,nse_corp_actions:equities
+INE083C01014,PLASTIBLEN,bonus,Bonus 1:1,2.0,2017-07-03,nse_corp_actions:equities
+INE890C01046,SANWARIA,bonus,Bonus 1:1,2.0,2017-07-03,nse_corp_actions:equities
+INE775A01035,MOTHERSON,bonus,Bonus 1:2,1.5,2017-07-05,nse_corp_actions:equities
+INE785M01013,PCJEWELLER,bonus,Bonus 1:1,2.0,2017-07-06,nse_corp_actions:equities
+INE215I01019,MAANALU,bonus,Bonus 1:1,2.0,2017-07-10,nse_corp_actions:equities
+INE998I01010,MHRIL,bonus,Bonus 1:2,1.5,2017-07-10,nse_corp_actions:equities
+INE094A01015,HINDPETRO,bonus,Bonus 1:2/ Dividend - Rs 1.10 Per Share,1.5,2017-07-11,nse_corp_actions:equities
+INE672B01024,MUNJALAU,bonus,Bonus 1:1,2.0,2017-07-11,nse_corp_actions:equities
+INE142K01011,LYPSAGEMS,bonus,Bonus 2:5,1.4,2017-07-12,nse_corp_actions:equities
+INE029A01011,BPCL,bonus,Bonus 1:2,1.5,2017-07-13,nse_corp_actions:equities
+INE491A01021,CUB,bonus,Bonus 1:10,1.1,2017-07-13,nse_corp_actions:equities
+INE390G01014,GPTINFRA,bonus,Bonus 1:1,2.0,2017-07-13,nse_corp_actions:equities
+INE018A01030,LT,bonus,Bonus 1:2,1.5,2017-07-13,nse_corp_actions:equities
+INE048G01018,NAVINFLUOR,split,Face Value Split From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2017-07-19,nse_corp_actions:equities
+INE805D01026,SUNTECK,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Rs 1/- Per Share,2.0,2017-07-25,nse_corp_actions:equities
+INE785A01026,JAYAGROGN,bonus,Bonus 1:1,2.0,2017-08-01,nse_corp_actions:equities
+INE558D01013,CORALFINAC,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2017-08-03,nse_corp_actions:equities
+INE159N01019,VIJIFIN,bonus,Bonus 1:10,1.1,2017-08-04,nse_corp_actions:equities
+INE366A01033,DWARKESH,split,Annual General Meeting/Dividend - Rs 10 Per Share/Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share (Purpose Revised),1.0,2017-08-10,nse_corp_actions:equities
+INE483S01020,CCAVENUE,split,Annual General Meeting/Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2017-08-31,nse_corp_actions:equities
+INE325C01027,DOLLAR,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2017-08-31,nse_corp_actions:equities
+INE002A01018,RELIANCE,bonus,Bonus 1:1,2.0,2017-09-07,nse_corp_actions:equities
+INE583C01013,DECCANCE,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2017-09-11,nse_corp_actions:equities
+INE317F01027,NESCO,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2017-09-15,nse_corp_actions:equities
+INE670A01012,TATAELXSI,bonus,Bonus 1:1,2.0,2017-09-18,nse_corp_actions:equities
+INE528G01019,YESBANK,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2017-09-21,nse_corp_actions:equities
+INE645H01019,SUTLEJTEX,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2017-09-26,nse_corp_actions:equities
+INE122R01018,MANPASAND,bonus,Bonus 1:1,2.0,2017-09-27,nse_corp_actions:equities
+INE490G01020,MOIL,bonus,Bonus 1:1,2.0,2017-09-27,nse_corp_actions:equities
+INE263A01016,BEL,bonus,Bonus 1:10,1.1,2017-09-28,nse_corp_actions:equities
+INE465A01025,BHARATFORG,bonus,Bonus 1:1,2.0,2017-09-28,nse_corp_actions:equities
+INE257A01018,BHEL,bonus,Bonus 1:2,1.5,2017-09-28,nse_corp_actions:equities
+INE763I01026,TARIL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2017-09-28,nse_corp_actions:equities
+INE305C01011,PANAMAPET,bonus,Bonus 1:2,1.5,2017-10-03,nse_corp_actions:equities
+INE039C01016,JAMNAAUTO,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share,5.0,2017-10-05,nse_corp_actions:equities
+INE978A01019,HERITGFOOD,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2017-10-10,nse_corp_actions:equities
+INE477A01012,CANFINHOME,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2017-10-12,nse_corp_actions:equities
+269761,SHAIVAL,bonus,BONUS 5:1,6.0,2017-10-17,nse_corp_actions:sme
+INE637C01017,POKARNA,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2017-10-18,nse_corp_actions:equities
+INE076B01010,SIYSIL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2017-10-25,nse_corp_actions:equities
+INE446A01017,ATLASCYCLE,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2017-10-30,nse_corp_actions:equities
+INE486J01014,INFINITE,bonus,Bonus 1:26,1.038462,2017-11-01,nse_corp_actions:equities
+INE203G01019,IGL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2017-11-09,nse_corp_actions:equities
+INE365I01012,NBIFIN,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2017-12-07,nse_corp_actions:equities
+INE787D01018,BALKRISIND,bonus,Bonus 1:1,2.0,2017-12-21,nse_corp_actions:equities
+INE172A01027,CASTROLIND,bonus,Bonus 1:1,2.0,2017-12-21,nse_corp_actions:equities
+INE101A01026,M&M,bonus,Bonus 1:1,2.0,2017-12-21,nse_corp_actions:equities
+INE051B01021,VAKRANGEE,bonus,Bonus 1:1,2.0,2017-12-21,nse_corp_actions:equities
+INE247D01013,JINDWORLD,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2017-12-26,nse_corp_actions:equities
+272277,DIRL,bonus,BONUS 1:1,2.0,2018-01-09,nse_corp_actions:sme
+INE607L01011,BILENERGY,bonus,Bonus 1:1,2.0,2018-01-11,nse_corp_actions:equities
+INE688J01023,LANDSMILL,bonus,Bonus 2:1,3.0,2018-01-23,nse_corp_actions:equities
+INE242A01010,IOC,bonus,Bonus 1:1,2.0,2018-03-15,nse_corp_actions:equities
+INE092B01017,INDNIPPON,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2018-03-21,nse_corp_actions:equities
+INE059D01012,LAOPALA,bonus,Bonus 1:1,2.0,2018-03-22,nse_corp_actions:equities
+INE129A01019,GAIL,bonus,Bonus 1:3,1.333333,2018-03-27,nse_corp_actions:equities
+INE164B01022,KELLTONTEC,bonus,Bonus 1:1,2.0,2018-03-27,nse_corp_actions:equities
+INE274J01014,OIL,bonus,Bonus 1:2,1.5,2018-03-27,nse_corp_actions:equities
+INE182D01012,MARATHON,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2018-04-05,nse_corp_actions:equities
+INE098F01015,AMRUTANJAN,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2018-04-13,nse_corp_actions:equities
+INE602A01023,PCBL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2018-04-19,nse_corp_actions:equities
+INE095N01015,NBCC,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2018-04-25,nse_corp_actions:equities
+INE123F01011,MMTC,bonus,Bonus 1:2,1.5,2018-05-03,nse_corp_actions:equities
+INE075D01018,GMBREW,bonus,Bonus 1:4,1.25,2018-05-21,nse_corp_actions:equities
+INE467B01029,TCS,bonus,Bonus 1:1 /Dividend- Rs 29 Per Share,2.0,2018-05-31,nse_corp_actions:equities
+INE580B01011,GRUH,bonus,Bonus 1:1,2.0,2018-06-06,nse_corp_actions:equities
+INE872H01019,LUMAXTECH,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2018-06-07,nse_corp_actions:equities
+INE337A01034,LGBBROSLTD,bonus,Bonus 1:1,2.0,2018-06-14,nse_corp_actions:equities
+INE854D01024,UNITDSPR,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2018-06-15,nse_corp_actions:equities
+INE255A01020,EPL,bonus,Bonus 1:1,2.0,2018-06-20,nse_corp_actions:equities
+INE548C01024,EMAMILTD,bonus,Bonus 1:1/Dividend- Rs 7 Per Share,2.0,2018-06-21,nse_corp_actions:equities
+INE797F01012,JUBLFOOD,bonus,Bonus 1:1,2.0,2018-06-21,nse_corp_actions:equities
+INE475B01014,HIKAL,bonus,Bonus 1:2,1.5,2018-06-22,nse_corp_actions:equities
+INE950G01015,UNIPLY,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2018-06-25,nse_corp_actions:equities
+INE871C01012,AVANTIFEED,bonus+split,Bonus 1:2/Face Value Split (Sub-Division) From Rs 2/- Per Share To Re 1/- Per Share,3.0,2018-06-26,nse_corp_actions:equities
+INE111A01017,CONCOR,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2018-06-26,nse_corp_actions:equities
+INE816B01019,FILATEX,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2018-06-27,nse_corp_actions:equities
+INE470Y01017,NIACL,bonus,Bonus 1:1/ Dividend- Rs 5 Per Share,2.0,2018-06-27,nse_corp_actions:equities
+INE668F01031,JYOTHYLAB,bonus,Bonus 1:1,2.0,2018-06-28,nse_corp_actions:equities
+279485,SHRENIK,split,FACE VALUE SPLIT (SUB-DIVISION) - FROM RS 10/- PER SHARE TO RS 2/- PER SHARE,5.0,2018-07-09,nse_corp_actions:sme
+INE491A01021,CUB,bonus,Bonus 1:10,1.1,2018-07-10,nse_corp_actions:equities
+INE405E01023,UNOMINDA,bonus,Bonus 2:1/Dividend- Rs 1.60 Per Share,3.0,2018-07-11,nse_corp_actions:equities
+INE442H01011,ASHOKA,bonus,Bonus 1:2,1.5,2018-07-12,nse_corp_actions:equities
+INE481Y01014,GICRE,bonus,Bonus 1:1/Dividend- Rs 13.5 Per Share,2.0,2018-07-12,nse_corp_actions:equities
+INE227C01017,MMFL,bonus,Bonus 1:1,2.0,2018-07-18,nse_corp_actions:equities
+281365,KKVAPOW,bonus,BONUS 1:4/DIVIDEND- RE 1 PER SHARE,1.25,2018-07-19,nse_corp_actions:sme
+INE666D01022,BORORENEW,bonus,Bonus 3:1,4.0,2018-08-02,nse_corp_actions:equities
+INE235C01010,SUMEETINDS,bonus,Bonus 1:4,1.25,2018-08-02,nse_corp_actions:equities
+INE528K01011,GALLISPAT,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2018-08-07,nse_corp_actions:equities
+INE715A01015,WHEELS,bonus,Bonus 1:1,2.0,2018-08-08,nse_corp_actions:equities
+282970,AIRAN,split,FACE VALUE SPLIT (SUB-DIVISION) - FROM RS 10/- PER SHARE TO RS 2/- PER SHARE,5.0,2018-08-14,nse_corp_actions:sme
+INE036D01010,KARURVYSYA,bonus,Bonus 1:10,1.1,2018-08-14,nse_corp_actions:equities
+INE338A01016,TIRUMALCHM,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2018-08-14,nse_corp_actions:equities
+INE009A01021,INFY,bonus,Bonus 1:1,2.0,2018-09-04,nse_corp_actions:equities
+283647,MCL,bonus,BONUS 2:1,3.0,2018-09-05,nse_corp_actions:sme
+INE520A01019,ZENSARTECH,split,Face Value Split (Sub-Division) - From Rs 10 /- Per Share To Rs 2/- Per Share,5.0,2018-09-07,nse_corp_actions:equities
+INE159A01016,GLAXO,bonus,Bonus 1:1,2.0,2018-09-11,nse_corp_actions:equities
+INE102D01028,GODREJCP,bonus,Bonus 1:2,1.5,2018-09-12,nse_corp_actions:equities
+288477,JETFREIGHT,bonus,BONUS 1:1,2.0,2018-09-12,nse_corp_actions:sme
+289819,LIBAS,bonus,BONUS 1:2,1.5,2018-09-21,nse_corp_actions:sme
+285505,EMKAYTOOLS,bonus,BONUS 5:1,6.0,2018-09-24,nse_corp_actions:sme
+INE188B01013,IGARASHI,bonus,Bonus 25:202,1.123762,2018-09-27,nse_corp_actions:equities
+INE890A01016,JMCPROJECT,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2018-10-04,nse_corp_actions:equities
+INE509F01011,CUPID,bonus,Bonus 1:5,1.2,2018-10-11,nse_corp_actions:equities
+INE451F01016,APOLSINHOT,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2018-10-12,nse_corp_actions:equities
+INE022Q01012,IEX,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2018-10-19,nse_corp_actions:equities
+INE497D01014,DAMODARIND,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2018-10-25,nse_corp_actions:equities
+INE775A01035,MOTHERSON,bonus,Bonus 1:2,1.5,2018-10-30,nse_corp_actions:equities
+INE247D01013,JINDWORLD,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share,5.0,2018-10-31,nse_corp_actions:equities
+INE456C01012,DFMFOODS,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2018-11-01,nse_corp_actions:equities
+INE190H01016,SAKUMA,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2018-11-12,nse_corp_actions:equities
+INE216A01014,BRITANNIA,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2018-11-29,nse_corp_actions:equities
+INE844O01022,GUJGASLTD,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2019-01-15,nse_corp_actions:equities
+INE111A01017,CONCOR,bonus,Bonus 1:4,1.25,2019-02-04,nse_corp_actions:equities
+INE919I01016,RADIOCITY,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2019-02-20,nse_corp_actions:equities
+INE075A01022,WIPRO,bonus,Bonus 1:3,1.333333,2019-03-06,nse_corp_actions:equities
+294162,AKASH,bonus,BONUS 1:1,2.0,2019-03-07,nse_corp_actions:sme
+INE733E01010,NTPC,bonus,Bonus 1:5,1.2,2019-03-19,nse_corp_actions:equities
+296196,SOUTHWEST,bonus,BONUS 1:1,2.0,2019-04-04,nse_corp_actions:sme
+296717,AIRAN,bonus,BONUS 1:1,2.0,2019-04-22,nse_corp_actions:sme
+296777,ONEPOINT,bonus,BONUS 1:2,1.5,2019-04-24,nse_corp_actions:sme
+297051,MCL,split,FACE VALUE SPLIT (SUB-DIVISION) - FROM RS 10/- PER SHARE TO RS 5/- PER SHARE,2.0,2019-05-02,nse_corp_actions:sme
+INE412C01015,JMA,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2019-05-14,nse_corp_actions:equities
+INE690A01010,TTKPRESTIG,bonus,Bonus 1:5,1.2,2019-05-15,nse_corp_actions:equities
+INE398R01022,SYNGENE,bonus,Bonus 1:1,2.0,2019-06-11,nse_corp_actions:equities
+INE376G01013,BIOCON,bonus,Bonus 1:1,2.0,2019-06-12,nse_corp_actions:equities
+INE121A01016,CHOLAFIN,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2019-06-14,nse_corp_actions:equities
+300221,MITTAL,bonus,BONUS 2:3,1.666667,2019-06-20,nse_corp_actions:sme
+300563,CNL,bonus,BONUS 1 : 1,2.0,2019-06-25,nse_corp_actions:sme
+INE131B01021,RELAXO,bonus,Bonus 1:1,2.0,2019-06-26,nse_corp_actions:equities
+INE349W01017,AVADHSUGAR,bonus,Bonus 1:1,2.0,2019-06-27,nse_corp_actions:equities
+INE347W01011,MAGADSUGAR,bonus,Bonus 4:10,1.4,2019-06-27,nse_corp_actions:equities
+300897,PARAMPARA,bonus,BONUS 3:1,4.0,2019-07-01,nse_corp_actions:sme
+INE628A01036,UPL,bonus,Bonus 1:2,1.5,2019-07-02,nse_corp_actions:equities
+INE116A01016,APCOTEXIND,split,Face Value Split (Sub-Division) - From Rs 5 Per Share To Rs 2 Per Share,2.5,2019-07-04,nse_corp_actions:equities
+INE129A01019,GAIL,bonus,Bonus 1:1,2.0,2019-07-09,nse_corp_actions:equities
+301385,SIRCA,bonus,BONUS 1:2,1.5,2019-07-09,nse_corp_actions:sme
+301907,SUMIT,bonus,BONUS 1:1,2.0,2019-07-16,nse_corp_actions:sme
+INE354C01019,BHAGERIA,bonus,Bonus 1:1,2.0,2019-07-17,nse_corp_actions:equities
+302185,PANACHE,bonus,BONUS 1:1,2.0,2019-07-18,nse_corp_actions:sme
+302535,FOCUS,bonus,BONUS 2:1,3.0,2019-07-22,nse_corp_actions:sme
+INE200M01013,VBL,bonus,Bonus 1:2,1.5,2019-07-25,nse_corp_actions:equities
+302705,ZOTA,bonus,BONUS 4:10,1.4,2019-07-25,nse_corp_actions:sme
+INE320J01015,RITES,bonus,Bonus  1:4,1.25,2019-08-08,nse_corp_actions:equities
+INE630A01016,SESHAPAPER,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2019-08-19,nse_corp_actions:equities
+INE409B01013,SWELECTES,bonus,Bonus 1:2,1.5,2019-08-22,nse_corp_actions:equities
+INE791I01019,BRIGADE,bonus,Bonus 1:2,1.5,2019-08-28,nse_corp_actions:equities
+305621,AARON,bonus,BONUS 1:10,1.1,2019-08-29,nse_corp_actions:sme
+INE006I01012,ASTRAL,bonus,Bonus 1:4,1.25,2019-09-16,nse_corp_actions:equities
+INE040A01018,HDFCBANK,split,Face Value Split (Sub-Division) - From Rs 2 Per Share To Rs 1 Per Share,2.0,2019-09-19,nse_corp_actions:equities
+310991,PULZ,bonus,BONUS 1:1,2.0,2019-09-26,nse_corp_actions:sme
+INE769A01020,AARTIIND,bonus,Bonus 1:1,2.0,2019-09-27,nse_corp_actions:equities
+311233,NITIRAJ,bonus,BONUS 1:4,1.25,2019-09-30,nse_corp_actions:sme
+311227,RELIABLE,bonus,BONUS 1:5,1.2,2019-10-03,nse_corp_actions:sme
+311173,TIRUPATIFL,bonus,BONUS 6:10,1.6,2019-10-03,nse_corp_actions:sme
+311459,MILTON,bonus,BONUS 1:10,1.1,2019-10-14,nse_corp_actions:sme
+INE170E01015,SATIA,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2019-10-15,nse_corp_actions:equities
+311739,VAISHALI,bonus,BONUS 3:5,1.6,2019-10-17,nse_corp_actions:sme
+311689,BSHSL,bonus,BONUS 1:5,1.2,2019-10-22,nse_corp_actions:sme
+311705,MCL,bonus,BONUS 1:1,2.0,2019-10-22,nse_corp_actions:sme
+311699,SHANTI,bonus,BONUS 1:2,1.5,2019-10-22,nse_corp_actions:sme
+INE547E01014,IMPAL,bonus,Bonus 1:2,1.5,2019-10-25,nse_corp_actions:equities
+INE860A01027,HCLTECH,bonus,Bonus 1:1,2.0,2019-12-05,nse_corp_actions:equities
+INE064C01014,TRIDENT,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 1/- Per Share,10.0,2019-12-13,nse_corp_actions:equities
+313607,INNOVANA,bonus,BONUS 3:2,2.5,2019-12-17,nse_corp_actions:sme
+313804,UNIVASTU,bonus,BONUS 1:1,2.0,2019-12-19,nse_corp_actions:sme
+INE164A01016,BALMLAWRIE,bonus,Bonus 1:2,1.5,2019-12-26,nse_corp_actions:equities
+313897,MMP,bonus,BONUS 1:2,1.5,2019-12-30,nse_corp_actions:sme
+314265,VERTOZ,bonus,BONUS 1:1,2.0,2020-01-02,nse_corp_actions:sme
+INE285J01010,SIS,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2020-01-15,nse_corp_actions:equities
+314853,KAPSTON,bonus,BONUS 1:6,1.166667,2020-01-27,nse_corp_actions:sme
+INE410B01029,VINATIORGA,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Rs 1/- Per Share,2.0,2020-02-05,nse_corp_actions:equities
+315500,SILLYMONKS,bonus,BONUS 6:5,2.2,2020-02-11,nse_corp_actions:sme
+315685,CONTI,bonus,BONUS 1:1.5,2.0,2020-02-13,nse_corp_actions:sme
+316406,NARMADA,bonus,BONUS 8:10,1.8,2020-02-25,nse_corp_actions:sme
+INE919I01016,RADIOCITY,bonus,Bonus 1:4,1.25,2020-03-12,nse_corp_actions:equities
+INE614B01018,KTKBANK,bonus,Bonus 1:10,1.1,2020-03-17,nse_corp_actions:equities
+318995,AAKASH,bonus,BONUS 1:2,1.5,2020-03-26,nse_corp_actions:sme
+INE962Y01013,IRCON,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2020-04-03,nse_corp_actions:equities
+INE861B01015,MOTOGENFIN,split,Face Value Split (Sub-Division) - From Rs 10 Per Share To Rs 5  Per Share,2.0,2020-06-19,nse_corp_actions:equities
+322551,MACPOWER,bonus,BONUS 2:100,1.02,2020-06-30,nse_corp_actions:sme
+INE278R01034,DHARAN,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2020-07-02,nse_corp_actions:equities
+INE529I01013,KUANTUM,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2020-07-14,nse_corp_actions:equities
+INE066A01013,EICHERMOT,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2020-08-24,nse_corp_actions:equities
+326841,BSHSL,bonus,BONUS 1:3,1.333333,2020-08-27,nse_corp_actions:sme
+326242,MGEL,bonus,BONUS 1:2,1.5,2020-08-31,nse_corp_actions:sme
+327523,AARON,bonus,BONUS 10:11,1.909091,2020-09-03,nse_corp_actions:sme
+325826,RAJMET,bonus,BONUS 1:1,2.0,2020-09-03,nse_corp_actions:sme
+324816,BANKA,bonus,BONUS 3:2 /DIVIDEND - RS 0.50 PER SHARE,2.5,2020-09-08,nse_corp_actions:sme
+330602,SHRADHA,bonus,BONUS 5:100,1.05,2020-09-16,nse_corp_actions:sme
+INE285A01027,ELGIEQUIP,bonus,Bonus 1:1,2.0,2020-09-24,nse_corp_actions:equities
+INE03QK01018,COHANCE,bonus,Bonus 1:1,2.0,2020-09-25,nse_corp_actions:equities
+332092,WEALTH,bonus,BONUS 2:3,1.666667,2020-09-25,nse_corp_actions:sme
+INE947Q01010,LAURUSLABS,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2020-09-29,nse_corp_actions:equities
+INE767A01016,AARTIDRUGS,bonus,Bonus 3:1,4.0,2020-09-30,nse_corp_actions:equities
+INE036B01022,GAEL,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2020-10-01,nse_corp_actions:equities
+INE976T01013,SAGARDEEP,bonus,Bonus 1:2,1.5,2020-10-05,nse_corp_actions:equities
+INE632X01014,SHRENIK,bonus,Bonus 2:1,3.0,2020-10-08,nse_corp_actions:equities
+INE632X01014,SHRENIK,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2020-10-08,nse_corp_actions:equities
+332217,ZODIAC,bonus,BONUS 1:1,2.0,2020-10-08,nse_corp_actions:sme
+332453,ARVEE,bonus,BONUS 1:1,2.0,2020-10-13,nse_corp_actions:sme
+INE263W01010,MAHESHWARI,bonus,Bonus 1:1,2.0,2020-10-13,nse_corp_actions:equities
+332494,IRISDOREME,bonus,BONUS 5:2,3.5,2020-10-14,nse_corp_actions:sme
+INE480C01012,SDBL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2020-10-15,nse_corp_actions:equities
+333108,GLOBAL,bonus,BONUS 31:10,4.1,2020-11-12,nse_corp_actions:sme
+334729,AKG,bonus,BONUS 3:5,1.6,2020-12-07,nse_corp_actions:sme
+INE473B01035,HATSUN,bonus,Bonus 1:3,1.333333,2020-12-09,nse_corp_actions:equities
+INE702C01019,APLAPOLLO,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2020-12-15,nse_corp_actions:equities
+INE755Q01025,VISHAL,bonus,Bonus 1:2,1.5,2020-12-16,nse_corp_actions:equities
+INE565V01010,VALIANTORG,bonus,Bonus 1:1,2.0,2020-12-24,nse_corp_actions:equities
+INE417C01014,PILANIINVS,bonus,Bonus 2:5,1.4,2020-12-31,nse_corp_actions:equities
+336373,SILGO,bonus,BONUS 1:4,1.25,2021-01-07,nse_corp_actions:sme
+336495,GANGAFORGE,bonus,BONUS 1:3,1.333333,2021-01-11,nse_corp_actions:sme
+INE634I01011,KNRCON,bonus,Bonus 1:1,2.0,2021-02-03,nse_corp_actions:equities
+INE186H01014,BASML,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2021-02-12,nse_corp_actions:equities
+338029,UNITEDPOLY,bonus,BONUS 2:1,3.0,2021-02-17,nse_corp_actions:sme
+INE01JE01010,MARINE,split,Face Value Split (Sub-Division) - From Rs 10 Per Share To Rs 2 Per Share,5.0,2021-02-18,nse_corp_actions:equities
+338657,TEMBO,bonus,BONUS 1:1,2.0,2021-03-03,nse_corp_actions:sme
+338975,AJOONI,bonus,BONUS 1:9,1.111111,2021-03-10,nse_corp_actions:sme
+INE006I01012,ASTRAL,bonus,Bonus 1:3,1.333333,2021-03-18,nse_corp_actions:equities
+INE483S01020,CCAVENUE,bonus,Bonus 1:1,2.0,2021-03-18,nse_corp_actions:equities
+INE935N01012,DIXON,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2021-03-18,nse_corp_actions:equities
+339105,GICL,bonus,BONUS 1:4,1.25,2021-03-18,nse_corp_actions:sme
+339172,SIKKO,bonus,BONUS 1:1,2.0,2021-03-18,nse_corp_actions:sme
+339846,WEWIN,bonus,BONUS 2:1,3.0,2021-03-30,nse_corp_actions:sme
+INE908V01012,LIBAS,bonus,Bonus 1:5,1.2,2021-04-06,nse_corp_actions:equities
+INE183A01016,FINPIPE,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2021-04-15,nse_corp_actions:equities
+INE597I01010,SHARDAMOTR,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2021-04-16,nse_corp_actions:equities
+340524,PAR,bonus,BONUS 1:1,2.0,2021-04-27,nse_corp_actions:sme
+INE884A01019,VAIBHAVGBL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2021-05-07,nse_corp_actions:equities
+INE150B01013,ALKYLAMINE,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Rs 2/- Per Share,2.5,2021-05-11,nse_corp_actions:equities
+INE962Y01013,IRCON,bonus,Bonus 1:1,2.0,2021-05-20,nse_corp_actions:equities
+341033,KSOLVES,bonus,BONUS 3:1/DIVIDEND - RS 30 PER SHARE,4.0,2021-06-04,nse_corp_actions:sme
+INE571B01028,JAYBARMARU,bonus,Bonus 1:1,2.0,2021-06-07,nse_corp_actions:equities
+INE200M01013,VBL,bonus,Bonus 1:2,1.5,2021-06-10,nse_corp_actions:equities
+INE769A01020,AARTIIND,bonus,Bonus 1:1,2.0,2021-06-22,nse_corp_actions:equities
+INE878H01016,INVENTURE,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2021-06-24,nse_corp_actions:equities
+INE170V01019,SALASAR,bonus,Bonus 1:1,2.0,2021-07-13,nse_corp_actions:equities
+INE514Y01012,MOKSH,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2021-07-14,nse_corp_actions:equities
+INE484C01030,VEEDOL,bonus,Bonus 1:1,2.0,2021-07-26,nse_corp_actions:equities
+INE484C01030,VEEDOL,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 2/- Per Share,2.5,2021-07-26,nse_corp_actions:equities
+INE752E01010,POWERGRID,bonus,Bonus 1:3,1.333333,2021-07-29,nse_corp_actions:equities
+INE215I01019,MAANALU,bonus,Bonus 1: 1,2.0,2021-08-02,nse_corp_actions:equities
+INE581X01013,GLOBE,bonus,Bonus 2:1,3.0,2021-08-03,nse_corp_actions:equities
+INE581X01013,GLOBE,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2021-08-03,nse_corp_actions:equities
+INE477B01010,DVL,bonus,Bonus 1:2,1.5,2021-08-05,nse_corp_actions:equities
+INE278R01034,DHARAN,bonus,Bonus 4:1,5.0,2021-08-12,nse_corp_actions:equities
+INE278R01034,DHARAN,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2021-08-12,nse_corp_actions:equities
+346735,KSHITIJPOL,bonus,BONUS 1:6,1.166667,2021-08-13,nse_corp_actions:sme
+INE229C01013,SAGCEM,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2021-08-17,nse_corp_actions:equities
+INE425B01027,BCG,bonus,Bonus 1:4,1.25,2021-08-18,nse_corp_actions:equities
+INE891D01018,REDINGTON,bonus,Bonus 1:1,2.0,2021-08-18,nse_corp_actions:equities
+INE997Y01019,MITTAL,bonus,Bonus 1:10,1.1,2021-08-31,nse_corp_actions:equities
+INE00KV01014,RAJMET,bonus,Bonus 1:2,1.5,2021-09-02,nse_corp_actions:equities
+347116,KSOLVES,bonus,BONUS 1:1,2.0,2021-09-06,nse_corp_actions:sme
+INE998I01010,MHRIL,bonus,Bonus 1:2,1.5,2021-09-08,nse_corp_actions:equities
+INE691Z01015,GANGAFORGE,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2021-09-13,nse_corp_actions:equities
+INE813A01018,MAHLIFE,bonus,Bonus 2:1,3.0,2021-09-14,nse_corp_actions:equities
+INE694E01014,KANPRPLA,bonus,Bonus 1:2,1.5,2021-09-15,nse_corp_actions:equities
+INE702C01019,APLAPOLLO,bonus,Bonus 1:1,2.0,2021-09-16,nse_corp_actions:equities
+INE413G01014,TPLPLASTEH,bonus,Bonus 1:1,2.0,2021-09-16,nse_corp_actions:equities
+INE486A01013,CESC,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2021-09-17,nse_corp_actions:equities
+INE908V01012,LIBAS,bonus,Bonus 1:5,1.2,2021-09-21,nse_corp_actions:equities
+INE025R01013,ARTEMISMED,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2021-09-23,nse_corp_actions:equities
+INE930H01015,KPRMILL,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share,5.0,2021-09-24,nse_corp_actions:equities
+INE201M01011,CLEDUCATE,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2021-09-30,nse_corp_actions:equities
+356633,WEL,bonus,BONUS 3:5,1.6,2021-10-06,nse_corp_actions:sme
+352513,ACEINTEG,bonus,BONUS 1:2,1.5,2021-10-07,nse_corp_actions:sme
+INE00WC01019,AFFLE,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2021-10-07,nse_corp_actions:equities
+352519,HECPROJECT,bonus,BONUS 4:1,5.0,2021-10-07,nse_corp_actions:sme
+INE319Y01016,TIRUPATIFL,bonus,Bonus 3:4,1.75,2021-10-07,nse_corp_actions:equities
+INE319Y01016,TIRUPATIFL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2021-10-07,nse_corp_actions:equities
+356300,THEJO,bonus,BONUS 2:1,3.0,2021-10-12,nse_corp_actions:sme
+INE647A01010,SRF,bonus,Bonus 4:1,5.0,2021-10-13,nse_corp_actions:equities
+352556,KKVAPOW,bonus,BONUS 1:4,1.25,2021-10-14,nse_corp_actions:sme
+356378,CROWN,bonus,BONUS 4:1,5.0,2021-10-18,nse_corp_actions:sme
+357018,PRITI,bonus,BONUS 3:1,4.0,2021-10-20,nse_corp_actions:sme
+357082,DEVIT,bonus,BONUS 1:1,2.0,2021-10-21,nse_corp_actions:sme
+INE430N01014,VISHWARAJ,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2021-10-21,nse_corp_actions:equities
+INE177H01013,GPIL,bonus,Bonus 1:1,2.0,2021-10-26,nse_corp_actions:equities
+INE177H01013,GPIL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2021-10-26,nse_corp_actions:equities
+INE335Y01012,IRCTC,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2021-10-28,nse_corp_actions:equities
+INE567A01010,NIPPOBATRY,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2021-10-28,nse_corp_actions:equities
+INE412U01017,BIGBLOC,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2021-11-15,nse_corp_actions:equities
+INE949H01015,MANINFRA,bonus,Bonus 1:2,1.5,2021-11-17,nse_corp_actions:equities
+INE802C01017,SSWL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2021-11-18,nse_corp_actions:equities
+INE126J01016,APOLLOPIPE,bonus,Bonus 2:1,3.0,2021-12-02,nse_corp_actions:equities
+INE022Q01012,IEX,bonus,Bonus 2:1,3.0,2021-12-03,nse_corp_actions:equities
+INE690A01010,TTKPRESTIG,split,Face Value Split (Sub-Division) - From Rs 10 Per Share To Re 1 Per Share,10.0,2021-12-14,nse_corp_actions:equities
+359681,KHFM,bonus,BONUS 1:30,1.033333,2021-12-16,nse_corp_actions:sme
+INE401H01017,KKCL,bonus,Bonus 4:1,5.0,2021-12-16,nse_corp_actions:equities
+INE372C01011,PRECWIRE,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share,5.0,2021-12-22,nse_corp_actions:equities
+INE034D01031,PTL,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2021-12-23,nse_corp_actions:equities
+360195,VCL,bonus,BONUS 2:3,1.666667,2021-12-27,nse_corp_actions:sme
+INE715B01013,ANDHRSUGAR,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2021-12-30,nse_corp_actions:equities
+INE919H01018,IMFA,bonus,Bonus 1:1,2.0,2022-01-07,nse_corp_actions:equities
+360508,DCI,bonus,BONUS 1:1,2.0,2022-01-10,nse_corp_actions:sme
+INE571A01020,IPCALAB,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2022-01-10,nse_corp_actions:equities
+INE840Y01011,ONEPOINT,bonus,Bonus 1:2,1.5,2022-01-18,nse_corp_actions:equities
+INE840Y01011,ONEPOINT,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2022-01-18,nse_corp_actions:equities
+INE925Y01036,AURIGROW,bonus,Bonus 1:1,2.0,2022-01-20,nse_corp_actions:equities
+360847,AVROIND,bonus,BONUS 21:10,3.1,2022-01-27,nse_corp_actions:sme
+INE087Z01016,AAKASH,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2022-02-03,nse_corp_actions:equities
+INE418N01035,ESSENTIA,split,Face Value Split (Sub-Division) - From Rs 3/- Per Share To Re 1/- Per Share,3.0,2022-02-03,nse_corp_actions:equities
+INE513A01014,SCHAEFFLER,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2022-02-08,nse_corp_actions:equities
+INE544R01013,GREENLAM,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share,5.0,2022-02-10,nse_corp_actions:equities
+INE927D01010,JBMA,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Rs 2/- Per Share,2.5,2022-02-21,nse_corp_actions:equities
+INE170I01016,HGS,bonus,Bonus 1:1,2.0,2022-02-22,nse_corp_actions:equities
+362392,NRL,bonus,BONUS 1:10,1.1,2022-02-22,nse_corp_actions:sme
+INE04AK01010,SBC,bonus,Bonus 1:1,2.0,2022-02-22,nse_corp_actions:equities
+INE04AK01010,SBC,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2022-02-22,nse_corp_actions:equities
+INE07O001018,EASEMYTRIP,bonus,Bonus 1:1,2.0,2022-02-28,nse_corp_actions:equities
+INE319Z01013,SUPREMEENG,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2022-03-03,nse_corp_actions:equities
+INE755Q01025,VISHAL,bonus,Bonus 2:1,3.0,2022-03-10,nse_corp_actions:equities
+INE483S01020,CCAVENUE,bonus,Bonus 1:1,2.0,2022-03-14,nse_corp_actions:equities
+INE399G01015,RKFORGE,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2022-03-14,nse_corp_actions:equities
+INE425B01027,BCG,bonus,Bonus 2:3,1.666667,2022-03-15,nse_corp_actions:equities
+INE451D01011,RAJRATAN,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2022-03-15,nse_corp_actions:equities
+INE03RS01019,DRCSYSTEMS,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2022-03-16,nse_corp_actions:equities
+INE118H01025,BSE,bonus,Bonus 2:1,3.0,2022-03-21,nse_corp_actions:equities
+INE925Y01036,AURIGROW,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2022-03-24,nse_corp_actions:equities
+INE875G01030,NDL,bonus,Bonus 2:1,3.0,2022-03-24,nse_corp_actions:equities
+INE825A01012,VTL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2022-03-24,nse_corp_actions:equities
+INE025B01017,GOLDIAM,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2022-03-28,nse_corp_actions:equities
+363683,VCL,split,FACE VALUE SPLIT (SUB-DIVISION) - FROM RS 10/- PER SHARE TO RS 2/- PER SHARE,5.0,2022-03-28,nse_corp_actions:sme
+INE591Q01016,SUULD,bonus,Bonus 1:1,2.0,2022-03-30,nse_corp_actions:equities
+INE602A01023,PCBL,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2022-04-11,nse_corp_actions:equities
+INE420B01028,ARIHANTCAP,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share,5.0,2022-04-12,nse_corp_actions:equities
+INE741L01018,DUCON,bonus,Bonus 1:10,1.1,2022-04-18,nse_corp_actions:equities
+INE797F01012,JUBLFOOD,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2022-04-19,nse_corp_actions:equities
+INE979A01017,SAREGAMA,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2022-04-26,nse_corp_actions:equities
+INE676A01019,BBOX,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2022-05-13,nse_corp_actions:equities
+INE153T01019,BLS,bonus,Bonus 1:1,2.0,2022-05-13,nse_corp_actions:equities
+365864,SECURCRED,bonus,BONUS 110:100,2.1,2022-05-18,nse_corp_actions:sme
+INE982V01017,JETFREIGHT,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2022-05-19,nse_corp_actions:equities
+366394,VINNY,bonus,BONUS 1:10,1.1,2022-05-26,nse_corp_actions:sme
+INE200M01013,VBL,bonus,Bonus 1:2,1.5,2022-06-06,nse_corp_actions:equities
+INE949L01017,AUBANK,bonus,Bonus 1:1,2.0,2022-06-09,nse_corp_actions:equities
+INE757A01017,COSMOFIRST,bonus,Bonus 1:2,1.5,2022-06-16,nse_corp_actions:equities
+368521,OSIAHYPER,bonus,BONUS 3:5,1.6,2022-06-20,nse_corp_actions:sme
+INE418L01021,NAZARA,bonus,Bonus 1:1,2.0,2022-06-24,nse_corp_actions:equities
+INE170V01019,SALASAR,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 1/- Per Share,10.0,2022-06-27,nse_corp_actions:equities
+368650,DUGLOBAL,split,FACE VALUE SPLIT (SUB-DIVISION) - FROM RS10/- PER SHARE TO RS 2/- PER SHARE,5.0,2022-06-30,nse_corp_actions:sme
+INE242A01010,IOC,bonus,Bonus 1:2,1.5,2022-06-30,nse_corp_actions:equities
+INE420C01042,PAISALO,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2022-06-30,nse_corp_actions:equities
+INE703B01027,RATNAMANI,bonus,Bonus 1:2,1.5,2022-06-30,nse_corp_actions:equities
+INE445C01015,XPROINDIA,bonus,Bonus 1:2,1.5,2022-07-01,nse_corp_actions:equities
+369185,SECL,bonus,BONUS 1:4,1.25,2022-07-06,nse_corp_actions:sme
+INE405E01023,UNOMINDA,bonus,Bonus 1:1,2.0,2022-07-07,nse_corp_actions:equities
+INE685A01028,TORNTPHARM,bonus,Bonus 1:1,2.0,2022-07-08,nse_corp_actions:equities
+INE541A01023,GMMPFAUDLR,bonus,Bonus 2:1,3.0,2022-07-11,nse_corp_actions:equities
+369400,URAVIDEF,bonus,BONUS 1:1,2.0,2022-07-11,nse_corp_actions:sme
+INE503B01013,STEELXIND,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2022-07-12,nse_corp_actions:equities
+INE00LM01011,SONAMLTD,bonus,Bonus 1:1,2.0,2022-07-14,nse_corp_actions:equities
+INE722H01016,RGL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2022-07-19,nse_corp_actions:equities
+INE254N01018,HNDFDS,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2022-07-21,nse_corp_actions:equities
+INE626Z01011,HARDWYN,bonus,Bonus 1:2,1.5,2022-07-25,nse_corp_actions:equities
+INE081A01012,TATASTEEL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2022-07-28,nse_corp_actions:equities
+INE020B01018,RECLTD,bonus,Bonus 1:3,1.333333,2022-08-17,nse_corp_actions:equities
+INE0APB01016,MGEL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2022-08-18,nse_corp_actions:equities
+INE230R01019,RAMASTEEL,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share,5.0,2022-08-25,nse_corp_actions:equities
+INE111Q01013,PDSL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2022-08-26,nse_corp_actions:equities
+INE00Z501011,KRITIKA,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2022-08-30,nse_corp_actions:equities
+374795,ATALREAL,bonus,BONUS 2:1,3.0,2022-09-01,nse_corp_actions:sme
+INE035D01012,SOTL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2022-09-01,nse_corp_actions:equities
+375644,PAVNAIND,bonus,BONUS 1:1,2.0,2022-09-05,nse_corp_actions:sme
+INE688Y01014,DANGEE,bonus,Bonus 1:2,1.5,2022-09-06,nse_corp_actions:equities
+INE688Y01014,DANGEE,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2022-09-06,nse_corp_actions:equities
+INE129A01019,GAIL,bonus,Bonus 1:2,1.5,2022-09-06,nse_corp_actions:equities
+INE629D01012,BANSWRAS,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2022-09-08,nse_corp_actions:equities
+INE269A01021,SONATSOFTW,bonus,Bonus 1:3,1.333333,2022-09-08,nse_corp_actions:equities
+INE918I01018,BAJAJFINSV,bonus,Bonus 1:1,2.0,2022-09-13,nse_corp_actions:equities
+INE918I01018,BAJAJFINSV,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share,5.0,2022-09-13,nse_corp_actions:equities
+376100,AAATECH,bonus,BONUS 1:2,1.5,2022-09-14,nse_corp_actions:sme
+INE263A01016,BEL,bonus,Bonus 2:1,3.0,2022-09-15,nse_corp_actions:equities
+INE00KV01014,RAJMET,bonus,Bonus 1:2,1.5,2022-09-15,nse_corp_actions:equities
+INE738I01010,ECLERX,bonus,Bonus 1:2,1.5,2022-09-21,nse_corp_actions:equities
+INE102B01014,CHOICEIN,bonus,Bonus 1:1,2.0,2022-09-22,nse_corp_actions:equities
+INE032Z01012,BSHSL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2022-09-23,nse_corp_actions:equities
+378398,BTML,bonus,BONUS 4:1,5.0,2022-09-23,nse_corp_actions:sme
+INE301D01018,RUBYMILLS,bonus,Bonus 1:1,2.0,2022-09-23,nse_corp_actions:equities
+INE667G01015,SAKSOFT,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2022-09-23,nse_corp_actions:equities
+INE561C01019,BHARATGEAR,bonus,Bonus 1:2,1.5,2022-09-27,nse_corp_actions:equities
+INE688J01023,LANDSMILL,bonus,Bonus 1:2,1.5,2022-09-28,nse_corp_actions:equities
+INE688J01023,LANDSMILL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2022-09-28,nse_corp_actions:equities
+INE207E01023,RAMRAT,bonus,Bonus 1:1,2.0,2022-09-28,nse_corp_actions:equities
+INE070I01018,INSECTICID,bonus,Bonus 1:2,1.5,2022-09-30,nse_corp_actions:equities
+INE775A01035,MOTHERSON,bonus,Bonus 1:2,1.5,2022-10-03,nse_corp_actions:equities
+381768,QUADPRO,bonus,BONUS 1:1,2.0,2022-10-03,nse_corp_actions:sme
+INE926K01017,AHLEAST,bonus,Bonus 1:2,1.5,2022-10-06,nse_corp_actions:equities
+INE820Y01013,AJOONI,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2022-10-07,nse_corp_actions:equities
+381840,SIGMA,bonus,BONUS 3:2,2.5,2022-10-07,nse_corp_actions:sme
+INE803H01014,RUCHIRA,bonus,Bonus 1:10,1.1,2022-10-10,nse_corp_actions:equities
+382048,SMVD,bonus,BONUS 102:100,2.02,2022-10-11,nse_corp_actions:sme
+382157,SVLL,bonus,BONUS 1:2,1.5,2022-10-11,nse_corp_actions:sme
+382356,GICL,bonus,BONUS 1:1,2.0,2022-10-12,nse_corp_actions:sme
+382362,LATTEYS,bonus,BONUS 3:2,2.5,2022-10-12,nse_corp_actions:sme
+INE386D01027,SBCL,bonus,Bonus 1:2,1.5,2022-10-12,nse_corp_actions:equities
+INE461D01010,HLEGLAS,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2022-10-18,nse_corp_actions:equities
+INE900L01010,MBAPL,bonus,Bonus 1:1,2.0,2022-10-18,nse_corp_actions:equities
+INE291W01011,GLOBAL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2022-10-19,nse_corp_actions:equities
+INE413G01014,TPLPLASTEH,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2022-10-19,nse_corp_actions:equities
+INE02EZ01014,AXITA,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2022-10-21,nse_corp_actions:equities
+INE411Y01011,DIL,bonus,Bonus 1:1,2.0,2022-10-27,nse_corp_actions:equities
+IN0000000000,KSHITIJPOL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2022-10-27,nse_corp_actions:equities
+INE112X01017,SIKKO,bonus,Bonus 1:2,1.5,2022-10-28,nse_corp_actions:equities
+INE419M01019,TDPOWERSYS,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2022-10-31,nse_corp_actions:equities
+INE388Y01029,NYKAA,bonus,Bonus 5:1,6.0,2022-11-10,nse_corp_actions:equities
+INE802C01017,SSWL,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share,5.0,2022-11-10,nse_corp_actions:equities
+INE390G01014,GPTINFRA,bonus,Bonus 1:1,2.0,2022-11-11,nse_corp_actions:equities
+INE0FS801015,MSUMI,bonus,Bonus 2:5,1.4,2022-11-16,nse_corp_actions:equities
+INE07O001018,EASEMYTRIP,bonus,Bonus 3:1,4.0,2022-11-21,nse_corp_actions:equities
+INE07O001018,EASEMYTRIP,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2022-11-21,nse_corp_actions:equities
+INE060X01018,DEVIT,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2022-11-25,nse_corp_actions:equities
+INE271B01025,MAHSEAMLES,bonus,Bonus 1:1,2.0,2022-11-25,nse_corp_actions:equities
+INE00KV01014,RAJMET,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2022-11-30,nse_corp_actions:equities
+INE060901019,LIKHITHA,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2022-12-02,nse_corp_actions:equities
+INE153T01019,BLS,bonus,Bonus 1:1,2.0,2022-12-08,nse_corp_actions:equities
+INE201M01011,CLEDUCATE,bonus,Bonus 1:1,2.0,2022-12-16,nse_corp_actions:equities
+INE359U01010,LANCER,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2022-12-16,nse_corp_actions:equities
+INE916U01025,SFL,bonus,Bonus 1:1,2.0,2022-12-21,nse_corp_actions:equities
+INE372C01011,PRECWIRE,bonus,Bonus 1:2,1.5,2022-12-22,nse_corp_actions:equities
+INE518E01015,ZIMLAB,bonus,Bonus 2:1,3.0,2022-12-22,nse_corp_actions:equities
+385012,NRL,bonus,BONUS 1:1,2.0,2022-12-23,nse_corp_actions:sme
+INE816B01019,FILATEX,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2022-12-27,nse_corp_actions:equities
+INE195Y01010,SECURCRED,bonus,Bonus 3:1,4.0,2023-01-04,nse_corp_actions:equities
+INE230R01019,RAMASTEEL,bonus,Bonus 4:1,5.0,2023-01-06,nse_corp_actions:equities
+INE663A01025,SPLPETRO,split,Face Value Split (Sub-Division) - From Rs 4/- Per Share To Rs 2/- Per Share,2.0,2023-01-06,nse_corp_actions:equities
+385826,BMETRICS,bonus,BONUS 3:1,4.0,2023-01-09,nse_corp_actions:sme
+INE270I01014,VISHNU,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2023-01-13,nse_corp_actions:equities
+INE542W01017,KPIGREEN,bonus,Bonus 1:1,2.0,2023-01-18,nse_corp_actions:equities
+386046,GOLDSTAR,bonus,BONUS 4:5,1.8,2023-01-20,nse_corp_actions:sme
+386040,GOLDSTAR,split,FACE VALUE SPLIT (SUB-DIVISION) - FROM RS 10/- PER SHARE TO RE 1/- PER SHARE,10.0,2023-01-20,nse_corp_actions:sme
+INE715Y01015,SHRADHA,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2023-01-20,nse_corp_actions:equities
+INE382T01030,GVPTECH,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2023-01-23,nse_corp_actions:equities
+386382,MKPL,bonus,BONUS 2:1,3.0,2023-02-03,nse_corp_actions:sme
+INE782X01017,SERVOTECH,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2023-02-03,nse_corp_actions:equities
+386598,LATTEYS,split,FACE VALUE SPLIT (SUB-DIVISION) - FROM RS 10/- PER SHARE TO RS 2/- PER SHARE,5.0,2023-02-10,nse_corp_actions:sme
+INE648Z01015,ACCURACY,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2023-02-15,nse_corp_actions:equities
+INE098201010,VCL,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2023-02-15,nse_corp_actions:equities
+INE821I01014,IRB,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2023-02-22,nse_corp_actions:equities
+INE01KI01019,VINNY,bonus,Bonus 13:10,2.3,2023-02-24,nse_corp_actions:equities
+INE01KI01019,VINNY,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2023-02-24,nse_corp_actions:equities
+388079,PULZ,bonus,BONUS 1:1,2.0,2023-03-01,nse_corp_actions:sme
+INE466L01020,360ONE,bonus,Bonus 1:1,2.0,2023-03-02,nse_corp_actions:equities
+INE466L01020,360ONE,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2023-03-02,nse_corp_actions:equities
+388170,ASCOM,bonus,BONUS 1:2,1.5,2023-03-06,nse_corp_actions:sme
+INE06IR01013,OSIAHYPER,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2023-03-13,nse_corp_actions:equities
+INE006I01012,ASTRAL,bonus,Bonus 1:3,1.333333,2023-03-14,nse_corp_actions:equities
+INE630Y01016,MEDICO,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2023-03-16,nse_corp_actions:equities
+INE106T01017,HITECH,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2023-03-17,nse_corp_actions:equities
+388794,INNOVANA,bonus,BONUS 1:1,2.0,2023-03-29,nse_corp_actions:sme
+INE0FHS01016,DEEPINDS,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2023-04-10,nse_corp_actions:equities
+389425,PARTYCRUS,bonus,BONUS 1:1,2.0,2023-04-18,nse_corp_actions:sme
+INE716B01029,TIPSMUSIC,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2023-04-21,nse_corp_actions:equities
+INE705X01018,GOYALALUM,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2023-04-25,nse_corp_actions:equities
+389678,SECL,split,FACE VALUE SPLIT (SUB-DIVISION) - FROM RS 10/- PER SHARE TO Re 1/- PER SHARE,10.0,2023-05-03,nse_corp_actions:sme
+INE713T01010,APOLLO,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2023-05-04,nse_corp_actions:equities
+INE792Z01011,SIRCA,bonus,Bonus 1:1,2.0,2023-05-11,nse_corp_actions:equities
+389855,CLOUD,bonus,BONUS 1:1,2.0,2023-05-12,nse_corp_actions:sme
+389849,CLOUD,split,FACE VALUE SPLIT (SUB-DIVISION) - FROM RS 10/- PER SHARE TO RS 5/- PER SHARE,2.0,2023-05-12,nse_corp_actions:sme
+INE392A01013,VISAKAIND,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2023-05-15,nse_corp_actions:equities
+INE008Z01012,SRPL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2023-05-19,nse_corp_actions:equities
+390280,SWARAJ,bonus,BONUS 1:1,2.0,2023-05-19,nse_corp_actions:sme
+INE583V01013,RADHIKAJWE,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2023-05-26,nse_corp_actions:equities
+INE050M01012,VSSL,bonus,Bonus 1:1,2.0,2023-05-26,nse_corp_actions:equities
+INE670K01029,LODHA,bonus,Bonus 1:1,2.0,2023-05-31,nse_corp_actions:equities
+390863,DUGLOBAL,bonus,BONUS 3:1,4.0,2023-06-02,nse_corp_actions:sme
+INE626Z01011,HARDWYN,bonus,Bonus 1:3,1.333333,2023-06-05,nse_corp_actions:equities
+INE626Z01011,HARDWYN,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2023-06-05,nse_corp_actions:equities
+INE570A01014,IONEXCHANG,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2023-06-12,nse_corp_actions:equities
+INE200M01013,VBL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2023-06-15,nse_corp_actions:equities
+INE472A01039,BLUESTARCO,bonus,Bonus 1:1,2.0,2023-06-20,nse_corp_actions:equities
+INE255D01016,GULPOLY,bonus,Bonus 1:5,1.2,2023-06-21,nse_corp_actions:equities
+INE933S01016,INDIAMART,bonus,Bonus 1:1,2.0,2023-06-21,nse_corp_actions:equities
+INE642Z01018,AKI,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2023-06-22,nse_corp_actions:equities
+INE531A01016,KANSAINER,bonus,Bonus 1:2,1.5,2023-07-04,nse_corp_actions:equities
+INE922A01025,BEPL,bonus,Bonus 1:2,1.5,2023-07-05,nse_corp_actions:equities
+INE888C01040,SADHNANIQ,bonus,Bonus 2:9,1.222222,2023-07-05,nse_corp_actions:equities
+INE535D01029,ROTO,bonus,Bonus 1:1,2.0,2023-07-07,nse_corp_actions:equities
+INE266F01018,APTECHT,bonus,Bonus 2:5,1.4,2023-07-14,nse_corp_actions:equities
+INE085J01014,THANGAMAYL,bonus,Bonus 1:1,2.0,2023-07-17,nse_corp_actions:equities
+INE02AR01019,ANMOL,bonus,Bonus 4:1,5.0,2023-07-18,nse_corp_actions:equities
+393127,AILIMITED,bonus,BONUS 1:1,2.0,2023-07-19,nse_corp_actions:sme
+393100,GOLDSTAR,bonus,BONUS 1:4,1.25,2023-07-19,nse_corp_actions:sme
+INE07OG01012,NDRAUTO,bonus,Bonus 1:1,2.0,2023-07-24,nse_corp_actions:equities
+INE526E01018,SHRIPISTON,bonus,Bonus 1:1,2.0,2023-07-24,nse_corp_actions:equities
+INE215I01019,MAANALU,bonus,Bonus 1:1,2.0,2023-07-27,nse_corp_actions:equities
+INE215I01019,MAANALU,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2023-07-27,nse_corp_actions:equities
+INE782X01017,SERVOTECH,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2023-07-28,nse_corp_actions:equities
+INE256Z01017,AKSHAR,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2023-07-31,nse_corp_actions:equities
+INE0BTI01029,KAMOPAINTS,bonus,Bonus 1:1,2.0,2023-08-01,nse_corp_actions:equities
+INE395U01014,NINSYS,bonus,Bonus 4:5,1.8,2023-08-03,nse_corp_actions:equities
+INE385C01013,SARDAEN,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2023-08-04,nse_corp_actions:equities
+INE01GN01017,IRISDOREME,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2023-08-11,nse_corp_actions:equities
+INE00IK01011,OSWALSEEDS,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2023-08-18,nse_corp_actions:equities
+INE934S01014,GNA,bonus,Bonus 1:1,2.0,2023-09-01,nse_corp_actions:equities
+INE391J01024,JTLIND,bonus,Bonus 1:1,2.0,2023-09-07,nse_corp_actions:equities
+INE982B01019,ADFFOODS,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2023-09-11,nse_corp_actions:equities
+INE752E01010,POWERGRID,bonus,Bonus 1:3,1.333333,2023-09-12,nse_corp_actions:equities
+399193,INFINIUM,bonus,BONUS 1:1,2.0,2023-09-13,nse_corp_actions:sme
+INE324X01018,SARVESHWAR,bonus,Bonus 2:1,3.0,2023-09-15,nse_corp_actions:equities
+INE324X01018,SARVESHWAR,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2023-09-15,nse_corp_actions:equities
+INE572A01028,JBCHEPHARM,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2023-09-18,nse_corp_actions:equities
+INE134E01011,PFC,bonus,Bonus 1:4,1.25,2023-09-21,nse_corp_actions:equities
+INE463A01020,BERGEPAINT,bonus,Bonus 1:5,1.2,2023-09-22,nse_corp_actions:equities
+INE066F01012,HAL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2023-09-28,nse_corp_actions:equities
+INE593W01010,FOCUS,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2023-10-06,nse_corp_actions:equities
+405881,OMFURN,bonus,BONUS 1:5,1.2,2023-10-06,nse_corp_actions:sme
+INE335A01012,SURYAROSNI,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2023-10-06,nse_corp_actions:equities
+INE0D0K01014,SIGACHI,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2023-10-09,nse_corp_actions:equities
+INE083B01016,THEMISMED,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2023-10-10,nse_corp_actions:equities
+INE06H201014,GENSOL,bonus,Bonus 2:1,3.0,2023-10-17,nse_corp_actions:equities
+INE900L01010,MBAPL,bonus,Bonus 1:1,2.0,2023-10-20,nse_corp_actions:equities
+INE669X01016,GEEKAYWIRE,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2023-10-23,nse_corp_actions:equities
+INE506W01012,KRISHANA,bonus,Bonus 1:1,2.0,2023-10-25,nse_corp_actions:equities
+INE571B01028,JAYBARMARU,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Rs 2/- Per Share,2.5,2023-10-26,nse_corp_actions:equities
+INE412G01016,BCLIND,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2023-10-27,nse_corp_actions:equities
+INE187D01011,TALBROAUTO,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2023-10-27,nse_corp_actions:equities
+INE997Y01019,MITTAL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2023-11-01,nse_corp_actions:equities
+INE068L01016,CANTABIL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2023-11-02,nse_corp_actions:equities
+406632,JSLL,bonus,BONUS 4:5,1.8,2023-11-02,nse_corp_actions:sme
+406725,GIRIRAJ,bonus,BONUS 4:1,5.0,2023-11-03,nse_corp_actions:sme
+INE864X01013,DPWIRES,bonus,Bonus 1:7,1.142857,2023-11-08,nse_corp_actions:equities
+INE0GSL01016,HPAL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2023-11-09,nse_corp_actions:equities
+INE642Y01011,HINDCON,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2023-11-10,nse_corp_actions:equities
+INE964W01013,MKPL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2023-11-10,nse_corp_actions:equities
+INE0ALR01011,ATALREAL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2023-11-16,nse_corp_actions:equities
+INE151G01010,SHAILY,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2023-11-23,nse_corp_actions:equities
+INE429E01023,SAFARI,bonus,Bonus 1:1,2.0,2023-12-12,nse_corp_actions:equities
+INE269A01021,SONATSOFTW,bonus,Bonus 1:1,2.0,2023-12-12,nse_corp_actions:equities
+INE065J01016,TPHQ,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2023-12-14,nse_corp_actions:equities
+INE00Z501011,KRITIKA,bonus,Bonus 2:1,3.0,2023-12-19,nse_corp_actions:equities
+INE02EZ01014,AXITA,bonus,Bonus 1:3,1.333333,2023-12-22,nse_corp_actions:equities
+INE0ECP01016,HMAAGRO,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2023-12-29,nse_corp_actions:equities
+INE418H01029,ALLCARGO,bonus,Bonus 3:1,4.0,2024-01-02,nse_corp_actions:equities
+INE239A01016,NESTLEIND,split,Face Value Split (Sub-Division) - From Rs10/- Per Share To Re 1/- Per Share,10.0,2024-01-05,nse_corp_actions:equities
+INE940H01014,PGIL,split,Face Value Split (Sub-Division) - From Rs10/- Per Share To Rs 5/- Per Share,2.0,2024-01-05,nse_corp_actions:equities
+INE704P01017,COCHINSHIP,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2024-01-10,nse_corp_actions:equities
+INE418N01035,ESSENTIA,bonus,Bonus 1:1,2.0,2024-01-11,nse_corp_actions:equities
+INE619B01017,NEWGEN,bonus,Bonus 1:1,2.0,2024-01-12,nse_corp_actions:equities
+INE04AK01010,SBC,bonus,Bonus 1:2,1.5,2024-01-19,nse_corp_actions:equities
+INE920A01029,DOLPHIN,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2024-01-25,nse_corp_actions:equities
+409217,ISHAN,bonus,BONUS 2:1,3.0,2024-01-25,nse_corp_actions:sme
+409211,ISHAN,split,FACE VALUE SPLIT (SUB-DIVISION) - FROM RS 10/- PER SHARE TO RE 1/- PER SHARE,10.0,2024-01-25,nse_corp_actions:sme
+INE879E01029,KANANIIND,bonus,Bonus 1:1,2.0,2024-01-30,nse_corp_actions:equities
+INE170V01019,SALASAR,bonus,Bonus 4:1,5.0,2024-02-01,nse_corp_actions:equities
+409536,NPST,bonus,BONUS 2:1,3.0,2024-02-02,nse_corp_actions:sme
+INE00IK01011,OSWALSEEDS,bonus,Bonus 1:5,1.2,2024-02-02,nse_corp_actions:equities
+INE149K01016,SANDUMA,bonus,Bonus 5:1,6.0,2024-02-02,nse_corp_actions:equities
+INE256Z01017,AKSHAR,bonus,Bonus 1:5,1.2,2024-02-15,nse_corp_actions:equities
+INE542W01017,KPIGREEN,bonus,Bonus 1:2,1.5,2024-02-15,nse_corp_actions:equities
+INE102B01014,CHOICEIN,bonus,Bonus 1:1,2.0,2024-02-20,nse_corp_actions:equities
+INE348L01012,MASFIN,bonus,Bonus 2:1,3.0,2024-02-22,nse_corp_actions:equities
+INE760W01015,RPPL,bonus,Bonus 2:1,3.0,2024-02-26,nse_corp_actions:equities
+INE03RS01019,DRCSYSTEMS,bonus,Bonus 2:1,3.0,2024-02-27,nse_corp_actions:equities
+INE737H01014,FIEMIND,bonus,Bonus 1:1,2.0,2024-02-28,nse_corp_actions:equities
+INE180C01018,CGCL,bonus,Bonus 1:1,2.0,2024-03-05,nse_corp_actions:equities
+INE180C01018,CGCL,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2024-03-05,nse_corp_actions:equities
+INE00VM01010,MANORAMA,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2024-03-07,nse_corp_actions:equities
+INE036B01022,GAEL,bonus,Bonus 1:1,2.0,2024-03-15,nse_corp_actions:equities
+INE964W01013,MKPL,bonus,Bonus 2:1,3.0,2024-03-15,nse_corp_actions:equities
+INE230R01019,RAMASTEEL,bonus,Bonus 2:1,3.0,2024-03-19,nse_corp_actions:equities
+INE199C01026,ADVANIHOTR,bonus,Bonus 1:1,2.0,2024-03-20,nse_corp_actions:equities
+INE0JM501013,NRL,bonus,Bonus 1:2,1.5,2024-03-20,nse_corp_actions:equities
+INE420C01042,PAISALO,bonus,Bonus 1:1,2.0,2024-03-20,nse_corp_actions:equities
+INE056I01017,REFEX,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2024-03-22,nse_corp_actions:equities
+INE740X01015,LAL,bonus,Bonus 6:11,1.545455,2024-03-28,nse_corp_actions:equities
+INE740X01015,LAL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2024-03-28,nse_corp_actions:equities
+INE262H01013,PERSISTENT,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2024-03-28,nse_corp_actions:equities
+INE509F01011,CUPID,bonus,Bonus 1:1,2.0,2024-04-04,nse_corp_actions:equities
+INE509F01011,CUPID,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2024-04-04,nse_corp_actions:equities
+INE0EEJ01015,BTML,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2024-04-05,nse_corp_actions:equities
+INE05ST01010,SBGLP,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2024-04-18,nse_corp_actions:equities
+INE294Z01018,ANUP,bonus,Bonus 1:1,2.0,2024-04-23,nse_corp_actions:equities
+INE464A01028,BBL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2024-04-24,nse_corp_actions:equities
+INE414D01019,BHAGCHEM,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 1/- Per Share,10.0,2024-05-02,nse_corp_actions:equities
+412866,ARHAM,bonus,BONUS 1:1,2.0,2024-05-03,nse_corp_actions:sme
+INE00LM01011,SONAMLTD,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2024-05-10,nse_corp_actions:equities
+INE476A01014,CANBK,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2024-05-15,nse_corp_actions:equities
+413290,TIMESCAN,bonus,BONUS 1:1,2.0,2024-05-17,nse_corp_actions:sme
+INE835A01011,VARDMNPOLY,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2024-05-17,nse_corp_actions:equities
+INE171Z01018,BDL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2024-05-24,nse_corp_actions:equities
+INE075D01018,GMBREW,bonus,Bonus 1:4,1.25,2024-05-24,nse_corp_actions:equities
+INE066P01011,INOXWIND,bonus,Bonus 3:1,4.0,2024-05-24,nse_corp_actions:equities
+INE480C01012,SDBL,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Rs 2/- Per Share,2.5,2024-05-24,nse_corp_actions:equities
+INE618N01014,BALAXI,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2024-05-30,nse_corp_actions:equities
+INE179G01011,DAVANGERE,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2024-05-31,nse_corp_actions:equities
+413818,REMUS,bonus,BONUS 3:1,4.0,2024-06-06,nse_corp_actions:sme
+INE338I01027,MOTILALOFS,bonus,Bonus 3:1,4.0,2024-06-10,nse_corp_actions:equities
+INE0BTI01029,KAMOPAINTS,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share,5.0,2024-06-14,nse_corp_actions:equities
+INE029A01011,BPCL,bonus,Bonus 1:1,2.0,2024-06-21,nse_corp_actions:equities
+INE094A01015,HINDPETRO,bonus,Bonus 1:2,1.5,2024-06-21,nse_corp_actions:equities
+INE863B01011,PREMEXPLN,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2024-06-21,nse_corp_actions:equities
+INE132H01018,AURIONPRO,bonus,Bonus 1:1,2.0,2024-06-27,nse_corp_actions:equities
+INE932X01018,SHAREINDIA,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2024-06-27,nse_corp_actions:equities
+INE323B01016,AVONMORE,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 1/- Per Share,10.0,2024-06-28,nse_corp_actions:equities
+INE274J01014,OIL,bonus,Bonus 1:2,1.5,2024-07-02,nse_corp_actions:equities
+INE390G01014,GPTINFRA,bonus,Bonus 1:1,2.0,2024-07-03,nse_corp_actions:equities
+INE474C01015,REMSONSIND,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2024-07-05,nse_corp_actions:equities
+INE188Y01015,VERTOZ,bonus,Bonus 1:1,2.0,2024-07-05,nse_corp_actions:equities
+INE188Y01015,VERTOZ,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2024-07-05,nse_corp_actions:equities
+INE457L01011,PGEL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2024-07-10,nse_corp_actions:equities
+INE227C01017,MMFL,bonus,Bonus 1:1,2.0,2024-07-16,nse_corp_actions:equities
+INE542W01017,KPIGREEN,split,Face Value Split (Sub-Division) - From Rs10/- Per Share To Rs 5/- Per Share,2.0,2024-07-18,nse_corp_actions:equities
+INE205B01023,ELECON,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2024-07-19,nse_corp_actions:equities
+416257,SIDDHIKA,bonus,BONUS 1:1,2.0,2024-07-19,nse_corp_actions:sme
+INE326B01027,ALMONDZ,split,Face Value Split (Sub-Division) - From Rs 6/- Per Share To Re 1/- Per Share,6.0,2024-07-23,nse_corp_actions:equities
+INE999A01015,KSB,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2024-07-25,nse_corp_actions:equities
+INE01C001018,AARTECH,bonus,Bonus 1:2,1.5,2024-08-09,nse_corp_actions:equities
+INE01C001018,AARTECH,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2024-08-09,nse_corp_actions:equities
+418962,CELLECOR,split,FACE VALUE SPLIT (SUB-DIVISION) - FROM RS 10/- PER SHARE TO RE 1/- PER SHARE,10.0,2024-08-09,nse_corp_actions:sme
+INE0B1K01014,DJML,bonus,Bonus 2:1,3.0,2024-08-09,nse_corp_actions:equities
+INE185E01013,FILATFASH,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share,5.0,2024-08-09,nse_corp_actions:equities
+INE542Z01010,KAPSTON,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2024-08-09,nse_corp_actions:equities
+INE573K01017,RUSHIL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2024-08-09,nse_corp_actions:equities
+INE190H01016,SAKUMA,bonus,Bonus 4:1,5.0,2024-08-09,nse_corp_actions:equities
+INE137I01015,GRPLTD,bonus,Bonus 3:1,4.0,2024-08-12,nse_corp_actions:equities
+INE276C01014,EIHAHOTELS,bonus,Bonus 1:1,2.0,2024-08-13,nse_corp_actions:equities
+419741,WALPAR,bonus,BONUS 1:1,2.0,2024-08-14,nse_corp_actions:sme
+INE736A01011,CDSL,bonus,Bonus 1:1,2.0,2024-08-23,nse_corp_actions:equities
+INE806T01012,SAPPHIRE,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2024-09-05,nse_corp_actions:equities
+INE710A01016,VSTIND,bonus,Bonus 10:1,11.0,2024-09-06,nse_corp_actions:equities
+INE435A01028,ANDHRAPAP,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2024-09-11,nse_corp_actions:equities
+INE412U01017,BIGBLOC,bonus,Bonus 1:1,2.0,2024-09-12,nse_corp_actions:equities
+INE200M01013,VBL,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Rs 2/- Per Share,2.5,2024-09-12,nse_corp_actions:equities
+INE967H01017,KIMS,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2024-09-13,nse_corp_actions:equities
+INE903D01011,MONARCH,bonus,Bonus 1:1,2.0,2024-09-13,nse_corp_actions:equities
+INE885H01011,SPORTKING,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2024-09-13,nse_corp_actions:equities
+INE760W01015,RPPL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2024-09-17,nse_corp_actions:equities
+INE875G01030,NDL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2024-09-19,nse_corp_actions:equities
+INE667G01015,SAKSOFT,bonus,Bonus 1:4,1.25,2024-09-19,nse_corp_actions:equities
+INE02EZ01014,AXITA,bonus,Bonus 1:3,1.333333,2024-09-20,nse_corp_actions:equities
+INE110B01017,MINDTECK,bonus,Bonus 1:4,1.25,2024-09-20,nse_corp_actions:equities
+INE211B01039,PHOENIXLTD,bonus,Bonus 1:1,2.0,2024-09-20,nse_corp_actions:equities
+INE320J01015,RITES,bonus,Bonus 1:1,2.0,2024-09-20,nse_corp_actions:equities
+428261,SOLEX,bonus,BONUS 1:4,1.25,2024-09-20,nse_corp_actions:sme
+INE899L01030,UEL,bonus,Bonus 1:4,1.25,2024-09-20,nse_corp_actions:equities
+431515,JFLLIFE,bonus,BONUS 2:1,3.0,2024-09-24,nse_corp_actions:sme
+INE07OG01012,NDRAUTO,bonus,Bonus 1:1,2.0,2024-09-25,nse_corp_actions:equities
+INE989A01024,SANGHVIMOV,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2024-09-27,nse_corp_actions:equities
+431677,BMETRICS,bonus,BONUS 1:1,2.0,2024-10-04,nse_corp_actions:sme
+INE177H01013,GPIL,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share,5.0,2024-10-04,nse_corp_actions:equities
+INE095N01015,NBCC,bonus,Bonus 1:2,1.5,2024-10-07,nse_corp_actions:equities
+INE211R01019,POWERMECH,bonus,Bonus 1:1,2.0,2024-10-08,nse_corp_actions:equities
+INE324A01024,JINDALSAW,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2024-10-09,nse_corp_actions:equities
+431795,MOXSH,bonus,BONUS 3:1,4.0,2024-10-09,nse_corp_actions:sme
+431842,ALCODIS,bonus,BONUS 1:4,1.25,2024-10-14,nse_corp_actions:sme
+INE972X01014,VAISHALI,bonus,Bonus 1:1,2.0,2024-10-15,nse_corp_actions:equities
+INE972X01014,VAISHALI,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2024-10-15,nse_corp_actions:equities
+INE063E01046,POCL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2024-10-16,nse_corp_actions:equities
+INE545A01016,HEG,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2024-10-18,nse_corp_actions:equities
+432404,BEWLTD,bonus,BONUS 3:1,4.0,2024-10-25,nse_corp_actions:sme
+432201,PULZ,bonus,BONUS 1:1,2.0,2024-10-25,nse_corp_actions:sme
+INE450E01011,SUKHJITS,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2024-10-25,nse_corp_actions:equities
+INE089A01023,DRREDDY,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share,5.0,2024-10-28,nse_corp_actions:equities
+INE002A01018,RELIANCE,bonus,Bonus 1:1,2.0,2024-10-28,nse_corp_actions:equities
+INE039O01011,JASH,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2024-10-30,nse_corp_actions:equities
+432229,KCK,split,FACE VALUE SPLIT (SUB-DIVISION) - FROM RS 10/- PER SHARE TO RS 2/- PER SHARE,5.0,2024-10-30,nse_corp_actions:sme
+INE247401016,PREMIERPOL,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share,5.0,2024-11-05,nse_corp_actions:equities
+INE0FRK01012,MOTISONS,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2024-11-08,nse_corp_actions:equities
+INE535D01029,ROTO,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2024-11-08,nse_corp_actions:equities
+INE02WG01016,WEL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2024-11-12,nse_corp_actions:equities
+INE391J01024,JTLIND,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2024-11-14,nse_corp_actions:equities
+INE908D01010,SHAKTIPUMP,bonus,Bonus 5:1,6.0,2024-11-25,nse_corp_actions:equities
+INE07O001018,EASEMYTRIP,bonus,Bonus 1:1,2.0,2024-11-29,nse_corp_actions:equities
+INE912T01018,RPEL,bonus,Bonus 1:1,2.0,2024-11-29,nse_corp_actions:equities
+INE989C01020,DIACABS,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2024-12-03,nse_corp_actions:equities
+INE075A01022,WIPRO,bonus,Bonus 1:1,2.0,2024-12-03,nse_corp_actions:equities
+INE555Z01012,TARACHAND,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2024-12-05,nse_corp_actions:equities
+434084,KODYTECH,bonus,BONUS 1:1,2.0,2024-12-06,nse_corp_actions:sme
+INE291W01011,GLOBAL,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Rs 2/- Per Share,2.5,2024-12-10,nse_corp_actions:equities
+INE715Y01015,SHRADHA,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Rs 2/- Per Share,2.5,2024-12-10,nse_corp_actions:equities
+434294,ESFL,bonus,BONUS 1:5,1.2,2024-12-13,nse_corp_actions:sme
+INE0GFE01018,EXXARO,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2024-12-13,nse_corp_actions:equities
+INE785M01013,PCJEWELLER,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2024-12-16,nse_corp_actions:equities
+INE01IU01018,SKYGOLD,bonus,Bonus 9:1,10.0,2024-12-16,nse_corp_actions:equities
+INE802B01019,LINC,bonus,Bonus 1:1,2.0,2024-12-20,nse_corp_actions:equities
+INE802B01019,LINC,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2024-12-20,nse_corp_actions:equities
+INE626Z01011,HARDWYN,bonus,Bonus 2:5,1.4,2024-12-27,nse_corp_actions:equities
+INE249Z01012,MAZDOCK,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2024-12-27,nse_corp_actions:equities
+INE584A01023,NMDC,bonus,Bonus 2:1,3.0,2024-12-27,nse_corp_actions:equities
+INE213C01025,BANCOINDIA,bonus,Bonus 1:1,2.0,2024-12-30,nse_corp_actions:equities
+INE335A01012,SURYAROSNI,bonus,Bonus 1:1,2.0,2025-01-01,nse_corp_actions:equities
+434799,ENSER,bonus,BONUS 1:1,2.0,2025-01-03,nse_corp_actions:sme
+INE276A01018,GARFIBRES,bonus,Bonus 4:1,5.0,2025-01-03,nse_corp_actions:equities
+INE542W01017,KPIGREEN,bonus,Bonus 1:2,1.5,2025-01-03,nse_corp_actions:equities
+INE048B01027,JAGSNPHARM,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Rs 2/- Per Share,2.5,2025-01-08,nse_corp_actions:equities
+INE390H01012,KAMDHENU,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2025-01-08,nse_corp_actions:equities
+INE721A01013,SHRIRAMFIN,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2025-01-10,nse_corp_actions:equities
+INE091G01018,JAIBALAJI,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2025-01-17,nse_corp_actions:equities
+435235,KDL,bonus,BONUS 2:1,3.0,2025-01-17,nse_corp_actions:sme
+INE602G01020,KITEX,bonus,Bonus 2:1,3.0,2025-01-17,nse_corp_actions:equities
+INE725A01022,NAVA,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2025-01-20,nse_corp_actions:equities
+INE885E01034,MAZDA,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2025-01-28,nse_corp_actions:equities
+INE203G01019,IGL,bonus,Bonus 1:1,2.0,2025-01-31,nse_corp_actions:equities
+INE927D01010,JBMA,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2025-01-31,nse_corp_actions:equities
+INE602W01019,SENCO,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2025-01-31,nse_corp_actions:equities
+INE0LXT01019,REDTAPE,bonus,Bonus 3:1,4.0,2025-02-04,nse_corp_actions:equities
+INE0D6I01015,KSOLVES,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2025-02-06,nse_corp_actions:equities
+INE976R01017,AGIIL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2025-02-07,nse_corp_actions:equities
+435577,ENSER,split,FACE VALUE SPLIT (SUB-DIVISION) - FROM RS 10/- PER SHARE TO RS 2/- PER SHARE,5.0,2025-02-07,nse_corp_actions:sme
+INE809A01024,RAMAPHO,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2025-02-07,nse_corp_actions:equities
+436153,URBAN,bonus,BONUS 1:1,2.0,2025-02-07,nse_corp_actions:sme
+INE592B01016,TTL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2025-02-12,nse_corp_actions:equities
+436194,PRITIKA,split,FACE VALUE SPLIT (SUB-DIVISION) - FROM RS 10/- PER SHARE TO RS 5/- PER SHARE,2.0,2025-02-14,nse_corp_actions:sme
+INE763I01026,TARIL,bonus,Bonus 1:1,2.0,2025-02-14,nse_corp_actions:equities
+INE823A01017,KOTHARIPRO,bonus,Bonus 1:1,2.0,2025-02-18,nse_corp_actions:equities
+INE247D01013,JINDWORLD,bonus,Bonus 4:1,5.0,2025-02-28,nse_corp_actions:equities
+INE377E01016,COASTCORP,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2025-03-04,nse_corp_actions:equities
+INE0APB01016,MGEL,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2025-03-04,nse_corp_actions:equities
+INE463V01026,ANANDRATHI,bonus,Bonus 1:1,2.0,2025-03-05,nse_corp_actions:equities
+INE04AK01010,SBC,bonus,Bonus 1:2,1.5,2025-03-10,nse_corp_actions:equities
+INE485C01011,IOLCP,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2025-03-11,nse_corp_actions:equities
+INE544R01013,GREENLAM,bonus,Bonus 1:1,2.0,2025-03-21,nse_corp_actions:equities
+438217,SAHAJSOLAR,bonus,BONUS 1:1,2.0,2025-04-02,nse_corp_actions:sme
+INE278R01034,DHARAN,bonus,Bonus 1:1,2.0,2025-04-04,nse_corp_actions:equities
+INE916Y01019,AFIL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2025-04-17,nse_corp_actions:equities
+INE268H01036,NAVKARURB,bonus,Bonus 3:2,2.5,2025-04-24,nse_corp_actions:equities
+INE00FF01025,ACUTAAS,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2025-04-25,nse_corp_actions:equities
+INE368U01011,UNITEDPOLY,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2025-05-02,nse_corp_actions:equities
+INE663F01024,NAUKRI,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2025-05-07,nse_corp_actions:equities
+INE268H01036,NAVKARURB,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2025-05-09,nse_corp_actions:equities
+INE118H01025,BSE,bonus,Bonus 2:1,3.0,2025-05-23,nse_corp_actions:equities
+INE899L01030,UEL,bonus,Bonus 17:25,1.68,2025-05-30,nse_corp_actions:equities
+INE591G01017,COFORGE,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2025-06-04,nse_corp_actions:equities
+INE386A01015,VESUVIUS,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2025-06-10,nse_corp_actions:equities
+440550,SAIFL,bonus,BONUS 4:1,5.0,2025-06-11,nse_corp_actions:sme
+INE579C01029,VIMTALABS,bonus,Bonus 1:1,2.0,2025-06-13,nse_corp_actions:equities
+INE296A01016,BAJFINANCE,bonus,Bonus 4:1,5.0,2025-06-16,nse_corp_actions:equities
+INE296A01016,BAJFINANCE,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2025-06-16,nse_corp_actions:equities
+INE665J01013,VMART,bonus,Bonus 3:1,4.0,2025-06-23,nse_corp_actions:equities
+INE111A01017,CONCOR,bonus,Bonus 1:4,1.25,2025-07-04,nse_corp_actions:equities
+452550,COOLCAPS,bonus,BONUS 1:1,2.0,2025-07-04,nse_corp_actions:sme
+452518,COOLCAPS,split,FACE VALUE SPLIT (SUB-DIVISION) - FROM RS 10/- PER SHARE TO RS 2/- PER SHARE,5.0,2025-07-04,nse_corp_actions:sme
+INE01GN01017,IRISDOREME,bonus,Bonus 1:1,2.0,2025-07-04,nse_corp_actions:equities
+INE045601015,PARAS,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2025-07-04,nse_corp_actions:equities
+452745,REMUS,bonus,BONUS 1:1,2.0,2025-07-04,nse_corp_actions:sme
+INE597I01010,SHARDAMOTR,bonus,Bonus 1:1,2.0,2025-07-04,nse_corp_actions:equities
+INE600Y01019,DYCL,bonus,Bonus 1:1,2.0,2025-07-11,nse_corp_actions:equities
+INE535D01029,ROTO,bonus,Bonus 2:1,3.0,2025-07-11,nse_corp_actions:equities
+INE489G01022,ANUHPHR,bonus,Bonus 1:1,2.0,2025-07-15,nse_corp_actions:equities
+INE208A01029,ASHOKLEY,bonus,Bonus 1:1,2.0,2025-07-16,nse_corp_actions:equities
+INE133Y01011,IFGLEXPOR,bonus,Bonus 1:1,2.0,2025-07-18,nse_corp_actions:equities
+INE337M01013,INDOTHAI,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2025-07-18,nse_corp_actions:equities
+INE775A01035,MOTHERSON,bonus,Bonus 1:2,1.5,2025-07-18,nse_corp_actions:equities
+INE0FS801015,MSUMI,bonus,Bonus 1:2,1.5,2025-07-18,nse_corp_actions:equities
+INE164B01022,KELLTONTEC,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share,5.0,2025-07-25,nse_corp_actions:equities
+456621,MOS,split,FACE VALUE SPLIT (SUB-DIVISION) - FROM RS 10/- PER SHARE TO RS 2/- PER SHARE,5.0,2025-08-08,nse_corp_actions:sme
+INE239A01016,NESTLEIND,bonus,Bonus 1:1,2.0,2025-08-08,nse_corp_actions:equities
+INE560A01015,INDIAGLYCO,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2025-08-12,nse_corp_actions:equities
+INE366I01010,VRLLOG,bonus,Bonus 1:1,2.0,2025-08-14,nse_corp_actions:equities
+457801,USHAFIN,bonus,BONUS 1:1,2.0,2025-08-19,nse_corp_actions:sme
+INE060X01018,DEVIT,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Rs 2/- Per Share,2.5,2025-08-21,nse_corp_actions:equities
+INE721Z01010,AARON,bonus,Bonus 1:1,2.0,2025-08-25,nse_corp_actions:equities
+INE040A01018,HDFCBANK,bonus,Bonus 1:1,2.0,2025-08-26,nse_corp_actions:equities
+INE036D01010,KARURVYSYA,bonus,Bonus 1:5,1.2,2025-08-26,nse_corp_actions:equities
+458535,KARNIKA,bonus,BONUS 4:1,5.0,2025-08-29,nse_corp_actions:sme
+INE124E01020,STEELCAS,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share,5.0,2025-08-29,nse_corp_actions:equities
+INE07S101020,PAVNAIND,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2025-09-01,nse_corp_actions:equities
+INE619A01035,PATANJALI,bonus,Bonus 2:1,3.0,2025-09-11,nse_corp_actions:equities
+INE771F01025,FISCHER,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2025-09-12,nse_corp_actions:equities
+INE260B01010,GODFRYPHLP,bonus,Bonus 2:1,3.0,2025-09-16,nse_corp_actions:equities
+INE768C01010,ZYDUSWELL,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2025-09-18,nse_corp_actions:equities
+INE305A01015,TFCILTD,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2025-09-19,nse_corp_actions:equities
+INE814H01011,ADANIPOWER,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2025-09-22,nse_corp_actions:equities
+INE149K01016,SANDUMA,bonus,Bonus 2:1,3.0,2025-09-22,nse_corp_actions:equities
+INE318A01026,PIDILITIND,bonus,Bonus 1:1,2.0,2025-09-23,nse_corp_actions:equities
+INE508G01029,TIMETECHNO,bonus,Bonus 1:1,2.0,2025-09-23,nse_corp_actions:equities
+462537,KKVAPOW,bonus,BONUS 1:10,1.1,2025-09-26,nse_corp_actions:sme
+INE418L01021,NAZARA,bonus,Bonus 1:1,2.0,2025-09-26,nse_corp_actions:equities
+INE418L01021,NAZARA,split,Face Value Split (Sub-Division) - From Rs 4/- Per Share To Rs 2/- Per Share,2.0,2025-09-26,nse_corp_actions:equities
+INE219Y01018,RMDRIP,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2025-09-26,nse_corp_actions:equities
+INE790G01023,SHILPAMED,bonus,Bonus 1:1,2.0,2025-10-03,nse_corp_actions:equities
+INE235C01010,SUMEETINDS,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2025-10-03,nse_corp_actions:equities
+INE0A0S01010,SIGMA,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2025-10-06,nse_corp_actions:equities
+462872,JAKHARIA,bonus,BONUS 2:1,3.0,2025-10-08,nse_corp_actions:sme
+INE976R01017,AGIIL,split,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share,5.0,2025-10-10,nse_corp_actions:equities
+INE258Y01016,LGHL,bonus,Bonus 7:5,2.4,2025-10-10,nse_corp_actions:equities
+INE899L01030,UEL,bonus,Bonus 2:1,3.0,2025-10-10,nse_corp_actions:equities
+462637,USASEEDS,bonus,BONUS 3:7,1.428571,2025-10-10,nse_corp_actions:sme
+INE562X01013,UNIVASTU,bonus,Bonus 2:1,3.0,2025-10-13,nse_corp_actions:equities
+INE314T01025,GOKULAGRO,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2025-10-14,nse_corp_actions:equities
+462531,MOS,bonus,BONUS 1:1,2.0,2025-10-14,nse_corp_actions:sme
+INE672A01018,TATAINVEST,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2025-10-14,nse_corp_actions:equities
+463077,TAC,bonus,BONUS 1:1,2.0,2025-10-15,nse_corp_actions:sme
+INE00YB01017,ABINFRA,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2025-10-17,nse_corp_actions:equities
+INE645S01016,ROLEXRINGS,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2025-10-17,nse_corp_actions:equities
+463280,DIGIKORE,bonus,BONUS 1:1,2.0,2025-10-24,nse_corp_actions:sme
+INE669X01016,GEEKAYWIRE,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2025-10-30,nse_corp_actions:equities
+INE045J01018,FCL,bonus,Bonus 4:1,5.0,2025-10-31,nse_corp_actions:equities
+INE045J01018,FCL,split,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share,2.0,2025-10-31,nse_corp_actions:equities
+INE258A01016,BEML,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2025-11-03,nse_corp_actions:equities
+INE103C01036,SMCGLOBAL,bonus,Bonus 1:1,2.0,2025-11-14,nse_corp_actions:equities
+INE855C01015,WEBELSOLAR,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2025-11-14,nse_corp_actions:equities
+464846,VIVIANA,bonus,BONUS 3:5,1.6,2025-11-19,nse_corp_actions:sme
+INE127D01025,HDFCAMC,bonus,Bonus 1:1,2.0,2025-11-26,nse_corp_actions:equities
+INE112X01017,SIKKO,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share,10.0,2025-11-27,nse_corp_actions:equities
+INE594H01019,THYROCARE,bonus,Bonus 2:1,3.0,2025-11-28,nse_corp_actions:equities
+INE596I01012,CAMS,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2025-12-05,nse_corp_actions:equities
+465517,INM,bonus,BONUS 1:1,2.0,2025-12-05,nse_corp_actions:sme
+INE112X01017,SIKKO,bonus,Bonus 1:1,2.0,2025-12-08,nse_corp_actions:equities
+INE495P01012,BECTORFOOD,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2025-12-12,nse_corp_actions:equities
+INE838B01013,BHARATRAS,bonus,Bonus 1:1,2.0,2025-12-12,nse_corp_actions:equities
+INE838B01013,BHARATRAS,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2025-12-12,nse_corp_actions:equities
+INE296Q01012,MONEYBOXX,bonus,Bonus 1:1,2.0,2025-12-15,nse_corp_actions:equities
+INE600L01024,LALPATHLAB,bonus,Bonus 1:1,2.0,2025-12-19,nse_corp_actions:equities
+INE0CJD01011,KMEW,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share,2.0,2025-12-22,nse_corp_actions:equities
+INE192H01020,GRMOVER,bonus,Bonus 2:1,3.0,2025-12-24,nse_corp_actions:equities
+INE531F01015,NUVAMA,split,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share,5.0,2025-12-26,nse_corp_actions:equities
+INE207E01023,RAMRAT,bonus,Bonus 1:1,2.0,2025-12-26,nse_corp_actions:equities
+INE679V01027,AVL,split,Face Value Split Rs.10 to Rs.1 (verified ex 2024-08-27),10.0,2024-08-27,verification_2026-05-31
+INE0LGX01024,INA,split,Face Value Split Rs.10 to Rs.1 (verified rec 2025-01-24),10.0,2025-01-24,verification_2026-05-31
+INE732I01021,ANGELONE,split,Face Value Split Rs.10 to Rs.1 (verified rec 2026-02-26),10.0,2026-02-26,verification_2026-05-31
+INE071Y01013,TTFL,bonus,Bonus 14:10 no split (verified ex 2020-08-12),2.40,2020-08-12,verification_2026-05-31
+INE287C01037,MICEL,split,Face Value Split Rs.10 to Rs.2 i.e 5:1 (verified ex 2008-06-27),5.0,2008-06-27,verification_2026-05-31
