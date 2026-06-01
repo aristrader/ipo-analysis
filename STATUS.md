@@ -21,12 +21,16 @@ interaction layer; backtester; cross-regime validator; data-informed weights; St
 adversarial-reviewed (latest round fixed the "unknown=safe" risk-gauge blocker). **77 tests, app verified,
 data/master byte-identical to backup.**
 
-## 🏃 IN PROGRESS / just-landed
-- **DRHP financials recovery: COMPLETE (staging only)** — 16 verified rows (Coal India, DLF, Mundra,
-  Varun Beverages, …) in `docs/research/drhp_recovered.csv`, 25 in `drhp_review_queue.csv`. **CAVEAT
-  (from cross-validation): the PAT field = profit-BEFORE-tax (PBT), systematically wrong** (DLF PAT
-  2,549.5 should be 1,941.3). net_sales cross-validates clean; **PAT must be fixed + re-validated before
-  any fold-in.** Nothing folded. Backup at `archive/pre_drhp_20260601/`.
+## 🏃 IN PROGRESS
+- **(running) D — conservative code dedups** (`pipeline/lib.py`, `_p()`→`spine.pct()`, `scrapers/http.py`),
+  full-suite + report-diff after every change; compute() split SKIPPED (your call).
+
+## ✅ DONE this run (E, git, wipeout-fold, C) — see DONE.md
+- **C — DRHP: productionized + gated, staged NOT folded (your "review" branch).** Prototype preserved into
+  `tools/drhp/` (was ephemeral /tmp) with a new `pat==op` PAT-suspect guard. DLF's suspect PAT withheld.
+  16 net_sales staged but only 2 INDEPENDENTLY cross-validated + PAT unreliable → **review-needed, not folded**
+  (data/master untouched). Bulk (~384) + PAT-label hardening = deferred (recorded in Backlog). Docs:
+  `docs/research/drhp_recovery.md`, `tools/drhp/README.md`.
 
 ## ⏳ YOUR DECISIONS — all resolved this session (kept for the record)
 1. **✅ DONE — wipeout-safety folded into `data_informed`** (you approved). Weight 0.13; OOS re-validated:

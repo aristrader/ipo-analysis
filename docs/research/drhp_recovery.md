@@ -1,5 +1,11 @@
 # Pre-IPO financials recovery for OLD longterm IPOs — DRHP-PDF pass (research/staging only)
 
+> **UPDATE 2026-06-02 (post cross-validation):** PAT field is unreliable (PBT-vs-after-tax; cross-val
+> caught DLF). DLF's PAT withheld; a `pat==op` guard added to the extractor (now in `tools/drhp/`).
+> Only net_sales is trustworthy, and only 2/16 are INDEPENDENTLY cross-validated → **NOT folded into
+> data/master; staged + review-needed.** Pipeline preserved in `tools/drhp/`. Bulk run deferred.
+
+
 **Date:** 2026-06-01 · **Scope:** recover `pre_ipo_net_sales` / `pre_ipo_pat` (+ operating profit where the
 restated P&L exposes it) for the **425** longterm-cohort IPOs (`data/master/ipo_analysis.csv`,
 `cohort=='longterm'`) where either field is null. **Staging only** — no `data/master/`, pipeline, predictor,
