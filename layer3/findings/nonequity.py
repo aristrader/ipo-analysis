@@ -40,4 +40,4 @@ def compute(_df_ignored=None):
 
 
 def _p(x):
-    return None if (x is None or pd.isna(x)) else round(100 * x, 1)
+    return spine.pct_num(x)   # delegated to the shared NaN-safe helper (was a copy-paste)

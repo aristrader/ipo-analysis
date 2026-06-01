@@ -87,4 +87,4 @@ def compute(df):
 
 
 def _p(x):
-    return None if x is None else round(100 * x, 1)
+    return spine.pct_num(x)   # delegated to the shared NaN-safe helper (was a copy-paste)

@@ -513,3 +513,12 @@ def guarded(value, n, fmt="{:.2f}"):
 
 def pct(x, digits=1):
     return "—" if x is None else f"{100*x:.{digits}f}%"
+
+
+def pct_num(x, digits=1):
+    """Numeric percent: x (a fraction) -> round(100*x, digits), or None for None/NaN. The shared,
+    NaN-safe version of the `_p()` helper that ~19 findings each copy-pasted (with inconsistent null
+    checks); findings delegate to this so a number stays a number (NOT a formatted string like pct())."""
+    if x is None or (isinstance(x, float) and pd.isna(x)):
+        return None
+    return round(100 * x, digits)
