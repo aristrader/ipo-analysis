@@ -76,6 +76,7 @@ backtests + the method spine). 5. `docs/layer2.md` / `docs/layer3.md` — design
   `delisting.csv` stays at `data/master/` top level (it is a price-pipeline data INPUT, read by step 07 + the merge).
 
 ## Non-negotiable conventions / decisions
+- **GIT IS LOCAL-ONLY** — `git init`’d for local history/rollback only. NEVER add a remote / push / connect to GitHub until the user explicitly says so (their standing instruction, 2026-06-02).
 - **ISIN is the primary key**; the ONLY automatic join key. Name-matching never merges (only flags).
   Exception: **corporate actions match by SYMBOL** (a face-value split changes the ISIN).
 - **Returns are ALPHA** vs Nifty 50 (+ Smallcap 250 where available, 2019+). Raw return is secondary.

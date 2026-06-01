@@ -179,16 +179,16 @@ with tab_score:
         if ar.get("sector_note"):
             st.caption("note: " + ar["sector_note"])
 
-        cols = st.columns(7)
+        cols = st.columns(8)
         names = {"return_potential": "Return", "multibagger_odds": "Multibagger",
                  "downside_safety": "Downside-safe", "liquidity": "Liquidity", "quality": "Quality",
-                 "tradeable_upside": "Tradeable up"}
+                 "tradeable_upside": "Tradeable up", "wipeout_safety": "Wipeout-safe"}
         for col, (k, label) in zip(cols, names.items()):
             s = sc["components"][k].get("score")
             w = sc["weights"].get(k, 0)
             col.metric(label + ("" if w else " (w0)"), f"{s:.0f}" if s is not None else "n/a")
         cs = sc["combined_score"]
-        cols[6].metric(f"COMBINED ({profile})", f"{cs:.0f}/100" if cs is not None else "n/a")
+        cols[7].metric(f"COMBINED ({profile})", f"{cs:.0f}/100" if cs is not None else "n/a")
         mbc = sc["components"]["multibagger_odds"]
         if mbc.get("pct_ever_2x") is not None:
             st.caption(f"ℹ️ Multibagger: **{_p(mbc.get('pct_2x_from_listing'))}** of analogs *ended* ≥2x, but "

@@ -28,15 +28,13 @@ data/master byte-identical to backup.**
   2,549.5 should be 1,941.3). net_sales cross-validates clean; **PAT must be fixed + re-validated before
   any fold-in.** Nothing folded. Backup at `archive/pre_drhp_20260601/`.
 
-## ⏳ YOUR DECISIONS (the things waiting on you)
-1. **⭐ Fold "wipeout-safety" into the `data_informed` score?** OOS test PASSED the robust bar (14/18
-   cells improve; strong at 3y: 55→77pp; mixed only at 1y). **Recommend YES** (into `data_informed` only,
-   presets unchanged). Not auto-applied (changes the headline validated number). One word → I wire it in
-   via `weights.py` + re-derive + re-run OOS to confirm.
-2. **DRHP fold-in:** fold the 16 verified **net_sales** (PAT held back until the extractor is fixed)? It's
-   16/425 (small) and changes the old-cohort findings → your call. Default: leave staged.
-3. **`git init`?** Both the structure audit and CLEANUP_FINDINGS flag "no version control" as HIGH (no
-   rollback net). You said "later" — flagging once more since two audits independently raised it.
+## ⏳ YOUR DECISIONS — all resolved this session (kept for the record)
+1. **✅ DONE — wipeout-safety folded into `data_informed`** (you approved). Weight 0.13; OOS re-validated:
+   3y lift 55→**77pp**, 1y +1.9→+3.6pp, holds across all splits. The first signal to earn its way in.
+   Presets unchanged. 77 tests, app verified.
+2. **DRHP fold-in** (your rule: validate→merge, else stage+record): handled in sub-project C below — fold
+   the verified net_sales ONLY if it cross-validates cleanly, else stage + record review-needed.
+3. **✅ git init done — LOCAL-ONLY** (your standing instruction: never connect to a remote). Baseline committed.
 
 ## 📋 BACKLOG / DEFERRED (real, not blocking — pick when ready)
 - **DRHP full recovery** (16/425 done): fix the PAT/PBT extractor bug (require after-tax row label +

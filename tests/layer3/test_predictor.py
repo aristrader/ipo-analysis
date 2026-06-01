@@ -42,15 +42,16 @@ def test_scorecard_components_and_combined(df):
     q = {"type": "MB", "broad_sector": "Finance", "market_cap_class": "mid",
          "pre_ipo_pat": 1.0, "pre_ipo_roe_pct": 18, "pre_ipo_debt_equity": 0.4}
     r = analogs.find_analogs(q, df=df, k=50)
-    sc = scorecard.scorecard(q, r["cohort"], r, profile="balanced")
-    assert set(sc["components"]) == {"return_potential", "multibagger_odds",
-                                     "downside_safety", "liquidity", "quality", "tradeable_upside"}
+    sc = scorecard.scorecard(q, r["cohort"], r, profile="balanced", df=df)
+    assert set(sc["components"]) == {"return_potential", "multibagger_odds", "downside_safety",
+                                     "liquidity", "quality", "tradeable_upside", "wipeout_safety"}
     for c in sc["components"].values():
         assert c["score"] is None or (0 <= c["score"] <= 100)
     assert sc["combined_score"] is None or (0 <= sc["combined_score"] <= 100)
     assert sc["confidence"]["label"] in {"high", "medium", "low"}
-    # tradeable_upside is weight-0 everywhere (display-only) -> must NOT enter the combined score
-    assert all(p["tradeable_upside"] == 0.0 for p in scorecard.PRESETS.values())
+    # tradeable_upside is weight-0 in PRESETS (display-only); wipeout_safety is 0 in PRESETS too
+    # (it only earns weight under data_informed, which is fit by weights.py) -> presets unchanged.
+    assert all(p["tradeable_upside"] == 0.0 and p["wipeout_safety"] == 0.0 for p in scorecard.PRESETS.values())
 
 
 def test_quality_uses_query_own_fundamentals():

@@ -12,7 +12,7 @@ def predict(query, df=None, profile="balanced", k=50):
         df = spine.load_substrate()
     ar = analogs.find_analogs(query, df=df, k=k, exclude_isin=query.get("isin"))
     cohort = ar["cohort"]
-    sc = scorecard.scorecard(query, cohort, ar, profile=profile)
+    sc = scorecard.scorecard(query, cohort, ar, profile=profile, df=df)
 
     # outcome distribution of the cohort (maturity-gated 3y, fallback 1y)
     h = "3y" if len(spine.maturity_gated(cohort, "3y")) >= config.MIN_N_HINT else "1y"
@@ -58,7 +58,7 @@ def format_text(r):
     L.append("COMPONENT SCORES (0–100):")
     names = {"return_potential": "Return potential", "multibagger_odds": "Multibagger odds",
              "downside_safety": "Downside safety", "liquidity": "Liquidity", "quality": "Quality",
-             "tradeable_upside": "Tradeable upside"}
+             "tradeable_upside": "Tradeable upside", "wipeout_safety": "Wipeout-safety"}
     for k, c in sc["components"].items():
         s = c.get("score")
         w = sc.get("weights", {}).get(k, 0)

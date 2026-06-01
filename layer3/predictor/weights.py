@@ -14,12 +14,13 @@ import pandas as pd
 from layer3 import spine, config
 from layer3.predictor import analogs, scorecard
 
-COMPONENTS = ["return_potential", "multibagger_odds", "downside_safety", "liquidity", "quality"]
+COMPONENTS = ["return_potential", "multibagger_odds", "downside_safety", "liquidity", "quality", "wipeout_safety"]
 WEIGHTS_PATH = config.ROOT / "data/master/scorecard_weights.json"
 
 _QUERY_FEATS = ["broad_sector", "market_cap_class", "ofs_pct", "sub_total_x", "sub_qib_x",
                 "pe_ratio", "pre_ipo_roe_pct", "pre_ipo_debt_equity", "pre_ipo_pat_margin_pct",
-                "promoter_post_issue_pct", "gmp_pct", "issue_size_cr", "pre_ipo_pat"]
+                "promoter_post_issue_pct", "gmp_pct", "issue_size_cr", "pre_ipo_pat",
+                "pre_ipo_net_sales", "lead_manager"]   # last two feed the wipeout-safety component
 
 
 def _query_from_row(r):
@@ -66,6 +67,7 @@ def score_all_pointintime(df, horizon="3y", max_ipos=None):
             "downside_safety": scorecard.downside_safety(coh)["score"],
             "liquidity": scorecard.liquidity(coh)["score"],
             "quality": scorecard.quality(q)["score"],
+            "wipeout_safety": scorecard.wipeout_safety(q, df=df)["score"],
         })
     return pd.DataFrame(rows)
 
@@ -74,6 +76,9 @@ def component_lift(scored):
     """Spearman rank-IC of each component score vs realized alpha, per cohort."""
     lift = {}
     for c in COMPONENTS:
+        if c not in scored.columns:          # component absent from the scored frame -> no signal
+            lift[c] = {coh: None for coh in config.COHORTS}
+            continue
         per = {}
         for coh in config.COHORTS:
             s = scored[scored["cohort"] == coh][[c, "realized_alpha"]].dropna()

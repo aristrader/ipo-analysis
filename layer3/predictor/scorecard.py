@@ -13,9 +13,9 @@ from layer3 import spine, config
 # movement-lens display (P(cohort reached +X%)); weighting it in would need a weights re-fit + OOS
 # re-validation — deferred (see NEEDS_YOUR_INPUT.md).
 PRESETS = {
-    "balanced":     dict(return_potential=1.0, multibagger_odds=1.0, downside_safety=1.0, liquidity=0.7, quality=0.8, tradeable_upside=0.0),
-    "conservative": dict(return_potential=0.5, multibagger_odds=0.4, downside_safety=1.5, liquidity=1.2, quality=1.2, tradeable_upside=0.0),
-    "aggressive":   dict(return_potential=1.4, multibagger_odds=1.4, downside_safety=0.6, liquidity=0.5, quality=0.6, tradeable_upside=0.0),
+    "balanced":     dict(return_potential=1.0, multibagger_odds=1.0, downside_safety=1.0, liquidity=0.7, quality=0.8, tradeable_upside=0.0, wipeout_safety=0.0),
+    "conservative": dict(return_potential=0.5, multibagger_odds=0.4, downside_safety=1.5, liquidity=1.2, quality=1.2, tradeable_upside=0.0, wipeout_safety=0.0),
+    "aggressive":   dict(return_potential=1.4, multibagger_odds=1.4, downside_safety=0.6, liquidity=0.5, quality=0.6, tradeable_upside=0.0, wipeout_safety=0.0),
 }
 
 
@@ -241,6 +241,19 @@ def risk_assessment(query, df):
             "per_flag": detail, "flags": wf["flags"]}
 
 
+def wipeout_safety(query, df=None):
+    """SCORE component (0–100) = inverse of the validated wipeout-flag load on the query's OWN features:
+    100 − 50·n_flags (0 flags→100, 1→50, 2+→0). Folded into the data_informed score (it passed the
+    OOS-robust bar: 14/18 cells, strong at 3y). Like `quality`, it's a query-feature signal, so it's
+    None when no inputs were given (unknown ≠ safe)."""
+    if df is None:
+        return _comp(None, n=0)
+    wf = wipeout_flags(query, df=df)
+    if wf["n_checked"] < 1:
+        return _comp(None, n=0, n_flags=0, reason="no risk inputs")
+    return _comp(float(max(0.0, 100.0 - 50.0 * wf["n_flags"])), n_flags=wf["n_flags"], n_checked=wf["n_checked"])
+
+
 def quality(query):
     """From the QUERY's OWN fundamentals (profitable / ROE / margin / debt) + two VALIDATED
     hard-to-fake red flags: the accrual flag (profit but negative operating cash — N8) and the
@@ -301,7 +314,7 @@ def _resolve_weights(profile):
     return PRESETS.get(profile, PRESETS["balanced"])
 
 
-def scorecard(query, cohort, analog_result, profile="balanced", weights=None):
+def scorecard(query, cohort, analog_result, profile="balanced", weights=None, df=None):
     h = pick_horizon(cohort)
     comps = {
         "return_potential": return_potential(cohort, h),
@@ -310,6 +323,7 @@ def scorecard(query, cohort, analog_result, profile="balanced", weights=None):
         "liquidity": liquidity(cohort),
         "quality": quality(query),
         "tradeable_upside": tradeable_upside(cohort, h),
+        "wipeout_safety": wipeout_safety(query, df),
     }
     w = weights or _resolve_weights(profile)
     num = den = 0.0

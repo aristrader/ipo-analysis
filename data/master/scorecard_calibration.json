@@ -1,10 +1,10 @@
 {
   "score_quintiles": [
-    12.3,
-    30.1,
-    38.6,
-    44.9
+    22.0,
+    35.6,
+    42.6,
+    49.2
   ],
-  "top_quintile_lift_pp": 11.1,
+  "top_quintile_lift_pp": 15.0,
   "n_scored": 1023
 }
