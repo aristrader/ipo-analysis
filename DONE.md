@@ -4,6 +4,18 @@ Completed items moved here to keep TODO.md lean. Most-recent first.
 
 ---
 
+## DRHP fold-in decision — DO NOT FOLD (evidence-based)  (2026-06-02)
+- Resolved the open "fold the 16 staged DRHP net_sales?" question via impact analysis on ground truth.
+- **Finding:** all 16 staged net_sales fill NULL cells, but every value is **≥61.5cr** — and the ONLY downstream
+  consumer of `pre_ipo_net_sales` (the wipeout `tiny-sales` flag) fires below **25cr**. So folding changes zero
+  flags / scores / findings (16 large old MB IPOs, 16/2296 rows). Against that: only 2/16 independently
+  cross-validated, weak P&L-page detection on some (score 3-4), observed parsing artifacts (stray array values,
+  doubled year-headers), PAT unreliable (1 confirmed-bad).
+- **Decision: do not fold** — folding 14 unvalidated values into the frozen substrate for zero analytical gain
+  fails the rigor bar. Recorded in STATUS.md + docs/research/drhp_recovery.md with a concrete re-open bar
+  (concrete need + per-value independent cross-validation + extractor array/PAT fixes). data/master untouched;
+  `tools/drhp/` preserved. Docs-only change.
+
 ## scrapers/nse_session.py — shared NSE priming (broad http.py rejected)  (2026-06-02)
 - Assessed the backlog's `scrapers/http.py` (shared session/UA/429): **rejected as scoped.** Ground truth — the
   scrapers are deliberately heterogeneous (curl_cffi / cloudscraper / requests / urllib, one anti-bot approach per

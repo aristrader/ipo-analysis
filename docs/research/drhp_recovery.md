@@ -4,6 +4,14 @@
 > caught DLF). DLF's PAT withheld; a `pat==op` guard added to the extractor (now in `tools/drhp/`).
 > Only net_sales is trustworthy, and only 2/16 are INDEPENDENTLY cross-validated → **NOT folded into
 > data/master; staged + review-needed.** Pipeline preserved in `tools/drhp/`. Bulk run deferred.
+>
+> **FOLD-IN DECISION 2026-06-02: DO NOT FOLD (final; recorded in STATUS.md).** Impact analysis: all 16
+> recovered net_sales fill NULL cells, but every value is ≥61.5cr — **none below the 25cr `tiny-sales` flag
+> threshold, the only scorecard/flag/finding that consumes `pre_ipo_net_sales`.** Folding would change zero
+> flags/scores/findings (16 large old MB IPOs, 16/2296 rows). With only 2/16 independently cross-validated +
+> observed parsing artifacts, folding 14 unvalidated values into the frozen substrate for zero analytical gain
+> fails the rigor bar. Re-open only with a concrete need + per-value independent cross-validation + the
+> extractor fixes (array-artifact cleanup, PAT after-tax labeling).
 
 
 **Date:** 2026-06-01 · **Scope:** recover `pre_ipo_net_sales` / `pre_ipo_pat` (+ operating profit where the

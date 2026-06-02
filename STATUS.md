@@ -66,8 +66,15 @@ data/master byte-identical to backup.**
 1. **✅ DONE — wipeout-safety folded into `data_informed`** (you approved). Weight 0.13; OOS re-validated:
    3y lift 55→**77pp**, 1y +1.9→+3.6pp, holds across all splits. The first signal to earn its way in.
    Presets unchanged. 77 tests, app verified.
-2. **DRHP fold-in** (your rule: validate→merge, else stage+record): handled in sub-project C below — fold
-   the verified net_sales ONLY if it cross-validates cleanly, else stage + record review-needed.
+2. **DRHP fold-in — ✅ DECIDED 2026-06-02: DO NOT FOLD (keep staged).** Evidence: all 16 staged net_sales fill
+   NULL cells but every value is **≥61.5cr — none below the 25cr tiny-sales threshold**, the ONLY scorecard/flag/
+   finding consumer of `pre_ipo_net_sales`. So folding changes ZERO flags/scores/findings (16 large old MB IPOs,
+   16/2296 rows). Against that: only **2/16 independently cross-validated**, some have weak P&L-page detection
+   (score 3-4), observed array parsing artifacts, and PAT is unreliable (1 confirmed-bad). Net: folding 14
+   unvalidated values into the FROZEN substrate for **zero analytical gain** fails the rigor bar. PAT: never fold.
+   **Re-open bar:** fold only if (a) a concrete downstream need for these old large-caps' sales appears, AND
+   (b) each value is independently cross-validated, AND (c) the extractor's array-artifact + PAT-after-tax fixes
+   land. Tool preserved in `tools/drhp/` for that future bulk pass. data/master untouched (verified).
 3. **✅ git init done — LOCAL-ONLY** (your standing instruction: never connect to a remote). Baseline committed.
 
 ## 📋 BACKLOG / DEFERRED (real, not blocking — pick when ready)
