@@ -80,7 +80,9 @@ data/master byte-identical to backup.**
 ## 📋 BACKLOG / DEFERRED (real, not blocking — pick when ready)
 - **DRHP full recovery** (16/425 done): fix the PAT/PBT extractor bug (require after-tax row label +
   PBT−tax reconciliation + flag operating_profit==pat), wire SEBI-URL-from-chittorgarh-anchors into the
-  locator, then a semi-automated human-in-loop pass on the ~384 remaining. Tooling cached in `/tmp/`.
+  locator, then a semi-automated human-in-loop pass on the ~384 remaining. Tooling productionized in `tools/drhp/`.
+  NOTE: net_sales has near-zero downstream impact for these old large-caps (all ≥25cr → no flag change; see the
+  fold-in decision above) — only worth a bulk run if tied to a concrete new finding/need.
 - **Microcap extension** — risk/movement screener MVP scoped (`docs/research/microcap_extension_thinking.md`).
 - **Code refactors** (from `docs/research/CLEANUP_FINDINGS.md`, real maintainability debt, deferred — do
   with tests + after git): `compute()` split (07), test hermeticity (synthetic fixture) + adversarial trap tests.
@@ -92,5 +94,5 @@ data/master byte-identical to backup.**
   byte-identical piece — NSE curl_cffi priming — was consolidated into **`scrapers/nse_session.py`**
   (`prime_nse_session(referer)`); corp_actions + nse_subscription keep a 1-line `prime_session()` shim. +3 tests.
 - **`docs/research/` reorg** (structure audit #3): split active vs `archive/`; move staging CSVs out.
-- **DEPS-2:** pin requirements versions. **Doc:** rename `docs/decisions.md` → `discussion.md` (mis-titled).
+- **DEPS-2:** pin requirements versions. (Doc rename decisions.md→discussion.md = DONE.)
 - Other NEEDS_YOUR_INPUT items now DONE: survivorship-lens (built), 5% thresholds (set), combined TP+SL (built).
