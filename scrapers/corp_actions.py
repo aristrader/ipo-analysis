@@ -13,9 +13,14 @@ comparable with a post-event price (equivalently, the multiplier of share count)
 API needs a primed browser session (curl_cffi chrome impersonation + cookie priming + Referer),
 mirroring scrapers/nse_subscription.py. Re-prime on stale session / timeout.
 """
+import os
 import re
+import sys
 import time
 from curl_cffi import requests as cr
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # scrapers dir, for `nse_session`
+from nse_session import prime_nse_session
 
 _REFERER = 'https://www.nseindia.com/companies-listing/corporate-filings-actions'
 _HDR = {'Referer': _REFERER, 'Accept': 'application/json'}
@@ -23,11 +28,8 @@ _API = 'https://www.nseindia.com/api/corporates-corporateActions'
 
 
 def prime_session():
-    """Return a curl_cffi session with NSE anti-bot cookies set (same flow as nse_subscription)."""
-    s = cr.Session(impersonate='chrome')
-    s.get('https://www.nseindia.com', timeout=20)
-    s.get(_REFERER, timeout=20)
-    return s
+    """Prime an NSE session for this scraper's Referer (logic in scrapers/nse_session.py)."""
+    return prime_nse_session(_REFERER)
 
 
 def fetch_year(session, index, year):

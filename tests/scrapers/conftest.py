@@ -56,3 +56,15 @@ def sharescart_mod():
 def chittorgarh_mod():
     """scrapers/chittorgarh.py — the IPO spine source normalizers."""
     return _load("scrapers/chittorgarh.py", "scr_chittorgarh")
+
+
+@pytest.fixture(scope="session")
+def nse_session_mod():
+    """scrapers/nse_session.py — shared NSE anti-bot session priming."""
+    return _load("scrapers/nse_session.py", "scr_nse_session")
+
+
+@pytest.fixture(scope="session")
+def nse_subscription_mod():
+    """scrapers/nse_subscription.py — delegates priming to nse_session."""
+    return _load("scrapers/nse_subscription.py", "scr_nse_subscription")

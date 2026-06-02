@@ -144,7 +144,7 @@ CONTEXTS = {
         "run_all.py", "project_map.py", "docs/pipeline.md", "pipeline/", "pipeline/lib.py",
     ],
     "scrapers / data sources": [
-        "scrapers/", "docs/sources.md", "tests/scrapers/",
+        "scrapers/", "scrapers/nse_session.py", "docs/sources.md", "tests/scrapers/",
     ],
     "backtest a strategy": [
         "layer3/backtest/", "run_backtest.py", "docs/strategies.md",

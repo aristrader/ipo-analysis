@@ -18,7 +18,7 @@
 - **add / edit a finding** → `layer3/findings/`, `layer3/spine.py`, `layer3/report.py`, `run_layer3_report.py`, `tests/layer3/test_findings.py`, `rules/index.md`
 - **prices / returns / MFE-MAE / listing-day** → `pipeline/07_returns_summary.py`, `scrapers/screener_prices_merge.py`, `pipeline/listing_remediation.py`, `tests/pipeline/test_returns_math.py`, `tests/pipeline/test_listing_remediation.py`
 - **build / fix the dataset (pipeline)** → `run_all.py`, `project_map.py`, `docs/pipeline.md`, `pipeline/`, `pipeline/lib.py`
-- **scrapers / data sources** → `scrapers/`, `docs/sources.md`, `tests/scrapers/`
+- **scrapers / data sources** → `scrapers/`, `scrapers/nse_session.py`, `docs/sources.md`, `tests/scrapers/`
 - **backtest a strategy** → `layer3/backtest/`, `run_backtest.py`, `docs/strategies.md`, `tests/layer3/test_backtest.py`, `tests/layer3/test_score_backtest.py`
 - **cross-regime validation / OOS** → `layer3/validate.py`, `run_validation.py`, `run_oos.py`, `tests/layer3/test_validate.py`
 - **the app / UI** → `app.py`

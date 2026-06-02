@@ -4,6 +4,17 @@ Completed items moved here to keep TODO.md lean. Most-recent first.
 
 ---
 
+## scrapers/nse_session.py — shared NSE priming (broad http.py rejected)  (2026-06-02)
+- Assessed the backlog's `scrapers/http.py` (shared session/UA/429): **rejected as scoped.** Ground truth — the
+  scrapers are deliberately heterogeneous (curl_cffi / cloudscraper / requests / urllib, one anti-bot approach per
+  source); unifying them = a network-unverifiable rewrite, not a dedup. Also caught a footgun: naming it `http.py`
+  would SHADOW stdlib `http` (script dir on sys.path[0]) and break curl_cffi/requests/urllib.
+- **Done instead:** consolidated the one genuinely-shared, byte-identical piece — NSE curl_cffi session priming —
+  into `scrapers/nse_session.py` (`prime_nse_session(referer)`). corp_actions + nse_subscription keep a 1-line
+  `prime_session()` shim binding their own `_REFERER` (call sites untouched → behavior-identical). Self-bootstrapping
+  `from nse_session import` (lib.py convention) so importlib-loaded tests resolve it. +3 wiring tests (129→132).
+  Registered in project_map.py (the workflow rule in action). Rejection recorded in STATUS so it's not re-litigated.
+
 ## Navigation + anti-drift system (single-source map, auto checkpoint)  (2026-06-02)
 - **Problem:** structure lived as scattered prose (CLAUDE.md + run_all + docs) and drifted — e.g. `03f_sector_mcap.py`
   exists but was never wired into run_all; test/finding counts went stale; I kept re-deriving "what runs where" at

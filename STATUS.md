@@ -10,8 +10,8 @@
 > `PYTHONPATH=. pytest tests/layer3 -q` · report `ls report/layer3_partA.html` · app
 > `curl -s localhost:8501/_stcore/health` · data-untouched `diff data/master/ipo_analysis.csv archive/pre_drhp_20260601/ipo_analysis.csv`.
 
-_Canonical facts (verify before quoting — or just run `python verify.py`): **29 findings, 129 tests**
-(77 layer3 + 25 pipeline + 21 scrapers + 6 map). Substrate as-of = `config.AS_OF_DATE` (2026-05-31), 2296 rows.
+_Canonical facts (verify before quoting — or just run `python verify.py`): **29 findings, 132 tests**
+(77 layer3 + 25 pipeline + 24 scrapers + 6 map). Substrate as-of = `config.AS_OF_DATE` (2026-05-31), 2296 rows.
 Navigation: `MAP.md` (generated) · structure source `project_map.py` · checkpoint `verify.py` (auto each turn)._
 
 ---
@@ -76,10 +76,14 @@ data/master byte-identical to backup.**
   locator, then a semi-automated human-in-loop pass on the ~384 remaining. Tooling cached in `/tmp/`.
 - **Microcap extension** — risk/movement screener MVP scoped (`docs/research/microcap_extension_thinking.md`).
 - **Code refactors** (from `docs/research/CLEANUP_FINDINGS.md`, real maintainability debt, deferred — do
-  with tests + after git): `scrapers/http.py` (shared session/UA/429-backoff), `compute()` split (07),
-  test hermeticity (synthetic fixture) + adversarial trap tests. (DONE already: `_p()`→`spine.pct_num` dedup;
-  scraper/pipeline test coverage [TEST-1]; **`pipeline/lib.py` dedup** of fnum/num/last_pre_listing_fy — see
-  TEST-1 section. `scrapers/http.py` is the next safe slice.)
+  with tests + after git): `compute()` split (07), test hermeticity (synthetic fixture) + adversarial trap tests.
+  (DONE already: `_p()`→`spine.pct_num` dedup; scraper/pipeline test coverage [TEST-1]; **`pipeline/lib.py` dedup**.)
+- **`scrapers/http.py` (broad shared HTTP) — REJECTED, do not retry.** Ground truth: the scrapers are deliberately
+  heterogeneous (curl_cffi / cloudscraper / requests / urllib, one anti-bot approach per source); a unified HTTP
+  layer would be a network-unverifiable rewrite, not a dedup. Also the name `http.py` would SHADOW stdlib `http`
+  (script dir is on sys.path[0]) and break curl_cffi/requests/urllib. **Done instead:** the one genuinely-shared,
+  byte-identical piece — NSE curl_cffi priming — was consolidated into **`scrapers/nse_session.py`**
+  (`prime_nse_session(referer)`); corp_actions + nse_subscription keep a 1-line `prime_session()` shim. +3 tests.
 - **`docs/research/` reorg** (structure audit #3): split active vs `archive/`; move staging CSVs out.
 - **DEPS-2:** pin requirements versions. **Doc:** rename `docs/decisions.md` → `discussion.md` (mis-titled).
 - Other NEEDS_YOUR_INPUT items now DONE: survivorship-lens (built), 5% thresholds (set), combined TP+SL (built).

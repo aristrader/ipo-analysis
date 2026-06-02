@@ -6,18 +6,20 @@ SME issues return 0.00 on NSE (not populated) → use ipowatch for SME instead.
 
 API needs a primed browser session (curl_cffi chrome impersonation + cookie priming + Referer).
 """
+import os
+import sys
 from curl_cffi import requests as cr
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # scrapers dir, for `nse_session`
+from nse_session import prime_nse_session
 
 _REFERER = 'https://www.nseindia.com/market-data/all-upcoming-issues-ipo'
 _HDR = {'Referer': _REFERER, 'Accept': 'application/json'}
 
 
 def prime_session():
-    """Return a curl_cffi session with NSE anti-bot cookies set."""
-    s = cr.Session(impersonate='chrome')
-    s.get('https://www.nseindia.com', timeout=20)
-    s.get(_REFERER, timeout=20)
-    return s
+    """Prime an NSE session for this scraper's Referer (logic in scrapers/nse_session.py)."""
+    return prime_nse_session(_REFERER)
 
 
 def _num(x):
