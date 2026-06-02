@@ -78,11 +78,17 @@ data/master byte-identical to backup.**
 3. **✅ git init done — LOCAL-ONLY** (your standing instruction: never connect to a remote). Baseline committed.
 
 ## 📋 BACKLOG / DEFERRED (real, not blocking — pick when ready)
-- **DRHP full recovery** (16/425 done): fix the PAT/PBT extractor bug (require after-tax row label +
-  PBT−tax reconciliation + flag operating_profit==pat), wire SEBI-URL-from-chittorgarh-anchors into the
-  locator, then a semi-automated human-in-loop pass on the ~384 remaining. Tooling productionized in `tools/drhp/`.
-  NOTE: net_sales has near-zero downstream impact for these old large-caps (all ≥25cr → no flag change; see the
-  fold-in decision above) — only worth a bulk run if tied to a concrete new finding/need.
+- **DRHP full recovery (~409 old IPOs) — PARKED. Plain summary:**
+  - WHAT'S MISSING: before-IPO financials (sales / profit / debt) for ~409 old IPOs (2006–2014). Recent IPOs
+    (2020–25) are complete.
+  - CAN WE GET IT? Not really. The numbers only exist inside old DRHP PDFs. Our tool reads **sales** correctly,
+    but reads **profit** wrong (mixes before-tax vs after-tax), gets **operating profit** only half the time, and
+    **can't get debt at all**. Doing all ~409 is high effort for mostly-unusable output.
+  - DOES IT HURT OUR ANALYSIS? No. The important stuff (returns, risk, the validated signals) doesn't use these
+    numbers. A few finance-based findings (n7, t9, n13, n14, n15) just run on fewer of the old companies — the
+    missing ones are **skipped, never guessed**, so nothing is biased or wrong, just a smaller sample there.
+  - VERDICT: leave it. Only worth revisiting if we build something that specifically needs old-company sales.
+  - Tooling preserved in `tools/drhp/` for that hypothetical future pass.
 - **Microcap extension** — risk/movement screener MVP scoped (`docs/research/microcap_extension_thinking.md`).
 - **Code refactors** (from `docs/research/CLEANUP_FINDINGS.md`, real maintainability debt, deferred — do
   with tests + after git): `compute()` split (07), test hermeticity (synthetic fixture) + adversarial trap tests.

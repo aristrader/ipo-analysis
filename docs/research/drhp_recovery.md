@@ -1,5 +1,14 @@
 # Pre-IPO financials recovery for OLD longterm IPOs — DRHP-PDF pass (research/staging only)
 
+> **PLAIN SUMMARY (the takeaway): PARKED — not worth doing, and it doesn't hurt anything.**
+> - Missing: before-IPO financials (sales / profit / debt) for ~409 old IPOs (2006–2014). Recent IPOs are complete.
+> - Can we get it? Not really. It's only in old DRHP PDFs. The tool reads **sales** right, but reads **profit**
+>   wrong (before-tax vs after-tax), gets **operating profit** half the time, and **can't get debt at all**.
+>   High effort for mostly-unusable output.
+> - Does it hurt the analysis? **No.** Returns, risk, and all validated signals don't use these numbers. A few
+>   finance-based findings just run on fewer old companies; missing values are **skipped, never guessed** — so
+>   nothing is biased, just a smaller sample there.
+
 > **UPDATE 2026-06-02 (post cross-validation):** PAT field is unreliable (PBT-vs-after-tax; cross-val
 > caught DLF). DLF's PAT withheld; a `pat==op` guard added to the extractor (now in `tools/drhp/`).
 > Only net_sales is trustworthy, and only 2/16 are INDEPENDENTLY cross-validated → **NOT folded into
