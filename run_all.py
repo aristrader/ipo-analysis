@@ -49,26 +49,11 @@ import sys
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # (key, path) in canonical run order. `key` is what you pass to --from.
-STEPS = [
-    ("00",    "pipeline/00_build_longterm_spine.py"),
-    ("lt/02", "pipeline/longterm/02_detail.py"),
-    ("lt/03", "pipeline/longterm/03_subscription.py"),
-    ("lt/04", "pipeline/longterm/04_financials.py"),
-    ("01",    "pipeline/01_build_base.py"),
-    ("02",    "pipeline/02_attach_detail.py"),
-    ("03",    "pipeline/03_enrich.py"),
-    ("03b",   "pipeline/03b_fill_financials_screener.py"),
-    ("03c",   "pipeline/03c_fill_subscription_nse.py"),
-    ("03d",   "pipeline/03d_fill_ipowatch.py"),
-    ("03e",   "pipeline/03e_fill_gmp_investorgain.py"),
-    ("04",    "pipeline/04_verify.py"),
-    ("05",    "pipeline/05_reconcile.py"),
-    ("06",    "pipeline/06_validate_tickers.py"),
-    ("07",    "pipeline/07_returns_summary.py"),
-    ("merge", "scrapers/screener_prices_merge.py"),
-    ("08",    "pipeline/08_build_universe.py"),
-    ("09",    "pipeline/09_assemble.py"),
-]
+# SINGLE SOURCE: derived from project_map.PIPELINE so the DAG can never drift
+# between the orchestrator and the map. To change the pipeline, edit project_map.py.
+sys.path.insert(0, ROOT)
+from project_map import dag_steps
+STEPS = dag_steps()
 
 
 def main():

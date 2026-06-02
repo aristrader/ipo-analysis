@@ -1,0 +1,248 @@
+"""SINGLE SOURCE OF TRUTH for repo structure, data flow, and navigation.
+
+Why this file exists: structure used to live as prose scattered across CLAUDE.md,
+run_all.py, and docs/ — so it drifted (e.g. a pipeline step existing but not wired,
+stale counts). This module is the ONE machine-readable description. Three things
+consume it:
+  * run_all.py        derives its pipeline step order from PIPELINE (one DAG source).
+  * verify.py         asserts every path here exists + invariants hold, and regenerates MAP.md.
+  * MAP.md            is GENERATED from render_map() — never hand-edit it.
+
+THE RULE (also in CLAUDE.md): when you add/move/retire a file, pipeline step, data
+product, or signal — update THIS file. verify.py (run automatically each turn) will
+flag the drift if you forget. Keep entries one line; this is a map, not documentation.
+"""
+
+# --------------------------------------------------------------------------- DAG
+# The pipeline, in canonical run order. run_all.py builds its STEPS from this list.
+# Each: (key passed to `run_all.py --from`, path, one-line role).
+PIPELINE = [
+    ("00",    "pipeline/00_build_longterm_spine.py",         "long-term (2006-19) Chittorgarh spine"),
+    ("lt/02", "pipeline/longterm/02_detail.py",              "longterm: attach detail"),
+    ("lt/03", "pipeline/longterm/03_subscription.py",        "longterm: subscription"),
+    ("lt/04", "pipeline/longterm/04_financials.py",          "longterm: financials"),
+    ("01",    "pipeline/01_build_base.py",                   "boom base table (2020-25)"),
+    ("02",    "pipeline/02_attach_detail.py",                "attach Chittorgarh detail"),
+    ("03",    "pipeline/03_enrich.py",                       "Sharescart enrichment"),
+    ("03b",   "pipeline/03b_fill_financials_screener.py",    "pre-IPO financials from screener"),
+    ("03c",   "pipeline/03c_fill_subscription_nse.py",       "NSE subscription"),
+    ("03d",   "pipeline/03d_fill_ipowatch.py",               "ipowatch SME subscription + GMP"),
+    ("03e",   "pipeline/03e_fill_gmp_investorgain.py",       "investorgain GMP (2nd pass)"),
+    ("04",    "pipeline/04_verify.py",                       "verify tickers"),
+    ("05",    "pipeline/05_reconcile.py",                    "reconcile sources (flag, never merge)"),
+    ("06",    "pipeline/06_validate_tickers.py",             "validate tickers"),
+    ("07",    "pipeline/07_returns_summary.py",              "prices -> returns_summary.csv (+MFE/MAE)"),
+    ("merge", "scrapers/screener_prices_merge.py",           "fold screener weekly prices into returns"),
+    ("08",    "pipeline/08_build_universe.py",               "build universe.csv (unified features)"),
+    ("09",    "pipeline/09_assemble.py",                     "join -> ipo_analysis.csv (THE substrate)"),
+]
+
+# Files that EXIST but are intentionally NOT in the DAG. Listed so verify.py can tell
+# "deliberately standalone" from "accidentally dropped" (the 03f-class goof-up).
+UNWIRED = [
+    ("pipeline/03f_sector_mcap.py",
+     "sector + market_cap_class; folded into 08_build_universe — run standalone only to re-source"),
+]
+
+# Shared, non-numbered pipeline helpers (imported by the numbered steps).
+PIPELINE_HELPERS = {
+    "pipeline/lib.py":                 "pure helpers fnum/num/last_pre_listing_fy (imported by 08/03b/03d/03e)",
+    "pipeline/listing_remediation.py": "listing-coverage remediation (used by 07 + the merge)",
+    "pipeline/checks/":                "per-step validators",
+    "pipeline/longterm/":              "2006-19 cohort enrichment steps",
+}
+
+# ----------------------------------------------------------------- data products
+# data/master/ — the canonical outputs. THE one to start from is ipo_analysis.csv.
+DATA_PRODUCTS = {
+    "data/master/ipo_analysis.csv":   "THE Layer-3 substrate: features+outcomes+quality+flags (2296 rows)",
+    "data/master/universe.csv":       "unified feature table (step 08 output)",
+    "data/master/returns_summary.csv":"price-derived outcomes (step 07 output)",
+    "data/master/mainboard.csv":      "boom mainboard master",
+    "data/master/sme.csv":            "boom SME master",
+    "data/master/longterm_mainboard.csv": "2006-19 mainboard master",
+    "data/master/longterm_sme.csv":   "2006-19 SME master",
+    "data/master/delisting.csv":      "delisting status/date/reason/last_price (INPUT to step 07)",
+    "data/master/review/":            "flag/review registers (gaps, ticker_conflicts, xcheck, ...)",
+}
+
+# raw + reference inputs (scrapers write here; pipeline reads here)
+DATA_INPUTS = {
+    "data/raw/<source>/":             "raw scraped payloads (one dir per scraper)",
+    "data/reference/":                "exchange lists, bhavcopy cache, corp_actions.csv, indices/",
+    "data/prices/<isin>.csv":         "daily split/bonus-adjusted OHLCV per ISIN",
+}
+
+# ---------------------------------------------------------------------- top dirs
+DIRS = {
+    "scrapers/": "ONE file per data SOURCE; fetch RAW only, never transform",
+    "pipeline/": "numbered build steps (the DAG above) + helpers",
+    "data/":     "raw/ reference/ prices/ master/ (master = the outputs)",
+    "layer3/":   "UI-agnostic analysis engine; reads ipo_analysis.csv only",
+    "rules/":    "the rule/signal/strategy REGISTRY (index.md) — navigate logic here",
+    "docs/":     "sources, schema, pipeline, strategies, layer2/3, research/",
+    "tests/":    "layer3/ (analysis) + pipeline/ + scrapers/ (data-building safety net)",
+    "tools/":    "side tools (drhp/ = DRHP financials recovery)",
+    "report/":   "generated HTML (layer3_partA.html)",
+    "archive/":  "superseded files + dataset backups (e.g. pre_drhp_20260601/)",
+}
+
+# ------------------------------------------------------------------- layer3 core
+LAYER3 = {
+    "layer3/config.py":   "AS_OF_DATE, thresholds (DEAD_MONEY_RETURN, SEGMENTS, ...) — single source",
+    "layer3/spine.py":    "method engine: distributions, reach_curve, exit/stop strategies, gating",
+    "layer3/findings/":   "the 29 descriptive findings (one file each)",
+    "layer3/predictor/scorecard.py": "the score COMPONENTS (incl. wipeout_safety, risk gauge)",
+    "layer3/predictor/weights.py":   "data-informed weights (point-in-time rank-IC, cross-regime)",
+    "layer3/predictor/analogs.py":   "comparables / analog selection",
+    "layer3/predictor/predict.py":   "assemble the full 'Evaluate this IPO' report",
+    "layer3/backtest/":   "engine + analyses + score_backtest (vs do-nothing)",
+    "layer3/validate.py": "cross-regime validation (boom vs 2006-19)",
+}
+
+# --------------------------------------------------------------------- run it
+ENTRYPOINTS = {
+    "PYTHONPATH=. python run_all.py":            "build the dataset (whole pipeline DAG; --from to resume)",
+    "PYTHONPATH=. python run_layer3_report.py":  "build report/layer3_partA.html (29 findings)",
+    "PYTHONPATH=. python predict_ipo.py --type MB --sector ...": "score/evaluate a new IPO",
+    "PYTHONPATH=. python run_backtest.py":       "strategy backtests",
+    "PYTHONPATH=. python run_validation.py":     "cross-regime validation",
+    "PYTHONPATH=. python run_weights.py":        "derive data-informed weights",
+    "PYTHONPATH=. python -m pytest tests -q":    "run all tests",
+    "PYTHONPATH=. streamlit run app.py":         "the interactive app (5 tabs)",
+    "python verify.py":                          "structure/invariant checkpoint + regenerate MAP.md",
+}
+
+# ------------------------------------------------------- where the rules/state live
+RULES_AND_STATE = {
+    "rules/index.md":  "navigable REGISTRY: every signal/component/strategy — status (in-score/display-only/"
+                       "rejected) + WHY + backtest lift/N/cross-regime. Consult before re-testing any signal.",
+    "rules/README.md": "the registry entry template",
+    "CLAUDE.md":       "conventions/decisions/repo-map (the brain; auto-loaded)",
+    "STATUS.md":       "live 'where are we / what's next' (verify from ground truth, never memory)",
+    "DONE.md":         "append-only history",
+}
+
+# ------------------------------------------------------------ CONTEXT INDEX
+# "I'm working on X -> go to these files." The router for context-fetching.
+CONTEXTS = {
+    "score / evaluate a new IPO": [
+        "layer3/predictor/scorecard.py", "layer3/predictor/weights.py",
+        "layer3/predictor/predict.py", "layer3/predictor/analogs.py",
+        "rules/index.md", "predict_ipo.py", "tests/layer3/test_predictor.py",
+    ],
+    "add / edit a finding": [
+        "layer3/findings/", "layer3/spine.py", "layer3/report.py",
+        "run_layer3_report.py", "tests/layer3/test_findings.py", "rules/index.md",
+    ],
+    "prices / returns / MFE-MAE / listing-day": [
+        "pipeline/07_returns_summary.py", "scrapers/screener_prices_merge.py",
+        "pipeline/listing_remediation.py", "tests/pipeline/test_returns_math.py",
+        "tests/pipeline/test_listing_remediation.py",
+    ],
+    "build / fix the dataset (pipeline)": [
+        "run_all.py", "project_map.py", "docs/pipeline.md", "pipeline/", "pipeline/lib.py",
+    ],
+    "scrapers / data sources": [
+        "scrapers/", "docs/sources.md", "tests/scrapers/",
+    ],
+    "backtest a strategy": [
+        "layer3/backtest/", "run_backtest.py", "docs/strategies.md",
+        "tests/layer3/test_backtest.py", "tests/layer3/test_score_backtest.py",
+    ],
+    "cross-regime validation / OOS": [
+        "layer3/validate.py", "run_validation.py", "run_oos.py", "tests/layer3/test_validate.py",
+    ],
+    "the app / UI": ["app.py"],
+    "what's done / what's next / project state": ["STATUS.md", "DONE.md", "CLAUDE.md", "rules/index.md"],
+    "schema / what a column means": ["docs/schema.md", "data/master/ipo_analysis.csv"],
+    "DRHP financials recovery": ["tools/drhp/", "docs/research/drhp_recovery.md"],
+}
+
+# --------------------------------------------------------------- INVARIANTS
+# Ground-truth facts the checkpoint re-derives and compares. Update when they change
+# (verify.py will tell you if a doc disagrees with reality).
+INVARIANTS = {
+    "n_findings":     29,            # ls layer3/findings/*.py minus __init__
+    "substrate_rows": 2296,          # csv records in ipo_analysis.csv (NOT wc -l — quoted multiline fields)
+    "as_of_date":     "2026-05-31",  # layer3/config.AS_OF_DATE
+    # exact test count comes from `pytest --co` (run by `python verify.py`, not the fast hook).
+}
+
+
+# --------------------------------------------------------------- helpers
+def dag_steps():
+    """(key, path) pairs in run order — run_all.py builds its STEPS from this."""
+    return [(key, path) for key, path, _role in PIPELINE]
+
+
+def all_referenced_paths():
+    """Every concrete path mentioned in the map (for verify.py existence checks).
+    Skips template paths containing '<' and bare commands."""
+    paths = set()
+    for _k, p, _r in PIPELINE:
+        paths.add(p)
+    for p, _r in UNWIRED:
+        paths.add(p)
+    for d in (PIPELINE_HELPERS, DATA_PRODUCTS, DIRS, LAYER3, RULES_AND_STATE):
+        paths.update(d.keys())
+    for files in CONTEXTS.values():
+        paths.update(files)
+    return {p for p in paths if "<" not in p}
+
+
+def render_map():
+    """Generate MAP.md from the structures above. Never hand-edit MAP.md."""
+    L = []
+    L.append("# MAP — generated, do not edit (source: project_map.py; run `python verify.py` to refresh)\n")
+    L.append("> Navigation, data-flow, and a context index for this repo. Generated from `project_map.py`.\n")
+
+    L.append("## Navigate — to do X, start here")
+    for cmd, what in ENTRYPOINTS.items():
+        L.append(f"- `{cmd}` — {what}")
+    L.append("")
+
+    L.append("## Context index — working on X? open these")
+    for ctx, files in CONTEXTS.items():
+        L.append(f"- **{ctx}** → {', '.join('`%s`' % f for f in files)}")
+    L.append("")
+
+    L.append("## Flow — data pipeline (DAG, canonical order)")
+    L.append("```")
+    L.append("WEB SOURCES --scrapers/--> data/raw/ + data/reference/ + data/prices/")
+    L.append("            --pipeline (below)--> data/master/  --layer3/--> report/ + predictions + app")
+    L.append("")
+    for key, path, role in PIPELINE:
+        L.append(f"  {key:6s} {path:48s} {role}")
+    L.append("```")
+    if UNWIRED:
+        L.append("\n**Exists but NOT wired into run_all (intentional — verify before running):**")
+        for p, role in UNWIRED:
+            L.append(f"- `{p}` — {role}")
+    L.append("")
+
+    L.append("## Data products (`data/master/`)")
+    for p, role in DATA_PRODUCTS.items():
+        L.append(f"- `{p}` — {role}")
+    L.append("")
+
+    L.append("## Tree — directories")
+    for p, role in DIRS.items():
+        L.append(f"- `{p}` — {role}")
+    L.append("")
+
+    L.append("## Layer-3 engine")
+    for p, role in LAYER3.items():
+        L.append(f"- `{p}` — {role}")
+    L.append("")
+
+    L.append("## Rules & state")
+    for p, role in RULES_AND_STATE.items():
+        L.append(f"- `{p}` — {role}")
+    L.append("")
+
+    L.append("## Invariants (re-derived by verify.py)")
+    for k, v in INVARIANTS.items():
+        L.append(f"- {k} = {v}")
+    L.append("")
+    return "\n".join(L)

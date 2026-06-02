@@ -4,6 +4,29 @@ Completed items moved here to keep TODO.md lean. Most-recent first.
 
 ---
 
+## Navigation + anti-drift system (single-source map, auto checkpoint)  (2026-06-02)
+- **Problem:** structure lived as scattered prose (CLAUDE.md + run_all + docs) and drifted — e.g. `03f_sector_mcap.py`
+  exists but was never wired into run_all; test/finding counts went stale; I kept re-deriving "what runs where" at
+  runtime. Goal (user): make navigation, context-fetching, safe code-updates, and anti-hallucination *stay* solved.
+- **Researched the pattern** (AGENTS.md / llms.txt / "agent meta-repo map"): single machine-readable source +
+  generated human views + self-healing checkpoint; caution that bloated/auto-gen context can *hurt* — so keep it lean.
+- **Built:**
+  - **`project_map.py`** — ONE source of truth: pipeline DAG (with roles), data products, layer3 modules, where
+    rules live, an UNWIRED list (flags 03f-class gaps), INVARIANTS, and a **CONTEXT INDEX** ("working on X → these
+    files"). `render_map()` generates MAP.md.
+  - **`MAP.md`** — generated nav/tree/flow/context (never hand-edited).
+  - **`run_all.py`** now derives `STEPS` from `project_map.dag_steps()` → the DAG has ONE source, can't drift.
+    Verified `--list` shows the identical 18 steps.
+  - **`verify.py`** — checkpoint: every mapped path exists, DAG consistent, invariants (29 findings / 2296 csv
+    records [NOT wc -l] / AS_OF_DATE / data-vs-backup) match; regenerates MAP.md. `--quiet` (~0.1s) for the hook.
+  - **`UserPromptSubmit` hook** in `.claude/settings.local.json` (PROJECT-LOCAL only; uses `.venv/bin/python`)
+    runs `verify.py --quiet` before each of my turns; drift is injected into context. Never blocks. Chose
+    UserPromptSubmit over Stop (Stop can loop). Confirmed schema via claude-code-guide.
+  - **`docs/WORKFLOWS.md`** — "what to do when" rules + 3 standing principles (verify-before-relying; update the
+    map on change; suggest improvements). Pointer block added to CLAUDE.md.
+  - **6 tests** (`tests/test_project_map.py`): mapped paths exist, DAG single-sourced into run_all, no drift,
+    invariants match reality, MAP has the four views. Full suite **123→129**.
+
 ## pipeline/lib.py dedup — copy-pasted helpers consolidated  (2026-06-02)
 - Consolidated three helpers that were copy-pasted across numbered pipeline files into **`pipeline/lib.py`**
   (+3 unit tests, `tests/pipeline/test_lib.py`): `fnum` (was in 08/03b/03d/03e), `num` type-guard (08/03b),

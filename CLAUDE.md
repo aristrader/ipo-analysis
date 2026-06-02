@@ -21,15 +21,15 @@ incl. delisted)** and turn them into (a) descriptive truths, (b) an analog-based
   CANONICAL RUN ORDER for Layer 2: `07_returns_summary` → `scrapers/screener_prices_merge` → `08_build_universe`
   → `09_assemble` (with `pipeline/listing_remediation.py` used inside 07 + the merge).
 - **Layer 3 — analysis.** ✅ BUILT (2026-05-31), reviewed + remediated. Engine in `layer3/` (UI-agnostic).
-  **Part A** (descriptive report): `layer3/spine.py` (method spine) + findings in `layer3/findings/` → `run_layer3_report.py` → `report/layer3_partA.html` (**29 findings**, **123 tests**).
+  **Part A** (descriptive report): `layer3/spine.py` (method spine) + findings in `layer3/findings/` → `run_layer3_report.py` → `report/layer3_partA.html` (**29 findings**, **129 tests**).
   **Part B** (analog predictor + 5-component scorecard): `layer3/predictor/` → `predict_ipo.py --type MB --sector ...`.
   **Part C** (backtester vs do-nothing): `layer3/backtest/` → `run_backtest.py`. **Cross-regime validation:**
   `layer3/validate.py` → `run_validation.py` (VALIDATED: lasting-wealth, pop-fade; MIXED/not-robust: ofs-skin,
   profitable). **Data-informed scorecard weights:** `layer3/predictor/weights.py` → `run_weights.py` (point-in-time
   rank-IC, cross-regime; return/multibagger/downside carry weight, liquidity/quality→0; `predict_ipo.py --profile
-  data_informed`). Tests: **123 total** — `tests/layer3/` (77, incl. 5-traps) + `tests/pipeline/` (25) +
-  `tests/scrapers/` (21) = TEST-1's data-building safety net (returns math / listing remediation /
-  corp-actions + scraper normalizers / `pipeline/lib.py`). Design: `docs/strategies.md`+`docs/layer3.md`; results:
+  data_informed`). Tests: **129 total** — `tests/layer3/` (77, incl. 5-traps) + `tests/pipeline/` (25) +
+  `tests/scrapers/` (21) = TEST-1's data-building safety net + `tests/test_project_map.py` (6, the nav/anti-drift
+  machinery). Design: `docs/strategies.md`+`docs/layer3.md`; results:
   `rules/index.md`. KEY: `alpha` is FROM-LISTING (secondary-buyer, vs Nifty); allottee additionally gets the pop.
   **Interactive app:** `app.py` (Streamlit, 5 tabs: report / score-a-new-IPO / explorer / backtester / validation+rules) →
   `PYTHONPATH=. streamlit run app.py`. Remaining (polish): DRHP-PDF financials, live-refresh commit path.
@@ -49,6 +49,20 @@ incl. delisted)** and turn them into (a) descriptive truths, (b) an analog-based
   KEY TRUTH: no take-profit/stop-loss rule beats buy-and-hold cross-regime (the right tail carries returns);
   tight stops actively hurt the secondary buyer (whipsaw). Combined TP+SL is NOT computable (MFE/MAE don't reveal
   which fired first). Catalog: `docs/research/ideas_movement_lens.md`.
+
+## Navigation & self-check (READ FIRST — beats rediscovering structure each time)
+- **`project_map.py`** = the SINGLE machine-readable source for structure: pipeline DAG (run_all derives its
+  steps from it), data products, layer3 modules, where rules live, and a **CONTEXT INDEX** ("working on X → open
+  these files"). Edit it whenever you add/move/retire a file, step, or signal.
+- **`MAP.md`** = human-readable navigation/tree/flow/context, **generated** from project_map.py (never hand-edit).
+- **`verify.py`** = the checkpoint: asserts every mapped path exists, the DAG is consistent, and invariants
+  (29 findings / 129 tests / 2296 rows / AS_OF_DATE / data-vs-backup) hold; regenerates MAP.md. It runs
+  **automatically each turn** via a `UserPromptSubmit` hook in `.claude/settings.local.json` (project-local,
+  ~0.1s, silent unless drift → injects drift into context so I don't act on stale state).
+- **`docs/WORKFLOWS.md`** = "what to do when" rules. THREE STANDING PRINCIPLES: (1) verify before relying
+  (ground truth, never memory; `wc -l` lies on the CSVs — count records via `csv`); (2) update `project_map.py`
+  the moment structure changes; (3) suggest structural improvements. STANDING RULE: keep project_map + STATUS +
+  rules/index updated as work happens; `verify.py` enforces it.
 
 ## Where to start / how it flows
 1. `docs/sources.md` — every data source (access, fields, coverage, free/premium). 2. `docs/schema.md` — columns.

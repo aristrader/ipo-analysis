@@ -10,7 +10,9 @@
 > `PYTHONPATH=. pytest tests/layer3 -q` · report `ls report/layer3_partA.html` · app
 > `curl -s localhost:8501/_stcore/health` · data-untouched `diff data/master/ipo_analysis.csv archive/pre_drhp_20260601/ipo_analysis.csv`.
 
-_Canonical facts (verify before quoting): **29 findings, 123 tests** (77 layer3 + 25 pipeline + 21 scrapers). Substrate as-of date = `config.AS_OF_DATE` (2026-05-31)._
+_Canonical facts (verify before quoting — or just run `python verify.py`): **29 findings, 129 tests**
+(77 layer3 + 25 pipeline + 21 scrapers + 6 map). Substrate as-of = `config.AS_OF_DATE` (2026-05-31), 2296 rows.
+Navigation: `MAP.md` (generated) · structure source `project_map.py` · checkpoint `verify.py` (auto each turn)._
 
 ---
 
