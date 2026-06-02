@@ -4,6 +4,28 @@ Completed items moved here to keep TODO.md lean. Most-recent first.
 
 ---
 
+## TEST-1 — data-building safety net (scraper/pipeline test coverage)  (2026-06-02)
+- The 77 existing tests covered only the analysis layer (`tests/layer3/`); the entire data-building half
+  (`scrapers/`, `pipeline/`) had **zero** tests. Added **31 unit tests** → full suite **108 passing**, with
+  `data/master` byte-identical to backup (test-only change, no production code touched).
+  - `tests/pipeline/test_returns_math.py` (11): `pdate`/`pfloat`, `adj_factor_after` (split adjustment factor),
+    `nearest_on_or_before` (benchmark lookup), `actions_for` (ISIN∪symbol dedup) — the core of step 07's returns.
+  - `tests/pipeline/test_listing_remediation.py` (11): all four `remediate_listing` branches
+    (ok / inferred_split / unreliable_coverage / recovered_bhavcopy) incl. the post-issue-reliable null logic,
+    plus `_outcome_class` thresholds at the boundaries.
+  - `tests/scrapers/test_corp_actions_parse.py` (9): `classify`, `parse_split_factor`, `parse_bonus_factor`,
+    `iso_date`, `parse_row` — the NSE-text→ratio_factor chain that feeds the split math above.
+- **How:** numbered pipeline files (`07_*`) can't be `import`ed (digit-leading module name) → loaded by file path
+  via importlib in per-suite `conftest.py` (modules self-bootstrap their own sys.path). Conftests set
+  `sys.dont_write_bytecode=True` after hitting a stale-`.pyc` footgun (sub-second edit/rerun served mutated
+  bytecode whose source-mtime collided with the reverted file).
+- **Rigor:** mutation-tested the suite — broke `parse_bonus_factor` (a+b)/b→a/b, `adj_factor_after` `>`→`>=`,
+  and the wipeout threshold `-0.90`→`-0.99`; each mutation failed a test, confirming the tests bite.
+- Unblocks the deferred `pipeline/lib.py` dedup (fnum/num/last_pre_listing_fy, copy-pasted across 5 files) and
+  `scrapers/http.py` — both now have, or can get, a regression net before refactoring.
+
+---
+
 ## Layer 3 — Streamlit app (interactive UI)  (2026-06-01)
 - `app.py` — one-file Streamlit front-end over the engine: 4 tabs — **Findings report** (embeds the 20-finding
   HTML), **Score a new IPO** (predictor form → scorecard + analogs + distribution + confidence), **Backtester**

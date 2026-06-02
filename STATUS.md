@@ -10,7 +10,7 @@
 > `PYTHONPATH=. pytest tests/layer3 -q` · report `ls report/layer3_partA.html` · app
 > `curl -s localhost:8501/_stcore/health` · data-untouched `diff data/master/ipo_analysis.csv archive/pre_drhp_20260601/ipo_analysis.csv`.
 
-_Canonical facts (verify before quoting): **29 findings, 77 tests.** Substrate as-of date = `config.AS_OF_DATE` (2026-05-31)._
+_Canonical facts (verify before quoting): **29 findings, 108 tests** (77 layer3 + 31 pipeline/scrapers). Substrate as-of date = `config.AS_OF_DATE` (2026-05-31)._
 
 ---
 
@@ -22,7 +22,23 @@ adversarial-reviewed (latest round fixed the "unknown=safe" risk-gauge blocker).
 data/master byte-identical to backup.**
 
 ## 🏃 IN PROGRESS
-- Nothing running. The E→git→C→D queue is complete (all committed). Awaiting your return.
+- Nothing running. The E→git→C→D queue is complete (all committed).
+
+## ✅ TEST-1 (scraper/pipeline coverage) — STARTED (data-building safety net)
+- **31 new tests** added, full suite now **108 passing** (was 77, all layer3). data/master untouched.
+  - `tests/pipeline/test_returns_math.py` (11) — pure math in step 07: `pdate`/`pfloat`,
+    `adj_factor_after` (split adjustment), `nearest_on_or_before` (benchmark lookup), `actions_for` (union/dedup).
+  - `tests/pipeline/test_listing_remediation.py` (11) — every branch of `remediate_listing`
+    (ok / inferred_split / unreliable_coverage / recovered_bhavcopy) + `_outcome_class` boundaries.
+  - `tests/scrapers/test_corp_actions_parse.py` (9) — `classify`/`parse_split_factor`/`parse_bonus_factor`/
+    `iso_date`/`parse_row` (the text→ratio_factor that feeds the split math above).
+  - Numbered pipeline files loaded via importlib in conftest (can't `import` a `07_*` name); conftest sets
+    `sys.dont_write_bytecode` to avoid stale-.pyc under rapid edit/rerun.
+  - **Mutation-tested**: confirmed all three target functions, when broken, fail a test (tests bite, not vacuous).
+- **Still deferred (next slice of TEST-1):** `fnum/num/last_pre_listing_fy` are copy-pasted across 5 pipeline
+  files (08/03b/03d/03e/05) and live inside import-UNSAFE modules (top-level execution) — they should be
+  pulled into `pipeline/lib.py` first, then tested; that dedup is the blocked refactor this unblocks.
+  Also: `scrapers/http.py` shared-session refactor; more scraper parse coverage (sharescart/screener/ipowatch).
 
 ## ✅ DONE this run (E, git, wipeout-fold, C, D-safe) — see DONE.md
 - **D (conservative) — DONE (the safe, verifiable part):** `_p()`→`spine.pct_num` dedup across 19 findings,
@@ -50,8 +66,10 @@ data/master byte-identical to backup.**
 - **Microcap extension** — risk/movement screener MVP scoped (`docs/research/microcap_extension_thinking.md`).
 - **Code refactors** (from `docs/research/CLEANUP_FINDINGS.md`, real maintainability debt, deferred — do
   with tests + after git): `pipeline/lib.py` (dedup fnum/num/last_pre_listing_fy), `scrapers/http.py`
-  (shared session/UA/429-backoff), `compute()` split (07), `_p()` → `spine.pct()` across 19 findings,
-  test hermeticity (synthetic fixture) + adversarial trap tests, scraper/pipeline test coverage.
+  (shared session/UA/429-backoff), `compute()` split (07), test hermeticity (synthetic fixture) +
+  adversarial trap tests. (`_p()`→`spine.pct_num` dedup DONE; scraper/pipeline test coverage STARTED — see
+  TEST-1 section above; `pipeline/lib.py` dedup + `scrapers/http.py` are the next safe slices now that the
+  core math/parsers have a regression net.)
 - **`docs/research/` reorg** (structure audit #3): split active vs `archive/`; move staging CSVs out.
 - **DEPS-2:** pin requirements versions. **Doc:** rename `docs/decisions.md` → `discussion.md` (mis-titled).
 - Other NEEDS_YOUR_INPUT items now DONE: survivorship-lens (built), 5% thresholds (set), combined TP+SL (built).

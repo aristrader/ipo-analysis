@@ -21,13 +21,15 @@ incl. delisted)** and turn them into (a) descriptive truths, (b) an analog-based
   CANONICAL RUN ORDER for Layer 2: `07_returns_summary` → `scrapers/screener_prices_merge` → `08_build_universe`
   → `09_assemble` (with `pipeline/listing_remediation.py` used inside 07 + the merge).
 - **Layer 3 — analysis.** ✅ BUILT (2026-05-31), reviewed + remediated. Engine in `layer3/` (UI-agnostic).
-  **Part A** (descriptive report): `layer3/spine.py` (method spine) + findings in `layer3/findings/` → `run_layer3_report.py` → `report/layer3_partA.html` (**29 findings**, **77 tests**).
+  **Part A** (descriptive report): `layer3/spine.py` (method spine) + findings in `layer3/findings/` → `run_layer3_report.py` → `report/layer3_partA.html` (**29 findings**, **108 tests**).
   **Part B** (analog predictor + 5-component scorecard): `layer3/predictor/` → `predict_ipo.py --type MB --sector ...`.
   **Part C** (backtester vs do-nothing): `layer3/backtest/` → `run_backtest.py`. **Cross-regime validation:**
   `layer3/validate.py` → `run_validation.py` (VALIDATED: lasting-wealth, pop-fade; MIXED/not-robust: ofs-skin,
   profitable). **Data-informed scorecard weights:** `layer3/predictor/weights.py` → `run_weights.py` (point-in-time
   rank-IC, cross-regime; return/multibagger/downside carry weight, liquidity/quality→0; `predict_ipo.py --profile
-  data_informed`). Tests: `tests/layer3/` (77, incl. 5-traps). Design: `docs/strategies.md`+`docs/layer3.md`; results:
+  data_informed`). Tests: **108 total** — `tests/layer3/` (77, incl. 5-traps) + `tests/pipeline/` (22) +
+  `tests/scrapers/` (9), the latter two = TEST-1's data-building safety net (returns math / listing remediation /
+  corp-actions parsing). Design: `docs/strategies.md`+`docs/layer3.md`; results:
   `rules/index.md`. KEY: `alpha` is FROM-LISTING (secondary-buyer, vs Nifty); allottee additionally gets the pop.
   **Interactive app:** `app.py` (Streamlit, 5 tabs: report / score-a-new-IPO / explorer / backtester / validation+rules) →
   `PYTHONPATH=. streamlit run app.py`. Remaining (polish): DRHP-PDF financials, live-refresh commit path.
