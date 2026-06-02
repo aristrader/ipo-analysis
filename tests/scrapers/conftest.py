@@ -32,3 +32,27 @@ def _load(relpath, name):
 def corp_actions_mod():
     """scrapers/corp_actions.py — split/bonus text -> ratio_factor parsing."""
     return _load("scrapers/corp_actions.py", "scr_corp_actions")
+
+
+@pytest.fixture(scope="session")
+def screener_mod():
+    """scrapers/screener.py — financials parsing + name matching."""
+    return _load("scrapers/screener.py", "scr_screener")
+
+
+@pytest.fixture(scope="session")
+def ipowatch_mod():
+    """scrapers/ipowatch.py — subscription/GMP/date parsing."""
+    return _load("scrapers/ipowatch.py", "scr_ipowatch")
+
+
+@pytest.fixture(scope="session")
+def sharescart_mod():
+    """scrapers/sharescart.py — list/detail text normalizers."""
+    return _load("scrapers/sharescart.py", "scr_sharescart")
+
+
+@pytest.fixture(scope="session")
+def chittorgarh_mod():
+    """scrapers/chittorgarh.py — the IPO spine source normalizers."""
+    return _load("scrapers/chittorgarh.py", "scr_chittorgarh")

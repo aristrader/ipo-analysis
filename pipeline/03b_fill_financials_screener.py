@@ -16,7 +16,10 @@ value against it; >5% disagreement is logged to screener_financials_review.csv (
 or restatement) — but screener still wins (correctly-dated). Where screener lacks fy3 we KEEP the
 existing pre_ipo_* (don't destroy good data). Financials we write are tagged pat_yr3_src='screener'.
 """
-import csv, os
+import csv, os, sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # pipeline dir, for `lib`
+from lib import fnum, num, last_pre_listing_fy
 
 fin = {}
 path = 'data/raw/screener/financials.csv'
@@ -30,22 +33,7 @@ for r in csv.DictReader(open(path)):
     fin.setdefault(r['isin'], {}).setdefault(fy, {})[r['metric']] = val
 
 
-def last_pre_listing_fy(listing_date):
-    if not listing_date or len(listing_date) < 7:
-        return None
-    y, m = int(listing_date[:4]), int(listing_date[5:7])
-    return y if m >= 4 else y - 1
-
-
-def num(v):
-    return v if isinstance(v, (int, float)) else None
-
-
-def fnum(s):
-    try:
-        return float(str(s).replace(',', ''))
-    except (ValueError, TypeError):
-        return None
+# fnum / num / last_pre_listing_fy moved to pipeline/lib.py (imported above)
 
 
 YR_METRICS = {'net_sales': 'sales', 'operating_profit': 'operating_profit', 'pat': 'net_profit',

@@ -21,15 +21,15 @@ incl. delisted)** and turn them into (a) descriptive truths, (b) an analog-based
   CANONICAL RUN ORDER for Layer 2: `07_returns_summary` → `scrapers/screener_prices_merge` → `08_build_universe`
   → `09_assemble` (with `pipeline/listing_remediation.py` used inside 07 + the merge).
 - **Layer 3 — analysis.** ✅ BUILT (2026-05-31), reviewed + remediated. Engine in `layer3/` (UI-agnostic).
-  **Part A** (descriptive report): `layer3/spine.py` (method spine) + findings in `layer3/findings/` → `run_layer3_report.py` → `report/layer3_partA.html` (**29 findings**, **108 tests**).
+  **Part A** (descriptive report): `layer3/spine.py` (method spine) + findings in `layer3/findings/` → `run_layer3_report.py` → `report/layer3_partA.html` (**29 findings**, **123 tests**).
   **Part B** (analog predictor + 5-component scorecard): `layer3/predictor/` → `predict_ipo.py --type MB --sector ...`.
   **Part C** (backtester vs do-nothing): `layer3/backtest/` → `run_backtest.py`. **Cross-regime validation:**
   `layer3/validate.py` → `run_validation.py` (VALIDATED: lasting-wealth, pop-fade; MIXED/not-robust: ofs-skin,
   profitable). **Data-informed scorecard weights:** `layer3/predictor/weights.py` → `run_weights.py` (point-in-time
   rank-IC, cross-regime; return/multibagger/downside carry weight, liquidity/quality→0; `predict_ipo.py --profile
-  data_informed`). Tests: **108 total** — `tests/layer3/` (77, incl. 5-traps) + `tests/pipeline/` (22) +
-  `tests/scrapers/` (9), the latter two = TEST-1's data-building safety net (returns math / listing remediation /
-  corp-actions parsing). Design: `docs/strategies.md`+`docs/layer3.md`; results:
+  data_informed`). Tests: **123 total** — `tests/layer3/` (77, incl. 5-traps) + `tests/pipeline/` (25) +
+  `tests/scrapers/` (21) = TEST-1's data-building safety net (returns math / listing remediation /
+  corp-actions + scraper normalizers / `pipeline/lib.py`). Design: `docs/strategies.md`+`docs/layer3.md`; results:
   `rules/index.md`. KEY: `alpha` is FROM-LISTING (secondary-buyer, vs Nifty); allottee additionally gets the pop.
   **Interactive app:** `app.py` (Streamlit, 5 tabs: report / score-a-new-IPO / explorer / backtester / validation+rules) →
   `PYTHONPATH=. streamlit run app.py`. Remaining (polish): DRHP-PDF financials, live-refresh commit path.
@@ -64,6 +64,8 @@ backtests + the method spine). 5. `docs/layer2.md` / `docs/layer3.md` — design
   `03f` sector/market-cap · `04` verify tickers · `05` reconcile · `06` validate tickers · `07` returns_summary ·
   `08` build universe · `09` assemble.
   `pipeline/checks/` validates each. `pipeline/longterm/` enriches the 2006–19 cohort.
+  `pipeline/lib.py` = shared pure helpers (`fnum`/`num`/`last_pre_listing_fy`); numbered siblings import it via
+  `sys.path.insert(0, dirname(__file__)); from lib import ...` (same convention 07 uses for `listing_remediation`).
 - `data/raw/<source>/` raw scraped · `data/reference/` exchange lists, bhavcopy cache, corp_actions, indices ·
   `data/prices/<isin>.csv` daily OHLCV · `data/master/` THE outputs (see below) · `archive/` superseded.
 - `docs/` — sources, schema, pipeline, strategies, layer2, layer3, patterns, data_review, discussion, changelog.

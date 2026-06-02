@@ -11,8 +11,11 @@ earlier IPO's ISIN). We keep ONE row per ISIN; the boom row wins (richer schema,
 """
 import csv
 import os
+import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # pipeline dir, for `lib`
+from lib import fnum, num, last_pre_listing_fy
 
 
 def p(*a):
@@ -77,22 +80,7 @@ for r in csv.DictReader(open(fpath)):
     fin.setdefault(r['isin'], {}).setdefault(fy, {})[r['metric']] = val
 
 
-def last_pre_listing_fy(listing_date):
-    if not listing_date or len(listing_date) < 7:
-        return None
-    y, m = int(listing_date[:4]), int(listing_date[5:7])
-    return y if m >= 4 else y - 1
-
-
-def num(v):
-    return v if isinstance(v, (int, float)) else None
-
-
-def fnum(s):
-    try:
-        return float(str(s).replace(',', ''))
-    except (ValueError, TypeError):
-        return None
+# fnum / num / last_pre_listing_fy moved to pipeline/lib.py (imported above)
 
 
 YR_METRICS = {'net_sales': 'sales', 'operating_profit': 'operating_profit', 'pat': 'net_profit',

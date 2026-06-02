@@ -5,7 +5,10 @@ CONCRETE match: our row matches an investorgain row only when our nse_symbol OR 
 theirs AND the listing_date is identical. gmp_pct = gmp_rs / issue_price * 100 (our issue_price; falls
 back to their ipo_price). Only fills rows lacking gmp_pct; tags gmp_pct_src='investorgain'. No guessing.
 """
-import csv, os
+import csv, os, sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # pipeline dir, for `lib`
+from lib import fnum
 
 src = 'data/raw/investorgain/gmp.csv'
 if not os.path.exists(src):
@@ -19,11 +22,7 @@ for r in csv.DictReader(open(src)):
         by_bse.setdefault(r['bse'], []).append(r)
 
 
-def fnum(s):
-    try:
-        return float(str(s).replace(',', ''))
-    except (ValueError, TypeError):
-        return None
+# fnum moved to pipeline/lib.py (imported above)
 
 
 def find_match(nse_symbol, bse_code, listing_date):

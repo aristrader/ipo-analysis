@@ -7,7 +7,10 @@ name + exact-IPO-date corroboration at fetch time (scrapers/ipowatch.py). Every 
 - GMP: gmp_pct = gmp_rs / issue_price * 100 for any row lacking gmp_pct (needs issue_price) → src='ipowatch'.
 Never overwrites existing values.
 """
-import csv, os
+import csv, os, sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # pipeline dir, for `lib`
+from lib import fnum
 
 path = 'data/raw/ipowatch/matches.csv'
 if not os.path.exists(path):
@@ -18,12 +21,7 @@ for r in csv.DictReader(open(path)):
         match[r['isin']] = r
 
 
-def fnum(s):
-    try:
-        return float(str(s).replace(',', ''))
-    except (ValueError, TypeError):
-        return None
-
+# fnum moved to pipeline/lib.py (imported above)
 
 SUBCOLS = ['sub_qib_x', 'sub_nii_x', 'sub_retail_x', 'sub_total_x']
 sub_filled = gmp_filled = 0

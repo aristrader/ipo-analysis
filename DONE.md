@@ -4,7 +4,25 @@ Completed items moved here to keep TODO.md lean. Most-recent first.
 
 ---
 
+## pipeline/lib.py dedup — copy-pasted helpers consolidated  (2026-06-02)
+- Consolidated three helpers that were copy-pasted across numbered pipeline files into **`pipeline/lib.py`**
+  (+3 unit tests, `tests/pipeline/test_lib.py`): `fnum` (was in 08/03b/03d/03e), `num` type-guard (08/03b),
+  `last_pre_listing_fy` (08/03b). Each numbered sibling now does
+  `sys.path.insert(0, dirname(__file__)); from lib import ...` (the convention step 07 already uses for
+  `listing_remediation`). Full suite 120→**123**.
+- **Verified safe:** AST-compared every copy's body before moving (all byte-identical); py_compile on all touched
+  files; an import-convention probe that replicates run_all's subprocess sys.path. data/master byte-identical.
+- **Trap avoided (the kind the user warned about):** `05_reconcile.py` defines a function ALSO named `num`, but it's
+  a *different* function — `float(x)` coercion, not the `isinstance` type-guard. The CLEANUP_FINDINGS "dedup num"
+  wording would have merged them and silently changed 05's behavior. Left 05 untouched.
+- Did NOT re-run the full pipeline: the substrate is frozen/post-remediation, so a full-chain diff is noisy;
+  behavior is preserved by construction and the only real risk (import resolution) was proven directly.
+
 ## TEST-1 — data-building safety net (scraper/pipeline test coverage)  (2026-06-02)
+- **Round 2 (scraper normalizers, +12):** `tests/scrapers/test_scraper_normalizers.py` pins the scalar
+  text→value helpers that silently corrupt data if wrong: `screener._num`/`_norm_tokens`/`name_match`/
+  `page_marketcap`, `ipowatch._num` (strips the `2.5x` suffix)/`_to_iso`, `sharescart.parse_num`/`clean`/
+  `_parse_year`, `chittorgarh._iso_to_date`/`_num`/`_cr_from_text`. Behaviors captured against live output first.
 - The 77 existing tests covered only the analysis layer (`tests/layer3/`); the entire data-building half
   (`scrapers/`, `pipeline/`) had **zero** tests. Added **31 unit tests** → full suite **108 passing**, with
   `data/master` byte-identical to backup (test-only change, no production code touched).

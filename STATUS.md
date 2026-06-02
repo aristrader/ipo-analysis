@@ -10,7 +10,7 @@
 > `PYTHONPATH=. pytest tests/layer3 -q` · report `ls report/layer3_partA.html` · app
 > `curl -s localhost:8501/_stcore/health` · data-untouched `diff data/master/ipo_analysis.csv archive/pre_drhp_20260601/ipo_analysis.csv`.
 
-_Canonical facts (verify before quoting): **29 findings, 108 tests** (77 layer3 + 31 pipeline/scrapers). Substrate as-of date = `config.AS_OF_DATE` (2026-05-31)._
+_Canonical facts (verify before quoting): **29 findings, 123 tests** (77 layer3 + 25 pipeline + 21 scrapers). Substrate as-of date = `config.AS_OF_DATE` (2026-05-31)._
 
 ---
 
@@ -24,8 +24,17 @@ data/master byte-identical to backup.**
 ## 🏃 IN PROGRESS
 - Nothing running. The E→git→C→D queue is complete (all committed).
 
-## ✅ TEST-1 (scraper/pipeline coverage) — STARTED (data-building safety net)
-- **31 new tests** added, full suite now **108 passing** (was 77, all layer3). data/master untouched.
+## ✅ TEST-1 (scraper/pipeline coverage) — DONE (data-building safety net) + pipeline/lib.py dedup
+- **46 new tests** added, full suite now **123 passing** (was 77, all layer3). data/master untouched.
+- **`pipeline/lib.py` dedup DONE (2026-06-02):** consolidated the copy-pasted `fnum` (×4: 08/03b/03d/03e),
+  `num` type-guard (×2: 08/03b), and `last_pre_listing_fy` (×2: 08/03b) into `pipeline/lib.py` (+3 unit tests).
+  AST-verified the bodies were byte-identical before moving. **Trap avoided:** `05_reconcile.py` also has a
+  `num()` but it's a DIFFERENT function (`float()` coercion, not a type-guard) — left untouched (the cleanup
+  note's "dedup num" wording would have silently broken it). Verified: py_compile + import-convention probe
+  (matches step-07's proven `sys.path.insert`+sibling-import pattern) + data/master byte-identical. NOT re-run
+  through the full pipeline on purpose — the substrate is frozen/post-remediation so a full-chain diff is noisy;
+  behavior is preserved by construction (identical bodies) and the only risk (import resolution) is proven directly.
+- Earlier slices (still true):
   - `tests/pipeline/test_returns_math.py` (11) — pure math in step 07: `pdate`/`pfloat`,
     `adj_factor_after` (split adjustment), `nearest_on_or_before` (benchmark lookup), `actions_for` (union/dedup).
   - `tests/pipeline/test_listing_remediation.py` (11) — every branch of `remediate_listing`
@@ -65,11 +74,10 @@ data/master byte-identical to backup.**
   locator, then a semi-automated human-in-loop pass on the ~384 remaining. Tooling cached in `/tmp/`.
 - **Microcap extension** — risk/movement screener MVP scoped (`docs/research/microcap_extension_thinking.md`).
 - **Code refactors** (from `docs/research/CLEANUP_FINDINGS.md`, real maintainability debt, deferred — do
-  with tests + after git): `pipeline/lib.py` (dedup fnum/num/last_pre_listing_fy), `scrapers/http.py`
-  (shared session/UA/429-backoff), `compute()` split (07), test hermeticity (synthetic fixture) +
-  adversarial trap tests. (`_p()`→`spine.pct_num` dedup DONE; scraper/pipeline test coverage STARTED — see
-  TEST-1 section above; `pipeline/lib.py` dedup + `scrapers/http.py` are the next safe slices now that the
-  core math/parsers have a regression net.)
+  with tests + after git): `scrapers/http.py` (shared session/UA/429-backoff), `compute()` split (07),
+  test hermeticity (synthetic fixture) + adversarial trap tests. (DONE already: `_p()`→`spine.pct_num` dedup;
+  scraper/pipeline test coverage [TEST-1]; **`pipeline/lib.py` dedup** of fnum/num/last_pre_listing_fy — see
+  TEST-1 section. `scrapers/http.py` is the next safe slice.)
 - **`docs/research/` reorg** (structure audit #3): split active vs `archive/`; move staging CSVs out.
 - **DEPS-2:** pin requirements versions. **Doc:** rename `docs/decisions.md` → `discussion.md` (mis-titled).
 - Other NEEDS_YOUR_INPUT items now DONE: survivorship-lens (built), 5% thresholds (set), combined TP+SL (built).

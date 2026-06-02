@@ -45,3 +45,9 @@ def returns_mod():
 def remediation_mod():
     """pipeline/listing_remediation.py — listing-coverage remediation branches."""
     return _load("pipeline/listing_remediation.py", "p_listing_remediation")
+
+
+@pytest.fixture(scope="session")
+def lib_mod():
+    """pipeline/lib.py — shared pure helpers (fnum/num/last_pre_listing_fy)."""
+    return _load("pipeline/lib.py", "p_lib")
