@@ -2,6 +2,12 @@
 
 Indian IPO dataset (Mainboard + SME, 2006–2025, incl. delisted) for repeatable-pattern research. Not financial advice.
 
+> **Resume the main Claude Code session** (run from this directory):
+> ```
+> claude --resume 01820f2d-c29a-4f29-84ad-349ce26b70fa
+> ```
+> (or `claude --resume` and pick the top one; `claude -c` continues the most recent.)
+
 ## Start here (read in order)
 1. `CLAUDE.md` — the project brain (3-layer status, conventions, run order) — read first
 2. `docs/sources.md` — what each data site provides (free/premium/coverage)

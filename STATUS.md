@@ -1,5 +1,8 @@
 # STATUS — single live source of "where are we / what's next"
 
+> **Resume the main Claude Code session:** `claude --resume 01820f2d-c29a-4f29-84ad-349ce26b70fa`
+> (run from this directory; or `claude --resume` → pick top; `claude -c` = most recent)
+
 > **Rule:** this is the ONE status file. Update it as work happens; **verify state from GROUND TRUTH
 > (files / command output), never from memory.** "What happened" (history) → `DONE.md`. "What is this /
 > conventions" → `CLAUDE.md`. "Findings + tested-signal registry" → `rules/index.md`. Raw analyses →
