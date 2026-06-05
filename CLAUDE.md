@@ -21,13 +21,13 @@ incl. delisted)** and turn them into (a) descriptive truths, (b) an analog-based
   CANONICAL RUN ORDER for Layer 2: `07_returns_summary` → `scrapers/screener_prices_merge` → `08_build_universe`
   → `09_assemble` (with `pipeline/listing_remediation.py` used inside 07 + the merge).
 - **Layer 3 — analysis.** ✅ BUILT (2026-05-31), reviewed + remediated. Engine in `layer3/` (UI-agnostic).
-  **Part A** (descriptive report): `layer3/spine.py` (method spine) + findings in `layer3/findings/` → `run_layer3_report.py` → `report/layer3_partA.html` (**29 findings**, **132 tests**).
+  **Part A** (descriptive report): `layer3/spine.py` (method spine) + findings in `layer3/findings/` → `run_layer3_report.py` → `report/layer3_partA.html` (**29 findings**, **139 tests**).
   **Part B** (analog predictor + 5-component scorecard): `layer3/predictor/` → `predict_ipo.py --type MB --sector ...`.
   **Part C** (backtester vs do-nothing): `layer3/backtest/` → `run_backtest.py`. **Cross-regime validation:**
   `layer3/validate.py` → `run_validation.py` (VALIDATED: lasting-wealth, pop-fade; MIXED/not-robust: ofs-skin,
   profitable). **Data-informed scorecard weights:** `layer3/predictor/weights.py` → `run_weights.py` (point-in-time
   rank-IC, cross-regime; return/multibagger/downside carry weight, liquidity/quality→0; `predict_ipo.py --profile
-  data_informed`). Tests: **132 total** — `tests/layer3/` (77, incl. 5-traps) + `tests/pipeline/` (25) +
+  data_informed`). Tests: **139 total** — `tests/layer3/` (77, incl. 5-traps) + `tests/pipeline/` (32) +
   `tests/scrapers/` (24) = TEST-1's data-building safety net + `tests/test_project_map.py` (6, the nav/anti-drift
   machinery). Design: `docs/strategies.md`+`docs/layer3.md`; results:
   `rules/index.md`. KEY: `alpha` is FROM-LISTING (secondary-buyer, vs Nifty); allottee additionally gets the pop.
@@ -56,7 +56,7 @@ incl. delisted)** and turn them into (a) descriptive truths, (b) an analog-based
   these files"). Edit it whenever you add/move/retire a file, step, or signal.
 - **`MAP.md`** = human-readable navigation/tree/flow/context, **generated** from project_map.py (never hand-edit).
 - **`verify.py`** = the checkpoint: asserts every mapped path exists, the DAG is consistent, and invariants
-  (29 findings / 132 tests / 2296 rows / AS_OF_DATE / data-vs-backup) hold; regenerates MAP.md. It runs
+  (29 findings / 139 tests / 2296 rows / AS_OF_DATE / data-vs-backup) hold; regenerates MAP.md. It runs
   **automatically each turn** via a `UserPromptSubmit` hook in `.claude/settings.local.json` (project-local,
   ~0.1s, silent unless drift → injects drift into context so I don't act on stale state).
 - **`docs/WORKFLOWS.md`** = "what to do when" rules. THREE STANDING PRINCIPLES: (1) verify before relying

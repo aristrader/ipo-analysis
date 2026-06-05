@@ -8,7 +8,7 @@
 > "What is this / conventions" → `CLAUDE.md`. "Findings + tested-signal registry" → `rules/index.md`.
 > Quick check: `python verify.py` (counts, drift, data-vs-backup; regenerates MAP.md).
 
-_Canonical facts (re-derived by `verify.py` each turn): **29 findings, 132 tests** (77 layer3 + 25
+_Canonical facts (re-derived by `verify.py` each turn): **29 findings, 139 tests** (77 layer3 + 32
 pipeline + 24 scrapers + 6 map). Substrate = `data/master/ipo_analysis.csv`, **2296 rows**, frozen,
 as-of `config.AS_OF_DATE` (2026-05-31), byte-identical to `archive/pre_drhp_20260601/`. Git LOCAL-ONLY._
 
@@ -23,10 +23,8 @@ as-of `config.AS_OF_DATE` (2026-05-31), byte-identical to `archive/pre_drhp_2026
 ## 📋 OPEN BACKLOG (all optional — pick when wanted)
 - **Microcap extension** — the one major optional item: apply the risk/movement analysis beyond IPOs
   (microcaps first). Scoped in `docs/research/microcap_extension_thinking.md`. A new sub-project.
-- **Small polish** (cosmetic, no effect on results):
-  - `compute()` split in `pipeline/07_returns_summary.py` (readability of one long function)
-  - test hermeticity: synthetic fixture + a few adversarial trap tests
-  - DEPS-2: pin versions in `requirements.txt`
+- (Small-polish items — compute() split, synthetic-fixture tests, DEPS-2 pinning — all DONE 2026-06-04,
+  see DONE.md.)
 
 ## 🅿 PARKED / REJECTED (decided — don't re-litigate; full evidence in DONE.md)
 - **DRHP bulk recovery (~409 old IPOs) — PARKED.** Can't reliably get the useful columns (tool reads

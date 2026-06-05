@@ -4,6 +4,24 @@ Completed items moved here to keep TODO.md lean. Most-recent first.
 
 ---
 
+## Small-polish trio: compute() split + synthetic fixtures + pinned deps  (2026-06-04)
+- **DEPS-2:** `requirements.txt` pinned to the working venv's exact versions. Also caught **matplotlib
+  missing entirely** (layer3/charts.py imports it) — added; yfinance uncommented (installed + used).
+- **Test hermeticity:** `tests/pipeline/test_compute_synthetic.py` (7 tests) — a hand-built 4-row IPO with
+  hand-computed expectations for step 07's `compute()` (listing gains, horizon returns + alpha, MFE/MAE +
+  timing, drawdown, outcome) PLUS adversarial traps: compulsory-delist → exactly −100% + MAE clamp;
+  maturity gating (future horizons stay NULL, never guessed); post-listing 2:1 split re-anchoring
+  (issue_price_adj=50, recorded action suppresses inferred_split). All passed against the PRE-split code
+  first — they pinned behavior before the refactor.
+- **compute() split (07):** 260-line `compute()` → 103-line orchestrator + 5 verbatim-extracted helpers
+  (`_terminal_state`, `_horizon_returns`, `_mfe_mae_block`, `_lifetime_block`, `_risk_liquidity_block`);
+  the inline outcome-class block replaced by `listing_remediation._outcome_class` (was an identical copy —
+  deduped to one source).
+- **PROOF the split changed nothing:** ran `compute()` on **all 2,296 real IPOs in memory before and after**
+  (read-only harness replicating main()'s exact setup incl. LISTING_OVERRIDE/smallcap globals) —
+  **0 of 2,296 output dicts differ**. Plus the 7 pinned synthetic tests + full suite **139 passing**
+  (was 132). data/master untouched.
+
 ## DRHP fold-in decision — DO NOT FOLD (evidence-based)  (2026-06-02)
 - Resolved the open "fold the 16 staged DRHP net_sales?" question via impact analysis on ground truth.
 - **Finding:** all 16 staged net_sales fill NULL cells, but every value is **≥61.5cr** — and the ONLY downstream

@@ -22,7 +22,7 @@ from bisect import bisect_right
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # so listing_remediation imports
 sys.path.insert(0, ROOT)                                        # so layer3.config imports
-from listing_remediation import remediate_listing
+from listing_remediation import remediate_listing, _outcome_class
 from layer3 import config as _l3cfg
 PRICES_DIR = os.path.join(ROOT, 'data/prices')
 TODAY = _l3cfg.AS_OF_DATE     # canonical as-of/build date (single source; was date(2026,5,31))
@@ -246,31 +246,9 @@ def adj_factor_after(actions, dt):
     return factor
 
 
-def compute(isin, mrow, prices, actions, deli, nifty_dates, nifty_closes):
-    # price_source default = 'bhavcopy_daily' so the schema is consistent for every row;
-    # scrapers/screener_prices_merge.py later overwrites the fix-set rows to
-    # 'screener_weekly' / 'none_listing_era'. Canonical run order:
-    #   07_returns_summary.py -> screener_prices_merge.py -> 08_build_universe.py -> 09_assemble.py
-    out = {'isin': isin, 'type': mrow['type'], 'price_source': 'bhavcopy_daily'}
-    issue_price = mrow['issue_price']
-    listing_date = mrow['listing_date']
-
-    # issue_price is on the RAW (at-IPO) scale. The price series is adjusted to
-    # the CURRENT scale, so a split AFTER listing means the raw issue_price must
-    # be divided by the post-listing adjustment factor to compare on one scale.
-    adj_issue = issue_price
-    if issue_price is not None and listing_date is not None:
-        adj_issue = issue_price / adj_factor_after(actions, listing_date)
-
-    n = len(prices)
-    out['n_days_history'] = n
-    if n == 0 or listing_date is None:
-        return None  # nothing to compute
-
-    pdates = [p['date'] for p in prices]
-    pclose = [p['c'] for p in prices]
-
-    # ---- delisting / terminal handling
+def _terminal_state(isin, deli, actions, pdates, pclose):
+    """Delisting status + the (adjusted) terminal value used for horizons AFTER delisting.
+    Returns (is_delisted, reason, terminal, eff_delist). Extracted verbatim from compute()."""
     status = deli.get(isin, {}).get('status', '') if deli.get(isin) else ''
     delist_date = deli.get(isin, {}).get('delist_date') if deli.get(isin) else None
     reason = deli.get(isin, {}).get('reason', '') if deli.get(isin) else ''
@@ -290,50 +268,16 @@ def compute(isin, mrow, prices, actions, deli, nifty_dates, nifty_closes):
             if terminal is None and deli_last is not None:
                 ref_dt = delist_date or pdates[-1]
                 terminal = deli_last / adj_factor_after(actions, ref_dt)
-    out['delisted'] = is_delisted
-    out['delist_reason'] = reason
 
     # effective delist date for horizon logic: explicit date else last price day
     eff_delist = delist_date if (is_delisted and delist_date) else (pdates[-1] if is_delisted else None)
+    return is_delisted, reason, terminal, eff_delist
 
-    # ---- entry refs
-    out['issue_price'] = issue_price           # RAW (for display)
-    out['issue_price_adj'] = adj_issue         # split-adjusted to current scale
-    # first trading day on/after listing_date
-    li = bisect_right(pdates, listing_date - timedelta(days=1))  # first idx with date >= listing_date
-    listing_close = listing_open = None
-    if li < n:
-        listing_close = prices[li]['c']
-        listing_open = prices[li]['o']
-    out['listing_close'] = listing_close
-    out['listing_open'] = listing_open
 
-    data_first = pdates[0]
-    data_last = pdates[-1]
-
-    # ---- horizon returns
-    def price_at_horizon(target):
-        """adjusted close used for a horizon ending at `target`. Returns
-        (value, mature_bool). mature False => leave NULL (not mature)."""
-        # delisting takes precedence: if delisted strictly before target, terminal
-        if is_delisted and eff_delist is not None and eff_delist < target:
-            return terminal, True
-        # maturity: horizon end in the future and not delisted-before -> NULL
-        if target > TODAY:
-            return None, False
-        # need price within data coverage
-        if target < data_first:
-            return None, True  # mature in time but no early data -> unavailable NULL
-        val = nearest_on_or_before(pdates, pclose, target)
-        if target > data_last:
-            # horizon end past our last price day but in the past relative to TODAY:
-            # use last available close (data gap) — treat as unavailable -> NULL
-            return None, True
-        return val, True
-
-    nifty_base = nearest_on_or_before(nifty_dates, nifty_closes, listing_date)
-    sc_base = nearest_on_or_before(SC_DATES, SC_CLOSES, listing_date) if SC_DATES else None
-
+def _horizon_returns(out, price_at_horizon, listing_date, adj_issue, listing_close,
+                     nifty_dates, nifty_closes, nifty_base, sc_base):
+    """Endpoint return + alpha at every HORIZON -> return_from_issue_* / return_from_listing_* /
+    alpha_* / alpha_sc_*. Extracted verbatim from compute()."""
     for label, days in HORIZONS:
         target = listing_date + timedelta(days=days)
         val, _mature = price_at_horizon(target)
@@ -358,8 +302,11 @@ def compute(isin, mrow, prices, actions, deli, nifty_dates, nifty_closes):
         out['alpha_%s' % label] = alpha
         out['alpha_sc_%s' % label] = alpha_sc
 
-    # ---- within-horizon peak/trough (MFE/MAE from issue): "did it REACH +X% within h?"
-    # captures the MOVEMENT inside the window, not just the day-h endpoint. Adjusted scale.
+
+def _mfe_mae_block(out, prices, listing_date, adj_issue, listing_close, is_delisted, data_last):
+    """Within-horizon peak/trough (MFE/MAE) from BOTH entries + move timing, for 1y/3y/5y.
+    Reads the endpoint returns already in `out` (clamp invariant) — call AFTER _horizon_returns.
+    Extracted verbatim from compute()."""
     for label, days in HORIZONS:
         if label not in ('1y', '3y', '5y'):
             continue
@@ -416,7 +363,10 @@ def compute(isin, mrow, prices, actions, deli, nifty_dates, nifty_closes):
         out['days_to_mae_%s' % label] = days_to_mae
         out['days_to_breakeven_%s' % label] = days_to_be
 
-    # ---- lifetime
+
+def _lifetime_block(out, prices, adj_issue, listing_open, listing_close):
+    """Listing gains, all-time high/low, max gain, max drawdown (+duration).
+    Extracted verbatim from compute()."""
     lg_open = (listing_open / adj_issue - 1) if (listing_open and adj_issue) else None
     lg_close = (listing_close / adj_issue - 1) if (listing_close and adj_issue) else None
     out['listing_gain_open'] = lg_open
@@ -446,12 +396,10 @@ def compute(isin, mrow, prices, actions, deli, nifty_dates, nifty_closes):
     out['max_drawdown_pct'] = mdd if prices else None
     out['max_drawdown_duration_days'] = mdd_dur if prices else None
 
-    # current price: last adj close, or terminal if delisted
-    current_price = terminal if (is_delisted and terminal is not None) else pclose[-1]
-    out['current_price'] = current_price
-    out['current_return_from_issue'] = (current_price / adj_issue - 1) if (current_price is not None and adj_issue) else None
 
-    # ---- risk / liquidity
+def _risk_liquidity_block(out, prices, n):
+    """Annualised volatility, median turnover (RAW close*volume), circuit-lock share,
+    liquidity flag. Extracted verbatim from compute()."""
     rets = []
     prev = None
     for p in prices:
@@ -476,21 +424,94 @@ def compute(isin, mrow, prices, actions, deli, nifty_dates, nifty_closes):
     med_turn = out['median_daily_turnover_inr']
     out['liquidity_flag'] = 'low' if (med_turn is not None and med_turn < 1e6) else 'ok'
 
-    # ---- outcome_class on current_return_from_issue
-    cr = out['current_return_from_issue']
-    if cr is None:
-        oc = None
-    elif cr <= -0.90:
-        oc = 'wipeout'
-    elif cr < -0.20:
-        oc = 'loser'
-    elif cr < 0.20:
-        oc = 'flat'
-    elif cr < 1.00:
-        oc = 'winner'
-    else:
-        oc = 'multibagger'
-    out['outcome_class'] = oc
+
+def compute(isin, mrow, prices, actions, deli, nifty_dates, nifty_closes):
+    # price_source default = 'bhavcopy_daily' so the schema is consistent for every row;
+    # scrapers/screener_prices_merge.py later overwrites the fix-set rows to
+    # 'screener_weekly' / 'none_listing_era'. Canonical run order:
+    #   07_returns_summary.py -> screener_prices_merge.py -> 08_build_universe.py -> 09_assemble.py
+    out = {'isin': isin, 'type': mrow['type'], 'price_source': 'bhavcopy_daily'}
+    issue_price = mrow['issue_price']
+    listing_date = mrow['listing_date']
+
+    # issue_price is on the RAW (at-IPO) scale. The price series is adjusted to
+    # the CURRENT scale, so a split AFTER listing means the raw issue_price must
+    # be divided by the post-listing adjustment factor to compare on one scale.
+    adj_issue = issue_price
+    if issue_price is not None and listing_date is not None:
+        adj_issue = issue_price / adj_factor_after(actions, listing_date)
+
+    n = len(prices)
+    out['n_days_history'] = n
+    if n == 0 or listing_date is None:
+        return None  # nothing to compute
+
+    pdates = [p['date'] for p in prices]
+    pclose = [p['c'] for p in prices]
+
+    # ---- delisting / terminal handling (see _terminal_state)
+    is_delisted, reason, terminal, eff_delist = _terminal_state(isin, deli, actions, pdates, pclose)
+    out['delisted'] = is_delisted
+    out['delist_reason'] = reason
+
+    # ---- entry refs
+    out['issue_price'] = issue_price           # RAW (for display)
+    out['issue_price_adj'] = adj_issue         # split-adjusted to current scale
+    # first trading day on/after listing_date
+    li = bisect_right(pdates, listing_date - timedelta(days=1))  # first idx with date >= listing_date
+    listing_close = listing_open = None
+    if li < n:
+        listing_close = prices[li]['c']
+        listing_open = prices[li]['o']
+    out['listing_close'] = listing_close
+    out['listing_open'] = listing_open
+
+    data_first = pdates[0]
+    data_last = pdates[-1]
+
+    # ---- horizon returns
+    def price_at_horizon(target):
+        """adjusted close used for a horizon ending at `target`. Returns
+        (value, mature_bool). mature False => leave NULL (not mature)."""
+        # delisting takes precedence: if delisted strictly before target, terminal
+        if is_delisted and eff_delist is not None and eff_delist < target:
+            return terminal, True
+        # maturity: horizon end in the future and not delisted-before -> NULL
+        if target > TODAY:
+            return None, False
+        # need price within data coverage
+        if target < data_first:
+            return None, True  # mature in time but no early data -> unavailable NULL
+        val = nearest_on_or_before(pdates, pclose, target)
+        if target > data_last:
+            # horizon end past our last price day but in the past relative to TODAY:
+            # use last available close (data gap) — treat as unavailable -> NULL
+            return None, True
+        return val, True
+
+    nifty_base = nearest_on_or_before(nifty_dates, nifty_closes, listing_date)
+    sc_base = nearest_on_or_before(SC_DATES, SC_CLOSES, listing_date) if SC_DATES else None
+
+    _horizon_returns(out, price_at_horizon, listing_date, adj_issue, listing_close,
+                     nifty_dates, nifty_closes, nifty_base, sc_base)
+
+    # within-horizon peak/trough (MFE/MAE) + timing — must follow _horizon_returns (clamp)
+    _mfe_mae_block(out, prices, listing_date, adj_issue, listing_close, is_delisted, data_last)
+
+    # listing gains, ATH/ATL, max gain, max drawdown
+    _lifetime_block(out, prices, adj_issue, listing_open, listing_close)
+
+    # current price: last adj close, or terminal if delisted
+    current_price = terminal if (is_delisted and terminal is not None) else pclose[-1]
+    out['current_price'] = current_price
+    out['current_return_from_issue'] = (current_price / adj_issue - 1) if (current_price is not None and adj_issue) else None
+
+    # ---- risk / liquidity
+    _risk_liquidity_block(out, prices, n)
+
+    # ---- outcome_class on current_return_from_issue (same thresholds as the
+    # remediation module; the inline copy was identical -> deduped to one source)
+    out['outcome_class'] = _outcome_class(out['current_return_from_issue'])
 
     # ---- FIX 2: listing-coverage remediation (unrecorded split / bad coverage)
     has_action = bool(actions)
