@@ -16,19 +16,15 @@ byte-identical to `archive/pre_drhp_20260601/`. Git LOCAL-ONLY._
 ---
 
 ## 🏃 NOW
-- **Nothing in progress. The project is complete, verified, and SHOWDOWN-CERTIFIED (2026-06-04)** —
-  dataset, 29 findings, predictor, backtester, validation, app, anti-drift checkpoint. The final-showdown
-  program (DONE.md) proved: substrate invariants hold (16 data tests), the offline pipeline REPRODUCES the
-  frozen substrate (sandbox re-run; returns_summary byte-identical; 34 substrate cells differ, all
-  explained), every entry point runs green & read-only, the app renders clean, and the suite kills 28/28
-  deliberate code breaks. Pre-release gate: `SHOWDOWN=1 PYTHONPATH=. pytest tests/showdown -q`.
-  Change→tests routing is injected automatically each turn (`verify.py` + `project_map.TEST_ROUTING`).
+- **Nothing in progress. Complete, verified, SHOWDOWN-CERTIFIED (2026-06-04** — full evidence in DONE.md
+  + `docs/research/showdown_{audit,pipeline_diff,mutation}.md`).
+- The two commands that matter: fast suite `PYTHONPATH=. pytest tests -q` (~80s) ·
+  pre-release gate `SHOWDOWN=1 PYTHONPATH=. pytest tests/showdown -q` (~3 min).
+- Change→tests routing is automatic each turn (`verify.py` hook + `project_map.TEST_ROUTING`).
 
 ## 📋 OPEN BACKLOG (all optional — pick when wanted)
 - **Microcap extension** — the one major optional item: apply the risk/movement analysis beyond IPOs
   (microcaps first). Scoped in `docs/research/microcap_extension_thinking.md`. A new sub-project.
-- (Small-polish items — compute() split, synthetic-fixture tests, DEPS-2 pinning — all DONE 2026-06-04,
-  see DONE.md.)
 
 ## 🅿 PARKED / REJECTED (decided — don't re-litigate; full evidence in DONE.md)
 - **DRHP bulk recovery (~409 old IPOs) — PARKED.** Can't reliably get the useful columns (tool reads
