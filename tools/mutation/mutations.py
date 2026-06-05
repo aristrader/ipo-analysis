@@ -57,7 +57,7 @@ MUTATIONS = [
     dict(file="layer3/predictor/scorecard.py",
          old='        return _comp(None, n=0, n_flags=0, reason="no risk inputs")',
          new='        return _comp(0.0, n=0, n_flags=0, reason="no risk inputs")',
-         tests="tests/layer3/test_predictor.py", label="scorecard.wipeout_safety unknown!=unsafe"),
+         tests="tests/layer3/test_gap_math.py", label="scorecard.wipeout_safety unknown!=unsafe"),
     # ---------------- pipeline/07 helpers ----------------
     dict(file="pipeline/07_returns_summary.py",
          old="            terminal = 0.0",
