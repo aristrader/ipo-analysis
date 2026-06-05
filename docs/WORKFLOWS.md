@@ -42,7 +42,9 @@ catches most drift — these rules tell you what to update so it stays green.
 
 - **Finish a chunk of work**
   → `python verify.py` (PASS + MAP.md fresh) → `pytest tests -q` (all green) →
-  update `STATUS.md` (live state) and `DONE.md` (history) → commit (LOCAL-ONLY, no remote).
+  write what happened in `DONE.md`, then **REMOVE the item from `STATUS.md`** (STATUS holds ONLY
+  live state + what's next — completed work must MOVE to DONE.md, never accumulate in STATUS) →
+  commit (LOCAL-ONLY, no remote).
 
 ## The checkpoint contract
 - `python verify.py` — full report (counts, exact pytest-collected count, backup match), regenerates `MAP.md`.
