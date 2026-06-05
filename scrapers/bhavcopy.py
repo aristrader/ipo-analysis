@@ -74,7 +74,12 @@ def fetch_bse(d):
 
 
 def parse_bhavcopy(text, exchange, d):
-    """Return {key: open_price}. Keys: ISIN and 'SYM:'+symbol."""
+    """Return {key: open_price}. Keys: ISIN and 'SYM:'+symbol.
+
+    Equity-series only + first-hit wins (same policy as bhavcopy_ohlc.parse_day):
+    a symbol can appear in multiple series (EQ + BL block deals, etc.) and the old
+    code let the LAST row overwrite — a BL row could silently replace the real EQ
+    open. (Found by the showdown test suite, 2026-06-04.)"""
     out = {}
     rows = list(csv.DictReader(io.StringIO(text)))
     if not rows:
@@ -82,18 +87,26 @@ def parse_bhavcopy(text, exchange, d):
     cols = rows[0].keys()
     if 'TckrSymb' in cols:        # UDiFF (NSE new + BSE)
         for r in rows:
+            ser = (r.get('SctySrs') or '').strip().upper()
+            if ser and ser not in ('EQ', 'BE', 'SM', 'ST'):
+                continue
             op = r.get('OpnPric', '').strip()
             if not op:
                 continue
-            if r.get('ISIN', '').strip():
-                out[r['ISIN'].strip()] = op
-            if r.get('TckrSymb', '').strip():
-                out['SYM:' + r['TckrSymb'].strip()] = op
+            isin = r.get('ISIN', '').strip()
+            if isin and isin not in out:
+                out[isin] = op
+            sym = r.get('TckrSymb', '').strip()
+            if sym and ('SYM:' + sym) not in out:
+                out['SYM:' + sym] = op
     elif 'SYMBOL' in cols:        # NSE old
         for r in rows:
+            ser = (r.get('SERIES') or '').strip().upper()
+            if ser and ser not in ('EQ', 'BE', 'SM', 'ST'):
+                continue
             op = r.get('OPEN', '').strip()
             sym = r.get('SYMBOL', '').strip()
-            if sym and op:
+            if sym and op and ('SYM:' + sym) not in out:
                 out['SYM:' + sym] = op
     return out
 

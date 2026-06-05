@@ -28,10 +28,12 @@ from bisect import bisect_right
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'pipeline'))  # so listing_remediation imports
+sys.path.insert(0, ROOT)                            # so layer3.config imports
 from listing_remediation import remediate_listing
+from layer3 import config as _l3cfg
 SP_DIR = os.path.join(ROOT, 'data/raw/screener_prices')
 RS_PATH = os.path.join(ROOT, 'data/master/returns_summary.csv')
-TODAY = date(2026, 5, 31)
+TODAY = _l3cfg.AS_OF_DATE   # single canonical as-of date (was a hardcoded copy of it — drift-prone)
 
 HORIZONS = [
     ('1d', 1), ('1w', 7), ('1m', 30), ('3m', 91), ('6m', 182),

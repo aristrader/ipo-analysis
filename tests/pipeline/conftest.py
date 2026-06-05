@@ -51,3 +51,9 @@ def remediation_mod():
 def lib_mod():
     """pipeline/lib.py — shared pure helpers (fnum/num/last_pre_listing_fy)."""
     return _load("pipeline/lib.py", "p_lib")
+
+
+@pytest.fixture(scope="session")
+def merge_mod():
+    """scrapers/screener_prices_merge.py — the weekly-close mirror of 07's compute()."""
+    return _load("scrapers/screener_prices_merge.py", "p_merge")
