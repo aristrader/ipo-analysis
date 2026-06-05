@@ -23,6 +23,7 @@
 - **cross-regime validation / OOS** → `layer3/validate.py`, `run_validation.py`, `run_oos.py`, `tests/layer3/test_validate.py`
 - **the app / UI** → `app.py`
 - **what's done / what's next / project state** → `STATUS.md`, `DONE.md`, `CLAUDE.md`, `rules/index.md`
+- **testing / verification / the showdown** → `tests/`, `tests/data/`, `tests/showdown/`, `tools/mutation/`, `pytest.ini`, `docs/research/showdown_audit.md`, `docs/research/showdown_pipeline_diff.md`, `docs/research/showdown_mutation.md`
 - **schema / what a column means** → `docs/schema.md`, `data/master/ipo_analysis.csv`
 - **DRHP financials recovery** → `tools/drhp/`, `docs/research/drhp_recovery.md`
 
@@ -72,8 +73,8 @@ WEB SOURCES --scrapers/--> data/raw/ + data/reference/ + data/prices/
 - `layer3/` — UI-agnostic analysis engine; reads ipo_analysis.csv only
 - `rules/` — the rule/signal/strategy REGISTRY (index.md) — navigate logic here
 - `docs/` — sources, schema, pipeline, strategies, layer2/3, research/
-- `tests/` — layer3/ (analysis) + pipeline/ + scrapers/ (data-building safety net)
-- `tools/` — side tools (drhp/ = DRHP financials recovery)
+- `tests/` — layer3/ + pipeline/ + scrapers/ + data/ (substrate invariants) + showdown/ (SHOWDOWN=1 execution proofs)
+- `tools/` — side tools (drhp/ = DRHP recovery; mutation/ = test-suite mutation validation)
 - `report/` — generated HTML (layer3_partA.html)
 - `archive/` — superseded files + dataset backups (e.g. pre_drhp_20260601/)
 

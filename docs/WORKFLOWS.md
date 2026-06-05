@@ -46,6 +46,16 @@ catches most drift — these rules tell you what to update so it stays green.
   live state + what's next — completed work must MOVE to DONE.md, never accumulate in STATUS) →
   commit (LOCAL-ONLY, no remote).
 
+## Change → tests routing (mechanical, every turn)
+- `project_map.TEST_ROUTING` maps changed files → the pytest commands to run. The per-turn hook
+  (`verify.py --quiet`) reads `git status`, routes the changes, and INJECTS "CHANGED → RUN" lines
+  into the assistant's context — so the right tests are surfaced every time, by machinery not memory.
+- On demand: `python verify.py --route`.
+- **`SHOWDOWN=1 PYTHONPATH=. pytest tests/showdown -q` = the pre-release / major-change gate**
+  (sandbox pipeline re-run + diff, entry-point smokes, app browser test; ~3 min).
+- Test-suite health: `tools/mutation/run_mutations.py` re-validates that deliberate code breaks
+  fail tests (run after any large test refactor; report → docs/research/showdown_mutation.md).
+
 ## The checkpoint contract
 - `python verify.py` — full report (counts, exact pytest-collected count, backup match), regenerates `MAP.md`.
 - `python verify.py --quiet` — fast (~0.1s), prints ONLY on drift; this is what the hook runs each turn.

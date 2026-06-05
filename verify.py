@@ -118,17 +118,72 @@ def fast_drift():
     return check_paths() + check_unwired() + check_invariants()
 
 
+# ------------------------------------------------------ change -> tests routing
+def changed_files():
+    """Paths with uncommitted changes (staged or not), per git."""
+    try:
+        out = subprocess.run(["git", "status", "--porcelain"], cwd=ROOT,
+                             capture_output=True, text=True, timeout=10).stdout
+    except Exception:
+        return []
+    paths = []
+    for line in out.splitlines():
+        p = line[3:].strip().strip('"')
+        if " -> " in p:                      # renames: take the new side
+            p = p.split(" -> ", 1)[1]
+        paths.append(p)
+    return paths
+
+
+def route(paths):
+    """Map changed paths through project_map.TEST_ROUTING (first glob match wins).
+    Returns {path: [commands]} for files that matched."""
+    import fnmatch
+    routed = {}
+    for p in paths:
+        for pattern, cmds in M.TEST_ROUTING:
+            if fnmatch.fnmatch(p, pattern):
+                routed[p] = cmds
+                break
+    return routed
+
+
+def routing_lines(paths):
+    """Human/assistant-readable 'CHANGED -> RUN' lines (deduped commands last)."""
+    routed = route(paths)
+    if not routed:
+        return []
+    lines = ["CHANGED FILES → TESTS TO RUN (project_map.TEST_ROUTING):"]
+    cmds = []
+    for p, cs in sorted(routed.items()):
+        lines.append(f"  {p}")
+        for c in cs:
+            if c not in cmds:
+                cmds.append(c)
+    lines.append("  RUN:")
+    lines.extend(f"    {c}" for c in cmds)
+    return lines
+
+
 def main():
     quiet = "--quiet" in sys.argv
     regenerate_map()  # always keep MAP.md fresh
     drift = fast_drift()
 
     if quiet:
-        # Hook mode: speak ONLY on drift (silence = clean). Never block.
+        # Hook mode: speak ONLY when something needs attention (silence = clean). Never block.
         if drift:
             print("⚠ PROJECT-MAP DRIFT (verify.py) — fix project_map.py or the cause:")
             for d in drift:
                 print(f"  - {d}")
+        for ln in routing_lines(changed_files()):
+            print(ln)
+        sys.exit(0)
+
+    if "--route" in sys.argv:
+        ch = changed_files()
+        lines = routing_lines(ch)
+        print("\n".join(lines) if lines else "no uncommitted changes — nothing to route")
         sys.exit(0)
 
     # Full mode: full report.

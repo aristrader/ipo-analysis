@@ -42,3 +42,22 @@ def test_render_map_has_the_four_views():
     md = M.render_map()
     for section in ("## Navigate", "## Context index", "## Flow", "## Tree"):
         assert section in md
+
+
+def test_routing_patterns_and_fallback():
+    # every concrete (non-glob) pattern must exist on disk; fallback must be last
+    pats = [p for p, _ in M.TEST_ROUTING]
+    assert pats[-1] == "*", "TEST_ROUTING must end with the '*' fallback"
+    for p in pats[:-1]:
+        if "*" not in p:
+            assert verify._exists(p), f"TEST_ROUTING references missing path: {p}"
+    # routing resolves: a pipeline change must route to the pipeline tests
+    routed = verify.route(["pipeline/lib.py", "totally/unknown.xyz"])
+    assert any("tests/pipeline" in c for c in routed["pipeline/lib.py"])
+    assert any("fallback" in c for c in routed["totally/unknown.xyz"])
+    # every test path mentioned in a routing command exists
+    import re
+    for _, cmds in M.TEST_ROUTING:
+        for c in cmds:
+            for t in re.findall(r"tests[/\w.]*", c):
+                assert verify._exists(t), f"routing command references missing {t}"

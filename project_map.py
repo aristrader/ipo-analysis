@@ -81,8 +81,8 @@ DIRS = {
     "layer3/":   "UI-agnostic analysis engine; reads ipo_analysis.csv only",
     "rules/":    "the rule/signal/strategy REGISTRY (index.md) — navigate logic here",
     "docs/":     "sources, schema, pipeline, strategies, layer2/3, research/",
-    "tests/":    "layer3/ (analysis) + pipeline/ + scrapers/ (data-building safety net)",
-    "tools/":    "side tools (drhp/ = DRHP financials recovery)",
+    "tests/":    "layer3/ + pipeline/ + scrapers/ + data/ (substrate invariants) + showdown/ (SHOWDOWN=1 execution proofs)",
+    "tools/":    "side tools (drhp/ = DRHP recovery; mutation/ = test-suite mutation validation)",
     "report/":   "generated HTML (layer3_partA.html)",
     "archive/":  "superseded files + dataset backups (e.g. pre_drhp_20260601/)",
 }
@@ -155,9 +155,47 @@ CONTEXTS = {
     ],
     "the app / UI": ["app.py"],
     "what's done / what's next / project state": ["STATUS.md", "DONE.md", "CLAUDE.md", "rules/index.md"],
+    "testing / verification / the showdown": [
+        "tests/", "tests/data/", "tests/showdown/", "tools/mutation/", "pytest.ini",
+        "docs/research/showdown_audit.md", "docs/research/showdown_pipeline_diff.md",
+        "docs/research/showdown_mutation.md",
+    ],
     "schema / what a column means": ["docs/schema.md", "data/master/ipo_analysis.csv"],
     "DRHP financials recovery": ["tools/drhp/", "docs/research/drhp_recovery.md"],
 }
+
+# ------------------------------------------------------------ TEST ROUTING
+# "You changed X -> run THESE tests." Ordered; FIRST match wins; '*' = fallback.
+# verify.py maps `git status` changes through this and injects the commands into
+# the assistant's context every turn (mechanical, not memory). `--route` = on demand.
+# SHOWDOWN=1 pytest tests/showdown = the pre-release gate (docs/WORKFLOWS.md).
+TEST_ROUTING = [
+    ("pipeline/07_returns_summary.py",
+     ["PYTHONPATH=. pytest tests/pipeline tests/data -q",
+      "SHOWDOWN=1 PYTHONPATH=. pytest tests/showdown/test_pipeline_sandbox.py -q  # before release"]),
+    ("scrapers/screener_prices_merge.py",
+     ["PYTHONPATH=. pytest tests/pipeline/test_merge_math.py tests/data -q",
+      "SHOWDOWN=1 PYTHONPATH=. pytest tests/showdown/test_pipeline_sandbox.py -q  # before release"]),
+    ("pipeline/listing_remediation.py", ["PYTHONPATH=. pytest tests/pipeline -q"]),
+    ("pipeline/lib.py", ["PYTHONPATH=. pytest tests/pipeline -q"]),
+    ("pipeline/*", ["PYTHONPATH=. pytest tests/pipeline tests/data -q",
+                    "SHOWDOWN=1 PYTHONPATH=. pytest tests/showdown/test_pipeline_sandbox.py -q  # before release"]),
+    ("layer3/predictor/*", ["PYTHONPATH=. pytest tests/layer3/test_predictor.py tests/layer3/test_weights.py "
+                            "tests/layer3/test_oos.py tests/layer3/test_gap_math.py -q"]),
+    ("layer3/backtest/*", ["PYTHONPATH=. pytest tests/layer3/test_backtest.py tests/layer3/test_analyses.py "
+                           "tests/layer3/test_score_backtest.py tests/layer3/test_gap_math.py -q"]),
+    ("layer3/findings/*", ["PYTHONPATH=. pytest tests/layer3/test_findings.py tests/layer3/test_report.py -q"]),
+    ("layer3/spine.py", ["PYTHONPATH=. pytest tests/layer3 -q"]),
+    ("layer3/config.py", ["PYTHONPATH=. pytest tests -q  # config feeds everything"]),
+    ("layer3/*", ["PYTHONPATH=. pytest tests/layer3 -q"]),
+    ("scrapers/*", ["PYTHONPATH=. pytest tests/scrapers -q"]),
+    ("data/master/*", ["PYTHONPATH=. pytest tests/data -q"]),
+    ("app.py", ["SHOWDOWN=1 PYTHONPATH=. pytest tests/showdown/test_app_smoke.py -q"]),
+    ("project_map.py", ["PYTHONPATH=. pytest tests/test_project_map.py -q"]),
+    ("verify.py", ["PYTHONPATH=. pytest tests/test_project_map.py -q"]),
+    ("tests/*", ["PYTHONPATH=. pytest tests -q"]),
+    ("*", ["PYTHONPATH=. pytest tests -q  # fallback: full fast suite"]),
+]
 
 # --------------------------------------------------------------- INVARIANTS
 # Ground-truth facts the checkpoint re-derives and compares. Update when they change
