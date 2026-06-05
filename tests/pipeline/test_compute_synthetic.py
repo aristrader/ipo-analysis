@@ -122,6 +122,19 @@ def test_unreached_horizons_stay_null_not_guessed(returns_mod):
     assert out["mfe_1y"] is None                         # movement gated the same way
 
 
+# ------------------------------------------------- trap: truncated price coverage
+def test_mfe_nulled_when_series_ends_before_horizon(returns_mod):
+    """Horizon end is in the PAST but past the last price row: the window is truncated,
+    so MFE/MAE must be NULL (a shorter window would silently understate the peak/trough).
+    (Mutation survivor fix: the end<=data_last clause of the coverage gate was untested.)"""
+    prices = [_row(LISTING, 120.0, 130.0, 115.0, 110.0),
+              _row(date(2024, 6, 3), 145.0, 160.0, 140.0, 150.0)]   # series stops mid-year
+    out = returns_mod.compute("TESTISIN0004", _mrow(), prices, [], {}, *FLAT_NIFTY)
+    # 1y end (2024-12-31) <= AS_OF but > data_last (2024-06-03) -> truncated -> NULL
+    assert out["mfe_1y"] is None and out["mae_1y"] is None
+    assert out["return_from_issue_1y"] is None                      # endpoint gated the same way
+
+
 # ------------------------------------------------------------ trap: split re-anchoring
 def test_post_listing_split_reanchors_issue_price(returns_mod):
     # 2:1 split after listing: price series arrives on the ADJUSTED scale (halved),

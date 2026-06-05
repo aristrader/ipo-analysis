@@ -51,6 +51,18 @@ def test_parse_bhavcopy_old_nse_symbol_only(bhavcopy_mod):
     assert all(k.startswith("SYM:") for k in out)                 # old format has no ISIN keys
 
 
+def test_parse_bhavcopy_first_equity_hit_wins(bhavcopy_mod):
+    # TWO equity-series rows for one symbol (EQ then BE — BOTH pass the series filter):
+    # the first must win; a later row must never overwrite it.
+    # (Mutation survivor fix: the BL row in NSE_OLD is series-filtered before the
+    # first-wins guard matters, so that test alone couldn't pin the guard.)
+    text = ("SYMBOL,SERIES,OPEN,HIGH,LOW,CLOSE,TOTTRDQTY\n"
+            "ACME,EQ,100.5,110.0,99.0,105.25,12345\n"
+            "ACME,BE,200.0,210.0,190.0,205.0,99\n")
+    out = bhavcopy_mod.parse_bhavcopy(text, "NSE", date(2010, 1, 1))
+    assert out["SYM:ACME"] == "100.5"
+
+
 def test_parse_bhavcopy_empty_and_garbage(bhavcopy_mod):
     assert bhavcopy_mod.parse_bhavcopy("", "NSE", date(2024, 1, 1)) == {}
     assert bhavcopy_mod.parse_bhavcopy("a,b\n1,2\n", "NSE", date(2024, 1, 1)) == {}

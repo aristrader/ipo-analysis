@@ -123,6 +123,21 @@ def test_bootstrap_median_ci_deterministic_constant_series():
     assert spine.bootstrap_median_ci(pd.Series([0.1] * 5))["median"] is None  # < MIN_N_HINT
 
 
+def test_bootstrap_reports_median_not_mean():
+    # skewed series: median 1.0, mean 3.0 — a median->mean regression must fail here
+    # (mutation survivor fix: the constant-series test couldn't tell them apart)
+    r = spine.bootstrap_median_ci(pd.Series([1.0, 1.0, 1.0, 9.0] * 10))
+    assert r["median"] == pytest.approx(1.0)
+
+
+def test_wipeout_safety_unknown_is_none_not_unsafe():
+    # no risk inputs -> score must be None (excluded from the blend), NEVER 0/"max risk"
+    # (mutation survivor fix: the unknown!=unsafe contract had no direct test)
+    c = scorecard.wipeout_safety({}, df=_cohort40())
+    assert c["score"] is None
+    assert c.get("n_checked", 0) == 0 or c.get("n", 0) == 0
+
+
 # --------------------------------------------------------------- outcome_profile
 def test_outcome_profile_hand_computed():
     g = pd.DataFrame({
