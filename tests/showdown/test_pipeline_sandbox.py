@@ -99,6 +99,18 @@ def test_real_repo_untouched_by_sandbox_run(sandbox):
         assert h(real) == h(bak), "REAL substrate changed during the showdown — investigate immediately"
 
 
+def test_run_weights_executes_in_sandbox(sandbox):
+    """run_weights WRITES data/master/*.json, so its execution proof lives here
+    (the sandbox), never in the in-place entry-point smokes. (Showdown gap-close.)"""
+    import json
+    p = subprocess.run([sys.executable, "run_weights.py"], cwd=SANDBOX,
+                       env={**os.environ, "PYTHONPATH": SANDBOX},
+                       capture_output=True, text=True, timeout=600)
+    assert p.returncode == 0, f"run_weights failed:\n{p.stderr[-1200:]}"
+    w = json.load(open(f"{SANDBOX}/data/master/scorecard_weights.json"))
+    assert sum(w.values()) == pytest.approx(1.0, abs=0.01)
+
+
 def test_network_steps_at_least_compile():
     import py_compile
     for step in ("pipeline/00_build_longterm_spine.py", "pipeline/06_validate_tickers.py",

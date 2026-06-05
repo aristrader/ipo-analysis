@@ -31,6 +31,15 @@ Completed items moved here to keep TODO.md lean. Most-recent first.
   TODAY instead of `config.AS_OF_DATE` (drift-prone duplicate); (3) CLAUDE.md carried stale
   listing_metrics_status counts (2043/85/142 → real: 2048/80/153/1). Plus 4 vacuous-coverage spots closed.
 - Real `data/master` byte-identical to backup throughout (hash-asserted every step). Git LOCAL-ONLY.
+- **Gap-close pass (user asked "all bases?"; honest audit said no — 2 real gaps):** (a) `run_weights.py`
+  had NO execution proof (excluded from in-place smokes because it writes; forgot to exercise it in the
+  sandbox) → now proven in `test_pipeline_sandbox.py` + weights/calibration JSON integrity tests
+  (components match registry, sum≈1, liquidity/quality=0, wipeout_safety≈0.13); (b) **GOLDEN headline
+  numbers** (`tests/data/test_headline_numbers.py`): 6 key analytical outputs (segment sizes, MB-boom 1y
+  median alpha −9.84%, MB-longterm wipeout 22.7%, median pop 10.3%, ever-2x-in-3y 34.8%) pinned through
+  the spine machinery — catches silent analytical drift on unmutated paths. Suite **197 → 207**.
+  Consciously out of scope (recorded): line-coverage %, property-based tests, scraper fetch-path fixtures,
+  app form-interaction tests.
 
 ## Small-polish trio: compute() split + synthetic fixtures + pinned deps  (2026-06-04)
 - **DEPS-2:** `requirements.txt` pinned to the working venv's exact versions. Also caught **matplotlib

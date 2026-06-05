@@ -8,8 +8,8 @@
 > "What is this / conventions" → `CLAUDE.md`. "Findings + tested-signal registry" → `rules/index.md`.
 > Quick check: `python verify.py` (counts, drift, data-vs-backup; regenerates MAP.md).
 
-_Canonical facts (re-derived by `verify.py` each turn): **29 findings, 197 tests** (94 layer3 + 37
-pipeline + 32 scrapers + 16 data + 11 showdown + 7 map), mutation-validated **28/28**. Substrate =
+_Canonical facts (re-derived by `verify.py` each turn): **29 findings, 207 tests** (94 layer3 + 37
+pipeline + 32 scrapers + 25 data + 12 showdown + 7 map), mutation-validated **28/28**. Substrate =
 `data/master/ipo_analysis.csv`, **2296 rows**, frozen, as-of `config.AS_OF_DATE` (2026-05-31),
 byte-identical to `archive/pre_drhp_20260601/`. Git LOCAL-ONLY._
 
