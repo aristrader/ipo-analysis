@@ -4,6 +4,34 @@ Completed items moved here to keep TODO.md lean. Most-recent first.
 
 ---
 
+## FINAL SHOWDOWN — testing & verification program (6 phases, auto-mode)  (2026-06-04)
+- **Spec/plan:** `docs/superpowers/specs/2026-06-04-final-showdown-testing-design.md` + plans/. Suite
+  **139 → 197 tests** (94 layer3 + 37 pipeline + 32 scrapers + 16 data + 11 showdown + 7 map); fast suite
+  still ~82s; execution proofs gated behind `SHOWDOWN=1` (~2.5 min).
+- **P0 audit** (2 subagents + reconciliation): `docs/research/showdown_audit.md` — corrected the agents'
+  over-reported gaps; produced the real P1 worklist.
+- **P1 data-integrity suite** (`tests/data/`, 16): the layer nothing watched — the substrate itself.
+  ALL invariants held on first probe (envelope mae≤end≤mfe ×6: 0 violations; outcome_class: 0 mismatches;
+  34 forced delistings all exactly −100%; joins clean; status-null == unpriced exactly).
+- **P2 logic-gap tests** (+26): spine gap math (combined TP+SL ordering, basket dispersion, allotment-capture
+  inversion, average-down, lifecycle, partial-exit, bootstrap, outcome_profile), engine._metrics, analogs,
+  scorecard component math, merge compute_weekly (4), bhavcopy parsers (7).
+- **P3 execution proofs** (`tests/showdown/`, 11, ALL GREEN): sandbox pipeline re-run → **returns_summary
+  byte-identical**; substrate numeric-identical except **34 explained cells** (3 hand-folded market-makers +
+  1 ISIN whose screener cache rows postdate the freeze — `docs/research/showdown_pipeline_diff.md`); staging
+  files = stale snapshots (verified harmless: their fresh fills MATCH the real substrate). Entry points all
+  run green with a hash-guard proving they never write data/master. App: 5 tabs, no exceptions (Playwright).
+- **P4 mutation validation** (`tools/mutation/`, 28 deliberate breaks): first pass 24/28 killed; the 4
+  survivors were REAL vacuous spots → 4 tests added (bootstrap median-vs-mean, wipeout_safety unknown≠unsafe,
+  07 truncated-coverage gate, bhavcopy first-wins) → **28/28 killed** (`docs/research/showdown_mutation.md`).
+- **P5 change→tests routing:** `project_map.TEST_ROUTING` + `verify.py --route`; the per-turn hook now
+  injects "CHANGED → RUN: <pytest cmd>" into context mechanically. WORKFLOWS: showdown = pre-release gate.
+- **BUGS FOUND + FIXED (3):** (1) `bhavcopy.parse_bhavcopy` lacked the equity-series filter + first-wins —
+  a BL block-deal row could overwrite the real EQ open (latent; frozen data unaffected); (2) merge hardcoded
+  TODAY instead of `config.AS_OF_DATE` (drift-prone duplicate); (3) CLAUDE.md carried stale
+  listing_metrics_status counts (2043/85/142 → real: 2048/80/153/1). Plus 4 vacuous-coverage spots closed.
+- Real `data/master` byte-identical to backup throughout (hash-asserted every step). Git LOCAL-ONLY.
+
 ## Small-polish trio: compute() split + synthetic fixtures + pinned deps  (2026-06-04)
 - **DEPS-2:** `requirements.txt` pinned to the working venv's exact versions. Also caught **matplotlib
   missing entirely** (layer3/charts.py imports it) — added; yfinance uncommented (installed + used).

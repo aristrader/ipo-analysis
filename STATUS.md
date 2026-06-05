@@ -8,17 +8,21 @@
 > "What is this / conventions" → `CLAUDE.md`. "Findings + tested-signal registry" → `rules/index.md`.
 > Quick check: `python verify.py` (counts, drift, data-vs-backup; regenerates MAP.md).
 
-_Canonical facts (re-derived by `verify.py` each turn): **29 findings, 139 tests** (77 layer3 + 32
-pipeline + 24 scrapers + 6 map). Substrate = `data/master/ipo_analysis.csv`, **2296 rows**, frozen,
-as-of `config.AS_OF_DATE` (2026-05-31), byte-identical to `archive/pre_drhp_20260601/`. Git LOCAL-ONLY._
+_Canonical facts (re-derived by `verify.py` each turn): **29 findings, 197 tests** (94 layer3 + 37
+pipeline + 32 scrapers + 16 data + 11 showdown + 7 map), mutation-validated **28/28**. Substrate =
+`data/master/ipo_analysis.csv`, **2296 rows**, frozen, as-of `config.AS_OF_DATE` (2026-05-31),
+byte-identical to `archive/pre_drhp_20260601/`. Git LOCAL-ONLY._
 
 ---
 
 ## 🏃 NOW
-- **Nothing in progress. The project is complete and verified** — dataset, 29 findings, predictor
-  ("Evaluate this IPO" report + wipeout risk gauge), backtester, cross-regime validation, data-informed
-  weights, Streamlit app, anti-drift checkpoint (verify.py, auto each turn). All past decisions resolved
-  and recorded in `DONE.md`.
+- **Nothing in progress. The project is complete, verified, and SHOWDOWN-CERTIFIED (2026-06-04)** —
+  dataset, 29 findings, predictor, backtester, validation, app, anti-drift checkpoint. The final-showdown
+  program (DONE.md) proved: substrate invariants hold (16 data tests), the offline pipeline REPRODUCES the
+  frozen substrate (sandbox re-run; returns_summary byte-identical; 34 substrate cells differ, all
+  explained), every entry point runs green & read-only, the app renders clean, and the suite kills 28/28
+  deliberate code breaks. Pre-release gate: `SHOWDOWN=1 PYTHONPATH=. pytest tests/showdown -q`.
+  Change→tests routing is injected automatically each turn (`verify.py` + `project_map.TEST_ROUTING`).
 
 ## 📋 OPEN BACKLOG (all optional — pick when wanted)
 - **Microcap extension** — the one major optional item: apply the risk/movement analysis beyond IPOs
