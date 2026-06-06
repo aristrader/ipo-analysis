@@ -100,3 +100,4 @@ WEB SOURCES --scrapers/--> data/raw/ + data/reference/ + data/prices/
 - n_findings = 29
 - substrate_rows = 2296
 - as_of_date = 2026-05-31
+- archive_pointer = archive/pre_drhp_20260601

@@ -88,13 +88,15 @@ def check_invariants():
 
 
 def data_backup_status():
-    """Informational: does the substrate still match its frozen backup?"""
+    """Informational: does the substrate still match its archive snapshot?
+    The snapshot location is a MOVABLE fact — substrate_meta.json's archive_pointer
+    (run_refresh.py re-points it when it archives the previous substrate)."""
     cur = _p("data/master/ipo_analysis.csv")
-    bak = _p("archive/pre_drhp_20260601/ipo_analysis.csv")
+    bak = _p(M.INVARIANTS.get("archive_pointer", ""), "ipo_analysis.csv")
     if not (os.path.exists(cur) and os.path.exists(bak)):
         return None
     h = lambda p: hashlib.md5(open(p, "rb").read()).hexdigest()
-    return "matches backup" if h(cur) == h(bak) else "DIFFERS from backup"
+    return "matches backup" if h(cur) == h(bak) else "DIFFERS from backup (expected right after a refresh)"
 
 
 def pytest_collected():

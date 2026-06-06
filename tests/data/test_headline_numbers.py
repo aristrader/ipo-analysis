@@ -1,57 +1,35 @@
-"""GOLDEN headline numbers (showdown gap-close): the project's key analytical
-outputs, pinned from the frozen substrate THROUGH the spine machinery.
+"""GOLDEN headline numbers: the key analytical outputs, asserted against the
+ACCEPTED values in data/reference/golden_numbers.json.
 
-Purpose: the data file is hash-checked and the functions are unit/mutation-tested,
-but a gating/segmentation change on an unmutated path could still shift the
-REPORTED numbers silently. These goldens close that hole.
-
-If one fails after an INTENTIONAL change (e.g. remediating the 75 scale-inversion
-rows, or a deliberate substrate rebuild): re-derive and update the constants
-consciously — that is the test doing its job, not an error to suppress.
-Derived 2026-06-04 from the frozen 2026-05-31 substrate.
+The computation lives in layer3/goldens.py (one source). A refresh re-derives the
+accepted file CONSCIOUSLY (tools/refresh/derive_goldens.py prints OLD -> NEW); a
+failure here therefore means SILENT analytical drift — something changed a number
+without going through the refresh/derive protocol. That is this test's entire job.
 """
-import pandas as pd
 import pytest
 
-from layer3 import spine
+from layer3 import goldens
 
 
-@pytest.fixture(scope="module")
-def df():
-    return spine.load_substrate()
+def test_current_computation_matches_accepted_goldens():
+    accepted = goldens.load_accepted()
+    current = goldens.compute()
+    assert set(current) == set(accepted), (
+        f"golden key set changed: only_current={set(current)-set(accepted)} "
+        f"only_accepted={set(accepted)-set(current)} — re-derive consciously")
+    drift = []
+    for k, cur in current.items():
+        tol = goldens.TOLERANCES.get(k, 0)
+        if abs(cur - accepted[k]) > tol:
+            drift.append((k, accepted[k], cur))
+    assert not drift, (
+        "SILENT ANALYTICAL DRIFT — values changed without the derive protocol "
+        f"(if intentional: run tools/refresh/derive_goldens.py): {drift}")
 
 
-def test_equity_universe_size(df):
-    assert len(df) == 2245                      # equity-only default view of the 2296
-
-
-def test_segment_sizes(df):
-    assert len(spine.segment(df, segment="MB", cohort="boom")) == 370
-    assert len(spine.segment(df, segment="SME", cohort="boom")) == 884
-    assert len(spine.segment(df, segment="MB", cohort="longterm")) == 471
-
-
-def test_mb_boom_1y_median_alpha(df):
-    g = spine.maturity_gated(spine.segment(df, segment="MB", cohort="boom"), "1y")
-    assert len(g) == 279
-    assert float(spine.alpha_series(g, "1y").median()) == pytest.approx(-0.098405, abs=1e-4)
-
-
-def test_mb_longterm_wipeout_lower_rate(df):
-    wb = spine.wipeout_band(spine.segment(df, segment="MB", cohort="longterm"))
-    assert wb["n"] == 471
-    assert wb["wipeout_lower_rate"] == pytest.approx(0.227176, abs=1e-4)
-
-
-def test_mb_boom_median_listing_pop(df):
-    mb = spine.segment(df, segment="MB", cohort="boom")
-    mb = mb[mb["listing_metrics_status"] != "unreliable_coverage"]
-    pop = pd.to_numeric(mb["adj_listing_gain_open"], errors="coerce")
-    assert float(pop.median()) == pytest.approx(0.103441, abs=1e-4)
-
-
-def test_mb_longterm_ever_2x_within_3y(df):
-    g = spine.maturity_gated(spine.segment(df, segment="MB", cohort="longterm"), "3y")
-    mfe = pd.to_numeric(g.get("mfe_lst_3y"), errors="coerce").dropna()
-    assert len(mfe) == 457
-    assert float((mfe >= 1.0).mean()) == pytest.approx(0.347921, abs=1e-4)
+def test_goldens_file_is_well_formed():
+    accepted = goldens.load_accepted()
+    assert len(accepted) >= 10
+    assert all(isinstance(v, (int, float)) for v in accepted.values())
+    # every key has an explicit tolerance policy
+    assert set(goldens.TOLERANCES) == set(accepted)

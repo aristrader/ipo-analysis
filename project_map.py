@@ -198,12 +198,26 @@ TEST_ROUTING = [
 ]
 
 # --------------------------------------------------------------- INVARIANTS
-# Ground-truth facts the checkpoint re-derives and compares. Update when they change
-# (verify.py will tell you if a doc disagrees with reality).
+# Ground-truth facts the checkpoint re-derives and compares. STRUCTURAL facts are
+# literals; MOVABLE facts (rows / as-of / backup pointer) come from
+# data/master/substrate_meta.json, which only `run_refresh.py --apply` writes —
+# so a refresh updates the rails as data, never as code edits.
+def _meta():
+    import json
+    import os as _os
+    p = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "data/master/substrate_meta.json")
+    try:
+        return json.load(open(p))
+    except (OSError, ValueError):
+        return {"as_of": "2026-05-31", "rows": 2296, "archive_pointer": "archive/pre_drhp_20260601"}
+
+
+_M = _meta()
 INVARIANTS = {
-    "n_findings":     29,            # ls layer3/findings/*.py minus __init__
-    "substrate_rows": 2296,          # csv records in ipo_analysis.csv (NOT wc -l — quoted multiline fields)
-    "as_of_date":     "2026-05-31",  # layer3/config.AS_OF_DATE
+    "n_findings":     29,                    # ls layer3/findings/*.py minus __init__ (structural)
+    "substrate_rows": int(_M["rows"]),       # csv records in ipo_analysis.csv (NOT wc -l)
+    "as_of_date":     _M["as_of"],           # layer3/config.AS_OF_DATE reads the same meta
+    "archive_pointer": _M.get("archive_pointer", ""),
     # exact test count comes from `pytest --co` (run by `python verify.py`, not the fast hook).
 }
 

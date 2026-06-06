@@ -1,0 +1,16 @@
+{
+ "note": "accepted golden numbers \u2014 rewritten only by the refresh/derive tool",
+ "derived_as_of": "2026-05-31",
+ "values": {
+  "equity_rows": 2245,
+  "mb_boom_n": 370,
+  "sme_boom_n": 884,
+  "mb_longterm_n": 471,
+  "mb_boom_1y_matured_n": 279,
+  "mb_boom_1y_median_alpha": -0.098405,
+  "mb_longterm_wipeout_lower_rate": 0.22717622080679406,
+  "mb_boom_median_listing_pop": 0.103441,
+  "mb_longterm_ever2x_3y_rate": 0.3479212253829322,
+  "mb_longterm_ever2x_3y_n": 457
+ }
+}

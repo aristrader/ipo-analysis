@@ -8,9 +8,23 @@ REPORT_DIR = ROOT / "report"
 
 # The substrate's AS-OF / build date — maturity-gating in the dataset (pipeline/07_returns_summary.py
 # TODAY) is anchored here, and age/survival findings (findings/t2_survival.py) MUST use the same date
-# so they stay consistent with the gating. Bump this on a full pipeline rebuild. (NOT date.today():
-# the substrate is frozen at build time, so a live date would desync findings from the data.)
-AS_OF_DATE = date(2026, 5, 31)
+# so they stay consistent with the gating. (NOT date.today(): the substrate is frozen at build time,
+# so a live date would desync findings from the data.)
+# SINGLE SOURCE: data/master/substrate_meta.json — written ONLY by `run_refresh.py --apply`, which
+# rebuilds the substrate in the same run. The literal below is the pre-meta fallback.
+SUBSTRATE_META = ROOT / "data/master/substrate_meta.json"
+
+
+def _as_of_from_meta():
+    import json
+    try:
+        meta = json.loads(SUBSTRATE_META.read_text())
+        return date.fromisoformat(meta["as_of"])
+    except (OSError, KeyError, ValueError):
+        return date(2026, 5, 31)
+
+
+AS_OF_DATE = _as_of_from_meta()
 
 # the dead-money cutoff (alive but ≥50% below issue & illiquid = un-exitable zombie) — used by the
 # zombie finding, the wipeout anatomy, and the risk gauge; one source so they can't drift apart.
