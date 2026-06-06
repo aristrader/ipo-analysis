@@ -169,10 +169,20 @@ def apply(skip_tests=False, with_delisting=False):
 
     print("[4/9] prices (bhavcopy, incremental)")
     import bhavcopy_ohlc as bo
-    earliest_new = min([(r.get("listing_date") or "9999")[:10] for r in new_rows], default="9999")
-    start_s = min(str(old_asof + timedelta(days=1)), earliest_new)
-    bo.run(datetime.strptime(start_s, "%Y-%m-%d"), datetime.combine(today, datetime.min.time()))
-    summary["price_window"] = f"{start_s}..{today}"
+    # 4a. BACKFILL for the new ISINs over manifest-covered days (their listing .. old as_of):
+    # targeted parse against the new ISINs only — never clears the manifest (which would
+    # duplicate the existing universe's rows; see ingest.backfill_prices_new_isins docstring).
+    listed_new = [(r.get("listing_date") or "")[:10] for r in new_rows
+                  if (r.get("listing_date") or "")[:10] and (r.get("listing_date") or "")[:10] <= str(today)]
+    if listed_new:
+        bf_start = datetime.strptime(min(listed_new), "%Y-%m-%d").date()
+        summary.update(ingest.backfill_prices_new_isins(new_rows, bf_start, old_asof))
+        print(f"  backfill (new isins) {bf_start}..{old_asof}: "
+              f"{summary.get('backfill_rows', 0)} rows over {summary.get('backfill_days', 0)} days")
+    # 4b. the recent gap for EVERYONE (manifest-naive days only)
+    bo.run(datetime.combine(old_asof + timedelta(days=1), datetime.min.time()),
+           datetime.combine(today, datetime.min.time()))
+    summary["price_window"] = f"{old_asof + timedelta(days=1)}..{today}"
 
     print("[5/9] aux reference data")
     run_step("scrapers/indices.py", "indices (nifty50 + smallcap250)", timeout=300)

@@ -141,6 +141,47 @@ def ingest_gmp_investorgain(years):
     return {"investorgain_appended": _append(INVESTORGAIN, out)}
 
 
+# ------------------------------------------------------------------ price backfill (new ISINs)
+def backfill_prices_new_isins(new_rows, start, end, sleep=0.4):
+    """Price history for the NEW ISINs over days the done-manifest already covers.
+
+    The manifest guards against duplicate appends for the existing universe, so we
+    must NOT clear it (re-parsing a done day would re-append every old ISIN's row).
+    Instead: fetch each day in [start, end] and parse it against the NEW isins ONLY,
+    appending just their rows. The manifest is left untouched. The recent gap days
+    (after the old as_of) are handled by the normal bhavcopy_ohlc.run() afterwards.
+    """
+    import bhavcopy_ohlc as bo
+    from datetime import timedelta as _td
+    isin_set = {r["isin"] for r in new_rows}
+    sym2isin = {(r.get("nse_symbol") or "").upper(): r["isin"]
+                for r in new_rows if r.get("nse_symbol")}
+    if not isin_set or start > end:
+        return {"backfill_days": 0, "backfill_rows": 0}
+    fetchers = {"NSE": bo.fetch_nse, "BSE": bo.fetch_bse}
+    d, n_days, n_rows = start, 0, 0
+    while d <= end:
+        if d.weekday() < 5:
+            seen_today = set()
+            for exch in ("NSE", "BSE"):
+                try:
+                    text = fetchers[exch](d)
+                except Exception:
+                    text = None
+                day = bo.parse_day(text, isin_set, sym2isin) if text else {}
+                if exch != "NSE":
+                    day = {k: v for k, v in day.items() if k not in seen_today}
+                seen_today.update(day.keys())
+                if day:
+                    bo.append_day(day, d.strftime("%Y-%m-%d"))
+                    n_rows += len(day)
+                time.sleep(sleep)
+            n_days += 1
+    # noqa: the loop advances below regardless of weekday
+        d = d + _td(days=1)
+    return {"backfill_days": n_days, "backfill_rows": n_rows}
+
+
 # ------------------------------------------------------------------ screener (rate-limited)
 def ingest_screener(new_rows, max_failures=8):
     """Financials + sector/mcap per new ISIN. Best-effort: screener blocks hard, so
