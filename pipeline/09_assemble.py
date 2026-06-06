@@ -72,7 +72,7 @@ for isin, u in uni.items():
     # columns — robust to upstream split-remediation (which rescales returns but not MFE/MAE) and
     # source-mixing. Flag rows where the clamp moved a value materially (>1pp) so it's auditable.
     clamped = False
-    for h in ('1y', '3y', '5y'):
+    for h in ('1m', '3m', '6m', '1y', '3y', '5y'):
         for mfe_c, mae_c, end_c in (('mfe_%s' % h, 'mae_%s' % h, 'return_from_issue_%s' % h),
                                     ('mfe_lst_%s' % h, 'mae_lst_%s' % h, 'return_from_listing_%s' % h)):
             end_v = f(row.get(end_c))
