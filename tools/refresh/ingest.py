@@ -152,21 +152,32 @@ def backfill_prices_new_isins(new_rows, start, end, sleep=0.4):
     (after the old as_of) are handled by the normal bhavcopy_ohlc.run() afterwards.
     """
     import bhavcopy_ohlc as bo
-    from datetime import timedelta as _td
+    from datetime import datetime as _dt, timedelta as _td
+    def _s(v):
+        """str or '' — also catches pandas NaN (a truthy float, slips past `or`)."""
+        return v.strip() if isinstance(v, str) else ""
     isin_set = {r["isin"] for r in new_rows}
-    sym2isin = {(r.get("nse_symbol") or "").upper(): r["isin"]
-                for r in new_rows if r.get("nse_symbol")}
+    sym2isin = {_s(r.get("nse_symbol")).upper(): r["isin"]
+                for r in new_rows if _s(r.get("nse_symbol"))}
     if not isin_set or start > end:
         return {"backfill_days": 0, "backfill_rows": 0}
     fetchers = {"NSE": bo.fetch_nse, "BSE": bo.fetch_bse}
-    d, n_days, n_rows = start, 0, 0
-    while d <= end:
+    # IMPORTANT: iterate DATETIMEs — bhavcopy fetchers compare against a datetime
+    # cutover constant, and a plain date raises TypeError (2026-06-06 incident: a
+    # blanket except hid exactly that and the whole backfill silently returned 0).
+    d = _dt(start.year, start.month, start.day)
+    end_dt = _dt(end.year, end.month, end.day)
+    n_days, n_rows, n_fetch_errors = 0, 0, 0
+    while d <= end_dt:
         if d.weekday() < 5:
             seen_today = set()
             for exch in ("NSE", "BSE"):
                 try:
                     text = fetchers[exch](d)
-                except Exception:
+                except Exception as e:
+                    n_fetch_errors += 1
+                    if n_fetch_errors <= 3:
+                        print(f"    backfill fetch error {exch} {d.date()}: {type(e).__name__}: {e}")
                     text = None
                 day = bo.parse_day(text, isin_set, sym2isin) if text else {}
                 if exch != "NSE":
@@ -177,9 +188,8 @@ def backfill_prices_new_isins(new_rows, start, end, sleep=0.4):
                     n_rows += len(day)
                 time.sleep(sleep)
             n_days += 1
-    # noqa: the loop advances below regardless of weekday
         d = d + _td(days=1)
-    return {"backfill_days": n_days, "backfill_rows": n_rows}
+    return {"backfill_days": n_days, "backfill_rows": n_rows, "backfill_fetch_errors": n_fetch_errors}
 
 
 # ------------------------------------------------------------------ screener (rate-limited)

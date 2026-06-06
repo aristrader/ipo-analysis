@@ -67,10 +67,10 @@ def score_cohort(cohort, old):
         q = _query_from_row(r)
         try:
             res = predict(q, df=old, profile="data_informed")
-            sc = res["scorecard"]["combined"] if isinstance(res.get("scorecard"), dict) else None
+            sc = res["scorecard"].get("combined_score") if isinstance(res.get("scorecard"), dict) else None
             flags = res.get("wipeout_flags", {})
             n_flags = flags.get("n_flags") if isinstance(flags, dict) else None
-        except Exception as e:
+        except Exception:
             sc, n_flags = None, None
         rows.append({"isin": r["isin"], "company": r.get("company_name"), "type": r.get("type"),
                      "listing_date": r.get("listing_date"), "score": sc, "n_flags": n_flags,
@@ -112,8 +112,10 @@ def analyze(scored):
     }
     g = scored[scored["gmp_pct"].notna() & scored["pop"].notna()]
     if len(g) >= config.MIN_N_HINT:
+        # spearman = pearson on ranks (avoids the scipy dependency)
+        rho = g["gmp_pct"].rank().corr(g["pop"].rank())
         out["gmp_pop"] = {"n": int(len(g)),
-                          "spearman": round(float(g["gmp_pct"].corr(g["pop"], method="spearman")), 3),
+                          "spearman": round(float(rho), 3),
                           "median_pop_when_gmp_ge_20": _med(g[g["gmp_pct"] >= 20]["pop"])[0],
                           "median_pop_when_gmp_lt_20": _med(g[g["gmp_pct"] < 20]["pop"])[0]}
     return out
