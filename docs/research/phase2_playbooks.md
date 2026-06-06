@@ -99,3 +99,72 @@ dd > −20/−30%} → 1y payoff vs B&H. Failure: cutting shallow dips of correc
 Nested regressions: alpha_1y ~ year-dummies vs + {dir60, vol20, phase}; both nest directions;
 ΔR² + collinearity (VIF); repeat for 1m alpha, multibagger, wipeout. Winner declared only at ≥5/6
 cells; outcome governs the gating variable for ALL other Phase-2 tests.
+
+---
+
+## FLOW FAMILIES — F2a-f, F7, F8  *(agent specs; status: READY)*
+
+**Shared cluster builder:** cluster = connected component over IPOs (same type) whose [open,close]
+windows overlap AND open_dates within W days. Baseline W=5; MANDATORY sweep W∈{2,3,5,7,10} — an
+effect surviving only one W = curve-fit = rejected. Singletons = placebo group. Precompute:
+cluster_id/size/listing_order/open_order. One parameterized builder feeds F2a-f, F7, F8.
+All forward outcomes = listing-anchored (secondary buyer); exclude unreliable_coverage rows.
+Cross-regime gate: headline cell must hold in boom AND longterm (N≥30) else "boom-only/MIXED".
+
+### F2a — Within-cluster GMP rank (the owner's pattern)
+L1: alpha_1m ~ gmp_rank_norm + cluster_FE; FALSIFIER: rank coef ≤0/insig. PLACEBOS: pseudo-clusters
+from singletons by month + 1000× GMP-rank shuffles (must exit 90% band).
+L2 table: [cohort,type,rank bucket{top/mid/bottom}] × {n, median pop, alpha_1w/1m, P10/P90, %pos};
+"pop-then-bleed" contrast = alpha_1m − alpha_1w.
+L3 grid: R1 buy bottom-rank member at listing; R2 buy bottom-2 (size≥3) × horizons {1w,1m,3m};
+BH = equal-weight whole cluster. Failure: whole-cluster-junk (median gmp<0) — neglected≠cheap there.
+N: MB-boom clusters ≈150-250; SME-longterm THIN.
+
+### F2b — Listing-order tone-setting
+L1: later-member open-gain ~ first_lister_day1_gain + own gmp + own sub (cluster SE); listings ≤5td
+apart. PLACEBO: calendar-adjacent non-cluster lister. L2: spill by first-lister bucket {pop>10 /
+flat / dud<−5} + decay by position 2 vs 3+. L3: R1 chase-tone when first popped; R2 value-of-skipping
+when first was a dud × {1d,1w,1m}. Failure: chase when later member's sub<2x. N≈80-140 MB-boom.
+
+### F2c — Ordinal fatigue in streaks
+Streak = same-type opens each ≤G td apart (G sweep {2,3,5}); ordinal = position. L1: outcomes ~
+ordinal + year_FE + log(size); fatigue must hit RETAIL sub harder than QIB (mechanism signature).
+L2: ordinal buckets {1, 2-3, 4+} monotonicity. L3: R1 buy leader vs R2 buy fatigued tail × {flip,1w,1m}.
+Failure: leader-chase under gmp>40 frenzy. MB ordinal-4+ THIN.
+
+### F2d — Retail congestion tax
+congestion_load = Σ issue_size of other overlapping books (same-type + all-type variants). L1: retail
+sub ~ congestion (expect −) while QIB ~ congestion ≈ 0 (category placebo; if QIB falls equally →
+macro, reject). L2: quartile dose-response retail vs QIB divergence + hidden-quality table (high
+congestion × high quality tercile → fwd alpha). L3: R1 congestion-hidden quality (top-congestion ×
+top-quality × sub<cluster-median) vs R2 same quality, low congestion × {1m,3m,6m}. R1 N≈40-70 (THIN).
+
+### F2e — QIB rotation to later-closing book
+MB clusters with staggered closes: sub_qib ~ close_order_norm + gmp + size + cluster_FE (expect +);
+retail placebo must NOT tilt. L2 adds anchor_pct compounding. L3: buy later- vs earlier-closing
+member × {flip,1m,3m}. Staggered-close size≥3 clusters RARE → bucket THIN everywhere.
+
+### F2f — Mega-IPO shadow + drought rebound
+is_mega = size ≥ p95 (per cohort+type); shadow = opening ≤S td after a mega's close (S sweep
+{5,10,15}); drought = first open after ≥D td gap (D sweep {10,15,21}). L1: shadow → lower retail
+sub/pop (controls: own gmp/sub); drought → higher. PLACEBO: pseudo-mega (random non-top-5%).
+L2: days-since-mega recovery curve {0-3,4-10,11-20}; drought dose {15-25,26-45,46+}.
+L3: R1 buy post-drought first-lister; R2 avoidance value of shadow × {flip,1w,1m}.
+Failure: drought-rebound on junk (gmp<0). Boom droughts THIN (~15-30); SME droughts ≈ none.
+
+### F7 — Disposition contagion / cold-streak survivors
+trailing_cohort_gain = median return_from_listing_1m (and pop variant) of listers in prior T days
+(T sweep {45,60,90}; same-type + all-type; null if <5 priors). L1: (i) retail sub ~ trailing gain
+(expect +, the contagion); (ii) fwd alpha_3m ~ trailing gain (expect −, the tax); MUST survive
+controlling trailing NIFTY (else it's generic momentum). L2: the SCISSORS chart — demand rises while
+forward alpha falls across sentiment quartiles. L3: R1 buy cold-tape listers (bottom quartile) vs
+R2 hot-chase (top) × {1m,3m,6m}. Failure: cold-tape × cold-Nifty (regime collapse, knife).
+Holdout: 1m/3m only (6m too young).
+
+### F8 — Unfilled-demand day-1 (undersubscription kink)
+unfilled = max(0, 1−sub_total_x); day1_strength = gain_close − gain_open. L1: day1_strength ~
+unfilled + sub_total + gmp (+FE) — unfilled must be INCREMENTAL; placebo kink at 2.0 must lose to
+the real kink at 1.0 (RD flavor). L2: fine bins around sub=1.0 in [0.5,1.5]; opposing-force check
+(deep undersub = junk signal vs clean-float mechanics — which dominates). L3: R1 mild-undersub band
+buy at open {day-close exit, 1w, 1m}; R2 deepest-undersub quartile = the DECLARED knife cell
+(report prominently). MB-boom undersub N<15 → primarily a LONGTERM + SME test (declared).
