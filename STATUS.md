@@ -25,6 +25,15 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
   forward test `python run_forward_test.py` · app `PYTHONPATH=. streamlit run app.py`.
 - Change→tests routing is automatic each turn (`verify.py` hook + `project_map.TEST_ROUTING`).
 
+## 🚀 PHASE 2 — declared 2026-06-06 (deep-hypothesis program + app redesign)
+- **Research program:** 8 families / ~26 second-order hypotheses, each tested at 3 layers
+  (existence → magnitude → PLAYBOOK with payoff distributions + failure cells).
+  Master docs: `docs/research/deep_hypotheses_2026-06.md` + `docs/research/phase2_playbooks.md`.
+- **App redesign (build LAST, design evolves after every run):** the simple 5-tab app must become
+  a sequenced research platform (IPO detail pages w/ event calendars + cluster context + reference
+  levels; evidence browser for hypothesis verdicts/playbooks; regime dashboard; forward-test tracker).
+  Design doc: `docs/research/app_phase2_design.md` (iterated per run; implementation = end of Phase 2).
+
 ## 📋 OPEN BACKLOG (all optional — pick when wanted)
 - **Re-run the forward test (~monthly)** as the 2026 cohort ages — the OOS verdict hardens; also
   re-test the SHORT-horizon idea then (parked: data said no, sample was young).
