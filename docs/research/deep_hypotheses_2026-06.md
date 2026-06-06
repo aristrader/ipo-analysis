@@ -78,6 +78,16 @@ T3d. Index/F&O inclusion drift — needs review-date calendar.
 T3e. Locked-share % beyond anchor — needs DRHP parsing (parked tooling exists).
 T3f. SME market-maker 3-yr expiry cliff — sample thins (only ≤2023 listings observable).
 
+## The 3-layer test protocol (owner's enhancement, 2026-06-06 — applies to EVERY family)
+1. EXISTENCE — does the pattern exist (event study, falsifier, placebo where available).
+2. MAGNITUDE & SHAPE — size, duration, dose-response, % of cases affected (e.g. F1: median day-90
+   dip %, days it lasts, depth vs anchor-share, share of IPOs that dip at all).
+3. PLAYBOOK — the conditional TRADE and its payoff distribution: pre-declared entry grid (e.g.
+   buy at day+1/+2 after the dip starts), horizons 2w/1m/3m, win-rate + median/P10/P90 vs the
+   buy-and-hold counterfactual, and the FAILURE CELLS (when the trade catches the knife).
+   Anti-curve-fit guard: the entry/threshold grid is fixed BEFORE looking; the WHOLE grid is
+   reported (no best-cell cherry-picking); any rule must hold cross-regime + on the OOS holdout.
+
 ## Suggested execution order (when approved)
 Wave 1: F1 (cleanest event study + placebo), F2a (the owner's pattern), F3 (+F4 same harness).
 Wave 2: F5, F6, F7, F8. Wave 3: Tier 2. Tier 3 only after a scoping pass on sources.
