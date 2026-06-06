@@ -126,3 +126,13 @@ results are kept on purpose).
 > `unreliable_coverage`. HONESTY: the secondary-buyer "100% ever gave an exit / break-even mean 0.0%" is a listing-day
 > tautology (the listing day is in-window) — now explicitly caveated in M1 + the app (only the +profit targets are
 > informative for the secondary buyer). Verdict: sound to ship after these fixes.
+
+## Context-signal verdicts (2026-06-06 — docs/research/context_signals_verdict.md)
+- **ctx_ipo_heat_90d (crowded IPO window)** — DISPLAY-ONLY, fold-candidate: negative in all 4 regime
+  cells (IC −0.13…−0.26; tercile spread −16…−29pp). In-score pending an OOS fold test.
+- ctx_nifty_mom_3m — REJECTED (IC ≈ 0 everywhere).
+- ctx_heat_pop_90d / ctx_sector_heat_180d — REJECTED (sign flips across cells).
+- SHORT score (GMP+subscription percentiles) — REJECTED (33→39% sliver on train; inverted on the 2026
+  holdout; high-short names have NEGATIVE 1y). The LONG score is the better short-horizon predictor.
+- "Hot pop then fades" — NOT SUPPORTED: first-month strength PERSISTS (hot 25-60% → +14% MB / +30% SME
+  at 1y; cold → −11%/−15%). m2 lens: drift after month 1 ≈ flat; P(1y<1m) ≈ coin flip.
