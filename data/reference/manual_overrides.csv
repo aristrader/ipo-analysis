@@ -1,0 +1,4 @@
+isin,column,value,reason,date
+INE00D001018,market_maker,New Berry Capitals Pvt. Ltd.,hand-verified; absent from all raw sources (showdown diff 2026-06-04),2026-06-01
+INE05FR01029,market_maker,NNM Securities Pvt. Ltd.,hand-verified; absent from all raw sources (showdown diff 2026-06-04),2026-06-01
+INE813V01022,market_maker,Pantomath Stock Brokers Pvt. Ltd.,hand-verified; absent from all raw sources (showdown diff 2026-06-04),2026-06-01

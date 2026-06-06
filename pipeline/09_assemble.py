@@ -112,6 +112,22 @@ for isin, u in uni.items():
     row['xcheck_flags'] = '|'.join(flags)
     rows.append(row)
 
+# ---- manual overrides (data/reference/manual_overrides.csv: isin,column,value,reason,date) ----
+# Hand-verified facts that exist in NO raw source (e.g. 3 market makers). Applied here, at the very
+# end, so a pipeline re-run REPRODUCES them (showdown finding 2026-06-04: they used to live only in
+# the output files and silently vanished on re-run).
+ov_path = 'data/reference/manual_overrides.csv'
+if os.path.exists(ov_path):
+    by_isin_ov = {}
+    for o in csv.DictReader(open(ov_path)):
+        by_isin_ov.setdefault(o['isin'], []).append(o)
+    n_ov = 0
+    for row in rows:
+        for o in by_isin_ov.get(row.get('isin'), []):
+            if o['column'] in row:
+                row[o['column']] = o['value']; n_ov += 1
+    print(f"manual overrides applied: {n_ov} cell(s) from {ov_path}")
+
 with open('data/master/ipo_analysis.csv','w',newline='') as fh:
     w = csv.DictWriter(fh, fieldnames=out_cols, extrasaction='ignore'); w.writeheader(); w.writerows(rows)
 os.makedirs('data/master/review',exist_ok=True)

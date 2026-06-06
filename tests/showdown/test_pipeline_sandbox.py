@@ -29,9 +29,9 @@ CHAIN = [
 ]
 
 # ---- the EXPLAINED differences (showdown_pipeline_diff.md) ----
-# 1. three hand-folded market makers (exist only in final files, not raw caches)
-ALLOWED_CELLS = {("INE00D001018", "market_maker"), ("INE05FR01029", "market_maker"),
-                 ("INE813V01022", "market_maker")}
+# 1. (CLOSED 2026-06-06) the three hand-folded market makers now live in
+#    data/reference/manual_overrides.csv and are re-applied by 09 — re-runs reproduce them.
+ALLOWED_CELLS = set()
 # 2. one ISIN whose screener cache rows arrived after the freeze (screener-wins refill)
 ALLOWED_ISINS_ANY_COL = {"INE338Y01016"}
 # staging/master snapshots are stale relative to the grown raw cache — final substrate unaffected
