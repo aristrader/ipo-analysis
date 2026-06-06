@@ -19,6 +19,11 @@ pipeline + 32 scrapers + 25 data + 12 showdown + 7 map), mutation-validated **28
 ## 🏃 NOW
 - **Nothing in progress. SHOWDOWN-CERTIFIED (2026-06-04) + FIRST REFRESH EXECUTED (2026-06-06):**
   dataset 2296 → **2384 rows** (+88 new 2026 IPOs, prices through 2026-06-05). Full evidence in DONE.md.
+- **Crowded-window FOLDED into the score (2026-06-06):** 5/5 OOS splits improved (+10..+56pp);
+  weight 0.254 = #2 component; in-sample top-quintile lift +39.5pp. **48 agent-generated hypotheses
+  batch-tested:** 0 new pre-IPO signals (all → rejected registry); 1 robust conditioning rule
+  (path_ratio_1m: month-1 asymmetry predicts the year); watchlist: pe_vs_sector(MB), qib_retail_ratio
+  (`docs/research/hypothesis_batch_2026-06-06.md`).
 - **Short-horizon lens shipped (2026-06-06):** MFE/MAE+timing now at 1m/3m/6m too. Study verdicts:
   crowded-IPO-window signal REAL & negative (display-only, fold-candidate); "hot pops fade" NOT supported
   (strength persists); SHORT score rejected — the LONG score is the better short-horizon predictor

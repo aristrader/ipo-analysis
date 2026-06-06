@@ -4,6 +4,16 @@ Completed items moved here to keep TODO.md lean. Most-recent first.
 
 ---
 
+## Hypothesis factory: crowded-window FOLD + 48 hypotheses batch-tested  (2026-06-06)
+- OOS fold test (wipeout-fold protocol): crowded_window improved lift in **5/5 splits** (+10..+56pp)
+  → FOLDED as the 8th component (presets 0; data_informed re-derived: weight **0.254**, lift +39.5pp).
+- 4 subagents (structure/demand/path/fundamentals) → 48 hypotheses → 34 features → 4-cell harness
+  (`tools/research/hypothesis_batch.py`): **zero new pre-IPO signals survived** (~30 → rejected registry);
+  path_ratio_1m = robust CONDITIONING rule (persistence made tradable); days_to_peak & turnover-to-size
+  exposed as mechanical/look-ahead (rejected); watchlist: pe_vs_sector (MB-only −43pp), qib_retail_ratio.
+- The honest take: the existing score + crowded_window already captures the predictable part — new ideas
+  could not beat in, which is evidence the system is near the data's edge, not a failure.
+
 ## Short-horizon lens + market-context signals (study + verdicts)  (2026-06-06)
 - **Substrate:** MFE/MAE + timing extended to 1m/3m/6m (07+merge+09-clamp; old horizons byte-stable —
   goldens 0 changed). Found+fixed: 74 inferred-split weekly rows were on the pre-remediation scale at the
