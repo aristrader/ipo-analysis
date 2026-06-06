@@ -8,18 +8,23 @@
 > "What is this / conventions" → `CLAUDE.md`. "Findings + tested-signal registry" → `rules/index.md`.
 > Quick check: `python verify.py` (counts, drift, data-vs-backup; regenerates MAP.md).
 
-_Canonical facts (re-derived by `verify.py` each turn): **29 findings, 207 tests** (94 layer3 + 37
+_Canonical facts (re-derived by `verify.py` each turn): **29 findings, 211 tests** (96 layer3 + 37
 pipeline + 32 scrapers + 25 data + 12 showdown + 7 map), mutation-validated **28/28**. Substrate =
-`data/master/ipo_analysis.csv`, **2296 rows**, frozen, as-of `config.AS_OF_DATE` (2026-05-31),
-byte-identical to `archive/pre_drhp_20260601/`. Git LOCAL-ONLY._
+`data/master/ipo_analysis.csv` — movable facts (rows / as-of / backup pointer) live in
+`data/master/substrate_meta.json` (currently **2384 rows, as-of 2026-06-06**; snapshot
+`archive/pre_refresh_20260606/`). Git LOCAL-ONLY._
 
 ---
 
 ## 🏃 NOW
-- **Nothing in progress. Complete, verified, SHOWDOWN-CERTIFIED (2026-06-04** — full evidence in DONE.md
-  + `docs/research/showdown_{audit,pipeline_diff,mutation}.md`).
-- The two commands that matter: fast suite `PYTHONPATH=. pytest tests -q` (~80s) ·
-  pre-release gate `SHOWDOWN=1 PYTHONPATH=. pytest tests/showdown -q` (~3 min).
+- **Nothing in progress. SHOWDOWN-CERTIFIED (2026-06-04) + FIRST REFRESH EXECUTED (2026-06-06):**
+  dataset 2296 → **2384 rows** (+88 new 2026 IPOs, prices through 2026-06-05). Full evidence in DONE.md.
+- **Forward test (true OOS, 82 never-seen IPOs): the score ordered early outcomes monotonically**
+  (low-score bucket 1m −7.7% / 3m −11.3% vs high-score +6.7% / +8.4%; wipeout-flagged −7.7% vs clean
+  +2.9% at 1m). EARLY READ only — `docs/research/forward_test_2026.md`; re-run `run_forward_test.py`
+  as the cohort ages.
+- The commands that matter: fast suite `PYTHONPATH=. pytest tests -q` (~85s) · pre-release gate
+  `SHOWDOWN=1 PYTHONPATH=. pytest tests/showdown -q` · refresh `python run_refresh.py [--apply]`.
 - Change→tests routing is automatic each turn (`verify.py` hook + `project_map.TEST_ROUTING`).
 
 ## 📋 OPEN BACKLOG (all optional — pick when wanted)

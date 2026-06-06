@@ -55,7 +55,7 @@ PIPELINE_HELPERS = {
 # ----------------------------------------------------------------- data products
 # data/master/ — the canonical outputs. THE one to start from is ipo_analysis.csv.
 DATA_PRODUCTS = {
-    "data/master/ipo_analysis.csv":   "THE Layer-3 substrate: features+outcomes+quality+flags (2296 rows)",
+    "data/master/ipo_analysis.csv":   "THE Layer-3 substrate: features+outcomes+quality+flags (rows per substrate_meta.json)",
     "data/master/universe.csv":       "unified feature table (step 08 output)",
     "data/master/returns_summary.csv":"price-derived outcomes (step 07 output)",
     "data/master/mainboard.csv":      "boom mainboard master",
@@ -111,6 +111,8 @@ ENTRYPOINTS = {
     "PYTHONPATH=. python -m pytest tests -q":    "run all tests",
     "PYTHONPATH=. streamlit run app.py":         "the interactive app (5 tabs)",
     "python verify.py":                          "structure/invariant checkpoint + regenerate MAP.md",
+    "PYTHONPATH=. python run_refresh.py":        "bring the dataset to today (dry-run; --apply executes)",
+    "PYTHONPATH=. python run_forward_test.py":   "score the never-seen post-refresh cohort (EARLY READ)",
 }
 
 # ------------------------------------------------------- where the rules/state live
@@ -162,6 +164,11 @@ CONTEXTS = {
     ],
     "schema / what a column means": ["docs/schema.md", "data/master/ipo_analysis.csv"],
     "DRHP financials recovery": ["tools/drhp/", "docs/research/drhp_recovery.md"],
+    "refresh the data / new IPOs": [
+        "run_refresh.py", "tools/refresh/", "data/master/substrate_meta.json",
+        "data/reference/golden_numbers.json", "data/reference/manual_overrides.csv",
+        "layer3/forward_test.py", "run_forward_test.py", "docs/WORKFLOWS.md",
+    ],
 }
 
 # ------------------------------------------------------------ TEST ROUTING
@@ -192,6 +199,8 @@ TEST_ROUTING = [
     ("data/master/*", ["PYTHONPATH=. pytest tests/data -q"]),
     ("app.py", ["SHOWDOWN=1 PYTHONPATH=. pytest tests/showdown/test_app_smoke.py -q"]),
     ("run_refresh.py", ["PYTHONPATH=. pytest tests/pipeline/test_refresh_lib.py tests/data -q"]),
+    ("layer3/forward_test.py", ["PYTHONPATH=. pytest tests/layer3/test_forward_test.py -q"]),
+    ("run_forward_test.py", ["PYTHONPATH=. pytest tests/layer3/test_forward_test.py -q"]),
     ("tools/refresh/*", ["PYTHONPATH=. pytest tests/pipeline/test_refresh_lib.py tests/data -q"]),
     ("project_map.py", ["PYTHONPATH=. pytest tests/test_project_map.py -q"]),
     ("verify.py", ["PYTHONPATH=. pytest tests/test_project_map.py -q"]),

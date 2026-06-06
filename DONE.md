@@ -4,6 +4,29 @@ Completed items moved here to keep TODO.md lean. Most-recent first.
 
 ---
 
+## REFRESH FLOW BUILT + FIRST REFRESH EXECUTED + FORWARD TEST  (2026-06-06)
+- **Built (spec/plan in docs/superpowers/):** `run_refresh.py` (dry-run / --apply, 9 idempotent phases),
+  `tools/refresh/ingest.py` (per-source new-IPO ingestion, idempotent appends), movable-facts rails
+  (`substrate_meta.json` read by config/verify/map; goldens → `golden_numbers.json` via `layer3/goldens.py`
+  + derive tool), `manual_overrides.csv` applied in 09 (market-maker wart closed), dynamic boom-year window
+  (**bug fixed: 01 hardcoded 2020-2025 → 2026 IPOs were silently dropped**), indices shrink-guard,
+  manifest-safe price backfill. +9 tests (refresh lib 6 + forward test 2 + routing 1) → suite **211**.
+- **Executed:** dataset **2296 → 2384 rows** (+88 2026 IPOs: 20 MB / 62 SME listed + 6 upcoming);
+  prices extended to 2026-06-05 incl. **3,960 backfilled rows** (99 days) for the new ISINs;
+  corp_actions +39; as_of → 2026-06-06; snapshot `archive/pre_refresh_20260606/`; goldens consciously
+  re-derived; suite green on the new substrate; weights + report rebuilt.
+- **Incidents caught by the rails (fixed-forward):** (1) indices re-pull TRUNCATED both benchmark CSVs
+  (endpoints changed; script exits 0) → caught by the post-refresh test gate (alpha_sc all-NaN, early
+  vintages losing alpha) → restored from git + shrink-guard added; (2) backfill silently fetched 0 rows
+  (date-vs-datetime TypeError hidden by a blanket except) → caught by the forward test's empty outcomes →
+  fixed (datetimes + logged errors) and re-run clean; (3) three data tests hardcoded frozen literals
+  (rows/cohort/weights) → would have failed every legitimate refresh → moved to movable-fact asserts.
+- **FORWARD TEST (true out-of-sample, 82 never-seen IPOs scored against the pre-refresh snapshot):**
+  score buckets ordered realized early outcomes MONOTONICALLY — low 33-score: 1m −7.7%/3m −11.3%;
+  mid 43: +2.9%/+5.8%; high 58: **+6.7%/+8.4%**. Wipeout-flagged (n=38) 1m −7.7% vs clean (n=44) +2.9%.
+  GMP→pop spearman +0.24 (n=56; weaker than history — 2026 pops are muted, median ≈0). EARLY READ
+  (0-5 months, small N) — `docs/research/forward_test_2026.md`; rerun `run_forward_test.py` as it ages.
+
 ## FINAL SHOWDOWN — testing & verification program (6 phases, auto-mode)  (2026-06-04)
 - **Spec/plan:** `docs/superpowers/specs/2026-06-04-final-showdown-testing-design.md` + plans/. Suite
   **139 → 197 tests** (94 layer3 + 37 pipeline + 32 scrapers + 16 data + 11 showdown + 7 map); fast suite

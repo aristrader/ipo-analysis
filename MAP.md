@@ -12,6 +12,8 @@
 - `PYTHONPATH=. python -m pytest tests -q` — run all tests
 - `PYTHONPATH=. streamlit run app.py` — the interactive app (5 tabs)
 - `python verify.py` — structure/invariant checkpoint + regenerate MAP.md
+- `PYTHONPATH=. python run_refresh.py` — bring the dataset to today (dry-run; --apply executes)
+- `PYTHONPATH=. python run_forward_test.py` — score the never-seen post-refresh cohort (EARLY READ)
 
 ## Context index — working on X? open these
 - **score / evaluate a new IPO** → `layer3/predictor/scorecard.py`, `layer3/predictor/weights.py`, `layer3/predictor/predict.py`, `layer3/predictor/analogs.py`, `rules/index.md`, `predict_ipo.py`, `tests/layer3/test_predictor.py`
@@ -26,6 +28,7 @@
 - **testing / verification / the showdown** → `tests/`, `tests/data/`, `tests/showdown/`, `tools/mutation/`, `pytest.ini`, `docs/research/showdown_audit.md`, `docs/research/showdown_pipeline_diff.md`, `docs/research/showdown_mutation.md`
 - **schema / what a column means** → `docs/schema.md`, `data/master/ipo_analysis.csv`
 - **DRHP financials recovery** → `tools/drhp/`, `docs/research/drhp_recovery.md`
+- **refresh the data / new IPOs** → `run_refresh.py`, `tools/refresh/`, `data/master/substrate_meta.json`, `data/reference/golden_numbers.json`, `data/reference/manual_overrides.csv`, `layer3/forward_test.py`, `run_forward_test.py`, `docs/WORKFLOWS.md`
 
 ## Flow — data pipeline (DAG, canonical order)
 ```
@@ -56,7 +59,7 @@ WEB SOURCES --scrapers/--> data/raw/ + data/reference/ + data/prices/
 - `pipeline/03f_sector_mcap.py` — sector + market_cap_class; folded into 08_build_universe — run standalone only to re-source
 
 ## Data products (`data/master/`)
-- `data/master/ipo_analysis.csv` — THE Layer-3 substrate: features+outcomes+quality+flags (2296 rows)
+- `data/master/ipo_analysis.csv` — THE Layer-3 substrate: features+outcomes+quality+flags (rows per substrate_meta.json)
 - `data/master/universe.csv` — unified feature table (step 08 output)
 - `data/master/returns_summary.csv` — price-derived outcomes (step 07 output)
 - `data/master/mainboard.csv` — boom mainboard master
