@@ -136,3 +136,17 @@ results are kept on purpose).
   holdout; high-short names have NEGATIVE 1y). The LONG score is the better short-horizon predictor.
 - "Hot pop then fades" — NOT SUPPORTED: first-month strength PERSISTS (hot 25-60% → +14% MB / +30% SME
   at 1y; cold → −11%/−15%). m2 lens: drift after month 1 ≈ flat; P(1y<1m) ≈ coin flip.
+
+## Hypothesis batch 2026-06-06 (48 agent-generated; docs/research/hypothesis_batch_2026-06-06.md)
+- **FOLDED: crowded_window** (5/5 OOS splits improved, +10..+56pp; weight 0.254 in data_informed).
+- **ROBUST CONDITIONING (not in score): path_ratio_1m** — month-1 up/down asymmetry predicts the year
+  (IC +0.23..+0.49 all 4 cells); the persistence rule for hold/exit decisions.
+- REJECTED (mixed/thin across regime cells — do not re-test without new evidence): band_position,
+  anchor_ratio/has_anchor, fixed_price, promoter_dilution_pp, size_z, min_investment, all_ofs,
+  banker_prior_alpha, nii_froth, gmp_sub_disagree, gmp_z, undersubscribed, demand_per_size,
+  breadth_hot_count, qib_cold_retail_hot, sales_accel_spike, cf_conversion, borrow_ramp, opm_trend,
+  sales_vs_asset_growth, fresh_dilution, profitable_stagnant, objects_debt_repay, lday_close_position,
+  lday_green, lday_giveback, volatility-early, circuit_lock, days_to_peak (mechanical),
+  turnover_to_size (look-ahead).
+- WATCHLIST: pe_vs_sector (MB-only lean-negative, −43pp spread; blocked on SME PE data),
+  qib_retail_ratio (lean-positive, display-only candidate).
