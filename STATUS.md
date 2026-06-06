@@ -19,6 +19,10 @@ pipeline + 32 scrapers + 25 data + 12 showdown + 7 map), mutation-validated **28
 ## 🏃 NOW
 - **Nothing in progress. SHOWDOWN-CERTIFIED (2026-06-04) + FIRST REFRESH EXECUTED (2026-06-06):**
   dataset 2296 → **2384 rows** (+88 new 2026 IPOs, prices through 2026-06-05). Full evidence in DONE.md.
+- **Short-horizon lens shipped (2026-06-06):** MFE/MAE+timing now at 1m/3m/6m too. Study verdicts:
+  crowded-IPO-window signal REAL & negative (display-only, fold-candidate); "hot pops fade" NOT supported
+  (strength persists); SHORT score rejected — the LONG score is the better short-horizon predictor
+  (`docs/research/context_signals_verdict.md`).
 - **Forward test (true OOS, 82 never-seen IPOs): the score ordered early outcomes monotonically**
   (low-score bucket 1m −7.7% / 3m −11.3% vs high-score +6.7% / +8.4%; wipeout-flagged −7.7% vs clean
   +2.9% at 1m). EARLY READ only — `docs/research/forward_test_2026.md`; re-run `run_forward_test.py`

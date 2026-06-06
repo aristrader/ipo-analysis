@@ -4,6 +4,18 @@ Completed items moved here to keep TODO.md lean. Most-recent first.
 
 ---
 
+## Short-horizon lens + market-context signals (study + verdicts)  (2026-06-06)
+- **Substrate:** MFE/MAE + timing extended to 1m/3m/6m (07+merge+09-clamp; old horizons byte-stable —
+  goldens 0 changed). Found+fixed: 74 inferred-split weekly rows were on the pre-remediation scale at the
+  new horizons (09's invariant clamp extended — its exact documented purpose). Suite 207.
+- **Context signals (point-in-time, layer3/context.py):** ipo_heat_90d = the real one (negative in ALL 4
+  regime cells, −16…−29pp tercile spreads) → display-only fold-candidate. Nifty momentum / heat-pop /
+  sector-heat / SHORT-score → rejected (zero, sign-flipping, or holdout-inverted). Commodities excluded
+  by decision. All registered in rules/index.md.
+- **User's fade hypothesis tested:** hot first months do NOT fade — they persist (hot→+14% MB/+30% SME
+  at 1y vs cold −11/−15%). Play/skip guidance: LONG score + red flags + crowded-window caution; no
+  separate short-game model (data said no). Re-test as the 2026 cohort matures.
+
 ## REFRESH FLOW BUILT + FIRST REFRESH EXECUTED + FORWARD TEST  (2026-06-06)
 - **Built (spec/plan in docs/superpowers/):** `run_refresh.py` (dry-run / --apply, 9 idempotent phases),
   `tools/refresh/ingest.py` (per-source new-IPO ingestion, idempotent appends), movable-facts rails
