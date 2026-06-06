@@ -58,7 +58,8 @@ def format_text(r):
     L.append("COMPONENT SCORES (0–100):")
     names = {"return_potential": "Return potential", "multibagger_odds": "Multibagger odds",
              "downside_safety": "Downside safety", "liquidity": "Liquidity", "quality": "Quality",
-             "tradeable_upside": "Tradeable upside", "wipeout_safety": "Wipeout-safety"}
+             "tradeable_upside": "Tradeable upside", "wipeout_safety": "Wipeout-safety",
+             "crowded_window": "Crowded-window"}
     for k, c in sc["components"].items():
         s = c.get("score")
         w = sc.get("weights", {}).get(k, 0)

@@ -44,7 +44,8 @@ def test_scorecard_components_and_combined(df):
     r = analogs.find_analogs(q, df=df, k=50)
     sc = scorecard.scorecard(q, r["cohort"], r, profile="balanced", df=df)
     assert set(sc["components"]) == {"return_potential", "multibagger_odds", "downside_safety",
-                                     "liquidity", "quality", "tradeable_upside", "wipeout_safety"}
+                                     "liquidity", "quality", "tradeable_upside", "wipeout_safety",
+                                     "crowded_window"}
     for c in sc["components"].values():
         assert c["score"] is None or (0 <= c["score"] <= 100)
     assert sc["combined_score"] is None or (0 <= sc["combined_score"] <= 100)

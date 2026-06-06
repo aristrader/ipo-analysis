@@ -14,10 +14,10 @@ import pandas as pd
 from layer3 import spine, config
 from layer3.predictor import analogs, scorecard
 
-COMPONENTS = ["return_potential", "multibagger_odds", "downside_safety", "liquidity", "quality", "wipeout_safety"]
+COMPONENTS = ["return_potential", "multibagger_odds", "downside_safety", "liquidity", "quality", "wipeout_safety", "crowded_window"]
 WEIGHTS_PATH = config.ROOT / "data/master/scorecard_weights.json"
 
-_QUERY_FEATS = ["broad_sector", "market_cap_class", "ofs_pct", "sub_total_x", "sub_qib_x",
+_QUERY_FEATS = ["ctx_ipo_heat_90d", "broad_sector", "market_cap_class", "ofs_pct", "sub_total_x", "sub_qib_x",
                 "pe_ratio", "pre_ipo_roe_pct", "pre_ipo_debt_equity", "pre_ipo_pat_margin_pct",
                 "promoter_post_issue_pct", "gmp_pct", "issue_size_cr", "pre_ipo_pat",
                 "pre_ipo_net_sales", "lead_manager"]   # last two feed the wipeout-safety component
@@ -42,7 +42,10 @@ def score_all_pointintime(df, horizon="3y", max_ipos=None):
     analog's matured alpha can only inform a query that listed AFTER the analog's horizon completed.
     Returns one row per IPO with its 5 component scores + realized alpha at `horizon`."""
     import pandas as _pd
+    from layer3 import context as _ctx
     df = df.copy()
+    if "ctx_ipo_heat_90d" not in df.columns:
+        df = _ctx.add_context_features(df)        # point-in-time crowded-window feature
     df["_ld"] = pd.to_datetime(df["listing_date"], errors="coerce")
     hd = _pd.Timedelta(days=_H_DAYS.get(horizon, 1095))
     matured = df[df[f"alpha_{horizon}"].notna() & df["_ld"].notna()].sort_values("_ld")
@@ -68,6 +71,7 @@ def score_all_pointintime(df, horizon="3y", max_ipos=None):
             "liquidity": scorecard.liquidity(coh)["score"],
             "quality": scorecard.quality(q)["score"],
             "wipeout_safety": scorecard.wipeout_safety(q, df=df)["score"],
+            "crowded_window": scorecard.crowded_window(q, df=df)["score"],
         })
     return pd.DataFrame(rows)
 

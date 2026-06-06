@@ -13,9 +13,9 @@ from layer3 import spine, config
 # movement-lens display (P(cohort reached +X%)); weighting it in would need a weights re-fit + OOS
 # re-validation — deferred (see NEEDS_YOUR_INPUT.md).
 PRESETS = {
-    "balanced":     dict(return_potential=1.0, multibagger_odds=1.0, downside_safety=1.0, liquidity=0.7, quality=0.8, tradeable_upside=0.0, wipeout_safety=0.0),
-    "conservative": dict(return_potential=0.5, multibagger_odds=0.4, downside_safety=1.5, liquidity=1.2, quality=1.2, tradeable_upside=0.0, wipeout_safety=0.0),
-    "aggressive":   dict(return_potential=1.4, multibagger_odds=1.4, downside_safety=0.6, liquidity=0.5, quality=0.6, tradeable_upside=0.0, wipeout_safety=0.0),
+    "balanced":     dict(return_potential=1.0, multibagger_odds=1.0, downside_safety=1.0, liquidity=0.7, quality=0.8, tradeable_upside=0.0, wipeout_safety=0.0, crowded_window=0.0),
+    "conservative": dict(return_potential=0.5, multibagger_odds=0.4, downside_safety=1.5, liquidity=1.2, quality=1.2, tradeable_upside=0.0, wipeout_safety=0.0, crowded_window=0.0),
+    "aggressive":   dict(return_potential=1.4, multibagger_odds=1.4, downside_safety=0.6, liquidity=0.5, quality=0.6, tradeable_upside=0.0, wipeout_safety=0.0, crowded_window=0.0),
 }
 
 
@@ -254,6 +254,54 @@ def wipeout_safety(query, df=None):
     return _comp(float(max(0.0, 100.0 - 50.0 * wf["n_flags"])), n_flags=wf["n_flags"], n_checked=wf["n_checked"])
 
 
+def crowded_window(query, df=None):
+    """SCORE component (0-100): how CROWDED the IPO window was — inverse percentile of
+    ctx_ipo_heat_90d (same-segment listings in the prior 90 days) within the segment.
+    Crowded window -> LOW score. FOLDED into data_informed 2026-06-06: negative in all
+    4 regime cells AND improved OOS top-quintile lift in 5/5 splits (+10..+56pp) —
+    docs/research/context_signals_verdict.md + the heat_fold_test."""
+    if df is None:
+        return _comp(None, n=0)
+    heat = query.get("ctx_ipo_heat_90d")
+    seg = query.get("type")
+    if heat is None and query.get("listing_date") is None:
+        # LIVE query: today's window = listings in the substrate's last 90 days
+        from layer3 import config as _cfg
+        ld = pd.to_datetime(df.get("listing_date"), errors="coerce")
+        asof = pd.Timestamp(_cfg.AS_OF_DATE)
+        m = (df.get("type") == seg) & ld.notna() & (ld >= asof - pd.Timedelta(days=90)) & (ld < asof)
+        heat = int(m.sum())
+    if heat is None or seg not in ("MB", "SME"):
+        return _comp(None, n=0)
+    ref = _heat_reference(df, seg)
+    if ref is None or len(ref) < 30:
+        return _comp(None, n=0)
+    pct_below = float((ref < float(heat)).mean())
+    return _comp(round((1.0 - pct_below) * 100, 1), heat=float(heat), n=int(len(ref)))
+
+
+_HEAT_REF_CACHE = {}
+
+
+def _heat_reference(df, seg):
+    """Segment heat distribution of the substrate (computed once per frame+segment)."""
+    key = (id(df), len(df), seg)
+    if key in _HEAT_REF_CACHE:
+        return _HEAT_REF_CACHE[key]
+    if "ctx_ipo_heat_90d" in df.columns:
+        ref = pd.to_numeric(df.loc[df["type"] == seg, "ctx_ipo_heat_90d"], errors="coerce").dropna()
+    else:
+        from layer3 import context as _ctx
+        sub = df[df["type"] == seg]
+        ld = pd.to_datetime(sub["listing_date"], errors="coerce").sort_values()
+        dl = ld.dropna().tolist()
+        import bisect as _b
+        ref = pd.Series([_b.bisect_left(dl, t) - _b.bisect_left(dl, t - pd.Timedelta(days=90))
+                         for t in dl], dtype=float)
+    _HEAT_REF_CACHE[key] = ref
+    return ref
+
+
 def quality(query):
     """From the QUERY's OWN fundamentals (profitable / ROE / margin / debt) + two VALIDATED
     hard-to-fake red flags: the accrual flag (profit but negative operating cash — N8) and the
@@ -324,6 +372,7 @@ def scorecard(query, cohort, analog_result, profile="balanced", weights=None, df
         "quality": quality(query),
         "tradeable_upside": tradeable_upside(cohort, h),
         "wipeout_safety": wipeout_safety(query, df),
+        "crowded_window": crowded_window(query, df),
     }
     w = weights or _resolve_weights(profile)
     num = den = 0.0
