@@ -168,3 +168,81 @@ the real kink at 1.0 (RD flavor). L2: fine bins around sub=1.0 in [0.5,1.5]; opp
 (deep undersub = junk signal vs clean-float mechanics — which dominates). L3: R1 mild-undersub band
 buy at open {day-close exit, 1w, 1m}; R2 deepest-undersub quartile = the DECLARED knife cell
 (report prominently). MB-boom undersub N<15 → primarily a LONGTERM + SME test (declared).
+
+---
+
+## PATH & GMP FAMILIES — F5a-f, F6a-d, T2g/T2i/T2j  *(agent specs; status: READY)*
+Conventions: t=0 = listing day; alpha vs Nifty; exclude unreliable_coverage; min-N 30 (12-29 = "thin",
+<12 suppressed); holdout = train 2006-2021 rules locked, test 2022-2026.
+
+### F5a — Issue-price magnet
+Approach episode: close enters [0.97,1.00)×issue having been <0.95×issue in prior 10d. Outcome 10d:
+clear (>1.02×issue) vs reject (<0.97). FALSIFIER: P(clear) ≥ P(reject) or ≈placebo. PLACEBOS: 20d-MA
+level + random level at equal distance. L2: by approach depth {−5/−10/−20%}: stall≥3d rate, clear
+rate, dwell, conditional fwd-10d drift. L3 grid: {buy-on-touch vs buy-on-confirmed-clear} × depth;
+failure: touch-buys on shallow approaches (dead money). N: 800-1200 episodes.
+
+### F5b — Listing-day-high trapped-supply ceiling
+Confirmed breakout: close>1.02×LDH held 3d; touch-and-fail: high≥0.99×LDH but never holds. Fwd-20d
+alpha post-confirm vs post-fail. PLACEBO level: listing-day CLOSE (no overhang). L2: by days-to-first-
+touch {≤10/11-30/31-60}: confirm rate, alphas, breakout volume ratio. L3: {confirmed-only vs naked-
+touch} × touch-timing; failure: naked touches ≤10d (supply unabsorbed). N: 700-1000 breakouts.
+
+### F5c — Volume-confirmed crossings
+Confirmed = crossing-day volume ≥1.5× trailing-20d median (sensitivity 1.25/1.5/2.0×). Hold-rate(5d)
++ fwd-10d alpha confirmed vs naked; PLACEBO: shuffled volume labels. L3: {confirmed-only vs all} ×
+{issue-clear, LDH-breakout, both}; failure: naked LDH (whipsaw). SME thin at 2.0×.
+
+### F5d — Double-reference ordering
+Both refs live (traded below issue + below LDH): P(clear LDH ≤60d | reclaimed issue first) vs not.
+PLACEBO: arbitrary A→B level pairs. L2: 3-state transition matrix {below-issue / between / above-LDH}
+at 20d/60d + dwell times. L3: {enter on issue-reclaim targeting LDH vs after LDH clear} × dwell
+buckets; failure: reclaim-entry with dwell>30d (grind). N: 400-700.
+
+### F5e — Capitulation flag (never reclaimed issue by 90d)
+P(wipeout | flag) with the INCREMENTAL test vs existing N14 flags (must add lift beyond tiny-sales/
+loss-making/obscure-banker). PLACEBO: never-reclaimed-listing-close (weaker ref). L3 = red-flag
+screen {flag ×existing-flag-count 0/1/2+} → avoided-loss; report the screen's miss rate. SCORE
+POLICY: display-only unless OOS-incremental. Wipeout-conditional cells thin.
+
+### F5f — Round-number magnets
+Tiers: A=×100/×50, B=×10, C=ugly. Stall-rate gradient A>C at equal distance, stratified by price level.
+PLACEBO: round levels that are NOT the issue price (generic round-number psych vs issue-anchor —
+both real, distinct claims). L3 2×2: {tier A vs C} × {touch vs clear}; failure: touch-buy tier A.
+
+### F6a — GMP-surprise residual
+surprise = adj_listing_gain − GMP/issue_price. Quintile → 1w/1m drift (must add beyond raw pop —
+partial out). PLACEBO: stale 5d-before GMP must predict weaker. L3: {long Q5, avoid/short Q1} ×
+{1w,1m,3m}; failure: Q5 at 3m (drift decayed). GMP pre-2019 sparse → boom-weighted, declared.
+
+### F6b — GMP × retail-share (self-fulfilling)
+Interaction GMP×retail_share on pop + 1w drift; PLACEBO: GMP×QIB-share must be ≪. L2: 3×3 GMP-tercile
+× retail-share-tercile surface. L3: {apply only high-retail vs regardless} × GMP tercile; failure:
+high-GMP×QIB-dominated. Corner cells structurally thin.
+
+### F6c — GMP meaning flips by regime
+GMP→1m-drift slope sign by regime {hot/neutral/cold} (interaction test; PLACEBO: shuffled regimes).
+L3: regime-conditional GMP strategy (long cold-high-GMP, fade hot-high-GMP) vs regime-blind; failure:
+regime-blind in hot. KEY THIN CELL: cold×high-GMP (cold suppresses GMP) — flag prominently.
+
+### F6d — T+3 natural experiment
+Clean-pre (≤Aug-2023) vs clean-post (≥Dec-2023), DROP Sep-Nov-2023 transition; GMP→pop slope/R²/
+residual-SD comparison + fake-date placebo (Dec-2022). Confound: 2024-25 frenzy — partial out
+IPO-market temperature. L3 = GMP trustworthiness for pop-sizing by era.
+
+### T2g — Same-banker collision
+Canonicalize lead_manager FIRST. Collision = same lead, windows ≤10td apart. Underperformance must
+survive regime control; PLACEBO: different-banker same-window (calendar congestion vs banker effect).
+L2: window tightness {same-week/≤10d/11-20d} + does the LATER one suffer more. N 150-400 pairs.
+
+### T2i — Day-1 flipping proxy
+flip = day1_volume/shares_offered; + day1→5 reversal. Top-quintile → lower 6m/1y alpha (partial out
+pop). PLACEBO: day-20 turnover must NOT predict. MB only reliable (SME circuit distorts day-1 volume).
+L3: {avoid high-flip, fade high-flip+reversed} × {1m,6m,1y}; failure: acting at 1m (unresolved churn).
+
+### T2j — SME circuit-cage path signature
+Matched |move| buckets: SME (5% bands) vs MB (20%) — monotone run length, days-to-MFE/MAE, fraction
+of limit days, give-back. PLACEBO: large-MB that never hits bands. L3 entry-timing: {day-1 vs first
+non-limit consolidation day} × trend-so-far; FAILURE (the practical warning): day-1 entry into a
+down-trending caged SME — locked in while it steps down 5%/day, can't exit at limit-down.
+Boom/2013+ finding by construction (SME barely existed before).
