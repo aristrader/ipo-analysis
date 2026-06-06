@@ -150,3 +150,11 @@ results are kept on purpose).
   turnover_to_size (look-ahead).
 - WATCHLIST: pe_vs_sector (MB-only lean-negative, −43pp spread; blocked on SME PE data),
   qib_retail_ratio (lean-positive, display-only candidate).
+
+## Tier-1 wave-1a verdicts (2026-06-06 — docs/research/tier1_wave1_verdicts.md)
+- T2f vintage: YEAR > regime 4/4 cells — regime does not subsume vintage; year stays the gate.
+- F3 regime-gated junk bounce: FALSIFIED on demand-proxy (placebo failed both segments; TP delta ≈0).
+  One PIT-score re-test permitted later.
+- F1 anchor-unlock day-30/90 dip: FALSIFIED — placebo inverted (pre-2022 more negative than
+  treatment), dose-response wrong sign, dip-buy loses (38% win). No Indian replication of the
+  US lockup-expiry effect. Calendar = information only, no edge chip.
