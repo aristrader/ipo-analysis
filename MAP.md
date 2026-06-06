@@ -98,6 +98,6 @@ WEB SOURCES --scrapers/--> data/raw/ + data/reference/ + data/prices/
 
 ## Invariants (re-derived by verify.py)
 - n_findings = 29
-- substrate_rows = 2296
-- as_of_date = 2026-05-31
-- archive_pointer = archive/pre_drhp_20260601
+- substrate_rows = 2384
+- as_of_date = 2026-06-06
+- archive_pointer = archive/pre_refresh_20260606

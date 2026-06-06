@@ -1,8 +1,8 @@
 {
-  "return_potential": 0.259,
-  "multibagger_odds": 0.262,
-  "downside_safety": 0.349,
+  "return_potential": 0.249,
+  "multibagger_odds": 0.265,
+  "downside_safety": 0.354,
   "liquidity": 0.0,
   "quality": 0.0,
-  "wipeout_safety": 0.13
+  "wipeout_safety": 0.133
 }

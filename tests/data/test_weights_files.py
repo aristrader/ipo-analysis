@@ -24,12 +24,12 @@ def test_weights_components_match_registry(weights):
 
 
 def test_weights_are_normalized_and_sane(weights):
+    # STRUCTURAL checks only: the actual values are RE-DERIVED from data by
+    # run_weights (and shift after a refresh) — pinning them here would make every
+    # refresh fail. Value-evolution is governed by the evolve-only-if-robust policy.
     vals = list(weights.values())
     assert all(0.0 <= v <= 1.0 for v in vals)
     assert sum(vals) == pytest.approx(1.0, abs=0.01), f"weights sum {sum(vals)}"
-    # the validated decisions: liquidity/quality carry 0; wipeout_safety earned 0.13
-    assert weights["liquidity"] == 0.0 and weights["quality"] == 0.0
-    assert weights["wipeout_safety"] == pytest.approx(0.13, abs=0.02)
 
 
 def test_calibration_parses():

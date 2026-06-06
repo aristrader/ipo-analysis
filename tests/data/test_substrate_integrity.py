@@ -18,7 +18,14 @@ AS_OF = date(2026, 5, 31)
 
 # ---------------------------------------------------------------- identity
 def test_row_count_and_isin_shape(ipo):
-    assert len(ipo) == 2296
+    # row count is a MOVABLE fact: substrate_meta.json is updated by the refresh
+    # in the same run that rebuilds the substrate — so this asserts consistency,
+    # not a frozen number.
+    import json
+    import os
+    root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    meta = json.load(open(os.path.join(root, "data/master/substrate_meta.json")))
+    assert len(ipo) == int(meta["rows"]), f"substrate rows {len(ipo)} != meta.rows {meta['rows']}"
     i = ipo["isin"]
     assert i.is_unique, "duplicate isins in ipo_analysis"
     bad = ~((i.str.len() == 12) & i.str.startswith("IN"))
@@ -26,7 +33,11 @@ def test_row_count_and_isin_shape(ipo):
 
 
 def test_cohort_partition_and_type(ipo):
-    assert ipo["cohort"].value_counts().to_dict() == {"boom": 1269, "longterm": 1027}
+    counts = ipo["cohort"].value_counts().to_dict()
+    # longterm (2006-19) is closed forever; boom grows with refreshes
+    assert counts["longterm"] == 1027
+    assert counts["boom"] >= 1269
+    assert counts["boom"] + counts["longterm"] == len(ipo)
     assert set(ipo["type"].unique()) == {"MB", "SME"}
 
 
@@ -74,8 +85,10 @@ def test_listing_metrics_status_enum_and_nulling(ipo):
     for c in ("adj_listing_open", "adj_listing_gain_open", "adj_listing_gain_close",
               "return_from_listing_1y", "alpha_1y"):
         assert u[c].isna().all(), f"unreliable_coverage rows carry {c}: {u.loc[u[c].notna(), 'isin'].tolist()}"
-    # status is null ONLY for the unpriced rows (they're absent from returns_summary; ~14)
-    assert int(s.isna().sum()) <= 20, "status-null rows exploded — unpriced set changed unexpectedly"
+    # status is null ONLY for unpriced rows (absent from returns_summary): the 14 legacy
+    # no-history rows + freshly-ingested IPOs that haven't listed/priced yet. The REAL
+    # check is the set-equality test below; this cap only catches an explosion.
+    assert int(s.isna().sum()) <= 120, "status-null rows exploded — unpriced set changed unexpectedly"
 
 
 def test_status_null_means_unpriced(ipo, returns_summary):

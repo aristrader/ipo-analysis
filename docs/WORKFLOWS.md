@@ -56,6 +56,18 @@ catches most drift — these rules tell you what to update so it stays green.
 - Test-suite health: `tools/mutation/run_mutations.py` re-validates that deliberate code breaks
   fail tests (run after any large test refactor; report → docs/research/showdown_mutation.md).
 
+## Refreshing the data (bring the dataset to today)
+- `PYTHONPATH=. python run_refresh.py` = DRY-RUN (what would change); `--apply` = do it.
+- The refresh snapshots first (`archive/pre_refresh_<date>/`), ingests new IPOs, extends prices,
+  re-runs the pipeline, re-derives goldens (OLD → NEW printed), and MUST end with the fast suite
+  green. Movable facts (as_of / rows / backup pointer) live in `data/master/substrate_meta.json` —
+  the refresh updates them as data; nothing edits source files.
+- **ROLLBACK:** `cp archive/pre_refresh_<date>/* data/master/` (the snapshot includes
+  substrate_meta.json) — then `python verify.py` to confirm.
+- After a refresh: `python run_forward_test.py` re-reads the never-seen cohort (EARLY READ labels).
+- Test-design rule learned 2026-06-06: data tests must assert MOVABLE facts via substrate_meta /
+  goldens (consistency), never literals — a literal row-count fails every legitimate refresh.
+
 ## The checkpoint contract
 - `python verify.py` — full report (counts, exact pytest-collected count, backup match), regenerates `MAP.md`.
 - `python verify.py --quiet` — fast (~0.1s), prints ONLY on drift; this is what the hook runs each turn.

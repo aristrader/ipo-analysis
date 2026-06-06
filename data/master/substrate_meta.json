@@ -1,6 +1,6 @@
 {
-  "as_of": "2026-05-31",
-  "rows": 2296,
-  "archive_pointer": "archive/pre_drhp_20260601",
-  "last_refresh": null
+ "as_of": "2026-06-06",
+ "rows": 2384,
+ "archive_pointer": "archive/pre_refresh_20260606",
+ "last_refresh": "2026-06-06"
 }

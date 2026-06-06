@@ -185,7 +185,7 @@ def apply(skip_tests=False, with_delisting=False):
     summary["price_window"] = f"{old_asof + timedelta(days=1)}..{today}"
 
     print("[5/9] aux reference data")
-    run_step("scrapers/indices.py", "indices (nifty50 + smallcap250)", timeout=300)
+    _refresh_indices_guarded()
     _refresh_corp_actions_current_year(today.year)
     if with_delisting:
         run_step("scrapers/delisting.py", "delisting register", timeout=1800)
@@ -228,6 +228,33 @@ def apply(skip_tests=False, with_delisting=False):
     if fail_keys:
         print("  NOTE: best-effort fetches with failures (gaps stay null):", fail_keys)
     print("  NOTE: new ISINs' tickers are unvalidated (06 = network step) — see review files.")
+
+
+def _refresh_indices_guarded():
+    """Refresh the benchmark indices WITH a shrink-guard.
+
+    2026-06-06 incident: the yahoo/investing endpoints changed; scrapers/indices.py
+    swallowed the failures (exit 0) and rewrote nifty50.csv truncated + smallcap250
+    header-only — silently destroying alpha for early vintages. The test gate caught
+    it. Guard: if either file SHRINKS, restore both from git and continue with the
+    (slightly stale) benchmarks — staleness is honest, truncation is corruption.
+    """
+    files = ["data/reference/indices/nifty50.csv", "data/reference/indices/niftysmallcap250.csv"]
+    before = {f: sum(1 for _ in open(os.path.join(ROOT, f))) for f in files}
+    p = sh(["scrapers/indices.py"], timeout=300)
+    after = {f: sum(1 for _ in open(os.path.join(ROOT, f))) for f in files}
+    shrunk = [f for f in files if after[f] < before[f]]
+    if p.returncode != 0 or shrunk:
+        for f in files:
+            blob = subprocess.run(["git", "show", f"HEAD:{f}"], cwd=ROOT,
+                                  capture_output=True, text=True)
+            if blob.returncode == 0:
+                open(os.path.join(ROOT, f), "w").write(blob.stdout)
+        print(f"  indices: PULL UNUSABLE (shrunk: {shrunk or 'rc!=0'}) -> restored from git; "
+              "benchmarks are a few days stale (honest), NOT truncated (corrupt)")
+    else:
+        print(f"  indices: OK (nifty50 {before[files[0]]}->{after[files[0]]} rows, "
+              f"smallcap {before[files[1]]}->{after[files[1]]})")
 
 
 def _refresh_corp_actions_current_year(year):
