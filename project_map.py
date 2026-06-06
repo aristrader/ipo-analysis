@@ -191,6 +191,8 @@ TEST_ROUTING = [
     ("scrapers/*", ["PYTHONPATH=. pytest tests/scrapers -q"]),
     ("data/master/*", ["PYTHONPATH=. pytest tests/data -q"]),
     ("app.py", ["SHOWDOWN=1 PYTHONPATH=. pytest tests/showdown/test_app_smoke.py -q"]),
+    ("run_refresh.py", ["PYTHONPATH=. pytest tests/pipeline/test_refresh_lib.py tests/data -q"]),
+    ("tools/refresh/*", ["PYTHONPATH=. pytest tests/pipeline/test_refresh_lib.py tests/data -q"]),
     ("project_map.py", ["PYTHONPATH=. pytest tests/test_project_map.py -q"]),
     ("verify.py", ["PYTHONPATH=. pytest tests/test_project_map.py -q"]),
     ("tests/*", ["PYTHONPATH=. pytest tests -q"]),
