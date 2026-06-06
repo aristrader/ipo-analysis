@@ -290,7 +290,7 @@ def compute_weekly(isin, mrow, prices, deli, nd, nc, by_isin, by_symbol):
     # peak>=endpoint>=trough holds). Same coverage gate as the endpoint; clamped to bracket the
     # endpoint return (handles forced-wipeout terminals and any data spikes uniformly).
     for label, days in HORIZONS:
-        if label not in ('1y', '3y', '5y'):
+        if label not in ('1m', '3m', '6m', '1y', '3y', '5y'):
             continue
         end = listing_date + timedelta(days=days)
         mature = is_delisted or (end <= TODAY and end <= data_last)

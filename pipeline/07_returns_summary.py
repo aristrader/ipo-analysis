@@ -308,7 +308,8 @@ def _mfe_mae_block(out, prices, listing_date, adj_issue, listing_close, is_delis
     Reads the endpoint returns already in `out` (clamp invariant) — call AFTER _horizon_returns.
     Extracted verbatim from compute()."""
     for label, days in HORIZONS:
-        if label not in ('1y', '3y', '5y'):
+        # short horizons (1m/3m/6m) added 2026-06-06 for the short-vs-long lens; same math
+        if label not in ('1m', '3m', '6m', '1y', '3y', '5y'):
             continue
         end = listing_date + timedelta(days=days)
         # mature AND covered: for a non-delisted name the daily series must actually reach the
@@ -539,9 +540,9 @@ def columns():
         cols += ['return_from_issue_%s' % label,
                  'return_from_listing_%s' % label,
                  'alpha_%s' % label, 'alpha_sc_%s' % label]
-    cols += ['mfe_1y', 'mae_1y', 'mfe_3y', 'mae_3y', 'mfe_5y', 'mae_5y',
-             'mfe_lst_1y', 'mae_lst_1y', 'mfe_lst_3y', 'mae_lst_3y', 'mfe_lst_5y', 'mae_lst_5y']
-    for label in ('1y', '3y', '5y'):
+    for label in ('1m', '3m', '6m', '1y', '3y', '5y'):
+        cols += ['mfe_%s' % label, 'mae_%s' % label, 'mfe_lst_%s' % label, 'mae_lst_%s' % label]
+    for label in ('1m', '3m', '6m', '1y', '3y', '5y'):
         cols += ['days_to_mfe_%s' % label, 'days_to_mae_%s' % label, 'days_to_breakeven_%s' % label]
     cols += ['max_gain_pct', 'max_drawdown_pct', 'max_drawdown_duration_days',
              'all_time_high', 'all_time_low', 'current_price',

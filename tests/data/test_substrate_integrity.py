@@ -12,7 +12,7 @@ import pytest
 
 from tests.data.conftest import num, offenders
 
-HORIZONS_ME = ("1y", "3y", "5y")
+HORIZONS_ME = ("1m", "3m", "6m", "1y", "3y", "5y")
 AS_OF = date(2026, 5, 31)
 
 
