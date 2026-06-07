@@ -25,10 +25,10 @@ PY = os.path.join(ROOT, ".venv/bin/python")
 
 
 def run_pipeline():
-    subprocess.run([PY, "scrapers/live_board.py"], cwd=ROOT,
-                   env={**os.environ, "PYTHONPATH": ROOT}, timeout=900)
-    subprocess.run([PY, "run_calls.py"], cwd=ROOT,
-                   env={**os.environ, "PYTHONPATH": ROOT}, timeout=3600)
+    env = {**os.environ, "PYTHONPATH": ROOT}
+    subprocess.run([PY, "scrapers/live_board.py"], cwd=ROOT, env=env, timeout=900)
+    subprocess.run([PY, "run_calls.py"], cwd=ROOT, env=env, timeout=3600)          # gap-fill+grade
+    subprocess.run([PY, "run_calls.py", "--live"], cwd=ROOT, env=env, timeout=1800)  # open issues
 
 
 def actionable_calls():
