@@ -96,6 +96,7 @@ backtests + the method spine). 5. `docs/layer2.md` / `docs/layer3.md` — design
 
 ## Non-negotiable conventions / decisions
 - **GIT IS LOCAL-ONLY** — `git init`’d for local history/rollback only. NEVER add a remote / push / connect to GitHub until the user explicitly says so (their standing instruction, 2026-06-02).
+- **PLAYWRIGHT = OFF BY DEFAULT** (company-laptop rule, owner 2026-06-08). Turn ON only for an app test/verify session, OFF the moment it's done — leftover "Chrome for Testing" processes trigger OS notifications. Procedure: `docs/playwright_on_off.md` (flip `disabled`↔`enabledMcpjsonServers` in `.claude/settings.local.json` + kill stray processes). `.mcp.json` keeps it localhost-pinned / isolated / headless / version-locked.
 - **ISIN is the primary key**; the ONLY automatic join key. Name-matching never merges (only flags).
   Exception: **corporate actions match by SYMBOL** (a face-value split changes the ISIN).
 - **Returns are ALPHA** vs Nifty 50 (+ Smallcap 250 where available, 2019+). Raw return is secondary.
