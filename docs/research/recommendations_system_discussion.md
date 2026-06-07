@@ -72,3 +72,11 @@ E. Recommendations tab UI + app redesign (design agents; renders A–D). LAST.
 ## Process (owner instruction)
 Log this discussion (this file) → superpowers brainstorming per idea (combine where sensible) →
 specs → writing-plans → ONE owner discussion round → implement.
+
+## Day-1 scoping verdict (2026-06-07, tools/research/scope_daywise_sub.py)
+Sampled 35 IPOs across 2020-2026: day-wise subscription tables found in **0/35** static
+chittorgarh pages (subscription pages carry FINAL category-wise totals only; day-wise rows are
+live-rendered during the window and not archived in HTML). → **BRANCH B: forward-collection.**
+`data/live/daywise_sub.csv` accumulates day-wise rows from each live-board fetch; the day-1
+accuracy question (P(day-1 verdict == final verdict)) becomes answerable after ~2-3 months of
+live IPOs. EARLY_* calls ship forward-only from day one (graded as data matures).
