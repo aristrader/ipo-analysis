@@ -10,3 +10,4 @@ data/raw/
 data/prices/
 data/reference/bhavcopy/
 archive/
+.playwright-mcp/
