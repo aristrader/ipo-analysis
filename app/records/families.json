@@ -1,0 +1,191 @@
+[
+  {
+    "family": "Score components",
+    "title": "The 5+ scorecard components",
+    "mechanism": "The combined predictor score is a weighted blend of analog-cohort-derived components (return-potential, multibagger-odds, downside-safety) plus folded signals (crowded_window, wipeout-safety); liquidity/quality/tradeable-upside are display-only at weight 0.",
+    "tier": "scorecard",
+    "n_tested": 6,
+    "n_validated": 3,
+    "status_rollup": "in_score: return_potential, multibagger_odds, downside_safety; display_only (weight 0): tradeable_upside, liquidity, quality"
+  },
+  {
+    "family": "F1 anchor-unlock supply waves",
+    "title": "SEBI anchor lock-in (30d/90d) supply-wave dips",
+    "mechanism": "Field&Hanka US lockup-expiry effect applied to SEBI anchor lock-in (50% @30d + 50% @90d post-2022-04): an abnormal alpha dip proportional to anchor share, buyable as a knowable calendar.",
+    "tier": "phase2",
+    "n_tested": 1,
+    "n_validated": 0,
+    "status_rollup": "rejected (FALSIFIED - placebo inverted; no Indian replication)"
+  },
+  {
+    "family": "F2 wallet-competition",
+    "title": "Wallet-competition clusters (overlapping subscription windows)",
+    "mechanism": "A finite retail wallet shared across concurrently-open books: GMP-rank effects, tone-setting, fatigue, and a retail congestion tax. The congestion tax is the only piece that survived (as the in-score crowded_window).",
+    "tier": "phase2",
+    "n_tested": 4,
+    "n_validated": 1,
+    "status_rollup": "in_score via crowded_window (congestion tax mechanism, F2d); rejected: F2a neglected-member, F2b tone-setting, F2c ordinal fatigue"
+  },
+  {
+    "family": "F3 regime-gated junk bounce",
+    "title": "Junk x bull -> rentable 1-month bounce (conditional take-profit)",
+    "mechanism": "Low-quality x bull listing regime -> reliable 1-month MFE (sell-into-strength works there), the same junk in bear dies on arrival; re-opens the rejected unconditional take-profit as a conditional rule.",
+    "tier": "phase2",
+    "n_tested": 1,
+    "n_validated": 0,
+    "status_rollup": "rejected (FALSIFIED twice: placebo + PIT re-test; bull-gate flips across cohorts)"
+  },
+  {
+    "family": "F4 regime-conditional stop-loss",
+    "title": "Bear-window stop-loss",
+    "mechanism": "Test whether the rejected 'stops lose to buy-and-hold' was a bull-era artifact by applying stops ONLY in bear-during-window cohorts (2008/2011/2022).",
+    "tier": "phase2",
+    "n_tested": 1,
+    "n_validated": 0,
+    "status_rollup": "rejected (stops lose even in bear windows; no-stop truth now unconditional and conditional)"
+  },
+  {
+    "family": "F5 reference-points",
+    "title": "Behavioral reference-point path dynamics",
+    "mechanism": "Reference levels (issue price, listing-day high, round numbers) as psychological magnets/ceilings; only F5e capitulation (never reclaimed issue by ~90d -> elevated wipeout) survived.",
+    "tier": "phase2",
+    "n_tested": 6,
+    "n_validated": 1,
+    "status_rollup": "validated display: F5e capitulation; rejected: F5a issue magnet, F5b LDH breakout, F5c volume reclaim, F5d ordering, F5f round numbers"
+  },
+  {
+    "family": "F6 GMP second-order",
+    "title": "Derivatives of GMP (raw level is in-score)",
+    "mechanism": "Second-order GMP signals: surprise residual, retail interaction, regime sign-flip, and the T+3 transmission natural experiment.",
+    "tier": "phase2",
+    "n_tested": 4,
+    "n_validated": 0,
+    "status_rollup": "watchlist: F6a GMP-surprise (weak lean); rejected: F6b interaction, F6c regime, F6d T+3"
+  },
+  {
+    "family": "F7 disposition contagion",
+    "title": "Sequential learning / cold-tape vs hot-chase",
+    "mechanism": "The prior cohort's realized listing pops drive next-cohort retail demand AND forward alpha; IPOs braving a cold streak are demand-validated and outperform the hot-chase.",
+    "tier": "phase2",
+    "n_tested": 2,
+    "n_validated": 1,
+    "status_rollup": "validated display (4/4 cells + OOS-directional); fold test failed (1/5) -> not in score"
+  },
+  {
+    "family": "F8 unfilled-demand pressure",
+    "title": "Day-1 buying from the denied allotment lottery",
+    "mechanism": "Day-1 buying proportional to how much the allotment lottery denied (sub-1 = unfilled multiple), incremental to raw subscription.",
+    "tier": "phase2",
+    "n_tested": 1,
+    "n_validated": 0,
+    "status_rollup": "rejected (inverted - undersubscribed are simply worse; junk dominates)"
+  },
+  {
+    "family": "F9 sector copycat decay",
+    "title": "Nth same-sector IPO progressively worse",
+    "mechanism": "Each successive same-sector IPO within 12 months should perform progressively worse as the theme tires.",
+    "tier": "phase2",
+    "n_tested": 1,
+    "n_validated": 0,
+    "status_rollup": "rejected (IC -0.012; no decay, slightly opposite)"
+  },
+  {
+    "family": "F10 early corp-action tells",
+    "title": "Bonus/split within year 1 = euphoria top",
+    "mechanism": "A bonus/split with ex-date 30-365d after listing follows a huge run-up and marks the euphoric TOP (an exit tell), not a healthy company.",
+    "tier": "phase2",
+    "n_tested": 1,
+    "n_validated": 1,
+    "status_rollup": "validated-thin display (n=31 exit flag); revisit as N grows"
+  },
+  {
+    "family": "F12 retail P&L climate",
+    "title": "Outcome-based climate index (vs count-based heat)",
+    "mechanism": "A size-weighted realized retail-P&L climate gauge to refine or replace the count-based crowded_window heat signal.",
+    "tier": "phase2",
+    "n_tested": 1,
+    "n_validated": 0,
+    "status_rollup": "rejected (size-weighting worse than simple median-pop climate)"
+  },
+  {
+    "family": "Tier-2 (calendar/regime/path/flows)",
+    "title": "Second-tier calendar, regime, scheduling and path tests",
+    "mechanism": "Lower-priority structural ideas: day-180 unlock, first-week x regime, transition fragility, recovery by phase, banker collision, ASBA echo, day-1 flipping, SME circuit-cage.",
+    "tier": "phase2",
+    "n_tested": 8,
+    "n_validated": 0,
+    "status_rollup": "all rejected: T2a, T2b, T2c, T2e, T2g, T2h, T2i, T2j"
+  },
+  {
+    "family": "Context signals",
+    "title": "Market-context point-in-time signals",
+    "mechanism": "Pre-listing macro/market-context features tested vs 1y alpha across the 4 regime cells; only crowded IPO heat (count-based) survived.",
+    "tier": "phase1-context",
+    "n_tested": 5,
+    "n_validated": 1,
+    "status_rollup": "in_score: ctx_ipo_heat_90d (= crowded_window); rejected: ctx_nifty_mom_3m, ctx_heat_pop_90d, ctx_sector_heat_180d, macro commodities"
+  },
+  {
+    "family": "Short-horizon study",
+    "title": "A separate short-game model / flip-the-hot edge",
+    "mechanism": "Whether a demand-percentile SHORT score or a flip-the-hot-pops rule can capture a tradable short-horizon edge.",
+    "tier": "phase1-context",
+    "n_tested": 2,
+    "n_validated": 0,
+    "status_rollup": "rejected: SHORT score (no edge; LONG score is the better short-horizon predictor), hot-pop-then-fade (opposite holds - strength persists)"
+  },
+  {
+    "family": "Hypothesis batch (48 agent-generated)",
+    "title": "48-hypothesis sweep across issue structure / demand / path / fundamentals",
+    "mechanism": "4 subagents generated 48 hypotheses (deduped to ~34 testable features), each tested by rank-IC + tercile alpha_1y spread across the 4 regime cells. No new PRE-IPO signal cleared the robustness bar.",
+    "tier": "phase1-batch",
+    "n_tested": 34,
+    "n_validated": 1,
+    "status_rollup": "validated conditioning (post-listing): path_ratio_1m; watchlist: pe_vs_sector, qib_retail_ratio; ~30 rejected (band_position, anchor_ratio, fixed_price, promoter_dilution_pp, size_z, min_investment, all_ofs, banker_prior_alpha, nii_froth, gmp_sub_disagree, gmp_z, undersubscribed, demand_per_size, breadth_hot_count, qib_cold_retail_hot, sales_accel_spike, cf_conversion, borrow_ramp, opm_trend, sales_vs_asset_growth, fresh_dilution, profitable_stagnant, objects_debt_repay, lday_close_position, lday_green, lday_giveback, volatility_early, circuit_lock, days_to_peak, turnover_to_size)"
+  },
+  {
+    "family": "N14 wipeout anatomy",
+    "title": "Pre-listing wipeout red flags",
+    "mechanism": "Which pre-listing features flag wipeout/dead-money risk: tiny pre-IPO sales and loss-making at IPO survived (additive count); micro-mcap / low-promoter / high-GMP / high-debt were rejected (reverse-causation or wrong sign).",
+    "tier": "phase1",
+    "n_tested": 6,
+    "n_validated": 2,
+    "status_rollup": "in_score: wipeout_safety (folded); validated badge: tiny-sales + loss-making (+ obscure-banker); rejected: micro mcap, low promoter, high GMP, high debt"
+  },
+  {
+    "family": "Interactions",
+    "title": "Two-factor interactions (super-additive tests)",
+    "mechanism": "Whether pairs of factors are super-additive (better/worse together than apart); only low-debt x high-ROE (clean compounder) survived cross-regime.",
+    "tier": "phase1",
+    "n_tested": 3,
+    "n_validated": 1,
+    "status_rollup": "validated (separate layer, not scored): low-debt x high-ROE; rejected: any risk pair, tiny-sales x loss-making (single-regime)"
+  },
+  {
+    "family": "Pop-fade / OFS / profitability (Tier-1 cross-regime)",
+    "title": "The original Tier-1 directional predicates",
+    "mechanism": "The first-pass directional claims subjected to cross-regime validation: pop-fade held (sign), OFS-skin and profitable-at-IPO flipped sign across regimes.",
+    "tier": "phase1",
+    "n_tested": 3,
+    "n_validated": 1,
+    "status_rollup": "validated: pred_pop_fade (within-vintage weak); rejected (sign flips): pred_ofs_skin, pred_profitable_ipo"
+  },
+  {
+    "family": "Strategies / movement-lens",
+    "title": "Trading strategies vs do-nothing (buy-and-hold)",
+    "mechanism": "Backtested strategies for the secondary buyer / allottee: buy-and-hold, filters, flip, take-profit ladders, stop-losses, averaging down, partial exit. Core truth: no exit rule beats buy-and-hold cross-regime.",
+    "tier": "strategy",
+    "n_tested": 8,
+    "n_validated": 0,
+    "status_rollup": "all rejected as edges: secondary_hold, secondary_filtered, avoid_hot, flip_listing, take_profit_ladder, stop_loss, average_down, partial_exit (partial_exit kept display-only as a median-vs-mean tradeoff)"
+  },
+  {
+    "family": "Recovery / earnings-quality (descriptive)",
+    "title": "Fallen-angel recovery, accrual flag, subscription saturation",
+    "mechanism": "Descriptive predicates outside the score: fallen-angel recovery (unpredictable), accrual/cash-flow flag (strong but not cross-regime-validated), subscription saturation (boom-only).",
+    "tier": "phase1",
+    "n_tested": 3,
+    "n_validated": 0,
+    "status_rollup": "rejected (validated-null): n13_fallen_angel; watchlist: n8_accrual; parked (single-regime): n2_subscription"
+  }
+]
