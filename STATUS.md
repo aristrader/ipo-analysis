@@ -26,14 +26,15 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
 - Change→tests routing is automatic each turn (`verify.py` hook + `project_map.TEST_ROUTING`).
 
 ## 🚀 PHASE 2 — declared 2026-06-06 (deep-hypothesis program + app redesign)
-- **Research program:** 12 families (8 original + F9-F12 owner tangents) / ~30 tests, 3-layer
-  protocol. Master docs: `deep_hypotheses_2026-06.md` + `phase2_playbooks.md` + verdicts in
-  `tier1_wave1_verdicts.md`. **Wave-1 done (14 tests): 11 falsified/rejected (incl. F1 anchor-unlock
-  via placebo, F2a neglected-member, F3 junk-bounce), 1 SURVIVOR — F7 disposition contagion
-  (cold-tape listers +7.6pp over hot-chase at 3m) pending cross-regime+OOS. **Wave-2 part-1 DONE: F7 VALIDATED
-  CROSS-REGIME (4/4 cells, cold-tape edge +2.6..+18.2pp) — everything else rejected (F12, F9, F4
-  bear-SL, T2b/c/e/g/h/j). Remaining queue: price-path scan (F5a/c/d/e/f, F10, T2i, T2a) + F7 fold
-  test + gated (F11, F3-retest).**
+- **Research program: ✅ COMPLETE (2026-06-07)** — 12 families / ~33 tests run, 3-layer protocol.
+  Master docs: `deep_hypotheses_2026-06.md` + `phase2_playbooks.md`; ALL verdicts in
+  `tier1_wave1_verdicts.md` + `rules/index.md`. **Final tally: 3 graduates** (crowded_window
+  IN-SCORE 0.254 · F7 disposition contagion VALIDATED display, 3m timing · F5e capitulation flag
+  VALIDATED display, day-90 checkpoint, incremental to N14) **+ 1 thin survivor** (F10 early
+  bonus/split = exit tell, n=31) **+ 2 mechanism confirmations** (F2d congestion tax, F2c SME
+  fatigue) **+ 1 display-watch** (F6a GMP-surprise) — everything else honestly killed (~26,
+  incl. F1/F3/F4/F5a-d/f/F8/F9/F12/T2a-j). F7 fold 1/5 → NOT in score (score stays 8 components).
+  Only gated remainder: F11 serial promoters (needs entity-matching infra).
 - **App redesign (build LAST, design evolves after every run):** the simple 5-tab app must become
   a sequenced research platform (IPO detail pages w/ event calendars + cluster context + reference
   levels; evidence browser for hypothesis verdicts/playbooks; regime dashboard; forward-test tracker).

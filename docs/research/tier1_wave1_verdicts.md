@@ -101,3 +101,66 @@ STATUS: VALIDATED. NEXT: OOS fold test as a climate component (median-pop-based 
 
 ## Remaining queue (price-path scan, post-compaction): F5a/c/d/e/f, F10 (early corp-action tells),
 T2i (flipping), T2a (day-180 unlock). Gated: F11 serial promoters, F3 PIT re-test.
+
+---
+# Wave-2 part 2 (2026-06-07) — price-path scan + unlock/corp-action + fold tests
+(tools/research/wave2_pricepath.py, wave2_unlock_corp.py, climate_fold_test.py)
+
+## ⭐ F5e GRADUATES: CAPITULATION FLAG — VALIDATED CROSS-REGIME, NO LOOK-AHEAD
+Flag = never closed above (adjusted) issue price in trading days 1–90 (knowable at day 90).
+Flag-rate 12% (n=261/2174). Bad-outcome (wipeout/dead-money) rate 55% vs 13% without.
+INCREMENTAL to the N14 prospectus flags at EVERY flag count: lift +39pp (0 flags) / +44pp (1) /
++45pp (2+). NO-LOOK-AHEAD test — forward 1y alpha measured from d91 (after flag knowable):
+capit −35.3% (win 19%) vs clean −18.1% (win 37%); negative gap in all 4 cells
+(boom/MB −7.5pp · boom/SME −24.0pp · longterm/MB −14.8pp · longterm/SME −32.7pp; boom/MB
+bad-outcome cell immature — too young to die). STATUS: VALIDATED, display-only red flag per the
+score policy (post-listing monitoring flag, not a pre-listing score input). USE: day-90 portfolio
+checkpoint — "still below issue after 90 days = exit review", alongside the N14 badge.
+
+## ⭐ F10 SURVIVOR (THIN n=31): EARLY CORP-ACTION = EUPHORIA TELL
+Bonus/split with ex-date 30–365d after listing (18 bonus + 14 split matched). These follow huge
+run-ups (median +184%) and then CRASH: fwd-3m alpha after ex-date −22.2%, win 16% — vs matched
+(same type, run-up ±25pp) pseudo-event controls +2.2%, win 55%. NOT run-up mean-reversion.
+MB worse (−78.5%, n=18). Timing-dose null (occurrence matters, not when). Endpoint alpha_1y still
++12.8% vs all-IPO −12.8% (they were winners overall — the action marks the TOP, not a bad company).
+STATUS: validated-thin, display-only EXIT flag ("early bonus/split after a big run-up = sell
+signal"). N too thin for score entry; revisit as sample grows.
+
+## F7 FOLD TEST: does NOT enter the score
+Trailing median-pop climate component (cold→high), folds 2021/2022/2023 × 1y/3y: improved OOS
+top-quintile lift in 1/5 splits (max +0.1). F7 is a SHORT-HORIZON (3m) timing signal; the score's
+1y/3y selection horizons don't capture it (crowded_window already covers long-horizon climate).
+STATUS: stays VALIDATED as a finding + display-only regime read ("hot tape = wait, cold tape =
+engage"); not a score component. Score remains 8 components.
+
+## F3 PIT RE-TEST (gated item, now closed): REJECTED
+Junk = bottom-tercile point-in-time score. The bull-gate FLIPS across cohorts: boom junk×BULL
+mfe_lst_1m +10.5% (P≥15%: 45%) vs junk×BEAR +6.9% (27%) — but longterm junk×BEAR +18.2% (60%)
+BEATS junk×BULL +13.4% (44%). Not cross-regime; terminal alpha_1m negative everywhere (−5..−10%).
+Original rejection CONFIRMED with the proper PIT junk definition. F3 closed.
+
+## Everything else: REJECTED (honest nulls/inversions)
+- F5a issue-price magnet: FALSIFIED BY PLACEBO. 4472 episodes: issue level clear 33%/reject 65%,
+  placebo 0.90× level 37%/62% — identical. No breakeven-anchor magnet; any overhead level rejects
+  weak stocks. Dose runs OPPOSITE the anchor story (deep approaches clear MORE, 41% vs 29% —
+  momentum). Touch-buy = dead money everywhere (median fwd-10d −2.1%, win 40%).
+- F5f round-number tiers: NULL. Stall/clear/reject flat across A/B/C tiers (36/35/32% clear).
+- F5c volume-confirmed reclaim: INVERTED as a buy signal. Confirmed crossings hold better 5d
+  (58% vs 48%) but fwd-10d alpha is WORSE (−3.0% vs −1.4%) — reclaim-day volume spike =
+  distribution, not accumulation. Reject.
+- F5d double-reference ordering: MECHANICAL/CONFOUNDED. Reclaimed-issue-by-d60 → 57% clear LDH by
+  d120 vs 15% never-reclaimed — but that's mostly "weak stocks stay weak" + the path constraint
+  (must pass issue to reach LDH). Descriptive only; F5a's placebo says levels per se carry nothing.
+- T2i day-1 flipping: INVERTED. High day-1 turnover → BETTER alpha (IC +0.103 on 1y,
+  pop-controlled; Q5 −14.5% vs Q1 −30.2%; placebo day-20 turnover clean at −0.009). Day-1 volume
+  is a DEMAND signal, not flipping churn. Hypothesis rejected; inversion noted as display-context.
+- T2a day-180 unlock: WEAK/NOT TRADEABLE. Crossed design half-works: pre-Aug-2021 cohort dips at
+  its 1y unlock (W365 −1.94%, 60% neg) and is clean at the placebo W180 (+0.54%) — but the
+  post-2021 cohort dips at BOTH windows (−0.82%/−1.02%), so attribution is unclean; magnitude
+  ~1–2% over 12 trading days ≈ costs. Reject as a trade; consistent-with-mechanism noted.
+
+## PHASE-2 RESEARCH PROGRAM: COMPLETE (except F11, gated on entity-matching infra)
+Final tally across all waves: ~33 tests run · 3 graduates (crowded_window IN-SCORE 0.254;
+F7 disposition contagion VALIDATED display; F5e capitulation flag VALIDATED display) ·
+1 thin survivor (F10 exit tell) · 2 mechanism confirmations (F2d congestion tax, F2c SME fatigue) ·
+1 display-watch (F6a GMP-surprise) · everything else honestly killed.

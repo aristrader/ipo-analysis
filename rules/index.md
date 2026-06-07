@@ -176,3 +176,23 @@ results are kept on purpose).
 - REJECTED: F12 size-weighted climate (median-pop wins), F9 copycat decay, F4 bear-window stop-loss
   (stops lose even in bears), T2b, T2c (thin), T2e, T2g banker collision, T2h ASBA echo (sign opposite
   — supports congestion tax), T2j circuit-cage (inconsistent).
+
+## Wave-2 part-2 verdicts (2026-06-07) — PHASE-2 RESEARCH PROGRAM COMPLETE
+- **⭐ F5e capitulation flag: VALIDATED CROSS-REGIME, NO LOOK-AHEAD — display-only red flag.**
+  Never closed above issue in td 1–90 (12% of IPOs) → bad-outcome 55% vs 13%; INCREMENTAL to N14
+  at every flag count (+39/+44/+45pp); post-flag fwd-1y alpha gap negative in all 4 cells
+  (−7.5..−32.7pp). The day-90 portfolio checkpoint flag. NOT in score (post-listing signal).
+- **⭐ F10 early corp-action tell: validated-THIN (n=31) — display-only EXIT flag.** Bonus/split
+  within yr 1 (after median +184% run-up) → fwd-3m −22.2% win 16% vs matched controls +2.2% win 55%.
+  Marks the TOP, not a bad company (their alpha_1y is still above average). Revisit as N grows.
+- **F7 fold test: 1/5 splits — NOT in score.** F7 = 3m timing signal; 1y/3y selection horizons
+  don't capture it (crowded_window already holds the long-horizon climate seat). Stays VALIDATED
+  display ("hot tape = wait, cold tape = engage"). Score remains 8 components.
+- **F3 closed: REJECTED on PIT re-test** — bull-gate flips across cohorts (boom bull>bear;
+  longterm bear>bull); junk terminal alpha negative everywhere.
+- REJECTED: F5a issue magnet (placebo-identical: 33/65 vs 37/62 clear/reject; dose OPPOSITE —
+  momentum not anchor; touch-buy dead money), F5f round numbers (flat tiers), F5c volume-confirmed
+  reclaim (INVERTED: confirmation volume = distribution; fwd −3.0% vs −1.4%), F5d ordering
+  (mechanical), T2i flipping (INVERTED: day-1 turnover = demand, IC +0.103 pop-controlled, placebo
+  clean), T2a day-180 unlock (weak ~1–2%, attribution unclean, ≈costs).
+- Gated remainder: F11 serial-promoter fingerprints (needs entity-matching infra — a build).
