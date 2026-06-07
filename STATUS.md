@@ -17,9 +17,12 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
 ---
 
 ## 🏃 NOW
-- **Nothing in progress.** System state: showdown-certified, refreshable (`run_refresh.py`), forward-
-  tested on 82 never-seen IPOs (score ordered real outcomes monotonically), 48-hypothesis batch done
-  (1 fold, 1 conditioning rule, ~30 to the rejected registry). Full history → `DONE.md`.
+- **NEXT ACTION (owner-approved 2026-06-07, do on session restart): START THE APP-DESIGN AGENTS.**
+  Brief = `docs/research/app_phase2_design.md` (+ frontend-design plugin, installed project-local).
+  Flow: design agents iterate the doc into concrete screen specs → review with owner → build →
+  playwright-verify each iteration. Research program is COMPLETE — the app is the last Phase-2 piece.
+- System state: showdown-certified, refreshable (`run_refresh.py`), forward-tested on 82 never-seen
+  IPOs (score ordered real outcomes monotonically). Full history → `DONE.md`.
 - Commands: fast suite `PYTHONPATH=. pytest tests -q` (~90s) · pre-release gate
   `SHOWDOWN=1 PYTHONPATH=. pytest tests/showdown -q` · refresh `python run_refresh.py [--apply]` ·
   forward test `python run_forward_test.py` · app `PYTHONPATH=. streamlit run app.py`.
