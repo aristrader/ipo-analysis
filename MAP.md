@@ -23,7 +23,8 @@
 - **scrapers / data sources** → `scrapers/`, `scrapers/nse_session.py`, `docs/sources.md`, `tests/scrapers/`
 - **backtest a strategy** → `layer3/backtest/`, `run_backtest.py`, `docs/strategies.md`, `tests/layer3/test_backtest.py`, `tests/layer3/test_score_backtest.py`
 - **cross-regime validation / OOS** → `layer3/validate.py`, `run_validation.py`, `run_oos.py`, `tests/layer3/test_validate.py`
-- **the app / UI** → `app.py`
+- **the app / UI** → `app.py`, `docs/research/app_phase2_design.md`
+- **test a hypothesis / research agent brief** → `docs/research/hypothesis_protocol.md`, `rules/index.md`, `docs/research/phase2_playbooks.md`, `tools/research/`, `docs/research/tier1_wave1_verdicts.md`
 - **what's done / what's next / project state** → `STATUS.md`, `DONE.md`, `CLAUDE.md`, `rules/index.md`
 - **testing / verification / the showdown** → `tests/`, `tests/data/`, `tests/showdown/`, `tools/mutation/`, `pytest.ini`, `docs/research/showdown_audit.md`, `docs/research/showdown_pipeline_diff.md`, `docs/research/showdown_mutation.md`
 - **schema / what a column means** → `docs/schema.md`, `data/master/ipo_analysis.csv`

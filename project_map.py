@@ -155,7 +155,12 @@ CONTEXTS = {
     "cross-regime validation / OOS": [
         "layer3/validate.py", "run_validation.py", "run_oos.py", "tests/layer3/test_validate.py",
     ],
-    "the app / UI": ["app.py"],
+    "the app / UI": ["app.py", "docs/research/app_phase2_design.md"],
+    "test a hypothesis / research agent brief": [
+        "docs/research/hypothesis_protocol.md", "rules/index.md",
+        "docs/research/phase2_playbooks.md", "tools/research/",
+        "docs/research/tier1_wave1_verdicts.md",
+    ],
     "what's done / what's next / project state": ["STATUS.md", "DONE.md", "CLAUDE.md", "rules/index.md"],
     "testing / verification / the showdown": [
         "tests/", "tests/data/", "tests/showdown/", "tools/mutation/", "pytest.ini",

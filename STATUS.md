@@ -34,7 +34,8 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
   bonus/split = exit tell, n=31) **+ 2 mechanism confirmations** (F2d congestion tax, F2c SME
   fatigue) **+ 1 display-watch** (F6a GMP-surprise) — everything else honestly killed (~26,
   incl. F1/F3/F4/F5a-d/f/F8/F9/F12/T2a-j). F7 fold 1/5 → NOT in score (score stays 8 components).
-  Only gated remainder: F11 serial promoters (needs entity-matching infra).
+  F11 serial promoters: **PARKED by owner 2026-06-07** (entity-matching = too much human
+  intervention for the payoff; don't re-open unless a clean promoter-ID source appears).
 - **App redesign (build LAST, design evolves after every run):** the simple 5-tab app must become
   a sequenced research platform (IPO detail pages w/ event calendars + cluster context + reference
   levels; evidence browser for hypothesis verdicts/playbooks; regime dashboard; forward-test tracker).

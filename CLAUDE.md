@@ -108,6 +108,15 @@ backtests + the method spine). 5. `docs/layer2.md` / `docs/layer3.md` — design
   distributions over means; min-N floors; flag (never silently mis-assign).
 - Full source map + the "tested & not viable" list are in `docs/sources.md`.
 
+## Standing agent briefs (the "load the info" chain — plain .md, no skills; owner decision 2026-06-07)
+- **Any hypothesis/research agent** → MUST be pointed at `docs/research/hypothesis_protocol.md`
+  (3-layer protocol, placebo/falsifier discipline, data conventions, look-ahead traps, env gotchas,
+  verdict-recording chain) + `rules/index.md` (what's already tested — check BEFORE testing).
+- **Any app design/build agent** → MUST be pointed at `docs/research/app_phase2_design.md`
+  (journeys, IPO detail page, evidence browser, trust chips, display rules).
+- Both are wired into `project_map.py` CONTEXTS (verify.py asserts they exist; MAP.md lists them).
+  When a brief's rules change, edit the .md — never re-teach in prompts.
+
 ## Rules / predicates / strategies registry  (← navigable, AI-pickable)
 When Layer 3 is built, every rule/predicate/score-component/strategy lives in **`rules/`** as a structured entry
 (see `rules/README.md` for the template + index). Each carries: id, type, plain description, the predicate/logic,
