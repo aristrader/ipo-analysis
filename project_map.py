@@ -200,6 +200,10 @@ CONTEXTS = {
 # the assistant's context every turn (mechanical, not memory). `--route` = on demand.
 # SHOWDOWN=1 pytest tests/showdown = the pre-release gate (docs/WORKFLOWS.md).
 TEST_ROUTING = [
+    ("app/ui.py", ["PYTHONPATH=. pytest tests/app -q"]),
+    ("app/", ["PYTHONPATH=. pytest tests/app -q",
+              "SHOWDOWN=1 PYTHONPATH=. pytest tests/showdown/test_app_smoke.py -q  # browser boot"]),
+    ("app.py", ["SHOWDOWN=1 PYTHONPATH=. pytest tests/showdown/test_app_smoke.py -q"]),
     ("layer3/calls.py", ["PYTHONPATH=. pytest tests/layer3/test_calls.py -q"]),
     ("run_calls.py", ["PYTHONPATH=. pytest tests/layer3/test_calls.py -q"]),
     ("scrapers/live_board.py", ["PYTHONPATH=. pytest tests/scrapers/test_live_board.py -q"]),
