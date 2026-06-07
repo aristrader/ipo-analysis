@@ -17,6 +17,10 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
 ---
 
 ## 🏃 NOW
+- **NEXT ACTION (on session restart, owner-approved): RUN THE APP-ITERATION PIPELINE** —
+  charter seed + all decisions in `docs/research/app_iteration_charter_seed.md` (Phase-0 3-agent
+  meta-plan → locked charter → tapered walk/review/fix iterations → combined report). Budget
+  ~870k tokens / ~3h. Playwright now localhost-pinned via `.mcp.json` (activates on restart).
 - **RECOMMENDATIONS SYSTEM ✅ BUILT (2026-06-07, owner-authorized autonomous run):**
   calls engine (`layer3/calls.py` + `run_calls.py`, 12 property tests: no-look-ahead/idempotent/
   gap-fill) · ledger `data/master/calls_ledger.csv` (**5,166 calls**: 2026 backfill OOS +
