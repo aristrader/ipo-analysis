@@ -64,6 +64,13 @@ DATA_PRODUCTS = {
     "data/master/longterm_sme.csv":   "2006-19 SME master",
     "data/master/delisting.csv":      "delisting status/date/reason/last_price (INPUT to step 07)",
     "data/master/review/":            "flag/review registers (gaps, ticker_conflicts, xcheck, ...)",
+    "data/master/calls_ledger.csv":   "the CALLS LEDGER: dated/graded recommendations (run_calls.py owns it)",
+}
+
+# live staging (scrapers/live_board.py writes here; NEVER feeds data/master directly)
+DATA_LIVE = {
+    "data/live/board.json":       "live+upcoming IPO board snapshot (open[]/upcoming[], GMP, sub)",
+    "data/live/daywise_sub.csv":  "accumulating day-wise subscription dataset (the day-1 question, Branch B)",
 }
 
 # raw + reference inputs (scrapers write here; pipeline reads here)
@@ -98,6 +105,7 @@ LAYER3 = {
     "layer3/predictor/predict.py":   "assemble the full 'Evaluate this IPO' report",
     "layer3/backtest/":   "engine + analyses + score_backtest (vs do-nothing)",
     "layer3/validate.py": "cross-regime validation (boom vs 2006-19)",
+    "layer3/calls.py":    "CALLS ENGINE: event-anchored point-in-time calls + gap-fill walk + grading",
 }
 
 # --------------------------------------------------------------------- run it
@@ -113,6 +121,8 @@ ENTRYPOINTS = {
     "python verify.py":                          "structure/invariant checkpoint + regenerate MAP.md",
     "PYTHONPATH=. python run_refresh.py":        "bring the dataset to today (dry-run; --apply executes)",
     "PYTHONPATH=. python run_forward_test.py":   "score the never-seen post-refresh cohort (EARLY READ)",
+    "PYTHONPATH=. python run_calls.py":          "calls ledger: cursor walk/gap-fill (--backfill, --grade-only, --report)",
+    "PYTHONPATH=. python scrapers/live_board.py": "fetch the live+upcoming IPO board -> data/live/",
 }
 
 # ------------------------------------------------------- where the rules/state live
@@ -162,6 +172,13 @@ CONTEXTS = {
         "docs/research/phase2_playbooks.md", "tools/research/",
         "docs/research/tier1_wave1_verdicts.md",
     ],
+    "recommendations / calls ledger / live board": [
+        "layer3/calls.py", "run_calls.py", "scrapers/live_board.py",
+        "data/master/calls_ledger.csv", "tests/layer3/test_calls.py",
+        "tests/scrapers/test_live_board.py",
+        "docs/superpowers/specs/2026-06-07-calls-engine-design.md",
+        "docs/research/recommendations_system_discussion.md",
+    ],
     "what's done / what's next / project state": ["STATUS.md", "DONE.md", "CLAUDE.md", "rules/index.md"],
     "testing / verification / the showdown": [
         "tests/", "tests/data/", "tests/showdown/", "tools/mutation/", "pytest.ini",
@@ -183,6 +200,9 @@ CONTEXTS = {
 # the assistant's context every turn (mechanical, not memory). `--route` = on demand.
 # SHOWDOWN=1 pytest tests/showdown = the pre-release gate (docs/WORKFLOWS.md).
 TEST_ROUTING = [
+    ("layer3/calls.py", ["PYTHONPATH=. pytest tests/layer3/test_calls.py -q"]),
+    ("run_calls.py", ["PYTHONPATH=. pytest tests/layer3/test_calls.py -q"]),
+    ("scrapers/live_board.py", ["PYTHONPATH=. pytest tests/scrapers/test_live_board.py -q"]),
     ("pipeline/07_returns_summary.py",
      ["PYTHONPATH=. pytest tests/pipeline tests/data -q",
       "SHOWDOWN=1 PYTHONPATH=. pytest tests/showdown/test_pipeline_sandbox.py -q  # before release"]),
@@ -253,7 +273,7 @@ def all_referenced_paths():
         paths.add(p)
     for p, _r in UNWIRED:
         paths.add(p)
-    for d in (PIPELINE_HELPERS, DATA_PRODUCTS, DIRS, LAYER3, RULES_AND_STATE):
+    for d in (PIPELINE_HELPERS, DATA_PRODUCTS, DATA_LIVE, DIRS, LAYER3, RULES_AND_STATE):
         paths.update(d.keys())
     for files in CONTEXTS.values():
         paths.update(files)
@@ -292,6 +312,11 @@ def render_map():
 
     L.append("## Data products (`data/master/`)")
     for p, role in DATA_PRODUCTS.items():
+        L.append(f"- `{p}` — {role}")
+    L.append("")
+
+    L.append("## Live staging (`data/live/` — display/calls only, never feeds data/master)")
+    for p, role in DATA_LIVE.items():
         L.append(f"- `{p}` — {role}")
     L.append("")
 

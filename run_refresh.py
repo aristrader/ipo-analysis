@@ -219,6 +219,15 @@ def apply(skip_tests=False, with_delisting=False):
     run_step("run_weights.py", timeout=1800)
     run_step("run_layer3_report.py", timeout=1800)
 
+    print("[10] calls ledger (gap-fill + grade; reads the fresh substrate)")
+    p = sh(["run_calls.py"], timeout=3600)            # cursor walk, mode=gap_filled
+    print(p.stdout[-600:] if p.returncode == 0 else f"  CALLS PHASE FAILED (non-blocking):\n{p.stdout[-600:]}")
+    try:
+        from scrapers import live_board
+        live_board.fetch_board()
+    except Exception as ex:
+        print(f"  live board fetch failed (non-blocking): {ex}")
+
     print("\nREFRESH COMPLETE")
     m = meta()
     print(f"  rows: {m['rows']}  as_of: {m['as_of']}  snapshot: {m['archive_pointer']}")
