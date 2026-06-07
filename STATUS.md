@@ -17,12 +17,17 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
 ---
 
 ## 🏃 NOW
-- **RECOMMENDATIONS SYSTEM (owner-scoped 2026-06-07, supersedes "design agents first"):** full
-  discussion log = `docs/research/recommendations_system_discussion.md`. Pieces: A calls
-  engine (ledger + point-in-time generator + gap-fill) · B backfill replay (2026 cohort +
-  historical sim) · C live/upcoming IPO board · D day-1 early-call (data-scope first) ·
-  E recommendations tab + app redesign (design agents, LAST). Process: brainstorm → specs →
-  plans → ONE owner discussion round → implement.
+- **RECOMMENDATIONS SYSTEM ✅ BUILT (2026-06-07, owner-authorized autonomous run):**
+  calls engine (`layer3/calls.py` + `run_calls.py`, 12 property tests: no-look-ahead/idempotent/
+  gap-fill) · ledger `data/master/calls_ledger.csv` (**5,166 calls**: 2026 backfill OOS +
+  boom historical_sim + **first 4 LIVE calls** on currently-open issues) · headline:
+  **APPLY +6.0% vs AVOID −28.2% a1y (sim, +34.2pp); OOS 2026: APPLY +16.4% vs AVOID −3.1% a3m** ·
+  live board `scrapers/live_board.py` → `data/live/` (+ day-wise sub accumulation = Branch B
+  for the day-1 question; chittorgarh static pages have NO day-wise history, 0/35) ·
+  refresh phase 10 = calls gap-fill + board fetch · telegram notifier skeleton ready
+  (`tools/notify/`, blocked only on owner bot token — task list #10) · evidence records
+  `app/records/` (102 signals + 21 families) · **Phase-2 app: agent building now** per
+  `docs/research/app_screens_v1.md` (6 screens, recommendations-first).
 - System state: showdown-certified, refreshable (`run_refresh.py`), forward-tested on 82 never-seen
   IPOs (score ordered real outcomes monotonically). Full history → `DONE.md`.
 - Commands: fast suite `PYTHONPATH=. pytest tests -q` (~90s) · pre-release gate

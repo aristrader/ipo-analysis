@@ -426,3 +426,21 @@ Cleanup: archived dead scratch (`archive/research_scratch/`), refreshed TODO/DON
   + scrapers/http.py dedup DEFERRED (need substrate-diff / scraper-test verification first).
 - Also fixed L3-1 live date bug (config.AS_OF_DATE single source), L3-2 (config.DEAD_MONEY_RETURN), stale doc counts
   (29/77), requirements + .gitignore. Status files consolidated to STATUS.md.
+
+## 2026-06-07 — Recommendations system (calls engine + live board + records; owner-authorized autonomous run)
+- **Calls engine**: `layer3/calls.py` (event-anchored point-in-time calls: verdict@close, track@listing,
+  persist@+21td, capit@+90td F5e, take-profits@ex-date F10) + `run_calls.py` (cursor walk, --backfill,
+  --grade-only, --live, --report). 12 property tests: no-look-ahead (caught+fixed a real capit window bug),
+  idempotence, chunked-walk==one-shot gap-fill, final-grade immutability. Survivorship-honest grading
+  (delisted → last price / wipeout → −100%, decision A1) after catching silent delisted-drop bias.
+- **Ledger**: 5,166 calls. Historical sim (boom): APPLY +6.0% vs AVOID −28.2% a1y (+34.2pp, n=345);
+  TAKE_PROFITS −49.4% a1y (n=15). 2026 OOS backfill: APPLY +16.4% vs AVOID −3.1% a3m. First 4 LIVE calls
+  (Genxai EARLY_APPLY; Hexagon/Vahh/UHM EARLY_AVOID). Insight: 2026 top-score IPOs popped flat but made
+  +13.6% 1m alpha — cold-tape regime, consistent with F7.
+- **Live board**: `scrapers/live_board.py` → data/live/board.json + daywise_sub.csv (accumulating the
+  day-1 dataset; chittorgarh static pages carry NO day-wise history — 0/35 scoped, Branch B forward-only).
+  GMP via investorgain (listed) + ipowatch (open). 8 parser tests. Frozen-substrate discipline kept.
+- **Refresh phase 10** = calls gap-fill + board fetch. Telegram notifier skeleton + launchd plist
+  (tools/notify/; needs owner bot token). Evidence records app/records/ (102 signals, 21 families, agent).
+- Specs docs/superpowers/specs/2026-06-07-*; plan docs/superpowers/plans/2026-06-07-calls-engine.md;
+  owner log docs/research/recommendations_system_discussion.md (incl. allotment-myth honesty note).
