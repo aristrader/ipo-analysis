@@ -399,11 +399,58 @@ def regime_read():
     return {"nifty_3m": nifty, "tape_state": tape, "crowding_pctl": crowd, "verdict": verdict}
 
 
+GLOSSARY = {
+    "alpha": "return OVER the Nifty 50 over the same days — +10% alpha means it beat the index by 10 points; 0 means it just matched the market",
+    "pop": "the listing-day jump: open price vs issue price",
+    "P10 / P90": "the bad-case / good-case ends: 10% of outcomes were worse than P10, 10% better than P90",
+    "median": "the middle outcome — half did better, half worse (we use it instead of averages, which one mega-winner can distort)",
+    "quintile": "which fifth of the ranking it falls in — Q5/top quintile = best 20%, Q1 = worst 20%",
+    "MFE / MAE": "the best peak (MFE) and worst trough (MAE) the price touched within the window — the move, not just the endpoint",
+    "OOS (out-of-sample)": "tested on IPOs the model had never seen when it was fit — the honest kind of test",
+    "mode (live / gap_filled / backfilled / historical_sim)": "how a call was made: live = in real time · gap_filled = reconstructed for missed days · backfilled = replayed on the 2026 holdout · historical_sim = dress rehearsal on the past",
+    "capitulation flag": "never closed above its issue price in the first 90 trading days — validated: ~55% of such IPOs ended in wipeout/dead-money vs ~13% without",
+    "GMP": "grey-market premium — the unofficial pre-listing price; an input, not a verdict",
+    "subscription (×)": "how many times the offered shares were bid for — 6× means demand was 6 times the supply",
+}
+
+
+def render_glossary():
+    """Iter-4 comprehension fix: every term a non-quant wouldn't know, explained once per screen."""
+    with st.expander("📖 What do these terms mean? (plain-language glossary)"):
+        for term, meaning in GLOSSARY.items():
+            st.markdown(f"**{term}** — {meaning}")
+
+
+def render_staleness_alarm(ledger, board):
+    """Iter-4: stale data must ALARM, not just stamp. Board >24h or grades >7d old → warning."""
+    import datetime as _dt
+    warn = []
+    try:
+        fetched = pd.Timestamp((board or {}).get("fetched_at"))
+        if pd.notna(fetched) and (pd.Timestamp.now() - fetched) > pd.Timedelta(hours=24):
+            warn.append(f"the live board is {(pd.Timestamp.now() - fetched).days}d old "
+                        f"(open-IPO calls may be outdated)")
+    except (ValueError, TypeError):
+        pass
+    try:
+        if ledger is not None and len(ledger):
+            g = pd.to_datetime(ledger["graded_at"], errors="coerce").max()
+            if pd.notna(g) and (pd.Timestamp.now() - g) > pd.Timedelta(days=7):
+                warn.append(f"call grades were last updated {(pd.Timestamp.now() - g).days}d ago")
+    except (ValueError, TypeError):
+        pass
+    if warn:
+        st.warning("⏰ **Stale data:** " + " · ".join(warn) +
+                   ". Refresh: `python -m scrapers.live_board && python run_calls.py` "
+                   "(or the 🔄 Refresh button on Recommendations).")
+
+
 def render_regime_banner():
     """The persistent regime banner (HOME / Recommendations / Track-Record)."""
     r = regime_read()
     ledger = load_ledger()
     board = load_board()
+    render_staleness_alarm(ledger, board)
     tape = r["tape_state"]
     tape_word = {"cold": "COLD", "hot": "HOT", "neutral": "NEUTRAL"}.get(tape, "UNKNOWN")
     vclass = {"ENGAGE": "verdict-engage", "SELECTIVE": "verdict-selective",

@@ -42,6 +42,7 @@ with hc2:
             st.rerun()
 
 ui.render_regime_banner()
+ui.render_glossary()
 
 if ledger is None:
     st.error("Calls engine not yet run — `python run_calls.py`. No ledger to render.")

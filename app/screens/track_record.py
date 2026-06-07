@@ -15,6 +15,7 @@ st.title("🛰 Forward-test / Track record")
 ui.one_liner("What am I looking at? Did the calls actually work? The honest forward audit — per call-type, "
              "split by evidence strength (mode) — plus the predictor's out-of-sample report card and the "
              "strategy backtester. Distributions, not means; N on every row. **Not financial advice.**")
+ui.render_glossary()
 
 ui.render_regime_banner()
 

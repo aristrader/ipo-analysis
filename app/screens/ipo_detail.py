@@ -145,6 +145,7 @@ ui.one_liner("What am I looking at? The full decision read for this one IPO — 
              + "**Not financial advice.**")
 st.markdown(f"<span class='asof'>as-of {ui.as_of_substrate()} · profile: {profile}</span>",
             unsafe_allow_html=True)
+ui.render_glossary()
 st.page_link("app/screens/ipo_detail.py", label="← look up a different IPO", icon="🔎")
 if not is_new and st.button("clear & search another"):
     st.query_params.clear()
