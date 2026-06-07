@@ -253,16 +253,30 @@ def _load_corp_actions():
 
 
 # ---------------------------------------------------------------- grading
-def _alpha(closes_df, start_ts, n_td):
-    """Alpha vs Nifty from the first close ON/AFTER start_ts over n_td sessions (None if young)."""
+def _alpha(closes_df, start_ts, n_td, terminal=None):
+    """Alpha vs Nifty from the first close ON/AFTER start_ts over n_td sessions.
+    None if the window is still YOUNG — except when the stock is DEAD (`terminal`):
+    survivorship-honest grading uses the last price ('last') or −100% ('wipeout')
+    when the file ends before the horizon (decision A1)."""
     pr = closes_df[closes_df["date"] >= start_ts].reset_index(drop=True)
-    if len(pr) <= n_td:
+    if not len(pr):
         return None
-    c0, c1 = float(pr.iloc[0]["close"]), float(pr.iloc[n_td]["close"])
-    n0, n1 = _nifty_at(pr.iloc[0]["date"]), _nifty_at(pr.iloc[n_td]["date"])
-    if not n0 or not n1 or c0 <= 0:
+    c0 = float(pr.iloc[0]["close"])
+    n0 = _nifty_at(pr.iloc[0]["date"])
+    if not n0 or c0 <= 0:
         return None
-    return (c1 / c0 - 1) - (n1 / n0 - 1)
+    if len(pr) > n_td:
+        c1 = float(pr.iloc[n_td]["close"])
+        n1 = _nifty_at(pr.iloc[n_td]["date"])
+        return (c1 / c0 - 1) - (n1 / n0 - 1) if n1 else None
+    if terminal is None:
+        return None                                   # alive, window just young
+    end = td_offset(pr.iloc[0]["date"], n_td)
+    if end is None or pd.isna(end):
+        return None
+    n1 = _nifty_at(end)
+    c1 = 0.0 if terminal == "wipeout" else float(pr.iloc[-1]["close"])
+    return (c1 / c0 - 1) - ((n1 / n0 - 1) if n1 else 0.0)
 
 
 def grade_calls(ledger, df, prices_root="data/prices", today=None):
@@ -294,9 +308,14 @@ def grade_calls(ledger, df, prices_root="data/prices", today=None):
             else pd.Timestamp(row["call_date"])
         if pd.isna(anchor):
             continue
+        # survivorship-honest terminal handling for DEAD stocks (decision A1)
+        delisted = bool(pd.notna(r.get("delisted")) and r.get("delisted") in (True, "True", 1))
+        terminal = None
+        if delisted:
+            terminal = "wipeout" if str(r.get("outcome_class")) == "wipeout" else "last"
         done = 0
         for col, ntd in GRADE_TD.items():
-            a = _alpha(pr, anchor, ntd)
+            a = _alpha(pr, anchor, ntd, terminal=terminal)
             if a is not None:
                 led.loc[i, col] = round(float(a), 4)
                 done += 1

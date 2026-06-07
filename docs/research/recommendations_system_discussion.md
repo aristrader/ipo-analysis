@@ -80,3 +80,10 @@ live-rendered during the window and not archived in HTML). → **BRANCH B: forwa
 `data/live/daywise_sub.csv` accumulates day-wise rows from each live-board fetch; the day-1
 accuracy question (P(day-1 verdict == final verdict)) becomes answerable after ~2-3 months of
 live IPOs. EARLY_* calls ship forward-only from day one (graded as data matures).
+
+## Notifications decision (owner, 2026-06-07)
+- Channel: **TELEGRAM ONLY** (desktop explicitly declined; email not chosen).
+- Mechanism: launchd scheduled job ~2x daily → live-board fetch → run_calls gap-fill →
+  telegram message when NEW actionable calls appear (APPLY/AVOID on live issues, EXIT_REVIEW,
+  TAKE_PROFITS). Plain python, no AI.
+- **PARKED AS TODO until owner creates the bot** (@BotFather token + chat id needed).

@@ -1,0 +1,5 @@
+fetch_date,name,isin,type,day_n,open_date,close_date,sub_qib_x,sub_nii_x,sub_retail_x,sub_total_x,gmp_rs,gmp_pct
+2026-06-07,Hexagon Nutrition Ltd.,,MB,3,2026-06-05,2026-06-09,,,2.43,1.65,,
+2026-06-07,Genxai Analytics Ltd.,,SME,3,2026-06-05,2026-06-09,,,0.42,0.6,,
+2026-06-07,Vahh Chemicals Ltd.,,SME,4,2026-06-04,2026-06-08,,,8.68,6.48,,
+2026-06-07,UHM Vacation Ltd.,,SME,4,2026-06-04,2026-06-08,,,0.93,0.66,,
