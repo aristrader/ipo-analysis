@@ -105,7 +105,9 @@ else:
     subj_isin = None
     subj_type = query.get("type", "MB")
 
-r = ui.predict_cached({k: v for k, v in query.items() if k != "_profile"}, profile=profile)
+r = ui.predict_cached({k: v for k, v in query.items()
+                       if k != "_profile" and v is not None and not (isinstance(v, float) and pd.isna(v))},
+                      profile=profile)
 sc = r["scorecard"]
 ar = r["analog"]
 ra = r.get("risk_assessment", {})
@@ -364,36 +366,42 @@ st.divider()
 # ====================================================== ⑦ PLAYBOOKS THAT APPLY
 st.subheader("⑦ Playbooks that apply")
 records = ui.load_records()
-applied = []
-for rec in records:
+# Records carry a plain-English playbook string (no structured applicability predicate),
+# so we surface the VALIDATED / in-score playbook library — rejected ideas are NEVER shown.
+# Each carries its own trust chip; segment-specific ones are matched by mention of the segment.
+
+
+def relevant(rec):
     if ui.chip_status(rec.get("status")) == "rejected":
-        continue  # rejected ideas NEVER get an action surface
-    pred = rec.get("playbook", {}).get("applies_predicate")
-    # generic, defensive evaluation: predicate is a dict of simple conditions if present
-    applies = False
-    if isinstance(pred, dict):
-        try:
-            applies = all(ui.match_cond(query, k, v) for k, v in pred.items())
-        except Exception:
-            applies = False
-    elif pred in (None, "", "always"):
-        applies = False  # don't show universal playbooks without a real predicate
-    if applies:
-        applied.append(rec)
+        return False
+    pb = rec.get("playbook")
+    if not pb or not isinstance(pb, str):
+        return False
+    # only surface validated / in-score / watchlist playbooks as action-adjacent guidance
+    return ui.chip_status(rec.get("status")) in ("validated", "thin")
+
+
+applied = [r for r in records if relevant(r)]
+# light relevance: prefer ones whose text doesn't name the OTHER segment
+other = "SME" if subj_type == "MB" else "MB"
+applied = [r for r in applied
+           if not (other.lower() in (r.get("playbook") or "").lower()
+                   and subj_type.lower() not in (r.get("playbook") or "").lower())]
+
 if not records:
-    st.caption("Evidence records not yet generated — playbooks will populate once "
+    st.caption("Evidence records not yet generated — playbooks populate once "
                "`app/records/signals.json` lands.")
 elif applied:
-    for rec in applied:
+    st.caption("Validated playbooks in the library (records carry no auto-match predicate, so judge "
+               "applicability against this IPO's profile above). Rejected ideas never appear here.")
+    for rec in applied[:12]:
         st.markdown(f"**{rec.get('title', rec.get('id'))}** {ui.chip(rec.get('status'))}",
                     unsafe_allow_html=True)
-        pb = rec.get("playbook", {})
-        if pb.get("grid"):
-            st.dataframe(pd.DataFrame(pb["grid"]), hide_index=True, use_container_width=True)
-        if pb.get("failure_cells"):
-            st.warning("Failure cells: " + "; ".join(str(c) for c in pb["failure_cells"]))
+        st.caption(str(rec.get("playbook")))
+        if rec.get("failure_cells"):
+            st.caption("⚠ fails when: " + str(rec["failure_cells"]))
 else:
-    st.caption("no validated playbook applies to this IPO")
+    st.caption("no validated playbook in the library right now")
 
 st.divider()
 

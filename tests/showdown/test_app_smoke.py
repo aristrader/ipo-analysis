@@ -1,5 +1,11 @@
-"""Execution proof #3: the Streamlit app boots headless, all 5 tabs render, and no
-exception text appears anywhere. Playwright chromium; server killed in teardown.
+"""Execution proof #3: the Streamlit app boots headless, every screen of the
+st.navigation multipage app renders, and no exception text appears anywhere.
+Playwright chromium; server killed in teardown.
+
+(Phase-2: the app moved from a 5-tab layout to a 7-page st.navigation app —
+HOME, Recommendations, IPO Detail, Evidence, Registry, Track Record, Data.
+This test visits each route directly + exercises the in-page tabs that remain
+on Track Record, asserting no traceback/exception text on any of them.)
 """
 import os
 import socket
@@ -35,10 +41,21 @@ def app_server():
         pytest.fail("streamlit never opened its port")
     yield f"http://127.0.0.1:{PORT}"
     proc.terminate()
-    proc.wait(timeout=10)
+    try:
+        proc.wait(timeout=10)
+    except subprocess.TimeoutExpired:            # streamlit can be slow to exit
+        proc.kill()
+        proc.wait(timeout=10)
 
 
-def test_all_tabs_render_without_exceptions(app_server):
+# the seven screens of the multipage app, as direct routes (st.navigation slugs)
+SCREENS = ["/", "/recommendations", "/ipo_detail", "/evidence",
+           "/registry", "/track_record", "/data"]
+ERROR_MARKERS = ("Traceback", "Exception:", "KeyError", "AttributeError",
+                 "NameError", "TypeError", "ValueError:")
+
+
+def test_all_screens_render_without_exceptions(app_server):
     try:
         from playwright.sync_api import sync_playwright
     except ImportError:
@@ -49,15 +66,30 @@ def test_all_tabs_render_without_exceptions(app_server):
         except Exception as e:                   # browser binaries missing
             pytest.skip(f"chromium unavailable: {e}")
         page = browser.new_page()
-        page.goto(app_server, timeout=60_000)
-        page.wait_for_load_state("networkidle", timeout=60_000)
-        tabs = page.locator('button[role="tab"]')
-        n = tabs.count()
-        assert n >= 5, f"expected >=5 tabs, found {n}"
-        for i in range(n):
-            tabs.nth(i).click()
-            page.wait_for_timeout(2500)          # let the tab compute/render
+        # every screen renders clean
+        for route in SCREENS:
+            page.goto(app_server + route, timeout=60_000)
+            page.wait_for_load_state("networkidle", timeout=60_000)
+            page.wait_for_timeout(3500)          # let the screen compute/render
             body = page.inner_text("body")
-            for marker in ("Traceback", "Exception:", "KeyError", "AttributeError"):
-                assert marker not in body, f"tab {i} shows error text: {marker}"
+            for marker in ERROR_MARKERS:
+                assert marker not in body, f"screen {route} shows error text: {marker}"
+        # the in-page tabs that remain (Track Record: track / backtester / validation)
+        page.goto(app_server + "/track_record", timeout=60_000)
+        page.wait_for_load_state("networkidle", timeout=60_000)
+        page.wait_for_timeout(4000)
+        tabs = page.locator('button[role="tab"]')
+        for i in range(tabs.count()):
+            tabs.nth(i).click()
+            page.wait_for_timeout(3000)
+            body = page.inner_text("body")
+            for marker in ERROR_MARKERS:
+                assert marker not in body, f"track-record tab {i} shows error text: {marker}"
+        # an IPO Detail page with a real ISIN must render its 8 sections clean
+        page.goto(app_server + "/ipo_detail?isin=INE002L01015", timeout=60_000)
+        page.wait_for_load_state("networkidle", timeout=60_000)
+        page.wait_for_timeout(4500)
+        body = page.inner_text("body")
+        for marker in ERROR_MARKERS:
+            assert marker not in body, f"ipo_detail?isin shows error text: {marker}"
         browser.close()

@@ -7,8 +7,9 @@ from app import ui
 ui.inject_style()
 
 st.title("📈 Indian IPO Analysis — research terminal")
-ui.one_liner("What am I looking at? A reader-only research terminal over ~2,296 Indian IPOs "
-             "(2006–2025, Mainboard + SME, incl. delisted). Free data only. **Not financial advice.**")
+ui.one_liner(f"What am I looking at? A reader-only research terminal over {len(ui.load_df()):,} "
+             "Indian IPOs (2006–2026, Mainboard + SME, incl. delisted). Free data only. "
+             "**Not financial advice.**")
 
 # ---- regime banner (persistent component)
 ui.render_regime_banner()

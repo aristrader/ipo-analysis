@@ -94,20 +94,24 @@ else:
             isin = o.get("isin")
             cd = pd.to_datetime(o.get("close_date"), errors="coerce")
             dtc = (cd - today).days if pd.notna(cd) else None
-            # look up the call for this issue in the ledger
+            # look up the call for this issue in the ledger — live calls are keyed by
+            # exchange ISIN when known, else the board slug/name (run_calls --live)
             call_row = None
-            if isin and isin in set(ledger["isin"]):
-                cands = ledger[(ledger["isin"] == isin)
-                               & (ledger["call_type"].isin(["APPLY", "AVOID", "NEUTRAL"]))]
-                if not cands.empty:
-                    call_row = cands.sort_values("call_date").iloc[-1]
+            keys = {k for k in (isin, o.get("slug"), o.get("name")) if k}
+            cands = ledger[ledger["isin"].isin(keys) & ledger["call_type"].isin(
+                ["APPLY", "AVOID", "NEUTRAL", "EARLY_APPLY", "EARLY_AVOID", "EARLY_NEUTRAL"])]
+            if not cands.empty:
+                call_row = cands.sort_values("call_date").iloc[-1]
             with st.container(border=True):
                 top = st.columns([3, 2])
                 top[0].markdown(f"**{o['name']}** ({o['type']})")
                 if call_row is not None:
+                    early = str(call_row["call_type"]).startswith("EARLY_")
                     top[1].markdown(f"call: **{call_row['call_type']}** "
                                     f"{call_chip(call_row['call_type'])}", unsafe_allow_html=True)
-                    st.caption(f"why: {call_row['rules_fired']}")
+                    st.caption(f"why: {call_row['rules_fired']}"
+                               + (" · early call on partial window data — final verdict lands "
+                                  "on the close date" if early else ""))
                 else:
                     top[1].markdown(f"call: **pending** {ui.chip('thin', 'awaits close-date')}",
                                     unsafe_allow_html=True)

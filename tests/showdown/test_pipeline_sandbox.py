@@ -48,7 +48,8 @@ def sandbox():
                     "--exclude", ".pytest_cache", f"{ROOT}/", f"{SANDBOX}/"],
                    check=True, capture_output=True)
     os.makedirs(os.path.join(SANDBOX, "logs"), exist_ok=True)
-    results = {}
+    pre_hash = hashlib.md5(open(f"{ROOT}/data/master/ipo_analysis.csv", "rb").read()).hexdigest()
+    results = {"_pre_hash": pre_hash}
     for step in CHAIN:
         p = subprocess.run([sys.executable, step], cwd=SANDBOX,
                            env={**os.environ, "PYTHONPATH": SANDBOX},
@@ -59,7 +60,8 @@ def sandbox():
 
 
 def test_every_offline_step_exits_zero(sandbox):
-    failed = {s: p.returncode for s, p in sandbox.items() if p.returncode != 0}
+    failed = {s: p.returncode for s, p in sandbox.items()
+              if not s.startswith("_") and p.returncode != 0}
     detail = "\n".join(f"{s}: rc={rc}\n{sandbox[s].stderr[-800:]}" for s, rc in failed.items())
     assert not failed, f"pipeline steps failed in sandbox:\n{detail}"
 
@@ -91,12 +93,11 @@ def test_substrate_numeric_identical_except_allowed(sandbox):
 
 
 def test_real_repo_untouched_by_sandbox_run(sandbox):
-    """The whole point: the real data/master must not have moved."""
-    h = lambda p: hashlib.md5(open(p, "rb").read()).hexdigest()
-    real = f"{ROOT}/data/master/ipo_analysis.csv"
-    bak = f"{ROOT}/archive/pre_drhp_20260601/ipo_analysis.csv"
-    if os.path.exists(bak):
-        assert h(real) == h(bak), "REAL substrate changed during the showdown — investigate immediately"
+    """The whole point: the real substrate must not move DURING the sandbox run.
+    Compares against the hash taken at fixture setup (self-contained — the old
+    hardcoded archive/pre_drhp_20260601 comparison broke on every legitimate refresh)."""
+    h = hashlib.md5(open(f"{ROOT}/data/master/ipo_analysis.csv", "rb").read()).hexdigest()
+    assert h == sandbox["_pre_hash"], "REAL substrate changed during the showdown — investigate immediately"
 
 
 def test_run_weights_executes_in_sandbox(sandbox):

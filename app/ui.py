@@ -43,6 +43,7 @@ _ALIAS = {
     "display_only": "display", "display-only": "display", "watchlist": "thin",
     "~": "display",
     "hypothesis": "thin", "thin_n": "thin", "validated_thin": "thin", "⚠": "thin",
+    "parked": "thin",
     "reject": "rejected", "graveyard": "rejected", "✗": "rejected",
 }
 
