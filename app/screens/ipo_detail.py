@@ -24,7 +24,7 @@ def _name_of(row):
 
 
 qp = st.query_params
-isin = qp.get("isin")
+isin = (qp.get("isin") or "").strip().upper() or None     # case-insensitive (iter-1 P2 fix)
 session_q = st.session_state.get("detail_query")
 
 row = None
@@ -32,6 +32,18 @@ if isin:
     m = df[df["isin"] == isin]
     if not m.empty:
         row = m.iloc[0]
+    else:
+        # iter-1 P1/P2 fix: say WHY nothing came up (typo vs deliberately-excluded row)
+        from layer3 import spine as _spine
+        full = _spine.load_substrate(equity_only=False)
+        if (full["isin"] == isin).any():
+            r0 = full[full["isin"] == isin].iloc[0]
+            st.warning(f"**{r0.get('company_name', isin)}** ({isin}) is in the dataset but "
+                       f"EXCLUDED from the equity analysis (REIT/InvIT/FPO or unreliable price "
+                       f"coverage) — no decision read is produced for it, by design.")
+        else:
+            st.error(f"No IPO found with ISIN **{isin}** — check for a typo, "
+                     f"or search by name below.")
 
 # ---------------------------------------------------------------- score-a-new-IPO entry (no isin & no session query)
 if row is None and not session_q:
@@ -105,9 +117,14 @@ else:
     subj_isin = None
     subj_type = query.get("type", "MB")
 
-r = ui.predict_cached({k: v for k, v in query.items()
-                       if k != "_profile" and v is not None and not (isinstance(v, float) and pd.isna(v))},
-                      profile=profile)
+try:
+    r = ui.predict_cached({k: v for k, v in query.items()
+                           if k != "_profile" and v is not None and not (isinstance(v, float) and pd.isna(v))},
+                          profile=profile)
+except Exception as e:                       # iter-1 fix: friendly failure, never a traceback
+    st.error(f"Couldn't build the evaluation for this query ({type(e).__name__}). "
+             f"Usually this means too few comparable IPOs exist. Try fewer/looser inputs.")
+    st.stop()
 sc = r["scorecard"]
 ar = r["analog"]
 ra = r.get("risk_assessment", {})

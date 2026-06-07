@@ -201,16 +201,12 @@ def asof_line(*parts) -> str:
 
 
 def page_link_isin(isin, label, *, disabled=False):
-    """Cross-link to the IPO Detail page for an ISIN (the universal drill-down)."""
+    """Cross-link to the IPO Detail page for an ISIN (the universal drill-down).
+    Uses a query-param URL — st.page_link cannot carry the ISIN (iter-1 P1 fix)."""
     if not isin or (isinstance(isin, float) and pd.isna(isin)):
         st.caption(f"{label} (no ISIN on file — detail unavailable)")
         return
-    try:
-        st.page_link("app/screens/ipo_detail.py", label=f"→ {label}",
-                     icon="🔎")
-    except Exception:
-        # query-param form fallback
-        st.markdown(f"[→ {label}](?isin={isin})")
+    st.markdown(f"🔎 [{label} →](/ipo_detail?isin={isin})")
 
 
 # ---------------------------------------------------------------- cached loaders

@@ -32,9 +32,14 @@ with hc2:
                 import run_refresh
                 with st.spinner("Refreshing…"):
                     run_refresh.find_new()
-                st.success("Refresh attempted — re-open the page to see updates.")
+                st.cache_data.clear()        # bust stale loaders so THIS page updates (iter-1 P2 fix)
+                st.success("Refreshed.")
+                st.rerun()
             except Exception as e:
                 st.warning(f"Couldn't refresh ({type(e).__name__}). Needs network / pipeline access.")
+        if st.button("Re-read data files (no network)"):
+            st.cache_data.clear()
+            st.rerun()
 
 ui.render_regime_banner()
 
@@ -63,7 +68,7 @@ def call_chip(ct):
 
 def isin_link(isin, label):
     if isin and not pd.isna(isin):
-        st.page_link("app/screens/ipo_detail.py", label=f"{label}  →", icon="🔎")
+        ui.page_link_isin(isin, label)      # carries ?isin= (iter-1 P1 fix)
     else:
         st.caption(f"{label} — no ISIN yet (detail unavailable until it enters the substrate)")
 

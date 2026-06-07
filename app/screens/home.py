@@ -25,7 +25,7 @@ n_open = len(board.get("open", [])) if board else 0
 n_up = len(board.get("upcoming", [])) if board else 0
 n_records = len(records)
 n_validated = sum(1 for r in records if ui.chip_status(r.get("status")) == "validated")
-n_graded = int((ledger["grade_status"] == "final").sum()) if ledger is not None else 0
+n_graded = int(ledger["grade_status"].isin(["final", "partial"]).sum()) if ledger is not None else 0  # partial included (iter-1 P1 fix)
 n_calls = len(ledger) if ledger is not None else 0
 
 st.subheader("Where do you want to go?")
