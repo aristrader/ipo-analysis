@@ -5160,4 +5160,8 @@ INE1UYW01010|TRACK|2026-06-02,INE1UYW01010,Harikanta Overseas Ltd.,SME,boom,2026
 INE11XK01017|NEUTRAL|2026-06-03,INE11XK01017,SMR Jewels Ltd.,SME,boom,2026-06-03,NEUTRAL,backfilled,score=unknown,,,,neutral,7.6,,,,,,pending,
 INE1GM501015|TRACK|2026-06-03,INE1GM501015,Rajnandini Fashion India Ltd.,SME,boom,2026-06-03,TRACK,backfilled,-,27.3,1.0,1.0,neutral,7.6,0.0,,,,,pending,2026-06-07
 INE1RQS01010|NEUTRAL|2026-06-03,INE1RQS01010,Merritronix Ltd.,SME,boom,2026-06-03,NEUTRAL,backfilled,score=unknown,,,,neutral,7.6,,,,,,pending,
+uhm-vacation-ipo|EARLY_AVOID|2026-06-04,uhm-vacation-ipo,UHM Vacation Ltd.,SME,live,2026-06-04,EARLY_AVOID,live,live_score=44.1;n14_flags=1;day_n=4;gmp=20.48;sub=0.66,44.1,,1.0,neutral,6.8,,,,,,pending,
+vahh-chemicals-ipo|EARLY_AVOID|2026-06-04,vahh-chemicals-ipo,Vahh Chemicals Ltd.,SME,live,2026-06-04,EARLY_AVOID,live,live_score=43.5;n14_flags=1;day_n=4;gmp=18.33;sub=6.48,43.5,,1.0,neutral,6.8,,,,,,pending,
 INE1KVL01010|TRACK|2026-06-05,INE1KVL01010,Aureate Tradde Ltd.,SME,boom,2026-06-05,TRACK,backfilled,-,28.8,1.0,1.0,neutral,4.4,0.0,,,,,pending,2026-06-07
+genxai-analytics-ipo|EARLY_APPLY|2026-06-05,genxai-analytics-ipo,Genxai Analytics Ltd.,SME,live,2026-06-05,EARLY_APPLY,live,live_score=61.8;n14_flags=0;day_n=3;gmp=9.48;sub=0.6,61.8,,0.0,neutral,6.8,,,,,,pending,
+hexagon-nutrition-ipo|EARLY_AVOID|2026-06-05,hexagon-nutrition-ipo,Hexagon Nutrition Ltd.,MB,live,2026-06-05,EARLY_AVOID,live,live_score=29.2;n14_flags=1;day_n=3;gmp=22.22;sub=1.65,29.2,,1.0,neutral,6.8,,,,,,pending,

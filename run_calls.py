@@ -102,6 +102,76 @@ def report(led):
                   f"AVOID {100*av.median():+.1f}% (n={len(av)}) — spread {100*(ap.median()-av.median()):+.1f}pp")
 
 
+def live_calls(df, led):
+    """Score OPEN issues from data/live/board.json (they are NOT in the substrate yet) and
+    append mode=live calls: EARLY_* while the window is open, the final verdict on close day.
+    Thresholds = the same segment quintile cuts the backfill used (pit cache scores)."""
+    import json
+    from datetime import date
+    from layer3 import calls
+    from layer3.predictor import predict as P
+    board_path = "data/live/board.json"
+    if not os.path.exists(board_path):
+        print("no board.json — run scrapers/live_board.py first")
+        return led
+    board = json.load(open(board_path))
+    pit = pd.read_csv(PIT_CACHE) if os.path.exists(PIT_CACHE) else None
+    cuts = {}
+    if pit is not None:
+        p = pit.merge(df[["isin", "type"]], on="isin", how="left")
+        for seg, g in p.groupby("type"):
+            s = pd.to_numeric(g["score"], errors="coerce").dropna()
+            if len(s) >= 30:
+                cuts[seg] = (s.quantile(0.2), s.quantile(0.8))
+    today = date.today().isoformat()
+    have = set(led["call_id"]) if led is not None and len(led) else set()
+    rows = []
+    for e in board.get("open", []):
+        key = e.get("isin") or e.get("slug") or e["name"]
+        is_close_day = today >= e["close_date"]
+        prefix = "" if is_close_day else "EARLY_"
+        anchor = e["close_date"] if is_close_day else e["open_date"]
+        q = {"type": e["type"], "issue_size_cr": e.get("issue_size_cr"),
+             "issue_price": e.get("price_band_high"), "lead_manager": e.get("lead_manager"),
+             "gmp_pct": e.get("gmp_pct"), "sub_total_x": e.get("sub_total_x"),
+             "sub_qib_x": e.get("sub_qib_x"), "sub_retail_x": e.get("sub_retail_x")}
+        try:
+            res = P.predict({k: v for k, v in q.items() if v is not None}, df=df,
+                            profile="data_informed")
+            sc = res["scorecard"].get("combined_score")
+            wf = res.get("wipeout_flags", {})
+            nf = wf.get("n_flags") if isinstance(wf, dict) else None
+        except Exception as ex:
+            print(f"  live scoring failed for {e['name']}: {ex}")
+            continue
+        lo, hi = cuts.get(e["type"], (None, None))
+        if sc is None or lo is None:
+            ct = prefix + "NEUTRAL"
+        elif sc >= hi and (nf or 0) == 0:
+            ct = prefix + "APPLY"
+        elif sc <= lo or (nf or 0) >= 2:
+            ct = prefix + "AVOID"
+        else:
+            ct = prefix + "NEUTRAL"
+        cid = f"{key}|{ct}|{anchor}"
+        if cid in have:
+            continue
+        ctx = calls.context_at(today, df)
+        rows.append({"call_id": cid, "isin": key, "name": e["name"], "type": e["type"],
+                     "cohort": "live", "call_date": anchor, "call_type": ct, "mode": "live",
+                     "rules_fired": f"live_score={sc};n14_flags={nf};day_n={e.get('day_n')};"
+                                    f"gmp={e.get('gmp_pct')};sub={e.get('sub_total_x')}",
+                     "score": sc, "score_quintile": None, "n14_flags": nf,
+                     "tape_state": ctx["tape_state"], "crowding_pctl": ctx["crowding_pctl"],
+                     "pop_pct": None, "alpha_1m": None, "alpha_3m": None, "alpha_1y": None,
+                     "early_final_agree": None, "grade_status": "pending", "graded_at": None})
+        print(f"  LIVE {ct}: {e['name']} (score {sc}, flags {nf})")
+    if rows:
+        new = pd.DataFrame(rows, columns=calls.LEDGER_COLUMNS)
+        led = pd.concat([led, new], ignore_index=True) if led is not None and len(led) else new
+    return led
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--backfill", nargs=2, metavar=("FROM", "TO"))
@@ -111,6 +181,8 @@ def main():
     ap.add_argument("--cohort", default=None, help="restrict to a cohort (e.g. boom)")
     ap.add_argument("--grade-only", action="store_true")
     ap.add_argument("--report", action="store_true")
+    ap.add_argument("--live", action="store_true",
+                    help="score OPEN issues from data/live/board.json -> mode=live calls")
     a = ap.parse_args()
 
     df = spine.load_substrate()
@@ -120,6 +192,10 @@ def main():
         if led is None:
             sys.exit("no ledger yet")
         report(led)
+        return
+    if a.live:
+        led = live_calls(df, led)
+        save_ledger(led)
         return
     if a.grade_only:
         if led is None:

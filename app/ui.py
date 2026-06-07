@@ -111,6 +111,35 @@ def pct_pp(x, digits=0) -> str:
     return f"{x:+.{digits}f}pp"
 
 
+def match_cond(query: dict, key: str, cond) -> bool:
+    """Evaluate one applies_predicate condition against a query/row dict. Defensive:
+    cond may be a literal (==), or a dict {op: value} with ops gte/lte/gt/lt/eq/in/neq."""
+    val = query.get(key)
+    if val is None or (isinstance(val, float) and pd.isna(val)):
+        return False
+    try:
+        if isinstance(cond, dict):
+            for op, target in cond.items():
+                if op in ("gte", ">="):
+                    if not float(val) >= float(target): return False
+                elif op in ("lte", "<="):
+                    if not float(val) <= float(target): return False
+                elif op in ("gt", ">"):
+                    if not float(val) > float(target): return False
+                elif op in ("lt", "<"):
+                    if not float(val) < float(target): return False
+                elif op in ("eq", "=="):
+                    if not val == target: return False
+                elif op in ("neq", "!="):
+                    if val == target: return False
+                elif op == "in":
+                    if val not in target: return False
+            return True
+        return val == cond
+    except (TypeError, ValueError):
+        return False
+
+
 def n_floor(n) -> str | None:
     """Min-N display guard. Returns a 'too few' string if below floor, else None
     (caller shows the real number)."""
