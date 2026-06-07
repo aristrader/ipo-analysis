@@ -26,8 +26,10 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
   for the day-1 question; chittorgarh static pages have NO day-wise history, 0/35) ·
   refresh phase 10 = calls gap-fill + board fetch · telegram notifier skeleton ready
   (`tools/notify/`, blocked only on owner bot token — task list #10) · evidence records
-  `app/records/` (102 signals + 21 families) · **Phase-2 app: agent building now** per
-  `docs/research/app_screens_v1.md` (6 screens, recommendations-first).
+  `app/records/` (102 signals + 21 families) · **Phase-2 app ✅ BUILT + playwright-verified**:
+  7-screen st.navigation terminal (`app.py` + `app/screens/` + `app/ui.py`), recommendations-first,
+  2 browser-caught bugs fixed; 227 tests + SHOWDOWN app smoke green. Run:
+  `PYTHONPATH=. streamlit run app.py`.
 - System state: showdown-certified, refreshable (`run_refresh.py`), forward-tested on 82 never-seen
   IPOs (score ordered real outcomes monotonically). Full history → `DONE.md`.
 - Commands: fast suite `PYTHONPATH=. pytest tests -q` (~90s) · pre-release gate

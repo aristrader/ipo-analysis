@@ -444,3 +444,9 @@ Cleanup: archived dead scratch (`archive/research_scratch/`), refreshed TODO/DON
   (tools/notify/; needs owner bot token). Evidence records app/records/ (102 signals, 21 families, agent).
 - Specs docs/superpowers/specs/2026-06-07-*; plan docs/superpowers/plans/2026-06-07-calls-engine.md;
   owner log docs/research/recommendations_system_discussion.md (incl. allotment-myth honesty note).
+- **Phase-2 app SHIPPED (same day)**: 7-screen st.navigation terminal (Home/Recommendations/IPO Detail/
+  Evidence/Registry/Track Record/Data) built by app agent per app_screens_v1.md; evidence records
+  agent distilled 102 signals + 21 families into app/records/. Playwright walk of every screen caught
+  2 real bugs (EARLY-call lookup keyed wrong; NaN broad_sector crashing predict on detail) — fixed.
+  Showdown sandbox "untouched" test made self-contained (pre-hash) — was comparing against a stale
+  hardcoded June-1 archive. Suite 227 passed + SHOWDOWN app smoke. Live calls visible on open cards.
