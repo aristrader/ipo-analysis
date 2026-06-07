@@ -157,13 +157,28 @@ st.divider()
 
 # ====================================================== ① VERDICT BAR
 st.subheader("① Verdict")
+# iter-2 P1 fix: a dead stock must SAY SO before any forward-looking read
+_dead = row is not None and str(row.get("delisted")) in ("True", "true", "1")
+_oc = str(row.get("outcome_class") or "") if row is not None else ""
+if _dead:
+    if _oc == "wipeout":
+        st.error("💀 **DELISTED — WIPEOUT (realized).** Compulsory delisting/liquidation; terminal "
+                 "value −100%. Everything below is the historical read of what led here.")
+    else:
+        _why = row.get("delist_reason")
+        _why = _why if isinstance(_why, str) and _why.strip() else "reason not recorded"
+        st.warning(f"⚠️ **DELISTED** ({_why}). Terminal value = last traded price. "
+                   "Everything below is the historical read.")
 v1, v2, v3 = st.columns([1, 1, 2])
 cs = sc["combined_score"]
 v1.metric(f"COMBINED ({profile})", f"{cs:.0f}/100" if cs is not None else "n/a",
           help="A transparent RANKING vs history (in-sample / indicative) — NOT a proven buy signal.")
 v1.markdown(ui.chip("display"), unsafe_allow_html=True)
 rscore = ra.get("risk_score_0_100")
-if rscore is not None:
+if _dead and _oc == "wipeout":
+    v2.metric("💀 Wipeout", "REALIZED", help="This is no longer a risk — it happened.")
+    v2.markdown(ui.chip("validated"), unsafe_allow_html=True)
+elif rscore is not None:
     band = ra.get("risk_band")
     tag = {"HIGH": "🔴 HIGH", "ELEVATED": "🟠 ELEVATED", "LOW": "🟢 LOW"}.get(band, band)
     v2.metric("💀 Wipeout-risk", f"{rscore:.0f}/100",

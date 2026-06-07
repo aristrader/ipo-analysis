@@ -130,7 +130,7 @@ def oos_table():
 with tab_track:
     st.subheader("C. OOS report card — the predictor's honest test")
     st.caption("Weights fit on IPOs listed ≤ cutoff, tested on LATER IPOs never seen during fitting. "
-               "Real edge at 3y (about +55pp); weak at 1y (+2-5pp). A ranking tool, not a flip signal.")
+               "The edge is strongest at 3y, weaker at 1y — read the lift column in the table (numbers live in the data, not this caption). A ranking tool, not a flip signal.")
     st.dataframe(oos_table(), hide_index=True, use_container_width=True)
     with st.expander("🎚 Try your own train/test split"):
         cc1, cc2, cc3 = st.columns([2, 1, 1])

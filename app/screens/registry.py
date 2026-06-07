@@ -17,6 +17,13 @@ ui.one_liner("What am I looking at? Every signal we ever tested and its verdict 
 st.info("**SCORE POLICY (locked): evolve-only-if-robust** — a signal enters the weighted score only if it "
         "improves out-of-sample top-quintile lift robustly across splits; otherwise it stays display-only.")
 
+import os as _os, datetime as _dt
+_rec_m = _dt.date.fromtimestamp(_os.path.getmtime("app/records/signals.json")).isoformat() \
+    if _os.path.exists("app/records/signals.json") else "never"
+st.markdown(f"<span class='asof'>substrate as-of {ui.as_of_substrate()} · records regenerated {_rec_m} "
+            f"(distilled from rules/index.md + verdict docs)</span>", unsafe_allow_html=True)
+
+
 records = ui.load_records()
 
 

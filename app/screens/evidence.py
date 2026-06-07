@@ -14,6 +14,13 @@ ui.one_liner("What am I looking at? Every tested hypothesis as a data record, gr
              "and the PLAYBOOK (the whole pre-declared grid, failure cells included). Rejected ideas live "
              "in the graveyard — first-class and browsable. **Not financial advice.**")
 
+import os as _os, datetime as _dt
+_rec_m = _dt.date.fromtimestamp(_os.path.getmtime("app/records/signals.json")).isoformat() \
+    if _os.path.exists("app/records/signals.json") else "never"
+st.markdown(f"<span class='asof'>substrate as-of {ui.as_of_substrate()} · records regenerated {_rec_m} "
+            f"(distilled from rules/index.md + verdict docs)</span>", unsafe_allow_html=True)
+
+
 records = ui.load_records()
 families = ui.load_families()
 

@@ -172,11 +172,14 @@ else:
     for _, t in track.sort_values("call_date", ascending=False).head(20).iterrows():
         listed = t["call_date"]
         age_d = (today - listed).days
-        # next milestone in calendar days (~21td≈30d, ~90td≈126d)
-        if age_d < 30:
-            milestone = f"d21 persistence read in ~{30 - age_d}d {ui.chip('display')}"
-        elif age_d < 126:
-            milestone = f"d90 capitulation check in ~{126 - age_d}d {ui.chip('validated')}"
+        # next milestone on the TRADING-day calendar (iter-2 P3 fix; was calendar-day approx)
+        from layer3 import calls as _calls
+        t21 = _calls.td_offset(listed, 21)
+        t90 = _calls.td_offset(listed, 90)
+        if t21 is not None and today < t21:
+            milestone = f"d21 persistence read in ~{(t21 - today).days}d {ui.chip('display')}"
+        elif t90 is not None and today < t90:
+            milestone = f"d90 capitulation check in ~{(t90 - today).days}d {ui.chip('validated')}"
         else:
             milestone = f"matured {ui.chip('validated')}"
         c = st.columns([3, 3])
