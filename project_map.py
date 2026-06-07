@@ -155,7 +155,8 @@ CONTEXTS = {
     "cross-regime validation / OOS": [
         "layer3/validate.py", "run_validation.py", "run_oos.py", "tests/layer3/test_validate.py",
     ],
-    "the app / UI": ["app.py", "docs/research/app_phase2_design.md"],
+    "the app / UI": ["app.py", "docs/research/app_phase2_design.md",
+                     "docs/research/recommendations_system_discussion.md"],
     "test a hypothesis / research agent brief": [
         "docs/research/hypothesis_protocol.md", "rules/index.md",
         "docs/research/phase2_playbooks.md", "tools/research/",

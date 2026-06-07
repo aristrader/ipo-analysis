@@ -17,10 +17,12 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
 ---
 
 ## 🏃 NOW
-- **NEXT ACTION (owner-approved 2026-06-07, do on session restart): START THE APP-DESIGN AGENTS.**
-  Brief = `docs/research/app_phase2_design.md` (+ frontend-design plugin, installed project-local).
-  Flow: design agents iterate the doc into concrete screen specs → review with owner → build →
-  playwright-verify each iteration. Research program is COMPLETE — the app is the last Phase-2 piece.
+- **RECOMMENDATIONS SYSTEM (owner-scoped 2026-06-07, supersedes "design agents first"):** full
+  discussion log = `docs/research/recommendations_system_discussion.md`. Pieces: A calls
+  engine (ledger + point-in-time generator + gap-fill) · B backfill replay (2026 cohort +
+  historical sim) · C live/upcoming IPO board · D day-1 early-call (data-scope first) ·
+  E recommendations tab + app redesign (design agents, LAST). Process: brainstorm → specs →
+  plans → ONE owner discussion round → implement.
 - System state: showdown-certified, refreshable (`run_refresh.py`), forward-tested on 82 never-seen
   IPOs (score ordered real outcomes monotonically). Full history → `DONE.md`.
 - Commands: fast suite `PYTHONPATH=. pytest tests -q` (~90s) · pre-release gate
