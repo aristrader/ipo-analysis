@@ -74,3 +74,30 @@ Scripts: tools/research/wave1_flows.py · wave1_gmp_path.py (re-runnable).
 ## QUEUE (wave-2 ready, specs in phase2_playbooks.md)
 F4 bear-window stop-loss · F5a/c/d/e/f reference-point variants · T2a/b/c/e/g/h/i/j ·
 F9/F10/F12 (new) · F3 one PIT-score re-test · F7 cross-regime+OOS confirmation (FIRST).
+
+---
+# Wave-2 part 1 (2026-06-07) — substrate tests (tools/research/wave2_substrate.py)
+
+## ⭐ F7 GRADUATES: VALIDATED CROSS-REGIME (4/4 cells)
+Cold-tape minus hot-tape fwd-3m edge: boom/MB +3.1pp · boom/SME +10.1pp · longterm/MB +18.2pp ·
+longterm/SME +2.6pp. OOS (thresholds trained ≤2021, tested ≥2022): cold −2.6% vs hot −5.8%
+(+3.2pp, right direction; cold n=57 — post-2022 was mostly hot tape).
+STATUS: VALIDATED. NEXT: OOS fold test as a climate component (median-pop-based trailing climate)
+— candidate to upgrade/augment count-based crowded_window in the score.
+
+## Everything else in this batch: REJECTED (honest nulls)
+- F12 size-weighted retail-P&L index: WORSE than simple median-pop climate (IC −0.02/−0.03 vs
+  −0.09); median-pop (= F7's basis) is the best climate gauge. Size-weighting rejected.
+- F9 sector copycat decay: IC −0.012; pioneers −13.1% vs 4th+ −10.8% — no decay (slightly opposite).
+- F4 bear-window stop-loss: stops LOSE even in bear windows (SL12 −12.0% / SL20 −9.1% vs B&H −5.8%).
+  The no-stop-loss truth is now unconditional AND conditional.
+- T2b first-week×regime: bull −8.5% vs bear −10.0% — no gate.
+- T2c transition fragility: +6.5% vs +6.9% (transition n=22 thin) — none detected.
+- T2e recovery by phase: 20%/16%/21% — no phase effect on recovery odds.
+- T2g same-banker collision: −4.5% vs −5.2% — null (also under congestion control).
+- T2h ASBA refund echo: IC **−0.179** — OPPOSITE of pump: concurrent unblocking = congestion drag.
+  Reject echo; consistent with the F2d retail-congestion-tax mechanism.
+- T2j SME circuit-cage: inconsistent (SME peaks later on small moves 11v8d, EARLIER on big 40v52d).
+
+## Remaining queue (price-path scan, post-compaction): F5a/c/d/e/f, F10 (early corp-action tells),
+T2i (flipping), T2a (day-180 unlock). Gated: F11 serial promoters, F3 PIT re-test.

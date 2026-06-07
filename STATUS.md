@@ -30,8 +30,10 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
   protocol. Master docs: `deep_hypotheses_2026-06.md` + `phase2_playbooks.md` + verdicts in
   `tier1_wave1_verdicts.md`. **Wave-1 done (14 tests): 11 falsified/rejected (incl. F1 anchor-unlock
   via placebo, F2a neglected-member, F3 junk-bounce), 1 SURVIVOR — F7 disposition contagion
-  (cold-tape listers +7.6pp over hot-chase at 3m) pending cross-regime+OOS. Wave-2 queue: F7
-  confirmation FIRST, F12 retail-P&L climate, F9/F10, F4, F5a/c-f, T2 remainder.**
+  (cold-tape listers +7.6pp over hot-chase at 3m) pending cross-regime+OOS. **Wave-2 part-1 DONE: F7 VALIDATED
+  CROSS-REGIME (4/4 cells, cold-tape edge +2.6..+18.2pp) — everything else rejected (F12, F9, F4
+  bear-SL, T2b/c/e/g/h/j). Remaining queue: price-path scan (F5a/c/d/e/f, F10, T2i, T2a) + F7 fold
+  test + gated (F11, F3-retest).**
 - **App redesign (build LAST, design evolves after every run):** the simple 5-tab app must become
   a sequenced research platform (IPO detail pages w/ event calendars + cluster context + reference
   levels; evidence browser for hypothesis verdicts/playbooks; regime dashboard; forward-test tracker).

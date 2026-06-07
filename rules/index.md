@@ -169,3 +169,10 @@ results are kept on purpose).
 - DISPLAY-WATCH: F6a GMP-surprise (weak lean).
 - NEW QUEUED: F9 copycat decay, F10 early corp-action tells, F11 serial promoters (gated), F12 retail
   P&L climate index (priority — may upgrade crowded_window).
+
+## Wave-2 part-1 verdicts (2026-06-07)
+- **F7 disposition contagion: VALIDATED CROSS-REGIME (4/4 cells, +2.6..+18.2pp) + OOS-directional.**
+  Queued: fold test as climate component (may upgrade crowded_window).
+- REJECTED: F12 size-weighted climate (median-pop wins), F9 copycat decay, F4 bear-window stop-loss
+  (stops lose even in bears), T2b, T2c (thin), T2e, T2g banker collision, T2h ASBA echo (sign opposite
+  — supports congestion tax), T2j circuit-cage (inconsistent).
