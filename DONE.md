@@ -450,3 +450,15 @@ Cleanup: archived dead scratch (`archive/research_scratch/`), refreshed TODO/DON
   2 real bugs (EARLY-call lookup keyed wrong; NaN broad_sector crashing predict on detail) — fixed.
   Showdown sandbox "untouched" test made self-contained (pre-hash) — was comparing against a stale
   hardcoded June-1 archive. Suite 227 passed + SHOWDOWN app smoke. Live calls visible on open cards.
+- **App-iteration pipeline (same day, owner-authorized autonomous)**: Phase-0 3-agent meta-plan
+  (thinker/UX-critic/code-prophet — 13 predicted bugs, 10 owner journeys, edge-ISIN walk scripts)
+  → locked 4-iteration charter (crash → truth → decide → feel) → tapered walker agents + inline
+  fixes. ITER 1 BREAK-IT: 9 findings, 0 P0; fixed isin-carrying links, friendly not-found/excluded,
+  graded=final+partial, case-insensitive ISIN, cache-busting refresh, guarded predict. ITER 2
+  DATA-HONESTY: ALL on-screen numbers verified == data; fixed delisted/WIPEOUT verdict badge, OOS
+  caption, evidence/registry as-of stamps, trading-day countdowns, families rollups. ITER 3
+  JOURNEYS: 10/10 owner tasks in click budget; color-coded call badges (dominance), same-tab links,
+  "no live record yet" honesty headline, registry→evidence deep-links, plain-language why-strings.
+  ITER 4 CALM: 11-term glossary on 4 screens, staleness alarm (>24h board / >7d grades), backtester
+  latency = cached-after-first. tests/app/ added (16 ui-logic) + smoke key-content asserts.
+  Module-reload lesson recorded: ui.py edits need app restart (hot-reload covers page scripts only).
