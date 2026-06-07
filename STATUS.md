@@ -26,9 +26,12 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
 - Change→tests routing is automatic each turn (`verify.py` hook + `project_map.TEST_ROUTING`).
 
 ## 🚀 PHASE 2 — declared 2026-06-06 (deep-hypothesis program + app redesign)
-- **Research program:** 8 families / ~26 second-order hypotheses, each tested at 3 layers
-  (existence → magnitude → PLAYBOOK with payoff distributions + failure cells).
-  Master docs: `docs/research/deep_hypotheses_2026-06.md` + `docs/research/phase2_playbooks.md`.
+- **Research program:** 12 families (8 original + F9-F12 owner tangents) / ~30 tests, 3-layer
+  protocol. Master docs: `deep_hypotheses_2026-06.md` + `phase2_playbooks.md` + verdicts in
+  `tier1_wave1_verdicts.md`. **Wave-1 done (14 tests): 11 falsified/rejected (incl. F1 anchor-unlock
+  via placebo, F2a neglected-member, F3 junk-bounce), 1 SURVIVOR — F7 disposition contagion
+  (cold-tape listers +7.6pp over hot-chase at 3m) pending cross-regime+OOS. Wave-2 queue: F7
+  confirmation FIRST, F12 retail-P&L climate, F9/F10, F4, F5a/c-f, T2 remainder.**
 - **App redesign (build LAST, design evolves after every run):** the simple 5-tab app must become
   a sequenced research platform (IPO detail pages w/ event calendars + cluster context + reference
   levels; evidence browser for hypothesis verdicts/playbooks; regime dashboard; forward-test tracker).
