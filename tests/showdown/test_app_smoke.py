@@ -49,8 +49,18 @@ def app_server():
 
 
 # the seven screens of the multipage app, as direct routes (st.navigation slugs)
-SCREENS = ["/", "/recommendations", "/ipo_detail", "/evidence",
-           "/registry", "/track_record", "/data"]
+# + a KEY-CONTENT marker each: pages must not just load, they must show their substance
+# (iter-1 deliverable: catches "renders but empty" — the failure ERROR_MARKERS can't see)
+SCREENS_CONTENT = {
+    "/": "Where do you want to go?",
+    "/recommendations": "Live & upcoming board",
+    "/ipo_detail": "Look up or score an IPO",
+    "/evidence": "famil",                       # family index
+    "/registry": "Signal Registry",
+    "/track_record": "Track record",
+    "/data": "methodolog",
+}
+SCREENS = list(SCREENS_CONTENT)
 ERROR_MARKERS = ("Traceback", "Exception:", "KeyError", "AttributeError",
                  "NameError", "TypeError", "ValueError:")
 
@@ -74,6 +84,8 @@ def test_all_screens_render_without_exceptions(app_server):
             body = page.inner_text("body")
             for marker in ERROR_MARKERS:
                 assert marker not in body, f"screen {route} shows error text: {marker}"
+            assert SCREENS_CONTENT[route].lower() in body.lower(), \
+                f"screen {route} rendered without its key content ({SCREENS_CONTENT[route]!r})"
         # the in-page tabs that remain (Track Record: track / backtester / validation)
         page.goto(app_server + "/track_record", timeout=60_000)
         page.wait_for_load_state("networkidle", timeout=60_000)
