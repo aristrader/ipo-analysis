@@ -196,3 +196,10 @@ results are kept on purpose).
   (mechanical), T2i flipping (INVERTED: day-1 turnover = demand, IC +0.103 pop-controlled, placebo
   clean), T2a day-180 unlock (weak ~1–2%, attribution unclean, ≈costs).
 - Gated remainder: F11 serial-promoter fingerprints (needs entity-matching infra — a build).
+
+## Swing-trade take-profit (2026-06-08, owner idea — REJECTED, definitive)
+- ENTRY listing close, SELL first close >=+20% else hold 1y, vs buy-and-hold. Take-profit lifts
+  WIN-RATE (67% vs 46%) + median (+21% vs −7%) but CUTS MEAN (+1% vs +41%) and P90 (+28% vs +140%)
+  — negative Δmean in all 4 regime cells (−9.7 / −47.2 / −36.9 / −51.1pp). Conditional good-entry
+  (month-1 strong) makes holding MORE valuable (hold mean +104%). The right tail carries IPO
+  returns; take-profit decapitates it. Bot will not emit sell-at-X calls. See future_ideas.md.

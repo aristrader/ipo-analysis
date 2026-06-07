@@ -164,3 +164,24 @@ Final tally across all waves: ~33 tests run · 3 graduates (crowded_window IN-SC
 F7 disposition contagion VALIDATED display; F5e capitulation flag VALIDATED display) ·
 1 thin survivor (F10 exit tell) · 2 mechanism confirmations (F2d congestion tax, F2c SME fatigue) ·
 1 display-watch (F6a GMP-surprise) · everything else honestly killed.
+
+---
+# Swing-trade take-profit test (2026-06-08, owner idea — tools/research/swing_tp_test.py)
+ENTRY = listing close; SELL first day closing >= +X%, else hold to 1y; vs buy-and-hold to 1y.
+VERDICT: REJECTED as a strategy, CONFIRMS the no-take-profit truth — and shows WHY, with numbers.
+
+The median/mean SCISSORS (n=2279, all listed):
+- buy&hold 1y: median −6.7% · MEAN +40.7% · P90 +140% · win 46%
+- take-profit +20%: median +21.2% · MEAN +1.0% · P90 +28% · win 67%
+Take-profit makes you WIN MORE OFTEN (67% vs 46%) and lifts the median hugely — it FEELS great —
+but it guts the MEAN (+1% vs +40.7%) and decapitates the P90 (+28% vs +140%). IPO total return is
+carried by a few multibaggers; selling them at +20% throws that away.
+CROSS-REGIME (Δmean TP20 − hold, negative = hurts): boom/MB −9.7pp · boom/SME −47.2pp ·
+longterm/MB −36.9pp · longterm/SME −51.1pp. Negative in ALL 4 cells. (Δmedian positive in all 4 —
+the trap: hit-rate up, wealth down.)
+CONDITIONAL ENTRY (month-1 strong, the validated persistence lean, n=769): hold MEAN +103.7%,
+P90 +222% vs take-profit +20% mean +19%. The BETTER the entry, the MORE take-profit costs — you're
+capping your best names. So a good entry signal makes HOLDING more valuable, never take-profit.
+USE: this is the definitive teaching example of the right-tail truth. Logged in future_ideas.md;
+the bot will NOT emit "sell at +X%" calls. A descriptive "touched +X% today" info-ping is the only
+honest version (no action implied).
