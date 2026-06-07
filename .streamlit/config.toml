@@ -1,0 +1,9 @@
+# Security pinning (company laptop — owner requirement 2026-06-07):
+# - bind to localhost ONLY (default binds 0.0.0.0 = visible to the whole LAN)
+# - no usage telemetry to Streamlit
+[server]
+address = "localhost"
+headless = true
+
+[browser]
+gatherUsageStats = false

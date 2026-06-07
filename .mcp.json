@@ -4,6 +4,9 @@
       "command": "npx",
       "args": [
         "@playwright/mcp@0.0.75",
+        "--browser", "chromium",
+        "--isolated",
+        "--headless",
         "--allowed-origins",
         "http://localhost:8501;http://localhost:8597;http://localhost:8598;http://localhost:8599;http://127.0.0.1:8501;http://127.0.0.1:8597;http://127.0.0.1:8598;http://127.0.0.1:8599"
       ]

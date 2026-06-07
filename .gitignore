@@ -11,3 +11,5 @@ data/prices/
 data/reference/bhavcopy/
 archive/
 .playwright-mcp/
+tools/notify/telegram.json
+tools/notify/.notified
