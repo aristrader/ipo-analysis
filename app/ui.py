@@ -77,6 +77,57 @@ def chips(*items) -> str:
     return " ".join(items)
 
 
+_CALL_COLOR = {        # the call must be the LOUDEST element on a card (iter-3 F1 fix)
+    "APPLY": ("#0a6b3d", "#e3f6ec"), "EARLY_APPLY": ("#0a6b3d", "#e3f6ec"),
+    "AVOID": ("#9b1c1c", "#fde8e8"), "EARLY_AVOID": ("#9b1c1c", "#fde8e8"),
+    "EXIT_REVIEW": ("#92400e", "#fef3c7"), "TAKE_PROFITS": ("#92400e", "#fef3c7"),
+}
+
+
+def call_badge(call_type: str) -> str:
+    """A big, color-coded badge for a ledger call — green=apply, red=avoid, amber=act."""
+    fg, bg = _CALL_COLOR.get(str(call_type), ("#374151", "#eceae3"))
+    return (f"<span style='background:{bg};color:{fg};border:1.5px solid {fg};"
+            f"border-radius:4px;padding:2px 10px;font:800 14px/1.6 ui-monospace,Menlo,monospace;"
+            f"white-space:nowrap;letter-spacing:.03em;'>{call_type}</span>")
+
+
+_WHY = {               # rules_fired codes -> plain language (iter-3 F5 fix)
+    "score_q": lambda v: {"5": "score in the TOP 20% of its segment",
+                          "1": "score in the BOTTOM 20% of its segment"}.get(v, f"score quintile {v}/5"),
+    "n14_flags": lambda v: "no prospectus red flags" if v == "0" else
+                           f"{v} prospectus red flag{'s' if v != '1' else ''} (tiny sales / loss-making / obscure banker)",
+    "live_score": lambda v: f"live score {v}/100 vs history",
+    "day_n": lambda v: f"day {v} of the subscription window",
+    "gmp": lambda v: f"grey-market premium {v}%" if v not in ("None", "") else None,
+    "sub": lambda v: f"subscribed {v}× so far" if v not in ("None", "") else None,
+    "up_day_ratio": lambda v: f"only {float(v):.0%} up-days in month 1" if float(v) < 0.5
+                              else f"{float(v):.0%} up-days in month 1",
+    "max_close_vs_issue": lambda v: (f"never closed above its issue price in 90 days (peak {float(v):.0%} of issue)"
+                                     if float(v) < 1 else f"has traded {float(v):.0%} of issue price"),
+    "early_corp_action": lambda v: "bonus/split announced within year 1 after a big run-up (the validated top-marker)",
+}
+
+
+def why_text(rules_fired: str) -> str:
+    """Translate a ledger rules_fired string into plain language; raw codes stay in the tooltip."""
+    out = []
+    for part in str(rules_fired or "").split(";"):
+        if "=" not in part:
+            continue
+        k, v = part.split("=", 1)
+        fn = _WHY.get(k.strip())
+        if fn is None:
+            continue
+        try:
+            t = fn(v.strip())
+        except (ValueError, TypeError):
+            t = None
+        if t:
+            out.append(t)
+    return " · ".join(out) if out else str(rules_fired or "—")
+
+
 # ---------------------------------------------------------------- formatters
 def money(cr) -> str:
     """Rupees-crore formatter."""
@@ -206,7 +257,9 @@ def page_link_isin(isin, label, *, disabled=False):
     if not isin or (isinstance(isin, float) and pd.isna(isin)):
         st.caption(f"{label} (no ISIN on file — detail unavailable)")
         return
-    st.markdown(f"🔎 [{label} →](/ipo_detail?isin={isin})")
+    # target=_self: stay in THIS tab (markdown links default to a new tab — iter-3 F2 fix)
+    st.markdown(f"<a href='/ipo_detail?isin={isin}' target='_self'>🔎 {label} →</a>",
+                unsafe_allow_html=True)
 
 
 # ---------------------------------------------------------------- cached loaders

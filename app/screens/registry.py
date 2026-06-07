@@ -75,9 +75,13 @@ if records:
                 "signal": sig, "family": rec.get("family", ""),
                 "state": _badge[cs], "weight": weight_of(rec),
                 "evidence": evidence_of(rec), "why": why,
+                "record": f"/evidence?id={rec.get('id','')}",
             })
         if rows:
-            st.dataframe(pd.DataFrame(rows), hide_index=True, use_container_width=True)
+            st.dataframe(pd.DataFrame(rows), hide_index=True, use_container_width=True,
+                         column_config={"record": st.column_config.LinkColumn(
+                             "record", display_text="open →"),
+                             "why": st.column_config.TextColumn("why", width="large")})
         else:
             st.caption("no signals in this section under the current filter")
 

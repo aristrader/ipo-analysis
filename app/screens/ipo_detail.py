@@ -194,7 +194,7 @@ if subj_isin and ledger is not None:
     if not lc.empty:
         c = lc.sort_values("call_date").iloc[-1]
         v3.markdown(f"**Ledger call: {c['call_type']}** {ui.chip('validated')}", unsafe_allow_html=True)
-        v3.caption(f"fired {c['call_date'].date()} · why: {c['rules_fired']}")
+        v3.caption(f"fired {c['call_date'].date()} · why: {ui.why_text(c['rules_fired'])}")
         v3.page_link("app/screens/recommendations.py", label="see all calls →", icon="🟢")
     else:
         v3.caption("no APPLY/AVOID/NEUTRAL call on file for this ISIN")

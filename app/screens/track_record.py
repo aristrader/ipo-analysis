@@ -46,6 +46,11 @@ with tab_track:
     else:
         st.caption("Mode legend: **live / gap_filled** = forward truth · **backfilled** = out-of-sample · "
                    "**historical_sim** = dress rehearsal. Never pool them — evidence strength differs.")
+        _fwd = ledger[ledger["mode"].isin(["live", "gap_filled"]) & ledger["alpha_1m"].notna()]
+        if _fwd.empty:
+            st.info("⏳ **No LIVE calls have matured yet.** The true forward track record starts grading "
+                    "~1 month after the first live calls (made 2026-06-07). Until then the rows below are "
+                    "backfill / simulation — useful, but not the same as forward proof.")
         lg = ledger.copy()
         lg["_win"] = lg.apply(win_flag, axis=1)
         graded = lg[lg["call_type"].isin(["APPLY", "AVOID", "EARLY_APPLY", "EARLY_AVOID",

@@ -53,7 +53,14 @@ with left:
         recs = recs_by_family.get(fn, [])
         c = rollup(recs)
         labels.append(f"{fn}  (✓{c['validated']} ~{c['display']} ⚠{c['thin']} ✗{c['rejected']})")
-    sel = st.radio("Pick a family", labels, label_visibility="collapsed")
+    _want = (st.query_params.get("id") or "").strip()
+    _idx = 0
+    if _want:
+        for _i, _fn in enumerate(fam_names):
+            if any(r.get("id") == _want for r in recs_by_family.get(_fn, [])):
+                _idx = _i
+                break
+    sel = st.radio("Pick a family", labels, label_visibility="collapsed", index=_idx)
     fam = fam_names[labels.index(sel)]
     st.divider()
     tier_filter = st.selectbox("Tier filter", ["(all)"] + sorted(
@@ -77,7 +84,8 @@ with right:
         st.stop()
 
     titles = [f"{r.get('title', r.get('id'))}" for r in fam_recs]
-    pick = st.selectbox("Hypothesis", titles)
+    _tidx = next((i for i, r in enumerate(fam_recs) if r.get("id") == _want), 0) if _want else 0
+    pick = st.selectbox("Hypothesis", titles, index=_tidx)
     rec = fam_recs[titles.index(pick)]
 
     st.markdown(f"### {rec.get('title', rec.get('id'))} &nbsp; {ui.chip(rec.get('status'))}",

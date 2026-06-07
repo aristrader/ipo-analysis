@@ -112,11 +112,12 @@ else:
                 top[0].markdown(f"**{o['name']}** ({o['type']})")
                 if call_row is not None:
                     early = str(call_row["call_type"]).startswith("EARLY_")
-                    top[1].markdown(f"call: **{call_row['call_type']}** "
+                    top[1].markdown(f"{ui.call_badge(call_row['call_type'])} "
                                     f"{call_chip(call_row['call_type'])}", unsafe_allow_html=True)
-                    st.caption(f"why: {call_row['rules_fired']}"
+                    st.caption(f"why: {ui.why_text(call_row['rules_fired'])}"
                                + (" · early call on partial window data — final verdict lands "
-                                  "on the close date" if early else ""))
+                                  "on the close date" if early else ""),
+                               help=f"raw: {call_row['rules_fired']}")
                 else:
                     top[1].markdown(f"call: **pending** {ui.chip('thin', 'awaits close-date')}",
                                     unsafe_allow_html=True)
@@ -198,9 +199,9 @@ if alerts.empty:
     st.caption("none right now")
 else:
     for _, a in alerts.sort_values("call_date", ascending=False).head(20).iterrows():
-        st.markdown(f"**{a['call_type']}** · {a['name']} ({a['type']}) · fired {a['call_date'].date()} "
+        st.markdown(f"{ui.call_badge(a['call_type'])} · **{a['name']}** ({a['type']}) · fired {a['call_date'].date()} "
                     f"{call_chip(a['call_type'])}", unsafe_allow_html=True)
-        st.caption(f"why: {a['rules_fired']}")
+        st.caption(f"why: {ui.why_text(a['rules_fired'])}", help=f"raw: {a['rules_fired']}")
         isin_link(a["isin"], "detail")
 
 st.divider()
