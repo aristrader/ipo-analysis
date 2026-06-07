@@ -4,17 +4,17 @@ Auto-loaded context for Claude/any AI working on this repo. Keep it current: whe
 step, a data source, a decision, or a rule, update the relevant section + the pointer here.
 
 ## What this is
-A personal research tool to find **repeatable, trustworthy patterns in Indian IPOs (2006–2025, Mainboard + SME,
+A personal research tool to find **repeatable, trustworthy patterns in Indian IPOs (2006–2026, Mainboard + SME,
 incl. delisted)** and turn them into (a) descriptive truths, (b) an analog-based predictor for new IPOs, and
 (c) a strategy backtester. Not financial advice. Free data sources only.
 
 ## The 3 layers (and status)
-- **Layer 1 — the dataset (event/identity + enrichment).** ✅ DONE. ISIN-keyed, ~2,296 IPOs across a boom cohort
-  (2020–25, 1,269) and a long-term cohort (2006–19, 1,027). Identity verified; enriched with subscription, GMP,
+- **Layer 1 — the dataset (event/identity + enrichment).** ✅ DONE. ISIN-keyed; ROW COUNT IS MOVABLE — read `data/master/substrate_meta.json` (2,384 as of the 2026-06-06 refresh)
+  across a boom cohort (2020–26) and a long-term cohort (2006–19). Identity verified; enriched with subscription, GMP,
   financials, sector, market-cap, promoter, etc. (with documented gaps).
 - **Layer 2 — price history + outcomes.** ✅ DONE — built, reviewed (2 adversarial passes), remediated. Daily prices
   (official bhavcopy, split/bonus adjusted) → `returns_summary` → joined with features into **`ipo_analysis.csv`**
-  (THE analysis substrate, 2296 rows) + per-row `data_quality_tier` + cross-source checks. Returns/alpha/delisting/
+  (THE analysis substrate; rows per substrate_meta.json) + per-row `data_quality_tier` + cross-source checks. Returns/alpha/delisting/
   liquidity verified sound. Listing-day metrics carry `listing_metrics_status` = ok(2048)/inferred_split(80)/
   recovered_bhavcopy(153)/unreliable_coverage(1, nulled+flagged)/null(14 unpriced) — Layer-3 listing-pop
   analysis should exclude `unreliable_coverage`. (Counts re-derived 2026-06-04 by the data-integrity suite.)
@@ -87,7 +87,7 @@ backtests + the method spine). 5. `docs/layer2.md` / `docs/layer3.md` — design
 
 ## Key data products (`data/master/`)
 - **`ipo_analysis.csv`** — THE Layer-3 substrate: features (universe) + outcomes (returns_summary) + data_quality + flags.
-- `universe.csv` — unified feature table (2,296). `returns_summary.csv` — price-derived outcomes.
+- `universe.csv` — unified feature table (count per substrate_meta.json). `returns_summary.csv` — price-derived outcomes.
 - `{mainboard,sme}.csv` (boom) + `{longterm_mainboard,longterm_sme}.csv` (2006–19). `_base_*.csv` = staging.
 - Review/flag files: `data_review.md` (register) + `data/master/review/` holds the review CSVs
   (`xcheck_review.csv`, `screener_financials_review.csv`, `ticker_conflicts.csv`, `name_isin_review.csv`,
