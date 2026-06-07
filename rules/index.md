@@ -158,3 +158,14 @@ results are kept on purpose).
 - F1 anchor-unlock day-30/90 dip: FALSIFIED — placebo inverted (pre-2022 more negative than
   treatment), dose-response wrong sign, dip-buy loses (38% win). No Indian replication of the
   US lockup-expiry effect. Calendar = information only, no edge chip.
+
+## Wave-1b verdicts (2026-06-07 — docs/research/tier1_wave1_verdicts.md)
+- REJECTED: F2a neglected-member (zero fwd catch-up, swept W), F2b tone-setting (shared GMP),
+  F8 unfilled-demand (inverted), F6b/F6c/F6d GMP-interaction/regime/T+3, F5b LDH-breakout trade
+  (+ look-ahead trap in fail-classification recorded).
+- VALIDATED-DIRECTIONAL: **F7 disposition contagion** — cold-tape listers +7.6pp over hot-chase at 3m
+  (chase +0.454, tax −0.088 Nifty-controlled). Pending cross-regime + OOS fold before any score role.
+- MECHANISM-ONLY: F2d retail-specific congestion tax (supports crowded_window); F2c SME demand fatigue.
+- DISPLAY-WATCH: F6a GMP-surprise (weak lean).
+- NEW QUEUED: F9 copycat decay, F10 early corp-action tells, F11 serial promoters (gated), F12 retail
+  P&L climate index (priority — may upgrade crowded_window).
