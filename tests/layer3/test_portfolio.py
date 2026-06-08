@@ -95,8 +95,8 @@ def test_growth_of_1l_three_series_start_at_capital():
     if out is None or out.empty:
         pytest.skip("no price data for sample isin in this env")
     series = set(out["series"].unique())
-    assert {"at-IPO (if allotted)", "at-listing", "Nifty"} <= series
-    # each series' first point ~= capital
-    for s, g in out.groupby("series"):
-        first = g.sort_values("date").iloc[0]["value"]
-        assert abs(first - 100000.0) < 100000.0 * 0.5     # starts in the ₹1L neighborhood
+    assert {"at-listing", "Nifty"} <= series              # at-IPO only if implied pop is sane
+    # I1 fix: at-listing and Nifty must start at EXACTLY ₹1L (anchored on the first real price row)
+    for s in ("at-listing", "Nifty"):
+        first = out[out["series"] == s].sort_values("date").iloc[0]["value"]
+        assert abs(first - 100000.0) < 1.0, f"{s} must start at exactly ₹1L, got {first:.0f}"

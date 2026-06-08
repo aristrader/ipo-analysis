@@ -49,6 +49,24 @@ def test_apply_graded_on_allottee_view():
     assert "lift_vs_base" in sc.columns    # D1 base-rate lift present
 
 
+def test_lift_is_apples_to_apples_and_direction_aware():
+    # C1/C2: APPLY lift uses an ALLOTTEE base; AVOID lift uses a DOWN base — not P(alpha>0) for both
+    led = pd.DataFrame([
+        # TRACK base set: 1 up (+pop), 1 down
+        {"call_type": "TRACK", "mode": "m", "alpha_3m": 0.10, "pop_pct": 5.0},
+        {"call_type": "TRACK", "mode": "m", "alpha_3m": -0.30, "pop_pct": 2.0},
+        {"call_type": "APPLY", "mode": "m", "alpha_3m": 0.10, "pop_pct": 5.0},
+        {"call_type": "AVOID", "mode": "m", "alpha_3m": -0.30, "pop_pct": 0.0},
+    ])
+    sc = C.scorecard(led, "3m")
+    # base_allottee = P(pop+alpha>0 | TRACK): both TRACK rows (0.15, -0.28) -> 1 of 2 = 0.5
+    ap = sc[sc.call_type == "APPLY"].iloc[0]
+    assert abs(ap["lift_vs_base"] - (1.0 - 0.5)) < 1e-6      # APPLY hit 1.0 minus allottee base 0.5
+    # base_down = P(alpha<0 | TRACK) = 1 of 2 = 0.5; AVOID hit 1.0 -> lift 0.5 (NOT vs P(alpha>0))
+    av = sc[sc.call_type == "AVOID"].iloc[0]
+    assert abs(av["lift_vs_base"] - 0.5) < 1e-6
+
+
 def test_score_reliability_orders():
     # construct: high score -> usually up, low score -> usually down
     import numpy as np

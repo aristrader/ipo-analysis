@@ -94,10 +94,13 @@ with tab_track:
                    "assumes you won the lottery. Full ₹1L/call, survivorship-honest (wipeouts=₹0). "
                    "*avg-vs-Nifty = mean of per-call ₹1L-vs-index over each call's own window — an "
                    "average alpha, NOT a single shared-capital portfolio curve. "
-                   + ("Bootstrap 90% CI on mean mult (secondary): " + " · ".join(_ci_bits) if _ci_bits else ""))
+                   + ("Bootstrap 90% CI on the MEAN multiple — NOT the typical position (the median "
+                      "is well below this band): " + " · ".join(_ci_bits) if _ci_bits else ""))
         # attribution — which picks carried / sank it (D2)
         with st.expander("Which calls made & lost the money? (position attribution)"):
-            att = _pf.attribution(pos, "secondary_val", "historical_sim")
+            _amode = pos["mode"].value_counts().idxmax()      # S2: use the mode with most positions
+            st.caption(f"Mode: {_amode} (the basket with the most APPLY positions).")
+            att = _pf.attribution(pos, "secondary_val", _amode)
             ac1, ac2 = st.columns(2)
             ac1.markdown("**Best (₹ P&L on ₹1L)**")
             ac1.dataframe(pd.DataFrame(att["best"]).assign(pnl=lambda d: d["pnl"].map(lambda x: f"₹{x:,.0f}")),
@@ -110,8 +113,9 @@ with tab_track:
         st.subheader("🎯 Were-we-right scorecard (hit-rate with 95% confidence bands)")
         st.caption("APPLY is graded on the **allottee view** (listing pop + subsequent alpha — an "
                    "applicant banks the pop); AVOID/exit on from-listing alpha vs Nifty. **lift** = "
-                   "hit-rate minus the unconditional 'buy every IPO' base rate (positive = the call "
-                   "beats indiscriminate IPO-buying). Small n → wide CI = honest uncertainty.")
+                   "hit-rate minus the 'buy every IPO' base measured on the SAME event (APPLY vs an "
+                   "allottee base; AVOID/exit vs the down-rate) — apples-to-apples. Positive = beats "
+                   "indiscriminate IPO-buying. Small n → wide CI = honest uncertainty.")
         from layer3 import calibration as _cal
         _h = st.radio("horizon", ["1m", "3m", "1y"], index=1, horizontal=True, key="sc_h")
         sc = _cal.scorecard(ledger, _h)

@@ -99,14 +99,23 @@ def growth_of_1l(isin, capital=CAPITAL, df=None, prices_root="data/prices"):
     if len(pr) < 5:
         return None
     wipe = str(r.get("delisted")) in ("True", "true", "1") and str(r.get("outcome_class")) == "wipeout"
+    # I1 FIX: anchor at-listing on the ACTUAL first price row (not the substrate adj_listing_close,
+    # which can be on a different adjustment basis / missing the listing-day row → bogus ₹4M starts).
+    # This guarantees at-listing starts at exactly ₹1L. at-IPO is then the at-listing curve scaled by
+    # the implied pop (close0/issue) — shown ONLY when that pop is sane (else the basis mismatched).
+    base_close = float(pr["close"].iloc[0])
+    if base_close <= 0:
+        return None
+    pop_factor = (base_close / float(ipx)) if (pd.notna(ipx) and ipx > 0) else None
+    show_ipo = pop_factor is not None and 0.1 <= pop_factor <= 6.0   # sane implied pop band
     rows = []
     for _, d in pr.iterrows():
         px = 0.0 if wipe and d["date"] == pr["date"].iloc[-1] else float(d["close"])
-        if pd.notna(ipx) and ipx > 0:
+        rows.append({"date": d["date"], "series": "at-listing", "value": capital * px / base_close})
+        if show_ipo:
+            # value if you'd entered at issue = at-listing value * pop_factor (same clean basis)
             rows.append({"date": d["date"], "series": "at-IPO (if allotted)",
-                         "value": capital * px / float(ipx)})
-        if pd.notna(lst) and lst > 0:
-            rows.append({"date": d["date"], "series": "at-listing", "value": capital * px / float(lst)})
+                         "value": capital * (px / base_close) * pop_factor})
         n0, n1 = _nifty_at(pr["date"].iloc[0]), _nifty_at(d["date"])
         if n0 and n1:
             rows.append({"date": d["date"], "series": "Nifty", "value": capital * n1 / n0})

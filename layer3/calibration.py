@@ -61,9 +61,23 @@ def scorecard(ledger, horizon="3m"):
     AND base-rate lift (hit-rate minus the unconditional rate for that horizon = does the call beat
     indiscriminate IPO-buying? D1). APPLY graded on the allottee view (T5)."""
     col = _GRADE_COL[horizon]
-    # unconditional base rate: of ALL graded IPOs at this horizon, what fraction had alpha>0?
-    base_a = pd.to_numeric(ledger[ledger["call_type"] == "TRACK"][col], errors="coerce").dropna()
-    base_rate = float((base_a > 0).mean()) if len(base_a) else None
+    # Base rates for "beat buying every IPO" — DIRECTION-AWARE and APPLE-TO-APPLE (review C1/C2):
+    # the baseline must be measured on the SAME event the call's hit-rate measures.
+    track = ledger[ledger["call_type"] == "TRACK"]
+    ta = pd.to_numeric(track[col], errors="coerce")
+    tpop = pd.to_numeric(track.get("pop_pct"), errors="coerce") / 100.0
+    t_allottee = ta.add(tpop, fill_value=0.0)
+    base_up = float((ta.dropna() > 0).mean()) if ta.notna().any() else None          # up-is-right base
+    base_down = float((ta.dropna() < 0).mean()) if ta.notna().any() else None        # down-is-right base
+    base_allottee = float((t_allottee[ta.notna()] > 0).mean()) if ta.notna().any() else None  # APPLY base
+
+    def _base_for(ct):
+        if ct in ("APPLY", "EARLY_APPLY"):
+            return base_allottee
+        # down-is-right call types grade on alpha<0; their fair base is P(alpha<0|all IPOs)
+        return base_down if ct in ("AVOID", "EARLY_AVOID", "EXIT_REVIEW",
+                                   "PERSIST_EXIT_LEAN", "TAKE_PROFITS") else base_up
+
     rows = []
     for (ct, mode), g in ledger.groupby(["call_type", "mode"]):
         rule = _WIN_RULE.get(ct)
@@ -76,7 +90,8 @@ def scorecard(ledger, horizon="3m"):
         wins = _apply_is_right(g, col)[mask] if ct in ("APPLY", "EARLY_APPLY") else a[mask].map(rule)
         n = int(mask.sum())
         lo, hi = wilson(int(wins.sum()), n)
-        lift = (float(wins.mean()) - base_rate) if base_rate is not None else None
+        base = _base_for(ct)
+        lift = (float(wins.mean()) - base) if base is not None else None
         rows.append({"call_type": ct, "mode": mode, "n": n,
                      "hit_rate": round(float(wins.mean()), 3),
                      "ci_lo": round(lo, 3), "ci_hi": round(hi, 3),
