@@ -501,3 +501,27 @@ Cleanup: archived dead scratch (`archive/research_scratch/`), refreshed TODO/DON
   builds were inline-TDD not full-agent-pipeline; ran an independent code-review agent → found 2
   LATENT P0 benchmark bugs (Nifty leg ran to now() vs the position's exit date; mult/nifty-mult over
   mismatched baskets) → FIXED + tested; added the H2 placebo the inline test had skipped. 256 tests.
+
+## 2026-06-08 — Multi-dimensional ENHANCEMENT pass (owner: "run the full pipeline on every task")
+After the owner flagged that the next-level build had skipped the divergent enhancement front-end,
+re-ran the proper pipeline (diverge via thinking-agent lenses → converge → build → review → test)
+on every task with current work:
+- **Task 1 (portfolio/scorecard):** 3 lenses (investor/analytics/red-team) → enhancements (median+
+  outlier decomposition, bootstrap CI, attribution, base-rate lift, edge-by-horizon) + trust-fixes.
+  TWO review rounds: review #1 found 2 latent Nifty-benchmark bugs (fixed); the enhancement itself
+  then introduced a NEW overclaim (lift column ~2.5x inflated, apples-to-oranges) which review #2
+  caught + fixed (apples-to-apples, direction-aware). Per-stock ₹1L chart anchored to start clean
+  (killed ₹4.46M/5x artifacts). APPLY regraded on allottee view (hit 52%→79%, was understated).
+  STATUS/DONE de-spun (median-first, not the winner-driven mean).
+- **Task 3 (Thread B):** 2 lenses (capability/red-team). Red-team found the gate printed "clean"
+  while mis-specifying score's contract. Hardened: enum checks, scoped non-null (APPLY/AVOID must be
+  scored), cross-file referential (non-live ISINs ⊆ substrate), listing-gain scale-inversion check;
+  gate now RAISES in run_refresh + runs in the per-turn verify hook; GMP-history dedup on ISIN +
+  writes null rows (no invisible holes).
+- **Task 4 (Thread C):** divergence agent expanded the hypothesis space (the skipped step) → 3 new
+  second-order hypotheses → all tested with placebo/falsifier → ALL REJECTED (margin-expansion
+  opposite+flip; sales-accel×demand fails shuffle p=0.156; banker-congestion null). Placebo caught
+  the one the falsifier passed. 0 new signals = honest.
+- Lesson banked: the post-build review repeatedly caught what pre-build divergence couldn't — incl.
+  a NEW overclaim introduced by the honesty-fix itself. The review step is non-negotiable on any
+  surface showing money numbers.

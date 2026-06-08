@@ -17,17 +17,20 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
 ---
 
 ## 🏃 NOW
-- **Nothing in progress — "next-level" program COMPLETE (2026-06-08).** All 6 items shipped +
-  independently code-reviewed (2 latent benchmark P0s found & fixed). System at rest, forward-
-  tracking itself. What was built → `DONE.md`; plan → `docs/research/NEXT.md`.
-- **New this program:** ₹1L portfolio sim (`run_portfolio.py`) · were-we-right scorecard
-  (`run_scorecard.py`) · schema gate (`tools/checks/schema_gate.py`, in refresh) · GMP-history
-  capture · pe_vs_sector display signal (placebo-confirmed) · app surfaces the ₹1L charts +
-  scorecard. News-feed scope = VIABLE (NSE API carries ISIN).
-- **Running parts:** Telegram notifier (thrice-daily; `launchctl unload …com.ipo.calls.plist` to
-  stop) · calls ledger ~5,170 · Playwright OFF by default (`docs/playwright_on_off.md`).
-- **Commands:** app `PYTHONPATH=. streamlit run app.py` · `run_portfolio.py` · `run_scorecard.py`
-  · `run_calls.py` · `run_refresh.py [--apply]` · tests `PYTHONPATH=. pytest tests -q` (256).
+- **Nothing in progress — next-level program + the full multi-dimensional ENHANCEMENT pass COMPLETE
+  (2026-06-08).** Every task with current work went through diverge (thinking-agent lenses) →
+  converge → build → review → test. System at rest, forward-tracking itself. History → `DONE.md`.
+- **Enhancement outcomes:** Task 1 portfolio/scorecard — 2 review rounds caught + fixed real
+  misleading-number bugs (median now shown next to mean, lift made apples-to-apples, ₹1L chart
+  starts clean, APPLY graded on allottee view). Task 3 (Thread B) — gate hardened (enums,
+  scoped-score, referential, scale-inversion; raises on refresh; runs each turn). Task 4 (Thread C)
+  — 3 NEW hypotheses generated + tested with placebo, all rejected (0 new signals = honest).
+- **Future builds (get their own divergence pass WHEN built, not before):** news-feed (scoped
+  VIABLE), broader app redesign. Both in `docs/research/future_ideas.md` / NEXT.md.
+- **Running parts:** Telegram notifier (thrice-daily) · calls ledger ~5,170 · schema gate in the
+  per-turn verify hook + refresh · Playwright OFF by default.
+- **Commands:** app `streamlit run app.py` · `run_portfolio.py` · `run_scorecard.py` ·
+  `run_calls.py` · `run_refresh.py [--apply]` · tests `pytest tests -q` (262).
 
 ## 📋 OPEN BACKLOG (all optional — pick when wanted)
 - **`docs/research/future_ideas.md`** — owner "someday" sub-projects: swing-trade buy/sell calls
