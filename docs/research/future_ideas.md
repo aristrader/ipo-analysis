@@ -33,12 +33,16 @@ things if it's (a) a real earnings beat vs (b) an unexplained pump. News tells t
 - Entity-matching news → ISIN (the hard part — same fuzzy-matching problem that parked F11).
 - Then: does a catalyst tag actually improve a trade decision? = another 3-layer hypothesis test,
   NOT an assumption. (News-reaction edges are famously arbitraged away fast.)
-**Honest blockers:** (a) news→stock matching is messy; (b) classifying "good vs bad news" reliably
-without an LLM-in-the-loop is hard, and an LLM-in-the-loop has cost + a company-laptop data
-question; (c) the edge may not survive testing even if built. **Big idea — think later.**
-**Smallest first step when we pick it up:** scope the FREE BSE/NSE corporate-announcements API
-coverage for our ISINs (read-only, structured, no LLM) before building anything — same
-"scope-the-source-first" discipline as the day-1 subscription question.
+**SCOPE DONE (2026-06-08, tools/research/scope_news_feed.py): VIABLE.** The FREE NSE
+corporate-announcements API returns HTTP 200, ~18-28 announcements per active listed name (5/8
+sampled; the 0s were very-recent/illiquid symbols), with fields `an_dt`/`dt` (date), `desc`/
+`attchmntText` (subject), `attchmntFile` (attachment), `smIndustry`, and crucially **`sm_isin`** —
+**the ISIN is IN the payload, so news→stock matching is SOLVED for free** (the blocker that parked
+this is gone). Remaining hard part is ONLY "good vs bad classification" (the LLM/ethos/laptop
+tension) — but a raw dated-announcement feed per held stock is useful even WITHOUT classification.
+**Upgraded: Large build → Medium, data de-risked.** Next when picked up: build a one-file scraper
+(reuse scrapers/nse_session.py) → data/live staging keyed on sm_isin → show on IPO Detail /
+tracking cards; THEN (optional) a classification + 3-layer test of whether catalysts improve calls.
 
 ## How to pick one up
 Both route through the standing process: brainstorm → spec → 3-layer test where it's a
