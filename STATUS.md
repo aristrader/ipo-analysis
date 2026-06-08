@@ -23,19 +23,21 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
   the owner improvement list. App: 7 screens, glossary, staleness alarm, color-coded call badges,
   plain-language whys, deep-links everywhere. **259 tests** (243 fast + 16 ui-logic in tests/app)
   + extended key-content smoke. Run: `PYTHONPATH=. streamlit run app.py` (localhost-only).
-- **RECOMMENDATIONS SYSTEM ✅ BUILT (2026-06-07, owner-authorized autonomous run):**
-  calls engine (`layer3/calls.py` + `run_calls.py`, 12 property tests: no-look-ahead/idempotent/
-  gap-fill) · ledger `data/master/calls_ledger.csv` (**5,166 calls**: 2026 backfill OOS +
-  boom historical_sim + **first 4 LIVE calls** on currently-open issues) · headline:
-  **APPLY +6.0% vs AVOID −28.2% a1y (sim, +34.2pp); OOS 2026: APPLY +16.4% vs AVOID −3.1% a3m** ·
-  live board `scrapers/live_board.py` → `data/live/` (+ day-wise sub accumulation = Branch B
-  for the day-1 question; chittorgarh static pages have NO day-wise history, 0/35) ·
-  refresh phase 10 = calls gap-fill + board fetch · telegram notifier skeleton ready
-  (`tools/notify/`, blocked only on owner bot token — task list #10) · evidence records
-  `app/records/` (102 signals + 21 families) · **Phase-2 app ✅ BUILT + playwright-verified**:
-  7-screen st.navigation terminal (`app.py` + `app/screens/` + `app/ui.py`), recommendations-first,
-  2 browser-caught bugs fixed; 227 tests + SHOWDOWN app smoke green. Run:
-  `PYTHONPATH=. streamlit run app.py`.
+- **RECOMMENDATIONS SYSTEM ✅ BUILT + LIVE (2026-06-07/08):** calls engine (`layer3/calls.py` +
+  `run_calls.py`, 12 property tests) · ledger `data/master/calls_ledger.csv` (~5,170 calls: 2026
+  backfill OOS + boom historical_sim + accruing LIVE) · headline **APPLY +6.0% vs AVOID −28.2% a1y
+  (sim); 2026 OOS APPLY +13.6%/+16.4% (1m/3m) vs AVOID −3.6%/−3.1%** · live board
+  `scrapers/live_board.py` → `data/live/` (day-wise sub accumulating = Branch B) · evidence records
+  `app/records/` (102 signals + 21 families).
+- **TELEGRAM NOTIFIER ✅ LIVE (2026-06-08):** @IPO_call_bot, thrice-daily launchd job
+  (9:30/14:30/20:30) → fetch board + gap-fill/grade + ping on NEW actionable calls only. Token in
+  gitignored `tools/notify/telegram.json`; on/off + revoke notes in `notify_calls.py`. Stop:
+  `launchctl unload ~/Library/LaunchAgents/com.ipo.calls.plist`.
+- **PLAYWRIGHT = OFF by default** (company-laptop rule) — on only for app testing, then off;
+  procedure `docs/playwright_on_off.md`.
+- **App ✅ shipped + 4-iteration polished + playwright-verified:** 7-screen st.navigation terminal,
+  glossary / staleness alarm / color-coded call badges / plain-language whys / deep-links.
+  Run: `PYTHONPATH=. streamlit run app.py` (localhost-only).
 - System state: showdown-certified, refreshable (`run_refresh.py`), forward-tested on 82 never-seen
   IPOs (score ordered real outcomes monotonically). Full history → `DONE.md`.
 - Commands: fast suite `PYTHONPATH=. pytest tests -q` (~90s) · pre-release gate
@@ -60,6 +62,9 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
   Design doc: `docs/research/app_phase2_design.md` (iterated per run; implementation = end of Phase 2).
 
 ## 📋 OPEN BACKLOG (all optional — pick when wanted)
+- **`docs/research/future_ideas.md`** — owner "someday" sub-projects: swing-trade buy/sell calls
+  (exit side REJECTED — take-profit guts the right tail; needs a new validated entry signal first)
+  + stock-news/catalyst feed (free BSE/NSE announcements API = first scoping step).
 - **Re-run the forward test (~monthly)** as the 2026 cohort ages — the OOS verdict hardens; also
   re-test the SHORT-horizon idea then (parked: data said no, sample was young).
 - **Watchlist signals** (re-open conditions in rules/index.md): pe_vs_sector (needs SME PE data),

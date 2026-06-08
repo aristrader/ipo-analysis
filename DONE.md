@@ -462,3 +462,19 @@ Cleanup: archived dead scratch (`archive/research_scratch/`), refreshed TODO/DON
   ITER 4 CALM: 11-term glossary on 4 screens, staleness alarm (>24h board / >7d grades), backtester
   latency = cached-after-first. tests/app/ added (16 ui-logic) + smoke key-content asserts.
   Module-reload lesson recorded: ui.py edits need app restart (hot-reload covers page scripts only).
+- **Telegram notifier LIVE (2026-06-08)**: @IPO_call_bot, thrice-daily launchd schedule
+  (9:30/14:30/20:30) → live-board fetch + run_calls gap-fill/grade + run_calls --live → ping ONLY
+  on new actionable calls (APPLY/AVOID/EARLY_*, EXIT_REVIEW, TAKE_PROFITS). Token in gitignored
+  telegram.json (owner set it via silent `read`; main session never saw the value); chat_id via
+  @userinfobot (getUpdates returned empty — region/network quirk, sidestepped). notified-state
+  pre-seeded so only NEW calls alert. .notified untracked (was gitignored-but-committed).
+- **Swing-trade take-profit test (owner idea, 2026-06-08): REJECTED + definitive.** Buy at listing,
+  sell first close >=+20% else hold 1y, vs B&H. TP+20% lifts win-rate (67% vs 46%) + median
+  (+21% vs −7%) but GUTS mean (+1% vs +41%) and P90 (+28% vs +140%) — negative Δmean in all 4
+  regime cells; the better the entry, the more it costs (capping the right tail that carries IPO
+  returns). tools/research/swing_tp_test.py; verdict in ledger + rules/index. Bot will NOT emit
+  sell-at-X calls. Logged with the stock-news/catalyst-feed idea in docs/research/future_ideas.md.
+- **App-iteration cleanups**: playwright disabled by default + on/off rule (docs/playwright_on_off.md,
+  CLAUDE.md convention); killed stray "Chrome for Testing" processes that triggered OS notifications;
+  Streamlit pinned localhost-only + telemetry off (.streamlit/config.toml); playwright version-pinned
+  0.0.75 + deny rules (run_code_unsafe/file_upload/network_request).
