@@ -74,14 +74,18 @@ with tab_track:
         prows = []
         for seg, v in sorted(psum.items()):
             mode, lens = seg.split("/")
+            # one-winner dependence is unavoidable: the mean carries its 'drop top-1' delta inline.
+            _mean = 100000 * v["mult"]
+            _mean_d1 = 100000 * v["mult_drop_top1"]
             prows.append({"mode": mode, "entry": "bought on listing" if lens == "secondary" else "if allotted",
                           "n": v["n"],
-                          "mean ₹1L→": f"₹{100000*v['mult']:,.0f}",
+                          # MEDIAN is the loud, leading number — the typical position
                           "MEDIAN ₹1L→": f"₹{100000*v['median_mult']:,.0f}",
                           "P10 / P90": f"₹{100000*v['p10_mult']:,.0f} / ₹{100000*v['p90_mult']:,.0f}",
-                          "drop top-1": f"{v['mult_drop_top1']:.2f}x",
+                          "win %": f"{100*v['win_rate']:.0f}%",
                           "avg-vs-Nifty*": f"{v['nifty_mult']:.2f}x",
-                          "win %": f"{100*v['win_rate']:.0f}%"})
+                          # mean demoted to the right, with its drop-top-1 delta beside it
+                          "mean ₹1L→ (drop top-1)": f"₹{_mean:,.0f}  (→₹{_mean_d1:,.0f})"})
         st.dataframe(pd.DataFrame(prows), hide_index=True, use_container_width=True)
         # bootstrap CI on the hero (secondary) lens for each mode
         _ci_bits = []
@@ -120,20 +124,25 @@ with tab_track:
         _h = st.radio("horizon", ["1m", "3m", "1y"], index=1, horizontal=True, key="sc_h")
         sc = _cal.scorecard(ledger, _h)
         if not sc.empty:
+            # Fix B: below MIN_N_FULL the point hit-rate is suppressed; the point + its CI
+            # band live in ONE inseparable cell so the band can't be read away from the point.
             sc_disp = sc.assign(
-                hit=sc["hit_rate"].map(lambda x: f"{100*x:.0f}%"),
-                **{"95% CI": sc.apply(lambda r: f"[{100*r['ci_lo']:.0f},{100*r['ci_hi']:.0f}]%", axis=1),
+                **{"hit-rate [95% CI]": sc.apply(
+                    lambda r: ui.rate_with_ci(r["hit_rate"], r["n"], r["ci_lo"], r["ci_hi"]), axis=1),
                    "lift vs base": sc["lift_vs_base"].map(lambda x: f"{100*x:+.0f}pp" if pd.notna(x) else "—"),
                    "median α": sc["median_alpha_pct"].map(lambda x: f"{x:+.1f}%")})
-            st.dataframe(sc_disp[["call_type", "mode", "n", "hit", "95% CI", "lift vs base", "median α"]],
+            st.dataframe(sc_disp[["call_type", "mode", "n", "hit-rate [95% CI]", "lift vs base", "median α"]],
                          hide_index=True, use_container_width=True)
+            st.caption(f"Rows with N < {ui.MIN_N_FULL} show only the CI band ('too few to say') — "
+                       "the point hit-rate is suppressed below the full-claim floor.")
         rel = _cal.score_reliability(ledger, _h)
         if not rel.empty:
             st.caption("**Is the score well-ordered?** (higher score → higher chance of beating Nifty)")
-            rel_d = rel.assign(**{"score range": rel.apply(lambda r: f"{r['score_lo']:.0f}–{r['score_hi']:.0f}", axis=1),
-                                  "P(beat Nifty)": rel["p_up"].map(lambda x: f"{100*x:.0f}%"),
-                                  "95% CI": rel.apply(lambda r: f"[{100*r['ci_lo']:.0f},{100*r['ci_hi']:.0f}]%", axis=1)})
-            st.dataframe(rel_d[["score_bucket", "score range", "n", "P(beat Nifty)", "95% CI"]],
+            rel_d = rel.assign(
+                **{"score range": rel.apply(lambda r: f"{r['score_lo']:.0f}–{r['score_hi']:.0f}", axis=1),
+                   "P(beat Nifty) [95% CI]": rel.apply(
+                       lambda r: ui.rate_with_ci(r["p_up"], r["n"], r["ci_lo"], r["ci_hi"]), axis=1)})
+            st.dataframe(rel_d[["score_bucket", "score range", "n", "P(beat Nifty) [95% CI]"]],
                          hide_index=True, use_container_width=True)
         st.divider()
 

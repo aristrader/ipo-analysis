@@ -36,4 +36,16 @@ with st.sidebar:
     st.caption("Indian IPO Analysis · 2006–2026 · MB + SME")
     st.caption("**Not financial advice.** Returns = alpha vs Nifty 50, from the listing price.")
 
+    # Global IPO search (Fix E — findability from anywhere). Navigates to IPO Detail via ?isin=,
+    # the exact convention ipo_detail.py reads (st.query_params.get("isin")).
+    st.divider()
+    st.markdown("**🔎 Find an IPO**")
+    _opts = ui.name_options(ui.load_df())
+    _pick = st.selectbox("Search by name", ["(choose)"] + list(_opts.keys()),
+                         key="sidebar_ipo_search", label_visibility="collapsed")
+    _isin = ui.resolve_label_to_isin(_pick, _opts)
+    if _isin and st.query_params.get("isin") != _isin:
+        st.query_params["isin"] = _isin
+        st.switch_page(ipo_detail)
+
 nav.run()

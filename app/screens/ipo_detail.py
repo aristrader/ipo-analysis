@@ -172,9 +172,12 @@ if _dead:
                    "Everything below is the historical read.")
 v1, v2, v3 = st.columns([1, 1, 2])
 cs = sc["combined_score"]
-v1.metric(f"COMBINED ({profile})", f"{cs:.0f}/100" if cs is not None else "n/a",
-          help="A transparent RANKING vs history (in-sample / indicative) — NOT a proven buy signal.")
+# Fix C: this is a RANK vs history, not a verdict — label it so, keep the number neutral (no
+# green/positive styling — st.metric with delta=None renders no color), and surface the
+# "NOT a proven buy signal" caveat as a VISIBLE caption, not hover-only.
+v1.metric(f"COMBINED RANK (vs history) · {profile}", f"{cs:.0f}/100" if cs is not None else "n/a")
 v1.markdown(ui.chip("display"), unsafe_allow_html=True)
+v1.caption("A transparent RANKING vs history (in-sample / indicative) — NOT a proven buy signal.")
 rscore = ra.get("risk_score_0_100")
 if _dead and _oc == "wipeout":
     v2.metric("💀 Wipeout", "REALIZED", help="This is no longer a risk — it happened.")

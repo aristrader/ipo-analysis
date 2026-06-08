@@ -55,6 +55,63 @@ def test_n_floor_handles_garbage():
     assert ui.n_floor(float("nan")) is not None     # nan -> unknown/too-few, never a pass
 
 
+# ---------------------------------------------------------------- rate_with_ci (Fix B)
+def test_rate_with_ci_below_full_floor_suppresses_point():
+    # n < MIN_N_FULL -> NO point estimate, "too few", band may still trail
+    s = ui.rate_with_ci(0.67, ui.MIN_N_FULL - 1, 0.20, 0.95)
+    assert "too few to say" in s
+    assert f"N={ui.MIN_N_FULL - 1}" in s
+    assert "67%" not in s          # the point estimate must be gone
+    assert "[20–95%]" in s         # but the honest band can show
+
+
+def test_rate_with_ci_at_and_above_full_floor_shows_fused_point_and_band():
+    s = ui.rate_with_ci(0.67, ui.MIN_N_FULL, 0.20, 0.95)
+    assert s == "67% [20–95%]"     # point and band fused, inseparable
+    s2 = ui.rate_with_ci(0.5, 100, 0.4, 0.6)
+    assert s2 == "50% [40–60%]"
+
+
+def test_rate_with_ci_missing_band_still_works():
+    # above floor but no CI computed -> just the point
+    assert ui.rate_with_ci(0.5, 100, None, None) == "50%"
+    # below floor, no band -> bare "too few"
+    s = ui.rate_with_ci(0.5, 3, None, None)
+    assert s == "too few to say (N=3)"
+
+
+def test_rate_with_ci_handles_garbage():
+    assert ui.rate_with_ci(0.5, "abc", 0.1, 0.9) == "—"      # bad n
+    assert ui.rate_with_ci(None, 100, None, None) == "—"     # above floor but no point
+
+
+# ---------------------------------------------------------------- name resolver (Fix E)
+def test_resolve_label_to_isin_basic():
+    opts = {"Acme Ltd (MB, INE000A01001)": "INE000A01001",
+            "Beta Co (SME, INE000B01002)": "INE000B01002"}
+    assert ui.resolve_label_to_isin("Acme Ltd (MB, INE000A01001)", opts) == "INE000A01001"
+
+
+def test_resolve_label_to_isin_sentinel_and_unknown():
+    opts = {"Acme Ltd (MB, INE000A01001)": "INE000A01001"}
+    assert ui.resolve_label_to_isin("(choose)", opts) is None
+    assert ui.resolve_label_to_isin("", opts) is None
+    assert ui.resolve_label_to_isin(None, opts) is None
+    assert ui.resolve_label_to_isin("Not A Real Label", opts) is None
+
+
+def test_name_options_unique_by_isin_and_skips_missing():
+    import pandas as pd
+    df = pd.DataFrame([
+        {"company_name": "Acme Ltd", "type": "MB", "isin": "INE000A01001"},
+        {"company_name": "Acme Ltd", "type": "SME", "isin": "INE000A01002"},   # same name, diff ISIN
+        {"company_name": "NoIsin Co", "type": "MB", "isin": None},             # dropped
+    ])
+    opts = ui.name_options(df)
+    assert len(opts) == 2                       # both Acmes kept (labels differ by ISIN), no-ISIN dropped
+    assert set(opts.values()) == {"INE000A01001", "INE000A01002"}
+
+
 # ---------------------------------------------------------------- formatters
 @pytest.mark.parametrize("fn", [ui.money, ui.frac, ui.pct, ui.pct_pp])
 def test_formatters_never_crash_on_none_or_nan(fn):

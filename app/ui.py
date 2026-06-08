@@ -204,6 +204,42 @@ def n_floor(n) -> str | None:
     return None
 
 
+def rate_with_ci(k, n, lo, hi) -> str:
+    """One inseparable display string for a rate + its 95% CI band, with the
+    full-claim floor (MIN_N_FULL) enforced so a point estimate can never be read
+    away from its band on a thin sample.
+
+    - n < MIN_N_FULL → suppress the point estimate; show ONLY the band as
+      "too few to say (N=k)" (or with the band if available, e.g.
+      "too few to say (N=8) [20–95%]").
+    - n >= MIN_N_FULL → "67% [20–95%]" — point and band fused in one string.
+
+    k/n/lo/hi are fractions (0..1); the rate (k) and CI bounds are rendered as
+    rounded integer percents. Missing/garbage inputs degrade to "—"."""
+    def _band(a, b):
+        if a is None or b is None or (isinstance(a, float) and pd.isna(a)) \
+                or (isinstance(b, float) and pd.isna(b)):
+            return None
+        try:
+            return f"[{100*float(a):.0f}–{100*float(b):.0f}%]"
+        except (TypeError, ValueError):
+            return None
+    try:
+        n_i = int(n)
+    except (TypeError, ValueError):
+        return "—"
+    band = _band(lo, hi)
+    if n_i < MIN_N_FULL:
+        return f"too few to say (N={n_i})" + (f" {band}" if band else "")
+    if k is None or (isinstance(k, float) and pd.isna(k)):
+        return "—"
+    try:
+        pt = f"{100*float(k):.0f}%"
+    except (TypeError, ValueError):
+        return "—"
+    return pt + (f" {band}" if band else "")
+
+
 # ---------------------------------------------------------------- global style + nav helpers
 _STYLE = """
 <style>
@@ -271,6 +307,35 @@ def load_df(exclude_low_quality: bool = False) -> pd.DataFrame:
 @st.cache_data(show_spinner=False)
 def sectors() -> list:
     return sorted(load_df()["broad_sector"].dropna().unique())
+
+
+def _row_name(row: dict) -> str:
+    """Best display name for an IPO row (mirror ipo_detail._name_of)."""
+    for c in ("company_name", "name_at_ipo", "official_isin_name"):
+        v = row.get(c)
+        if isinstance(v, str) and v.strip():
+            return v.strip()
+    return str(row.get("isin", "(unnamed)"))
+
+
+def name_options(df) -> dict:
+    """Map "Name (TYPE, ISIN)" -> ISIN for every row with an ISIN, sorted by name.
+    The label is unique-by-ISIN so name collisions never clobber each other."""
+    opts = {}
+    for _, r in df.iterrows():
+        isin = r.get("isin")
+        if not isin or (isinstance(isin, float) and pd.isna(isin)):
+            continue
+        nm = _row_name(r)
+        opts[f"{nm} ({r.get('type', '?')}, {isin})"] = isin
+    return dict(sorted(opts.items(), key=lambda kv: kv[0].lower()))
+
+
+def resolve_label_to_isin(label: str, options: dict) -> str | None:
+    """Pure resolver: a selectbox label -> its ISIN, or None for the sentinel/unknown."""
+    if not label or label == "(choose)":
+        return None
+    return options.get(label)
 
 
 @st.cache_data(show_spinner=False)

@@ -6,9 +6,13 @@ Two questions, one engine:
  - PER-STOCK: growth_of_1l(isin) → 3 aligned series (at-IPO if-allotted / at-listing / Nifty).
 
 Pure reader over calls_ledger + substrate + adjusted prices + Nifty. No new data. Free, on-ethos.
-Allotment haircut grounded in strat-flip-ev (3.5% median allotment prob + adverse selection →
-naive flip EV +21% collapses to ~+2%); we model the allottee lens as a blend toward the
-no-allotment baseline rather than claiming full fills."""
+HONEST NOTE on the allottee lens: simulate() deploys a FULL ₹1L at the issue price *if allotted*
+(see CAPITAL + _position_value(ipx, ...)). It is a BEST-CASE 'you won the lottery and got a full
+fill' curve — it is NOT weighted by allotment probability and is NOT blended toward the
+no-allotment baseline. Allotment realism (≈3.5% median allotment prob + adverse selection, which
+collapses naive flip EV +21% → ~+2% per strat-flip-ev) is handled separately in the flip-EV
+analysis, not folded into this curve. Read the secondary ('bought on listing') lens as the
+realistic one; treat 'if allotted' as the lottery-win upper bound."""
 import os
 import bisect
 
