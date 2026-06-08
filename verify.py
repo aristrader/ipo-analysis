@@ -132,6 +132,35 @@ def fast_drift():
     return check_paths() + check_unwired() + check_invariants() + check_schema()
 
 
+# substantive code dirs whose changes mean "real task in progress / shipped"
+_CODE_DIRS = ("layer3/", "pipeline/", "scrapers/", "app/", "tools/", "run_", "verify.py", "project_map.py")
+
+
+def _is_code(p):
+    return any(p.startswith(d) or ("/" + d) in p for d in _CODE_DIRS) and p.endswith(".py")
+
+
+def pipeline_nudges():
+    """Execution-pipeline reminders — CONDITIONAL (not every turn):
+    (1) work-in-progress: substantive code is uncommitted → remind to follow the pipeline;
+    (2) tripwire: the last commit changed code but didn't touch task_log.md → flag a possibly
+        un-logged (one-dimensioned) task."""
+    out = []
+    try:
+        changed = changed_files()
+        if any(_is_code(p) for p in changed):
+            out.append("◆ Code in progress — follow docs/research/execution_pipeline.md "
+                       "(triage → diverge → converge → build → REVIEW → test). Log it in task_log.md.")
+        last = subprocess.run(["git", "show", "--name-only", "--pretty=format:", "HEAD"],
+                              cwd=ROOT, capture_output=True, text=True, timeout=10).stdout.split()
+        if any(_is_code(p) for p in last) and not any("task_log.md" in p for p in last):
+            out.append("⚠ Last commit changed code but didn't update docs/research/task_log.md — "
+                       "was the pipeline followed/logged? (skip only for a true one-liner/hotfix).")
+    except Exception:
+        pass
+    return out
+
+
 # ------------------------------------------------------ change -> tests routing
 def changed_files():
     """Paths with uncommitted changes (staged or not), per git."""
@@ -185,10 +214,12 @@ def main():
     drift = fast_drift()
 
     if quiet:
-        # Hook mode: drift/routing speak only when needed; the pipeline reminder is a STANDING
-        # nudge every turn (owner mandate 2026-06-08 — "must be executed for every task").
-        print("◆ For any non-trivial task: follow docs/research/execution_pipeline.md "
-              "(diverge → converge → build → REVIEW → test). Don't one-dimension it.")
+        # Hook mode. Pipeline reminder fires ONLY when substantive code is uncommitted (work in
+        # progress) — not every chat turn (red-team #3: every-turn noise habituates → ignored).
+        # Plus a TRIPWIRE: if the last commit changed code but skipped task_log.md, the pipeline
+        # may have been one-dimensioned silently (red-team #1) — surface it.
+        for line in pipeline_nudges():
+            print(line)
         if drift:
             print("⚠ PROJECT-MAP DRIFT (verify.py) — fix project_map.py or the cause:")
             for d in drift:

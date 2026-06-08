@@ -116,7 +116,7 @@ backtests + the method spine). 5. `docs/layer2.md` / `docs/layer3.md` — design
   caught a bug the honesty-fix itself introduced; placebo killed a hypothesis the falsifier passed.
   Do NOT one-dimension a substantive task; right-size per that doc, and if skipping a stage, say why.
   At the START of any non-trivial task, load that doc and run its "TASK-KICKOFF PROMPT". The per-turn
-  verify hook injects a one-line reminder so this is never forgotten (owner: "must be executed").
+  verify hook nudges WHEN code is in progress + a TRIPWIRE flags code committed without a task_log entry (the on-disk proof the pipeline ran). Log every non-trivial task in `docs/research/task_log.md`.
 
 ## Standing agent briefs (the "load the info" chain — plain .md, no skills; owner decision 2026-06-07)
 - **Any hypothesis/research agent** → MUST be pointed at `docs/research/hypothesis_protocol.md`
