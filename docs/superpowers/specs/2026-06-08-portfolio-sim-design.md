@@ -11,10 +11,11 @@ into Nifty on the same dates?
 - **Universe:** APPLY (and EARLY_APPLY) calls from the ledger. Optional AVOID-as-short is OUT
   (we don't short; AVOID = "didn't buy", shown as opportunity-avoided, not a position).
 - **Two entry lenses (both reported, never pooled):**
-  - **Allottee:** entry = adjusted issue price; return includes the listing pop. Apply the
-    realistic **allotment haircut** — retail lottery means you don't get full allotment on hot
-    IPOs; use the validated ~+2% real-EV adjustment from `strat-flip-ev` (don't claim full fills).
-  - **Secondary buyer:** entry = listing close (`adj_listing_close`); no pop, the from-listing view.
+  - **Secondary buyer (HERO/main lens):** entry = listing close (`adj_listing_close`); the
+    realistic view — you can always actually buy on listing day. Lead with this number.
+  - **Allottee (comparison):** entry = adjusted issue price; full ₹1L invested (includes the
+    listing pop). OWNER DECISION 2026-06-08: NO idle-cash/allotment haircut — assume the full ₹1L
+    is invested if allotted (the "if you got allotment" view), apples-to-apples with secondary.
 - **Per-position value to "today":** adjusted daily price series (`data/prices/<isin>.csv`) →
   current value; **delisted → terminal (wipeout = ₹0, else last price), and the position STAYS in
   the curve at its dead value** (survivorship honesty, decision A1). Split/bonus already adjusted.

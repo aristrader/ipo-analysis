@@ -28,8 +28,8 @@ def main():
     for k, v in sorted(s.items()):
         nif = f"{v['nifty_mult']:.2f}x" if v['nifty_mult'] else "  -"
         print(f"  {k:26s} {v['n']:>4} {v['mult']:>6.2f}x {nif:>7} {100*v['win_rate']:>4.0f}%")
-    print("\nallottee lens carries the 3.5% allotment haircut (most capital sits in cash — "
-          "realistic for the retail lottery); secondary lens = pick quality if you could deploy.")
+    print("\nfull ₹1L invested per call. 'secondary' (bought on listing day) is the HERO/realistic "
+          "lens; 'allottee' (full ₹1L at issue price, if you got allotment) is the comparison.")
 
 
 if __name__ == "__main__":

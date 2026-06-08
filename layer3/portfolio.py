@@ -16,11 +16,8 @@ import pandas as pd
 
 from layer3 import config, spine
 
-CAPITAL = 100_000.0          # ₹1 lakh per call
-# allottee realism: fraction of capital that actually gets allotted on a typical retail app.
-# strat-flip-ev: ~3.5% allotment prob; the rest stays in cash (earns ~0 over the short flip window).
-ALLOT_FRAC = 0.035
-
+CAPITAL = 100_000.0          # ₹1 lakh fully invested per call (no idle-cash haircut — owner call:
+                             # assume full ₹1L deployed, whether allotted-at-issue or bought-at-listing)
 _NIFTY = {}
 
 
@@ -46,19 +43,12 @@ def _nifty_at(ts):
 
 
 # ---------------------------------------------------------------- primitives
-def _position_value(entry, exit_px, capital=CAPITAL, haircut=False):
-    """₹ value of `capital` deployed at `entry`, now worth `exit_px`. exit_px=0 → wipeout → ₹0
-    (stays a number, counts in the aggregate). haircut=True applies the allottee realism blend."""
+def _position_value(entry, exit_px, capital=CAPITAL):
+    """₹ value of the full `capital` deployed at `entry`, now worth `exit_px`.
+    exit_px=0 → wipeout → ₹0 (stays a number, counts in the aggregate)."""
     if entry is None or entry <= 0 or exit_px is None or pd.isna(entry) or pd.isna(exit_px):
         return None
-    gross = capital * (float(exit_px) / float(entry))
-    return _apply_haircut(gross, capital) if haircut else gross
-
-
-def _apply_haircut(gross, capital=CAPITAL):
-    """Allottee realism: only ALLOT_FRAC of capital is actually allotted; the rest sat in cash.
-    So realized ≈ allotted_part*outcome + uninvested_part*1.0 (cash). Dampens toward ₹1L."""
-    return ALLOT_FRAC * gross + (1 - ALLOT_FRAC) * capital
+    return capital * (float(exit_px) / float(entry))
 
 
 def _exit_price(isin, sub_row, prices_root="data/prices"):
@@ -133,8 +123,8 @@ def simulate(ledger=None, df=None, capital=CAPITAL, prices_root="data/prices"):
             continue
         ipx = pd.to_numeric(pd.Series([r.get("issue_price_adj")]), errors="coerce").iloc[0]
         lst = pd.to_numeric(pd.Series([r.get("adj_listing_close")]), errors="coerce").iloc[0]
-        allottee = _position_value(ipx, exit_px, capital, haircut=True)
-        secondary = _position_value(lst, exit_px, capital, haircut=False)
+        allottee = _position_value(ipx, exit_px, capital)          # full ₹1L at issue (if allotted)
+        secondary = _position_value(lst, exit_px, capital)         # full ₹1L at listing (the HERO lens)
         ld = pd.to_datetime(r.get("listing_date"), errors="coerce")
         n0, n1 = _nifty_at(ld), _nifty_at(pd.Timestamp.now())
         nifty_val = capital * n1 / n0 if (n0 and n1) else None

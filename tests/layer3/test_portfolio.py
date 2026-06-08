@@ -17,17 +17,10 @@ def test_wipeout_position_is_zero_not_dropped():
     assert v == 0.0                       # dead money = ₹0, still a number (counts in aggregate)
 
 
-def test_allotment_haircut_only_on_allottee():
-    # haircut blends ₹1L-deployed toward the no-allotment baseline; applies to allottee lens only
-    gross = 150000.0
-    hair = P._apply_haircut(gross, capital=100000.0)
-    assert capital_le(hair, gross) and hair > 100000.0      # dampened toward 1L, not below deploy
-    # secondary buyer lens never haircut
-    assert P._position_value(100.0, 150.0, 100000.0, haircut=False) == 150000.0
-
-
-def capital_le(a, b):
-    return a <= b + 1e-6
+def test_full_capital_no_haircut_both_lenses():
+    # owner call: full ₹1L invested, no idle-cash haircut, both entry lenses
+    assert P._position_value(100.0, 150.0, 100000.0) == 150000.0
+    assert P._position_value(50.0, 100.0, 100000.0) == 200000.0      # entry 50 -> 100 = 2x
 
 
 def test_mode_split_never_pools(monkeypatch):
