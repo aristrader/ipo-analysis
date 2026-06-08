@@ -47,3 +47,17 @@ verdict: DONE. do-first for the 6hr batch = A1 banker-flag fix (proof: Park); hi
   Added THEME H to improvement_backlog: relative-valuation-vs-peers + intrinsic value (FA dimension; ember = existing
   n6/pe_vs_sector −43pp MB). Honest blockers: look-ahead, all-stocks point-in-time peer panel (collides w/ extension_roadmap),
   fuzzy peer-ID. MVP = peers as earlier-IPOs-in-industry (owned point-in-time data, clean). Phased ~10-50 tasks, gated.
+
+## 2026-06-09 — App honesty + nav polish (5 red-team-scoped fixes)  [path: RIGHT-SIZED]
+scope: implement EXACTLY 5 fixes from a red-team review (reading-order can mislead despite strong
+honesty infra); no scope-creep. diverge/converge: pre-scoped by the briefing (each fix bounded to a
+file:line range + DO-NOT-TOUCH list) so no fan-out needed; read the two app briefs first.
+build (TDD on pure logic): A median-first ₹1L table (track_record.py); B ui.rate_with_ci() floor helper
++ apply to scorecard/reliability tables (point suppressed <MIN_N_FULL, point+band fused); C COMBINED→
+'COMBINED RANK (vs history)' + visible caption + neutral number (ipo_detail.py); D portfolio.py docstring
+corrected (full-fill-if-allotted best-case, NOT a probability-weighted blend); E sidebar IPO name search
+→ ?isin= via st.switch_page (app.py) + ui.name_options/resolve_label_to_isin.
+tests: +7 in tests/app/test_ui_logic.py (rate_with_ci below/at/above floor, missing band, garbage;
+resolver sentinel/unknown; name_options unique-by-isin + skips missing). Suite 269p+12s (was 262+12).
+verify.py exit 0. left out: scorecard_weights.json + batch_run_2026-06-09.md were pre-existing dirty
+(not mine) — NOT committed. commit d51d7fe on auto/6hr-batch.
