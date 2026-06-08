@@ -16,10 +16,22 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
 
 ---
 
-## 🏃 NOW
-- **Nothing in progress — system at rest.** All 3 layers + Phase-2 research + the app + the live
-  calls engine + Telegram alerts are built and running. It now forward-tracks itself (live calls
-  grade as they mature). Next work = pick from OPEN BACKLOG. (What was built → `DONE.md`.)
+## 🏃 NOW — "NEXT-LEVEL" PROGRAM running (owner-approved 2026-06-08; full plan `docs/research/NEXT.md`)
+Pipeline per item: brainstorm → thinking/review agents → spec → plan → build agent → review →
+tests → commit → checkpoint. Owner autonomy granted (sensible defaults, flag big calls). Order:
+1. **Thread A — paper-portfolio sim** (₹1L/APPLY vs Nifty equity curve, allottee + listing entries,
+   realistic allotment haircut, survivorship-honest) + **per-stock ₹1L chart** on IPO Detail
+   (at-IPO "if allotted" / at-listing / Nifty). ← STARTING HERE
+2. **Thread A.2** — monthly were-we-right scorecard + calibration (Brier/reliability) + Wilson/
+   Jeffreys credible intervals on base rates.
+3. **Thread B** — pipeline hardening: GMP-history daily capture · post-listing auto-monitor from
+   bhavcopy · Pandera schema gate.
+4. **Thread C** — new-signal 3-layer tests: accruals (Modified-Jones DCA) · pe-vs-sector unblock
+   (SME P/E + EV/Sales) · SME→Mainboard migration. (Survivors only touch the score.)
+5. **News feed — SCOPE step only** (free NSE/BSE announcements API coverage probe → build/no-build).
+6. **FINAL — app rework** to surface all the above (re-run the app-iteration pipeline). Build LAST.
+- Prior state (all DONE, → `DONE.md`): 3 layers + Phase-2 research + app + live calls engine +
+  Telegram alerts (thrice-daily). System forward-tracks itself.
 - **Running parts:** Telegram notifier LIVE (@IPO_call_bot, thrice-daily launchd; stop with
   `launchctl unload ~/Library/LaunchAgents/com.ipo.calls.plist`) · calls ledger
   `data/master/calls_ledger.csv` (~5,170 + accruing) · live board → `data/live/`.
