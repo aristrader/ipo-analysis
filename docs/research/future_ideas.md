@@ -47,3 +47,9 @@ test; swing-trade = mostly a test that's already leaning "no" on current signals
 
 ## Owner discussion parking-lot
 - **Discuss Fujiyama and Park Hospital** (owner note 2026-06-08) — context to be supplied when we pick this up.
+
+## Thread C data-gated hypotheses (2026-06-08 — pursue when the data exists)
+- **Pre-IPO accruals (earnings-quality red flag):** needs RECEIVABLES + CASH-FLOW-FROM-OPS per IPO
+  (re-scrape screener); then Modified-Jones discretionary-accruals test upgrades the n8 flag.
+- **SME→Mainboard migration:** needs a migration-date source (Chittorgarh report 123 / BSE / NSE).
+  Then: migration as an outcome class + a predictive feature (the SME escape from the dead-money trap).

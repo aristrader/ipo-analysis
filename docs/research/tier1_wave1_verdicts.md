@@ -185,3 +185,25 @@ capping your best names. So a good entry signal makes HOLDING more valuable, nev
 USE: this is the definitive teaching example of the right-tail truth. Logged in future_ideas.md;
 the bot will NOT emit "sell at +X%" calls. A descriptive "touched +X% today" info-ping is the only
 honest version (no action implied).
+
+---
+# Thread C — new-signal hypotheses (2026-06-08; scope-first per protocol)
+2 of 3 were DATA-GATED on scoping (the discipline working as intended); 1 testable.
+
+## H2 pe-vs-sector — REPLICATES both segments (boom), → DISPLAY-ONLY (not score)
+tools/research/h2_pe_vs_sector_sme.py. Rich issue-time P/E vs sector median → underperformance.
+- SME: IC(rel_PE, alpha_1y) −0.245, rich +4.0% vs cheap +52.9% = −48.9pp (n=68). STRONG.
+- MB: IC −0.066, −13.1pp (n=161) — same direction, confirms the prior MB-only finding.
+- CROSS-REGIME GATE FAILS: SME is boom-only (longterm SME has ~0 P/E data) — cannot validate on
+  2006-19. Per "boom findings are hypotheses until they hold longterm" + evolve-only-if-robust,
+  it CANNOT enter the score. VERDICT: graduate from watchlist/blocked → DISPLAY-ONLY (both
+  segments, boom), with the honest "SME not cross-regime testable" caveat.
+
+## H1 accruals (Modified-Jones DCA) — DATA-GATED (parked)
+Substrate has sales/PAT/total_assets by year but NO receivables and NO cash-flow-from-ops —
+Modified-Jones needs ΔReceivables + CFO to separate discretionary accruals. Not computable from
+current data. To pursue: re-scrape screener for receivables + CFO (a data project), THEN test.
+
+## H3 SME→Mainboard migration — DATA-GATED (parked)
+No migration flag/date in the substrate; needs a new free source (Chittorgarh report 123 / BSE /
+NSE migration list). Scope-the-source-first before any test. Descriptive-finding candidate.

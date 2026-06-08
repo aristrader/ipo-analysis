@@ -203,3 +203,10 @@ results are kept on purpose).
   — negative Δmean in all 4 regime cells (−9.7 / −47.2 / −36.9 / −51.1pp). Conditional good-entry
   (month-1 strong) makes holding MORE valuable (hold mean +104%). The right tail carries IPO
   returns; take-profit decapitates it. Bot will not emit sell-at-X calls. See future_ideas.md.
+
+## Thread C verdicts (2026-06-08)
+- **pe_vs_sector: WATCHLIST → DISPLAY-ONLY** (both segments, boom). Rich issue-time P/E vs sector
+  median underperforms: SME −48.9pp/IC−0.245 (n=68), MB −13.1pp (n=161). NOT in score — SME is
+  boom-only (no longterm P/E data) so it fails the cross-regime gate. h2_pe_vs_sector_sme.py.
+- **accruals (Modified-Jones DCA): DATA-GATED** — needs receivables + CFO (not in substrate). Parked.
+- **SME→MB migration: DATA-GATED** — needs a migration-date source (Chittorgarh r123/BSE/NSE). Parked.
