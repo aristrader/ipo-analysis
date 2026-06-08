@@ -22,10 +22,15 @@ the owner explicitly deems a new source safe — never silently.
 - `www.screener.in` — financials/announcements (we already ingest)
 - `portal.tradebrains.in` — (legacy, price cross-check)
 - `seylox.github.io` — (one-off reference)
+- `sebi.gov.in` / `www.sebi.gov.in` — regulator orders/circulars (owner-approved 2026-06-08)
+- `moneycontrol.com` / `www.moneycontrol.com` — financial media (owner-approved 2026-06-08)
+- `economictimes.indiatimes.com` — financial media (owner-approved 2026-06-08)
+- `livemint.com` / `www.livemint.com` — financial media (owner-approved 2026-06-08)
 To add one: append `"WebFetch(domain:<host>)"` to `permissions.allow` in settings.local.json —
-ONLY after the owner deems it safe. Candidates surfaced by research but NOT yet enabled (kept off
-until approved): sebi.gov.in, moneycontrol.com, economictimes.indiatimes.com, livemint.com,
-news.google.com (RSS), chittorgarh.com, webnodejs.chittorgarh.com, investorgain/ipowatch hosts.
+ONLY after the owner deems it safe. NOT enabled (kept off): **news.google.com** — aggregator whose
+article links redirect to ARBITRARY unvetted third-party publishers; if ever enabled, consume RSS
+headlines/dates ONLY, never auto-follow the redirect links off-allowlist. Also off: chittorgarh/
+investorgain/ipowatch hosts (reached via scrapers, not WebFetch); social (killed).
 
 ## Scraper endpoints (hit by python via Bash, not WebFetch — bounded by HARDCODED URLs in scrapers/)
 chittorgarh (webnodejs.chittorgarh.com, www.chittorgarh.com) · NSE (nseindia.com APIs via
