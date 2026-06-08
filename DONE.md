@@ -478,3 +478,26 @@ Cleanup: archived dead scratch (`archive/research_scratch/`), refreshed TODO/DON
   CLAUDE.md convention); killed stray "Chrome for Testing" processes that triggered OS notifications;
   Streamlit pinned localhost-only + telemetry off (.streamlit/config.toml); playwright version-pinned
   0.0.75 + deny rules (run_code_unsafe/file_upload/network_request).
+
+## 2026-06-08 — "Next-level" program (6 items, owner-approved, one session, autonomous)
+- **Thread A — paper-portfolio sim** (layer3/portfolio.py + run_portfolio.py): ₹1L/APPLY vs Nifty,
+  both entry lenses (secondary=hero), full ₹1L (owner dropped the allotment haircut), survivorship-
+  honest, mode-split. Result: hist-sim secondary 2.09x vs Nifty 1.27x; 2026 OOS 1.34x vs 0.98x.
+  Per-stock growth_of_1l (3 lines).
+- **Thread A.2 — were-we-right scorecard** (layer3/calibration.py + run_scorecard.py): Wilson 95%
+  CIs (no scipy), per call_type×mode hit-rate, score-ordering reliability (Q1 38%→Q5 53% P(beat
+  Nifty) = score well-ordered).
+- **Thread B — hardening**: pure-Python schema gate (tools/checks/schema_gate.py, wired into
+  run_refresh phase 11) + GMP-history capture (data/live/gmp_history.csv, open+upcoming).
+- **Thread C — scope-first**: 2/3 data-gated (accruals need receivables/CFO; SME→MB needs a
+  migration source — both parked in future_ideas). H2 pe_vs_sector REPLICATES (SME −48.9pp/IC−0.245
+  n=68, MB −13.1pp), placebo-confirmed (1000x shuffle p=0.019) → watchlist→DISPLAY-ONLY (boom-only,
+  not score).
+- **News-feed SCOPE — VIABLE**: free NSE announcements API carries sm_isin (matching solved);
+  Large→Medium, data de-risked. tools/research/scope_news_feed.py.
+- **FINAL app rework**: IPO Detail growth-of-₹1L chart + Track Record ₹1L portfolio table +
+  were-we-right scorecard (horizon toggle). Smoke-verified.
+- **Rigor-backfill** (after owner asked "did you run everything well?"): honest that the engine
+  builds were inline-TDD not full-agent-pipeline; ran an independent code-review agent → found 2
+  LATENT P0 benchmark bugs (Nifty leg ran to now() vs the position's exit date; mult/nifty-mult over
+  mismatched baskets) → FIXED + tested; added the H2 placebo the inline test had skipped. 256 tests.
