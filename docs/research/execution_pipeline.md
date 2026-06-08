@@ -43,3 +43,21 @@ asked for this explicitly and more than once — DO NOT shortcut it for speed un
 ## The standing rule
 When the owner says "do X" for anything non-trivial, the answer is this pipeline — not a
 one-dimensional implementation. If skipping a stage for a real reason, SAY SO up front and why.
+
+## TASK-KICKOFF PROMPT  (run this at the START of every non-trivial task — copy verbatim)
+> A task has been picked. Before any code, execute the standing pipeline
+> (docs/research/execution_pipeline.md):
+> 1. State the task + success criteria in one line.
+> 2. DIVERGE: spawn 2-3 thinking agents with DISTINCT lenses (user-value · analytical-depth ·
+>    RED-TEAM; for a hypothesis: expand-the-space · test-design · falsifier). Wait for all.
+> 3. CONVERGE: synthesize into a pruned spec (YAGNI). Show the owner the dimensions surfaced.
+> 4. PLAN: break into small, independently-testable sub-tasks.
+> 5. BUILD with TDD (failing test → minimal code → green → commit), small steps.
+> 6. REVIEW: spawn an INDEPENDENT review agent AFTER the build (non-negotiable if it shows money
+>    numbers/scores). For a hypothesis, the review = placebo/falsifier.
+> 7. FIX review findings → re-test; loop review↔fix until clean.
+> 8. TEST + verify.py green; CLEAN UP (STATUS/DONE/rules/project_map); commit; record the verdict.
+> Right-size per the doc (infra = lighter; one-liner = just do it) and if you skip a stage, say why.
+
+(CLAUDE.md "HOW we work" points here; the per-turn verify hook injects a reminder so it can't be
+forgotten. To run it deliberately, paste the block above when a task starts.)

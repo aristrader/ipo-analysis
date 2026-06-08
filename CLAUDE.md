@@ -115,6 +115,8 @@ backtests + the method spine). 5. `docs/layer2.md` / `docs/layer3.md` — design
   test+verify → cleanup. Slower per task, exceptional results, few bugs. Proven 2026-06-08: review
   caught a bug the honesty-fix itself introduced; placebo killed a hypothesis the falsifier passed.
   Do NOT one-dimension a substantive task; right-size per that doc, and if skipping a stage, say why.
+  At the START of any non-trivial task, load that doc and run its "TASK-KICKOFF PROMPT". The per-turn
+  verify hook injects a one-line reminder so this is never forgotten (owner: "must be executed").
 
 ## Standing agent briefs (the "load the info" chain — plain .md, no skills; owner decision 2026-06-07)
 - **Any hypothesis/research agent** → MUST be pointed at `docs/research/hypothesis_protocol.md`

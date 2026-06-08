@@ -185,7 +185,10 @@ def main():
     drift = fast_drift()
 
     if quiet:
-        # Hook mode: speak ONLY when something needs attention (silence = clean). Never block.
+        # Hook mode: drift/routing speak only when needed; the pipeline reminder is a STANDING
+        # nudge every turn (owner mandate 2026-06-08 — "must be executed for every task").
+        print("◆ For any non-trivial task: follow docs/research/execution_pipeline.md "
+              "(diverge → converge → build → REVIEW → test). Don't one-dimension it.")
         if drift:
             print("⚠ PROJECT-MAP DRIFT (verify.py) — fix project_map.py or the cause:")
             for d in drift:
