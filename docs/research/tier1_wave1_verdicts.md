@@ -209,3 +209,19 @@ current data. To pursue: re-scrape screener for receivables + CFO (a data projec
 ## H3 SME→Mainboard migration — DATA-GATED (parked)
 No migration flag/date in the substrate; needs a new free source (Chittorgarh report 123 / BSE /
 NSE migration list). Scope-the-source-first before any test. Descriptive-finding candidate.
+
+---
+# Thread C round 2 — expanded hypothesis space (2026-06-08; divergence agent generated, all tested)
+The "diverge before testing" step I'd skipped, done properly. 3 genuinely-new second-order
+hypotheses (cross-checked not-already-tested), tested with placebo/falsifier. ALL REJECTED — honest.
+tools/research/threadC_new_hypotheses.py.
+- **H-C1 margin-expansion vs sales-only growth: REJECTED (opposite + sign-flip).** Among growers,
+  margin-EXPANDERS underperformed eroders (1y −2.6pp, 3y −17.1pp; IC ~0) and the sign flipped across
+  regimes (boom +5.6pp, longterm −6.7pp). Not the predicted "quality growth wins."
+- **H-C2 sales-accel × demand divergence: REJECTED (fails placebo).** The predicted asymmetry showed
+  (high-sub accel beat decel +7.1pp; low-sub ~flat −2.7pp), passing the directional falsifier — BUT
+  the 1000× shuffle placebo put it WITHIN NOISE (p=0.156), and longterm is thin (n=19, no
+  cross-regime). Suggestive, not distinguishable from noise → not a signal.
+- **H-C3 same-banker pipeline congestion: REJECTED (null).** Congested (LM ≥1 IPO in prior 30d)
+  −12.5% vs solo −12.7% = +0.2pp. No effect (consistent with the earlier T2g banker-collision null).
+NET: 0 new validated signals; the placebo caught H-C2 (which the falsifier alone would have passed).

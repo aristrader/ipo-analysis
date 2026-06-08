@@ -212,3 +212,8 @@ results are kept on purpose).
   h2_pe_vs_sector_sme.py.
 - **accruals (Modified-Jones DCA): DATA-GATED** — needs receivables + CFO (not in substrate). Parked.
 - **SME→MB migration: DATA-GATED** — needs a migration-date source (Chittorgarh r123/BSE/NSE). Parked.
+
+## Thread C round 2 (2026-06-08) — 3 new hypotheses, ALL REJECTED (graveyard)
+- margin-expansion-vs-sales-growth (opposite + regime sign-flip) · sales-accel×demand-divergence
+  (suggestive +7.1pp but FAILS shuffle placebo p=0.156, boom-only) · same-banker-pipeline-congestion
+  (+0.2pp null). threadC_new_hypotheses.py. Do not re-test without new data/framing.
