@@ -30,3 +30,20 @@ verdict: DONE (research). News-REACTION trading killed (structural slowness); 3 
 delivery-%% [first, free/historical/backtestable-now], H7 corp-action backtest, RUNG 1 explanatory
 feed; predictive news gated behind ~18-36mo forward-collection; all-stocks/TA+FA+news fusion KILLED
 (negative-ROI/moat-breaking). Scope-down decision left to owner. NO BUILD.
+
+## 2026-06-09 — Grade Fujiyama/Park calls + build the canonical improvement backlog  [path: LIGHT]
+scope: (1) grade the two frozen point-in-time calls vs realized outcome; (2) capture every open improvement
+idea (today's grading insights + prior threads) into ONE deduped, status-tagged menu (de-sprawl the 5+ next/roadmap docs).
+grade: Fujiyama APPLY = CORRECT (+44% allottee on our data, brutal −24.6% MAE path, peak day 160); Park NEUTRAL
+= a MISS (+73.9% allottee) caused SOLELY by the obscure-banker flag false-positiving on Nuvama (10 prior IPOs < 12
+threshold; Nuvama is top-tier). Regret ≈ ₹74k/₹1L. Confirmed via banker freq count + verdict logic in calls.py.
+build: docs/research/fujiyama_park_case.md GRADE section · docs/research/improvement_backlog.md (NEW canonical
+menu: themes A grading-fixes / B miss-mining / C app / D news / E factors / F close-loop / G beyond-IPO) ·
+NEXT.md banner → backlog is the live menu · project_map CONTEXTS "improvement backlog" + verify wires it.
+verify: PASS (274 tests collected, 29 findings, 2384 rows, no drift). no code logic changed (docs + map only).
+verdict: DONE. do-first for the 6hr batch = A1 banker-flag fix (proof: Park); high-value companion = B1 miss-mining.
+- addendum (2026-06-09): B1 reframed as symmetric two-sided miss-mining (false-negatives=missed winners/opportunity
+  + false-positives=APPLY'd losers/real capital — the latter flagged higher-priority per downside-first ethos).
+  Added THEME H to improvement_backlog: relative-valuation-vs-peers + intrinsic value (FA dimension; ember = existing
+  n6/pe_vs_sector −43pp MB). Honest blockers: look-ahead, all-stocks point-in-time peer panel (collides w/ extension_roadmap),
+  fuzzy peer-ID. MVP = peers as earlier-IPOs-in-industry (owned point-in-time data, clean). Phased ~10-50 tasks, gated.

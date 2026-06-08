@@ -194,6 +194,10 @@ CONTEXTS = {
         "docs/research/recommendations_system_discussion.md",
     ],
     "what's done / what's next / project state": ["STATUS.md", "DONE.md", "CLAUDE.md", "rules/index.md"],
+    "improvement backlog / what to build next": [
+        "docs/research/improvement_backlog.md", "docs/research/fujiyama_park_case.md",
+        "docs/research/NEXT.md", "docs/research/future_ideas.md",
+    ],
     "testing / verification / the showdown": [
         "tests/", "tests/data/", "tests/showdown/", "tools/mutation/", "pytest.ini",
         "docs/research/showdown_audit.md", "docs/research/showdown_pipeline_diff.md",

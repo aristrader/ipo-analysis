@@ -1,3 +1,6 @@
+> ⚠️ **SUPERSEDED AS THE LIVE MENU (2026-06-09):** the current, deduped, status-tagged backlog is
+> `improvement_backlog.md`. This doc remains as the deeper Thread A/B/C *reasoning* (a feeder); pick work from the backlog.
+
 # What's next — synthesis & recommendation (2026-06-08)
 
 Synthesizes three scouting passes (all in docs/research/):
