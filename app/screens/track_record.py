@@ -82,6 +82,9 @@ with tab_track:
 
         # ===== WERE-WE-RIGHT scorecard (calibration + Wilson CIs) =====
         st.subheader("🎯 Were-we-right scorecard (hit-rate with 95% confidence bands)")
+        st.caption("Graded on FROM-LISTING alpha (vs Nifty) — this excludes the listing-day pop, so "
+                   "AVOID looks slightly generous and APPLY slightly harsh at the margin (an allottee "
+                   "also banks the pop). Small n → wide CI = honest uncertainty.")
         from layer3 import calibration as _cal
         _h = st.radio("horizon", ["1m", "3m", "1y"], index=1, horizontal=True, key="sc_h")
         sc = _cal.scorecard(ledger, _h)

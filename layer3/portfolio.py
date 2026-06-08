@@ -52,19 +52,27 @@ def _position_value(entry, exit_px, capital=CAPITAL):
 
 
 def _exit_price(isin, sub_row, prices_root="data/prices"):
-    """Adjusted value 'to today' (live) or terminal (delisted: wipeout→0, else last close)."""
+    """(adjusted exit value, exit DATE) — 'to today' (live) or terminal (delisted: wipeout→0,
+    else last close). The exit DATE is returned so the Nifty benchmark can be anchored to the
+    SAME date (P0 fix: a delisted name's stock value is years-stale; the benchmark must match)."""
     delisted = str(sub_row.get("delisted")) in ("True", "true", "1")
-    if delisted and str(sub_row.get("outcome_class")) == "wipeout":
-        return 0.0
     p = os.path.join(prices_root, f"{isin}.csv")
+    last_date = None
     if os.path.exists(p):
         try:
             pr = pd.read_csv(p)
+            pr["date"] = pd.to_datetime(pr["date"], errors="coerce")
+            pr = pr.dropna(subset=["date"]).sort_values("date")
             if len(pr):
-                return float(pr["close"].astype(float).iloc[-1])
+                last_date = pr["date"].iloc[-1]
+                if delisted and str(sub_row.get("outcome_class")) == "wipeout":
+                    return 0.0, last_date
+                return float(pr["close"].astype(float).iloc[-1]), last_date
         except Exception:
             pass
-    return None
+    if delisted and str(sub_row.get("outcome_class")) == "wipeout":
+        return 0.0, None
+    return None, None
 
 
 # ---------------------------------------------------------------- per-stock ₹1L
@@ -118,7 +126,7 @@ def simulate(ledger=None, df=None, capital=CAPITAL, prices_root="data/prices"):
         r = sub.get(c["isin"])
         if r is None:
             continue
-        exit_px = _exit_price(c["isin"], r, prices_root)
+        exit_px, exit_date = _exit_price(c["isin"], r, prices_root)
         if exit_px is None:
             continue
         ipx = pd.to_numeric(pd.Series([r.get("issue_price_adj")]), errors="coerce").iloc[0]
@@ -126,7 +134,10 @@ def simulate(ledger=None, df=None, capital=CAPITAL, prices_root="data/prices"):
         allottee = _position_value(ipx, exit_px, capital)          # full ₹1L at issue (if allotted)
         secondary = _position_value(lst, exit_px, capital)         # full ₹1L at listing (the HERO lens)
         ld = pd.to_datetime(r.get("listing_date"), errors="coerce")
-        n0, n1 = _nifty_at(ld), _nifty_at(pd.Timestamp.now())
+        # P0 fix: anchor the Nifty leg to the SAME exit date as the stock (not now()), so a
+        # delisted/stale position is compared over its OWN holding period, like-for-like.
+        bench_end = exit_date if exit_date is not None else pd.Timestamp.now()
+        n0, n1 = _nifty_at(ld), _nifty_at(bench_end)
         nifty_val = capital * n1 / n0 if (n0 and n1) else None
         rows.append({"isin": c["isin"], "name": c["name"], "type": c["type"], "mode": c["mode"],
                      "call_date": c["call_date"], "allottee_val": allottee,
@@ -139,14 +150,16 @@ def summary(positions):
     out = {}
     for mode, g in positions.groupby("mode"):
         for lens, col in (("allottee", "allottee_val"), ("secondary", "secondary_val")):
-            v = pd.to_numeric(g[col], errors="coerce").dropna()
-            if v.empty:
+            # P0 fix: portfolio mult and Nifty mult MUST be over the SAME matched basket
+            # (rows that have BOTH the lens value and a Nifty value) — else it's apples-to-oranges.
+            m = g[[col, "nifty_val"]].apply(pd.to_numeric, errors="coerce").dropna()
+            if m.empty:
                 continue
-            nif = pd.to_numeric(g["nifty_val"], errors="coerce").dropna()
+            v, nif = m[col], m["nifty_val"]
             out[f"{mode}/{lens}"] = {
                 "n": len(v), "deployed": CAPITAL * len(v), "value_now": float(v.sum()),
                 "mult": float(v.sum() / (CAPITAL * len(v))),
-                "nifty_mult": float(nif.sum() / (CAPITAL * len(nif))) if len(nif) else None,
+                "nifty_mult": float(nif.sum() / (CAPITAL * len(nif))),
                 "win_rate": float((v > CAPITAL).mean()),
                 "median_mult": float(v.median() / CAPITAL),
             }

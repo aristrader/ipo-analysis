@@ -32,6 +32,32 @@ def test_mode_split_never_pools(monkeypatch):
     assert g["historical_sim"] == 2.0 and g["live"] == 0.5   # contract: keyed by mode
 
 
+def test_exit_price_returns_date_for_benchmark_anchoring(tmp_path):
+    # P0 fix: _exit_price returns (value, date) so the Nifty leg can match the holding period
+    import pandas as pd
+    d = pd.bdate_range("2021-01-01", periods=50)
+    pd.DataFrame({"date": d.strftime("%Y-%m-%d"), "open": 100, "high": 100, "low": 100,
+                  "close": 120.0, "volume": 1}).to_csv(tmp_path / "INEDEL01.csv", index=False)
+    val, dt = P._exit_price("INEDEL01", {"delisted": "False"}, prices_root=str(tmp_path))
+    assert val == 120.0 and str(dt.date()) == "2021-03-11"   # last date in the file, not today
+    # wipeout keeps ₹0 + its terminal date
+    val2, dt2 = P._exit_price("INEDEL01", {"delisted": "True", "outcome_class": "wipeout"},
+                              prices_root=str(tmp_path))
+    assert val2 == 0.0 and dt2 is not None
+
+
+def test_summary_matches_baskets():
+    # P0 fix: a position missing nifty_val must not skew mult vs nifty_mult (same basket)
+    import pandas as pd
+    pos = pd.DataFrame([
+        {"mode": "x", "allottee_val": 200000.0, "secondary_val": 150000.0, "nifty_val": 110000.0},
+        {"mode": "x", "allottee_val": 100000.0, "secondary_val": 100000.0, "nifty_val": None},
+    ])
+    s = P.summary(pos)["x/secondary"]
+    assert s["n"] == 1                            # only the row with BOTH values counts
+    assert s["mult"] == 1.5 and s["nifty_mult"] == 1.1
+
+
 def test_growth_of_1l_three_series_start_at_capital():
     out = P.growth_of_1l("INE14OX01013", capital=100000.0)
     if out is None or out.empty:
