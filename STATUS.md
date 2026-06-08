@@ -35,8 +35,8 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
   + stock-news/catalyst feed (free BSE/NSE announcements API = first scoping step).
 - **Re-run the forward test (~monthly)** as the 2026 cohort ages — the OOS verdict hardens; also
   re-test the SHORT-horizon idea then (parked: data said no, sample was young).
-- **Watchlist signals** (re-open conditions in rules/index.md): pe_vs_sector (needs SME PE data),
-  qib_retail_ratio (lean-positive; display-only candidate).
+- **Watchlist signals** (rules/index.md): qib_retail_ratio (lean-positive; display-only candidate).
+  [pe_vs_sector RESOLVED 2026-06-08 → display-only, placebo-confirmed, boom-only.]
 - **Microcap extension** — the one major optional sub-project
   (`docs/research/microcap_extension_thinking.md`).
 
