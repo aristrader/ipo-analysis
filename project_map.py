@@ -172,6 +172,9 @@ CONTEXTS = {
     ],
     "the app / UI": ["app.py", "docs/research/app_phase2_design.md",
                      "docs/research/recommendations_system_discussion.md"],
+    "network / trusted sources / security policy": [
+        "docs/research/trusted_sources.md", "docs/playwright_on_off.md", ".claude/settings.local.json",
+    ],
     "how to work / execution pipeline": [
         "docs/research/execution_pipeline.md", "docs/research/task_log.md",
         "docs/research/hypothesis_protocol.md",

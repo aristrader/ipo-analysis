@@ -95,6 +95,7 @@ backtests + the method spine). 5. `docs/layer2.md` / `docs/layer3.md` — design
   `delisting.csv` stays at `data/master/` top level (it is a price-pipeline data INPUT, read by step 07 + the merge).
 
 ## Non-negotiable conventions / decisions
+- **NETWORK = DEFAULT-DENY** (company laptop, owner 2026-06-08): only the WebFetch-allowlisted domains in `.claude/settings.local.json` are fetchable (no blanket WebFetch); read-only, ZERO downloads; off-list source → STOP and ask. Trusted-source registry + the expand-only-if-deemed-safe rule: `docs/research/trusted_sources.md`.
 - **GIT IS LOCAL-ONLY** — `git init`’d for local history/rollback only. NEVER add a remote / push / connect to GitHub until the user explicitly says so (their standing instruction, 2026-06-02).
 - **PLAYWRIGHT = OFF BY DEFAULT** (company-laptop rule, owner 2026-06-08). Turn ON only for an app test/verify session, OFF the moment it's done — leftover "Chrome for Testing" processes trigger OS notifications. Procedure: `docs/playwright_on_off.md` (flip `disabled`↔`enabledMcpjsonServers` in `.claude/settings.local.json` + kill stray processes). `.mcp.json` keeps it localhost-pinned / isolated / headless / version-locked.
 - **ISIN is the primary key**; the ONLY automatic join key. Name-matching never merges (only flags).
