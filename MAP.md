@@ -27,7 +27,7 @@
 - **scrapers / data sources** → `scrapers/`, `scrapers/nse_session.py`, `docs/sources.md`, `tests/scrapers/`
 - **backtest a strategy** → `layer3/backtest/`, `run_backtest.py`, `docs/strategies.md`, `tests/layer3/test_backtest.py`, `tests/layer3/test_score_backtest.py`
 - **cross-regime validation / OOS** → `layer3/validate.py`, `run_validation.py`, `run_oos.py`, `tests/layer3/test_validate.py`
-- **the app / UI** → `app.py`, `docs/research/app_phase2_design.md`, `docs/research/recommendations_system_discussion.md`, `docs/research/newsfeed_opportunity_map.md`
+- **the app / UI** → `app.py`, `docs/research/app_phase2_design.md`, `docs/research/recommendations_system_discussion.md`, `docs/research/newsfeed_opportunity_map.md`, `docs/research/fujiyama_park_case.md`
 - **network / trusted sources / security policy** → `docs/research/trusted_sources.md`, `docs/playwright_on_off.md`, `.claude/settings.local.json`
 - **how to work / execution pipeline** → `docs/research/execution_pipeline.md`, `docs/research/task_log.md`, `docs/research/hypothesis_protocol.md`
 - **test a hypothesis / research agent brief** → `docs/research/hypothesis_protocol.md`, `rules/index.md`, `docs/research/phase2_playbooks.md`, `tools/research/`, `docs/research/tier1_wave1_verdicts.md`

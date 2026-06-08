@@ -172,7 +172,8 @@ CONTEXTS = {
     ],
     "the app / UI": ["app.py", "docs/research/app_phase2_design.md",
                      "docs/research/recommendations_system_discussion.md",
-                     "docs/research/newsfeed_opportunity_map.md"],
+                     "docs/research/newsfeed_opportunity_map.md",
+                     "docs/research/fujiyama_park_case.md"],
     "network / trusted sources / security policy": [
         "docs/research/trusted_sources.md", "docs/playwright_on_off.md", ".claude/settings.local.json",
     ],
