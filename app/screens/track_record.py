@@ -57,6 +57,51 @@ with tab_track:
         graded = lg[lg["call_type"].isin(["APPLY", "AVOID", "EARLY_APPLY", "EARLY_AVOID",
                                           "EXIT_REVIEW", "PERSIST_EXIT_LEAN", "TAKE_PROFITS"])]
 
+        # ===== ₹1L PORTFOLIO — the headline money view =====
+        st.subheader("💰 Growth of ₹1 lakh — followed every APPLY call vs the index")
+
+        @st.cache_data(show_spinner="Simulating the ₹1L portfolio…")
+        def _portfolio():
+            from layer3 import portfolio as _pf
+            return _pf.summary(_pf.simulate())
+        psum = _portfolio()
+        prows = []
+        for seg, v in sorted(psum.items()):
+            mode, lens = seg.split("/")
+            prows.append({"mode": mode, "entry": "bought on listing" if lens == "secondary" else "if allotted (at issue)",
+                          "n calls": v["n"],
+                          "₹1L → now": f"₹{v['value_now']/v['n']:,.0f}" if v["n"] else "—",
+                          "multiple": f"{v['mult']:.2f}x",
+                          "vs Nifty": f"{v['nifty_mult']:.2f}x" if v["nifty_mult"] else "—",
+                          "win %": f"{100*v['win_rate']:.0f}%"})
+        st.dataframe(pd.DataFrame(prows), hide_index=True, use_container_width=True)
+        st.caption("**'bought on listing' is the realistic line** (you can always buy on listing day); "
+                   "'if allotted' assumes you won the IPO allotment lottery. Full ₹1L invested per call, "
+                   "survivorship-honest (wipeouts count as ₹0). Split by mode — live/gap_filled = forward "
+                   "truth (young), backfilled = 2026 out-of-sample, historical_sim = dress rehearsal.")
+
+        # ===== WERE-WE-RIGHT scorecard (calibration + Wilson CIs) =====
+        st.subheader("🎯 Were-we-right scorecard (hit-rate with 95% confidence bands)")
+        from layer3 import calibration as _cal
+        _h = st.radio("horizon", ["1m", "3m", "1y"], index=1, horizontal=True, key="sc_h")
+        sc = _cal.scorecard(ledger, _h)
+        if not sc.empty:
+            sc_disp = sc.assign(
+                hit=sc["hit_rate"].map(lambda x: f"{100*x:.0f}%"),
+                **{"95% CI": sc.apply(lambda r: f"[{100*r['ci_lo']:.0f},{100*r['ci_hi']:.0f}]%", axis=1),
+                   "median α": sc["median_alpha_pct"].map(lambda x: f"{x:+.1f}%")})
+            st.dataframe(sc_disp[["call_type", "mode", "n", "hit", "95% CI", "median α"]],
+                         hide_index=True, use_container_width=True)
+        rel = _cal.score_reliability(ledger, _h)
+        if not rel.empty:
+            st.caption("**Is the score well-ordered?** (higher score → higher chance of beating Nifty)")
+            rel_d = rel.assign(**{"score range": rel.apply(lambda r: f"{r['score_lo']:.0f}–{r['score_hi']:.0f}", axis=1),
+                                  "P(beat Nifty)": rel["p_up"].map(lambda x: f"{100*x:.0f}%"),
+                                  "95% CI": rel.apply(lambda r: f"[{100*r['ci_lo']:.0f},{100*r['ci_hi']:.0f}]%", axis=1)})
+            st.dataframe(rel_d[["score_bucket", "score range", "n", "P(beat Nifty)", "95% CI"]],
+                         hide_index=True, use_container_width=True)
+        st.divider()
+
         # A. table call_type × mode
         st.subheader("A. Call track record")
         rows = []

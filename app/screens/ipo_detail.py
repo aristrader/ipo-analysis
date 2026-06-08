@@ -382,6 +382,28 @@ if prices is not None and len(prices) > 1:
             st.markdown(f"🚩 **CAPITULATION** — never closed above the issue price in trading days 1–90. "
                         f"{ui.chip('validated')}", unsafe_allow_html=True)
             st.caption("F5e (cross-regime, no look-ahead): ~12% of IPOs hit this — bad-outcome rate 55% vs 13%.")
+    # ₹1L growth — the intuitive money view (at-IPO if-allotted / at-listing / Nifty)
+    if subj_isin:
+        from layer3 import portfolio as _pf
+        g1 = _pf.growth_of_1l(subj_isin, df=df)
+        if g1 is not None and not g1.empty:
+            st.markdown("**Growth of ₹1 lakh** — what your money would have done:")
+            gg = g1.copy()
+            if (gg["date"].max() - gg["date"].min()).days > 365:
+                gg = (gg.set_index("date").groupby("series").resample("W")["value"].last()
+                      .dropna().reset_index())
+            ch1 = alt.Chart(gg).mark_line().encode(
+                x=alt.X("date:T", title=None),
+                y=alt.Y("value:Q", title="value of ₹1L (₹)"),
+                color=alt.Color("series:N", title=None,
+                                scale=alt.Scale(domain=["at-IPO (if allotted)", "at-listing", "Nifty"],
+                                                range=["#0f5132", "#1f4e79", "#9b9b9b"])),
+                tooltip=["date:T", "series:N", alt.Tooltip("value:Q", format=",.0f")])
+            st.altair_chart(ch1.properties(height=260), use_container_width=True)
+            ends = g1.sort_values("date").groupby("series").tail(1).set_index("series")["value"]
+            st.caption("at-listing (bought on listing day) is the realistic line; at-IPO assumes you "
+                       "won the allotment lottery. Final: "
+                       + " · ".join(f"{s} ₹{ends[s]:,.0f}" for s in ends.index))
 else:
     st.caption("No price file for this IPO — showing the *expected* reach ladder from analogs instead.")
 rch = r.get("reach_curve_h", {})
