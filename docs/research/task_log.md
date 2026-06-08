@@ -24,6 +24,9 @@ opportunity map + hypothesis catalog + source table + layered task breakdown; sc
 constraints (owner, away): trusted sites only · NO downloads · web search/fetch are read-only.
 diverge wave-1 (6 parallel agents): sources(a381743) · taxonomy(a4b039b) · mechanics(aa6ac5a) ·
 hypotheses(af261c8) · red-team(a7e5515) · grand-vision(ae05952).
-plan: wave-1 → wave-2 review/expand agents (gaps, push dimensions) → converge into
-docs/research/newsfeed_opportunity_map.md. NO BUILD.
-verdict: (in progress)
+diverge wave-2 (2 agents): synthesis+expand(a3edd3e) · coverage-critic(a2df0b8).
+converge: docs/research/newsfeed_opportunity_map.md (authoritative) over 8 detail docs.
+verdict: DONE (research). News-REACTION trading killed (structural slowness); 3 worth-doing —
+delivery-%% [first, free/historical/backtestable-now], H7 corp-action backtest, RUNG 1 explanatory
+feed; predictive news gated behind ~18-36mo forward-collection; all-stocks/TA+FA+news fusion KILLED
+(negative-ROI/moat-breaking). Scope-down decision left to owner. NO BUILD.
