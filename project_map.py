@@ -172,6 +172,9 @@ CONTEXTS = {
     ],
     "the app / UI": ["app.py", "docs/research/app_phase2_design.md",
                      "docs/research/recommendations_system_discussion.md"],
+    "how to work / execution pipeline": [
+        "docs/research/execution_pipeline.md", "docs/research/hypothesis_protocol.md",
+    ],
     "test a hypothesis / research agent brief": [
         "docs/research/hypothesis_protocol.md", "rules/index.md",
         "docs/research/phase2_playbooks.md", "tools/research/",

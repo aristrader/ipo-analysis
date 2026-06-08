@@ -109,6 +109,13 @@ backtests + the method spine). 5. `docs/layer2.md` / `docs/layer3.md` — design
   distributions over means; min-N floors; flag (never silently mis-assign).
 - Full source map + the "tested & not viable" list are in `docs/sources.md`.
 
+## HOW we work — the execution pipeline (owner mandate 2026-06-08, NON-NEGOTIABLE for non-trivial work)
+- **`docs/research/execution_pipeline.md`** = the standing per-task pipeline: brainstorm → DIVERGE
+  (multi-lens thinking agents) → converge → plan → BUILD (TDD) → independent REVIEW agent → fix →
+  test+verify → cleanup. Slower per task, exceptional results, few bugs. Proven 2026-06-08: review
+  caught a bug the honesty-fix itself introduced; placebo killed a hypothesis the falsifier passed.
+  Do NOT one-dimension a substantive task; right-size per that doc, and if skipping a stage, say why.
+
 ## Standing agent briefs (the "load the info" chain — plain .md, no skills; owner decision 2026-06-07)
 - **Any hypothesis/research agent** → MUST be pointed at `docs/research/hypothesis_protocol.md`
   (3-layer protocol, placebo/falsifier discipline, data conventions, look-ahead traps, env gotchas,
