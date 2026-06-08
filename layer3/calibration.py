@@ -46,24 +46,42 @@ _WIN_RULE = {
 }
 
 
+def _apply_is_right(g, col):
+    """APPLY/EARLY_APPLY allottee view (T5 fix): the applicant ALSO banks the listing pop, so
+    'right' = allottee total return > 0 ≈ pop + from-listing alpha, not from-listing alpha alone.
+    Falls back to alpha>0 where pop is absent."""
+    a = pd.to_numeric(g[col], errors="coerce")
+    pop = pd.to_numeric(g.get("pop_pct"), errors="coerce") / 100.0
+    total = a.add(pop, fill_value=0.0)        # pop + subsequent alpha (allottee proxy)
+    return total > 0
+
+
 def scorecard(ledger, horizon="3m"):
-    """The monthly 'were-we-right' table: per (call_type, mode) -> N, hit-rate + Wilson CI,
-    median alpha. Only call types with a defined win-rule and a graded alpha are scored."""
+    """The 'were-we-right' table: per (call_type, mode) -> N, hit-rate + Wilson CI, median alpha,
+    AND base-rate lift (hit-rate minus the unconditional rate for that horizon = does the call beat
+    indiscriminate IPO-buying? D1). APPLY graded on the allottee view (T5)."""
     col = _GRADE_COL[horizon]
+    # unconditional base rate: of ALL graded IPOs at this horizon, what fraction had alpha>0?
+    base_a = pd.to_numeric(ledger[ledger["call_type"] == "TRACK"][col], errors="coerce").dropna()
+    base_rate = float((base_a > 0).mean()) if len(base_a) else None
     rows = []
     for (ct, mode), g in ledger.groupby(["call_type", "mode"]):
         rule = _WIN_RULE.get(ct)
         if rule is None:
             continue
-        a = pd.to_numeric(g[col], errors="coerce").dropna()
-        if a.empty:
+        a = pd.to_numeric(g[col], errors="coerce")
+        mask = a.notna()
+        if mask.sum() == 0:
             continue
-        wins = a.map(rule)
-        lo, hi = wilson(int(wins.sum()), len(a))
-        rows.append({"call_type": ct, "mode": mode, "n": len(a),
+        wins = _apply_is_right(g, col)[mask] if ct in ("APPLY", "EARLY_APPLY") else a[mask].map(rule)
+        n = int(mask.sum())
+        lo, hi = wilson(int(wins.sum()), n)
+        lift = (float(wins.mean()) - base_rate) if base_rate is not None else None
+        rows.append({"call_type": ct, "mode": mode, "n": n,
                      "hit_rate": round(float(wins.mean()), 3),
                      "ci_lo": round(lo, 3), "ci_hi": round(hi, 3),
-                     "median_alpha_pct": round(100 * float(a.median()), 1)})
+                     "lift_vs_base": round(lift, 3) if lift is not None else None,
+                     "median_alpha_pct": round(100 * float(a[mask].median()), 1)})
     return pd.DataFrame(rows).sort_values(["call_type", "mode"]) if rows else pd.DataFrame()
 
 

@@ -401,8 +401,13 @@ if prices is not None and len(prices) > 1:
                 tooltip=["date:T", "series:N", alt.Tooltip("value:Q", format=",.0f")])
             st.altair_chart(ch1.properties(height=260), use_container_width=True)
             ends = g1.sort_values("date").groupby("series").tail(1).set_index("series")["value"]
-            st.caption("at-listing (bought on listing day) is the realistic line; at-IPO assumes you "
-                       "won the allotment lottery. Final: "
+            starts = g1.sort_values("date").groupby("series").head(1).set_index("series")["value"]
+            _ipo_start = starts.get("at-IPO (if allotted)")
+            st.caption("**at-listing (bought on listing day) is the realistic line** — you can always do it. "
+                       "**at-IPO assumes you won the allotment lottery** (~3.5% on a hot retail book) AND it "
+                       "STARTS ABOVE ₹1L"
+                       + (f" (at ₹{_ipo_start:,.0f}, the listing pop already banked)" if pd.notna(_ipo_start) else "")
+                       + " — so don't read its higher line as 'outperformance', it began higher. Final: "
                        + " · ".join(f"{s} ₹{ends[s]:,.0f}" for s in ends.index))
 else:
     st.caption("No price file for this IPO — showing the *expected* reach ladder from analogs instead.")

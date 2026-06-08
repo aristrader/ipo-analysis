@@ -58,6 +58,38 @@ def test_summary_matches_baskets():
     assert s["mult"] == 1.5 and s["nifty_mult"] == 1.1
 
 
+def test_summary_outlier_decomposition():
+    # mean is one-winner-driven; median/drop-top must expose it (T1)
+    import pandas as pd
+    pos = pd.DataFrame([{"mode": "m", "secondary_val": v, "allottee_val": v, "nifty_val": 110000.0}
+                        for v in [90000, 100000, 110000, 120000, 2500000]])  # one 25x
+    s = P.summary(pos)["m/secondary"]
+    assert s["mult"] > 5            # mean dragged up by the 25x
+    assert s["median_mult"] < 1.2   # typical position ~flat
+    assert s["mult_drop_top1"] < s["mult"]      # dropping the winner collapses the mean
+    assert 0 < s["top3_share"] <= 1
+
+
+def test_bootstrap_ci_brackets_mean():
+    import pandas as pd
+    pos = pd.DataFrame([{"mode": "m", "secondary_val": v} for v in
+                        [80000, 100000, 120000, 150000, 200000] * 4])
+    ci = P.bootstrap_ci(pos, "secondary_val", "m", b=500)
+    assert ci is not None and ci[0] < ci[1]
+    assert P.bootstrap_ci(pos.head(3), "secondary_val", "m") is None   # <10 -> None
+
+
+def test_attribution_orders_by_pnl():
+    import pandas as pd
+    pos = pd.DataFrame([
+        {"mode": "historical_sim", "name": "Win", "type": "MB", "call_date": "2021-01-01",
+         "secondary_val": 300000.0},
+        {"mode": "historical_sim", "name": "Lose", "type": "SME", "call_date": "2021-02-01",
+         "secondary_val": 20000.0}])
+    a = P.attribution(pos)
+    assert a["best"][0]["name"] == "Win" and a["worst"][0]["name"] == "Lose"
+
+
 def test_growth_of_1l_three_series_start_at_capital():
     out = P.growth_of_1l("INE14OX01013", capital=100000.0)
     if out is None or out.empty:

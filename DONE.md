@@ -482,7 +482,7 @@ Cleanup: archived dead scratch (`archive/research_scratch/`), refreshed TODO/DON
 ## 2026-06-08 — "Next-level" program (6 items, owner-approved, one session, autonomous)
 - **Thread A — paper-portfolio sim** (layer3/portfolio.py + run_portfolio.py): ₹1L/APPLY vs Nifty,
   both entry lenses (secondary=hero), full ₹1L (owner dropped the allotment haircut), survivorship-
-  honest, mode-split. Result: hist-sim secondary 2.09x vs Nifty 1.27x; 2026 OOS 1.34x vs 0.98x.
+  honest, mode-split. Result: hist-sim secondary MEAN 2.09x but MEDIAN position 1.18x (winner-driven, mostly simulated); APPLY allottee hit-rate 79%.
   Per-stock growth_of_1l (3 lines).
 - **Thread A.2 — were-we-right scorecard** (layer3/calibration.py + run_scorecard.py): Wilson 95%
   CIs (no scipy), per call_type×mode hit-rate, score-ordering reliability (Q1 38%→Q5 53% P(beat

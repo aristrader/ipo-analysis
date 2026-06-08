@@ -36,6 +36,19 @@ def test_scorecard_win_rules():
     assert "TRACK" not in set(sc["call_type"])     # excluded (no rule)
 
 
+def test_apply_graded_on_allottee_view():
+    # T5: APPLY that drifted to alpha<0 but banked a big pop is RIGHT (allottee made money)
+    led = pd.DataFrame([
+        {"call_type": "APPLY", "mode": "m", "alpha_3m": -0.05, "pop_pct": 40.0},   # pop+alpha>0 -> right
+        {"call_type": "APPLY", "mode": "m", "alpha_3m": -0.05, "pop_pct": 1.0},     # pop+alpha<0 -> wrong
+        {"call_type": "TRACK", "mode": "m", "alpha_3m": 0.10},                      # base-rate input
+    ])
+    sc = C.scorecard(led, "3m")
+    ap = sc[sc["call_type"] == "APPLY"].iloc[0]
+    assert ap["hit_rate"] == 0.5           # one of two APPLY right under the allottee rule
+    assert "lift_vs_base" in sc.columns    # D1 base-rate lift present
+
+
 def test_score_reliability_orders():
     # construct: high score -> usually up, low score -> usually down
     import numpy as np

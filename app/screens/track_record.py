@@ -57,34 +57,61 @@ with tab_track:
         graded = lg[lg["call_type"].isin(["APPLY", "AVOID", "EARLY_APPLY", "EARLY_AVOID",
                                           "EXIT_REVIEW", "PERSIST_EXIT_LEAN", "TAKE_PROFITS"])]
 
-        # ===== ₹1L PORTFOLIO — the headline money view =====
-        st.subheader("💰 Growth of ₹1 lakh — followed every APPLY call vs the index")
+        # ===== ₹1L PORTFOLIO — the money view, with honesty up front =====
+        st.subheader("💰 Growth of ₹1 lakh per APPLY call")
+        from layer3 import portfolio as _pf
 
         @st.cache_data(show_spinner="Simulating the ₹1L portfolio…")
         def _portfolio():
-            from layer3 import portfolio as _pf
-            return _pf.summary(_pf.simulate())
-        psum = _portfolio()
+            pos = _pf.simulate()
+            return pos, _pf.summary(pos)
+        pos, psum = _portfolio()
+        # honesty banner ABOVE the table (T3): mode mix — this is mostly NOT a followed record yet
+        _mm = pos["mode"].value_counts().to_dict()
+        st.warning("⚠️ **Mostly a dress rehearsal, not a track record yet.** Of the APPLY basket: "
+                   + ", ".join(f"{k} {v}" for k, v in _mm.items()) + ". The true *followed* record "
+                   "(live/gap_filled) is still tiny — read these as simulation/out-of-sample, not proof.")
         prows = []
         for seg, v in sorted(psum.items()):
             mode, lens = seg.split("/")
-            prows.append({"mode": mode, "entry": "bought on listing" if lens == "secondary" else "if allotted (at issue)",
-                          "n calls": v["n"],
-                          "₹1L → now": f"₹{v['value_now']/v['n']:,.0f}" if v["n"] else "—",
-                          "multiple": f"{v['mult']:.2f}x",
-                          "vs Nifty": f"{v['nifty_mult']:.2f}x" if v["nifty_mult"] else "—",
+            prows.append({"mode": mode, "entry": "bought on listing" if lens == "secondary" else "if allotted",
+                          "n": v["n"],
+                          "mean ₹1L→": f"₹{100000*v['mult']:,.0f}",
+                          "MEDIAN ₹1L→": f"₹{100000*v['median_mult']:,.0f}",
+                          "P10 / P90": f"₹{100000*v['p10_mult']:,.0f} / ₹{100000*v['p90_mult']:,.0f}",
+                          "drop top-1": f"{v['mult_drop_top1']:.2f}x",
+                          "avg-vs-Nifty*": f"{v['nifty_mult']:.2f}x",
                           "win %": f"{100*v['win_rate']:.0f}%"})
         st.dataframe(pd.DataFrame(prows), hide_index=True, use_container_width=True)
-        st.caption("**'bought on listing' is the realistic line** (you can always buy on listing day); "
-                   "'if allotted' assumes you won the IPO allotment lottery. Full ₹1L invested per call, "
-                   "survivorship-honest (wipeouts count as ₹0). Split by mode — live/gap_filled = forward "
-                   "truth (young), backfilled = 2026 out-of-sample, historical_sim = dress rehearsal.")
+        # bootstrap CI on the hero (secondary) lens for each mode
+        _ci_bits = []
+        for mode in pos["mode"].unique():
+            ci = _pf.bootstrap_ci(pos, "secondary_val", mode)
+            if ci:
+                _ci_bits.append(f"{mode}: [{ci[0]:.2f}x, {ci[1]:.2f}x]")
+        st.caption("**Read the MEDIAN, not the mean** — the mean is lifted by a few big winners "
+                   "('drop top-1' shows how much). 'bought on listing' is realistic; 'if allotted' "
+                   "assumes you won the lottery. Full ₹1L/call, survivorship-honest (wipeouts=₹0). "
+                   "*avg-vs-Nifty = mean of per-call ₹1L-vs-index over each call's own window — an "
+                   "average alpha, NOT a single shared-capital portfolio curve. "
+                   + ("Bootstrap 90% CI on mean mult (secondary): " + " · ".join(_ci_bits) if _ci_bits else ""))
+        # attribution — which picks carried / sank it (D2)
+        with st.expander("Which calls made & lost the money? (position attribution)"):
+            att = _pf.attribution(pos, "secondary_val", "historical_sim")
+            ac1, ac2 = st.columns(2)
+            ac1.markdown("**Best (₹ P&L on ₹1L)**")
+            ac1.dataframe(pd.DataFrame(att["best"]).assign(pnl=lambda d: d["pnl"].map(lambda x: f"₹{x:,.0f}")),
+                          hide_index=True, use_container_width=True)
+            ac2.markdown("**Worst**")
+            ac2.dataframe(pd.DataFrame(att["worst"]).assign(pnl=lambda d: d["pnl"].map(lambda x: f"₹{x:,.0f}")),
+                          hide_index=True, use_container_width=True)
 
         # ===== WERE-WE-RIGHT scorecard (calibration + Wilson CIs) =====
         st.subheader("🎯 Were-we-right scorecard (hit-rate with 95% confidence bands)")
-        st.caption("Graded on FROM-LISTING alpha (vs Nifty) — this excludes the listing-day pop, so "
-                   "AVOID looks slightly generous and APPLY slightly harsh at the margin (an allottee "
-                   "also banks the pop). Small n → wide CI = honest uncertainty.")
+        st.caption("APPLY is graded on the **allottee view** (listing pop + subsequent alpha — an "
+                   "applicant banks the pop); AVOID/exit on from-listing alpha vs Nifty. **lift** = "
+                   "hit-rate minus the unconditional 'buy every IPO' base rate (positive = the call "
+                   "beats indiscriminate IPO-buying). Small n → wide CI = honest uncertainty.")
         from layer3 import calibration as _cal
         _h = st.radio("horizon", ["1m", "3m", "1y"], index=1, horizontal=True, key="sc_h")
         sc = _cal.scorecard(ledger, _h)
@@ -92,8 +119,9 @@ with tab_track:
             sc_disp = sc.assign(
                 hit=sc["hit_rate"].map(lambda x: f"{100*x:.0f}%"),
                 **{"95% CI": sc.apply(lambda r: f"[{100*r['ci_lo']:.0f},{100*r['ci_hi']:.0f}]%", axis=1),
+                   "lift vs base": sc["lift_vs_base"].map(lambda x: f"{100*x:+.0f}pp" if pd.notna(x) else "—"),
                    "median α": sc["median_alpha_pct"].map(lambda x: f"{x:+.1f}%")})
-            st.dataframe(sc_disp[["call_type", "mode", "n", "hit", "95% CI", "median α"]],
+            st.dataframe(sc_disp[["call_type", "mode", "n", "hit", "95% CI", "lift vs base", "median α"]],
                          hide_index=True, use_container_width=True)
         rel = _cal.score_reliability(ledger, _h)
         if not rel.empty:

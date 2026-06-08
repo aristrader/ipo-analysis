@@ -156,11 +156,47 @@ def summary(positions):
             if m.empty:
                 continue
             v, nif = m[col], m["nifty_val"]
+            mults = (v / CAPITAL).sort_values()
+            # outlier decomposition (T1): the mean can be one-winner-driven — show the honest spread
+            drop1 = float(mults.iloc[:-1].mean()) if len(mults) > 1 else float(mults.mean())
+            drop3 = float(mults.iloc[:-3].mean()) if len(mults) > 3 else drop1
+            top3_share = float(mults.iloc[-3:].sum() / mults.sum()) if mults.sum() else None
             out[f"{mode}/{lens}"] = {
                 "n": len(v), "deployed": CAPITAL * len(v), "value_now": float(v.sum()),
-                "mult": float(v.sum() / (CAPITAL * len(v))),
-                "nifty_mult": float(nif.sum() / (CAPITAL * len(nif))),
+                "mult": float(mults.mean()),                       # the MEAN (sum/deployed)
+                "median_mult": float(mults.median()),              # the TYPICAL position (T1)
+                "p10_mult": float(mults.quantile(0.10)),
+                "p90_mult": float(mults.quantile(0.90)),
+                "mult_drop_top1": drop1, "mult_drop_top3": drop3,  # one-winner sensitivity
+                "top3_share": top3_share,
+                "nifty_mult": float(nif.sum() / (CAPITAL * len(nif))),   # avg per-call vs index (NOT a portfolio curve — T2)
                 "win_rate": float((v > CAPITAL).mean()),
-                "median_mult": float(v.median() / CAPITAL),
             }
     return out
+
+
+def bootstrap_ci(positions, lens="secondary_val", mode=None, b=2000, seed=7):
+    """Pure-Python 5th/95th-pct CI on the mean multiple (T1/D3) — resample positions with
+    replacement. No scipy. Honest 'the 2.09x is not precise' band."""
+    import random
+    g = positions if mode is None else positions[positions["mode"] == mode]
+    vals = [float(x) / CAPITAL for x in pd.to_numeric(g[lens], errors="coerce").dropna()]
+    if len(vals) < 10:
+        return None
+    rng = random.Random(seed)
+    means = []
+    for _ in range(b):
+        s = [vals[rng.randrange(len(vals))] for _ in range(len(vals))]
+        means.append(sum(s) / len(s))
+    means.sort()
+    return (means[int(0.05 * b)], means[int(0.95 * b)])
+
+
+def attribution(positions, lens="secondary_val", mode="historical_sim", top=5):
+    """Best/worst APPLY picks by ₹ P&L (D2) — which calls carried or sank the basket."""
+    g = positions[positions["mode"] == mode].copy()
+    g["pnl"] = pd.to_numeric(g[lens], errors="coerce") - CAPITAL
+    g = g.dropna(subset=["pnl"]).sort_values("pnl")
+    cols = ["name", "type", "call_date", "pnl"]
+    return {"worst": g.head(top)[cols].to_dict("records"),
+            "best": g.tail(top)[cols].sort_values("pnl", ascending=False).to_dict("records")}
