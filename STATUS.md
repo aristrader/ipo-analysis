@@ -17,49 +17,21 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
 ---
 
 ## 🏃 NOW
-- **APP-ITERATION PIPELINE ✅ COMPLETE (2026-06-07): 4/4 iterations run.** Charter
-  `docs/research/app_iteration_charter.md`; findings iter1/2/3 in `docs/research/iter*_findings.md`.
-  Tally: **0 P0 anywhere** · 23 findings found · 19 fixed (all P1/P2 + cheap P3) · 4 deferred to
-  the owner improvement list. App: 7 screens, glossary, staleness alarm, color-coded call badges,
-  plain-language whys, deep-links everywhere. **259 tests** (243 fast + 16 ui-logic in tests/app)
-  + extended key-content smoke. Run: `PYTHONPATH=. streamlit run app.py` (localhost-only).
-- **RECOMMENDATIONS SYSTEM ✅ BUILT + LIVE (2026-06-07/08):** calls engine (`layer3/calls.py` +
-  `run_calls.py`, 12 property tests) · ledger `data/master/calls_ledger.csv` (~5,170 calls: 2026
-  backfill OOS + boom historical_sim + accruing LIVE) · headline **APPLY +6.0% vs AVOID −28.2% a1y
-  (sim); 2026 OOS APPLY +13.6%/+16.4% (1m/3m) vs AVOID −3.6%/−3.1%** · live board
-  `scrapers/live_board.py` → `data/live/` (day-wise sub accumulating = Branch B) · evidence records
-  `app/records/` (102 signals + 21 families).
-- **TELEGRAM NOTIFIER ✅ LIVE (2026-06-08):** @IPO_call_bot, thrice-daily launchd job
-  (9:30/14:30/20:30) → fetch board + gap-fill/grade + ping on NEW actionable calls only. Token in
-  gitignored `tools/notify/telegram.json`; on/off + revoke notes in `notify_calls.py`. Stop:
-  `launchctl unload ~/Library/LaunchAgents/com.ipo.calls.plist`.
-- **PLAYWRIGHT = OFF by default** (company-laptop rule) — on only for app testing, then off;
-  procedure `docs/playwright_on_off.md`.
-- **App ✅ shipped + 4-iteration polished + playwright-verified:** 7-screen st.navigation terminal,
-  glossary / staleness alarm / color-coded call badges / plain-language whys / deep-links.
-  Run: `PYTHONPATH=. streamlit run app.py` (localhost-only).
-- System state: showdown-certified, refreshable (`run_refresh.py`), forward-tested on 82 never-seen
-  IPOs (score ordered real outcomes monotonically). Full history → `DONE.md`.
-- Commands: fast suite `PYTHONPATH=. pytest tests -q` (~90s) · pre-release gate
-  `SHOWDOWN=1 PYTHONPATH=. pytest tests/showdown -q` · refresh `python run_refresh.py [--apply]` ·
-  forward test `python run_forward_test.py` · app `PYTHONPATH=. streamlit run app.py`.
-- Change→tests routing is automatic each turn (`verify.py` hook + `project_map.TEST_ROUTING`).
-
-## 🚀 PHASE 2 — declared 2026-06-06 (deep-hypothesis program + app redesign)
-- **Research program: ✅ COMPLETE (2026-06-07)** — 12 families / ~33 tests run, 3-layer protocol.
-  Master docs: `deep_hypotheses_2026-06.md` + `phase2_playbooks.md`; ALL verdicts in
-  `tier1_wave1_verdicts.md` + `rules/index.md`. **Final tally: 3 graduates** (crowded_window
-  IN-SCORE 0.254 · F7 disposition contagion VALIDATED display, 3m timing · F5e capitulation flag
-  VALIDATED display, day-90 checkpoint, incremental to N14) **+ 1 thin survivor** (F10 early
-  bonus/split = exit tell, n=31) **+ 2 mechanism confirmations** (F2d congestion tax, F2c SME
-  fatigue) **+ 1 display-watch** (F6a GMP-surprise) — everything else honestly killed (~26,
-  incl. F1/F3/F4/F5a-d/f/F8/F9/F12/T2a-j). F7 fold 1/5 → NOT in score (score stays 8 components).
-  F11 serial promoters: **PARKED by owner 2026-06-07** (entity-matching = too much human
-  intervention for the payoff; don't re-open unless a clean promoter-ID source appears).
-- **App redesign (build LAST, design evolves after every run):** the simple 5-tab app must become
-  a sequenced research platform (IPO detail pages w/ event calendars + cluster context + reference
-  levels; evidence browser for hypothesis verdicts/playbooks; regime dashboard; forward-test tracker).
-  Design doc: `docs/research/app_phase2_design.md` (iterated per run; implementation = end of Phase 2).
+- **Nothing in progress — system at rest.** All 3 layers + Phase-2 research + the app + the live
+  calls engine + Telegram alerts are built and running. It now forward-tracks itself (live calls
+  grade as they mature). Next work = pick from OPEN BACKLOG. (What was built → `DONE.md`.)
+- **Running parts:** Telegram notifier LIVE (@IPO_call_bot, thrice-daily launchd; stop with
+  `launchctl unload ~/Library/LaunchAgents/com.ipo.calls.plist`) · calls ledger
+  `data/master/calls_ledger.csv` (~5,170 + accruing) · live board → `data/live/`.
+  **Playwright = OFF by default** (company-laptop rule; on-for-testing-then-off →
+  `docs/playwright_on_off.md`).
+- **Commands:** app `PYTHONPATH=. streamlit run app.py` (localhost) · calls `python run_calls.py`
+  (`--live` / `--backfill` / `--report`) · refresh `python run_refresh.py [--apply]` · forward test
+  `python run_forward_test.py` · tests `PYTHONPATH=. pytest tests -q` · gate
+  `SHOWDOWN=1 PYTHONPATH=. pytest tests/showdown -q`. Change→tests routing is automatic (verify hook).
+- **Phase 2 ✅ COMPLETE** (research + app) — full tally in `rules/index.md` + `DONE.md`; verdicts in
+  `tier1_wave1_verdicts.md`. Headline: score stays 8 components; graduates = crowded_window (in-score)
+  + F7/F5e (display); everything else honestly killed.
 
 ## 📋 OPEN BACKLOG (all optional — pick when wanted)
 - **`docs/research/future_ideas.md`** — owner "someday" sub-projects: swing-trade buy/sell calls
