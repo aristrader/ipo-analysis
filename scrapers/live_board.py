@@ -153,13 +153,18 @@ def append_gmp_history(entries, today, out_dir):
     path = os.path.join(out_dir, "gmp_history.csv")
     cols = ["fetch_date", "name", "isin", "type", "status", "open_date", "close_date",
             "price_band_high", "gmp_rs", "gmp_pct"]
+    fd = today.strftime("%Y-%m-%d")
+    # dedup on (fetch_date, ISIN-or-slug-or-name): ISIN/slug is stable; name can drift between
+    # fetches (review fix). Write a row even when GMP is MISSING so a flaky-source day is a VISIBLE
+    # null in the trajectory, not an invisible hole.
+    def _key(e):
+        return (fd, str(e.get("isin") or e.get("slug") or e["name"]))
     seen = set()
     if os.path.exists(path):
         with open(path) as f:
-            seen = {(r["fetch_date"], r["name"]) for r in csv.DictReader(f)}
-    fd = today.strftime("%Y-%m-%d")
-    new = [e for e in entries if e["status"] in ("open", "upcoming")
-           and e.get("gmp_pct") is not None and (fd, e["name"]) not in seen]
+            for r in csv.DictReader(f):
+                seen.add((r["fetch_date"], str(r.get("isin") or r.get("name"))))
+    new = [e for e in entries if e["status"] in ("open", "upcoming") and _key(e) not in seen]
     if not new:
         return 0
     write_header = not os.path.exists(path)

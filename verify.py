@@ -115,9 +115,21 @@ def regenerate_map():
         f.write(M.render_map())
 
 
+def check_schema():
+    """Schema-gate contracts (Thread B): surfaced as drift each turn (warn, never fail the hook).
+    Catches data corruption the count/path checks miss — null headline cols, enum typos,
+    ledger↔substrate referential gaps, listing-gain scale-inversion."""
+    try:
+        sys.path.insert(0, os.path.join(ROOT, "tools/checks"))
+        import schema_gate
+        return [f"schema: {v}" for v in schema_gate.check_all()]
+    except Exception as e:
+        return [f"schema gate skipped ({type(e).__name__})"]
+
+
 def fast_drift():
     """All fast checks; returns a list of drift strings (empty = clean)."""
-    return check_paths() + check_unwired() + check_invariants()
+    return check_paths() + check_unwired() + check_invariants() + check_schema()
 
 
 # ------------------------------------------------------ change -> tests routing

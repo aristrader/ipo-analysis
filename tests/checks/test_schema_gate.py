@@ -23,3 +23,13 @@ def test_gate_catches_violations(tmp_path, monkeypatch):
     assert "score" in joined and "max" in joined        # 999 > 100 caught
     assert "unique" in joined or "duplicates" in joined  # dup call_id caught
     assert "rows" in joined                              # below min-rows floor caught
+
+
+def test_gate_catches_enum_typo(tmp_path):
+    bad = tmp_path / "calls_ledger.csv"
+    pd.DataFrame([{"call_id": "x", "isin": "I1", "call_type": "APPLY",
+                   "mode": "histroical_sim",         # typo the red-team flagged
+                   "call_date": "2026-01-01", "score": 50, "alpha_1m": 0.1, "alpha_3m": 0.1,
+                   "grade_status": "final"}]).to_csv(bad, index=False)
+    v = " ".join(G._check_file_abs(str(bad), G.SCHEMAS["data/master/calls_ledger.csv"]))
+    assert "mode" in v and "unexpected" in v            # histroical_sim caught

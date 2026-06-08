@@ -234,11 +234,16 @@ def apply(skip_tests=False, with_delisting=False):
         import schema_gate
         viol = schema_gate.check_all()
         if viol:
-            print("  ⚠ SCHEMA VIOLATIONS (investigate — refresh may have drifted):")
-            for x in viol:
-                print("   -", x)
-        else:
-            print("  clean — all pinned contracts hold.")
+            # RAISE (review C2): a drifted refresh must fail LOUD, not print-and-continue.
+            # (Honest limitation: the swap already happened in steps 7-9; this catches it
+            # immediately + non-zero exit so the bad state is never silently trusted. A future
+            # refactor should gate a staging copy BEFORE the mv.)
+            msg = "SCHEMA GATE FAILED after refresh — substrate/ledger drifted:\n" + \
+                  "\n".join(f"   - {x}" for x in viol)
+            raise SystemExit(msg)
+        print("  clean — all pinned contracts hold.")
+    except SystemExit:
+        raise
     except Exception as ex:
         print(f"  schema gate skipped ({ex})")
 
