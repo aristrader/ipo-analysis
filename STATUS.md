@@ -33,6 +33,13 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
   `run_calls.py` · `run_refresh.py [--apply]` · tests `pytest tests -q` (262).
 
 ## 📋 OPEN BACKLOG (all optional — pick when wanted)
+- **B1 miss-mining DONE (2026-06-09, `docs/research/miss_mining_2026-06.md`):** per-IPO grade of all 364
+  recent (~12mo) IPOs, both error types. Confusion matrix TP68/FP59/FN52/TN158; APPLY hit-rate 44.2%,
+  mean +28.6% vs cohort median −5.1% (the ranking adds value). Seeds: **A1 banker-flag fix** (obscure-banker
+  flag = SOLE blocker on 34/52 missed winners, 17 top-quintile flips ~₹0.93M/₹1L — hypothesis CONFIRMED) +
+  a **new low-subscription FALSE-POS guard** (all 59 losers we APPLY'd were 0-flag; sub 2.2× vs 6.6× — must
+  pass 3-layer/placebo before any veto). EARLY READ (young cohort); re-run as it matures. Reproduce:
+  `PYTHONPATH=. python tools/research/miss_mining.py`.
 - **`docs/research/future_ideas.md`** — owner "someday" sub-projects: swing-trade buy/sell calls
   (exit side REJECTED — take-profit guts the right tail; needs a new validated entry signal first)
   + stock-news/catalyst feed (free BSE/NSE announcements API = first scoping step).

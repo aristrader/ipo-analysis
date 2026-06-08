@@ -225,3 +225,19 @@ tools/research/threadC_new_hypotheses.py.
 - **H-C3 same-banker pipeline congestion: REJECTED (null).** Congested (LM ≥1 IPO in prior 30d)
   −12.5% vs solo −12.7% = +0.2pp. No effect (consistent with the earlier T2g banker-collision null).
 NET: 0 new validated signals; the placebo caught H-C2 (which the falsifier alone would have passed).
+
+## B1 — two-sided miss-mining of recent-cohort calls (2026-06-09; EARLY READ, data as-of 2026-06-06)
+Per-IPO point-in-time grade of all 364 IPOs listed in the last ~12mo (analog pool = prior-only; weights
+per-month prior-only; calls.py verdict logic). Full writeup: `docs/research/miss_mining_2026-06.md`;
+grades: `data/master/review/miss_mining_grades.csv`.
+- **Confusion matrix:** TRUE_POS 68 · FALSE_POS 59 · FALSE_NEG 52 · TRUE_NEG 158 (+27 flat/not-applied).
+  APPLY hit-rate 68/154 = 44.2% (Wilson95 36.5–52.0). APPLY allottee median +7.0% / mean +28.6% / 0 wipeouts
+  vs whole-cohort median −5.1% — the ranking adds value even this young.
+- **FALSE-POS (capital loss, n=59, ≈−₹2.18M/₹1L):** a pure flag BLIND SPOT (0 flags on all 59); the tell was
+  WEAK DEMAND — sub_total_x median 2.2× vs 6.6× for winners, 32/58 <3× subscribed; SME/small-issue took the
+  worst hit (−48% median). GMP did NOT separate. → seeds a low-subscription guard (display-first, must pass 3-layer).
+- **FALSE-NEG (missed winners, n=52, ≈₹3.82M/₹1L, allottee median +50%):** obscure-banker flag is the SOLE
+  blocker on 34/52; 17 are top-quintile (would flip APPLY, ~₹0.93M recoverable); 12/34 bankers have ≥10 IPOs
+  in full data (artifact). **Obscure-banker false-negative hypothesis CONFIRMED.** → seeds A1 (banker-flag fix).
+NET: 2 backlog seeds (A1 banker-flag fix = do-first; new low-sub FALSE-POS guard = downside-first). EARLY READ —
+re-run as the cohort matures; labels are realized-to-date, not 1y/3y verdicts.

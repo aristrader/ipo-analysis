@@ -35,6 +35,8 @@ results are kept on purpose).
 | INTERACTION: low-debt × high-ROE (upside) | **VALIDATED (separate layer)** | the ONE combination that cleared super-additive + cross-regime + N≥~30/cell (N15). Does NOT feed the score yet (needs OOS-robust to graduate). |
 | INTERACTION: any risk combination | **REJECTED (cross-regime)** | the risk-side hunt found NONE — single wipeout flags are the whole story; pairs overlap or sub-add. high-debt×loss-making is dramatic but longterm-only. |
 | INTERACTION: tiny-sales × loss-making | **single-regime** | clean super-additive in longterm only; boom verdict was an artifact (loss-making-alone ≈ 0% in boom). |
+| obscure-banker flag → false-negative driver | **CONFIRMED (fix → A1)** | B1 miss-mining (`miss_mining_2026-06.md`): on 364 recent IPOs the obscure-banker flag is the SOLE blocker on 34/52 missed winners; 17 are top-quintile (flag-only veto → would flip to APPLY, ~₹0.93M/₹1L recoverable); 12/34 bankers have ≥10 IPOs in full data (pure coverage artifact — Nuvama/Motilal/Morgan Stanley mis-tagged). Frequency-based + quality-blind → seeds A1 (size/quality-aware banker flag). |
+| low-subscription veto on analog-top-quintile APPLYs | **CANDIDATE (display-first, untested)** | B1 miss-mining: all 59 FALSE-POS (losers we APPLY'd) carried 0 flags; sub_total_x median 2.2× vs 6.6× for true-pos winners; 32/58 were <3× subscribed; SME/small-issue took the −48% median hit. Proposed 2nd-order veto (weak demand AMONG analog-top-quintile names). MUST clear 3-layer + placebo (1st-order undersub-screens are dead) before any gate. |
 
 | id | name | type | status | impl | headline result |
 |---|---|---|---|---|---|

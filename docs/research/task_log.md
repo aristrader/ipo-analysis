@@ -61,3 +61,19 @@ tests: +7 in tests/app/test_ui_logic.py (rate_with_ci below/at/above floor, miss
 resolver sentinel/unknown; name_options unique-by-isin + skips missing). Suite 269p+12s (was 262+12).
 verify.py exit 0. left out: scorecard_weights.json + batch_run_2026-06-09.md were pre-existing dirty
 (not mine) — NOT committed. commit d51d7fe on auto/6hr-batch.
+
+## 2026-06-09 — B1 two-sided miss-mining of recent-cohort calls  [path: RIGHT-SIZED hypothesis/research]
+scope: extend the OOS forward test from bucket-aggregates to a PER-IPO grade for all 364 IPOs listed in
+the last ~12mo; mine BOTH error types (FALSE-POS = losers we APPLY'd; FALSE-NEG = winners we waved off);
+confirm/deny the obscure-banker false-negative hypothesis. brief: hypothesis_protocol.md + the Fujiyama
+grade pattern. build: tools/research/miss_mining.py — point-in-time (analog pool = df._ld<r._ld; weights
+derived per listing-month on prior-only data, ~30x cheaper than per-IPO with <0.01 drift verified;
+per-segment prior-pool quintiles matching calls.py:add_quintiles). HONESTY: young cohort → realized-to-date
+labels, EARLY READ, no 1y/3y; survivorship-honest (wipeout=-100%); restores committed scorecard_weights.json
+via raw-bytes finally (no artifact corruption). FINDINGS: confusion matrix TP68/FP59/FN52/TN158; APPLY
+hit-rate 44.2%, mean +28.6% vs cohort median -5.1% (ranking works). FALSE-POS = 0-flag blind spot, weak-demand
+tell (sub 2.2x vs 6.6x). FALSE-NEG = obscure-banker flag SOLE blocker on 34/52, 17 top-quintile flips
+(~Rs0.93M/Rs1L), 12/34 reputable banks mis-tagged → hypothesis CONFIRMED. deliverables: miss_mining_2026-06.md,
+miss_mining_grades.csv, miss_mining.py. recording chain: ledger + rules/index (2 new lines) + STATUS + this log.
+verify.py exit 0. seeds A1 (banker-flag fix) + new low-sub FALSE-POS guard. no commit of pre-existing dirty
+newsfeed_*.md / batch_run docs (not mine). commit on auto/6hr-batch.
