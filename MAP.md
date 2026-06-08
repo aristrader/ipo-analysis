@@ -16,6 +16,7 @@
 - `PYTHONPATH=. python run_forward_test.py` — score the never-seen post-refresh cohort (EARLY READ)
 - `PYTHONPATH=. python run_calls.py` — calls ledger: cursor walk/gap-fill (--backfill, --grade-only, --report)
 - `PYTHONPATH=. python run_portfolio.py` — ₹1L paper-portfolio sim vs Nifty (--stock ISIN = per-stock growth)
+- `PYTHONPATH=. python run_scorecard.py` — were-we-right scorecard + score-ordering (--horizon 1m/3m/1y)
 - `PYTHONPATH=. python scrapers/live_board.py` — fetch the live+upcoming IPO board -> data/live/
 
 ## Context index — working on X? open these
@@ -103,6 +104,7 @@ WEB SOURCES --scrapers/--> data/raw/ + data/reference/ + data/prices/
 - `layer3/validate.py` — cross-regime validation (boom vs 2006-19)
 - `layer3/calls.py` — CALLS ENGINE: event-anchored point-in-time calls + gap-fill walk + grading
 - `layer3/portfolio.py` — PAPER-PORTFOLIO sim (₹1L/APPLY vs Nifty) + per-stock growth-of-₹1L (3 lenses)
+- `layer3/calibration.py` — were-we-right scorecard + Wilson CIs + score-ordering reliability (no scipy)
 
 ## Rules & state
 - `rules/index.md` — navigable REGISTRY: every signal/component/strategy — status (in-score/display-only/rejected) + WHY + backtest lift/N/cross-regime. Consult before re-testing any signal.
