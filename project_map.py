@@ -106,6 +106,7 @@ LAYER3 = {
     "layer3/backtest/":   "engine + analyses + score_backtest (vs do-nothing)",
     "layer3/validate.py": "cross-regime validation (boom vs 2006-19)",
     "layer3/calls.py":    "CALLS ENGINE: event-anchored point-in-time calls + gap-fill walk + grading",
+    "layer3/portfolio.py":"PAPER-PORTFOLIO sim (₹1L/APPLY vs Nifty) + per-stock growth-of-₹1L (3 lenses)",
 }
 
 # --------------------------------------------------------------------- run it
@@ -122,6 +123,7 @@ ENTRYPOINTS = {
     "PYTHONPATH=. python run_refresh.py":        "bring the dataset to today (dry-run; --apply executes)",
     "PYTHONPATH=. python run_forward_test.py":   "score the never-seen post-refresh cohort (EARLY READ)",
     "PYTHONPATH=. python run_calls.py":          "calls ledger: cursor walk/gap-fill (--backfill, --grade-only, --report)",
+    "PYTHONPATH=. python run_portfolio.py":      "₹1L paper-portfolio sim vs Nifty (--stock ISIN = per-stock growth)",
     "PYTHONPATH=. python scrapers/live_board.py": "fetch the live+upcoming IPO board -> data/live/",
 }
 
@@ -205,6 +207,8 @@ TEST_ROUTING = [
               "SHOWDOWN=1 PYTHONPATH=. pytest tests/showdown/test_app_smoke.py -q  # browser boot"]),
     ("app.py", ["SHOWDOWN=1 PYTHONPATH=. pytest tests/showdown/test_app_smoke.py -q"]),
     ("layer3/calls.py", ["PYTHONPATH=. pytest tests/layer3/test_calls.py -q"]),
+    ("layer3/portfolio.py", ["PYTHONPATH=. pytest tests/layer3/test_portfolio.py -q"]),
+    ("run_portfolio.py", ["PYTHONPATH=. pytest tests/layer3/test_portfolio.py -q"]),
     ("run_calls.py", ["PYTHONPATH=. pytest tests/layer3/test_calls.py -q"]),
     ("scrapers/live_board.py", ["PYTHONPATH=. pytest tests/scrapers/test_live_board.py -q"]),
     ("pipeline/07_returns_summary.py",
