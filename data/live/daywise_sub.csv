@@ -3,3 +3,7 @@ fetch_date,name,isin,type,day_n,open_date,close_date,sub_qib_x,sub_nii_x,sub_ret
 2026-06-07,Genxai Analytics Ltd.,,SME,3,2026-06-05,2026-06-09,,,0.42,0.6,,
 2026-06-07,Vahh Chemicals Ltd.,,SME,4,2026-06-04,2026-06-08,,,8.68,6.48,,
 2026-06-07,UHM Vacation Ltd.,,SME,4,2026-06-04,2026-06-08,,,0.93,0.66,,
+2026-06-08,Genxai Analytics Ltd.,,SME,4,2026-06-05,2026-06-09,,,0.42,0.6,11.0,9.48
+2026-06-08,Hexagon Nutrition Ltd.,,MB,4,2026-06-05,2026-06-09,,,2.43,1.65,10.0,22.22
+2026-06-08,Vahh Chemicals Ltd. CT,,SME,5,2026-06-04,2026-06-08,,,8.68,6.48,,
+2026-06-08,UHM Vacation Ltd. CT,,SME,5,2026-06-04,2026-06-08,,,0.93,0.66,,
