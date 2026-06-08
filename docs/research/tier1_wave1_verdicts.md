@@ -196,8 +196,10 @@ tools/research/h2_pe_vs_sector_sme.py. Rich issue-time P/E vs sector median → 
 - MB: IC −0.066, −13.1pp (n=161) — same direction, confirms the prior MB-only finding.
 - CROSS-REGIME GATE FAILS: SME is boom-only (longterm SME has ~0 P/E data) — cannot validate on
   2006-19. Per "boom findings are hypotheses until they hold longterm" + evolve-only-if-robust,
-  it CANNOT enter the score. VERDICT: graduate from watchlist/blocked → DISPLAY-ONLY (both
-  segments, boom), with the honest "SME not cross-regime testable" caveat.
+  it CANNOT enter the score. PLACEBO/FALSIFIER (added 2026-06-08 to meet the 3-layer bar):
+  1000x shuffle null mean ~0.00, real IC −0.245 at p=0.019 (SURVIVES); random-feature placebo at
+  noise (~1 SD for n=68). VERDICT: graduate watchlist/blocked → DISPLAY-ONLY (both segments, boom);
+  placebo-confirmed real, but n=68 + SME-not-cross-regime-testable keep it out of the score.
 
 ## H1 accruals (Modified-Jones DCA) — DATA-GATED (parked)
 Substrate has sales/PAT/total_assets by year but NO receivables and NO cash-flow-from-ops —
