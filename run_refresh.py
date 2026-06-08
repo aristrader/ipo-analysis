@@ -228,6 +228,20 @@ def apply(skip_tests=False, with_delisting=False):
     except Exception as ex:
         print(f"  live board fetch failed (non-blocking): {ex}")
 
+    print("[11] schema gate (typed column/range/null contracts on the fresh products)")
+    try:
+        sys.path.insert(0, os.path.join(ROOT, "tools/checks"))
+        import schema_gate
+        viol = schema_gate.check_all()
+        if viol:
+            print("  ⚠ SCHEMA VIOLATIONS (investigate — refresh may have drifted):")
+            for x in viol:
+                print("   -", x)
+        else:
+            print("  clean — all pinned contracts hold.")
+    except Exception as ex:
+        print(f"  schema gate skipped ({ex})")
+
     print("\nREFRESH COMPLETE")
     m = meta()
     print(f"  rows: {m['rows']}  as_of: {m['as_of']}  snapshot: {m['archive_pointer']}")

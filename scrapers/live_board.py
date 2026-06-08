@@ -147,6 +147,31 @@ def append_daywise(entries, today, out_dir):
     return len(new)
 
 
+def append_gmp_history(entries, today, out_dir):
+    """Accumulate the pre-listing GMP TRAJECTORY for BOTH open AND upcoming issues — a dataset no
+    free tool keeps cleanly (Thread B). One row per issue per fetch-day; dedup on (fetch_date,name)."""
+    path = os.path.join(out_dir, "gmp_history.csv")
+    cols = ["fetch_date", "name", "isin", "type", "status", "open_date", "close_date",
+            "price_band_high", "gmp_rs", "gmp_pct"]
+    seen = set()
+    if os.path.exists(path):
+        with open(path) as f:
+            seen = {(r["fetch_date"], r["name"]) for r in csv.DictReader(f)}
+    fd = today.strftime("%Y-%m-%d")
+    new = [e for e in entries if e["status"] in ("open", "upcoming")
+           and e.get("gmp_pct") is not None and (fd, e["name"]) not in seen]
+    if not new:
+        return 0
+    write_header = not os.path.exists(path)
+    with open(path, "a", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
+        if write_header:
+            w.writeheader()
+        for e in new:
+            w.writerow(dict(e, fetch_date=fd))
+    return len(new)
+
+
 def fetch_board(out_dir=LIVE_DIR, today=None):
     """The full fetch. Returns the board dict (also written to out_dir/board.json)."""
     import cloudscraper
@@ -208,8 +233,9 @@ def fetch_board(out_dir=LIVE_DIR, today=None):
     with open(os.path.join(out_dir, "board.json"), "w") as f:
         json.dump(board, f, indent=1)
     n = append_daywise(entries, today, out_dir)
+    g = append_gmp_history(entries, today, out_dir)
     print(f"board: {len(board['open'])} open, {len(board['upcoming'])} upcoming; "
-          f"daywise rows appended: {n}")
+          f"daywise rows appended: {n}; gmp-history rows appended: {g}")
     return board
 
 

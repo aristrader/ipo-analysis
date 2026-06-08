@@ -79,6 +79,7 @@ WEB SOURCES --scrapers/--> data/raw/ + data/reference/ + data/prices/
 ## Live staging (`data/live/` — display/calls only, never feeds data/master)
 - `data/live/board.json` — live+upcoming IPO board snapshot (open[]/upcoming[], GMP, sub)
 - `data/live/daywise_sub.csv` — accumulating day-wise subscription dataset (the day-1 question, Branch B)
+- `data/live/gmp_history.csv` — pre-listing GMP trajectory (open+upcoming, accumulating; Thread B)
 
 ## Tree — directories
 - `scrapers/` — ONE file per data SOURCE; fetch RAW only, never transform
@@ -88,7 +89,7 @@ WEB SOURCES --scrapers/--> data/raw/ + data/reference/ + data/prices/
 - `rules/` — the rule/signal/strategy REGISTRY (index.md) — navigate logic here
 - `docs/` — sources, schema, pipeline, strategies, layer2/3, research/
 - `tests/` — layer3/ + pipeline/ + scrapers/ + data/ (substrate invariants) + showdown/ (SHOWDOWN=1 execution proofs)
-- `tools/` — side tools (drhp/ = DRHP recovery; mutation/ = test-suite mutation validation)
+- `tools/` — side tools (drhp/ = DRHP recovery; mutation/ = mutation validation; checks/ = schema gate; notify/ = telegram; refresh/; research/)
 - `report/` — generated HTML (layer3_partA.html)
 - `archive/` — superseded files + dataset backups (e.g. pre_drhp_20260601/)
 

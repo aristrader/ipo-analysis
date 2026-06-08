@@ -44,3 +44,6 @@ coverage for our ISINs (read-only, structured, no LLM) before building anything 
 Both route through the standing process: brainstorm → spec → 3-layer test where it's a
 hypothesis (docs/research/hypothesis_protocol.md) → only ship what survives. News feed = build +
 test; swing-trade = mostly a test that's already leaning "no" on current signals.
+
+## Owner discussion parking-lot
+- **Discuss Fujiyama and Park Hospital** (owner note 2026-06-08) — context to be supplied when we pick this up.

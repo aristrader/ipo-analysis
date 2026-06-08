@@ -1,0 +1,4 @@
+fetch_date,name,isin,type,status,open_date,close_date,price_band_high,gmp_rs,gmp_pct
+2026-06-08,Genxai Analytics Ltd.,,SME,open,2026-06-05,2026-06-09,116.0,11.0,9.48
+2026-06-08,Hexagon Nutrition Ltd.,,MB,open,2026-06-05,2026-06-09,45.0,10.0,22.22
+2026-06-08,Horizon Reclaim (India) Ltd.,,SME,upcoming,2026-06-12,2026-06-16,103.0,5.0,4.85
