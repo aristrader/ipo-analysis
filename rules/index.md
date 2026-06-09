@@ -231,4 +231,12 @@ results are kept on purpose).
   → selling DESTROYS value. Per-name "sell wins" 57–78% is the MEDIAN TRAP; PLACEBO: non-flagged names drift
   identically (−7.8 vs −15.4 boom) → negative median is universe-wide post-d90, not flag-specific. 22–43% false
   exits dump recoverers (Garden Reach +3050%; IRFC/Kalyan near-misses; Fujiyama max90 0.987→+44%). Confirms M1. a3_capitulation_2026-06.md.
-- **A1 banker-flag quality fix: implementer set it LIVE — PENDING adversarial review** (in progress) before accepted; if not robust → display-only. a1_banker_flag_2026-06.md.
+- **A1 banker-flag quality fix: DOWNGRADED to display-only by adversarial review — NOT live.** The quality-aware
+  PIT def (fire iff banker's ≥5 prior IPOs failed ≥40%, else abstain) is artifact-free (un-vetoes 33/34 reputable
+  missed-winners) BUT its abstention HALVES bad-outcome recall (25.4%→13.2%) — a NEW blind spot on real small-shop
+  SME wipeouts (78 bad outcomes the old rule caught, now missed). Robust only in 1 CI-separated panel (SME-boom);
+  3y OOS fold degrades. → reverted live flag to legacy freq<12 baseline (`OBSCURE_BANKER_NEW=False`); NEW code kept
+  for the A1b coverage-guard hybrid (promote only if recall does NOT regress). a1_banker_flag_2026-06.md + review.
+- **E1 accruals (total-accruals proxy TA=(PAT−CFO)/avg-assets, graded n8): DISPLAY-ONLY (longterm-only).** Bad-outcome
+  spread Q3−Q1 works LONGTERM (MB +17pp p=0.045 N=141; SME +12pp p=0.029 N=318) but NULL/inverted in boom → fails
+  cross-regime gate. Adds +8–11pp over n8 longterm, 0 boom. Full Modified-Jones DCA stays DATA-GATED (no receivables col). Not in score. e1_accruals_2026-06.md.

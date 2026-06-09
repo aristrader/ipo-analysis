@@ -148,3 +148,12 @@ PYTHONPATH=. .venv/bin/python tools/research/a1_banker_flag.py     # discriminat
 PYTHONPATH=. .venv/bin/python tools/research/a1_fold_test.py 1y    # OOS lift A/B (1y; pass 3y for 3y)
 PYTHONPATH=. .venv/bin/python -m pytest tests/layer3/test_banker_flag.py -q
 ```
+
+## ADVERSARIAL REVIEW VERDICT (2026-06-10): DOWNGRADE TO DISPLAY-ONLY — NOT LIVE
+Independent skeptic reproduced all numbers. The NEW def is genuine + look-ahead-clean BUT does not clear the live bar:
+- BIGGEST: abstention HALVES bad-outcome recall (25.4%→13.2%); 78 real small-shop SME wipeouts the old rule caught
+  are now missed (none are the reputable-artifact type the fix targets) — trades a false-veto for a worse false-negative.
+- "3/4 panels" is really 1 CI-separated (SME-boom) + 1 directional-overlap + 2 noise. "Improves OOS" overstated:
+  higher-N 3y fold (n=211) DEGRADES. Placebo survives (~11pp clean). Params SME-boom-robust but headline knife-edge.
+ACTION TAKEN: `OBSCURE_BANKER_NEW=False` (reverted live flag to legacy freq<12 baseline). NEW code retained behind the
+toggle for the A1b hybrid. Re-promotion bar: recall must NOT regress.

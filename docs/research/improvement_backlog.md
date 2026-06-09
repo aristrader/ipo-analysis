@@ -183,3 +183,17 @@ ONE channel (`🟢 CALL` / `🚨 HEALTH` / `✅ RUN`); never let ops chatter bur
   (systematic miss-mining)** as the high-value companion that finds the *next* A-items, and **A2/A3** as the
   post-listing/hold thread. C2 is a cheap, satisfying app win (engine already built).
 - When an item ships, mark it 🟢 and move the verdict to `rules/index.md`. When a new idea appears, add it here first.
+
+## NIGHT-2 follow-ups (2026-06-10)
+### A1b — banker-flag coverage-guard hybrid  ⚪ · M
+- A1's quality-aware def fixes the reputable-bank false-veto but ABSTAINS on thin-record bankers → halves wipeout
+  recall (the 78 small-shop SME wipeouts). HYBRID: use NEW (quality-aware) to EXONERATE reputable banks for the
+  display badge + as the artifact-free narrative, AND retain a frequency/size leg for THIN-RECORD SME so genuinely-
+  obscure small shops still flag. Promotion to LIVE requires recall NOT to regress (vs the legacy freq<12 baseline)
+  AND cross-regime lift. Until then the legacy flag stays live. Code is staged behind `OBSCURE_BANKER_NEW`. Source: a1_banker_flag_2026-06.md + review.
+### I3 — canonical scorecard_weights.json silently re-derived/overwritten  ⚪ · S · test/data hygiene
+- During dev/suite runs the canonical `data/master/scorecard_weights.json` gets overwritten with slightly-VARYING
+  (non-deterministic) but sane re-derivations by an as-yet-unpinned derive+save path (NOT run_calls/run_refresh —
+  they don't save; showdown run_weights is sandboxed; suspect an agent/dev derive call). Values stay sane so live
+  score is unaffected, but the CANONICAL validated weights can silently drift. FIX: pin the writer + make
+  derive_weights deterministic + protect/guard the canonical file (or assert-vs-canonical in a test). Not a live bug.

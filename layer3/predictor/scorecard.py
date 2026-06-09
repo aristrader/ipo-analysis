@@ -142,7 +142,12 @@ def liquidity(cohort):
 OBSCURE_FREQ_CUTOFF = 12      # the OLD rule's banker-IPO-count threshold (kept for A/B + ref)
 OBSCURE_MIN_PRIOR = 5         # min PIT prior IPOs by the banker before we trust its track record
 OBSCURE_BAD_RATE = 0.40       # PIT prior bad-outcome rate above which the banker is "bad"
-OBSCURE_BANKER_NEW = True     # True = quality-aware PIT (LIVE); False = legacy freq<12 (A/B only)
+OBSCURE_BANKER_NEW = False    # DOWNGRADED to legacy freq<12 by adversarial review (2026-06-10): the NEW
+                             # quality-aware PIT def is artifact-free (un-vetoes reputable banks) BUT its
+                             # abstention HALVES bad-outcome recall (25.4%->13.2%, a new blind spot on real
+                             # small-shop SME wipeouts) -> not robust enough for the LIVE score. NEW code kept
+                             # here for the A1b coverage-guard hybrid (decouple: NEW for display badge + retain
+                             # a freq/size leg for thin-record SME; promote only if recall does NOT regress).
 
 
 def _banker_prior_badrate(lm, df, asof=None):
