@@ -159,6 +159,23 @@ market-cap; nearest-mcap matching; does a lower issue-PE-vs-peers lead to catch-
   boom-only finding for those rows. Cheap, owned-data, no scraping. **NOT the live-feed parser bug** (that's fixed).
 - **Source:** `batch_run_2026-06-09.md` §"are we sure". **Touches:** substrate build step + `findings/n3_demand_skew`.
 
+## THEME J — Observability / Telegram ops-channel (owner 2026-06-09)
+Use the existing Telegram channel as the single owner-ops bus (today it carries only call alerts). Tag streams in
+ONE channel (`🟢 CALL` / `🚨 HEALTH` / `✅ RUN`); never let ops chatter bury trade signals.
+### J1. FAIL-LOUD health alerts  ⚪ · S · **do-first of this theme**
+- `notify_calls.py` runs live_board → run_calls → --live with NO error checking; a real failure (e.g. board
+  fetch raises/returns empty, schema gate raises, run errors) currently passes SILENTLY on stale data.
+- **Fix:** wrap each step; on a failure that left **no usable result** (board empty/stale, exception, gate block),
+  send a tagged `🚨 HEALTH` Telegram message. Alert on OUTCOME not every caught exception (today's DNS blip
+  RECOVERED — must NOT alert on transient-but-recovered). Throttle/dedupe (no repeat-panic). Telegram send is
+  best-effort (different host than the failing scraper). **Touches:** `tools/notify/notify_calls.py`.
+### J2. Heartbeat / last-run stamp — make SILENCE meaningful  ⚪ · S
+- Stamp each successful run ('last good run @ T'); surface a long gap on the next run (catches runs missed while
+  the Mac was off — pairs with the new RunAtLoad login-catch-up). Optional Phase-2: a daily `✅ RUN` digest
+  ('ran 3×, N calls, 0 errors'). **Honest limit:** can only alert WHEN a run fires (login-gated launchd) — true
+  24/7 dead-man's-switch needs an always-on server (out of scope for the free/local moat; documented, not built).
+### Scope: J1 first (high-value, small), then J2. Keep ONE channel + tags + throttle. NOT a code-change firehose.
+
 ---
 
 ## How to use this
