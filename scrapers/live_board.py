@@ -78,20 +78,27 @@ def parse_list_row(row, today):
 
 
 def parse_subscription_html(html):
-    """Category-wise subscription table from a chittorgarh ipo_subscription page.
-    Returns {qib, nii, retail, total} (floats, x-times) — None where absent."""
+    """Category-wise subscription TIMES (x) from a chittorgarh ipo_subscription page.
+    Returns {qib, nii, retail, total} (floats, x-times) — None where absent.
+
+    The page has MULTIPLE tables; the one we want is the subscription-times table whose rows are
+    `<td>CATEGORY</td><td>N.NNx</td>` with the FULL category labels:
+      'Qualified Institutional', 'Non Institutional', 'Retail Individual', 'Total Subscription'.
+    We anchor on those specific labels + require the trailing `x`. (The previous regex used the short
+    forms 'QIB'/'NII'/'Retail'/'Total' and accepted the first `Nx` anywhere → it matched a DIFFERENT
+    table and returned bogus values, and missed QIB/NII because the times-table labels are the long
+    forms. See docs — this was a real defect, live-feed only; the substrate uses the NSE JSON API.)"""
     out = {"qib": None, "nii": None, "retail": None, "total": None}
     txt = re.sub(r"\s+", " ", html)
-    for key, pats in (("qib", ("QIB",)), ("nii", ("NII", "Non-Institutional")),
-                      ("retail", ("Retail", "RII")), ("total", ("Total",))):
-        for p in pats:
-            m = re.search(p + r"[^<]*</td>\s*<td[^>]*>\s*([\d,.]+)x", txt, re.I)
-            if m:
-                try:
-                    out[key] = float(m.group(1).replace(",", ""))
-                except ValueError:
-                    pass
-                break
+    pats = (("qib", r"Qualified\s+Institutional"), ("nii", r"Non[\s-]?Institutional"),
+            ("retail", r"Retail\s+Individual"), ("total", r"Total\s+Subscription"))
+    for key, lab in pats:
+        m = re.search(r"<td[^>]*>\s*" + lab + r"[^<]*</td>\s*<td[^>]*>\s*([\d,.]+)\s*x", txt, re.I)
+        if m:
+            try:
+                out[key] = float(m.group(1).replace(",", ""))
+            except ValueError:
+                pass
     return out
 
 

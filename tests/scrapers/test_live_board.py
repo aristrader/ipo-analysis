@@ -35,10 +35,24 @@ def test_day_n():
 
 
 def test_parse_subscription_html():
-    html = ("<table><tr><td>QIB</td><td>2.50x</td></tr><tr><td>NII</td><td>5.10x</td></tr>"
-            "<tr><td>Retail</td><td>1.20x</td></tr><tr><td>Total</td><td>2.10x</td></tr></table>")
-    s = lb.parse_subscription_html(html)
-    assert s == {"qib": 2.5, "nii": 5.1, "retail": 1.2, "total": 2.1}
+    # Mirrors the REAL chittorgarh page: a DECOY table first (short labels QIB/Total, offered/percent
+    # columns, NO 'x') that the OLD regex wrongly matched, THEN the real subscription-TIMES table with
+    # the long labels + 'Nx'. The parser must read the times-table, not the decoy. (Regression for the
+    # live-feed bug where QIB/NII came back None and retail/total were bogus wrong-table values.)
+    decoy = ("<table><tr><td>QIB</td><td>21,54,000</td><td>24.99</td><td>45.56%</td></tr>"
+             "<tr><td>Retail</td><td>1,20,000</td><td>1.13</td><td>11%</td></tr>"
+             "<tr><td>Total</td><td>47,28,000</td><td>54.84</td><td>100%</td></tr></table>")
+    real = ("<table><tr><td>Qualified Institutional</td><td>17.58x</td></tr>"
+            "<tr><td>Non Institutional</td><td>30.91x</td></tr>"
+            "<tr><td>Retail Individual</td><td>12.59x</td></tr>"
+            "<tr class='fw-bold'><td>Total Subscription</td><td>16.99x</td></tr></table>")
+    s = lb.parse_subscription_html(decoy + real)
+    assert s == {"qib": 17.58, "nii": 30.91, "retail": 12.59, "total": 16.99}
+
+def test_parse_subscription_nii_hyphen_variant():
+    # 'Non-Institutional' (hyphen) must also match the nii label.
+    html = "<table><tr><td>Non-Institutional</td><td>4.00x</td></tr></table>"
+    assert lb.parse_subscription_html(html)["nii"] == 4.0
 
 
 def test_subscription_unknowns_stay_none():
