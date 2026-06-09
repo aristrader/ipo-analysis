@@ -17,15 +17,22 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
 ---
 
 ## 🏃 NOW
-- **⏸ AUTONOMOUS BATCH 2026-06-09 PAUSED (owner ended session) — work is on branch `auto/6hr-batch`, NOT main.**
-  Full record + resume map: `docs/research/batch_run_2026-06-09.md`. SHIPPED on branch: App C1 honesty/nav
-  polish (median-first ₹1L, n_floor scorecard, COMBINED→rank, sidebar search; walked) · B1 two-sided
-  miss-mining of 364 recent IPOs (obscure-banker = sole blocker on 34/52 missed winners; weak-sub = false-APPLY
-  tell) · News R&D (delivery-% demoted, H7 promoted). **WIP (DO NOT MERGE): A1 banker-flag fix** (`8c87960` —
-  impl in scorecard.py passes tests but needs new-tests + evolve-only-if-robust verdict + adversarial review).
-  NOT STARTED: A3 / H7 / E1 / H-MVP / A2 + a weak-subscription false-APPLY guard. Full suite 269p/12s, verify
-  exit 0, Playwright OFF. **Next session: review the branch, finish A1 (resume from its commit checklist), then
-  pick from `improvement_backlog.md`.**
+- **✅ AUTONOMOUS BATCH COMPLETE (nights of 2026-06-09 + 06-10) — all on branch `auto/6hr-batch`, main UNtouched.
+  Awaiting owner review/merge.** Full record: `docs/research/batch_run_2026-06-09.md`.
+  - **NIGHT-1 shipped:** App C1 honesty/nav polish (median-first ₹1L, n_floor scorecard, COMBINED→rank, sidebar
+    search; visually walked) · B1 two-sided miss-mining of 364 recent IPOs · News R&D (delivery-% demoted, H7 promoted).
+  - **Subscription-parser bug** (live-feed only): found + fixed + hardened (label-variant robust); 8 affected live
+    calls remediated (Genxai APPLY→NEUTRAL, etc.); substrate verified clean; blast-radius fully scoped.
+  - **NIGHT-2 analysis (7 tasks, ALL reviewed):** H7 (display-only F10-narrow) · A3 (F5e lean, confirms M1) ·
+    **A1 banker-flag → adversarial review DOWNGRADED to display-only**, reverted to legacy baseline (halved recall) ·
+    E1 accruals (display-only, longterm-only) · A2 hold-drawdown (REJECT-as-exit) · weak-sub guard (REJECT —
+    B1's tell was a young-cohort artifact) · H-MVP relative-valuation (redundant-with-n6, boom-only).
+    **NET: ZERO new live-score components — evolve-only-if-robust held; the gate caught A1's overclaim.**
+  - **Infra:** Playwright ALWAYS-ON (localhost-pinned) · notifier RunAtLoad login-catch-up · **J1/J2 Telegram
+    ops-channel** (fail-loud health alerts + heartbeat, tested, [TEST] pings delivered).
+  - **HELD for owner:** I1 (substrate 0-vs-null hygiene — do at pipeline-build level, not a post-hoc CSV edit).
+  - Full suite **300p/12s**, verify exit 0, tree clean. **Next: review/merge `auto/6hr-batch`; decide I1; backlog
+    has A1b (banker coverage-guard hybrid) + I3 (weights-file churn hygiene).**
 - **Nothing in progress — next-level program + the full multi-dimensional ENHANCEMENT pass COMPLETE
   (2026-06-08).** Every task with current work went through diverge (thinking-agent lenses) →
   converge → build → review → test. System at rest, forward-tracking itself. History → `DONE.md`.
