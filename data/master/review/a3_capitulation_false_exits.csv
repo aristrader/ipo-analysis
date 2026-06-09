@@ -1,0 +1,112 @@
+isin,name,cohort,type,max90_vs_issue,fwd_alpha_term,outcome_class
+INE149O01018,Kavita Fabrics Ltd.,longterm,SME,0.806,244.94174099046734,multibagger
+INE382Z01011,Garden Reach Shipbuilders & Engineers Ltd.,longterm,MB,0.873,30.501886962933572,multibagger
+INE209L01016,Commercial Engineers & Body Builders Co.Ltd.,longterm,MB,0.124,18.340960990278354,multibagger
+INE945H01021,Vishal Retail Ltd.,longterm,MB,0.617,15.339955882362839,multibagger
+INE0OJ401014,Bizotic Commercial Ltd.,boom,SME,0.928,13.613120903353858,multibagger
+INE940H01022,House of Pearl Fashions Ltd.,longterm,MB,0.426,10.86237357754679,multibagger
+INE702H01018,Jagjanani Textiles Ltd.,longterm,MB,0.034,10.715629682259141,loser
+INE030P01017,Alacrity Securities Ltd.,longterm,SME,0.673,9.246886707738918,multibagger
+INE0IGO01011,Destiny Logistics & Infra Ltd.,boom,SME,0.938,8.900642866592348,multibagger
+INE0SGC01015,M.V.K.Agro Food Product Ltd.,boom,SME,0.657,7.059434539782757,multibagger
+INE0O6A01019,ITCONS E-Solutions Ltd.,boom,SME,0.995,6.380220963982699,multibagger
+INE061F01013,Fortis Healthcare Ltd.,longterm,MB,0.941,6.291126119866503,multibagger
+INE0MOT01016,Kandarp Digi Smart BPO Ltd.,boom,SME,0.903,6.145478701630866,multibagger
+INE191O01010,Lakhotia Polyesters (India) Ltd.,longterm,SME,0.749,5.634318720055225,multibagger
+INE704H01022,Cinemax India Ltd.,longterm,MB,0.144,4.94366893145631,flat
+INE333Y01017,MRC Exim Ltd.,longterm,SME,0.729,4.3346870938501505,multibagger
+INE284S01014,S.J.S.Enterprises Ltd.,boom,MB,0.95,4.233796739512595,multibagger
+INE0NA501011,Divine Hira Jewellers Ltd.,boom,SME,0.903,4.178206013816079,multibagger
+INE303R01014,Kalyan Jewellers India Ltd.,boom,MB,0.992,4.114096265562019,multibagger
+INE821Y01011,Ratnabhumi Developers Ltd.,longterm,SME,0.975,3.7523158001540233,multibagger
+INE255X01014,MSTC Ltd.,longterm,MB,0.948,3.742551922179597,multibagger
+INE517M01028,Polysil Irrigation Systems Ltd.,boom,SME,0.955,3.482969410691674,multibagger
+INE510W01014,Inox Green Energy Services Ltd.,boom,MB,0.958,3.0556780182469945,multibagger
+INE548Z01017,Lagnam Spintex Ltd.,longterm,SME,0.904,2.906756065821897,winner
+INE0Y4801011,Excellent Wires & Packaging Ltd.,boom,SME,0.866,2.6409948593290555,winner
+INE053F01010,Indian Railway Finance Corp.Ltd.,boom,MB,0.996,2.416421027385306,multibagger
+INE0KKN01029,Rhetan TMT Ltd.,boom,SME,0.215,2.2329103432864383,loser
+INE01BL01012,Northern Spirits Ltd.,longterm,SME,0.952,2.154946686955039,multibagger
+INE688I01017,Future Capital Holdings Ltd.,longterm,MB,0.283,2.042109834717695,loser
+INE0H5O01029,Windlas Biotech Ltd.,boom,MB,0.873,1.7233542287205321,winner
+INE590L01019,Vaswani Industries Ltd.,longterm,MB,0.375,1.7195813090861334,winner
+INE0T8T01010,Accretion Pharmaceuticals Ltd.,boom,SME,0.785,1.4591304815525943,winner
+INE138Y01010,KFin Technologies Ltd.,boom,MB,0.979,1.3698917623240112,multibagger
+INE0D7801012,MRP Agro Ltd.,boom,SME,0.997,1.2910827743248134,multibagger
+INE0L4V01013,Vilin Bio Med Ltd.,boom,SME,0.903,1.255691618103288,winner
+INE741K01010,CreditAccess Grameen Ltd.,longterm,MB,0.964,1.1180879938593926,multibagger
+INE819Y01015,Rithwik Facility Management Services Ltd.,longterm,SME,0.937,1.0646093260357117,multibagger
+INE0K1401020,Achyut Healthcare Ltd.,boom,SME,0.283,1.0438653424810904,loser
+INE00RQ01019,Mindpool Technologies Ltd.,longterm,SME,0.987,1.0377793668791204,multibagger
+INE104Y01012,Manav infra projects Ltd.,longterm,SME,0.81,1.019379379476327,winner
+INE290S01011,CarTrade Tech Ltd.,boom,MB,0.976,0.9383804999215721,winner
+INE1IBY01019,Essex Marine Ltd.,boom,SME,0.722,0.8906959205307203,flat
+INE622W01025,ACME Solar Holdings Ltd.,boom,MB,0.972,0.8698804150791557,winner
+INE0Q2L01013,Davin Sons Retail Ltd.,boom,SME,0.798,0.8489007273427063,loser
+INE0BTM01013,SecMark Consultancy Ltd.,boom,SME,0.896,0.8026029346894425,flat
+INE336T01010,Husys Consulting Ltd.,longterm,SME,0.87,0.787510927791828,winner
+INE870Z01015,Innovators Facade Systems Ltd.,longterm,SME,0.998,0.747128025623192,winner
+INE0PA601017,Vivaa Tradecom Ltd.,boom,SME,0.845,0.6938102516512912,flat
+INE404A01024,Aditya Birla Sun Life AMC Ltd.,boom,MB,0.979,0.6928570599365029,winner
+INE760Y01011,Ashoka Metcast Ltd.,longterm,SME,0.64,0.6426895681147151,loser
+INE982J01020,One 97 Communications Ltd.,boom,MB,0.837,0.6221348771809436,loser
+INE0CWK01019,Adishakti Loha & Ispat Ltd.,boom,SME,0.985,0.6043933436060871,flat
+INE087J01028,Mandhana Industries Ltd.,longterm,MB,0.347,0.5820867114954311,loser
+INE1IIQ01028,Solvex Edibles Ltd.,boom,SME,0.852,0.5337105955950124,loser
+INE763G01038,ICICI Securities Ltd.,longterm,MB,0.857,0.5252812139154601,winner
+INE019J01013,Microsec Financial Services Ltd.,longterm,MB,0.843,0.4984646628701488,multibagger
+INE0ZN101029,Rachit Prints Ltd.,boom,SME,0.968,0.49440804436005725,winner
+INE145Y01023,Shish Industries Ltd.,longterm,SME,0.457,0.48868010631326897,loser
+INE12UR01024,Fujiyama Power Systems Ltd.,boom,MB,0.987,0.48711519780459156,winner
+INE12P101018,Chiraharit Ltd.,boom,SME,0.722,0.4504454351374565,loser
+INE0VYX01018,Nukleus Office Solutions Ltd.,boom,SME,0.957,0.40775295089637353,flat
+INE0TQE01026,Glottis Ltd.,boom,MB,0.649,0.40570243294258035,loser
+INE075I01017,Healthcare Global Enterprises Ltd.,longterm,MB,0.951,0.3880171887479209,multibagger
+INE495S01016,HPL Electric & Power Ltd.,longterm,MB,0.933,0.3791388857685094,winner
+INE0G1V01016,Amanaya Ventures Ltd.,boom,SME,0.822,0.35328620546011846,flat
+INE860Y01019,Lex Nimble Solutions Ltd.,longterm,SME,0.923,0.3213468491963387,winner
+INE778I01024,Aishwarya Telecom Ltd.,longterm,MB,0.132,0.313292403616372,loser
+INE1CCX01012,Gurunanak Agriculture India Ltd.,boom,SME,0.722,0.2922620683606888,loser
+INE085001019,WeWork India Management Ltd.,boom,MB,1.0,0.28399980105009326,flat
+INE00YJ01010,Jaro Institute of Technology Management & Research Ltd.,boom,MB,0.884,0.27498508193307336,loser
+INE0B9A01018,Bonlon Industries Ltd.,boom,SME,0.946,0.2711864240526649,winner
+INE0V7W01012,Carraro India Ltd.,boom,MB,0.94,0.24321554198317208,loser
+INE0R8Q01018,Om Metallogic Ltd.,boom,SME,0.939,0.242890489159167,loser
+INE16IQ01014,Super Iron Foundry Ltd.,boom,SME,0.903,0.21716613664526285,loser
+INE0RU901015,Mangal Compusolution Ltd.,boom,SME,0.993,0.20505203943170447,flat
+INE833Q01012,Mittal Sections Ltd.,boom,SME,0.722,0.20085934649897053,loser
+INE0D8001018,Shining Tools Ltd.,boom,SME,0.824,0.19997586030448067,loser
+INE0Y0E01012,Icon Facilitators Ltd.,boom,SME,0.893,0.19553747356660678,loser
+INE0XCV01014,Aten Papers & Foam Ltd.,boom,SME,0.846,0.18608830433228962,loser
+INE965W01036,BMW Ventures Ltd.,boom,MB,0.729,0.16085321556550303,loser
+INE0SQH01013,Bikewo Green Tech Ltd.,boom,SME,0.724,0.15636403664683973,loser
+INE652V01016,Ganesh Consumer Products Ltd.,boom,MB,0.949,0.14976835190588644,loser
+INE09A801015,Galaxy Medicare Ltd.,boom,SME,0.903,0.14543694418957875,loser
+INE0R7R01018,Italian Edibles Ltd.,boom,SME,0.891,0.1345463637791513,loser
+INE16NZ01023,Orkla India Ltd.,boom,MB,0.969,0.11724083858036694,flat
+INE615T01017,Ganga Pharmaceuticals Ltd.,longterm,SME,0.8,0.10554593073805862,flat
+INE0QZR01017,Methodhub Software Ltd.,boom,SME,0.85,0.10504870036372638,loser
+INE753K01015,Emmbi Polyarns Ltd.,longterm,MB,0.652,0.09328449601277455,winner
+INE0M1F01011,Premium Plast Ltd.,boom,SME,0.989,0.07240705969510586,loser
+INE154801018,Pushpa Jewellers Ltd.,boom,SME,0.989,0.07039533817144972,flat
+INE1DKT01011,Riddhi Display Equipments Ltd.,boom,SME,0.722,0.06826856140587845,loser
+INE1EUB01016,Shlokka Dyes Ltd.,boom,SME,0.893,0.0647329359477471,loser
+INE0V6F01027,Hyundai Motor India Ltd.,boom,MB,0.978,0.06422171253421682,flat
+INE0RTI01017,Oval Projects Engineering Ltd.,boom,SME,0.951,0.06295035285245854,loser
+INE15MX01014,Abril Paper Tech Ltd.,boom,SME,0.841,0.05420172289983227,loser
+INE111601014,Icodex Publishing Solutions Ltd.,boom,SME,0.766,0.046177817292910706,loser
+INE0G5901015,EPACK Durable Ltd.,boom,MB,0.94,0.0459014453897848,flat
+INE06XZ01023,Gem Aromatics Ltd.,boom,MB,0.931,0.035006642779322195,loser
+INE0XZB01017,Krupalu Metals Ltd.,boom,SME,0.853,0.03380682759205422,loser
+INE15WN01014,Repono Ltd.,boom,SME,0.995,0.03352744844654276,loser
+INE1DLF01018,Shivashrit Foods Ltd.,boom,SME,0.998,0.03195635684344278,flat
+INE010601016,Entero Healthcare Solutions Ltd.,boom,MB,0.96,0.026795107185757727,flat
+INE0SJA01013,VMS TMT Ltd.,boom,MB,0.956,0.02435949819534422,loser
+INE413X01035,7NR Retail Ltd.,longterm,SME,0.703,0.022230547667628553,loser
+INE1NQ501012,Neptune Logitek Ltd.,boom,SME,0.723,0.017202227482142063,loser
+INE1V4601019,Shri Kanha Stainless Ltd.,boom,SME,0.883,0.013281931594431584,loser
+INE0RUY01012,Astron Multigrain Ltd.,boom,SME,0.722,0.01301718284131459,loser
+INE0YKW01013,Forge Auto International Ltd.,boom,SME,0.981,0.011700422036044156,flat
+INE0SVO01019,Siddhi Cotspin Ltd.,boom,SME,0.722,0.010723760765217305,loser
+INE1BZC01019,Om Freight Forwarders Ltd.,boom,MB,0.755,0.009788917527824847,loser
+INE0VOV01021,Dev Accelerator Ltd.,boom,MB,0.997,0.0036824782132408584,loser
