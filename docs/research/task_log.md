@@ -176,3 +176,44 @@ less-negative MEDIAN among underwater, same family as F5e/persistence). FILES:
 docs/research/a2_hold_drawdown_2026-06.md, tools/research/a2_hold_drawdown.py,
 data/master/review/a2_hold_drawdown.csv. Did NOT touch rules/index.md/scorecard.py/scorecard_weights.json/
 substrate (parallel agents own them) — proposed registry line in the writeup for the controller.
+
+## H-MVP — relative valuation via earlier-IPO peers (2026-06-10, branch auto/6hr-batch)
+VERDICT: REDUNDANT-WITH-n6 / display-only — no new score role. Theme H P0+P1 owned-data MVP (peers =
+earlier IPOs same industry/sector within a size band, valued with point-in-time data we own; did NOT
+build the P4 all-stocks panel). P0 hypotheses: (a) RE-RATING cheap-vs-earlier-IPO-peers catches up /
+rich fades; (b) PEER-PROXIMITY dose. METHOD: PIT peer-matcher — for each IPO, peers = STRICTLY-earlier-
+listed same-segment same-bucket IPOs with issue_size in a factor band + valid issue-time P/E
+(=issue_price/eps_ttm fallback pe_ratio; loss-makers excluded); pe_pctl = fraction of peers cheaper;
+maturity-gated fwd alpha vs Nifty; Wilson CI + bootstrap median CI + 1000x label-shuffle placebo; 3
+configs (fine-industry/×3 band; broad_sector/×3; broad_sector/no-band) to separate weak-signal from
+sparse-peers. TWO STRUCTURAL WALLS: (1) P/E coverage ZERO in longterm → valuation re-rating is
+structurally boom-only, cross-regime gate uncleardable (same wall as n6/E2); (2) fine-industry matching
+catastrophically sparse (13 boom-MB / 0 boom-SME with >=5 prior same-industry peers) → only broad_sector
+populates = exactly n6's bucket. RESULT: in the one well-populated placebo-clean cell (boom/MB N=94, 1y)
+cheap +14.7% vs rich -23.2% alpha = +37.9pp spread, IC -0.345, placebo p=0.000, bootstrap CIs separate
+([+1,+36] vs [-33,-11]) — same sign/magnitude as n6's MB lean. SME directional (-0.40 IC) but thin
+(N<=26), sign-unstable under the band; 3y untestable (prior-peer pool fills late in boom). DOSE rejected
+(hi vs lo peer-count spreads equal). INCREMENTAL-vs-sector: IC peer -0.345 vs sector-rel -0.309, residual
+-0.166 — non-zero but mechanical (peer pool IS the sector pool since fine-industry matching is empty);
+NOT meaningfully incremental over n6, at large coverage cost. Recommend folding into n6 lineage, NOT a
+new component; do NOT advance to P4 on valuation grounds. FILES: docs/research/hmvp_relative_valuation_
+2026-06.md, tools/research/hmvp_relative_valuation.py, data/master/review/hmvp_relative_valuation_review.csv.
+Did NOT touch rules/index.md / scorecard.py / scorecard_weights.json / substrate (parallel agents own
+them) — proposed registry line in the writeup for the controller.
+
+## B1 — weak-subscription false-APPLY guard (2026-06-10, branch auto/6hr-batch)
+VERDICT: REJECT (does not survive cross-regime + placebo). THE QUESTION: among would-be-APPLY IPOs
+(top-segment-quintile AND 0 wipeout flags), does adding a low-subscription veto (sub_total_x<3x) cut
+false-APPLYs (losers we'd APPLY) WITHOUT killing winners, cross-regime? This is the conditional 2nd-order
+angle (a guard ON the APPLY gate / the analog-vs-own-demand disagreement), distinct from the dead 1st-order
+undersubscribed->bad screen (already REJECTED in rules/index.md). METHOD: PIT (mirrors miss_mining/calls) —
+per-listing-month prior-only weights + per-segment quintiles, would-be-APPLY=top-q+0-flags, 437 APPLYs
+(2020+ matured; longterm 2006-19 sub coverage ~9% -> NOT TESTABLE). Split LOW<3x vs ADEQUATE>=3x; bad-rate
+Wilson95, fwd alpha_1y/ret_1y, winners-lost-if-vetoed; 2000x shuffle-sub placebo; threshold sweep; no scipy.
+RESULT: placebo FAILS both cohorts (gap +7.7pp p=0.137 all / +5.6pp p=0.304 boom = noise); cross-regime
+INVERTS (boom-matured low-sub APPLYs OUTPERFORM: a1y +23.8% vs +1.2%, equal win-rate) — B1's tell was a
+young 2024-25 cohort artifact (unmatured winners); veto dumps winners ~1:1 with losers (32 winners @ median
++119% to avoid 33 losers, the fat right tail). Redundant with already-rejected first-order screen. FILES:
+docs/research/weaksub_guard_2026-06.md, tools/research/weaksub_guard.py,
+data/master/review/weaksub_guard_apply_pool.csv. Did NOT touch rules/index.md/scorecard.py/
+scorecard_weights.json (parallel agents own them) — proposed registry line in the writeup for the controller.
