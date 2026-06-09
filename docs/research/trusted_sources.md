@@ -11,8 +11,8 @@ the owner explicitly deems a new source safe — never silently.
   There is deliberately **NO blanket `WebFetch`** allow.
 - **WebSearch** is allowed (returns search snippets only; it does not fetch arbitrary sites with our
   identity, and downloads nothing) — low risk, and needed for research.
-- **Playwright** is OFF by default + localhost-origin-pinned + run_code_unsafe/file_upload/
-  network_request DENIED (`docs/playwright_on_off.md`).
+- **Playwright** is ALWAYS ON (owner 2026-06-10) but localhost-origin-pinned + isolated + headless +
+  run_code_unsafe/file_upload/network_request DENIED → no external-network surface (`docs/playwright_on_off.md`).
 - **No downloads:** web tools READ + parse to text only. Scrapers write ONLY parsed data into
   `data/`. Do not curl/wget files from external sites.
 

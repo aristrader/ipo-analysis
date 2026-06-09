@@ -92,3 +92,10 @@ Added <key>RunAtLoad</key><true/> to tools/notify/com.ipo.calls.plist → fires 
 login. Safe: the pipeline is idempotent gap-fill + .notified dedup (no-op + no re-spam when nothing missed).
 plutil -lint OK; reinstalled to ~/Library/LaunchAgents + reloaded (unload→load); verified loaded (PID assigned,
 RunAtLoad fired one bg catch-up run). Repo plist committed. Behaviour documented in batch_run_2026-06-09.md.
+
+## 2026-06-10 — Policy reversal: Playwright ALWAYS ON (localhost-pinned)  [path: HOTFIX/config]
+Owner deemed always-on safe given the localhost origin-pin (+ isolated/headless/version-lock + dangerous-tools
+denied = no external-network surface). Flipped settings.local.json → enabledMcpjsonServers. Updated the policy
+in CLAUDE.md, STATUS.md, trusted_sources.md, playwright_on_off.md (OFF-by-default → ALWAYS-ON). Flagged + documented
+the ONE residual the pin doesn't cover (leftover Chrome-for-Testing → OS notifications) with the one-time OS
+mitigation (Notifications → Chrome for Testing → OFF). verify clean.

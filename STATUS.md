@@ -36,8 +36,8 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
   — 3 NEW hypotheses generated + tested with placebo, all rejected (0 new signals = honest).
 - **Future builds (get their own divergence pass WHEN built, not before):** news-feed (scoped
   VIABLE), broader app redesign. Both in `docs/research/future_ideas.md` / NEXT.md.
-- **Running parts:** Telegram notifier (thrice-daily) · calls ledger ~5,170 · schema gate in the
-  per-turn verify hook + refresh · Playwright OFF by default.
+- **Running parts:** Telegram notifier (thrice-daily + RunAtLoad login-catch-up) · calls ledger ~5,170 · schema
+  gate in the per-turn verify hook + refresh · Playwright ALWAYS ON, localhost-pinned (owner 2026-06-10).
 - **Commands:** app `streamlit run app.py` · `run_portfolio.py` · `run_scorecard.py` ·
   `run_calls.py` · `run_refresh.py [--apply]` · tests `pytest tests -q` (262).
 
