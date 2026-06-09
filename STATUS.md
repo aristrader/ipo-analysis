@@ -17,6 +17,15 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
 ---
 
 ## 🏃 NOW
+- **⏸ AUTONOMOUS BATCH 2026-06-09 PAUSED (owner ended session) — work is on branch `auto/6hr-batch`, NOT main.**
+  Full record + resume map: `docs/research/batch_run_2026-06-09.md`. SHIPPED on branch: App C1 honesty/nav
+  polish (median-first ₹1L, n_floor scorecard, COMBINED→rank, sidebar search; walked) · B1 two-sided
+  miss-mining of 364 recent IPOs (obscure-banker = sole blocker on 34/52 missed winners; weak-sub = false-APPLY
+  tell) · News R&D (delivery-% demoted, H7 promoted). **WIP (DO NOT MERGE): A1 banker-flag fix** (`8c87960` —
+  impl in scorecard.py passes tests but needs new-tests + evolve-only-if-robust verdict + adversarial review).
+  NOT STARTED: A3 / H7 / E1 / H-MVP / A2 + a weak-subscription false-APPLY guard. Full suite 269p/12s, verify
+  exit 0, Playwright OFF. **Next session: review the branch, finish A1 (resume from its commit checklist), then
+  pick from `improvement_backlog.md`.**
 - **Nothing in progress — next-level program + the full multi-dimensional ENHANCEMENT pass COMPLETE
   (2026-06-08).** Every task with current work went through diverge (thinking-agent lenses) →
   converge → build → review → test. System at rest, forward-tracking itself. History → `DONE.md`.
