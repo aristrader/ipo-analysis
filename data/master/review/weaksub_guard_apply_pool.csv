@@ -1,0 +1,438 @@
+isin,name,type,listing_date,year,sub_total_x,issue_size_cr,score,quintile,n_flags,allottee_ret,alpha_1y,ret_1y,outcome_class,is_bad,is_winner
+INE068V01023,Gland Pharma Ltd.,MB,2020-11-20,2020,2.06,6480.0,44.3,5,0,0.5153,0.4972,1.279,winner,False,True
+INE063P01018,Equitas Small Finance Bank Ltd.,MB,2020-11-02,2020,,518.0,46.0,5,0,1.2409,0.3801,0.9015,multibagger,False,True
+INE495P01020,Mrs.Bectors Food Specialities Ltd.,MB,2020-12-24,2020,198.02,541.0,39.2,5,0,1.9896,-0.5997,0.3142,multibagger,False,True
+INE07T201019,Restaurant Brands Asia Ltd.,MB,2020-12-14,2020,,810.0,36.1,5,0,0.1452,-0.1499,1.6017,flat,False,False
+INE01BK01022,Antony Waste Handling Cell Ltd.,MB,2021-01-01,2021,0.5,300.0,32.3,5,0,0.4319,-0.4338,0.0398,winner,False,True
+INE053F01010,Indian Railway Finance Corp.Ltd.,MB,2021-01-29,2021,3.49,4633.0,41.3,5,0,2.7104,-0.3249,-0.1135,multibagger,False,True
+INE0DD101019,RailTel Corp.of India Ltd.,MB,2021-02-26,2021,42.39,819.0,54.9,5,0,2.3324,-0.3625,0.0122,multibagger,False,True
+INE00IN01015,Stove Kraft Ltd.,MB,2021-02-05,2021,18.03,413.0,35.3,5,0,0.6864,0.7754,1.2577,winner,False,True
+INE481N01025,Home First Finance Co.India Ltd.,MB,2021-02-03,2021,26.66,1154.0,47.8,5,0,1.0828,0.2723,0.4865,multibagger,False,True
+INE09VQ01012,Indigo Paints Ltd.,MB,2021-02-02,2021,117.02,1169.0,38.2,5,0,-0.3596,-0.5741,0.3383,loser,True,False
+INE428Q01011,Suryoday Small Finance Bank Ltd.,MB,2021-03-26,2021,2.37,582.0,43.4,5,0,-0.4366,-0.8165,-0.6667,loser,True,False
+INE303R01014,Kalyan Jewellers India Ltd.,MB,2021-03-26,2021,,1175.0,27.7,5,0,3.2741,-0.3898,-0.3149,multibagger,False,True
+INE00LO01017,Craftsman Automation Ltd.,MB,2021-03-25,2021,3.81,824.0,27.7,5,0,5.0839,0.2658,0.4098,multibagger,False,True
+INE07O001026,Easy Trip Planners Ltd.,MB,2021-03-19,2021,159.33,510.0,24.2,5,0,0.1534,1.8513,2.3706,flat,False,False
+INE670K01029,Macrotech Developers Ltd.,MB,2021-04-19,2021,1.36,2500.0,44.6,5,0,2.6809,1.059,1.1443,multibagger,False,True
+INE021O01019,Dodla Dairy Ltd.,MB,2021-06-28,2021,45.61,520.0,70.9,5,0,1.5636,-0.2115,0.1269,multibagger,False,True
+INE967H01025,Krishna Institute of Medical Sciences Ltd.,MB,2021-06-28,2021,3.86,2144.0,60.7,5,0,3.7815,0.1565,0.4003,multibagger,False,True
+INE810G01011,Shyam Metalics & Energy Ltd.,MB,2021-06-24,2021,,909.0,49.0,5,0,2.2722,-0.2327,-0.0639,multibagger,False,True
+INE073K01018,Sona BLW Precision Forgings Ltd.,MB,2021-06-24,2021,2.28,5550.0,58.3,5,0,1.0698,0.6117,0.9933,multibagger,False,True
+INE201P01022,G R Infraprojects Ltd.,MB,2021-07-19,2021,102.58,962.0,45.5,5,0,0.0613,-0.3232,0.4906,flat,False,False
+INE852O01025,Aptus Value Housing Finance India Ltd.,MB,2021-08-24,2021,17.2,2780.0,52.8,5,0,-0.2484,-0.0868,-0.0446,loser,True,False
+INE290S01011,CarTrade Tech Ltd.,MB,2021-08-20,2021,20.29,2999.0,50.0,5,0,0.2104,-0.6573,-0.6083,winner,False,True
+INE0H5O01029,Windlas Biotech Ltd.,MB,2021-08-16,2021,22.47,402.0,38.1,5,0,0.7699,-0.551,-0.5351,winner,False,True
+INE645S01024,Rolex Rings Ltd.,MB,2021-08-09,2021,,731.0,51.6,5,0,0.5372,0.4678,1.0043,winner,False,True
+INE03Q201024,Glenmark Life Sciences Ltd.,MB,2021-08-06,2021,,1514.0,42.8,5,0,0.434,-0.4694,-0.3744,winner,False,True
+INE00D001018,Rex Pipes & Cables Industries Ltd.,SME,2021-08-10,2021,,6.0,55.2,5,0,5.7019,0.3278,0.4481,multibagger,False,True
+INE953O01021,Sansera Engineering Ltd.,MB,2021-09-24,2021,,1283.0,56.2,5,0,2.9585,-0.1082,-0.0512,multibagger,False,True
+INE00FF01025,Acutaas Chemicals Ltd.,MB,2021-09-14,2021,,570.0,76.6,5,0,9.2705,-0.1845,0.696,multibagger,False,True
+INE043W01024,Vijaya Diagnostic Centre Ltd.,MB,2021-09-14,2021,4.54,1894.0,49.6,5,0,1.5846,-0.3835,-0.2381,multibagger,False,True
+INE0GAO01018,Prevest Denpro Ltd.,SME,2021-09-27,2021,,27.0,73.4,5,0,3.5833,1.186,3.8256,multibagger,False,True
+INE404A01024,Aditya Birla Sun Life AMC Ltd.,MB,2021-10-11,2021,,2768.0,54.2,5,0,0.473,-0.3166,-0.3813,winner,False,True
+INE045601023,Paras Defence & Space Technologies Ltd.,MB,2021-10-01,2021,,171.0,46.3,5,0,9.9731,0.442,2.9874,multibagger,False,True
+INE0GN101014,D.K.Enterprises Global Ltd.,SME,2021-10-22,2021,,8.0,59.4,5,0,0.6038,0.1383,0.2,winner,False,True
+INE0CWK01019,Adishakti Loha & Ispat Ltd.,SME,2021-10-13,2021,,2.0,50.8,5,0,0.0273,-0.1868,-0.2227,flat,False,False
+INE0I2F01015,Promax Power Ltd.,SME,2021-10-12,2021,,2.0,73.4,5,0,0.449,1.0872,1.355,winner,False,True
+INE0HLJ01013,Shri Venkatesh Refineries Ltd.,SME,2021-10-11,2021,,12.0,59.1,5,0,5.2475,4.7258,4.97,multibagger,False,True
+INE02KC01010,Jainam Ferro Alloys (I) Ltd.,SME,2021-10-08,2021,,20.0,70.2,5,0,2.5857,1.2787,1.3457,multibagger,False,True
+INE144Z01023,Tarsons Products Ltd.,MB,2021-11-26,2021,,1024.0,51.0,5,0,-0.6817,-0.2411,0.0461,loser,True,False
+INE0I7C01011,Latent View Analytics Ltd.,MB,2021-11-23,2021,326.49,600.0,36.1,5,0,0.5868,-0.2783,0.8987,winner,False,True
+INE284S01014,S.J.S.Enterprises Ltd.,MB,2021-11-15,2021,1.59,800.0,52.0,5,0,2.697,-0.0777,-0.1165,multibagger,False,True
+INE388Y01029,FSN E-Commerce Ventures Ltd.,MB,2021-11-10,2021,81.78,5350.0,59.1,5,0,0.3989,-0.4886,0.004,winner,False,True
+INE0J0B01017,Kotyark Industries Ltd.,SME,2021-11-02,2021,,11.0,67.7,5,0,7.0892,9.6414,9.1196,multibagger,False,True
+INE925R01014,CMS Info Systems Ltd.,MB,2021-12-31,2021,1.95,1100.0,65.7,5,0,0.4157,0.2688,0.447,winner,False,True
+INE07RO01027,Supriya Lifescience Ltd.,MB,2021-12-28,2021,71.51,700.0,50.8,5,0,2.4597,-0.4553,-0.1495,multibagger,False,True
+INE0IX101010,Data Patterns (India) Ltd.,MB,2021-12-24,2021,119.62,588.0,51.7,5,0,6.201,0.2969,0.7348,multibagger,False,True
+INE804L01022,Medplus Health Services Ltd.,MB,2021-12-23,2021,52.59,1398.0,56.8,5,0,0.0788,-0.4768,-0.2026,flat,False,False
+INE317I01021,Metro Brands Ltd.,MB,2021-12-22,2021,3.64,1368.0,64.2,5,0,1.0468,0.6202,0.6668,multibagger,False,True
+INE0BV301023,C.E.Info systems Ltd.,MB,2021-12-21,2021,154.71,1040.0,56.5,5,0,-0.1739,-0.2849,0.0797,flat,True,False
+INE463V01026,Anand Rathi Wealth Ltd.,MB,2021-12-14,2021,20.7,659.0,53.3,5,0,11.7513,0.1047,0.2538,multibagger,False,True
+INE011K01018,Tega Industries Ltd.,MB,2021-12-13,2021,,619.0,47.4,5,0,3.0788,-0.2134,0.3752,multibagger,False,True
+INE0JJS01014,Clara Industries Ltd.,SME,2021-12-29,2021,,3.0,76.2,5,0,-0.1279,3.0512,3.2035,flat,True,False
+INE0I7D01019,Foce India Ltd.,SME,2021-12-28,2021,,29.0,55.8,5,0,5.2933,2.0676,2.1289,multibagger,False,True
+INE0JM501013,Nupur Recyclers Ltd.,SME,2021-12-23,2021,,34.0,73.2,5,0,2.8841,2.6307,3.7575,multibagger,False,True
+INE07L501010,DMR Hydroengineering & Infrastructures Ltd.,SME,2021-12-07,2021,,2.0,59.5,5,0,0.6333,0.3099,0.7381,winner,False,True
+INE583L01014,AGS Transact Technologies Ltd.,MB,2022-01-31,2022,7.79,680.0,56.1,5,0,-1.0,-0.6581,-0.6683,wipeout,True,False
+INE0DRT01018,Fabino Life Sciences Ltd.,SME,2022-01-13,2022,,3.0,55.6,5,0,-0.4358,-0.1892,-0.1097,loser,True,False
+INE08PH01015,AB Cotspin India Ltd.,SME,2022-01-11,2022,,10.0,60.5,5,0,4.8331,0.2217,0.4,multibagger,False,True
+INE825V01034,Vedant Fashions Ltd.,MB,2022-02-16,2022,2.57,3149.0,58.9,5,0,-0.5319,0.2722,0.4159,loser,True,False
+INE699H01024,AWL Agri Business Ltd.,MB,2022-02-08,2022,0.26,3600.0,55.7,5,0,-0.1788,0.5262,0.8209,flat,True,False
+INE0KAF01018,Quality RO Industries Ltd.,SME,2022-02-09,2022,,3.0,77.4,5,0,0.2659,0.9596,1.0892,winner,False,True
+INE0GGO01015,Krishival Foods Ltd.,SME,2022-03-31,2022,,19.0,65.5,5,0,9.8324,5.1477,6.3203,multibagger,False,True
+INE0KNW01016,KN Agri Resources Ltd.,SME,2022-03-28,2022,,49.0,65.5,5,0,1.6179,-0.2836,0.364,multibagger,False,True
+INE0KQ001017,Bhatia Colour Chem Ltd.,SME,2022-03-24,2022,,40.0,75.2,5,0,-0.442,0.1209,-0.42,loser,True,False
+INE0HS001028,Cool Caps Industries Ltd.,SME,2022-03-24,2022,,12.0,56.3,5,0,5.0395,12.3534,12.2145,multibagger,False,True
+INE0JW501011,SP Refractories Ltd.,SME,2022-03-22,2022,,5.0,63.3,5,0,-0.0811,0.0011,-0.0072,flat,True,False
+INE619A01035,Patanjali Foods Ltd.,MB,2022-04-08,2022,,,59.7,5,0,0.9405,0.0551,0.4865,winner,False,True
+INE0K5F01014,Dhyaani Tile & Marblez Ltd.,SME,2022-04-12,2022,,2.0,59.0,5,0,-1.0,1.6244,1.8373,wipeout,True,False
+INE0J5601015,Krishna Defence & Allied Industries Ltd.,SME,2022-04-06,2022,,12.0,59.3,5,0,28.8692,0.7774,2.5654,multibagger,False,True
+INE04TZ01018,Ethos Ltd.,MB,2022-05-30,2022,1.04,402.0,52.1,5,0,1.696,0.3962,0.3854,multibagger,False,True
+INE0JA001018,Venus Pipes & Tubes Ltd.,MB,2022-05-24,2022,16.31,165.0,52.5,5,0,3.4448,1.6016,1.9735,multibagger,False,True
+INE00F201020,Prudent Corporate Advisory Services Ltd.,MB,2022-05-20,2022,1.22,428.0,57.2,5,0,3.2808,0.4052,0.3591,multibagger,False,True
+INE0J1Y01017,Life Insurance Corp.of India,MB,2022-05-17,2022,2.95,20557.0,58.0,5,0,-0.1572,-0.467,-0.3994,flat,True,False
+INE961O01016,Rainbow Children's Medicare Ltd.,MB,2022-05-10,2022,12.43,1581.0,68.6,5,0,1.4784,0.6665,0.4904,multibagger,False,True
+INE278Y01022,Campus Activewear Ltd.,MB,2022-05-09,2022,51.75,1400.0,65.8,5,0,-0.1675,-0.161,0.245,flat,True,False
+INE0JZA01018,Sonu Infratech Ltd.,SME,2022-05-13,2022,,9.0,56.8,5,0,0.275,0.1427,0.3611,winner,False,True
+INE0G1L01017,Le Merite Exports Ltd.,SME,2022-05-09,2022,,48.0,58.6,5,0,1.67,-0.3789,-0.2213,multibagger,False,True
+INE0J2K01014,Global Longlife Hospital & Research Ltd.,SME,2022-05-04,2022,,49.0,58.6,5,0,-1.0,-0.7548,-0.6714,wipeout,True,False
+INE0BWX01014,Aether Industries Ltd.,MB,2022-06-03,2022,6.26,808.0,47.5,5,0,0.7729,0.0677,0.4297,winner,False,True
+INE01QM01018,eMudhra Ltd.,MB,2022-06-01,2022,2.72,413.0,68.2,5,0,0.8201,0.5658,0.6973,winner,False,True
+INE0LQQ01019,Fidel Softech Ltd.,SME,2022-06-10,2022,102.89,13.0,63.1,5,0,3.0541,0.0629,1.027,multibagger,False,True
+INE00WS01056,Globesecure Technologies Ltd.,SME,2022-06-02,2022,14.17,10.0,63.1,5,0,-0.2966,1.2883,2.0741,loser,True,False
+INE02OY01016,Rachana Infrastructure Ltd.,SME,2022-06-10,2022,1.21,76.0,56.4,5,0,-0.7204,0.0906,0.2689,loser,True,False
+INE0L3501015,Healthy Life Agritec Ltd.,SME,2022-07-26,2022,8.21,10.0,66.5,5,0,-0.341,-0.5468,-0.39,loser,True,False
+INE0KR801019,Jayant Infratech Ltd.,SME,2022-07-13,2022,4.0,6.0,76.8,5,0,-0.1866,-0.293,0.0993,flat,True,False
+INE0JYY01011,Mangalam Worldwide Ltd.,SME,2022-07-11,2022,1.33,66.0,78.9,5,0,2.7505,0.0689,0.2871,multibagger,False,True
+INE0J1E01027,KCK Industries Ltd.,SME,2022-07-08,2022,5.91,5.0,66.5,5,0,1.2417,-0.2985,-0.2183,multibagger,False,True
+INE0DYJ01015,Syrma SGS Technology Ltd.,MB,2022-08-26,2022,32.61,840.0,63.0,5,0,4.5764,0.6347,1.4443,multibagger,False,True
+INE0CBM01019,Upsurge Seeds of Agriculture Ltd.,SME,2022-08-11,2022,80.5,23.0,67.9,5,0,0.1429,1.5189,2.2083,flat,False,False
+INE0JUS01029,Harsha Engineers International Ltd.,MB,2022-09-26,2022,74.7,755.0,58.0,5,0,0.2268,-0.2898,0.2765,winner,False,True
+INE668A01016,Tamilnad Mercantile Bank Ltd.,MB,2022-09-15,2022,2.86,808.0,59.0,5,0,0.4625,-0.0585,0.0703,winner,False,True
+INE0JS101016,Dreamfolks Services Ltd.,MB,2022-09-06,2022,56.68,562.0,62.4,5,0,-0.7756,0.0007,0.5765,loser,True,False
+INE0DZ101013,Sabar Flex India Ltd.,SME,2022-09-21,2022,85.47,4.0,81.6,5,0,-0.5136,0.049,1.3318,loser,True,False
+INE0G1D01014,Mega Flex Plastics Ltd.,SME,2022-09-19,2022,46.31,11.0,74.3,5,0,2.1738,-0.4018,0.05,multibagger,False,True
+INE0MEG01014,Viviana Power Tech Ltd.,SME,2022-09-16,2022,85.2,9.0,71.8,5,0,24.8182,0.4725,1.7909,multibagger,False,True
+INE0I0T01010,Virtuoso Optoelectronics Ltd.,SME,2022-09-15,2022,96.83,30.0,60.7,5,0,5.2679,1.0278,3.4455,multibagger,False,True
+INE0LA901015,JFL Life Sciences Ltd.,SME,2022-09-08,2022,8.93,18.0,58.2,5,0,-0.5082,-0.3316,-0.1475,loser,True,False
+INE0MC401013,Dipna Pharmachem Ltd.,SME,2022-09-08,2022,2.77,15.0,58.2,5,0,-0.8105,-0.3456,-0.325,loser,True,False
+INE0KKN01029,Rhetan TMT Ltd.,SME,2022-09-05,2022,1.47,56.0,65.6,5,0,-0.572,5.6386,-0.8554,loser,True,False
+INE02YR01019,Electronics Mart India Ltd.,MB,2022-10-17,2022,29.43,500.0,52.4,5,0,0.8888,0.8473,1.8525,winner,False,True
+INE0DGC01025,Swastik Pipe Ltd.,SME,2022-10-12,2022,1.35,63.0,59.0,5,0,-0.778,0.2322,-0.038,loser,True,False
+INE0N0J01014,Concord Control Systems Ltd.,SME,2022-10-10,2022,202.41,8.0,78.6,5,0,53.1827,4.0573,9.9091,multibagger,False,True
+INE0MKO01015,Reetech International Cargo & Courier Ltd.,SME,2022-10-10,2022,,12.0,54.9,5,0,-0.7833,-0.4841,-0.4762,loser,True,False
+INE0LGX01024,Insolation Energy Ltd.,SME,2022-10-10,2022,320.7,22.0,81.8,5,0,32.1842,3.3116,10.3684,multibagger,False,True
+INE263M01029,Keystone Realtors Ltd.,MB,2022-11-24,2022,2.01,635.0,57.3,5,0,-0.2787,-0.1072,-0.008,loser,True,False
+INE918Z01012,Kaynes Technology India Ltd.,MB,2022-11-22,2022,34.16,858.0,65.7,5,0,4.3182,2.5247,3.2439,multibagger,False,True
+INE128S01021,Five-Star Business Finance Ltd.,MB,2022-11-21,2022,0.7,1589.0,63.7,5,0,-0.0787,0.5506,0.6954,flat,True,False
+INE128X01021,Archean Chemical Industries Ltd.,MB,2022-11-21,2022,,1462.0,51.0,5,0,0.2735,0.0566,0.29,winner,False,True
+INE474Q01031,Global Health Ltd.,MB,2022-11-16,2022,9.58,2206.0,78.2,5,0,2.6905,1.0658,1.6443,multibagger,False,True
+INE139R01012,Fusion Micro Finance Ltd.,MB,2022-11-15,2022,2.95,1104.0,60.9,5,0,-0.5323,0.7694,0.6227,loser,True,False
+INE0KL801015,DCX Systems Ltd.,MB,2022-11-11,2022,,500.0,57.9,5,0,-0.0635,-0.1603,0.3386,flat,True,False
+INE0L4K01016,Vital Chemtech Ltd.,SME,2022-11-14,2022,79.33,65.0,74.3,5,0,-0.4431,-0.5403,-0.1594,loser,True,False
+INE050401020,Elin Electronics Ltd.,MB,2022-12-30,2022,3.09,475.0,49.8,5,0,-0.5594,-0.5508,-0.4014,loser,True,False
+INE138Y01010,KFin Technologies Ltd.,MB,2022-12-29,2022,2.59,1500.0,63.1,5,0,1.3739,0.132,0.3189,multibagger,False,True
+INE559R01029,Landmark Cars Ltd.,MB,2022-12-23,2022,3.06,552.0,49.9,5,0,-0.1734,0.5709,0.6034,flat,True,False
+INE00ZE01026,Abans Holdings Ltd.,MB,2022-12-23,2022,,346.0,50.9,5,0,-0.2554,0.2519,0.1609,loser,True,False
+INE142Q01026,Sula Vineyards Ltd.,MB,2022-12-22,2022,2.33,960.0,70.9,5,0,-0.5632,0.2431,0.3182,loser,True,False
+INE244O01017,Uniparts India Ltd.,MB,2022-12-12,2022,25.32,836.0,63.4,5,0,0.0987,-0.1112,-0.0469,flat,False,False
+INE0JHH01011,Dollex Agrotech Ltd.,SME,2022-12-28,2022,1.87,24.0,68.9,5,0,-0.0971,0.33,0.3786,flat,True,False
+INE0M2X01012,All E Technologies Ltd.,SME,2022-12-21,2022,,48.0,67.3,5,0,0.5906,0.8386,1.9261,winner,False,True
+INE0L2Y01011,Arham Technologies Ltd.,SME,2022-12-15,2022,442.79,10.0,57.0,5,0,5.7595,2.3102,4.2131,multibagger,False,True
+INE029Q01017,Baheti Recycling Industries Ltd.,SME,2022-12-08,2022,347.53,12.0,67.3,5,0,12.7756,0.6056,3.3889,multibagger,False,True
+INE0N6V01016,AMBO Agritec Ltd.,SME,2022-12-02,2022,336.75,10.0,68.9,5,0,-0.507,-0.4321,-0.085,loser,True,False
+INE855R01021,Radiant Cash Management Services Ltd.,MB,2023-01-04,2023,0.53,257.0,60.5,5,0,-0.5936,-0.3458,-0.0463,loser,True,False
+INE082101010,Aristo Bio-Tech & Lifescience Ltd.,SME,2023-01-30,2023,,13.0,72.2,5,0,0.3785,-0.2647,0.1139,winner,False,True
+INE0BSU01018,Eastern Logica Infoway Ltd.,SME,2023-01-17,2023,1.74,17.0,63.8,5,0,-0.2889,3.019,4.3096,loser,True,False
+INE06PV01010,Chaman Metallics Ltd.,SME,2023-01-16,2023,207.88,24.0,75.8,5,0,1.7908,0.2076,1.4461,multibagger,False,True
+INE0MLA01012,Agarwal Float Glass India Ltd.,SME,2023-02-23,2023,5.2,9.0,67.9,5,0,-0.2845,0.1163,0.4524,loser,True,False
+INE0MM001019,Shera Energy Ltd.,SME,2023-02-17,2023,47.4,35.0,60.7,5,0,1.7754,1.2256,1.8974,multibagger,False,True
+INE0O4V01010,Earthstahl & Alloys Ltd.,SME,2023-02-08,2023,235.1,13.0,61.3,5,0,-0.55,-0.2628,0.375,loser,True,False
+INE0LVM01018,Gayatri Rubbers & Chemicals Ltd.,SME,2023-02-07,2023,,5.0,68.3,5,0,16.33,4.1911,5.65,multibagger,False,True
+INE753U01022,Divgi TorqTransfer Systems Ltd.,MB,2023-03-14,2023,0.0,412.0,60.2,5,0,0.3232,-0.1394,0.1809,winner,False,True
+INE0OMI01019,Bright Outdoor Media Ltd.,SME,2023-03-24,2023,1.3,55.0,60.7,5,0,1.5685,1.7509,2.2955,multibagger,False,True
+INE0O1M01015,Quality Foils (India) Ltd.,SME,2023-03-24,2023,364.4,5.0,74.7,5,0,-0.2325,-0.2472,0.7208,loser,True,False
+INE0NLJ01011,Labelkraft Technologies Ltd.,SME,2023-03-23,2023,53.4,5.0,71.3,5,0,0.0545,-0.1289,0.1818,flat,False,False
+INE00TV01023,Sudarshan Pharma Industries Ltd.,SME,2023-03-22,2023,1.1,50.0,75.2,5,0,4.599,-0.0278,0.2556,multibagger,False,True
+INE0O7R01011,Systango Technologies Ltd.,SME,2023-03-15,2023,65.0,35.0,68.2,5,0,1.5672,1.7476,2.49,multibagger,False,True
+INE0NPI01014,Srivasavi Adhesive Tapes Ltd.,SME,2023-03-09,2023,7.8,15.0,58.7,5,0,0.2488,1.9236,2.2805,winner,False,True
+INE0OLH01013,Macfos Ltd.,SME,2023-03-01,2023,193.9,24.0,58.0,5,0,11.0672,1.563,3.8373,multibagger,False,True
+INE0O4601016,Sealmatic India Ltd.,SME,2023-03-01,2023,16.6,56.0,63.8,5,0,0.7056,2.0207,2.4444,winner,False,True
+INE0LCL01028,Avalon Technologies Ltd.,MB,2023-04-18,2023,2.3,865.0,65.5,5,0,2.6878,0.0421,0.1833,multibagger,False,True
+INE0O6N01012,A G Universal Ltd.,SME,2023-04-24,2023,3.4,9.0,64.5,5,0,0.065,-0.244,0.0183,flat,False,False
+INE0MRE01011,Infinium Pharmachem Ltd.,SME,2023-04-17,2023,1.8,25.0,55.9,5,0,2.0741,1.8209,2.363,multibagger,False,True
+INE0O8901016,Exhicon Events Media Solutions Ltd.,SME,2023-04-17,2023,2.0,21.0,59.5,5,0,5.8906,3.2135,3.6875,multibagger,False,True
+INE0O2D01012,Sotac Pharmaceuticals Ltd.,SME,2023-04-13,2023,1.6,33.0,52.8,5,0,0.0,-0.2528,0.0991,flat,True,False
+INE0O1T01010,Maiden Forgings Ltd.,SME,2023-04-06,2023,1.2,24.0,57.2,5,0,0.2841,0.408,0.6032,winner,False,True
+INE634S01028,Mankind Pharma Ltd.,MB,2023-05-09,2023,15.3,4326.0,77.4,5,0,1.1631,0.3136,1.021,multibagger,False,True
+INE0O5T01011,Remus Pharmaceuticals Ltd.,SME,2023-05-29,2023,57.1,48.0,57.0,5,0,3.5774,2.7893,4.8771,multibagger,False,True
+INE0NR701018,Krishca Strapping Solutions Ltd.,SME,2023-05-26,2023,336.6,18.0,56.8,5,0,2.3333,0.7276,3.1157,multibagger,False,True
+INE0JWV01011,De Neers Tools Ltd.,SME,2023-05-11,2023,15.0,23.0,58.5,5,0,1.1891,0.0411,1.2277,multibagger,False,True
+INE0K4D01020,Quicktouch Technologies Ltd.,SME,2023-05-02,2023,107.3,9.0,69.1,5,0,-0.5893,0.7316,2.1311,loser,True,False
+INE0OB201016,Aatmaj Healthcare Ltd.,SME,2023-06-30,2023,33.6,38.0,62.1,5,0,-0.6833,-0.7578,-0.5625,loser,True,False
+INE0ORA01015,Cosmic CRF Ltd.,SME,2023-06-30,2023,1.2,57.0,67.4,5,0,2.3815,5.2524,3.943,multibagger,False,True
+INE0O0201019,Urban Enviro Waste Management Ltd.,SME,2023-06-22,2023,255.5,11.0,54.3,5,0,1.66,0.8689,2.14,multibagger,False,True
+INE0NXA01015,Comrade Appliances Ltd.,SME,2023-06-13,2023,77.3,12.0,64.6,5,0,-0.3519,-0.2336,0.713,loser,True,False
+INE0NJ001013,CFF Fluid Control Ltd.,SME,2023-06-12,2023,0.0,86.0,57.0,5,0,3.4658,1.678,2.2615,multibagger,False,True
+INE0GYI01028,Hemant Surgical Industries Ltd.,SME,2023-06-05,2023,139.7,25.0,58.7,5,0,3.2017,-0.4685,0.4133,multibagger,False,True
+INE0ONE01016,Proventus Agrocom Ltd.,SME,2023-06-05,2023,2.6,70.0,52.2,5,0,1.0117,-0.1098,0.1933,multibagger,False,True
+INE0N5801013,Vasa Denticity Ltd.,SME,2023-06-02,2023,68.0,54.0,58.7,5,0,2.4008,1.1897,3.1633,multibagger,False,True
+INE0NT901020,Netweb Technologies India Ltd.,MB,2023-07-27,2023,90.6,631.0,68.9,5,0,8.332,1.3598,3.776,multibagger,False,True
+INE735W01017,Utkarsh Small Finance Bank Ltd.,MB,2023-07-21,2023,110.8,500.0,62.5,5,0,-0.4976,-0.2007,1.0,loser,True,False
+INE602W01027,Senco Gold Ltd.,MB,2023-07-14,2023,0.0,405.0,59.2,5,0,1.2129,1.4193,2.4159,multibagger,False,True
+INE055S01018,Cyient DLM Ltd.,MB,2023-07-10,2023,71.3,592.0,59.9,5,0,0.7109,0.5612,1.8942,winner,False,True
+INE349Y01013,ideaForge Technology Ltd.,MB,2023-07-07,2023,106.1,567.0,61.6,5,0,0.4062,-0.616,0.2376,winner,False,True
+INE0ECP01024,HMA Agro Industries Ltd.,MB,2023-07-04,2023,0.0,480.0,55.3,5,0,-0.5968,-0.3362,-0.0826,loser,True,False
+INE0DN001027,Asarfi Hospital Ltd.,SME,2023-07-26,2023,195.1,27.0,61.0,5,0,2.9404,-0.5912,0.2823,multibagger,False,True
+INE0PS501019,Global Pet Industries Ltd.,SME,2023-07-10,2023,4.3,13.0,63.5,5,0,2.2255,0.5473,0.95,multibagger,False,True
+INE0O1S01012,Magson Retail & Distribution Ltd.,SME,2023-07-06,2023,6.7,14.0,54.8,5,0,1.6154,-0.2345,0.4915,multibagger,False,True
+INE024001021,Aeroflex Industries Ltd.,MB,2023-08-31,2023,97.1,351.0,62.6,5,0,2.8866,-0.2836,0.5526,multibagger,False,True
+INE0MIS01010,Pyramid Technoplast Ltd.,MB,2023-08-29,2023,18.3,153.0,48.4,5,0,-0.0231,-0.3202,0.0434,flat,False,False
+INE395N01027,TVS Supply Chain Solutions Ltd.,MB,2023-08-23,2023,0.0,880.0,57.0,5,0,-0.3418,-0.3042,-0.0084,loser,True,False
+INE338H01029,Concord Biotech Ltd.,MB,2023-08-18,2023,24.9,1551.0,70.1,5,0,0.6328,0.4625,1.2054,winner,False,True
+INE423Y01016,SBFC Finance Ltd.,MB,2023-08-16,2023,0.0,1025.0,61.4,5,0,0.6309,-0.3227,0.4844,winner,False,True
+INE013V01011,Shelter Pharma Ltd.,SME,2023-08-23,2023,15.3,16.0,64.7,5,0,-0.2802,0.0114,0.2862,loser,True,False
+INE0ON201012,Srivari Spices & Foods Ltd.,SME,2023-08-18,2023,450.0,9.0,64.9,5,0,3.1845,1.4551,5.9155,multibagger,False,True
+INE0OSJ01014,Vinsys IT Services India Ltd.,SME,2023-08-11,2023,89.0,50.0,66.7,5,0,2.1461,0.4576,1.9102,multibagger,False,True
+INE0PPS01018,Zeal Global Services Ltd.,SME,2023-08-09,2023,4.1,36.0,56.3,5,0,-0.3301,0.0058,0.8495,loser,True,False
+INE0OMF01015,Shri Techtex Ltd.,SME,2023-08-04,2023,148.4,45.0,56.8,5,0,0.1148,-0.4032,0.2057,flat,False,False
+INE08S201019,Yasons Chemex Care Ltd.,SME,2023-08-03,2023,59.6,21.0,55.7,5,0,-0.7588,-0.5729,-0.41,loser,True,False
+INE438K01021,Sai Silks (Kalamandir) Ltd.,MB,2023-09-27,2023,4.5,1201.0,48.3,5,0,-0.5205,-0.5981,-0.193,loser,True,False
+INE07K301024,Zaggle Prepaid Ocean Services Ltd.,MB,2023-09-22,2023,12.9,563.0,53.0,5,0,0.2245,1.4886,1.703,winner,False,True
+INE777K01022,R R Kabel Ltd.,MB,2023-09-20,2023,18.7,1964.0,67.6,5,0,1.1482,0.1221,0.6196,multibagger,False,True
+INE0OV601013,EMS Ltd.,MB,2023-09-21,2023,0.0,321.0,52.7,5,0,0.3784,1.6127,2.8723,winner,False,True
+INE682M01012,Jupiter Life Line Hospitals Ltd.,MB,2023-09-18,2023,64.8,869.0,54.3,5,0,0.7789,0.012,0.8654,winner,False,True
+INE0N2P01017,Rishabh Instruments Ltd.,MB,2023-09-11,2023,31.7,491.0,70.2,5,0,0.162,-0.4132,-0.1568,flat,False,False
+INE0PIC01017,Hi-Green Carbon Ltd.,SME,2023-09-28,2023,168.9,53.0,60.0,5,0,0.686,1.5855,2.1547,winner,False,True
+INE0QP001012,Marco Cables & Conductors Ltd.,SME,2023-09-28,2023,30.9,19.0,53.4,5,0,-0.0792,0.6369,1.2306,flat,True,False
+INE0P6701019,Madhusudan Masala Ltd.,SME,2023-09-26,2023,444.3,24.0,64.9,5,0,1.215,0.4189,1.8357,multibagger,False,True
+INE0LXA01019,Holmarc Opto-Mechatronics Ltd.,SME,2023-09-25,2023,85.8,11.0,77.4,5,0,1.7388,0.418,1.9737,multibagger,False,True
+INE0OWX01025,Kundan Edifice Ltd.,SME,2023-09-26,2023,42.3,25.0,54.2,5,0,-0.1209,0.684,0.7363,flat,True,False
+INE0PT101017,Chavda Infra Ltd.,SME,2023-09-25,2023,180.1,43.0,52.0,5,0,0.3846,0.8602,1.8977,winner,False,True
+INE0PRF01011,Unihealth Consultancy Ltd.,SME,2023-09-21,2023,18.2,57.0,57.1,5,0,2.4682,-0.1662,0.1489,multibagger,False,True
+INE0N5H01017,Jiwanram Sheoduttrai Industries Ltd.,SME,2023-09-18,2023,113.0,17.0,56.9,5,0,-0.7739,-0.5818,-0.1565,loser,True,False
+INE0OCC01013,Basilic Fly Studio Ltd.,SME,2023-09-11,2023,358.6,66.0,57.5,5,0,1.0758,0.895,5.299,multibagger,False,True
+INE0O7A01017,Pramara Promotions Ltd.,SME,2023-09-13,2023,25.7,15.0,56.3,5,0,1.3841,0.2185,1.7444,multibagger,False,True
+INE0PCL01011,Saroja Pharma Industries India Ltd.,SME,2023-09-13,2023,8.9,9.0,63.7,5,0,-0.5958,-0.4152,-0.3095,loser,True,False
+INE0QBU01012,C P S Shapers Ltd.,SME,2023-09-07,2023,254.0,11.0,59.9,5,0,4.4054,-0.6667,0.5149,multibagger,False,True
+INE0OIP01012,Mono Pharmacare Ltd.,SME,2023-09-07,2023,13.4,15.0,55.3,5,0,-0.5911,-0.0857,0.2768,loser,True,False
+INE0JWS01017,Valiant Laboratories Ltd.,MB,2023-10-06,2023,29.8,152.0,54.7,5,0,-0.4775,-0.5796,-0.157,loser,True,False
+INE880J01026,JSW Infrastructure Ltd.,MB,2023-10-03,2023,0.0,2800.0,55.0,5,0,1.337,0.8752,1.9029,multibagger,False,True
+INE851I01011,Updater Services Ltd.,MB,2023-10-04,2023,3.0,640.0,49.3,5,0,-0.3565,-0.0066,0.2232,loser,True,False
+INE0P4T01013,Arvind & Co.Shipping Agencies Ltd.,SME,2023-10-25,2023,385.0,15.0,52.5,5,0,-0.2689,0.2859,1.5111,loser,True,False
+INE0PQ001012,Vishnusurya Projects & Infra Ltd.,SME,2023-10-10,2023,44.1,50.0,54.9,5,0,1.3059,2.4449,3.186,multibagger,False,True
+INE460Q01014,Sharp Chucks & Machines Ltd.,SME,2023-10-12,2023,54.2,17.0,59.9,5,0,0.3966,0.5835,1.069,winner,False,True
+INE0PXD01014,Plada Infotech Services Ltd.,SME,2023-10-13,2023,57.9,12.0,62.4,5,0,-0.749,-0.7287,-0.375,loser,True,False
+INE0MGA01012,Karnika Industries Ltd.,SME,2023-10-12,2023,3.1,25.0,55.8,5,0,7.6184,1.9228,2.4605,multibagger,False,True
+INE0QG301017,Canarys Automations Ltd.,SME,2023-10-11,2023,9.9,47.0,56.7,5,0,-0.3548,-0.2158,0.3935,loser,True,False
+INE0M7501019,City Crops Agro Ltd.,SME,2023-10-10,2023,3.5,15.0,53.8,5,0,-0.1232,-0.2499,0.036,flat,False,False
+INE0QJ901011,Digikore Studios Ltd.,SME,2023-10-04,2023,281.6,30.0,55.4,5,0,-0.3368,0.125,1.3611,loser,True,False
+INE0PSK01027,Saakshi Medtech & Panels Ltd.,SME,2023-10-03,2023,91.7,45.0,54.3,5,0,1.5381,0.2191,1.434,multibagger,False,True
+INE0PW501021,Newjaisa Technologies Ltd.,SME,2023-10-05,2023,6.9,40.0,64.6,5,0,-0.6543,0.0853,1.0564,loser,True,False
+INE0MIO01019,Organic Recycling Systems Ltd.,SME,2023-10-06,2023,1.6,50.0,64.1,5,0,0.1742,-0.1344,0.285,flat,False,False
+INE00C401011,Mangalam Alloys Ltd.,SME,2023-10-04,2023,5.6,55.0,52.8,5,0,-0.5988,-0.757,-0.485,loser,True,False
+INE142M01025,Tata Technologies Ltd.,MB,2023-11-30,2023,69.4,3043.0,71.1,5,0,0.5424,-0.4838,0.877,winner,False,True
+INE717W01049,Gandhar Oil Refinery (India) Ltd.,MB,2023-11-30,2023,65.6,501.0,44.8,5,0,-0.0489,-0.4591,0.3188,flat,True,False
+INE007N01010,Fedbank Financial Services Ltd.,MB,2023-11-30,2023,2.2,1092.0,63.3,5,0,0.147,-0.3802,-0.1801,flat,False,False
+INE491J01022,ASK Automotive Ltd.,MB,2023-11-15,2023,1.4,834.0,61.3,5,0,0.5555,0.1442,0.4738,winner,False,True
+INE004A01022,Protean eGov Technologies Ltd.,MB,2023-11-13,2023,23.9,490.0,78.3,5,0,-0.2215,0.8594,1.3277,loser,True,False
+INE818W01011,ESAF Small Finance Bank Ltd.,MB,2023-11-10,2023,0.0,463.0,52.1,5,0,-0.537,-0.594,-0.253,loser,True,False
+INE0LMW01024,Cello World Ltd.,MB,2023-11-06,2023,41.7,1900.0,62.9,5,0,-0.4103,-0.2097,0.2677,loser,True,False
+INE0KBH01020,Blue Jet Healthcare Ltd.,MB,2023-11-01,2023,8.0,840.0,55.0,5,0,0.3444,-0.131,0.3665,winner,False,True
+INE0N6U01018,Kalyani Cast Tech Ltd.,SME,2023-11-17,2023,208.6,30.0,57.8,5,0,3.1694,0.5239,2.4245,multibagger,False,True
+INE0PDJ01013,ROX Hi-Tech Ltd.,SME,2023-11-16,2023,214.4,54.0,69.9,5,0,-0.5994,-0.4622,0.244,loser,True,False
+INE0PUC01020,SAR Televenture Ltd.,SME,2023-11-08,2023,288.1,25.0,54.2,5,0,1.3691,2.0661,5.6364,multibagger,False,True
+INE0NVI01020,Transteel Seating Technologies Ltd.,SME,2023-11-06,2023,49.2,50.0,62.3,5,0,0.7043,-0.5844,-0.1164,winner,False,True
+INE0PLQ01011,Maitreya Medicare Ltd.,SME,2023-11-07,2023,446.8,15.0,53.4,5,0,0.8402,1.0336,3.3232,winner,False,True
+INE0DUT01020,Innova Captab Ltd.,MB,2023-12-29,2023,55.3,570.0,55.0,5,0,0.9364,0.901,1.4131,winner,False,True
+INE02IJ01035,Azad Engineering Ltd.,MB,2023-12-28,2023,83.0,740.0,65.5,5,0,3.2132,1.3876,2.2078,multibagger,False,True
+INE330T01021,Happy Forgings Ltd.,MB,2023-12-27,2023,82.6,1009.0,66.6,5,0,0.6329,-0.1317,0.1704,winner,False,True
+INE220Q01020,Credo Brands Marketing Ltd.,MB,2023-12-27,2023,51.9,550.0,50.0,5,0,-0.6798,-0.5372,-0.3761,loser,True,False
+INE046W01019,Muthoot Microfin Ltd.,MB,2023-12-26,2023,12.3,960.0,61.8,5,0,-0.375,-0.4257,-0.3773,loser,True,False
+INE616N01034,Inox India Ltd.,MB,2023-12-21,2023,61.3,1459.0,74.1,5,0,1.3921,0.0525,0.6552,multibagger,False,True
+INE922K01024,India Shelter Finance Corp.Ltd.,MB,2023-12-20,2023,38.6,1200.0,60.7,5,0,0.5349,0.1602,0.4282,winner,False,True
+INE321T01012,DOMS Industries Ltd.,MB,2023-12-20,2023,99.3,1200.0,63.8,5,0,1.6495,1.0773,2.7092,multibagger,False,True
+INE00Y201027,Flair Writing Industries Ltd.,MB,2023-12-01,2023,49.3,593.0,61.4,5,0,-0.061,-0.566,-0.0735,flat,True,False
+INE0QD201012,Trident Techlabs Ltd.,SME,2023-12-29,2023,763.3,16.0,68.6,5,0,3.7557,12.1546,38.0129,multibagger,False,True
+INE0PSJ01011,Sahara Maritime Ltd.,SME,2023-12-26,2023,22.7,7.0,73.0,5,0,-0.7741,-0.3938,-0.2858,loser,True,False
+INE0Q2Z01013,Benchmark Computer Solutions Ltd.,SME,2023-12-21,2023,484.5,12.0,58.9,5,0,-0.3609,-0.4873,-0.2727,loser,True,False
+INE0P1P01017,Marinetrans India Ltd.,SME,2023-12-08,2023,33.0,11.0,58.8,5,0,-0.3885,-0.4978,-0.1904,loser,True,False
+INE518X01015,Net Avenue Technologies Ltd.,SME,2023-12-08,2023,511.2,10.0,58.9,5,0,-0.7778,-0.8272,-0.225,loser,True,False
+INE0RDM01013,Deepak Chemtex Ltd.,SME,2023-12-06,2023,403.0,23.0,59.3,5,0,0.075,-0.3925,0.5713,flat,False,False
+INE0G5901015,EPACK Durable Ltd.,MB,2024-01-30,2024,16.8,640.0,59.7,5,0,-0.0204,1.1475,1.0072,flat,True,False
+INE456Z01021,Medi Assist Healthcare Services Ltd.,MB,2024-01-23,2024,16.3,1172.0,62.0,5,0,-0.1453,0.1536,0.381,flat,True,False
+INE0RCG01017,Kay Cee Energy & Infra Ltd.,SME,2024-01-05,2024,1052.5,16.0,59.6,5,0,0.7296,0.3753,5.5657,winner,False,True
+INE0RNZ01014,Shri Balaji Valve Components Ltd.,SME,2024-01-03,2024,276.4,22.0,55.4,5,0,0.08,-0.3377,0.569,flat,False,False
+INE0R3501012,HRH Next Services Ltd.,SME,2024-01-03,2024,66.3,10.0,60.4,5,0,-0.1667,1.2034,1.7833,flat,True,False
+INE0QFT01015,AIK Pipes & Polymers Ltd.,SME,2024-01-02,2024,43.6,15.0,62.0,5,0,-0.7387,-0.0487,0.2354,loser,True,False
+INE0QIS01011,Shree Marutinandan Tubes Ltd.,SME,2024-01-19,2024,47.2,14.0,56.4,5,0,-0.5217,-0.2679,0.1825,loser,True,False
+INE0P0001010,Australian Premium Solar (India) Ltd.,SME,2024-01-18,2024,464.2,28.0,69.8,5,0,4.8907,2.1998,7.9315,multibagger,False,True
+INE486R01017,GPT Healthcare Ltd.,MB,2024-02-29,2024,8.5,525.0,55.4,5,0,-0.1955,-0.354,-0.296,flat,True,False
+INE0J1F01024,Rashi Peripherals Ltd.,MB,2024-02-14,2024,63.0,600.0,50.4,5,0,0.7564,-0.1323,-0.0466,winner,False,True
+INE953L01027,Jana Small Finance Bank Ltd.,MB,2024-02-14,2024,19.9,570.0,63.0,5,0,0.1535,0.0385,-0.028,flat,False,False
+INE646H01017,Capital Small Finance Bank Ltd.,MB,2024-02-14,2024,0.0,523.0,52.8,5,0,-0.4244,-0.3572,-0.3518,loser,True,False
+INE988S01028,Apeejay Surrendra Park Hotels Ltd.,MB,2024-02-12,2024,0.0,920.0,57.6,5,0,-0.2632,-0.2504,0.0728,loser,True,False
+INE0NLT01010,BLS E-Services Ltd.,MB,2024-02-06,2024,162.4,309.0,44.6,5,0,0.7013,-0.5824,0.3505,winner,False,True
+INE05DH01017,Atmastco Ltd.,SME,2024-02-23,2024,17.6,56.0,59.6,5,0,1.2344,1.5248,2.1656,multibagger,False,True
+INE0OPC01015,Interiors & More Ltd.,SME,2024-02-23,2024,11.2,42.0,66.5,5,0,0.4524,0.1025,0.4097,winner,False,True
+INE517M01028,Polysil Irrigation Systems Ltd.,SME,2024-02-16,2024,6.9,17.0,58.2,5,0,1.7778,-0.5979,-0.5556,multibagger,False,True
+INE0OYK01010,Rudra Gas Enterprise Ltd.,SME,2024-02-15,2024,350.8,14.0,58.2,5,0,0.1917,-0.219,0.6508,flat,False,False
+INE0R5Z01015,Mayank Cattle Food Ltd.,SME,2024-02-05,2024,8.8,19.0,65.2,5,0,0.875,1.0426,1.369,winner,False,True
+INE0SK801018,DelaPlex Ltd.,SME,2024-02-02,2024,177.8,46.0,70.0,5,0,-0.4797,-0.4488,0.0573,loser,True,False
+INE0OGG01015,Docmode Health Technologies Ltd.,SME,2024-02-02,2024,215.2,7.0,60.4,5,0,-0.3867,-0.6449,-0.0171,loser,True,False
+INE0QN801017,Krystal Integrated Services Ltd.,MB,2024-03-21,2024,13.5,300.0,52.2,5,0,-0.1842,-0.367,-0.3083,flat,True,False
+INE772T01024,Popular Vehicles & Services Ltd.,MB,2024-03-19,2024,1.3,602.0,47.4,5,0,-0.6699,-0.6882,-0.6614,loser,True,False
+INE0L9R01028,Gopal Snacks Ltd.,MB,2024-03-14,2024,9.5,650.0,49.1,5,0,-0.2902,-0.2902,-0.3478,loser,True,False
+INE0NQ801033,R K SWAMY Ltd.,MB,2024-03-12,2024,25.8,424.0,45.0,5,0,-0.65,-0.2365,-0.2984,loser,True,False
+INE0CG401037,Mukka Proteins Ltd.,MB,2024-03-07,2024,137.0,224.0,49.1,5,0,-0.1996,-0.1806,0.2404,flat,True,False
+INE777F01014,Exicom Tele-Systems Ltd.,MB,2024-03-05,2024,133.6,429.0,59.0,5,0,-0.0574,-0.3197,0.0764,flat,True,False
+INE0QVH01025,KP Green Engineering Ltd.,SME,2024-03-22,2024,29.5,190.0,60.5,5,0,1.5948,0.8383,1.7635,multibagger,False,True
+INE0S3X01014,Enfuse Solutions Ltd.,SME,2024-03-22,2024,357.3,22.0,70.1,5,0,0.7708,1.152,1.6562,winner,False,True
+INE0R9I01021,Enser Communications Ltd.,SME,2024-03-22,2024,7.3,16.0,70.1,5,0,1.1429,2.0531,2.1143,multibagger,False,True
+INE0R9401019,AVP Infracon Ltd.,SME,2024-03-20,2024,21.5,52.0,59.4,5,0,-0.034,0.9441,1.0073,flat,True,False
+INE0QA601016,Pratham EPC Projects Ltd.,SME,2024-03-18,2024,178.5,36.0,65.1,5,0,0.6033,0.4615,1.374,winner,False,True
+INE510U01018,Pune E-Stock Broking Ltd.,SME,2024-03-15,2024,371.2,38.0,63.2,5,0,2.3765,-0.0326,0.5795,multibagger,False,True
+INE0Q6H01012,Sona Machinery Ltd.,SME,2024-03-13,2024,273.5,52.0,53.6,5,0,-0.7601,-0.3561,-0.3923,loser,True,False
+INE0OAF01028,JNK India Ltd.,MB,2024-04-30,2024,28.5,649.0,74.5,5,0,0.0152,-0.569,-0.1506,flat,False,False
+INE343G01021,Bharti Hexacom Ltd.,MB,2024-04-12,2024,29.9,4275.0,71.3,5,0,1.5974,0.8365,1.6399,multibagger,False,True
+INE0STM01017,Aluwind Architectural Ltd.,SME,2024-04-09,2024,8.2,30.0,57.9,5,0,0.1489,0.1113,0.1556,flat,False,False
+INE0DEZ01013,K2 Infragen Ltd.,SME,2024-04-08,2024,51.5,41.0,54.2,5,0,-0.5731,-0.568,-0.3794,loser,True,False
+INE0TO601017,Yash Optics & Lens Ltd.,SME,2024-04-08,2024,42.2,53.0,59.4,5,0,0.5963,-0.1528,-0.037,winner,False,True
+INE0SWN01019,Trust Fintech Ltd.,SME,2024-04-04,2024,108.6,63.0,77.4,5,0,-0.6876,-0.4276,-0.1218,loser,True,False
+INE03JT01014,Go Digit General Insurance Ltd.,MB,2024-05-23,2024,9.6,2615.0,63.3,5,0,0.1272,-0.0243,0.1901,flat,False,False
+INE673O01025,TBO Tek Ltd.,MB,2024-05-15,2024,86.7,1551.0,64.4,5,0,0.3317,-0.2706,0.312,winner,False,True
+INE883F01010,Aadhar Housing Finance Ltd.,MB,2024-05-15,2024,26.8,3000.0,62.9,5,0,0.4862,0.2281,0.4192,winner,False,True
+INE065X01017,Indegene Ltd.,MB,2024-05-13,2024,70.3,1842.0,55.8,5,0,0.1571,-0.1105,0.2649,flat,False,False
+INE0SQY01018,GSM Foils Ltd.,SME,2024-05-31,2024,257.3,11.0,59.5,5,0,5.4875,3.3658,3.6875,multibagger,False,True
+INE0TNW01017,Quest Laboratories Ltd.,SME,2024-05-23,2024,85.3,43.0,61.6,5,0,0.0515,-0.4102,0.0206,flat,False,False
+INE0RRU01016,Indian Emulsifiers Ltd.,SME,2024-05-22,2024,460.1,42.0,54.0,5,0,-0.6337,-0.7354,0.2095,loser,True,False
+INE0R3T01013,Mandeep Auto Industries Ltd.,SME,2024-05-21,2024,77.2,25.0,53.3,5,0,-0.7045,-0.6836,-0.5925,loser,True,False
+INE0QRV01016,ABS Marine Services Ltd.,SME,2024-05-21,2024,144.4,96.0,60.0,5,0,0.748,-0.654,-0.15,winner,False,True
+INE0SCB01016,Aztec Fluids & Machinery Ltd.,SME,2024-05-17,2024,218.4,24.0,70.5,5,0,0.2537,0.0358,0.4669,winner,False,True
+INE0R4W01015,Piotex Industries Ltd.,SME,2024-05-17,2024,107.4,14.0,57.8,5,0,-0.6223,-0.7725,-0.5851,loser,True,False
+INE0S1L01013,Energy-Mission Machineries (India) Ltd.,SME,2024-05-16,2024,,41.0,58.2,5,0,-0.0815,-0.5598,0.5507,flat,True,False
+INE0STN01015,Silkflex Polymers (India) Ltd.,SME,2024-05-15,2024,39.3,18.0,56.2,5,0,2.5144,0.4904,0.8279,multibagger,False,True
+INE0S3D01016,Winsol Engineers Ltd.,SME,2024-05-14,2024,682.1,23.0,61.8,5,0,0.6667,-0.5907,1.6547,winner,False,True
+INE0SMA01017,Slone Infosystems Ltd.,SME,2024-05-10,2024,667.8,11.0,65.2,5,0,0.8481,1.1082,2.131,winner,False,True
+INE0RGM01016,Storage Technologies & Automation Ltd.,SME,2024-05-08,2024,,30.0,58.4,5,0,-0.5718,-0.4497,0.2532,loser,True,False
+INE0QSB01016,Amkay Products Ltd.,SME,2024-05-08,2024,748.0,13.0,62.1,5,0,0.0336,-0.6691,-0.1636,flat,False,False
+INE01A001028,Stanley Lifestyles Ltd.,MB,2024-06-28,2024,97.2,537.0,47.6,5,0,-0.6157,-0.331,-0.052,loser,True,False
+INE841L01016,DEE Development Engineers Ltd.,MB,2024-06-26,2024,103.0,418.0,59.3,5,0,2.3062,-0.1365,0.5426,multibagger,False,True
+INE916Y01027,Akme Fintrade (India) Ltd.,MB,2024-06-26,2024,54.5,132.0,53.0,5,0,-0.1175,-0.5087,-0.3758,flat,True,False
+INE0HV901016,Le Travenues Technology Ltd.,MB,2024-06-18,2024,98.1,740.0,64.4,5,0,0.6726,0.0353,0.9397,winner,False,True
+INE0PE401018,Medicamen Organics Ltd.,SME,2024-06-28,2024,993.6,11.0,64.1,5,0,-0.3824,-0.7564,0.325,loser,True,False
+INE0RUJ01013,GEM Enviro Management Ltd.,SME,2024-06-26,2024,265.1,45.0,78.9,5,0,-0.496,-0.6043,-0.0703,loser,True,False
+INE0R7D01018,3C IT Solutions & Telecoms (India) Ltd.,SME,2024-06-12,2024,,11.0,70.8,5,0,-0.65,-0.4734,-0.4844,loser,True,False
+INE0RUV01018,Aimtron Electronics Ltd.,SME,2024-06-06,2024,99.2,87.0,53.8,5,0,6.8938,1.2559,2.696,multibagger,False,True
+INE08NE01025,Sanstar Ltd.,MB,2024-07-26,2024,83.0,510.0,49.5,5,0,0.2417,-0.2139,-0.0477,winner,False,True
+INE168P01015,Emcure Pharmaceuticals Ltd.,MB,2024-07-10,2024,67.9,1952.0,67.3,5,0,0.7429,-0.0984,0.2728,winner,False,True
+INE0B9K01025,Bansal Wire Industries Ltd.,MB,2024-07-10,2024,62.8,745.0,55.4,5,0,0.1936,0.0759,0.5305,flat,False,False
+INE0S2V01010,Vraj Iron & Steel Ltd.,MB,2024-07-03,2024,126.4,171.0,44.9,5,0,-0.4005,-0.3439,-0.1452,loser,True,False
+INE552Z01027,Allied Blenders & Distillers Ltd.,MB,2024-07-02,2024,24.9,1500.0,49.5,5,0,1.0665,0.2797,0.5101,multibagger,False,True
+INE0U1T01012,Chetana Education Ltd.,SME,2024-07-31,2024,196.9,46.0,66.0,5,0,-0.4747,-0.2297,-0.0682,loser,True,False
+INE0R3101011,Manglam Infra & Engineering Ltd.,SME,2024-07-31,2024,394.4,28.0,65.2,5,0,-0.7518,-0.8042,-0.6241,loser,True,False
+INE0RPM01017,Sati Poly Plast Ltd.,SME,2024-07-22,2024,499.1,17.0,53.7,5,0,-0.7219,-0.6755,-0.3077,loser,True,False
+INE0V9N01017,Prizor Viztech Ltd.,SME,2024-07-22,2024,219.5,25.0,67.2,5,0,7.9609,0.3592,1.7563,multibagger,False,True
+INE0U9101019,Effwa Infra & Research Ltd.,SME,2024-07-12,2024,313.7,51.0,54.2,5,0,2.9372,0.3737,1.7927,multibagger,False,True
+INE0R8C01018,Ganesh Green Bharat Ltd.,SME,2024-07-12,2024,229.9,125.0,55.6,5,0,0.6871,0.39,1.8258,winner,False,True
+INE0M3I01029,Dhansa Labs Ltd.,SME,2024-07-11,2024,172.67,45.0,69.3,5,0,-0.6471,-0.6096,-0.4426,loser,True,False
+INE0SUN01013,Nephro Care India Ltd.,SME,2024-07-05,2024,715.8,41.0,64.5,5,0,-0.1789,-0.387,0.3161,flat,True,False
+INE998U01015,Petro Carbon & Chemicals Ltd.,SME,2024-07-02,2024,92.0,113.0,72.2,5,0,0.7249,-0.4777,0.0637,winner,False,True
+INE0SH001010,Mason Infratech Ltd.,SME,2024-07-01,2024,32.9,30.0,63.2,5,0,0.7891,0.8598,1.7688,winner,False,True
+INE0BHK01012,Visaman Global Sales Ltd.,SME,2024-07-01,2024,42.2,16.0,61.8,5,0,1.6337,-0.1055,0.0488,multibagger,False,True
+INE0PPK01015,Orient Technologies Ltd.,MB,2024-08-28,2024,154.8,215.0,46.7,5,0,0.4046,0.0242,0.4711,winner,False,True
+INE00M901018,Interarch Building Products Ltd.,MB,2024-08-26,2024,93.8,600.0,80.6,5,0,0.9592,0.76,1.3223,winner,False,True
+INE00U401027,Unicommerce eSolutions Ltd.,MB,2024-08-13,2024,168.3,277.0,62.7,5,0,-0.2,-0.4028,0.2005,flat,True,False
+INE0AG901020,Ceigall India Ltd.,MB,2024-08-08,2024,14.0,1253.0,68.1,5,0,-0.106,-0.3436,-0.3571,flat,False,False
+INE09XN01023,Akums Drugs & Pharmaceuticals Ltd.,MB,2024-08-06,2024,63.4,1857.0,67.6,5,0,-0.1844,-0.4126,-0.2827,flat,True,False
+INE0QA901010,Rapid Multimodal Logistics Ltd.,SME,2024-08-30,2024,350.5,8.0,62.4,5,0,0.5774,-0.362,-0.2202,winner,False,True
+INE0KZF01015,QVC Exports Ltd.,SME,2024-08-28,2024,535.0,24.0,58.2,5,0,-0.7331,-0.7877,-0.6616,loser,True,False
+INE0T9I01011,Ideal Technoplast Industries Ltd.,SME,2024-08-28,2024,116.8,16.0,56.0,5,0,0.5702,0.6028,0.812,winner,False,True
+INE0R4Z01018,Brace Port Logistics Ltd.,SME,2024-08-26,2024,657.8,24.0,55.3,5,0,-0.3256,-0.5153,-0.0569,loser,True,False
+INE0U0201016,Solve Plastic Products Ltd.,SME,2024-08-21,2024,34.2,12.0,61.7,5,0,-0.8049,-0.7419,-0.6813,loser,True,False
+INE0S3H01017,Positron Energy Ltd.,SME,2024-08-20,2024,414.9,51.0,53.8,5,0,-0.224,-0.4039,0.2176,loser,True,False
+INE0OXY01013,Afcom Holdings Ltd.,SME,2024-08-09,2024,303.0,74.0,58.1,5,0,7.319,3.1522,7.2829,multibagger,False,True
+INE0RFP01011,Sathlokhar Synergys E&C Global Ltd.,SME,2024-08-06,2024,211.1,93.0,54.0,5,0,1.4489,0.698,2.0386,multibagger,False,True
+INE0SZ301012,Bulkcorp International Ltd.,SME,2024-08-06,2024,,21.0,64.4,5,0,-0.6095,-0.4455,-0.2476,loser,True,False
+INE0SYV01018,Trom Industries Ltd.,SME,2024-08-01,2024,459.0,31.0,55.0,5,0,-0.5043,-0.5454,-0.1287,loser,True,False
+INE939X01013,Manba Finance Ltd.,MB,2024-09-30,2024,224.1,151.0,53.2,5,0,-0.0127,-0.0773,0.1118,flat,False,False
+INE0QRL01017,Arkade Developers Ltd.,MB,2024-09-24,2024,106.83,410.0,53.0,5,0,-0.1201,0.0945,0.3741,flat,True,False
+INE850M01015,Northern Arc Capital Ltd.,MB,2024-09-24,2024,117.2,777.0,61.4,5,0,0.1287,-0.1144,0.0471,flat,False,False
+INE0CJF01024,Western Carriers (India) Ltd.,MB,2024-09-24,2024,31.7,493.0,48.7,5,0,-0.4414,-0.094,-0.1917,loser,True,False
+INE953R01016,P N Gadgil Jewellers Ltd.,MB,2024-09-17,2024,59.4,1100.0,59.7,5,0,0.1924,-0.1954,0.3241,flat,False,False
+INE377Y01014,Bajaj Housing Finance Ltd.,MB,2024-09-16,2024,67.4,6560.0,63.0,5,0,0.202,-0.2918,0.656,winner,False,True
+INE0O6601022,Kross Ltd.,MB,2024-09-16,2024,17.7,500.0,46.5,5,0,-0.2579,-0.1119,-0.0448,loser,True,False
+INE01FR01028,Baazar Style Retail Ltd.,MB,2024-09-06,2024,40.6,835.0,62.9,5,0,-0.1316,-0.1293,-0.1093,flat,True,False
+INE06HJ01020,ECOS (India) Mobility & Hospitality Ltd.,MB,2024-09-04,2024,64.2,601.0,66.3,5,0,-0.6242,-0.3642,-0.1808,loser,True,False
+INE0BS701011,Premier Energies Ltd.,MB,2024-09-03,2024,75.0,2830.0,80.0,5,0,1.4002,0.2428,1.2779,multibagger,False,True
+INE0OO201011,WOL 3D India Ltd.,SME,2024-09-30,2024,373.9,26.0,61.3,5,0,0.0483,-0.2764,-0.1467,flat,False,False
+INE0RMF01018,Osel Devices Ltd.,SME,2024-09-24,2024,194.2,71.0,57.9,5,0,2.0266,2.0256,2.8881,multibagger,False,True
+INE0SUH01015,Envirotech Systems Ltd.,SME,2024-09-24,2024,91.7,30.0,63.6,5,0,0.4455,0.4481,1.8205,winner,False,True
+INE01YQ01013,Aditya Ultra Steel Ltd.,SME,2024-09-16,2024,10.27,46.0,59.5,5,0,-0.6444,-0.416,-0.3806,loser,True,False
+INE0UL701015,Shubhshree Biofuels Energy Ltd.,SME,2024-09-16,2024,132.9,17.0,59.5,5,0,1.5966,1.2632,2.7647,multibagger,False,True
+INE0RVQ01016,My Mudra Fincorp Ltd.,SME,2024-09-12,2024,102.5,33.0,55.0,5,0,-0.3018,-0.1122,-0.0155,loser,True,False
+INE0UYT01018,Mach Conferences & Events Ltd.,SME,2024-09-11,2024,196.7,125.0,56.8,5,0,-0.3896,-0.5855,-0.4509,loser,True,False
+INE0S2W01018,Paramatrix Technologies Ltd.,SME,2024-09-04,2024,9.2,34.0,59.2,5,0,-0.4364,-0.2448,-0.1909,loser,True,False
+INE0U2M01015,Vdeal System Ltd.,SME,2024-09-03,2024,71.4,18.0,66.6,5,0,0.5174,0.3389,1.0982,winner,False,True
+INE497S01012,Godavari Biorefineries Ltd.,MB,2024-10-30,2024,1.9,555.0,46.1,5,0,-0.2138,-0.277,-0.2335,loser,True,False
+INE377N01017,Waaree Energies Ltd.,MB,2024-10-28,2024,79.4,4321.0,68.0,5,0,1.0313,0.425,1.3196,multibagger,False,True
+INE0V6F01027,Hyundai Motor India Ltd.,MB,2024-10-22,2024,2.4,27859.0,70.8,5,0,-0.0237,0.2306,0.1954,flat,False,False
+INE0JVO01026,Garuda Construction & Engineering Ltd.,MB,2024-10-15,2024,7.6,264.0,45.9,5,0,0.7603,0.7722,0.996,winner,False,True
+INE0Q3J01015,KRN Heat Exchanger & Refrigeration Ltd.,MB,2024-10-03,2024,213.4,342.0,53.2,5,0,4.5309,0.7448,2.7666,multibagger,False,True
+INE0YU901016,Danish Power Ltd.,SME,2024-10-29,2024,126.7,198.0,71.2,5,0,1.4158,0.3195,1.1804,multibagger,False,True
+INE0YHV01011,OBSC Perfection Ltd.,SME,2024-10-29,2024,16.6,66.0,57.7,5,0,3.865,1.6105,2.09,multibagger,False,True
+INE0SFW01015,Freshara Agro Exports Ltd.,SME,2024-10-24,2024,236.8,75.0,58.4,5,0,0.8625,0.1967,0.456,winner,False,True
+INE0VZS01015,Lakshya Powertech Ltd.,SME,2024-10-23,2024,573.4,50.0,54.8,5,0,-0.3781,-0.7492,-0.3808,loser,True,False
+INE0S9501014,Khyati Global Ventures Ltd.,SME,2024-10-11,2024,15.2,18.0,56.4,5,0,-0.4183,-0.262,-0.2434,loser,True,False
+INE471R01019,NeoPolitan Pizza & Foods Ltd.,SME,2024-10-09,2024,32.7,12.0,59.0,5,0,-0.6115,-0.4177,-0.4035,loser,True,False
+INE0RBQ01018,Sahasra Electronic Solutions Ltd.,SME,2024-10-04,2024,122.1,186.0,64.9,5,0,0.0509,-0.4365,0.1145,flat,False,False
+INE0SHE01019,Thinking Hats Entertainment Solutions Ltd.,SME,2024-10-03,2024,322.2,15.0,58.6,5,0,-0.7193,-0.2613,-0.0614,loser,True,False
+INE995S01015,Niva Bupa Health Insurance Co.Ltd.,MB,2024-11-14,2024,1.9,2200.0,58.1,5,0,0.1138,-0.0666,0.0347,flat,False,False
+INE622W01025,ACME Solar Holdings Ltd.,MB,2024-11-13,2024,2.9,2900.0,50.0,5,0,0.2341,-0.1068,-0.1313,winner,False,True
+INE0W2G01015,Sagility India Ltd.,MB,2024-11-12,2024,3.2,2106.0,78.2,5,0,0.334,0.6782,0.7217,winner,False,True
+INE101I01011,Afcons Infrastructure Ltd.,MB,2024-11-04,2024,2.8,5430.0,85.2,5,0,-0.3097,-0.1285,-0.039,loser,True,False
+INE0R0201012,Lamosaic India Ltd.,SME,2024-11-29,2024,1.8,61.0,60.1,5,0,-0.8315,-0.8658,-0.8105,loser,True,False
+INE0N1401016,Neelam Linens & Garments (India) Ltd.,SME,2024-11-18,2024,92.0,13.0,60.5,5,0,-0.5083,-0.5673,-0.1479,loser,True,False
+INE0U3I01011,Unimech Aerospace & Manufacturing Ltd.,MB,2024-12-31,2024,184.3,500.0,59.2,5,0,0.3736,-0.4453,0.1568,winner,False,True
+INE781S01027,Ventive Hospitality Ltd.,MB,2024-12-30,2024,10.3,1600.0,51.6,5,0,-0.0032,-0.047,0.1502,flat,False,False
+INE0RB801010,Senores Pharmaceuticals Ltd.,MB,2024-12-30,2024,97.9,582.0,67.6,5,0,1.6463,0.3815,1.1064,multibagger,False,True
+INE0V7W01012,Carraro India Ltd.,MB,2024-12-30,2024,1.2,1250.0,63.7,5,0,-0.2578,-0.2647,-0.2478,loser,True,False
+INE454P01035,Transrail Lighting Ltd.,MB,2024-12-27,2024,82.0,839.0,80.7,5,0,0.1418,-0.013,0.3846,flat,False,False
+INE284H01025,DAM Capital Advisors Ltd.,MB,2024-12-27,2024,81.9,840.0,54.0,5,0,-0.4677,-0.5848,-0.2536,loser,True,False
+INE0TO701015,Mamata Machinery Ltd.,MB,2024-12-27,2024,195.0,179.0,55.8,5,0,0.5233,-0.4253,0.7327,winner,False,True
+INE0JPD01013,Sanathan Textiles Ltd.,MB,2024-12-27,2024,36.9,550.0,60.0,5,0,0.2394,0.0247,0.353,winner,False,True
+INE037Z01029,Concord Enviro Systems Ltd.,MB,2024-12-27,2024,10.7,500.0,53.7,5,0,-0.6389,-0.5498,-0.3584,loser,True,False
+INE0Q9301021,International Gemmological Institute (India) Ltd.,MB,2024-12-20,2024,35.5,4225.0,65.5,5,0,-0.1165,-0.4307,-0.2428,flat,True,False
+INE115Q01022,Inventurus Knowledge Solutions Ltd.,MB,2024-12-19,2024,52.7,2498.0,74.8,5,0,0.2484,-0.2194,0.2758,winner,False,True
+INE01EA01019,Vishal Mega Mart Ltd.,MB,2024-12-18,2024,28.8,8000.0,76.3,5,0,0.5222,0.1227,0.7069,winner,False,True
+INE570L01029,Sai Life Sciences Ltd.,MB,2024-12-18,2024,1.1,3043.0,67.6,5,0,1.161,0.0795,0.5966,multibagger,False,True
+INE0HLU01028,One Mobikwik Systems Ltd.,MB,2024-12-18,2024,125.7,572.0,54.0,5,0,-0.3023,-0.6213,-0.157,loser,True,False
+INE877V01027,Suraksha Diagnostic Ltd.,MB,2024-12-06,2024,1.3,846.0,49.6,5,0,-0.376,-0.3883,-0.3634,loser,True,False
+INE0LB101011,NACDAC Infrastructure Ltd.,SME,2024-12-24,2024,2209.8,10.0,66.2,5,0,-0.2,-0.6012,-0.0014,flat,True,False
+INE0DQN01013,Nisus Finance Services Co.Ltd.,SME,2024-12-11,2024,192.3,114.0,78.7,5,0,0.1669,0.1143,0.5294,flat,False,False
+INE0P8X01016,Agarwal Toughened Glass India Ltd.,SME,2024-12-05,2024,9.9,63.0,65.5,5,0,0.0907,-0.1596,0.1815,flat,False,False
+INE0T4V01015,Apex Ecotech Ltd.,SME,2024-12-04,2024,457.1,26.0,68.4,5,0,1.5753,-0.13,0.863,multibagger,False,True
+INE0VHU01019,Rajputana Biodiesel Ltd.,SME,2024-12-03,2024,718.81,25.0,69.5,5,0,0.6923,-0.0855,0.9492,winner,False,True
+INE0VN801010,Rajesh Power Services Ltd.,SME,2024-12-02,2024,59.0,160.0,60.7,5,0,1.5296,0.767,2.6694,multibagger,False,True
+INE0U7V01015,C2C Advanced Systems Ltd.,SME,2024-12-03,2024,125.4,99.0,61.2,5,0,0.5201,0.1625,1.4438,winner,False,True
+INE0RYC01010,Stallion India Fluorochemicals Ltd.,MB,2025-01-23,2025,188.3,199.0,51.8,5,0,1.11,0.4872,1.1933,multibagger,False,True
+INE0WO601020,Laxmi Dental Ltd.,MB,2025-01-20,2025,0.0,698.0,50.3,5,0,-0.4628,-0.6623,-0.4616,loser,True,False
+INE0M4D01010,Standard Glass Lining Technology Ltd.,MB,2025-01-13,2025,185.5,410.0,63.0,5,0,0.1051,-0.2671,-0.0115,flat,False,False
+INE0ZHT01012,Technichem Organics Ltd.,SME,2025-01-07,2025,425.1,25.0,54.9,5,0,-0.2971,-0.2292,-0.0455,loser,True,False
+INE0WXM01011,CapitalNumbers Infotech Ltd.,SME,2025-01-27,2025,134.6,169.0,66.2,5,0,-0.5722,-0.7353,-0.6348,loser,True,False
+INE0ZOL01023,EMA Partners India Ltd.,SME,2025-01-24,2025,221.1,76.0,65.6,5,0,-0.2895,-0.538,-0.3444,loser,True,False
+INE12QA01010,Landmark Immigration Consultants Ltd.,SME,2025-01-23,2025,72.8,40.0,77.4,5,0,-0.7522,-0.5066,-0.4028,loser,True,False
+INE0CFH01028,Rikhav Securities Ltd.,SME,2025-01-22,2025,307.0,89.0,78.8,5,0,-0.4564,-0.8309,-0.4788,loser,True,False
+INE0QX401014,Barflex Polyfilms Ltd.,SME,2025-01-20,2025,151.5,39.0,60.3,5,0,-0.0292,-0.0928,0.0375,flat,False,False
+INE0XRN01019,Delta Autocorp Ltd.,SME,2025-01-14,2025,342.1,55.0,68.9,5,0,-0.7246,-0.8434,-0.6604,loser,True,False
+INE0RH001011,Leo Dryfruits & Spices Trading Ltd.,SME,2025-01-08,2025,181.8,25.0,61.1,5,0,0.0462,-0.22,0.1971,flat,False,False
+INE0SII01026,Quality Power Electrical Equipments Ltd.,MB,2025-02-24,2025,1.3,859.0,84.5,5,0,1.5224,1.1533,1.0815,multibagger,False,True
+INE093A01041,Hexaware Technologies Ltd.,MB,2025-02-19,2025,2.8,8750.0,66.2,5,0,-0.2571,-0.4027,-0.2382,loser,True,False
+INE274Y01021,Ajax Engineering Ltd.,MB,2025-02-17,2025,6.1,1269.0,84.4,5,0,-0.0433,-0.3034,-0.2266,flat,False,False
+INE943P01029,Dr.Agarwal's Health Care Ltd.,MB,2025-02-04,2025,1.5,3027.0,68.1,5,0,0.1442,0.0355,0.1203,flat,False,False
+INE0TD301017,Shanmuga Hospital Ltd.,SME,2025-02-21,2025,2.5,21.0,59.5,5,0,-0.2887,-0.3284,-0.2463,loser,True,False
+INE241X01014,Voler Car Ltd.,SME,2025-02-19,2025,13.6,27.0,62.4,5,0,1.4211,1.3794,1.5294,multibagger,False,True
+INE10A501018,Maxvolt Energy Industries Ltd.,SME,2025-02-19,2025,3.2,54.0,57.4,5,0,1.0589,0.8049,0.9244,multibagger,False,True
+INE0B2N01016,Chandan Healthcare Ltd.,SME,2025-02-17,2025,7.0,107.0,55.3,5,0,0.4887,0.4477,0.7097,winner,False,True
+INE10QL01011,Readymix Construction Machinery Ltd.,SME,2025-02-13,2025,4.6,38.0,59.3,5,0,-0.3809,-0.1646,-0.1057,loser,True,False
+INE0W0H01017,Solarium Green Energy Ltd.,SME,2025-02-13,2025,8.8,105.0,63.8,5,0,-0.0453,-0.1703,0.038,flat,True,False
+INE0U2L01017,Amwill Health Care Ltd.,SME,2025-02-12,2025,5.7,60.0,61.6,5,0,-0.627,-0.7316,-0.6739,loser,True,False
+INE0QX901013,Rapid Fleet Management Services Ltd.,SME,2025-03-28,2025,1.7,44.0,56.6,5,0,-0.0156,-0.139,-0.1302,flat,False,False
+INE0KLO01025,Active Infrastructures Ltd.,SME,2025-03-28,2025,1.1,78.0,60.1,5,0,0.0083,0.0434,-0.0166,flat,False,False
+INE12E301017,Grand Continent Hotels Ltd.,SME,2025-03-27,2025,1.8,74.0,56.2,5,0,0.1288,-0.1607,-0.2345,flat,False,False
+INE0VNH01014,NAPS Global India Ltd.,SME,2025-03-11,2025,1.2,12.0,57.7,5,0,-0.5244,-0.6905,-0.5778,loser,True,False
+INE0PQ601019,Balaji Phosphates Ltd.,SME,2025-03-07,2025,1.2,50.0,57.9,5,0,0.4,0.6072,0.7964,winner,False,True
+INE10XX01012,Spinaroo Commercial Ltd.,SME,2025-04-08,2025,1.5,10.0,61.4,5,0,0.1763,-0.0408,0.0931,flat,False,False
+INE0DM401012,Shri Ahimsa Naturals Ltd.,SME,2025-04-02,2025,62.7,74.0,69.7,5,0,2.0992,0.615,0.9622,multibagger,False,True
+INE0TGG01014,Desco Infratech Ltd.,SME,2025-04-01,2025,83.8,31.0,59.9,5,0,0.472,-0.0311,0.0617,winner,False,True
+INE894V01022,Belrise Industries Ltd.,MB,2025-05-28,2025,43.1,2150.0,60.6,5,0,1.3998,1.2734,1.4237,multibagger,False,True
+INE1ABX01018,Unified Data-Tech Solutions Ltd.,SME,2025-05-29,2025,91.1,144.0,68.3,5,0,0.5209,0.3851,0.4615,winner,False,True
+INE04Q901010,Dar Credit & Capital Ltd.,SME,2025-05-28,2025,106.1,26.0,64.2,5,0,-0.2917,-0.3513,-0.345,loser,True,False
+INE0T8T01010,Accretion Pharmaceuticals Ltd.,SME,2025-05-21,2025,7.7,30.0,62.6,5,0,0.4347,0.4343,0.1396,winner,False,True
+INE0YSH01017,Integrity Infrabuild Developers Ltd.,SME,2025-05-20,2025,2.2,12.0,57.3,5,0,0.72,0.6357,0.65,winner,False,True
+INE0VRH01015,Virtual Galaxy Infotech Ltd.,SME,2025-05-19,2025,231.5,93.0,62.4,5,0,0.1113,-0.1619,0.0447,flat,False,False
+INE1AII01014,Iware Supplychain Services Ltd.,SME,2025-05-06,2025,3.0,27.0,56.9,5,0,2.5684,3.8462,3.1253,multibagger,False,True
+INE0INX01018,Aegis Vopak Terminals Ltd.,MB,2025-06-02,2025,2.2,2800.0,56.6,5,0,-0.1907,-0.1452,-0.1685,flat,True,False
+INE0AQ201015,The Leela Palaces Hotels & Resorts Ltd.,MB,2025-06-02,2025,3.1,3500.0,57.9,5,0,-0.036,-0.0126,-0.0587,flat,False,False
+INE156901014,Neptune Petrochemicals Ltd.,SME,2025-06-04,2025,4.11,73.0,72.5,5,0,0.5418,0.3712,0.5164,winner,False,True
+INE0FLF01015,Nikita Papers Ltd.,SME,2025-06-03,2025,1.4,68.0,60.6,5,0,-0.2308,-0.0463,-0.2058,loser,True,False
