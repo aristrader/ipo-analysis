@@ -157,3 +157,22 @@ boom. → fails cross-regime gate + evolve-only-if-robust; would not survive an 
 Modified-Jones formally stays data-gated. FILES: docs/research/e1_accruals_2026-06.md,
 tools/research/e1_accruals.py, data/master/review/e1_accruals_{review,summary}.csv. Did NOT touch
 rules/index.md or scorecard.py (parallel agents own them) — proposed registry line in the writeup.
+
+## A2 — hold-through-drawdown / post-listing conviction overlay (2026-06-10, branch auto/6hr-batch)
+VERDICT: REJECT as an act-on EXIT overlay; faint DISPLAY-ONLY median lean at best; re-confirms M1/A3
+(post-listing → never a score input). THE QUESTION (Fujiyama case): among UNDERWATER names at decision
+day D, does a PIT strength signal (up-day ratio + reclaim-off-trough + RS-vs-Nifty + volume-trend) that
+EXITS the WEAK and HOLDS the STRONG beat do-nothing (always-hold)? DIFFERS from A3 (blanket sell on F5e
+flag) — this is a CONDITIONAL exit, best-case for an exit rule. METHOD: PIT (strength from sessions 0..D
+only; fwd alpha from day D to 6m/1y/terminal), D∈{90,126}, underwater := close[D]<issue_price_adj,
+survivorship-honest terminals (decision A1), composite = within-underwater-group percentile ranks,
+Wilson CI + pure-Python bootstrap + 1000× label-shuffle placebo, no scipy, cross-regime boom vs longterm.
+RESULT: overlay does NOT beat do-nothing cross-regime — discrimination sign FLIPS boom↔longterm at D=90
+(placebo p=0.021/0.027 but gaps +60.5%/−365.5%, opposite signs) and collapses to NOISE at D=126
+(p=0.205/0.725). RIGHT-TAIL TRAP: the WEAK basket you'd sell carries a flat-to-POSITIVE mean fwd-term
+alpha (boom +3.5% D90, +43.9% [boot +3..+104] D126) → exiting forfeits the right tail (242 weak-but-
+recovered names, incl. Fujiyama-type underwater-then-ran). Only a faint median lean survives (strength →
+less-negative MEDIAN among underwater, same family as F5e/persistence). FILES:
+docs/research/a2_hold_drawdown_2026-06.md, tools/research/a2_hold_drawdown.py,
+data/master/review/a2_hold_drawdown.csv. Did NOT touch rules/index.md/scorecard.py/scorecard_weights.json/
+substrate (parallel agents own them) — proposed registry line in the writeup for the controller.
