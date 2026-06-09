@@ -149,6 +149,16 @@ market-cap; nearest-mcap matching; does a lower issue-PE-vs-peers lead to catch-
 ### G1. Microcap / SME-seasoned small-cap RISK & MOVEMENT screener  🔬 · L — the on-moat first slice outward; build a SCREENER (risk/movement/quality), NOT a return predictor. Only after the IPO tool's polish is done.
 ### G2. Swing-trade buy/sell calls  🔬 · L — research-gated; EXIT side tested (no blanket TP beats hold), ENTRY side weak. Needs a new entry signal that survives the 3-layer protocol, or D1/D2.
 
+## THEME I — Data quality (from the 2026-06-09 "are we sure" subscription re-check)
+### I1. Subscription category breakdown stored as 0 instead of null (~32 rows)  ⚪ · S
+- ~32 substrate rows have `sub_total_x` present but `sub_qib_x`/`sub_nii_x`/`sub_retail_x` = 0 — the breakdown
+  (esp. QIB) was UNCAPTURED and stored as 0; the TOTAL is correct. Found via the at-scale consistency check
+  (total outside [min,max] of categories → all 35 trace to this benign cause, not corruption).
+- **Fix:** where total is present and a category is 0-with-no-real-bid, set it to null (0-vs-null hygiene); then
+  re-confirm `n3_demand_skew` (QIB/retail ratio) excludes/handles them — today it reads 0, marginally biasing the
+  boom-only finding for those rows. Cheap, owned-data, no scraping. **NOT the live-feed parser bug** (that's fixed).
+- **Source:** `batch_run_2026-06-09.md` §"are we sure". **Touches:** substrate build step + `findings/n3_demand_skew`.
+
 ---
 
 ## How to use this
