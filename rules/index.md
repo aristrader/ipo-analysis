@@ -240,3 +240,16 @@ results are kept on purpose).
 - **E1 accruals (total-accruals proxy TA=(PAT−CFO)/avg-assets, graded n8): DISPLAY-ONLY (longterm-only).** Bad-outcome
   spread Q3−Q1 works LONGTERM (MB +17pp p=0.045 N=141; SME +12pp p=0.029 N=318) but NULL/inverted in boom → fails
   cross-regime gate. Adds +8–11pp over n8 longterm, 0 boom. Full Modified-Jones DCA stays DATA-GATED (no receivables col). Not in score. e1_accruals_2026-06.md.
+- **A2 hold-through-drawdown conviction overlay: REJECT as exit; display-only median lean at best. Re-confirms M1/A3.**
+  Among UNDERWATER names, a PIT strength signal (up-day ratio + reclaim + RS-vs-Nifty + volume) to exit-WEAK/hold-STRONG
+  does NOT beat do-nothing — discrimination sign FLIPS boom↔longterm (D90 placebo p .021/.027 but gaps +60.5/−365.5%),
+  collapses to NOISE at D126 (p .205/.725); the WEAK basket you'd sell carries flat-to-POSITIVE mean (boom +3.5% D90,
+  +43.9% [boot +3..+104] D126) → exiting forfeits the right tail (242 weak-but-recovered dumped). Post-listing → never a score input. a2_hold_drawdown_2026-06.md.
+- **weak-subscription false-APPLY guard: REJECTED.** B1's "weak sub = false-APPLY tell" was a YOUNG-COHORT artifact
+  (unmatured winners). On matured data it INVERTS (boom low-sub APPLYs a1y +23.8% vs +1.2%), placebo FAILS both cohorts
+  (shuffle p .137 all / .304 boom = noise), veto dumps winners ~1:1 with losers (32 @ median +119%); longterm untestable
+  (sub ~9%). Redundant with the already-rejected first-order undersubscribed. Not a gate, not a score input. weaksub_guard_2026-06.md.
+- **H-MVP relative-valuation vs earlier-IPO peers: REDUNDANT-WITH-n6 / display-only.** Boom-MB cheap-vs-peers beats rich
+  +37.9pp 1y (N=94, IC −0.345, placebo p=0.000, CIs separate) — real, BUT reduces to n6's broad_sector pool (fine-industry
+  matching empty: 13 MB / 0 SME), NOT incremental (resid-IC −0.166), no peer-proximity dose, STRUCTURALLY boom-only (zero
+  longterm P/E — same wall as n6/E2). SME thin (N≤26), 3y untestable. Do NOT advance to the all-stocks panel on valuation. hmvp_relative_valuation_2026-06.md.
