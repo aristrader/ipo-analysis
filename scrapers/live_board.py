@@ -90,15 +90,30 @@ def parse_subscription_html(html):
     forms. See docs — this was a real defect, live-feed only; the substrate uses the NSE JSON API.)"""
     out = {"qib": None, "nii": None, "retail": None, "total": None}
     txt = re.sub(r"\s+", " ", html)
-    pats = (("qib", r"Qualified\s+Institutional"), ("nii", r"Non[\s-]?Institutional"),
-            ("retail", r"Retail\s+Individual"), ("total", r"Total\s+Subscription"))
-    for key, lab in pats:
-        m = re.search(r"<td[^>]*>\s*" + lab + r"[^<]*</td>\s*<td[^>]*>\s*([\d,.]+)\s*x", txt, re.I)
-        if m:
-            try:
-                out[key] = float(m.group(1).replace(",", ""))
-            except ValueError:
-                pass
+    # Scope to the subscription-TIMES <table> (the one with a 'Total Subscription' row); other tables on
+    # the page use offered/percent columns (no trailing 'x') and are thereby excluded. Then map EACH row's
+    # label fuzzily — chittorgarh varies the label ('Qualified Institutional' vs 'QIB', 'Non Institutional'
+    # vs 'NII', etc.), and SME pages may omit QIB entirely (→ stays None, which is correct).
+    anchor = re.search(r"Total\s+Subscription", txt, re.I)
+    if not anchor:
+        return out
+    start = txt.rfind("<table", 0, anchor.start())
+    end = txt.find("</table>", anchor.start())
+    table = txt[(start if start != -1 else 0):(end if end != -1 else len(txt))]
+    cat = (("qib", ("qualified institutional", "qib")),
+           ("nii", ("non institutional", "non-institutional", "nii")),
+           ("retail", ("retail individual", "retail", "rii")),
+           ("total", ("total subscription", "total")))
+    for m in re.finditer(r"<td[^>]*>(.*?)</td>\s*<td[^>]*>\s*([\d,.]+)\s*x", table):
+        label = re.sub(r"<[^>]+>", "", m.group(1)).strip().lower()
+        try:
+            val = float(m.group(2).replace(",", ""))
+        except ValueError:
+            continue
+        for key, names in cat:
+            if out[key] is None and any(n in label for n in names):
+                out[key] = val
+                break
     return out
 
 

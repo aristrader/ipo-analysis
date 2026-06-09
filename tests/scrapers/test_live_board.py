@@ -49,10 +49,23 @@ def test_parse_subscription_html():
     s = lb.parse_subscription_html(decoy + real)
     assert s == {"qib": 17.58, "nii": 30.91, "retail": 12.59, "total": 16.99}
 
-def test_parse_subscription_nii_hyphen_variant():
-    # 'Non-Institutional' (hyphen) must also match the nii label.
-    html = "<table><tr><td>Non-Institutional</td><td>4.00x</td></tr></table>"
-    assert lb.parse_subscription_html(html)["nii"] == 4.0
+def test_parse_subscription_short_qib_label_variant():
+    # chittorgarh varies the QIB label: some pages use the short 'QIB' (not 'Qualified Institutional').
+    # The parser must catch it — and still ignore the decoy table (short labels, NO trailing 'x').
+    decoy = "<table><tr><td>QIB</td><td>21,54,000</td><td>24.99</td></tr></table>"
+    real = ("<table><tr><td>QIB</td><td>9.90x</td></tr>"
+            "<tr><td>Non-Institutional</td><td>4.00x</td></tr>"
+            "<tr><td>Total Subscription</td><td>6.50x</td></tr></table>")
+    s = lb.parse_subscription_html(decoy + real)
+    assert s == {"qib": 9.9, "nii": 4.0, "retail": None, "total": 6.5}
+
+def test_parse_subscription_sme_no_qib_row():
+    # SME pages may omit QIB entirely → qib stays None (correct, not a miss).
+    html = ("<table><tr><td>Non Institutional</td><td>74.08x</td></tr>"
+            "<tr><td>Retail Individual</td><td>100.18x</td></tr>"
+            "<tr><td>Total Subscription</td><td>87.17x</td></tr></table>")
+    s = lb.parse_subscription_html(html)
+    assert s == {"qib": None, "nii": 74.08, "retail": 100.18, "total": 87.17}
 
 
 def test_subscription_unknowns_stay_none():
