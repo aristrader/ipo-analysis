@@ -110,3 +110,21 @@ no independent N). Real action-specific edge at 1m/3m only (treated 1m -27% / 3m
 HIGH-run-up names -81% win 0% at 1m. Files: tools/research/h7_corp_action.py, docs/research/h7_corp_action_2026-06.md,
 data/master/review/h7_corp_action_events.csv. verify.py exit 0. Did NOT touch rules/index.md/scorecard.py/n14 (A1
 editing concurrently) — proposed rules line in the return report. Commit on auto/6hr-batch.
+
+## 2026-06-09 — A1 obscure-banker flag redefinition: freq → quality-aware PIT (LIVE)  [path: FULL]
+Completed the WIP A1 (commit 8c87960). Replaced the frequency-based (freq<12, quality-blind) obscure-lead-manager
+wipeout flag — B1's documented false-veto driver (sole blocker on 34/52 missed winners; 12/34 reputable coverage
+artifacts) — with a QUALITY-AWARE POINT-IN-TIME rule: fire iff the banker's prior IPOs (>=5, listed strictly before
+this IPO) failed >=40% (wipeout|dead-money); ABSTAIN on a thin prior record (no frequency fallback). DIVERGE: 4
+candidates (current / size-aware / quality-PIT / hybrid). BUILD: scorecard.py logic was in the WIP; I added the
+behaviour tests + ran the decisive evidence + decided the verdict. EVIDENCE (independently re-run, not trusted from
+WIP): (1) cross-regime bad-outcome discrimination POSITIVE 3/4 N14 panels vs old rule's 1/4 (SME-boom +24.3pp CI-sep);
+(2) placebo-clean (real 16.9pp vs null 5.8±3.6 p=0.00, but null mean>0 → ~1/3 mechanical); (3) un-vetoes 33/34 B1
+missed winners (recomputed from miss_mining_grades.csv), all named reputable banks exonerated; (4) OOS lift A/B
+(a1_fold_test): 1y better-2/same-1/worse-0 (no degrade), 3y mixed-but-thin. VERDICT: LIVE under evolve-only-if-robust
+(improves purpose + fixes false-veto + no OOS degrade at high-N 1y). Conservative call honest about 3y ambiguity +
+abstention coverage loss (607 rows silent). TESTS: tests/layer3/test_banker_flag.py (9 new — clean/bad/PIT/abstain/
+series-consistency/real-data reputable exoneration). Full suite 280p/12s, verify exit 0. n14 NOT changed (it's a
+descriptive historical anatomy; the LIVE predictor flag is what changed). Files: scorecard.py, test_banker_flag.py,
+rules/index.md, docs/research/a1_banker_flag_2026-06.md, tools/research/a1_*.py (WIP). Adversarial review pending.
+Commit on auto/6hr-batch only.
