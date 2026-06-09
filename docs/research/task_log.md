@@ -99,3 +99,14 @@ denied = no external-network surface). Flipped settings.local.json → enabledMc
 in CLAUDE.md, STATUS.md, trusted_sources.md, playwright_on_off.md (OFF-by-default → ALWAYS-ON). Flagged + documented
 the ONE residual the pin doesn't cover (leftover Chrome-for-Testing → OS notifications) with the one-time OS
 mitigation (Notifications → Chrome for Testing → OFF). verify clean.
+
+## 2026-06-09 — H7 corp-action euphoria-top backtest (widens F10)  [path: hypothesis/research]
+Tested H7: corp action (bonus/split) on a recent IPO marks a euphoria top → negative post-ex-date fwd alpha,
+conditioned on prior run-up. 3-layer + same-name random-date PLACEBO + matched control, 4 horizons, cross-regime.
+RESULT: DISPLAY-ONLY EXIT FLAG (confirms+narrows F10, NOT a score input — post-listing signal). Min-N binding
+(n=31 total, boom 13 / longterm 18, below per-cohort floor; SAME sample as F10 — no dividend ex-dates exist, so
+no independent N). Real action-specific edge at 1m/3m only (treated 1m -27% / 3m -22% beats control AND placebo);
+6m/1y collapse into the placebo (generic euphoria fade — DON'T double-count F5e). Driver = run-up dose srho -0.74;
+HIGH-run-up names -81% win 0% at 1m. Files: tools/research/h7_corp_action.py, docs/research/h7_corp_action_2026-06.md,
+data/master/review/h7_corp_action_events.csv. verify.py exit 0. Did NOT touch rules/index.md/scorecard.py/n14 (A1
+editing concurrently) — proposed rules line in the return report. Commit on auto/6hr-batch.
