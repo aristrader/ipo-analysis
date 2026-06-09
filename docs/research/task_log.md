@@ -77,3 +77,11 @@ tell (sub 2.2x vs 6.6x). FALSE-NEG = obscure-banker flag SOLE blocker on 34/52, 
 miss_mining_grades.csv, miss_mining.py. recording chain: ledger + rules/index (2 new lines) + STATUS + this log.
 verify.py exit 0. seeds A1 (banker-flag fix) + new low-sub FALSE-POS guard. no commit of pre-existing dirty
 newsfeed_*.md / batch_run docs (not mine). commit on auto/6hr-batch.
+
+## 2026-06-09 — Autonomous batch (owner away; ended early by owner)  [path: FULL, multi-task]
+Branch auto/6hr-batch (main untouched). SHIPPED: App C1 honesty/nav polish (d51d7fe/7f8a47f, walked, +7 tests) ·
+B1 two-sided miss-mining of 364 recent IPOs (3dfc129; obscure-banker = sole blocker on 34/52 missed winners,
+weak-sub = false-APPLY tell) · News R&D (e71dc61; delivery-% demoted, H7 promoted, D1 spec). WIP: A1 banker-flag
+fix (8c87960, INCOMPLETE/UNREVIEWED — impl in scorecard.py passes tests but missing new-tests+robustness-verdict+
+review). NOT STARTED: A3/H7/E1/H-MVP/A2 + weak-sub guard. Each shipped task ran diverge→build→(walk/grade)→commit;
+A1 stopped before its test+verdict+review stages. Full record: docs/research/batch_run_2026-06-09.md.
