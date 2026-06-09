@@ -142,3 +142,18 @@ PIT (capit uses sessions 1..90 only; fwd alpha from d90), survivorship-honest te
 pure-Python bootstrap, no scipy. FILES: docs/research/a3_capitulation_2026-06.md,
 tools/research/a3_capitulation.py, data/master/review/a3_capitulation_false_exits.csv. Did NOT touch
 rules/index.md (A1 owns concurrently) — proposed registry line is in the writeup for the controller.
+
+## E1 — pre-IPO accruals (earnings-quality) signal (2026-06-09, branch auto/6hr-batch)
+VERDICT: DISPLAY-ONLY (longterm-leaning, NOT cross-regime; NOT in score). DATA RESOLUTION first:
+full Modified-Jones DCA stays DATA-GATED (no receivables column confirmed) — instead tested the
+computable TOTAL-ACCRUALS proxy TA=(PAT−CFO)/avg total assets on the latest pre-IPO FY (yr3; ~72%
+coverage overall but MB-longterm only 31%). This is the graded version of the proven binary n8 flag.
+3-layer, PIT, survivorship-honest, placebo (1000× within-cell shuffle), no scipy. RESULT: bad-outcome
+(wipeout/dead-money) spread Q3−Q1 works LONGTERM ONLY (MB +17pp p=0.045 N=141; SME +12pp p=0.029
+N=318) and is NULL/INVERTED in boom (MB-boom 0 bad outcomes → no discrimination; SME-boom −2pp wrong
+sign, placebo p=0.44 = noise). 3y alpha spread negative 3/4 cells but rank-IC ≈0 in 3/4 (only MB-boom
+−0.15, one fragile tertile). Incremental over n8 (within n8-clean): adds +8–11pp longterm, nothing in
+boom. → fails cross-regime gate + evolve-only-if-robust; would not survive an OOS fold (boom is null).
+Modified-Jones formally stays data-gated. FILES: docs/research/e1_accruals_2026-06.md,
+tools/research/e1_accruals.py, data/master/review/e1_accruals_{review,summary}.csv. Did NOT touch
+rules/index.md or scorecard.py (parallel agents own them) — proposed registry line in the writeup.

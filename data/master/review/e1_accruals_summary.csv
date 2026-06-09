@@ -1,0 +1,5 @@
+cell,N_valid,spread_alpha_1y,spread_alpha_3y,spread_bad_rate,rank_IC_acc_a3y,placebo_p,placebo_real,placebo_null_mean,incr_n8clean_spread
+MB-boom,362,-0.0093,-0.5789,0.0,-0.146,1.0,0.0,0.0,0.0
+SME-boom,850,0.084,-0.1182,-0.0208,0.016,0.436,-0.0208,0.0002,-0.0208
+MB-longterm,141,-0.13,-0.2589,0.1702,-0.1,0.045,0.1702,0.005,0.1111
+SME-longterm,318,-0.0071,-0.0445,0.1227,-0.008,0.029,0.1226,0.0024,0.0789
