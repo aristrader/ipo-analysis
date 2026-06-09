@@ -126,11 +126,65 @@ def liquidity(cohort):
                  n=n, pct_investable=ok["rate"], median_turnover_inr=float(medturn) if pd.notna(medturn) else None)
 
 
+# ── Obscure-lead-manager flag definition (A1, 2026-06-09) ─────────────────────────────────────────
+# OLD (frequency-based, quality-blind): fire when the banker has < OBSCURE_FREQ_CUTOFF IPOs in our
+# window. B1 (miss_mining_2026-06.md) showed this false-vetoes reputable but UNDER-SAMPLED banks
+# (Nuvama, Morgan Stanley, Smart Horizon, Choice, Indorient) — it measured "under-represented in OUR
+# window", not "low quality" — and was the SOLE blocker on 34/52 missed winners.
+# NEW (quality-aware, point-in-time): fire only when the banker's PRIOR IPOs (>= OBSCURE_MIN_PRIOR,
+# listed STRICTLY BEFORE this IPO) FAILED at >= OBSCURE_BAD_RATE (wipeout|dead-money). ABSTAIN (never
+# fire) when the banker's prior record is too thin (< OBSCURE_MIN_PRIOR) — we do NOT fall back to
+# frequency (that re-introduces the artifact). So the flag now fires only on an EVIDENCED bad track
+# record, exonerating the clean reputable banks while still catching genuinely-bad small shops.
+# A1 verdict: NEW improves cross-regime bad-outcome discrimination (3/4 panels positive vs the old
+# rule's 1/4 meaningful) AND un-vetoes 33/34 B1 missed winners → wired LIVE. See docs/research/
+# a1_banker_flag_2026-06.md. Toggle below lets the fold harness A/B the two defs.
+OBSCURE_FREQ_CUTOFF = 12      # the OLD rule's banker-IPO-count threshold (kept for A/B + ref)
+OBSCURE_MIN_PRIOR = 5         # min PIT prior IPOs by the banker before we trust its track record
+OBSCURE_BAD_RATE = 0.40       # PIT prior bad-outcome rate above which the banker is "bad"
+OBSCURE_BANKER_NEW = True     # True = quality-aware PIT (LIVE); False = legacy freq<12 (A/B only)
+
+
+def _banker_prior_badrate(lm, df, asof=None):
+    """Point-in-time (prior_count, prior_bad_rate) for a banker `lm` over `df`: IPOs by the SAME
+    banker that listed STRICTLY BEFORE `asof` (NaN asof → use ALL of df, the live-new-IPO case, since
+    every substrate IPO is prior to a not-yet-listed query). bad = wipeout OR dead-money (same mask as
+    risk_assessment). Returns (n_prior, bad_rate or None)."""
+    if df is None or "lead_manager" not in df.columns:
+        return 0, None
+    same = df["lead_manager"].astype(str).str.strip() == str(lm).strip()
+    g = df[same]
+    if asof is not None:
+        ld = pd.to_datetime(g.get("listing_date"), errors="coerce")
+        a = pd.to_datetime(asof, errors="coerce")
+        if pd.notna(a):
+            g = g[ld < a]
+    n = len(g)
+    if n == 0:
+        return 0, None
+    return n, float(_bad_outcome_mask(g).mean())
+
+
+def _obscure_banker_fires(lm, df, query=None):
+    """Decide the obscure-lead-manager flag for ONE query banker. Returns (fires: bool, why: str).
+    NEW (quality-aware PIT) when OBSCURE_BANKER_NEW; else legacy frequency<12."""
+    if not OBSCURE_BANKER_NEW:
+        freq = int((df["lead_manager"].astype(str).str.strip() == str(lm).strip()).sum())
+        return (freq < OBSCURE_FREQ_CUTOFF), f"only {freq} IPOs by this banker in our data"
+    asof = (query or {}).get("listing_date")
+    n_prior, bad = _banker_prior_badrate(lm, df, asof=asof)
+    if n_prior < OBSCURE_MIN_PRIOR or bad is None:        # thin record → ABSTAIN (don't false-veto)
+        return False, f"banker track record too thin to judge ({n_prior} prior IPOs)"
+    fires = bad >= OBSCURE_BAD_RATE
+    return fires, f"banker's prior IPOs failed {100*bad:.0f}% of the time (N={n_prior}, ≥{int(100*OBSCURE_BAD_RATE)}% = poor)"
+
+
 def wipeout_flags(query, df=None):
     """Check a NEW IPO against the VALIDATED, prospectus-readable wipeout red flags (N14, cross-regime):
-    tiny pre-IPO sales (<25cr), loss-making at IPO (PAT<=0), obscure lead manager (infrequent banker).
-    Only flags fields the query actually provides (unknown ≠ safe — reported as 'unknown'). Returns the
-    tripped flags + how many of the checkable ones fired — the input to the prominent red-flag badge.
+    tiny pre-IPO sales (<25cr), loss-making at IPO (PAT<=0), obscure lead manager (NOW: banker with an
+    evidenced poor point-in-time track record — A1). Only flags fields the query actually provides
+    (unknown ≠ safe — reported as 'unknown'). Returns the tripped flags + how many of the checkable
+    ones fired — the input to the prominent red-flag badge.
     NOTE: micro-cap / low-promoter-holding / GMP are deliberately NOT here (reverse-causation / wrong
     sign — see rules/index.md tested-signal registry)."""
     flags, checked = [], 0
@@ -147,9 +201,9 @@ def wipeout_flags(query, df=None):
     lm = query.get("lead_manager")
     if lm and df is not None and "lead_manager" in df.columns:
         checked += 1
-        freq = int((df["lead_manager"].astype(str).str.strip() == str(lm).strip()).sum())
-        if freq < 12:
-            flags.append(("obscure lead manager", f"only {freq} IPOs by this banker in our data"))
+        fires, why = _obscure_banker_fires(lm, df, query)
+        if fires:
+            flags.append(("obscure lead manager", why))
     return {"n_flags": len(flags), "n_checked": checked, "flags": flags,
             "unknown": [k for k, present in
                         [("pre_ipo_net_sales", sales is not None), ("pre_ipo_pat", pat is not None),
@@ -165,16 +219,50 @@ def _bad_outcome_mask(pool):
     return wipe | dead
 
 
+def _obscure_banker_series(pool, df):
+    """Vectorized obscure-lead-manager flag over a pool, using the SAME definition as wipeout_flags so
+    risk_assessment base-rates stay consistent with the per-query badge.
+    NEW (quality-aware, point-in-time): for each row, fire iff the banker's PRIOR IPOs (>= MIN_PRIOR,
+    listed strictly before THIS row's listing_date, within df) failed at >= BAD_RATE. ABSTAIN (NaN)
+    when the prior record is thin (< MIN_PRIOR). LEGACY (toggle off): freq<12 over the full window."""
+    lm = pool.get("lead_manager")
+    if lm is None:
+        return None
+    if not OBSCURE_BANKER_NEW:
+        freq = lm.astype(str).str.strip().map(df["lead_manager"].astype(str).str.strip().value_counts())
+        return (freq < OBSCURE_FREQ_CUTOFF)
+    d = df.copy()
+    d["_lm"] = d["lead_manager"].astype(str).str.strip()
+    d["_ld"] = pd.to_datetime(d.get("listing_date"), errors="coerce")
+    d["_bad"] = _bad_outcome_mask(d).astype(float)
+    # precompute per-banker sorted (date, bad) so each row's PIT prior stats are a slice
+    by_banker = {b: (g["_ld"].values, g["_bad"].values)
+                 for b, g in d.sort_values("_ld").groupby("_lm")}
+    pl = pool["lead_manager"].astype(str).str.strip()
+    pld = pd.to_datetime(pool.get("listing_date"), errors="coerce")
+    out = pd.Series(np.nan, index=pool.index)
+    for idx in pool.index:
+        b = pl.loc[idx]
+        if b == "" or b == "nan" or b not in by_banker:
+            continue
+        dates, bads = by_banker[b]
+        t = pld.loc[idx] if pld is not None else pd.NaT
+        mask = (dates < np.datetime64(t)) if pd.notna(t) else np.ones(len(dates), dtype=bool)
+        n_prior = int(mask.sum())
+        if n_prior < OBSCURE_MIN_PRIOR:
+            continue                                   # thin → ABSTAIN (NaN), never false-veto
+        out.loc[idx] = 1.0 if (np.nanmean(bads[mask]) >= OBSCURE_BAD_RATE) else 0.0
+    return out
+
+
 def _query_flag_series(pool, df):
-    """The validated pre-listing wipeout flags evaluated over a pool (same defs as N14)."""
+    """The validated pre-listing wipeout flags evaluated over a pool (same defs as N14 / wipeout_flags)."""
     sales = pd.to_numeric(pool.get("pre_ipo_net_sales"), errors="coerce")
     pat = pd.to_numeric(pool.get("pre_ipo_pat"), errors="coerce")
-    lm = pool.get("lead_manager")
-    freq = lm.astype(str).str.strip().map(df["lead_manager"].astype(str).str.strip().value_counts()) if lm is not None else None
     return {
         "tiny sales (<25cr)": (sales < 25),
         "loss-making at IPO": (pat <= 0),
-        "obscure lead manager": (freq < 12) if freq is not None else None,
+        "obscure lead manager": _obscure_banker_series(pool, df),
     }
 
 
