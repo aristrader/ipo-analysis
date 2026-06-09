@@ -220,3 +220,15 @@ results are kept on purpose).
 - margin-expansion-vs-sales-growth (opposite + regime sign-flip) · sales-accel×demand-divergence
   (suggestive +7.1pp but FAILS shuffle placebo p=0.156, boom-only) · same-banker-pipeline-congestion
   (+0.2pp null). threadC_new_hypotheses.py. Do not re-test without new data/framing.
+
+## Night-2 verdicts (2026-06-10 — auto/6hr-batch run)
+- **H7 corp-action euphoria (widens F10): display-only EXIT flag, NARROWED to 1–3m + HIGH run-up.** Treated 3m
+  −22% win 16% vs control −0.6%/50%; PLACEBO passes at 1m/3m (action-specific) but FAILS at 6m/1y (generic
+  euphoria fade — overlaps F5e, DON'T double-count). Run-up is the driver (dose srho 1m −0.74). n=31 = SAME
+  sample as F10 (below per-cohort floor; no dividend ex-dates exist). NOT a score input (post-listing). h7_corp_action_2026-06.md.
+- **A3 capitulation-EXIT re-test: F5e stays display-only LEAN, NOT an act-on sell.** SELLING on the day-90 flag
+  does NOT beat HOLD cross-regime — boom flagged-basket fwd-terminal alpha MEAN +29.1% [boot +6..+56, excludes 0]
+  → selling DESTROYS value. Per-name "sell wins" 57–78% is the MEDIAN TRAP; PLACEBO: non-flagged names drift
+  identically (−7.8 vs −15.4 boom) → negative median is universe-wide post-d90, not flag-specific. 22–43% false
+  exits dump recoverers (Garden Reach +3050%; IRFC/Kalyan near-misses; Fujiyama max90 0.987→+44%). Confirms M1. a3_capitulation_2026-06.md.
+- **A1 banker-flag quality fix: implementer set it LIVE — PENDING adversarial review** (in progress) before accepted; if not robust → display-only. a1_banker_flag_2026-06.md.

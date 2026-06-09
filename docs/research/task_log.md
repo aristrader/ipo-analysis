@@ -128,3 +128,17 @@ series-consistency/real-data reputable exoneration). Full suite 280p/12s, verify
 descriptive historical anatomy; the LIVE predictor flag is what changed). Files: scorecard.py, test_banker_flag.py,
 rules/index.md, docs/research/a1_banker_flag_2026-06.md, tools/research/a1_*.py (WIP). Adversarial review pending.
 Commit on auto/6hr-batch only.
+
+## A3 — 90-day capitulation EXIT re-test (2026-06-09, branch auto/6hr-batch)
+VERDICT: NO — selling on the F5e day-90 flag does NOT beat HOLD cross-regime. Boom flagged-basket
+forward-term alpha mean +29.1% [bootstrap +6..+56%, excludes 0] → selling DESTROYS value; longterm
+noisy (CI straddles 0). Per-name "sell wins" 57-78% is the MEDIAN TRAP — placebo: non-flagged names
+drift identically (boom −7.8% vs −15.4%; longterm −124.6% vs −132.4%) so the negative median is
+universe-wide post-d90, not flag-specific. False-exit rate 22-43% dumps recoverers (Garden Reach
++3050%, IRFC/Kalyan/KFin near-misses; Fujiyama max90=0.987 tripped → +44% terminal, owner's
+counterexample CONFIRMED). F5e stays a display-only FLAG/LEAN, NOT an act-on sell; score unchanged
+(post-listing → never a score input). Confirms M1's right-tail mechanism (not independent). METHOD:
+PIT (capit uses sessions 1..90 only; fwd alpha from d90), survivorship-honest terminals, Wilson CI,
+pure-Python bootstrap, no scipy. FILES: docs/research/a3_capitulation_2026-06.md,
+tools/research/a3_capitulation.py, data/master/review/a3_capitulation_false_exits.csv. Did NOT touch
+rules/index.md (A1 owns concurrently) — proposed registry line is in the writeup for the controller.
