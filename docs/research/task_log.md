@@ -85,3 +85,10 @@ weak-sub = false-APPLY tell) · News R&D (e71dc61; delivery-% demoted, H7 promot
 fix (8c87960, INCOMPLETE/UNREVIEWED — impl in scorecard.py passes tests but missing new-tests+robustness-verdict+
 review). NOT STARTED: A3/H7/E1/H-MVP/A2 + weak-sub guard. Each shipped task ran diverge→build→(walk/grade)→commit;
 A1 stopped before its test+verdict+review stages. Full record: docs/research/batch_run_2026-06-09.md.
+
+## 2026-06-09 — Add RunAtLoad login-catch-up to the notifier launchd agent  [path: HOTFIX]
+Owner Q surfaced that a missed 9:30/14:30/20:30 slot (Mac off/logged-out) isn't retroactively run by launchd.
+Added <key>RunAtLoad</key><true/> to tools/notify/com.ipo.calls.plist → fires a catch-up run shortly after
+login. Safe: the pipeline is idempotent gap-fill + .notified dedup (no-op + no re-spam when nothing missed).
+plutil -lint OK; reinstalled to ~/Library/LaunchAgents + reloaded (unload→load); verified loaded (PID assigned,
+RunAtLoad fired one bg catch-up run). Repo plist committed. Behaviour documented in batch_run_2026-06-09.md.

@@ -3,6 +3,10 @@
 <plist version="1.0">
 <dict>
   <key>Label</key><string>com.ipo.calls</string>
+  <!-- RunAtLoad: fire a catch-up run shortly after login (covers a 9:30/14:30/20:30 slot missed because the
+       Mac was off/logged-out). The pipeline is idempotent gap-fill + .notified dedup, so an extra run is a
+       harmless no-op when nothing was missed. -->
+  <key>RunAtLoad</key><true/>
   <key>ProgramArguments</key>
   <array>
     <string>/Users/swapnilagarwal/Visual_Studio_Projects/ipo-analysis/.venv/bin/python</string>
