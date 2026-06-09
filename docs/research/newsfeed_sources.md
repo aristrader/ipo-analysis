@@ -55,3 +55,12 @@ Ingest effort (S/M/L). Statuses: ✅ probed-OK · ⚠ probed-partial · ◻ not-
 - **Discipline:** stage to `data/live/` keyed on `sm_isin`, never the frozen substrate (same rule as the live board). A raw dated-announcement feed is useful WITHOUT good/bad classification; classification = a separate 3-layer hypothesis test (news edges arbitrage away fast).
 
 _Cited: nseindia.com `/api/corporate-announcements|corporate-board-meetings|event-calendar|corporate-sast-reg29|corporates-pit`; news.google.com/rss/search; economictimes.indiatimes.com/.../2146842.cms; livemint.com/rss/markets; moneycontrol.com/rss; api.bseindia.com/.../AnnGetData/w; business-standard.com/rss-feeds/listing; screener.in/company/<SYM>; sebi.gov.in._
+
+## Addendum 2026-06-09 — delivery-volume% data source (the D2 linchpin)
+- **`sec_bhavdata_full_<DDMMYYYY>.csv`** (host `archives.nseindia.com/products/content/...`) is the free,
+  daily, security-wise delivery file. Cols incl `DELIV_QTY`, `DELIV_PER` (= DELIV_QTY/TTL_TRD_QNTY×100).
+  **This is a SEPARATE file from the cm-bhavcopy our `scrapers/bhavcopy*.py` already pull (those carry NO
+  delivery columns)** → delivery% requires a NEW daily pull + ISIN/symbol join. History depth is shallow:
+  reliably retrievable ~FY2016-17 (~2017)+ (legacy MTO report older but patchy/unconfirmed) → **boom-only,
+  cannot reach the 2006–19 longterm cohort → cannot be cross-regime-validated**. Full availability verdict +
+  3-layer test design + sharpened (weak) prior: `newsfeed_rnd_2026-06-09.md` §1, §3e, §4.

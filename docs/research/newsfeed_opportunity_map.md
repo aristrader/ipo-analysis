@@ -71,3 +71,13 @@ Scope down to the **3 worth doing**: (1) delivery-% [first], (2) H7 corp-action 
 explanatory feed (+ start the announcement staging clock). Park the forward-only hypotheses (collect
 raw history quietly). Kill social / LLM-polarity / all-stocks fusion. Each "do" item enters the
 standard pipeline when picked.
+
+## RE-RANK 2026-06-09 (R&D update — `newsfeed_rnd_2026-06-09.md`, supersedes the order above)
+The delivery-% history finding is the linchpin: `sec_bhavdata_full` delivery data is **boom-only (~2017+)**
+and a SEPARATE pull from our cm-bhavcopy → it **cannot be cross-regime-validated → cannot enter the score**;
+realistic ceiling = display-only, with only a weak (practitioner, non-academic) prior. So:
+- **(1→ now 3) Delivery-%: DEMOTE** to "one disciplined, falsifiable, display-only experiment" — not the linchpin.
+- **(2→ now 1) H7 corp-action backtest: PROMOTE to DO-FIRST** — only item that is data-in-hand (corp_actions.csv,
+  2006+) AND cross-regime-capable AND extends a shipped flag (F10), zero new fragility.
+- **(3) RUNG-1 explanatory feed: KEEP (medium)** — best near-term PRODUCT (turnkey spec in the R&D doc §2),
+  moat-safe display-only; start the announcement staging clock now. KILLs unchanged.

@@ -76,6 +76,13 @@ first — F10 (early corp-action tell), F5e (day-90 capitulation), path_ratio_1m
 - Data: corp_actions.csv (HAVE — ex_date, action_type, ratio). DIRECTLY backtestable NOW; no new feed.
 - Falsifier: with larger N the −22% fwd-3m collapses to control levels (F10 was thin-N noise).
 - Backtestable? YES — already have it. Cross-regime POSSIBLE (corp_actions spans 2006+). Highest feasibility.
+- **PRIOR (2026-06-09 lit review, `newsfeed_rnd_2026-06-09.md` §3c):** the UNCONDITIONAL Indian corp-action
+  announcement effect is SMALL (~1.8% bonus / ~0.8% split) with the stated motive = liquidity/retail
+  participation. So H7's edge is NOT the generic announcement-return literature — it is the narrow
+  behavioral conditioning "corp action timed AFTER a big run in a RECENT IPO marks a retail-demand top."
+  Run H7, but expect the edge (if any) to live entirely in that conditioning; a flat result on
+  unconditioned corp actions does NOT falsify it. **RECOMMENDED DO-FIRST** of the 3 catalyst items
+  (only one that is data-in-hand AND cross-regime-capable — see scope-down §4).
 
 ## H8 — Regulatory/SEBI action or audit-qualification = the wipeout accelerant on flagged names
 - Mechanism: a regulatory red flag landing on a name that ALREADY carries N14 wipeout flags (tiny sales/
