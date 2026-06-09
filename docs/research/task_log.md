@@ -217,3 +217,25 @@ young 2024-25 cohort artifact (unmatured winners); veto dumps winners ~1:1 with 
 docs/research/weaksub_guard_2026-06.md, tools/research/weaksub_guard.py,
 data/master/review/weaksub_guard_apply_pool.csv. Did NOT touch rules/index.md/scorecard.py/
 scorecard_weights.json (parallel agents own them) — proposed registry line in the writeup for the controller.
+
+## J1+J2 — Telegram ops-channel: fail-loud health alerts + heartbeat (2026-06-10, branch auto/6hr-batch)
+SCOPE: THEME J (owner 2026-06-09). Wired observability into the LIVE notifier (tools/notify/notify_calls.py)
+WITHOUT touching the existing actionable-call alert path (🟢/🔴 calls send exactly as before — verified).
+TDD: 20 pure-logic tests written first (tests/notify/test_health_heartbeat.py), confirmed red, then green.
+J1 (fail-loud, throttled): run_pipeline() now captures each step's returncode/exception/timeout as a
+StepResult instead of fire-and-forget subprocess.run. detect_failure(steps, board_ok, ledger_ok) = REAL
+failure only if a step errored AND the run left no usable result (board.json missing/empty/stale->24h OR
+ledger unwritable); a transient that recovered (nonzero rc but fresh non-empty board) -> silent. THROTTLE
+via tools/notify/.health_state (healthy/failed): health_transition sends on healthy->failed ('🚨 HEALTH')
+and failed->recovered ('✅ HEALTH RECOVERED'), silent on failed->failed (no repeat-panic). Telegram send is
+best-effort (_maybe_send wraps in try/except — the scraper host failing must not crash the notifier).
+J2 (heartbeat): each successful run stamps tools/notify/.last_run; heartbeat_note() emits a one-line
+'⚠️ RUN: first run in Nh' when the gap since the last good run exceeds 18h (catches slots missed while the
+Mac was off). Unparseable/missing stamp -> None (never crashes). Both new streams honor --dry-run (print,
+no send). State files gitignored.
+TESTS: tests/notify/test_health_heartbeat.py (20) — failure predicate (real-vs-transient), board usability,
+throttle transitions, heartbeat gap calc + boundary + garbage-safe. Full suite 300 passed / 12 skipped.
+verify.py --quiet exit 0. REAL [TEST] sends: '🚨 HEALTH: [TEST]...' (HTTP 200, ok:true) + '✅ RUN: [TEST]...'
+via _maybe_send -> owner's phone pinged. FILES: tools/notify/notify_calls.py, tests/notify/
+test_health_heartbeat.py, .gitignore. Did NOT touch rules/index.md/scorecard.py/scorecard_weights.json/
+substrate/other agents' files. Existing call-alert path UNCHANGED.
