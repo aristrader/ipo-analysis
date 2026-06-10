@@ -144,6 +144,26 @@ with tab_track:
                        lambda r: ui.rate_with_ci(r["p_up"], r["n"], r["ci_lo"], r["ci_hi"]), axis=1)})
             st.dataframe(rel_d[["score_bucket", "score range", "n", "P(beat Nifty) [95% CI]"]],
                          hide_index=True, use_container_width=True)
+
+        # ===== F2: OOS read over time (the credibility spine — one row per refresh vintage) =====
+        try:
+            from layer3 import config as _cfg
+            _hp = _cfg.ROOT / "data/master/forward_test_history.csv"
+            if _hp.exists():
+                _hist = pd.read_csv(_hp)
+                if not _hist.empty:
+                    st.subheader("🛰 OOS read over time (does the score keep ranking outcomes?)")
+                    st.caption("One row per data refresh. **spread_** = top-minus-bottom score-bucket median "
+                               "outcome (positive = the score ranked the never-seen cohort correctly); "
+                               "**flag_pop_gap** = clean-minus-flagged listing pop (positive = the wipeout flag "
+                               "separated). Every figure is an EARLY READ (pop/1m/3m) — the verdict HARDENS as "
+                               "vintages accrue. This is the honest forward record, not a backtest.")
+                    _cols = [c for c in ["as_of_date", "n_scored", "spread_pop", "spread_1m",
+                                         "spread_3m", "flag_pop_gap", "gmp_pop_spearman"] if c in _hist.columns]
+                    st.dataframe(_hist[_cols], hide_index=True, use_container_width=True)
+        except Exception:
+            pass  # the spine is a bonus view; never let it break the track-record screen
+
         st.divider()
 
         # A. table call_type × mode

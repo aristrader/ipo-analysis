@@ -80,6 +80,7 @@ WEB SOURCES --scrapers/--> data/raw/ + data/reference/ + data/prices/
 - `data/master/delisting.csv` — delisting status/date/reason/last_price (INPUT to step 07)
 - `data/master/review/` — flag/review registers (gaps, ticker_conflicts, xcheck, ...)
 - `data/master/calls_ledger.csv` — the CALLS LEDGER: dated/graded recommendations (run_calls.py owns it)
+- `data/master/forward_test_history.csv` — F2 credibility spine: append-only OOS were-we-right snapshot per refresh vintage (run_forward_test.py)
 
 ## Live staging (`data/live/` — display/calls only, never feeds data/master)
 - `data/live/board.json` — live+upcoming IPO board snapshot (open[]/upcoming[], GMP, sub)

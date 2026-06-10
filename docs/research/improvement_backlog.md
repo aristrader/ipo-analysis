@@ -16,10 +16,6 @@
 ---
 
 ## QUICK / OWNED-DATA (no internet — safe to run anytime)
-### F2 — durable monthly "were-we-right" scorecard  🟡 · S
-The forward test runs ~monthly; make it an append-only, comparable dated artifact (the credibility spine). Small add
-over `run_forward_test`. (F1 paper-portfolio sim + F3 calibration are BUILT — just confirm they're surfaced in the app.)
-
 ## OWNED-DATA, BIGGER
 ### C1 — deeper app polish / redesign pass  🟡 · M · needs the Playwright visual walk
 Night-1 shipped the honesty/nav fixes (median-first, n_floor, COMBINED→rank, sidebar search). Remaining: the broader

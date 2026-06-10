@@ -248,6 +248,17 @@ SAFE (5/5 checks: only intended cells, 309 genuine zeros untouched, 2384 rows, g
 unchanged rows byte-identical). n3 was already guarded so its output is unchanged — I1 is raw-data correctness
 hygiene. tests/data 27 passed, full suite 300p/12s, verify 0. Merged to main.
 
+## 2026-06-10 — F2: durable were-we-right OOS history (credibility spine)  [path: LIGHT, owned-data]
+Made the forward test emit an append-only, comparable artifact. forward_test.py: `history_row` (flattens an
+analyze() result to the score-bucket top−bottom SPREADS + the flag clean−flagged gap + gmp spearman — the
+spreads ARE the "did the score rank outcomes" verdict) + `append_history` (upsert by as_of_date vintage →
+data/master/forward_test_history.csv). Wired into run_forward_test.py. First row seeded (as_of 2026-06-06,
+n=82: spread_1m +12.9 / spread_3m +9.6 → the score ranks 1m/3m of the never-seen cohort; spread_pop weak 0.3).
+Confirmed F1 (₹1L portfolio) + F3 (were-we-right calibration) already surfaced in app/screens/track_record.py;
+added a small "OOS read over time" trajectory table there (defensively wrapped — can't break the screen).
+Tests: test_forward_test.py +2 (spreads, upsert-by-vintage), app smoke passes. NOTE: the new app table is
+logic-safe but its LAYOUT wants a Playwright visual walk when the owner is back (frontend policy).
+
 ## 2026-06-10 — I3: scorecard_weights.json drift protection  [path: LIGHT, hygiene]
 Investigated the silent-drift claim: `derive_weights` IS deterministic (two runs byte-identical), and the two
 research tools that write the canonical path (miss_mining, weaksub_guard) already snapshot+restore it in a

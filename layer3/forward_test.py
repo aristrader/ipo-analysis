@@ -14,7 +14,9 @@ HONESTY RAILS (non-negotiable):
 
 Repeatable: run again as the cohort ages and the early read hardens.
 """
+import csv
 import os
+from datetime import datetime
 
 import pandas as pd
 
@@ -119,3 +121,60 @@ def analyze(scored):
                           "median_pop_when_gmp_ge_20": _med(g[g["gmp_pct"] >= 20]["pop"])[0],
                           "median_pop_when_gmp_lt_20": _med(g[g["gmp_pct"] < 20]["pop"])[0]}
     return out
+
+
+# ---- F2: durable, append-only "were-we-right" history (the credibility spine) -----------------
+# Each refresh vintage gets ONE row capturing whether the score RANKED outcomes (top−bottom bucket
+# spreads) and whether the wipeout flag SEPARATED outcomes. Keyed on as_of_date (the cohort vintage),
+# so re-running the same vintage updates its row and a new refresh appends — the row sequence is the
+# maturation trajectory. Every figure is still an EARLY READ (pop/1m/3m only).
+HISTORY_PATH = config.ROOT / "data/master/forward_test_history.csv"
+HISTORY_COLS = ["as_of_date", "run_date", "n_cohort", "n_scored",
+                "top_bucket_pop", "bot_bucket_pop", "spread_pop",
+                "top_bucket_1m", "bot_bucket_1m", "spread_1m",
+                "top_bucket_3m", "bot_bucket_3m", "spread_3m",
+                "flagged_pop", "clean_pop", "flag_pop_gap", "gmp_pop_spearman"]
+
+
+def _spread(top, bot):
+    return round(top - bot, 1) if (top is not None and bot is not None) else None
+
+
+def history_row(res, as_of, run_date):
+    """Flatten an analyze() result into one comparable history row (the spreads ARE the verdict)."""
+    row = {c: None for c in HISTORY_COLS}
+    row.update({"as_of_date": as_of, "run_date": run_date,
+                "n_cohort": res.get("n_cohort"), "n_scored": res.get("n_scored")})
+    bk = res.get("score_buckets") or []
+    if len(bk) >= 2:
+        top, bot = bk[-1], bk[0]    # buckets are ordered B1..Bn with higher=better last
+        for short, key in (("pop", "median_pop_%"), ("1m", "median_1m_%"), ("3m", "median_3m_%")):
+            t, b = top.get(key), bot.get(key)
+            row[f"top_bucket_{short}"], row[f"bot_bucket_{short}"] = t, b
+            row[f"spread_{short}"] = _spread(t, b)
+    wf = res.get("wipeout_flags") or {}
+    fl, cl = (wf.get("flagged") or {}), (wf.get("clean") or {})
+    row["flagged_pop"], row["clean_pop"] = fl.get("median_pop_%"), cl.get("median_pop_%")
+    # clean−flagged: a working flag means clean names pop MORE → positive gap
+    row["flag_pop_gap"] = _spread(cl.get("median_pop_%"), fl.get("median_pop_%"))
+    row["gmp_pop_spearman"] = (res.get("gmp_pop") or {}).get("spearman")
+    return row
+
+
+def append_history(res, as_of=None, run_date=None, path=HISTORY_PATH):
+    """Upsert this run's summary into the append-only history CSV, keyed on as_of_date (vintage).
+    Returns (row, path). Idempotent within a vintage; comparable across vintages."""
+    as_of = as_of or str(config.AS_OF_DATE)
+    run_date = run_date or datetime.now().strftime("%Y-%m-%d %H:%M")
+    row = history_row(res, as_of, run_date)
+    existing = []
+    if os.path.exists(path):
+        with open(path, newline="") as f:
+            existing = [r for r in csv.DictReader(f) if r.get("as_of_date") != as_of]
+    existing.append({k: ("" if v is None else v) for k, v in row.items()})
+    existing.sort(key=lambda r: str(r.get("as_of_date")))
+    with open(path, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=HISTORY_COLS, extrasaction="ignore")
+        w.writeheader()
+        w.writerows(existing)
+    return row, path

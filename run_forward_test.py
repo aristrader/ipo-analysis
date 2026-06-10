@@ -55,6 +55,11 @@ def main():
     open(out, "w").write("\n".join(lines))
     print(f"\nwritten: {out}")
 
+    # F2: append this vintage's summary to the durable, comparable were-we-right history (credibility spine)
+    row, hpath = ft.append_history(res)
+    print(f"history: appended as_of={row['as_of_date']} (spread_pop={row['spread_pop']}, "
+          f"flag_pop_gap={row['flag_pop_gap']}) → {hpath}")
+
 
 if __name__ == "__main__":
     main()
