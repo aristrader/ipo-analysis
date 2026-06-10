@@ -17,8 +17,14 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
 ---
 
 ## 🏃 NOW
-- **✅ AUTONOMOUS BATCH COMPLETE (nights of 2026-06-09 + 06-10) — all on branch `auto/6hr-batch`, main UNtouched.
-  Awaiting owner review/merge.** Full record: `docs/research/batch_run_2026-06-09.md`.
+- **▶ NEXT (owner available 2026-06-10, babysat session): the NETWORK/SCRAPING backlog items** — start with **D4/D1**
+  (build the NSE corporate-announcements scraper + start the staging pull; D1 spec is turnkey in
+  `docs/research/newsfeed_rnd_2026-06-09.md`), then **E3** (find a dated SME→Mainboard migration source). Network
+  rules still apply (trusted-only allowlist, no downloads, off-list = stop — `docs/research/trusted_sources.md`).
+  Open items: `docs/research/improvement_backlog.md`.
+- **✅ AUTONOMOUS BATCH COMPLETE + MERGED to main (nights of 2026-06-09 + 06-10).** Branches deleted; full suite 300p/12s,
+  verify 0. I1 DONE (merged). Docs consolidated (DONE.md removed → history=git log; 7 feeders archived; INDEX.md map;
+  anti-sprawl discipline in CLAUDE.md). Full record: `docs/research/batch_run_2026-06-09.md`.
   - **NIGHT-1 shipped:** App C1 honesty/nav polish (median-first ₹1L, n_floor scorecard, COMBINED→rank, sidebar
     search; visually walked) · B1 two-sided miss-mining of 364 recent IPOs · News R&D (delivery-% demoted, H7 promoted).
   - **Subscription-parser bug** (live-feed only): found + fixed + hardened (label-variant robust); 8 affected live
