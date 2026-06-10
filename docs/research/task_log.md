@@ -248,6 +248,30 @@ SAFE (5/5 checks: only intended cells, 309 genuine zeros untouched, 2384 rows, g
 unchanged rows byte-identical). n3 was already guarded so its output is unchanged — I1 is raw-data correctness
 hygiene. tests/data 27 passed, full suite 300p/12s, verify 0. Merged to main.
 
+## 2026-06-10 — D1/D4: NSE corporate-announcements context feed (build + history-depth R&D)  [path: FULL, network build]
+Babysat network session. BUILT the RUNG-1 explanatory feed: `layer3/news/taxonomy.py` (local rule-based
+categories + look-ahead-safe actionable_from + parse_an_dt; NO LLM, NO polarity), `layer3/news/staging.py`
+(normalize raw NSE row → staging row + idempotent upsert), `scrapers/announcements.py` (curl_cffi NSE pull via
+nse_session → data/live/news/; zero downloads, never touches substrate). DIVERGE stage was pre-done (the spec
+`newsfeed_rnd_2026-06-09.md` §2 is turnkey) so right-sized to TDD build → independent review → fix.
+R&D SUB-AGENT (history depth, owner's question "can we get OLD notices?"): VERDICT = YES. The default per-symbol
+call ALREADY returns FULL history (back to ~Sept-2004, no row cap to ~5k, delisted names to delisting) — the
+"~18-28" was just genuinely-young names (GSPCROP). So this pull IS the backfill; no date paging. `index=equities`
+is the SUPERSET for ALL incl. SME (BTML 327 vs sme 115). CAVEAT: payload `sm_isin` can be a PRE-SPLIT ISIN
+(BTML files under INE0EEJ01015, substrate has INE0EEJ01023 — a face-value split changes the ISIN), so the render
+join must key on SYMBOL (staging stores both); 0-row/drift symbols (e.g. TATAMOTORS=0, renamed) recorded to
+coverage_misses.csv (flag-don't-drop).
+INDEPENDENT REVIEW (superpowers:code-reviewer, adversarial): substrate-untouched + zero-download rails confirmed
+AIRTIGHT. Fixed before commit: I1 (taxonomy substring false-positives — "rating"∈"narrating"/"operating" etc;
+→ word-boundary regex `\b…s?\b`, also handles plurals), I2 (dedup key collapsed distinct same-minute filings under
+identical desc; → include attchmntText in hash; spec §2d amended), M1-M3 (misses classification → single source,
+subset runs no longer clobber the canonical misses file), M4 (date-only/unknown-time → stamped at 15:30 close =
+conservative look-ahead-safe). Added the 8 missing-edge-case tests the reviewer named.
+TESTS: tests/layer3/test_news.py 22 passed (was 14). Full suite 322p/12s. verify.py exit 0 (334 collected).
+project_map updated (DATA_LIVE, LAYER3, ENTRYPOINTS, CONTEXTS, test-routing). Did NOT touch
+scorecard.py/weights/substrate/rules verdicts — this is DISPLAY-ONLY context, outside the score by design.
+NEXT in-session: run the full forward-collect/backfill pull (~1685 nse_symbols) → data/live/news/.
+
 ## 2026-06-10 — Doc consolidation round 2: remove DONE.md, finalize anti-sprawl  [path: LIGHT, docs]
 Removed DONE.md (redundant with git log; content preserved in git history). Repointed all 17 spine references
 (project_map, CLAUDE, STATUS, MAP, WORKFLOWS, improvement_backlog, README) → "history = git log". Archival/concluded

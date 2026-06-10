@@ -169,7 +169,11 @@ Keep the keyword map in a versioned local file (e.g. `layer3/news/taxonomy.py`);
   `sm_isin` + `an_dt`. **NEVER write into the frozen substrate** (`ipo_analysis.csv`) — same rule as the live
   board (`newsfeed_sources.md` discipline). The substrate stays the survivorship-clean, point-in-time
   research base; the feed is a mutable display overlay joined at render time.
-- Idempotent upsert on (`sm_isin`,`an_dt`,`desc`-hash); store `attchmntFile` URL only (zero downloads).
+- Idempotent upsert on (`sm_isin`,`an_dt`,`desc`+`attchmntText`-hash); store `attchmntFile` URL only
+  (zero downloads). [AMENDED 2026-06-10 at build: the key includes `attchmntText`, not `desc` alone —
+  NSE often files several DISTINCT attachments in the same minute under an identical subject `desc`
+  ("Outcome of Board Meeting"); hashing `desc` alone collapsed them and silently dropped a real filing.
+  Caught by the build's independent review.]
 - Forward-collect: the API skews recent + 0-coverage on old/illiquid names (prior probe) → start the daily
   pull NOW to accrue history; "no news found" ≠ "no event" (survivorship caveat shown in UI).
 

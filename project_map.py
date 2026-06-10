@@ -72,6 +72,7 @@ DATA_LIVE = {
     "data/live/board.json":       "live+upcoming IPO board snapshot (open[]/upcoming[], GMP, sub)",
     "data/live/daywise_sub.csv":  "accumulating day-wise subscription dataset (the day-1 question, Branch B)",
     "data/live/gmp_history.csv":  "pre-listing GMP trajectory (open+upcoming, accumulating; Thread B)",
+    "data/live/news/":            "NSE corporate-announcements staging (D1/D4 context feed; announcements_staging.csv + coverage_misses.csv; display-only, join by SYMBOL)",
 }
 
 # raw + reference inputs (scrapers write here; pipeline reads here)
@@ -104,6 +105,8 @@ LAYER3 = {
     "layer3/predictor/weights.py":   "data-informed weights (point-in-time rank-IC, cross-regime)",
     "layer3/predictor/analogs.py":   "comparables / analog selection",
     "layer3/predictor/predict.py":   "assemble the full 'Evaluate this IPO' report",
+    "layer3/news/taxonomy.py":       "local rule-based announcement categories + look-ahead-safe actionable_from (no LLM/polarity)",
+    "layer3/news/staging.py":        "normalize NSE announcement rows + idempotent upsert (display overlay, never substrate)",
     "layer3/backtest/":   "engine + analyses + score_backtest (vs do-nothing)",
     "layer3/validate.py": "cross-regime validation (boom vs 2006-19)",
     "layer3/calls.py":    "CALLS ENGINE: event-anchored point-in-time calls + gap-fill walk + grading",
@@ -128,6 +131,7 @@ ENTRYPOINTS = {
     "PYTHONPATH=. python run_portfolio.py":      "₹1L paper-portfolio sim vs Nifty (--stock ISIN = per-stock growth)",
     "PYTHONPATH=. python run_scorecard.py":      "were-we-right scorecard + score-ordering (--horizon 1m/3m/1y)",
     "PYTHONPATH=. python scrapers/live_board.py": "fetch the live+upcoming IPO board -> data/live/",
+    "PYTHONPATH=. python scrapers/announcements.py": "collect NSE corporate-announcement history -> data/live/news/ (D1/D4; --limit/--symbols)",
 }
 
 # ------------------------------------------------------- where the rules/state live
@@ -161,6 +165,11 @@ CONTEXTS = {
     ],
     "scrapers / data sources": [
         "scrapers/", "scrapers/nse_session.py", "docs/sources.md", "tests/scrapers/",
+    ],
+    "news / announcement context feed (D1/D4)": [
+        "scrapers/announcements.py", "layer3/news/taxonomy.py", "layer3/news/staging.py",
+        "tests/layer3/test_news.py", "data/live/news/",
+        "docs/research/newsfeed_rnd_2026-06-09.md", "docs/research/newsfeed_opportunity_map.md",
     ],
     "backtest a strategy": [
         "layer3/backtest/", "run_backtest.py", "docs/strategies.md",
@@ -230,6 +239,8 @@ TEST_ROUTING = [
     ("scrapers/live_board.py", ["PYTHONPATH=. pytest tests/scrapers/test_live_board.py -q"]),
     ("run_calls.py", ["PYTHONPATH=. pytest tests/layer3/test_calls.py -q"]),
     ("scrapers/live_board.py", ["PYTHONPATH=. pytest tests/scrapers/test_live_board.py -q"]),
+    ("scrapers/announcements.py", ["PYTHONPATH=. pytest tests/layer3/test_news.py -q"]),
+    ("layer3/news/*", ["PYTHONPATH=. pytest tests/layer3/test_news.py -q"]),
     ("pipeline/07_returns_summary.py",
      ["PYTHONPATH=. pytest tests/pipeline tests/data -q",
       "SHOWDOWN=1 PYTHONPATH=. pytest tests/showdown/test_pipeline_sandbox.py -q  # before release"]),

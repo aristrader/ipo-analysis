@@ -18,6 +18,7 @@
 - `PYTHONPATH=. python run_portfolio.py` — ₹1L paper-portfolio sim vs Nifty (--stock ISIN = per-stock growth)
 - `PYTHONPATH=. python run_scorecard.py` — were-we-right scorecard + score-ordering (--horizon 1m/3m/1y)
 - `PYTHONPATH=. python scrapers/live_board.py` — fetch the live+upcoming IPO board -> data/live/
+- `PYTHONPATH=. python scrapers/announcements.py` — collect NSE corporate-announcement history -> data/live/news/ (D1/D4; --limit/--symbols)
 
 ## Context index — working on X? open these
 - **score / evaluate a new IPO** → `layer3/predictor/scorecard.py`, `layer3/predictor/weights.py`, `layer3/predictor/predict.py`, `layer3/predictor/analogs.py`, `rules/index.md`, `predict_ipo.py`, `tests/layer3/test_predictor.py`
@@ -25,6 +26,7 @@
 - **prices / returns / MFE-MAE / listing-day** → `pipeline/07_returns_summary.py`, `scrapers/screener_prices_merge.py`, `pipeline/listing_remediation.py`, `tests/pipeline/test_returns_math.py`, `tests/pipeline/test_listing_remediation.py`
 - **build / fix the dataset (pipeline)** → `run_all.py`, `project_map.py`, `docs/pipeline.md`, `pipeline/`, `pipeline/lib.py`
 - **scrapers / data sources** → `scrapers/`, `scrapers/nse_session.py`, `docs/sources.md`, `tests/scrapers/`
+- **news / announcement context feed (D1/D4)** → `scrapers/announcements.py`, `layer3/news/taxonomy.py`, `layer3/news/staging.py`, `tests/layer3/test_news.py`, `data/live/news/`, `docs/research/newsfeed_rnd_2026-06-09.md`, `docs/research/newsfeed_opportunity_map.md`
 - **backtest a strategy** → `layer3/backtest/`, `run_backtest.py`, `docs/strategies.md`, `tests/layer3/test_backtest.py`, `tests/layer3/test_score_backtest.py`
 - **cross-regime validation / OOS** → `layer3/validate.py`, `run_validation.py`, `run_oos.py`, `tests/layer3/test_validate.py`
 - **the app / UI** → `app.py`, `docs/research/app_phase2_design.md`, `docs/research/recommendations_system_discussion.md`, `docs/research/newsfeed_opportunity_map.md`, `docs/research/fujiyama_park_case.md`
@@ -83,6 +85,7 @@ WEB SOURCES --scrapers/--> data/raw/ + data/reference/ + data/prices/
 - `data/live/board.json` — live+upcoming IPO board snapshot (open[]/upcoming[], GMP, sub)
 - `data/live/daywise_sub.csv` — accumulating day-wise subscription dataset (the day-1 question, Branch B)
 - `data/live/gmp_history.csv` — pre-listing GMP trajectory (open+upcoming, accumulating; Thread B)
+- `data/live/news/` — NSE corporate-announcements staging (D1/D4 context feed; announcements_staging.csv + coverage_misses.csv; display-only, join by SYMBOL)
 
 ## Tree — directories
 - `scrapers/` — ONE file per data SOURCE; fetch RAW only, never transform
@@ -104,6 +107,8 @@ WEB SOURCES --scrapers/--> data/raw/ + data/reference/ + data/prices/
 - `layer3/predictor/weights.py` — data-informed weights (point-in-time rank-IC, cross-regime)
 - `layer3/predictor/analogs.py` — comparables / analog selection
 - `layer3/predictor/predict.py` — assemble the full 'Evaluate this IPO' report
+- `layer3/news/taxonomy.py` — local rule-based announcement categories + look-ahead-safe actionable_from (no LLM/polarity)
+- `layer3/news/staging.py` — normalize NSE announcement rows + idempotent upsert (display overlay, never substrate)
 - `layer3/backtest/` — engine + analyses + score_backtest (vs do-nothing)
 - `layer3/validate.py` — cross-regime validation (boom vs 2006-19)
 - `layer3/calls.py` — CALLS ENGINE: event-anchored point-in-time calls + gap-fill walk + grading
