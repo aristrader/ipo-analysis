@@ -247,3 +247,10 @@ breakdown, not real 0×). Diff = exactly 96 cells / 32 rows, nothing else. INDEP
 SAFE (5/5 checks: only intended cells, 309 genuine zeros untouched, 2384 rows, golden tests + verify pass, 5
 unchanged rows byte-identical). n3 was already guarded so its output is unchanged — I1 is raw-data correctness
 hygiene. tests/data 27 passed, full suite 300p/12s, verify 0. Merged to main.
+
+## 2026-06-10 — Doc consolidation round 2: remove DONE.md, finalize anti-sprawl  [path: LIGHT, docs]
+Removed DONE.md (redundant with git log; content preserved in git history). Repointed all 17 spine references
+(project_map, CLAUDE, STATUS, MAP, WORKFLOWS, improvement_backlog, README) → "history = git log". Archival/concluded
+docs keep their dated DONE.md citations (recoverable via git log by date). Earlier this session: archived 6 feeder
+planning docs + old session log → docs/research/archive/, generated docs/research/INDEX.md (map of all docs),
+backlog stripped to OPEN-only, lean README → INDEX, doc-discipline locked in CLAUDE.md. verify exit 0.

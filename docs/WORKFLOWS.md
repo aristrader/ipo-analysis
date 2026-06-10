@@ -42,8 +42,8 @@ catches most drift — these rules tell you what to update so it stays green.
 
 - **Finish a chunk of work**
   → `python verify.py` (PASS + MAP.md fresh) → `pytest tests -q` (all green) →
-  write what happened in `DONE.md`, then **REMOVE the item from `STATUS.md`** (STATUS holds ONLY
-  live state + what's next — completed work must MOVE to DONE.md, never accumulate in STATUS) →
+  record what happened in the git commit message, then **REMOVE the item from `STATUS.md`** (STATUS holds ONLY
+  live state + what's next — completed work leaves STATUS (history = git log), never accumulate) →
   commit (LOCAL-ONLY, no remote).
 
 ## Change → tests routing (mechanical, every turn)

@@ -32,7 +32,7 @@
 - **how to work / execution pipeline** → `docs/research/execution_pipeline.md`, `docs/research/task_log.md`, `docs/research/hypothesis_protocol.md`
 - **test a hypothesis / research agent brief** → `docs/research/hypothesis_protocol.md`, `rules/index.md`, `docs/research/phase2_playbooks.md`, `tools/research/`, `docs/research/tier1_wave1_verdicts.md`
 - **recommendations / calls ledger / live board** → `layer3/calls.py`, `run_calls.py`, `scrapers/live_board.py`, `data/master/calls_ledger.csv`, `tests/layer3/test_calls.py`, `tests/scrapers/test_live_board.py`, `docs/superpowers/specs/2026-06-07-calls-engine-design.md`, `docs/research/recommendations_system_discussion.md`
-- **what's done / what's next / project state** → `STATUS.md`, `DONE.md`, `CLAUDE.md`, `rules/index.md`
+- **what's done / what's next / project state** → `STATUS.md`, `CLAUDE.md`, `rules/index.md`
 - **improvement backlog / what to build next** → `docs/research/improvement_backlog.md`, `docs/research/fujiyama_park_case.md`, `docs/research/INDEX.md`
 - **testing / verification / the showdown** → `tests/`, `tests/data/`, `tests/showdown/`, `tools/mutation/`, `pytest.ini`, `docs/research/showdown_audit.md`, `docs/research/showdown_pipeline_diff.md`, `docs/research/showdown_mutation.md`
 - **schema / what a column means** → `docs/schema.md`, `data/master/ipo_analysis.csv`
@@ -115,7 +115,6 @@ WEB SOURCES --scrapers/--> data/raw/ + data/reference/ + data/prices/
 - `rules/README.md` — the registry entry template
 - `CLAUDE.md` — conventions/decisions/repo-map (the brain; auto-loaded)
 - `STATUS.md` — live 'where are we / what's next' (verify from ground truth, never memory)
-- `DONE.md` — append-only history
 
 ## Invariants (re-derived by verify.py)
 - n_findings = 29

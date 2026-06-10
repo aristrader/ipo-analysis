@@ -66,8 +66,7 @@ incl. delisted)** and turn them into (a) descriptive truths, (b) an analog-based
   rules/index updated as work happens; `verify.py` enforces it.
 - **`docs/research/INDEX.md`** = the generated map of ALL research docs (active + archived), by status. **DOC
   DISCIPLINE (owner 2026-06-10, anti-sprawl):** ONE home per info type — open WORK → `improvement_backlog.md`
-  (open items only); every signal's verdict → `rules/index.md`; history → **git log** (DONE.md is milestone-only,
-  not a per-task log — don't triple-log git+task_log+DONE); structure → `project_map.py`. **Don't spawn a new
+  (open items only); every signal's verdict → `rules/index.md`; history → **git log** (the single drift-free record — do NOT duplicate it in a tracking doc); structure → `project_map.py`. **Don't spawn a new
   tracking doc — extend the canonical one.** When a thread concludes: move the item to DONE/rules, leave/`archive/`
   its write-up. Superseded planning docs live in `docs/research/archive/`.
 
@@ -75,7 +74,7 @@ incl. delisted)** and turn them into (a) descriptive truths, (b) an analog-based
 1. `docs/sources.md` — every data source (access, fields, coverage, free/premium). 2. `docs/schema.md` — columns.
 3. `docs/pipeline.md` — run order. 4. `docs/strategies.md` — the prioritized Layer-3 catalog (rules/predictors/
 backtests + the method spine). 5. `docs/layer2.md` / `docs/layer3.md` — design decisions. 6. `docs/data_review.md`
-— every doubtful/partial item to fix later. 7. `STATUS.md` / `DONE.md` — work tracking.
+— every doubtful/partial item to fix later. 7. `STATUS.md` — live work tracking (history → git log).
 
 ## Repo map
 - `scrapers/` — one file per SOURCE (chittorgarh, sharescart, screener, exchange_lists, bhavcopy, bhavcopy_ohlc,

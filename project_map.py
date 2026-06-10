@@ -137,7 +137,6 @@ RULES_AND_STATE = {
     "rules/README.md": "the registry entry template",
     "CLAUDE.md":       "conventions/decisions/repo-map (the brain; auto-loaded)",
     "STATUS.md":       "live 'where are we / what's next' (verify from ground truth, never memory)",
-    "DONE.md":         "append-only history",
 }
 
 # ------------------------------------------------------------ CONTEXT INDEX
@@ -193,7 +192,7 @@ CONTEXTS = {
         "docs/superpowers/specs/2026-06-07-calls-engine-design.md",
         "docs/research/recommendations_system_discussion.md",
     ],
-    "what's done / what's next / project state": ["STATUS.md", "DONE.md", "CLAUDE.md", "rules/index.md"],
+    "what's done / what's next / project state": ["STATUS.md", "CLAUDE.md", "rules/index.md"],
     "improvement backlog / what to build next": [
         "docs/research/improvement_backlog.md", "docs/research/fujiyama_park_case.md",
         "docs/research/INDEX.md",   # map of all research docs (active + archived feeders)

@@ -1,12 +1,12 @@
 # Improvement backlog — OPEN items only (the single living menu)
 
-> **This lists only what's LEFT to do.** Completed work → `DONE.md` (history) + `rules/index.md` (signal verdicts).
+> **This lists only what's LEFT to do.** Completed work → git log (history) + `rules/index.md` (signal verdicts).
 > Map of all research docs → `docs/research/INDEX.md`. Deeper rationale for feeder ideas → archived planning docs.
 >
 > Ethos: only-what-works (3-layer validated) · free data · no ML · analog-based · survivorship-honest.
 > Each item runs through `execution_pipeline.md`. Status: ⚪ proposed · 🟡 partial · 🔬 research/data-gated. Effort S/M/L.
 
-> **Done in the 2-night batch (2026-06-09/10), now in DONE.md:** A1 (→display-only via review), A2, A3, B1, C2,
+> **Done in the 2-night batch (2026-06-09/10) — see git log:** A1 (→display-only via review), A2, A3, B1, C2,
 > D3/H7, E1, H-MVP, weak-sub guard, I1, J1, J2, app honesty/nav polish. **Net: zero new live-score components
 > (all tested signals landed display-only/reject/redundant — the honest outcome).**
 
@@ -58,10 +58,10 @@ H-MVP (owned-data peers) done → redundant-with-n6, boom-only. The bigger versi
 intrinsic-value models) is a real sub-project; DON'T advance to it on valuation grounds (it hits the same wall). Gated.
 ### G1 — Microcap / SME-seasoned small-cap RISK & MOVEMENT screener  🔬 · L
 The on-moat first slice beyond IPOs; build a SCREENER (risk/movement/quality), NOT a return predictor. Only after the
-IPO tool's polish is fully done. Source: `extension_roadmap.md` (archived).
+IPO tool's polish is fully done. Source: `archive/extension_roadmap.md`.
 ### G2 — Swing-trade buy/sell calls  🔬 · L
 Research-gated. EXIT side tested (no blanket take-profit beats hold); ENTRY side weak. Needs a new entry signal that
-survives the 3-layer protocol, or the news feed (D1/D2). Source: `future_ideas.md` (archived).
+survives the 3-layer protocol, or the news feed (D1/D2). Source: `archive/future_ideas.md`.
 
 ## KILLED — do NOT rabbit-hole
 Social sentiment · hosted-LLM headline polarity · RSS fuzzy ISIN-matching · F&O/options-OI · all-stocks TA+FA+news
@@ -73,4 +73,4 @@ fusion · weak-subscription veto (2026-06-10: B1's tell was a young-cohort artif
 ## How to use this
 - **Pick from here.** Current do-firsts (quick, owned-data): **A1b** (proper banker fix), **I3** (weights hygiene),
   **F2** (durable scorecard). Network items (D1/D4/E3) need a babysat session; H-full/G1/G2 are big-project decisions.
-- When an item ships: move it to `DONE.md`, put the signal verdict in `rules/index.md`, remove it from here. New idea → add here first.
+- When an item ships: record it in the git commit, put the signal verdict in `rules/index.md`, remove it from here. New idea → add here first.

@@ -4,7 +4,7 @@
 > (run from this directory; or `claude --resume` → pick top; `claude -c` = most recent)
 
 > **Rule:** this is the ONE status file — live state + what's next ONLY. **Verify state from GROUND
-> TRUTH (files / command output), never from memory.** "What happened" (history) → `DONE.md`.
+> TRUTH (files / command output), never from memory.** "What happened" (history) → **git log**.
 > "What is this / conventions" → `CLAUDE.md`. "Findings + tested-signal registry" → `rules/index.md`.
 > Quick check: `python verify.py` (counts, drift, data-vs-backup; regenerates MAP.md).
 
@@ -35,14 +35,14 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
     has A1b (banker coverage-guard hybrid) + I3 (weights-file churn hygiene).**
 - **Nothing in progress — next-level program + the full multi-dimensional ENHANCEMENT pass COMPLETE
   (2026-06-08).** Every task with current work went through diverge (thinking-agent lenses) →
-  converge → build → review → test. System at rest, forward-tracking itself. History → `DONE.md`.
+  converge → build → review → test. System at rest, forward-tracking itself. History → git log.
 - **Enhancement outcomes:** Task 1 portfolio/scorecard — 2 review rounds caught + fixed real
   misleading-number bugs (median now shown next to mean, lift made apples-to-apples, ₹1L chart
   starts clean, APPLY graded on allottee view). Task 3 (Thread B) — gate hardened (enums,
   scoped-score, referential, scale-inversion; raises on refresh; runs each turn). Task 4 (Thread C)
   — 3 NEW hypotheses generated + tested with placebo, all rejected (0 new signals = honest).
 - **Future builds (get their own divergence pass WHEN built, not before):** news-feed (scoped
-  VIABLE), broader app redesign. Both in `docs/research/archive/future_ideas.md` / NEXT.md.
+  VIABLE), broader app redesign. Both in `docs/research/archive/` (future_ideas / NEXT).
 - **Running parts:** Telegram notifier (thrice-daily + RunAtLoad login-catch-up) · calls ledger ~5,170 · schema
   gate in the per-turn verify hook + refresh · Playwright ALWAYS ON, localhost-pinned (owner 2026-06-10).
 - **Commands:** app `streamlit run app.py` · `run_portfolio.py` · `run_scorecard.py` ·
@@ -66,7 +66,7 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
 - **Microcap extension** — the one major optional sub-project
   (`docs/research/microcap_extension_thinking.md`).
 
-## 🅿 PARKED / REJECTED (decided — don't re-litigate; evidence in DONE.md + rules/index.md)
+## 🅿 PARKED / REJECTED (decided — don't re-litigate; evidence in git log + rules/index.md)
 - **~30 hypothesis-batch rejections** + earlier: SHORT score, market-momentum/sector-heat/commodity
   context, "hot pops fade" (opposite holds), exit-timing rules vs buy-and-hold.
 - **DRHP bulk recovery** — parked (can't get the useful columns reliably; analysis unaffected).
