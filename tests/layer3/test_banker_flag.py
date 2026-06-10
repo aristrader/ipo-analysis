@@ -37,12 +37,12 @@ def _mini(rows):
 
 
 @pytest.fixture(autouse=True)
-def _force_new_def():
-    """Every test here exercises the LIVE (NEW) definition; restore the module flag afterwards."""
-    prev = scorecard.OBSCURE_BANKER_NEW
-    scorecard.OBSCURE_BANKER_NEW = True
+def _force_quality_def():
+    """These tests pin the QUALITY (PIT bad-rate) definition's contract; restore the mode after."""
+    prev = scorecard.OBSCURE_BANKER_MODE
+    scorecard.OBSCURE_BANKER_MODE = "quality"
     yield
-    scorecard.OBSCURE_BANKER_NEW = prev
+    scorecard.OBSCURE_BANKER_MODE = prev
 
 
 # ---- 1a. reputable banker with a CLEAN (>=MIN_PRIOR, low-bad) prior record → NOT flagged -----
@@ -54,10 +54,10 @@ def test_clean_record_banker_not_flagged():
     fires, why = scorecard._obscure_banker_fires("GoodBank", df, q)
     assert fires is False, why
     # and the OLD rule really would have fired (proves the fix matters, not a no-op)
-    scorecard.OBSCURE_BANKER_NEW = False
+    scorecard.OBSCURE_BANKER_MODE = "legacy"
     old_fires, _ = scorecard._obscure_banker_fires("GoodBank", df, q)
     assert old_fires is True
-    scorecard.OBSCURE_BANKER_NEW = True
+    scorecard.OBSCURE_BANKER_MODE = "quality"
 
 
 # ---- 1b. genuinely-poor small banker (>=MIN_PRIOR, high-bad) → flagged ------------------------
@@ -143,6 +143,63 @@ def df_real():
 def test_reputable_banks_not_flagged_on_real_data(df_real, banker):
     # live query (no listing_date) uses the banker's FULL real history; reputable banks have a
     # clean prior record so the NEW flag must not fire (the OLD freq<12 rule false-vetoed them).
-    scorecard.OBSCURE_BANKER_NEW = True
+    scorecard.OBSCURE_BANKER_MODE = "quality"
     fires, why = scorecard._obscure_banker_fires(banker, df_real, {"lead_manager": banker})
     assert fires is False, f"{banker} should be exonerated, got: {why}"
+
+
+# ============================================================================================
+# A1b coverage-guard (LIVE) — the thin-record leg the quality def abstained on. Pins the MB/SME
+# asymmetry that recovers recall WITHOUT re-introducing the false-veto.
+# ============================================================================================
+def _mini_mb(rows):
+    df = _mini(rows)
+    df["type"] = "MB"
+    return df
+
+
+def test_coverage_guard_thin_sme_banker_fires():
+    # a thin-record SME banker (2 priors < MIN_PRIOR, freq<12) FIRES under coverage_guard — the
+    # recall-recovery leg that the quality def (abstain) missed.
+    scorecard.OBSCURE_BANKER_MODE = "coverage_guard"
+    df = _mini([("TinyShop", "2022-01-01", False), ("TinyShop", "2022-02-01", False)])  # type SME
+    q = {"lead_manager": "TinyShop", "listing_date": "2024-01-01", "type": "SME"}
+    fires, why = scorecard._obscure_banker_fires("TinyShop", df, q)
+    assert fires is True, why
+    assert "thin-record" in why.lower() or "small-shop" in why.lower()
+
+
+def test_coverage_guard_thin_mainboard_banker_not_vetoed():
+    # SAME thin record but a MAINBOARD query must NOT fire — this is the false-veto the freq<12 rule
+    # caused (Nuvama/Morgan Stanley) and the asymmetry coverage_guard exists to fix.
+    scorecard.OBSCURE_BANKER_MODE = "coverage_guard"
+    df = _mini_mb([("BigBankThin", "2022-01-01", False), ("BigBankThin", "2022-02-01", False)])
+    q = {"lead_manager": "BigBankThin", "listing_date": "2024-01-01", "type": "MB"}
+    fires, why = scorecard._obscure_banker_fires("BigBankThin", df, q)
+    assert fires is False, why
+
+
+def test_coverage_guard_record_bearing_clean_bank_still_exonerated():
+    # record-bearing path is shared with quality: a clean >=MIN_PRIOR SME banker is NOT flagged even
+    # under coverage_guard (the thin-SME leg only applies when the prior record is thin).
+    scorecard.OBSCURE_BANKER_MODE = "coverage_guard"
+    df = _mini([("GoodSME", f"2022-0{i+1}-01", False) for i in range(6)])
+    q = {"lead_manager": "GoodSME", "listing_date": "2024-01-01", "type": "SME"}
+    fires, _ = scorecard._obscure_banker_fires("GoodSME", df, q)
+    assert fires is False
+
+
+def test_coverage_guard_series_thin_sme_decisive_not_nan():
+    # the vectorized series must be DECISIVE (0/1) for thin records under coverage_guard, not NaN:
+    # a thin-record SME row fires (1.0); a thin-record MB row does not (0.0).
+    scorecard.OBSCURE_BANKER_MODE = "coverage_guard"
+    df = _mini([("TinySME", "2022-01-01", False), ("TinySME", "2023-01-01", False)])  # SME, 1 prior for row2
+    df.loc[1, "listing_date"] = "2023-01-01"
+    series = scorecard._obscure_banker_series(df, df)
+    row2 = df.index[df["listing_date"] == "2023-01-01"][0]
+    assert series.loc[row2] == 1.0  # thin SME → decisive fire, not abstain
+    # MB variant of the same thin record → decisive 0.0
+    dmb = _mini_mb([("TinyMB", "2022-01-01", False), ("TinyMB", "2023-01-01", False)])
+    smb = scorecard._obscure_banker_series(dmb, dmb)
+    r2 = dmb.index[dmb["listing_date"] == "2023-01-01"][0]
+    assert smb.loc[r2] == 0.0

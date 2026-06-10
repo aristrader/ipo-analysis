@@ -9,17 +9,13 @@
 > **Done in the 2-night batch (2026-06-09/10) — see git log:** A1 (→display-only via review), A2, A3, B1, C2,
 > D3/H7, E1, H-MVP, weak-sub guard, I1, J1, J2, app honesty/nav polish. **Net: zero new live-score components
 > (all tested signals landed display-only/reject/redundant — the honest outcome).**
+> **Done 2026-06-10 (babysat session):** D1/D4 (NSE announcement context feed + full-history pull), **A1b
+> (banker coverage-guard hybrid → PROMOTED LIVE by independent review — the ONE signal change that cleared the
+> bar: recovers recall + keeps the false-veto fix).**
 
 ---
 
 ## QUICK / OWNED-DATA (no internet — safe to run anytime)
-### A1b — banker-flag coverage-guard hybrid  ⚪ · M · **do-first**
-The proper fix after A1 was downgraded. A1's quality-aware def exonerates reputable banks (good) but ABSTAINS on
-thin-record bankers → halves wipeout recall (misses ~78 small-shop SME wipeouts). HYBRID: keep the quality def for
-the reputable-bank cleanup (display badge), AND retain a frequency/size leg for THIN-RECORD SME so genuinely-obscure
-small shops still flag. **Promotion to LIVE requires recall NOT to regress** vs the legacy baseline + cross-regime lift.
-Code is staged behind `OBSCURE_BANKER_NEW` in `scorecard.py`. Source: `a1_banker_flag_2026-06.md` + its review.
-
 ### I3 — canonical scorecard_weights.json silently re-derived  ⚪ · S · hygiene
 During dev/suite runs the canonical `data/master/scorecard_weights.json` gets overwritten with slightly-varying
 (non-deterministic) but sane re-derivations by an unpinned derive+save path (NOT run_calls/run_refresh; showdown is

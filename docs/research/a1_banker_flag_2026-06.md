@@ -157,3 +157,10 @@ Independent skeptic reproduced all numbers. The NEW def is genuine + look-ahead-
   higher-N 3y fold (n=211) DEGRADES. Placebo survives (~11pp clean). Params SME-boom-robust but headline knife-edge.
 ACTION TAKEN: `OBSCURE_BANKER_NEW=False` (reverted live flag to legacy freq<12 baseline). NEW code retained behind the
 toggle for the A1b hybrid. Re-promotion bar: recall must NOT regress.
+
+## SUPERSEDED (2026-06-10): A1b coverage-guard hybrid PROMOTED TO LIVE
+The display-only downgrade above was the right call for the pure quality def (recall halved). The follow-up
+**A1b coverage-guard hybrid** (`docs/research/a1b_coverage_guard_2026-06-10.md`) recovers the recall (24.6% ≈
+legacy 25.4%) by adding an SME-restricted freq<12 leg for thin-record bankers, WHILE keeping the false-veto fix.
+Independent adversarial review PROMOTED it to LIVE: `scorecard.OBSCURE_BANKER_MODE="coverage_guard"`. The legacy
+`OBSCURE_BANKER_NEW` boolean toggle is replaced by the `OBSCURE_BANKER_MODE` string ("legacy"|"quality"|"coverage_guard").

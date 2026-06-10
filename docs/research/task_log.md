@@ -248,6 +248,23 @@ SAFE (5/5 checks: only intended cells, 309 genuine zeros untouched, 2384 rows, g
 unchanged rows byte-identical). n3 was already guarded so its output is unchanged — I1 is raw-data correctness
 hygiene. tests/data 27 passed, full suite 300p/12s, verify 0. Merged to main.
 
+## 2026-06-10 — A1b: banker-flag coverage-guard hybrid → PROMOTED LIVE  [path: FULL, score-touching]
+The proper fix after A1's quality def was downgraded for halving recall. Built candidate (d) coverage-guard:
+QUALITY def for record-bearing bankers + a `freq<12` leg RESTRICTED TO SME for thin-record bankers (the MB/SME
+asymmetry recovers small-shop recall without re-vetoing thin MB names like Nuvama/Morgan Stanley). Added (d) +
+a RECALL metric to `tools/research/a1_banker_flag.py`; A/B'd OOS lift via `a1_fold_test.py [h] coverage_guard`.
+RESULTS: recall 24.6% (≈ legacy 25.4%, vs quality's 13.2% collapse), precision 26.6% > legacy 23.3%, false-veto
+fixed (Nuvama/MS→0), SME-boom +15.2pp CI-separated, placebo-clean (real 11.5/null 2.84, p=0.00), 1y OOS
+better-3/worse-0, 3y mixed-thin. INDEPENDENT ADVERSARIAL REVIEWER reproduced everything + dug into composition
+(the −3 net recall is a quality-improving SWAP: drops 48 reputable-MB false-vetoes, adds 45 genuine small-shop SME
+catches) → VERDICT PROMOTE TO LIVE. Implemented `OBSCURE_BANKER_MODE` string (legacy|quality|coverage_guard),
+flipped LIVE to coverage_guard. Fixed a latent consumer bug exposed by going live (risk_assessment ANDed a
+float flag-series → added `_as_bool_flag` coercion). Re-derived data-informed weights (wipeout_safety 0.099→0.080;
+top-quintile lift still +39.5pp) + calibration. Added 4 coverage_guard contract tests (thin-SME fires, thin-MB
+NOT vetoed, record-bearing exonerated, series decisive). Full suite 326p/12s, verify 0. Docs: a1b_coverage_guard_
+2026-06-10.md, rules/index.md (A1 superseded → A1b LIVE), STATUS weights line, backlog (A1b removed). MONITOR
+residuals: thin-SME freq leg has a mild SME-only artifact (~5 clean shops); 3y/2021 fold −13 on n=211.
+
 ## 2026-06-10 — D1/D4: NSE corporate-announcements context feed (build + history-depth R&D)  [path: FULL, network build]
 Babysat network session. BUILT the RUNG-1 explanatory feed: `layer3/news/taxonomy.py` (local rule-based
 categories + look-ahead-safe actionable_from + parse_an_dt; NO LLM, NO polarity), `layer3/news/staging.py`

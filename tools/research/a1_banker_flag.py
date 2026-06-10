@@ -115,16 +115,53 @@ def flag_c_hybrid(df, freq, pcount, pbad):
     return pd.Series(np.where(freq.notna(), fire.astype(float), np.nan), index=df.index)
 
 
+def flag_d_coverage_guard(df, freq, pcount, pbad):
+    """(d) COVERAGE-GUARD HYBRID (A1b): split cleanly by whether the banker has a PIT track record.
+      - record-bearing (pcount>=MIN_PRIOR): QUALITY def — fire iff prior bad-rate >= BANKER_BAD_RATE
+        (exonerates reputable good-record banks; fires only on EVIDENCED-bad ones — same as (b) here).
+      - thin-record (pcount<MIN_PRIOR): fire iff freq<12 AND type==SME.
+        This is the recall-recovery leg: genuinely-obscure small-shop SME names still flag, but the
+        thin-record MAINBOARD banks the freq rule false-vetoed (Nuvama, Morgan Stanley — they do MB)
+        are NOT flagged. The MB/SME asymmetry is what lets us recover recall without the artifact.
+    Evaluable wherever the banker is present (freq.notna)."""
+    has_record = (pcount >= MIN_PRIOR) & pbad.notna()
+    quality_fire = has_record & (pbad >= BANKER_BAD_RATE)
+    is_sme = (df["type"] == "SME")
+    thin_fire = (~has_record) & (freq < OBSCURE_CUTOFF) & is_sme
+    fire = quality_fire.fillna(False) | thin_fire.fillna(False)
+    return pd.Series(np.where(freq.notna(), fire.astype(float), np.nan), index=df.index)
+
+
 CANDIDATES = {
     "current (freq<12)": flag_current,
     "(a) size-aware": flag_a_size,
     "(b) quality-aware PIT": flag_b_quality,
     "(c) hybrid": flag_c_hybrid,
+    "(d) coverage-guard": flag_d_coverage_guard,
 }
 
 
 def wilson(k, n):
     return spine.wilson_ci(k, n)
+
+
+def recall_table(df, flags_by_name, bad):
+    """Bad-outcome RECALL + precision per candidate. THE A1b BAR: recall must NOT regress vs legacy.
+    Recall is computed over ALL bad outcomes in df (abstain/NaN counts as a MISS — this is exactly
+    what 'abstention halves recall' means), so it is directly comparable across candidates regardless
+    of each one's evaluable coverage. Precision = of the IPOs a candidate fires on, the bad-rate."""
+    o = bad.astype(bool)
+    total_bad = int(o.sum())
+    rows = []
+    for name, fl in flags_by_name.items():
+        fired = fl.fillna(0).astype(bool)
+        n_fired = int(fired.sum())
+        n_caught = int((fired & o).sum())
+        recall = round(100 * n_caught / total_bad, 1) if total_bad else None
+        prec = round(100 * n_caught / n_fired, 1) if n_fired else None
+        rows.append({"candidate": name, "fires": n_fired, "bad_caught": n_caught,
+                     "recall%": recall, "precision%": prec})
+    return pd.DataFrame(rows), total_bad
 
 
 def discrimination_table(df, flag, bad):
@@ -174,7 +211,7 @@ def placebo(df, flagfn, bad, freq, pcount, pbad, n_shuffle=200, seed=0):
         perm = rng.permutation(base_lm)
         d["lead_manager"] = perm
         fr = banker_freq_full(d)
-        pc, pb = pit_banker_stats(d) if flagfn in (flag_b_quality, flag_c_hybrid) else (pcount, pbad)
+        pc, pb = pit_banker_stats(d) if flagfn in (flag_b_quality, flag_c_hybrid, flag_d_coverage_guard) else (pcount, pbad)
         fl = flagfn(d, fr, pc, pb)
         L = pooled_lift(fl)
         if L is not None:
@@ -241,6 +278,11 @@ def main():
         remain = cur_fired & fl.fillna(0).astype(bool)
         nr = int(remain.sum()); brr = round(100 * bad[remain].mean(), 1) if nr else None
         print(f"{name}: un-flags {n} (bad%={br}) | keeps-flagged {nr} (bad%={brr})")
+
+    print("\n=== (2c) RECALL — bad-outcome recall + precision per candidate (A1b BAR: recall must NOT regress) ===")
+    rt, total_bad = recall_table(df, flags_by_name, bad)
+    print(f"(total bad outcomes in df = {total_bad}; abstain counts as a miss)")
+    print(rt.to_string(index=False))
 
     print("\n=== (3) PLACEBO — pooled lift vs shuffled-banker-label null (real should be right-tail) ===")
     for name, fn in CANDIDATES.items():

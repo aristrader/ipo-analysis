@@ -142,12 +142,22 @@ def liquidity(cohort):
 OBSCURE_FREQ_CUTOFF = 12      # the OLD rule's banker-IPO-count threshold (kept for A/B + ref)
 OBSCURE_MIN_PRIOR = 5         # min PIT prior IPOs by the banker before we trust its track record
 OBSCURE_BAD_RATE = 0.40       # PIT prior bad-outcome rate above which the banker is "bad"
-OBSCURE_BANKER_NEW = False    # DOWNGRADED to legacy freq<12 by adversarial review (2026-06-10): the NEW
-                             # quality-aware PIT def is artifact-free (un-vetoes reputable banks) BUT its
-                             # abstention HALVES bad-outcome recall (25.4%->13.2%, a new blind spot on real
-                             # small-shop SME wipeouts) -> not robust enough for the LIVE score. NEW code kept
-                             # here for the A1b coverage-guard hybrid (decouple: NEW for display badge + retain
-                             # a freq/size leg for thin-record SME; promote only if recall does NOT regress).
+# obscure-lead-manager flag definition (A/B-able; the live value is set after the A1b verdict below):
+#   "legacy"         — freq<12 over the full window. High recall (25.4%) but a COVERAGE ARTIFACT:
+#                      false-vetoes reputable-but-undersampled banks (Nuvama, Morgan Stanley → the Park
+#                      Medi miss). This was the live default after A1's NEW def was downgraded.
+#   "quality"        — PIT prior bad-rate (fire iff banker's >=MIN_PRIOR prior IPOs failed >=BAD_RATE;
+#                      ABSTAIN when thin). Artifact-free, but abstention HALVED recall (->13.2%) → a new
+#                      blind spot on real small-shop SME wipeouts. Downgraded to display-only by review.
+#   "coverage_guard" — A1b HYBRID: quality def for record-bearing bankers (exonerates reputable, fires on
+#                      evidenced-bad) + a freq<12 leg RESTRICTED TO SME for thin-record bankers. The MB/SME
+#                      asymmetry recovers small-shop recall (24.6% ≈ legacy) WITHOUT re-vetoing thin MB
+#                      banks. Promote to LIVE only if recall does not regress AND OOS fold lift holds.
+# LIVE = coverage_guard (A1b, 2026-06-10): independent adversarial review PROMOTED it — recall 24.6% (≈
+# legacy 25.4%, the −3 is a quality-improving swap: drops 48 reputable-MB false-vetoes, adds 45 genuine
+# small-shop SME catches), false-veto fixed (Nuvama/MorganStanley→0), 1y OOS better-3/worse-0, placebo-clean,
+# param-robust. See docs/research/a1b_coverage_guard_2026-06-10.md.
+OBSCURE_BANKER_MODE = "coverage_guard"
 
 
 def _banker_prior_badrate(lm, df, asof=None):
@@ -172,16 +182,23 @@ def _banker_prior_badrate(lm, df, asof=None):
 
 def _obscure_banker_fires(lm, df, query=None):
     """Decide the obscure-lead-manager flag for ONE query banker. Returns (fires: bool, why: str).
-    NEW (quality-aware PIT) when OBSCURE_BANKER_NEW; else legacy frequency<12."""
-    if not OBSCURE_BANKER_NEW:
+    Definition selected by OBSCURE_BANKER_MODE ('legacy' | 'quality' | 'coverage_guard')."""
+    if OBSCURE_BANKER_MODE == "legacy":
         freq = int((df["lead_manager"].astype(str).str.strip() == str(lm).strip()).sum())
         return (freq < OBSCURE_FREQ_CUTOFF), f"only {freq} IPOs by this banker in our data"
     asof = (query or {}).get("listing_date")
     n_prior, bad = _banker_prior_badrate(lm, df, asof=asof)
-    if n_prior < OBSCURE_MIN_PRIOR or bad is None:        # thin record → ABSTAIN (don't false-veto)
-        return False, f"banker track record too thin to judge ({n_prior} prior IPOs)"
-    fires = bad >= OBSCURE_BAD_RATE
-    return fires, f"banker's prior IPOs failed {100*bad:.0f}% of the time (N={n_prior}, ≥{int(100*OBSCURE_BAD_RATE)}% = poor)"
+    if n_prior >= OBSCURE_MIN_PRIOR and bad is not None:  # record-bearing → quality verdict
+        fires = bad >= OBSCURE_BAD_RATE
+        return fires, f"banker's prior IPOs failed {100*bad:.0f}% of the time (N={n_prior}, ≥{int(100*OBSCURE_BAD_RATE)}% = poor)"
+    # thin prior record:
+    if OBSCURE_BANKER_MODE == "coverage_guard":
+        is_sme = str((query or {}).get("type", "")).strip().upper() == "SME"
+        if is_sme:
+            freq = int((df["lead_manager"].astype(str).str.strip() == str(lm).strip()).sum())
+            if freq < OBSCURE_FREQ_CUTOFF:
+                return True, f"thin-record small-shop SME banker (only {freq} IPOs, no proven track record)"
+    return False, f"banker track record too thin to judge ({n_prior} prior IPOs)"  # quality: ABSTAIN
 
 
 def wipeout_flags(query, df=None):
@@ -233,9 +250,12 @@ def _obscure_banker_series(pool, df):
     lm = pool.get("lead_manager")
     if lm is None:
         return None
-    if not OBSCURE_BANKER_NEW:
+    if OBSCURE_BANKER_MODE == "legacy":
         freq = lm.astype(str).str.strip().map(df["lead_manager"].astype(str).str.strip().value_counts())
         return (freq < OBSCURE_FREQ_CUTOFF)
+    # coverage_guard needs the full-window banker frequency + the row's segment for the thin-record SME leg
+    full_freq = df["lead_manager"].astype(str).str.strip().value_counts()
+    p_type = pool.get("type")
     d = df.copy()
     d["_lm"] = d["lead_manager"].astype(str).str.strip()
     d["_ld"] = pd.to_datetime(d.get("listing_date"), errors="coerce")
@@ -255,9 +275,22 @@ def _obscure_banker_series(pool, df):
         mask = (dates < np.datetime64(t)) if pd.notna(t) else np.ones(len(dates), dtype=bool)
         n_prior = int(mask.sum())
         if n_prior < OBSCURE_MIN_PRIOR:
-            continue                                   # thin → ABSTAIN (NaN), never false-veto
+            # thin prior record. quality → ABSTAIN (NaN). coverage_guard → decisive: fire only on a
+            # thin-record SME banker with freq<12 (recall-recovery leg; thin MB names are NOT vetoed).
+            if OBSCURE_BANKER_MODE == "coverage_guard":
+                is_sme = (str(p_type.loc[idx]).strip().upper() == "SME") if p_type is not None else False
+                fires = is_sme and int(full_freq.get(b, 0)) < OBSCURE_FREQ_CUTOFF
+                out.loc[idx] = 1.0 if fires else 0.0
+            continue
         out.loc[idx] = 1.0 if (np.nanmean(bads[mask]) >= OBSCURE_BAD_RATE) else 0.0
     return out
+
+
+def _as_bool_flag(s):
+    """Coerce a flag series to a clean boolean (NaN/abstain -> False). Flag series may be boolean
+    (legacy freq rule) OR float 0.0/1.0/NaN (quality / coverage_guard), so consumers that AND them
+    together must normalize first — a raw float `& bool` raises in pandas."""
+    return pd.to_numeric(s, errors="coerce").fillna(0) > 0
 
 
 def _query_flag_series(pool, df):
@@ -300,15 +333,15 @@ def risk_assessment(query, df):
         s = pool_flags.get(col)
         if s is None:
             continue
-        with_m = s.fillna(False) & bad.notna()
-        nf = int(s.fillna(False).sum())
+        sb = _as_bool_flag(s)                  # flag series may be float (coverage_guard) — coerce to bool
+        nf = int(sb.sum())
         if nf >= config.MIN_N_HINT:
-            wr = round(100 * float(bad[s.fillna(False)].mean()), 1)
-            wo = round(100 * float(bad[~s.fillna(False) & s.notna()].mean()), 1)
+            wr = round(100 * float(bad[sb].mean()), 1)
+            wo = round(100 * float(bad[~sb & s.notna()].mean()), 1)
             detail.append({"flag": qname, "failed_with_flag_%": wr, "failed_without_%": wo, "n_with": nf})
     # overall: place the query in its flag-count BAND (0/1/2/3+) and read that band's historical
     # bad-outcome rate, RELATIVE TO the segment's own base (MB and SME have very different base risk).
-    cnt = sum(s.fillna(False).astype(int) for s in pool_flags.values() if s is not None)
+    cnt = sum(_as_bool_flag(s).astype(int) for s in pool_flags.values() if s is not None)
     qcount = wf["n_flags"]
     seg_base = round(100 * float(bad.mean()), 1) if len(bad) else None
     overall, basis = None, None

@@ -1,8 +1,9 @@
-"""A1 evolve-only-if-robust fold test: does the NEW (quality-aware PIT) obscure-banker definition,
-folded into wipeout_safety, improve/preserve OOS top-quintile lift vs the CURRENT (freq<12) definition?
+"""A1/A1b evolve-only-if-robust fold test: does the CANDIDATE obscure-banker definition, folded into
+wipeout_safety, improve/preserve OOS top-quintile lift vs the legacy (freq<12) definition?
 
 We rebuild wipeout_safety's flag-count two ways and re-derive PIT weights on train, then measure the
-test-fold top-quintile alpha lift. Mirrors heat_fold_test. Bar: NEW must not DEGRADE lift across splits.
+test-fold top-quintile alpha lift. Mirrors heat_fold_test. Bar: candidate must not DEGRADE lift.
+Usage: a1_fold_test.py [horizon=3y] [candidate_mode=coverage_guard]   (legacy is always the baseline arm).
 """
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
@@ -14,21 +15,17 @@ df = spine.load_substrate()
 df = df[df.get("listing_metrics_status") != "unreliable_coverage"].copy()
 df["_yr"] = pd.to_datetime(df["listing_date"], errors="coerce").dt.year
 
-# we compare two component frames: wipeout_safety using CURRENT vs NEW obscure-banker def.
-# Build both scored frames once (3y), then fold.
-def scored_frame(use_new):
-    scorecard.OBSCURE_BANKER_NEW = use_new      # toggle the live flag def
-    return W.score_all_pointintime(df, "3y").merge(df[["isin", "_yr", "type"]], on="isin", how="left")
-
+# we compare two component frames: wipeout_safety using legacy vs the CANDIDATE obscure-banker def.
 HORIZON = sys.argv[1] if len(sys.argv) > 1 else "3y"
-def scored_frame_h(use_new, h):
-    scorecard.OBSCURE_BANKER_NEW = use_new
+CAND = sys.argv[2] if len(sys.argv) > 2 else "coverage_guard"
+def scored_frame_h(mode, h):
+    scorecard.OBSCURE_BANKER_MODE = mode
     return W.score_all_pointintime(df, h).merge(df[["isin", "_yr", "type"]], on="isin", how="left")
-print(f"horizon={HORIZON}; scoring CURRENT ...")
-cur = scored_frame_h(False, HORIZON)
-print("scoring NEW (quality-aware PIT) ...")
-new = scored_frame_h(True, HORIZON)
-scorecard.OBSCURE_BANKER_NEW = True             # leave toggle in the new state
+print(f"horizon={HORIZON}; scoring legacy (freq<12) ...")
+cur = scored_frame_h("legacy", HORIZON)
+print(f"scoring candidate ({CAND}) ...")
+new = scored_frame_h(CAND, HORIZON)
+scorecard.OBSCURE_BANKER_MODE = "legacy"        # restore the live default
 
 def fold_lift(scored):
     out = []

@@ -36,7 +36,7 @@ results are kept on purpose).
 | INTERACTION: any risk combination | **REJECTED (cross-regime)** | the risk-side hunt found NONE — single wipeout flags are the whole story; pairs overlap or sub-add. high-debt×loss-making is dramatic but longterm-only. |
 | INTERACTION: tiny-sales × loss-making | **single-regime** | clean super-additive in longterm only; boom verdict was an artifact (loss-making-alone ≈ 0% in boom). |
 | obscure-banker flag → false-negative driver | **CONFIRMED (fix → A1)** | B1 miss-mining (`miss_mining_2026-06.md`): on 364 recent IPOs the obscure-banker flag is the SOLE blocker on 34/52 missed winners; 17 are top-quintile (flag-only veto → would flip to APPLY, ~₹0.93M/₹1L recoverable); 12/34 bankers have ≥10 IPOs in full data (pure coverage artifact — Nuvama/Motilal/Morgan Stanley mis-tagged). Frequency-based + quality-blind → seeds A1 (size/quality-aware banker flag). |
-| **A1: obscure-banker flag redefinition (freq → quality-aware PIT)** | **RESOLVED → LIVE 2026-06-09** | Replaced the freq<12 rule with: fire iff the banker's PRIOR IPOs (≥5, listed strictly before this IPO) failed ≥40% (wipeout\|dead-money); ABSTAIN (never fire) on a thin prior record (no frequency fallback). `scorecard.py` `OBSCURE_BANKER_NEW=True`; OLD rule kept behind the toggle for A/B. **Evidence** (`docs/research/a1_banker_flag_2026-06.md`, harness `tools/research/a1_banker_flag.py` + `a1_fold_test.py`): cross-regime bad-outcome discrimination POSITIVE in 3/4 N14 panels vs old rule's 1/4 (SME-boom +24.3pp CI-separated); placebo-clean (real 16.9pp vs null 5.8±3.6, p=0.00 — but null mean >0 so ~1/3 mechanical); un-vetoes **33/34** B1 missed winners; exonerates all named reputable banks (Nuvama/Morgan Stanley/Smart Horizon/Choice/Indorient → 0 flags). OOS top-quintile lift A/B: 1y better-2/same-1/worse-0 (no degrade); 3y mixed but thin folds. **Verdict LIVE** under evolve-only-if-robust (improves purpose + fixes false-veto, no OOS degrade). CAVEATS: abstains on 607 thin-record rows (silent on first-time-banker shops); MB-boom panel uninformative; params (5, 0.40) un-swept. |
+| **A1: obscure-banker flag redefinition (freq → quality-aware PIT)** | **SUPERSEDED → see A1b (coverage-guard) below; live def is now `OBSCURE_BANKER_MODE="coverage_guard"`** | Replaced the freq<12 rule with: fire iff the banker's PRIOR IPOs (≥5, listed strictly before this IPO) failed ≥40% (wipeout\|dead-money); ABSTAIN (never fire) on a thin prior record (no frequency fallback). `scorecard.py` `OBSCURE_BANKER_NEW=True`; OLD rule kept behind the toggle for A/B. **Evidence** (`docs/research/a1_banker_flag_2026-06.md`, harness `tools/research/a1_banker_flag.py` + `a1_fold_test.py`): cross-regime bad-outcome discrimination POSITIVE in 3/4 N14 panels vs old rule's 1/4 (SME-boom +24.3pp CI-separated); placebo-clean (real 16.9pp vs null 5.8±3.6, p=0.00 — but null mean >0 so ~1/3 mechanical); un-vetoes **33/34** B1 missed winners; exonerates all named reputable banks (Nuvama/Morgan Stanley/Smart Horizon/Choice/Indorient → 0 flags). OOS top-quintile lift A/B: 1y better-2/same-1/worse-0 (no degrade); 3y mixed but thin folds. **Verdict LIVE** under evolve-only-if-robust (improves purpose + fixes false-veto, no OOS degrade). CAVEATS: abstains on 607 thin-record rows (silent on first-time-banker shops); MB-boom panel uninformative; params (5, 0.40) un-swept. |
 | low-subscription veto on analog-top-quintile APPLYs | **CANDIDATE (display-first, untested)** | B1 miss-mining: all 59 FALSE-POS (losers we APPLY'd) carried 0 flags; sub_total_x median 2.2× vs 6.6× for true-pos winners; 32/58 were <3× subscribed; SME/small-issue took the −48% median hit. Proposed 2nd-order veto (weak demand AMONG analog-top-quintile names). MUST clear 3-layer + placebo (1st-order undersub-screens are dead) before any gate. |
 
 | id | name | type | status | impl | headline result |
@@ -231,12 +231,20 @@ results are kept on purpose).
   → selling DESTROYS value. Per-name "sell wins" 57–78% is the MEDIAN TRAP; PLACEBO: non-flagged names drift
   identically (−7.8 vs −15.4 boom) → negative median is universe-wide post-d90, not flag-specific. 22–43% false
   exits dump recoverers (Garden Reach +3050%; IRFC/Kalyan near-misses; Fujiyama max90 0.987→+44%). Confirms M1. a3_capitulation_2026-06.md.
-- **A1 banker-flag quality fix: DOWNGRADED to display-only by adversarial review — NOT live.** The quality-aware
+- **A1 banker-flag quality fix: DOWNGRADED to display-only (2026-06-10) — superseded by A1b below.** The quality-aware
   PIT def (fire iff banker's ≥5 prior IPOs failed ≥40%, else abstain) is artifact-free (un-vetoes 33/34 reputable
   missed-winners) BUT its abstention HALVES bad-outcome recall (25.4%→13.2%) — a NEW blind spot on real small-shop
-  SME wipeouts (78 bad outcomes the old rule caught, now missed). Robust only in 1 CI-separated panel (SME-boom);
-  3y OOS fold degrades. → reverted live flag to legacy freq<12 baseline (`OBSCURE_BANKER_NEW=False`); NEW code kept
-  for the A1b coverage-guard hybrid (promote only if recall does NOT regress). a1_banker_flag_2026-06.md + review.
+  SME wipeouts. Not robust enough for the live score alone.
+- **A1b banker-flag COVERAGE-GUARD hybrid: PROMOTED → LIVE 2026-06-10** (`scorecard.OBSCURE_BANKER_MODE="coverage_guard"`).
+  Splits by track record: QUALITY def for record-bearing bankers (≥5 priors → fire iff ≥40% bad; exonerates reputable,
+  fires on evidenced-bad) + a `freq<12` leg RESTRICTED TO SME for thin-record bankers. The MB/SME asymmetry recovers
+  recall to **24.6%** (≈ legacy 25.4%; the −3-of-394 is a quality-improving SWAP — drops 48 reputable-MB false-vetoes,
+  adds 45 genuine small-shop SME catches) while KEEPING the false-veto fix (Nuvama/Morgan Stanley → 0). Precision 26.6%
+  > legacy 23.3%; SME-boom discrimination +15.2pp CI-separated; placebo-clean (real 11.5pp vs null 2.84±2.33, p=0.00,
+  ~8.7pp clean); OOS top-quintile fold 1y better-3/worse-0, 3y mixed-thin. **INDEPENDENT ADVERSARIAL REVIEW promoted it**
+  (recall not materially regressed + OOS holds + no new MB artifact). Re-derived data-informed weights (wipeout_safety
+  0.099→0.080). RESIDUAL (monitor): thin-SME leg has a mild SME-only freq artifact (~5 clean small shops); the 3y/2021
+  fold −13 on n=211. `docs/research/a1b_coverage_guard_2026-06-10.md` + a1_banker_flag.py `(d)` + a1_fold_test.py.
 - **E1 accruals (total-accruals proxy TA=(PAT−CFO)/avg-assets, graded n8): DISPLAY-ONLY (longterm-only).** Bad-outcome
   spread Q3−Q1 works LONGTERM (MB +17pp p=0.045 N=141; SME +12pp p=0.029 N=318) but NULL/inverted in boom → fails
   cross-regime gate. Adds +8–11pp over n8 longterm, 0 boom. Full Modified-Jones DCA stays DATA-GATED (no receivables col). Not in score. e1_accruals_2026-06.md.

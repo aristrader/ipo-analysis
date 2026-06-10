@@ -11,8 +11,9 @@
 _Canonical facts (re-derived by `verify.py` each turn): **29 findings, 219 tests**, mutation-validated
 28/28. Substrate = `data/master/ipo_analysis.csv`; movable facts in `data/master/substrate_meta.json`
 (**2384 rows, as-of 2026-06-06**; snapshot `archive/pre_refresh_20260606/`). Score = **8 components**;
-`data_informed` weights: downside 0.264 · **crowded_window 0.254** · multibagger 0.197 · return 0.185 ·
-wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 2026 cohort). Git LOCAL-ONLY._
+`data_informed` weights: downside 0.269 · **crowded_window 0.260** · multibagger 0.201 · return 0.189 ·
+wipeout 0.080 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 2026 cohort). Banker wipeout-flag
+= `coverage_guard` (A1b, LIVE 2026-06-10). Git LOCAL-ONLY._
 
 ---
 
