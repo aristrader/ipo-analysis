@@ -525,3 +525,23 @@ on every task with current work:
 - Lesson banked: the post-build review repeatedly caught what pre-build divergence couldn't — incl.
   a NEW overclaim introduced by the honesty-fix itself. The review step is non-negotiable on any
   surface showing money numbers.
+
+## 2-night autonomous batch (2026-06-09 → 06-10) — merged to main
+Branch auto/6hr-batch (then i1-substrate-hygiene), all merged + branches deleted. Full suite 300p/12s, verify 0.
+**NET signal outcome: ZERO new live-score components — every tested idea landed display-only / reject / redundant
+(the honest "only-what-works" result); the one live attempt (A1) was caught + downgraded by adversarial review.**
+- **Subscription-parser bug (live-feed only):** found + fixed + hardened (was reading the wrong table → wrong sub
+  numbers); 8 affected live calls remediated (Genxai APPLY→NEUTRAL etc.); substrate verified unaffected; blast-radius scoped.
+- **App C1 (partial):** honesty/nav polish — median-first ₹1L table, n_floor "too few to say", COMBINED→"RANK", sidebar search; visually walked.
+- **B1:** graded all 364 recent IPOs point-in-time (two-sided miss-mining).
+- **A1 banker-flag:** built quality-aware PIT def LIVE → **adversarial review DOWNGRADED to display-only** (abstention halved bad-outcome recall) → reverted to legacy baseline. Proper fix queued = A1b.
+- **A3:** 90-day capitulation EXIT does NOT beat hold (placebo decisive; Fujiyama confirmed) — F5e stays display-lean. Confirms M1.
+- **H7/D3:** corp-action euphoria = display-only EXIT flag, narrowed to 1-3m high-run-up.
+- **E1:** accruals (total-accruals proxy) = display-only, longterm-only (Modified-Jones data-gated).
+- **A2:** hold-through-drawdown overlay = REJECT as exit (forfeits the right tail). Confirms M1/A3.
+- **weak-sub guard:** REJECT — B1's "weak sub = false-APPLY tell" was a young-cohort artifact; inverts on matured data.
+- **H-MVP:** relative-valuation via earlier-IPO peers = REDUNDANT-WITH-n6 (boom-only wall). Don't advance to all-stocks panel.
+- **I1:** nulled 32 uncaptured subscription-category cells (safe-substrate method + independent verifier agent).
+- **J1+J2:** Telegram ops-channel — fail-loud health alerts (throttled) + heartbeat; 20 tests; real [TEST] send verified.
+- **Infra:** Playwright ALWAYS-ON (localhost-pinned) · notifier RunAtLoad login-catch-up.
+- Backlog ADDED for later: A1b (banker coverage-guard hybrid), I3 (weights-file churn hygiene).
