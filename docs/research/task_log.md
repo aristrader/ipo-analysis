@@ -248,6 +248,14 @@ SAFE (5/5 checks: only intended cells, 309 genuine zeros untouched, 2384 rows, g
 unchanged rows byte-identical). n3 was already guarded so its output is unchanged — I1 is raw-data correctness
 hygiene. tests/data 27 passed, full suite 300p/12s, verify 0. Merged to main.
 
+## 2026-06-10 — I3: scorecard_weights.json drift protection  [path: LIGHT, hygiene]
+Investigated the silent-drift claim: `derive_weights` IS deterministic (two runs byte-identical), and the two
+research tools that write the canonical path (miss_mining, weaksub_guard) already snapshot+restore it in a
+`finally`. Residual risk = a SIGKILL mid-run, hand-edit, or a score-def change not followed by run_weights.
+FIX: added `test_canonical_weights_match_fresh_derivation` (tests/data/test_weights_files.py) — asserts the
+committed weights == a fresh deterministic derivation under the LIVE def, converting ANY silent drift into a
+loud failure. Self-consistent across refreshes (canonical + fresh-derive move together). tests/data 5 passed.
+
 ## 2026-06-10 — A1b: banker-flag coverage-guard hybrid → PROMOTED LIVE  [path: FULL, score-touching]
 The proper fix after A1's quality def was downgraded for halving recall. Built candidate (d) coverage-guard:
 QUALITY def for record-bearing bankers + a `freq<12` leg RESTRICTED TO SME for thin-record bankers (the MB/SME

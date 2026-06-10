@@ -16,12 +16,6 @@
 ---
 
 ## QUICK / OWNED-DATA (no internet — safe to run anytime)
-### I3 — canonical scorecard_weights.json silently re-derived  ⚪ · S · hygiene
-During dev/suite runs the canonical `data/master/scorecard_weights.json` gets overwritten with slightly-varying
-(non-deterministic) but sane re-derivations by an unpinned derive+save path (NOT run_calls/run_refresh; showdown is
-sandboxed). Values stay sane so live score is unaffected, but the canonical weights can silently drift. FIX: pin the
-writer + make derive_weights deterministic + protect the canonical file (or assert-vs-canonical in a test). Not a live bug.
-
 ### F2 — durable monthly "were-we-right" scorecard  🟡 · S
 The forward test runs ~monthly; make it an append-only, comparable dated artifact (the credibility spine). Small add
 over `run_forward_test`. (F1 paper-portfolio sim + F3 calibration are BUILT — just confirm they're surfaced in the app.)

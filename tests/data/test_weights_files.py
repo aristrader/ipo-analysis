@@ -32,6 +32,23 @@ def test_weights_are_normalized_and_sane(weights):
     assert sum(vals) == pytest.approx(1.0, abs=0.01), f"weights sum {sum(vals)}"
 
 
+def test_canonical_weights_match_fresh_derivation(weights):
+    """PROTECTION (I3): the committed weights MUST equal a fresh DETERMINISTIC derivation under the
+    LIVE scorecard def. Converts SILENT drift into a loud failure — catches a hard-killed research
+    run that left per-month weights in the canonical file, a hand-edit, OR a score-def change (e.g.
+    the banker OBSCURE_BANKER_MODE) that wasn't followed by `run_weights.py`. derive_weights is
+    deterministic, so this is stable; after a conscious refresh the canonical + a fresh derive move
+    together, so the invariant 'canonical == what derive produces now' always holds."""
+    from layer3.predictor import weights as W
+    fresh, _rep, _scored = W.derive_weights()
+    fresh = {k: round(float(v), 3) for k, v in fresh.items()}
+    committed = {k: round(float(v), 3) for k, v in weights.items()}
+    assert committed == fresh, (
+        f"canonical scorecard_weights.json drifted from a fresh derivation:\n"
+        f"  committed={committed}\n  fresh    ={fresh}\n"
+        f"-> re-run `PYTHONPATH=. python run_weights.py`, or investigate a stale/killed write.")
+
+
 def test_calibration_parses():
     c = json.load(open(os.path.join(ROOT, "data/master/scorecard_calibration.json")))
     assert isinstance(c, dict) and len(c) >= 1
