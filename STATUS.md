@@ -18,11 +18,25 @@ wipeout 0.080 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
 ---
 
 ## 🏃 NOW
-- **▶ NEXT (owner available 2026-06-10, babysat session): the NETWORK/SCRAPING backlog items** — start with **D4/D1**
-  (build the NSE corporate-announcements scraper + start the staging pull; D1 spec is turnkey in
-  `docs/research/newsfeed_rnd_2026-06-09.md`), then **E3** (find a dated SME→Mainboard migration source). Network
-  rules still apply (trusted-only allowlist, no downloads, off-list = stop — `docs/research/trusted_sources.md`).
-  Open items: `docs/research/improvement_backlog.md`.
+- **✅ 2026-06-10 BABYSAT/AWAY SESSION COMPLETE — 5 backlog items shipped, all via the execution pipeline (build →
+  independent review → test → verify → commit). The whole QUICK + NETWORK backlog is now cleared.**
+  - **D1/D4 — NSE announcement context feed** (`scrapers/announcements.py` + `layer3/news/{taxonomy,staging}.py`):
+    display-only "context, not signal", ISIN/symbol-keyed, locally category-tagged, look-ahead-safe. Independent
+    review confirmed substrate-untouched + zero-download rails airtight. **History R&D: the default API returns FULL
+    history (~2004→, delisted included) → one pull = the backfill, no paging.** Full pull running/seeded into the
+    gitignored `data/live/news/` (regenerable, ~180MB; re-pull via the scraper). Render-join = by SYMBOL (sm_isin
+    can be pre-split). 22 tests.
+  - **A1b — banker wipeout-flag coverage-guard hybrid → PROMOTED LIVE** (`OBSCURE_BANKER_MODE="coverage_guard"`): the
+    ONE signal change that cleared the bar. Recovers recall (24.6% ≈ legacy 25.4%, vs quality's 13.2%) WHILE keeping
+    the false-veto fix; independent adversarial review promoted it (the −3 net recall is a quality-improving swap).
+    Re-derived weights (wipeout 0.099→0.080). [[rules/index.md]] A1b entry.
+  - **I3** — weights drift now caught by a protection test (canonical == fresh deterministic derive).
+  - **F2** — durable append-only OOS were-we-right history (`data/master/forward_test_history.csv`); first vintage
+    seeded (spread_1m +12.9). App trajectory table added (wants a visual walk).
+  - **E3** — SME→Mainboard migration outcome class, derived from OWNED DATA (no scraping): 333/1468 (22.7%) migrated;
+    quantifies the bimodal dead-money trap (both cohorts). DESCRIPTIVE only (selection + look-ahead → not scored).
+  - **Remaining backlog (need owner / gated, NOT autonomous):** C1 app redesign (Playwright visual walk), E2 (boom-only
+    wall), Theme-H-full / G1 / G2 (big build decisions). `docs/research/improvement_backlog.md`.
 - **✅ AUTONOMOUS BATCH COMPLETE + MERGED to main (nights of 2026-06-09 + 06-10).** Branches deleted; full suite 300p/12s,
   verify 0. I1 DONE (merged). Docs consolidated (DONE.md removed → history=git log; 7 feeders archived; INDEX.md map;
   anti-sprawl discipline in CLAUDE.md). Full record: `docs/research/batch_run_2026-06-09.md`.
