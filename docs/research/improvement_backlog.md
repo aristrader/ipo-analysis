@@ -150,7 +150,7 @@ market-cap; nearest-mcap matching; does a lower issue-PE-vs-peers lead to catch-
 ### G2. Swing-trade buy/sell calls  🔬 · L — research-gated; EXIT side tested (no blanket TP beats hold), ENTRY side weak. Needs a new entry signal that survives the 3-layer protocol, or D1/D2.
 
 ## THEME I — Data quality (from the 2026-06-09 "are we sure" subscription re-check)
-### I1. Subscription category breakdown stored as 0 instead of null (~32 rows)  ⚪ · S
+### I1. Subscription category breakdown stored as 0 instead of null (~32 rows)  🟢 DONE (2026-06-10, safe-substrate method + verifier agent)
 - ~32 substrate rows have `sub_total_x` present but `sub_qib_x`/`sub_nii_x`/`sub_retail_x` = 0 — the breakdown
   (esp. QIB) was UNCAPTURED and stored as 0; the TOTAL is correct. Found via the at-scale consistency check
   (total outside [min,max] of categories → all 35 trace to this benign cause, not corruption).

@@ -239,3 +239,11 @@ verify.py --quiet exit 0. REAL [TEST] sends: '🚨 HEALTH: [TEST]...' (HTTP 200,
 via _maybe_send -> owner's phone pinged. FILES: tools/notify/notify_calls.py, tests/notify/
 test_health_heartbeat.py, .gitignore. Did NOT touch rules/index.md/scorecard.py/scorecard_weights.json/
 substrate/other agents' files. Existing call-alert path UNCHANGED.
+
+## 2026-06-10 — I1: null the 32 uncaptured subscription-category cells (safe-substrate method)  [path: LIGHT, data]
+Backed up substrate → /tmp/ipo_analysis.PRE_I1.bak.csv. Surgical csv round-trip (DictReader keeps strings → no
+float drift): nulled sub_qib_x/nii_x/retail_x on the 32 rows where total>0 AND all three were 0 (uncaptured
+breakdown, not real 0×). Diff = exactly 96 cells / 32 rows, nothing else. INDEPENDENT VERIFIER agent confirmed
+SAFE (5/5 checks: only intended cells, 309 genuine zeros untouched, 2384 rows, golden tests + verify pass, 5
+unchanged rows byte-identical). n3 was already guarded so its output is unchanged — I1 is raw-data correctness
+hygiene. tests/data 27 passed, full suite 300p/12s, verify 0. Merged to main.
