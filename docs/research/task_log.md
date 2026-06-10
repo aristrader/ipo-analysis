@@ -248,6 +248,18 @@ SAFE (5/5 checks: only intended cells, 309 genuine zeros untouched, 2384 rows, g
 unchanged rows byte-identical). n3 was already guarded so its output is unchanged — I1 is raw-data correctness
 hygiene. tests/data 27 passed, full suite 300p/12s, verify 0. Merged to main.
 
+## 2026-06-10 — E3: SME→Mainboard migration outcome class (owned-data, NO scraping)  [path: FULL, owned-data]
+Backlog assumed E3 needed a dated external source; it's derivable from owned reference data. Built
+`tools/research/sme_migration.py`: SME-listed IPO has migrated iff ISIN now on nse_equity_list.csv (mainboard;
+its DATE OF LISTING = migration date, verified strictly post-IPO for all 216 NSE migrants) OR a non-SME BSE
+group (M/MT=SME) in bse_master.csv. RESULT: 333/1468 SMEs (22.7%) migrated (dates 2015-2026); migrated vs
+trapped — bad% 23.7 vs 43.2, multibagger 59.2 vs 22.5, median return +170% vs −6%, alpha_3y +0.01 vs −0.45 —
+holds in BOTH cohorts → quantifies the SME bimodal dead-money trap. DISCIPLINE: SELECTION-confounded (migration
+requires growth) + LOOK-AHEAD (unknown at IPO) → DESCRIPTIVE outcome class, NOT a score input (documented). No
+substrate edit (derived on-demand from reference files; a column would wait for the next pipeline-build, per I1
+discipline). Doc sme_migration_2026-06-10.md, rules/index.md entry, backlog E3 done. FUTURE: early at-IPO marker
+of eventual migration = a clean predictive hypothesis for later.
+
 ## 2026-06-10 — F2: durable were-we-right OOS history (credibility spine)  [path: LIGHT, owned-data]
 Made the forward test emit an append-only, comparable artifact. forward_test.py: `history_row` (flattens an
 analyze() result to the score-bucket top−bottom SPREADS + the flag clean−flagged gap + gmp spearman — the

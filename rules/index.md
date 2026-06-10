@@ -261,3 +261,9 @@ results are kept on purpose).
   +37.9pp 1y (N=94, IC −0.345, placebo p=0.000, CIs separate) — real, BUT reduces to n6's broad_sector pool (fine-industry
   matching empty: 13 MB / 0 SME), NOT incremental (resid-IC −0.166), no peer-proximity dose, STRUCTURALLY boom-only (zero
   longterm P/E — same wall as n6/E2). SME thin (N≤26), 3y untestable. Do NOT advance to the all-stocks panel on valuation. hmvp_relative_valuation_2026-06.md.
+- **E3 SME→Mainboard migration: DESCRIPTIVE outcome class (owned-data; NOT a score input).** Derivable WITHOUT scraping
+  (`tools/research/sme_migration.py`): SME-listed IPO whose ISIN now sits on the NSE mainboard list (dated via its
+  `DATE OF LISTING`) or a non-SME BSE group. **333/1468 SMEs (22.7%) migrated**; migrated vs trapped is bad% 23.7 vs 43.2,
+  multibagger 59.2 vs 22.5, median return +170% vs −6% — holds BOTH cohorts → quantifies the SME bimodal dead-money trap.
+  But SELECTION-confounded (migration requires growth → tautological) and LOOK-AHEAD (unknown at IPO) → descriptive only,
+  never scored. The predictive question (early at-IPO marker of eventual migration) is a clean FUTURE hypothesis. sme_migration_2026-06-10.md.

@@ -30,8 +30,12 @@ News R&D found it's boom-only (~2017+, no longterm coverage → can't clear cros
 bhavcopy pull + no peer-review support. Display-only ceiling at best. Lower priority than once thought.
 ### D4 — start the NSE-announcement staging pull (forward-collect)  ⚪ · S
 The only way to start the ~18–36mo clock that makes any predictive news hypothesis testable later. Stage raw, don't interpret.
-### E3 — SME→Mainboard migration as an outcome class + feature  ⚪ · M
-The big unmodeled SME escape from the dead-money trap. Needs a dated migration source (Chittorgarh r123 / BSE/NSE).
+### ~~E3 — SME→Mainboard migration~~  ✅ DONE 2026-06-10 (owned-data, no scraping)
+Turned out derivable WITHOUT a new source: SME-listed ISIN now on the NSE mainboard list (dated) or a non-SME BSE
+group. 333/1468 (22.7%) migrated; migrated vs trapped quantifies the bimodal dead-money trap (bad% 24 vs 43,
+multibagger 59 vs 23, median +170% vs −6%, both cohorts). DESCRIPTIVE only (selection-confounded + look-ahead →
+not a score input). `tools/research/sme_migration.py` + `sme_migration_2026-06-10.md`. FUTURE: early at-IPO marker
+of eventual migration (a clean predictive hypothesis); optional substrate column at next pipeline-build.
 
 ## ANALYSIS EXTENSIONS (owned-data but hit known walls)
 ### E2 — unblock P/E-vs-sector for SME + EV/Sales for loss-makers  ⚪ · M
