@@ -9,6 +9,9 @@ logs/
 data/raw/
 data/prices/
 data/reference/bhavcopy/
+# NSE announcement staging: large (~180MB+) display-only overlay, FULLY re-pullable from NSE
+# (scrapers/announcements.py), wholesale-rewritten each pull -> regenerable, not version-controlled.
+data/live/news/
 archive/
 .playwright-mcp/
 tools/notify/telegram.json

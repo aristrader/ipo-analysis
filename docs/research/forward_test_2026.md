@@ -8,14 +8,14 @@ Cohort: **82** never-seen IPOs, **82** scored (features at IPO time, analog pool
 
 | bucket | n | median score | median pop % | median 1m % (n) | median 3m % (n) |
 |---|---|---|---|---|---|
-| B1 (higher=better) | 28 | 33.1 | 0.0 | -7.7 (20) | -11.3 (12) |
-| B2 (higher=better) | 27 | 43.1 | 0.0 | 2.9 (23) | 5.8 (16) |
-| B3 (higher=better) | 27 | 57.7 | 0.3 | 6.7 (22) | 8.4 (14) |
+| B1 (higher=better) | 29 | 50.2 | 0.0 | -6.2 (21) | -1.2 (13) |
+| B2 (higher=better) | 26 | 58.1 | 0.2 | 2.6 (22) | -4.2 (15) |
+| B3 (higher=better) | 27 | 68.2 | 0.3 | 6.7 (22) | 8.4 (14) |
 
 ## Wipeout red-flags vs early outcomes
 
-- flagged (≥1 flag): n=38, median pop 0.0%, median 1m -7.7%
-- clean (0 flags):   n=44, median pop 0.0%, median 1m 2.9%
+- flagged (≥1 flag): n=30, median pop 0.0%, median 1m -5.1%
+- clean (0 flags):   n=52, median pop 0.0%, median 1m -1.0%
 
 ## GMP → listing pop (the short-horizon signal)
 

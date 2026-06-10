@@ -54,9 +54,27 @@ MISSES_PATH = os.path.join(STAGING_DIR, "coverage_misses.csv")  # 0-row symbols 
 SUBSTRATE = os.path.join(_ROOT, "data", "master", "ipo_analysis.csv")
 
 
+class _NetworkDown(Exception):
+    """Raised when the NSE session can't be (re-)primed after backoff — i.e. the network is down,
+    not a single bad symbol. The run aborts gracefully (progress already flushed) so a re-run resumes."""
+
+
 def prime_session():
     """Prime an NSE session for the announcements Referer (logic in scrapers/nse_session.py)."""
     return prime_nse_session(_REFERER)
+
+
+def _safe_reprime(sleep, attempts=4):
+    """Re-prime with exponential backoff. Raises _NetworkDown if every attempt fails (outage), so
+    the caller can stop cleanly instead of marking the whole remaining universe as 'misses'."""
+    last = None
+    for k in range(attempts):
+        try:
+            return prime_session()
+        except Exception as e:  # noqa: BLE001 — DNS/connection failures during priming
+            last = e
+            time.sleep(sleep * (2 ** k))
+    raise _NetworkDown(f"could not re-prime NSE session after {attempts} tries: {last}")
 
 
 def fetch_symbol(session, symbol, extra_params=None):
@@ -120,33 +138,46 @@ def collect(symbols, out_path=STAGING_PATH, extra_params=None, sleep=_RATE, reco
     Returns (n_symbols_done, n_rows_total, n_with_news, n_misses).
     """
     rows = load_staging(out_path)
+    already = {r["symbol"] for r in rows if r.get("symbol")}  # resume: symbols already pulled (have rows)
+    if already:
+        print(f"resume: {len(already)} symbols already have staged rows — will skip them")
     session = prime_session()
     done = with_news = 0
-    covered = set()  # symbols that returned >=1 filing — single source of truth for miss classification
+    covered = set(already)  # already-staged symbols count as covered (single source for miss classification)
+    aborted = False
     for i, sym in enumerate(symbols, 1):
-        for attempt in (1, 2):
-            try:
-                raw = fetch_symbol(session, sym, extra_params=extra_params)
-                if raw:
-                    with_news += 1
-                    covered.add(sym)
-                rows = staging.upsert(rows, [staging.normalize(r) for r in raw])
-                print(f"  [{i}/{len(symbols)}] {sym:14s} -> {len(raw)} filings")
-                break
-            except Exception as e:  # noqa: BLE001 — transient NSE/network; re-prime + retry once
-                if attempt == 1:
-                    print(f"  [{i}/{len(symbols)}] {sym:14s} -> error ({str(e)[:50]}); re-priming")
-                    time.sleep(sleep * 2)
-                    session = prime_session()
-                else:
-                    print(f"  [{i}/{len(symbols)}] {sym:14s} -> FAILED ({str(e)[:50]}); skipping")
+        if sym in already:
+            done += 1
+            continue
+        try:
+            for attempt in (1, 2):
+                try:
+                    raw = fetch_symbol(session, sym, extra_params=extra_params)
+                    if raw:
+                        with_news += 1
+                        covered.add(sym)
+                    rows = staging.upsert(rows, [staging.normalize(r) for r in raw])
+                    print(f"  [{i}/{len(symbols)}] {sym:14s} -> {len(raw)} filings")
+                    break
+                except Exception as e:  # noqa: BLE001 — transient NSE/network; re-prime + retry once
+                    if attempt == 1:
+                        print(f"  [{i}/{len(symbols)}] {sym:14s} -> error ({str(e)[:50]}); re-priming")
+                        time.sleep(sleep * 2)
+                        session = _safe_reprime(sleep)  # raises _NetworkDown on a real outage
+                    else:
+                        print(f"  [{i}/{len(symbols)}] {sym:14s} -> FAILED ({str(e)[:50]}); skipping")
+        except _NetworkDown as nd:
+            print(f"\nNETWORK DOWN — {nd}\nflushing progress and stopping; re-run to resume from here.")
+            aborted = True
+            break
         done += 1
         if i % _FLUSH_EVERY == 0:
             write_staging(rows, out_path)
         time.sleep(sleep)
     write_staging(rows, out_path)
+    # only classify misses on a COMPLETE run (an abort would mislabel the un-reached tail as misses)
     misses = [s for s in symbols if s not in covered]
-    if record_misses:
+    if record_misses and not aborted:
         _write_misses(misses, MISSES_PATH)
     return done, len(rows), with_news, len(misses)
 
