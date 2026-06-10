@@ -1,12 +1,18 @@
-# docs/research — active research & analysis artifacts
+# docs/research — research & analysis artifacts
 
-**Active here** = current decisions, live-findings reference, and inputs to in-flight work:
-- Movement-lens + headlines: `ideas_movement_lens.md`, `headlines_entry_exit.md`, `headlines_selection_survival.md`
-- Wipeout / interactions: `wipeout_anatomy.md`, `wipeout_anatomy_v2.md`, `interactions_risk.md`, `interactions_upside.md`
-- DRHP financials recovery: `drhp_recovery.md`, `drhp_crossvalidation.md`, `financials_extra_sources.md`, `drhp_recovered.csv`, `drhp_review_queue.csv`
-- Structure / extension / audit: `structure_audit.md`, `extension_roadmap.md`, `microcap_extension_thinking.md`, `CLEANUP_FINDINGS.md`
-- Narrative history: `autonomous_session_log.md`
+**Full map of every doc here (auto-generated, by status): see `INDEX.md`.** That's the authoritative listing —
+this README is just the placement rule (don't hand-maintain a second listing; it drifts).
 
-**`archive/`** = superseded build-era reviews, one-off integration/recovery logs, superseded ideation, misfiled CSVs (kept for provenance, not current).
+What lives here:
+- **The live to-do menu:** `improvement_backlog.md` (OPEN items only; done → `DONE.md` + `rules/index.md`).
+- **Standing briefs** (living guides): `execution_pipeline.md`, `hypothesis_protocol.md`, `app_phase2_design.md`,
+  `trusted_sources.md`, `phase2_playbooks.md`, `app_iteration_charter.md`.
+- **Concluded research write-ups** — the evidence behind `rules/index.md`. Not to-do lists.
+- **Logs:** `task_log.md` (pipeline proof), `batch_run_2026-06-09.md`.
+- **`archive/`** — superseded planning/ideation (the old NEXT/roadmap/feeder docs, replaced by
+  `improvement_backlog.md`), old session logs, and build-era reviews. Kept for provenance, not current.
 
-**Rule:** ongoing research → here · superseded → `archive/` · formal specs → `docs/superpowers/specs/` · project state → `STATUS.md` (root).
+**Rules (doc discipline):**
+- Open WORK lives ONLY in `improvement_backlog.md`. Every signal's verdict lives in `rules/index.md`. History → git log (+ milestone `DONE.md`).
+- Don't spawn a new tracking doc — extend the canonical one. When a research thread concludes, its write-up is evidence (leave it / archive it); move the item to DONE + the verdict to `rules/index.md`.
+- Superseded → `archive/` · formal specs → `docs/superpowers/specs/` · live project state → `STATUS.md` (root).

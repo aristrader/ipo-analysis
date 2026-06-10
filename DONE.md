@@ -211,7 +211,7 @@ Completed items moved here to keep TODO.md lean. Most-recent first.
     Removed the overstated "cross-regime validated" string; disclosed quality/liquidity get 0 weight under
     data-informed; refreshed stale weights; fixed validator mislabeling insufficient-N as FRAGILE.
 - **Net: 62 tests pass, 20 findings, everything adversarially reviewed + honestly labeled.** Reviews in
-  `docs/research/review_new_*.md`; full play-by-play in `docs/research/autonomous_session_log.md`.
+  `docs/research/review_new_*.md`; full play-by-play in `docs/research/archive/autonomous_session_log.md`.
 
 ## Layer 2 — price history + returns + analysis substrate  (2026-05-31)
 - Daily prices for the full universe via official NSE/BSE bhavcopy (`scrapers/bhavcopy_ohlc.py`) — 2284/2296 stocks;
@@ -473,7 +473,7 @@ Cleanup: archived dead scratch (`archive/research_scratch/`), refreshed TODO/DON
   (+21% vs −7%) but GUTS mean (+1% vs +41%) and P90 (+28% vs +140%) — negative Δmean in all 4
   regime cells; the better the entry, the more it costs (capping the right tail that carries IPO
   returns). tools/research/swing_tp_test.py; verdict in ledger + rules/index. Bot will NOT emit
-  sell-at-X calls. Logged with the stock-news/catalyst-feed idea in docs/research/future_ideas.md.
+  sell-at-X calls. Logged with the stock-news/catalyst-feed idea in docs/research/archive/future_ideas.md.
 - **App-iteration cleanups**: playwright disabled by default + on/off rule (docs/playwright_on_off.md,
   CLAUDE.md convention); killed stray "Chrome for Testing" processes that triggered OS notifications;
   Streamlit pinned localhost-only + telemetry off (.streamlit/config.toml); playwright version-pinned

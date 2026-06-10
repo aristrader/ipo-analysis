@@ -42,7 +42,7 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
   scoped-score, referential, scale-inversion; raises on refresh; runs each turn). Task 4 (Thread C)
   — 3 NEW hypotheses generated + tested with placebo, all rejected (0 new signals = honest).
 - **Future builds (get their own divergence pass WHEN built, not before):** news-feed (scoped
-  VIABLE), broader app redesign. Both in `docs/research/future_ideas.md` / NEXT.md.
+  VIABLE), broader app redesign. Both in `docs/research/archive/future_ideas.md` / NEXT.md.
 - **Running parts:** Telegram notifier (thrice-daily + RunAtLoad login-catch-up) · calls ledger ~5,170 · schema
   gate in the per-turn verify hook + refresh · Playwright ALWAYS ON, localhost-pinned (owner 2026-06-10).
 - **Commands:** app `streamlit run app.py` · `run_portfolio.py` · `run_scorecard.py` ·
@@ -56,7 +56,7 @@ wipeout 0.099 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
   a **new low-subscription FALSE-POS guard** (all 59 losers we APPLY'd were 0-flag; sub 2.2× vs 6.6× — must
   pass 3-layer/placebo before any veto). EARLY READ (young cohort); re-run as it matures. Reproduce:
   `PYTHONPATH=. python tools/research/miss_mining.py`.
-- **`docs/research/future_ideas.md`** — owner "someday" sub-projects: swing-trade buy/sell calls
+- **`docs/research/archive/future_ideas.md`** — owner "someday" sub-projects: swing-trade buy/sell calls
   (exit side REJECTED — take-profit guts the right tail; needs a new validated entry signal first)
   + stock-news/catalyst feed (free BSE/NSE announcements API = first scoping step).
 - **Re-run the forward test (~monthly)** as the 2026 cohort ages — the OOS verdict hardens; also

@@ -196,7 +196,7 @@ CONTEXTS = {
     "what's done / what's next / project state": ["STATUS.md", "DONE.md", "CLAUDE.md", "rules/index.md"],
     "improvement backlog / what to build next": [
         "docs/research/improvement_backlog.md", "docs/research/fujiyama_park_case.md",
-        "docs/research/NEXT.md", "docs/research/future_ideas.md",
+        "docs/research/INDEX.md",   # map of all research docs (active + archived feeders)
     ],
     "testing / verification / the showdown": [
         "tests/", "tests/data/", "tests/showdown/", "tools/mutation/", "pytest.ini",

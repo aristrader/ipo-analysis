@@ -205,7 +205,7 @@ results are kept on purpose).
   WIN-RATE (67% vs 46%) + median (+21% vs −7%) but CUTS MEAN (+1% vs +41%) and P90 (+28% vs +140%)
   — negative Δmean in all 4 regime cells (−9.7 / −47.2 / −36.9 / −51.1pp). Conditional good-entry
   (month-1 strong) makes holding MORE valuable (hold mean +104%). The right tail carries IPO
-  returns; take-profit decapitates it. Bot will not emit sell-at-X calls. See future_ideas.md.
+  returns; take-profit decapitates it. Bot will not emit sell-at-X calls. See docs/research/archive/future_ideas.md.
 
 ## Thread C verdicts (2026-06-08)
 - **pe_vs_sector: WATCHLIST → DISPLAY-ONLY** (both segments, boom). Rich issue-time P/E vs sector

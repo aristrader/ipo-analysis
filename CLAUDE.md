@@ -64,6 +64,12 @@ incl. delisted)** and turn them into (a) descriptive truths, (b) an analog-based
   (ground truth, never memory; `wc -l` lies on the CSVs — count records via `csv`); (2) update `project_map.py`
   the moment structure changes; (3) suggest structural improvements. STANDING RULE: keep project_map + STATUS +
   rules/index updated as work happens; `verify.py` enforces it.
+- **`docs/research/INDEX.md`** = the generated map of ALL research docs (active + archived), by status. **DOC
+  DISCIPLINE (owner 2026-06-10, anti-sprawl):** ONE home per info type — open WORK → `improvement_backlog.md`
+  (open items only); every signal's verdict → `rules/index.md`; history → **git log** (DONE.md is milestone-only,
+  not a per-task log — don't triple-log git+task_log+DONE); structure → `project_map.py`. **Don't spawn a new
+  tracking doc — extend the canonical one.** When a thread concludes: move the item to DONE/rules, leave/`archive/`
+  its write-up. Superseded planning docs live in `docs/research/archive/`.
 
 ## Where to start / how it flows
 1. `docs/sources.md` — every data source (access, fields, coverage, free/premium). 2. `docs/schema.md` — columns.
