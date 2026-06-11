@@ -279,6 +279,17 @@ FIX: added `test_canonical_weights_match_fresh_derivation` (tests/data/test_weig
 committed weights == a fresh deterministic derivation under the LIVE def, converting ANY silent drift into a
 loud failure. Self-consistent across refreshes (canonical + fresh-derive move together). tests/data 5 passed.
 
+## 2026-06-11 — handoff/ onboarding pack (project may move to a new account)  [path: LIGHT, docs]
+Built `handoff/` so a fresh account/session can fully re-orient. Captures the two things that DON'T travel
+on a new login: (a) the assistant auto-memory (copied from ~/.claude/.../memory → handoff/auto_memory/, with a
+staleness note — CLAUDE.md/STATUS.md remain live truth), and (b) the gitignored `.claude/settings.local.json`
+(network allowlist + verify hook + MCP/plugins) recreated verbatim in handoff/ENVIRONMENT.md, plus the
+gitignored data to re-pull. handoff/README.md = read-order into the in-repo brain + the non-negotiable
+conventions + how-we-work pipeline + signal digest + current state/next + owner profile + "what doesn't travel".
+Deliberately POINTS to (not duplicates) CLAUDE.md/STATUS.md/rules/index — respecting the anti-sprawl rule;
+the whole repo travels with the folder so pointing is correct + drift-free. Owner confirmed: keep it LOCAL, no
+external share-link publish (local-only/no-egress posture). Registered handoff/ in project_map DIRS. verify clean.
+
 ## 2026-06-11 — MIGRATION+: at-IPO predictor of eventual SME→mainboard migration  [path: HYPOTHESIS, unattended]
 scope: derived migration outcome (E3 tool) + at-IPO features; CENSORING is the trap (median TTM 3.7y, 0% in
 first 3y) → test only MATURE SMEs (survive ≥5y, n=560, mig 55.5%). build: tools/research/migration_predictor.py
