@@ -279,6 +279,19 @@ FIX: added `test_canonical_weights_match_fresh_derivation` (tests/data/test_weig
 committed weights == a fresh deterministic derivation under the LIVE def, converting ANY silent drift into a
 loud failure. Self-consistent across refreshes (canonical + fresh-derive move together). tests/data 5 passed.
 
+## 2026-06-11 — MIGRATION+: at-IPO predictor of eventual SME→mainboard migration  [path: HYPOTHESIS, unattended]
+scope: derived migration outcome (E3 tool) + at-IPO features; CENSORING is the trap (median TTM 3.7y, 0% in
+first 3y) → test only MATURE SMEs (survive ≥5y, n=560, mig 55.5%). build: tools/research/migration_predictor.py
+(rank-IC + tertile rates + vintage-stability + placebo, min-N). review: independent agent (a0860f7) reproduced
+all numbers + traced market_cap provenance + verified survivorship handling → confirmed every call.
+verdict: NO new live signal. (1) market_cap_cr IC 0.564 was CIRCULAR (current mcap = grew-into-it,
+reverse-causation; corr 0.79 w/ growth, 16.9× vs 3.3× mcap/issue) → DISCARDED. (2) real at-IPO features
+(sales 0.20, pat 0.195, issue 0.156, placebo-clean) but pre-2020-ONLY (boom n=40 sign-flips), redundant w/
+scorecard financials, profit-binary null → DISPLAY-ONLY, no score path. (3) BYPRODUCT: censoring reframe
+corrects E3 — among SMEs that SURVIVE ≥5y, ~55.5% migrate (not 22.7%). The falsifier caught the circular
+predictor — the key save. Re-test cross-regime ~2026-27 when the 2020-21 SME cohort matures.
+migration_predictor_2026-06-11.md + rules/index.md + E3 doc updated. NO live-score / substrate change.
+
 ## 2026-06-11 — A1c: richer banker-QUALITY measure (replace count-based legs)  [path: FULL, score-touching]
 scope: owned-data confirmed — 162 bankers; 93% of IPOs by bankers with ≥5 priors; alpha horizons present
 3m 97% / 6m 93% / 1y 83% / 3y 57% (3y sparse → taper). Task: build a banker-quality FEATURE FAMILY

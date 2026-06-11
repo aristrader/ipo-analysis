@@ -272,6 +272,13 @@ results are kept on purpose).
   p=0.0) but DISPLAY-ONLY** — predicts only the pop (allottee day-1, not sustained alpha; alpha_1m p=0.94), overlaps
   GMP, and incrementality is only boom-verifiable (longterm GMP/sub coverage=0 — the pe_vs_sector/H-MVP wall). A
   candidate APPLY-side context chip, not a scored signal. `a1c_banker_quality_2026-06-11.md` + `banker_quality.py`.
+- **MIGRATION+ at-IPO predictor of eventual SME→mainboard migration: NO new signal (reviewed).** (1) market_cap_cr
+  IC 0.564 was CIRCULAR — it's CURRENT mcap (grew-into-it), reverse-causation → DISCARDED (corr 0.79 w/ growth;
+  migrants 16.9× vs trapped 3.3× mcap/issue ratio). (2) Genuine at-IPO features (pre_ipo_net_sales IC 0.20, pre_ipo_pat
+  0.195, issue_size 0.156, placebo-clean) are REAL but pre-2020-ONLY (boom-eligible n=40, sign-flips), REDUNDANT with
+  scorecard financials, profit/loss-binary null → DISPLAY-ONLY at most, no score path. (3) CENSORING REFRAME (corrects
+  E3): migration takes median 3.7y, 0% in first 3y → E3's 22.7% was censored; among SMEs that SURVIVE ≥5y the migration
+  rate is **55.5%** (majority). FUTURE: re-test cross-regime once the 2020-21 SME cohort matures (~2026-27). `migration_predictor_2026-06-11.md`.
 - **E3 SME→Mainboard migration: DESCRIPTIVE outcome class (owned-data; NOT a score input).** Derivable WITHOUT scraping
   (`tools/research/sme_migration.py`): SME-listed IPO whose ISIN now sits on the NSE mainboard list (dated via its
   `DATE OF LISTING`) or a non-SME BSE group. **333/1468 SMEs (22.7%) migrated**; migrated vs trapped is bad% 23.7 vs 43.2,

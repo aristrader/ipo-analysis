@@ -41,14 +41,13 @@ Open directions to scope WITH the owner before building (don't pick unilaterally
 - whether ANY of it can become a *signal* later (RUNG-2) — gated on forward-collected DATE+CATEGORY+DIRECTION and
   the full 3-layer/cross-regime bar; the red-team's prior is "unlikely to clear it" for a daily/free tool. Keep honest.
 - D2 delivery-volume% (below) is the other news-adjacent idea.
-### MIGRATION+ — extend the SME→Mainboard migration work (DISCUSS first)
-E3 shipped the descriptive outcome class (333/1468 = 22.7% migrate; +170% vs −6%). Owner: "a lot we can discuss and
-improve." Directions to scope WITH the owner:
-- the PREDICTIVE question: an **early, at-IPO marker of EVENTUAL migration** (e.g. IPO-time profitability, issue size,
-  subscription, sector) — a look-ahead-SAFE signal, run through the 3-layer/placebo protocol. The real prize.
-- add `migrated_to_mainboard` + `migration_date` as substrate COLUMNS at the next pipeline-build (not a post-hoc edit).
-- migration as a positive scorecard/analog input IF an at-IPO predictor of it validates.
-- time-to-migration distribution + does an SME that migrates *keep* outperforming post-migration (or is the move spent)?
+### MIGRATION+ — extend the SME→Mainboard migration work
+- ✅ **The PREDICTIVE question was TESTED (2026-06-11) → no new signal** (`migration_predictor_2026-06-11.md`): the
+  strong market_cap predictor was circular (current mcap); the real at-IPO features (sales/PAT/issue-size) are
+  weak + pre-2020-only + redundant → display-only. **Re-test cross-regime once the 2020-21 SME cohort matures (~2026-27)**
+  — that's the only way to get a real boom-eligible set. Censoring reframe: ~55.5% of SMEs that SURVIVE ≥5y migrate.
+- STILL OPEN (owner discuss): add `migrated_to_mainboard` + `migration_date` as substrate COLUMNS at the next
+  pipeline-build (not a post-hoc edit); does an SME that migrates *keep* outperforming post-migration, or is the move spent?
 
 ## NEEDS NETWORK / SCRAPING (a babysat session — NOT unattended-safe)
 ### D2 — delivery-volume % conviction signal  🔬 · S-M · DEMOTED

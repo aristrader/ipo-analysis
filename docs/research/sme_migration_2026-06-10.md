@@ -49,3 +49,9 @@ the segment is bimodal — a minority escape to the mainboard and compound, the 
 - A formal layer3 descriptive finding (SME bimodality) is an easy follow-up if wanted.
 
 Reproduce: `PYTHONPATH=. python tools/research/sme_migration.py`
+
+## UPDATE (2026-06-11): the 22.7% is CENSORED — among SMEs that survive ≥5y, ~55% migrate
+MIGRATION+ (`migration_predictor_2026-06-11.md`) found migration takes median 3.7y and 0% migrate in their
+first 3y, so the 22.7% above is depressed by recent (not-yet-eligible) listings. On the mature set (SMEs that
+SURVIVE ≥5y, n=560), the migration rate is **55.5%** — migration is the MAJORITY outcome for SMEs that last.
+The descriptive migrated-vs-trapped gap above still stands; the BASE RATE is just higher once censoring is removed.
