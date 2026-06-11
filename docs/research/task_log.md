@@ -279,6 +279,29 @@ FIX: added `test_canonical_weights_match_fresh_derivation` (tests/data/test_weig
 committed weights == a fresh deterministic derivation under the LIVE def, converting ANY silent drift into a
 loud failure. Self-consistent across refreshes (canonical + fresh-derive move together). tests/data 5 passed.
 
+## 2026-06-11 — A1c: richer banker-QUALITY measure (replace count-based legs)  [path: FULL, score-touching]
+scope: owned-data confirmed — 162 bankers; 93% of IPOs by bankers with ≥5 priors; alpha horizons present
+3m 97% / 6m 93% / 1y 83% / 3y 57% (3y sparse → taper). Task: build a banker-quality FEATURE FAMILY
+(A=size/recency-weighted, segment-specific, multi-horizon-tapered prior-alpha track; B=confidence-shrinkage
+toward segment base — the principled "don't judge on count" fix; C=pricing-discipline / listing-pop track;
+D=consistency/hit-rate; E=downside wipeout rate) + a harness testing each ONE-SIDED & TWO-SIDED through
+discrimination/recall/placebo/cross-regime/OOS-fold; promote ONLY the robust winner (review-gated), replacing
+A1b's count-based legs if it beats them. NO ML (transparent formulas). Point-in-time (priors must list AND
+mature before the scored IPO). Success = a robust banker-quality signal that ≥ matches A1b, or an honest
+"nothing beats A1b" verdict. Brainstorm: this session (A-E approved by owner; build-and-test-all directive).
+diverge: 3 parallel agents — test-design (a5bf7d6) · red-team/falsifier (a1b0b36) · expand-space (aff1a6f).
+Strong consensus: (1) downside use already ~solved by coverage_guard → A1c's value there is a CLEANER mechanism
+(shrinkage replaces MIN_PRIOR/freq cliff; strict maturity fixes A1b's look-ahead), must not regress recall;
+(2) return/two-sided use re-litigates n12 (no clean banker→alpha) → PRESUMED DEAD, higher bar; (3) multiple-
+comparisons is the dominant trap → pre-register, tiny promotion bench, 1 primary endpoint/arm; (4) incrementality
+vs the LIVE score + cross-regime (SME-boom-alone ≠ live) are the key gates; (5) confidence-shrinkage toward the
+PIT segment base is the principled "don't judge on count" fix; (6) CUT C/D/velocity/demand/market-share standalone
+(redundant/p-hack), BRLM infeasible (single-name field); the one orthogonal NEW dim = deterioration-trend.
+converge: spec `docs/superpowers/specs/2026-06-11-a1c-banker-quality-design.md` (IN: unified shrunk+maturity-
+gated+size/recency-weighted+segment track [downside + return arms] + deterioration; CUT the rest to descriptive).
+build: <in progress> · review: · tests: · verify:
+verdict: <pending>
+
 ## 2026-06-10 — A1b: banker-flag coverage-guard hybrid → PROMOTED LIVE  [path: FULL, score-touching]
 The proper fix after A1's quality def was downgraded for halving recall. Built candidate (d) coverage-guard:
 QUALITY def for record-bearing bankers + a `freq<12` leg RESTRICTED TO SME for thin-record bankers (the MB/SME
