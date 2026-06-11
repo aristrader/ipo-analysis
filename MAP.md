@@ -99,6 +99,7 @@ WEB SOURCES --scrapers/--> data/raw/ + data/reference/ + data/prices/
 - `tools/` — side tools (drhp/ = DRHP recovery; mutation/ = mutation validation; checks/ = schema gate; notify/ = telegram; refresh/; research/)
 - `report/` — generated HTML (layer3_partA.html)
 - `archive/` — superseded files + dataset backups (e.g. pre_drhp_20260601/)
+- `handoff/` — onboarding pack for a fresh account/session: README (read-order + conventions) + auto_memory/ (copied, won't-travel) + ENVIRONMENT.md (gitignored config to recreate)
 
 ## Layer-3 engine
 - `layer3/config.py` — AS_OF_DATE, thresholds (DEAD_MONEY_RETURN, SEGMENTS, ...) — single source
