@@ -11,8 +11,10 @@ even though two things do **not** travel with a fresh login (see "What doesn't t
 ---
 
 ## 1. READ THESE IN ORDER (the live truth — always trust files/git over any summary)
-1. **`CLAUDE.md`** (repo root) — the auto-loaded project brain: what this is, the 3 layers + status, the
-   non-negotiable conventions, the repo map, how-we-work. **This supersedes any stale text anywhere.**
+1. **`CLAUDE.md`** (repo root) — the auto-loaded project brain: what this is, the 3 layers, the non-negotiable
+   CONVENTIONS, the repo map, how-we-work. It's authoritative on **conventions/architecture**; for **current
+   state of what's built** it intentionally defers to STATUS.md + rules/index + git log (so if CLAUDE.md's
+   headline status reads older than those, trust STATUS/rules/git — they're the live record).
 2. **`STATUS.md`** — live "where are we / what's next" (the NOW section). History → `git log`.
 3. **`rules/index.md`** — the signal/strategy REGISTRY: every signal tested, its verdict (in-score /
    display-only / rejected) + WHY + the numbers. **Consult before re-testing anything.**

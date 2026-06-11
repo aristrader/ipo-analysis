@@ -1,4 +1,8 @@
-# docs/research/ — INDEX (generated map: what each doc is + status)
+# docs/research/ — INDEX (point-in-time map: what each doc is + status)
+
+> ⚠ **SNAPSHOT (no live generator), last rebuilt ~2026-06-10 — may not list the newest docs** (e.g.
+> a1b_coverage_guard, a1c_banker_quality, migration_predictor, sme_migration are recent). For the LIVE picture:
+> `ls docs/research/*.md` + **git log** + `task_log.md` (what was done) + `rules/index.md` (every verdict).
 
 Legend: **LIVE MENU** = the to-do · **STANDING** = living guide · **LOG** · **concluded write-up** =
 finished research; its verdict lives in `rules/index.md` (this is the evidence/history, NOT a to-do).

@@ -12,7 +12,9 @@ data/reference/bhavcopy/
 # NSE announcement staging: large (~180MB+) display-only overlay, FULLY re-pullable from NSE
 # (scrapers/announcements.py), wholesale-rewritten each pull -> regenerable, not version-controlled.
 data/live/news/
-archive/
+# only the ROOT archive/ holds the large dataset backups; docs/research/archive/ is small text
+# provenance (dead-ends, superseded plans) that SHOULD travel — so anchor this to root only.
+/archive/
 .playwright-mcp/
 tools/notify/telegram.json
 tools/notify/.notified

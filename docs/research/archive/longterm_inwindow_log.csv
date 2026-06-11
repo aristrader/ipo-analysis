@@ -1,0 +1,82 @@
+isin,company,preFY,slug,page_name,name_ok,preFY_present,pat,verify
+INE302M01033,Prabhat Dairy Ltd.,2015,nse:PRABHAT,Madhyam Agrivet Industries Ltd,False,True,3.6,STAGED(rename-code-verified)
+INE200M01039,Varun Beverages Ltd.,2016,bse:540180,Varun Beverages Ltd,True,False,,no-page/no-financials
+INE264T01014,Capacit'e Infraprojects Ltd.,2017,bse:540710,Capacite Infraprojects Ltd,False,True,69.0,STAGED(rename-code-verified)
+INE285J01028,Security & Intelligence Services (India) Ltd.,2017,bse:540673,SIS Ltd,False,True,54.0,STAGED(rename-code-verified)
+INE219X23014,IndiGrid Infrastructure Trust InvIT,2017,bse:540565,IndiGrid Infrastructure Trust,True,False,,page-found-but-preFY-off-window earliest=2014
+INE278R01034,Karda Constructions Ltd.,2018,bse:541161,Dharan Infra-EPC Ltd,False,True,13.0,STAGED(rename-code-verified)
+INE00M201021,Sterling & Wilson Solar Ltd.,2019,bse:542760,Sterling &amp; Wilson Renewable Energy Ltd,False,True,196.0,STAGED(rename-code-verified)
+INE382T01014,Fourth Dimension Solutions Ltd.,2015,,,False,False,,no-page/no-financials
+INE742R01013,OFS Technologies Ltd.,2015,,,False,False,,no-page/no-financials
+INE800S01017,Cawasji Behramji Catering Services Ltd.,2015,,,False,False,,no-page/no-financials
+INE256S01012,Vaksons Automobiles Ltd.,2015,bse:539402,Naksh Precious Metals Ltd,False,True,0.18,STAGED(rename-code-verified)
+INE725P01012,H.K.Trade International Ltd.,2015,bse:539337,Waaree Technologies Ltd,False,True,0.11,STAGED(rename-code-verified)
+INE365S01045,Oyeeee Media Ltd.,2015,bse:539310,Thinkink Picturez Ltd,False,True,0.28,STAGED(rename-code-verified)
+INE480S01026,Gala Print City Ltd.,2015,bse:539228,Gala Global Products Ltd,False,True,0.11,STAGED(rename-code-verified)
+INE027T01023,M.D.Inducto Cast Ltd.,2015,bse:539226,Rudra Global Infra Products Ltd,False,True,6.0,STAGED(rename-code-verified)
+INE451S01027,VMV Holidays Ltd.,2015,bse:539222,Growington Ventures India Ltd,False,True,-0.0,STAGED(rename-code-verified)
+INE653S01028,Junction Fabrics & Apparels Ltd.,2015,bse:539216,Garment Mantra Lifestyle Ltd,False,True,0.0,STAGED(rename-code-verified)
+INE904R01027,Yogya Enterprises Ltd.,2015,bse:539097,UR Sugar Industries Ltd,False,True,0.02,STAGED(rename-code-verified)
+INE908V01012,Libas Designs Ltd.,2016,nse:LIBAS,Libas Consumer Products Ltd,False,True,0.91,STAGED(rename-code-verified)
+INE607V01028,Veeram Ornaments Ltd.,2016,bse:540252,Viram Suvarn Ltd,False,True,0.08,STAGED(rename-code-verified)
+INE448V01019,Aurangabad Distillery Ltd.,2016,nse:ALCODIS,Alcokraft Distillery Ltd,False,True,3.0,STAGED(rename-code-verified)
+INE592O01019,Spicy Entertainment & Media Ltd.,2016,,,False,False,,no-page/no-financials
+INE715T01031,Narayani Steels Ltd.,2016,bse:540080,Dhatre Udyog Ltd,False,True,1.23,STAGED(rename-code-verified)
+INE537U01037,Sprayking Agro Equipment Ltd.,2016,bse:540079,Sprayking Ltd,False,True,0.05,STAGED(rename-code-verified)
+INE171P01019,Prabhat Telecoms (India) Ltd.,2016,bse:540027,Prabhat Technologies (India) Ltd,False,True,1.0,STAGED(rename-code-verified)
+INE912T01018,Raghav Ramming Mass Ltd.,2016,bse:539837,Raghav Productivity Enhancers Ltd,False,True,1.0,STAGED(rename-code-verified)
+INE359U01028,Lancer Container Lines Ltd.,2016,bse:539841,Lancer Containers Lines Ltd,False,True,0.55,STAGED(rename-code-verified)
+INE622Q01019,Sylph Education Solutions Ltd.,2015,bse:539682,Mobavenue AI Tech Ltd,False,True,0.07,STAGED(rename-code-verified)
+INE564S01019,Vidli Restaurants Ltd.,2015,bse:539659,Vikram Kamats Hospitality Ltd,False,True,0.11,STAGED(rename-code-verified)
+INE333Y01017,MRC Exim Ltd.,2017,bse:540809,MRC Agrotech Ltd,False,True,0.12,STAGED(rename-code-verified)
+INE715Y01031,Shradha Infraprojects (Nagpur) Ltd.,2017,nse:SHRADHA,Shradha Realty Ltd,False,True,4.0,STAGED(rename-code-verified)
+INE864K01010,IRIS Business Services Ltd.,2017,bse:540735,IRIS Regtech Solutions Ltd,False,True,-10.0,STAGED(rename-code-verified)
+INE070Y01015,Innovative Tyres & Tubes Ltd.,2017,,,False,False,,no-page/no-financials
+INE777X01017,AKM Lace & Embrotex Ltd.,2017,bse:540718,Aayush Art and Bullion Ltd,False,True,0.0,STAGED(rename-code-verified)
+INE672X01010,Sri Krishna Metcom Ltd.,2017,nse:BABAFOOD,Baba Agro Food Ltd,False,True,1.0,STAGED(rename-code-verified)
+INE319X01018,A & M Febcon Ltd.,2017,,,False,False,,no-page/no-financials
+INE145Y01023,Shish Industries Ltd.,2017,bse:540693,Shish Industries Ltd,True,False,,page-found-but-preFY-off-window earliest=2021
+INE782X01033,Servotech Power Systems Ltd.,2017,nse:SERVOTECH,Servotech Renewable Power System Ltd,False,True,5.0,STAGED(rename-code-verified)
+INE344X01016,Ashok Masala Mart Ltd.,2017,bse:540681,Chothani Foods Ltd,False,True,0.12,STAGED(rename-code-verified)
+INE082W01014,Surevin BPO Services Ltd.,2017,bse:543535,We Win Ltd,False,True,1.88,STAGED(rename-code-verified)
+INE586X01012,Keerti Knowledge & Skills Ltd.,2017,nse:GTECJAINX,G-Tec Janix Education Ltd,False,True,0.2,STAGED(rename-code-verified)
+INE986W01016,Bhakti Gems & Jewellery Ltd.,2017,bse:540545,Guru Krupa Gems &amp; Jewellery Ltd,False,True,0.17,STAGED(rename-code-verified)
+INE594W01042,Pure Giftcarat Ltd.,2017,bse:540492,Starlineps Enterprises Ltd,False,True,0.09,STAGED(rename-code-verified)
+INE617I01024,ASL Industries Ltd.,2017,nse:AVATAR,AVATAR Industries Ltd,False,True,0.49,STAGED(rename-code-verified)
+INE985W01018,Creative Peripherals & Distribution Ltd.,2017,bse:544631,Creative Newtech Ltd,False,True,1.0,STAGED(rename-code-verified)
+INE442V01012,Prime Customer Services Ltd.,2016,bse:540404,Prime Fresh Ltd,False,True,0.0,STAGED(rename-code-verified)
+INE737W01013,Akash Infra-Projects Ltd.,2016,nse:AKASH,Akash Infraprojects Ltd,False,True,3.57,STAGED(rename-code-verified)
+INE01Z401013,Shubhlaxmi Jewel Art Ltd.,2018,nse:SHUBHLAXMI,Shubhlaxmi Jewel Art Ltd,True,False,,page-found-but-preFY-off-window earliest=2019
+INE00F301010,Ultra Wiring Connectivity System Ltd.,2018,nse:UWCSL,Ultra Wiring Connectivity Systems Ltd,False,True,1.18,STAGED(rename-code-verified)
+INE647Z01025,Veeram Infra Engineering Ltd.,2018,bse:542046,Vivid Mercantile Ltd,False,True,1.0,STAGED(rename-code-verified)
+INE00U801010,Parin Furniture Ltd.,2018,nse:PARIN,Parin Enterprises Ltd,False,True,2.53,STAGED(rename-code-verified)
+INE01IU01018,Sky Gold Ltd.,2018,bse:541967,Sky Gold &amp; Diamonds Ltd,False,True,3.0,STAGED(rename-code-verified)
+INE01B501018,Add-Shop Promotions Ltd.,2018,bse:541865,Add-Shop E-Retail Ltd,False,True,0.0,STAGED(rename-code-verified)
+INE869Y01010,Saketh Exim Ltd.,2018,nse:TEMBO,Tembo Global Industries Ltd,False,True,1.0,STAGED(rename-code-verified)
+INE00WY01013,Ganesh Films India Ltd.,2018,bse:541703,Raconteur Global Resources Ltd,False,False,,page-found-but-preFY-off-window earliest=2025
+INE652Z01025,Avon Moldplast Ltd.,2018,bse:543512,Avro India Ltd,False,True,0.85,STAGED(rename-code-verified)
+INE00C501018,Ambani Organics Ltd.,2018,nse:AMBANIORGO,Ambani Orgochem Ltd,False,True,2.0,STAGED(rename-code-verified)
+INE411Y01011,Debock Sales & Marketing Ltd.,2018,nse:DIL,Debock Industries Ltd,False,True,1.0,STAGED(rename-code-verified)
+INE591Q01016,Suumaya Lifestyle Ltd.,2018,nse:SUULD,Suumaya Industries Ltd,False,True,1.0,STAGED(rename-code-verified)
+INE925Y01010,Godha Cabcon & Insulation Ltd.,2018,,,False,False,,no-page/no-financials
+INE626Z01029,Garv Industries Ltd.,2018,bse:541276,Hardwyn India Ltd,False,True,0.0,STAGED(rename-code-verified)
+INE542Z01028,Kapston Facilities Management Ltd.,2018,nse:KAPSTON,Kapston Services Ltd,False,True,6.0,STAGED(rename-code-verified)
+INE568Z01015,Uravi T & Wedge Lamps Ltd.,2017,bse:543930,Uravi Defence &amp; Technology Ltd,False,True,1.05,STAGED(rename-code-verified)
+INE705X01026,Advitiya Trade India Ltd.,2017,bse:541152,Goyal Aluminiums Ltd,False,True,-0.05,STAGED(rename-code-verified)
+INE555Z01020,Tara Chand Logistic Solutions Ltd.,2017,nse:TARACHAND,Tara Chand Infralogistic Solutions Ltd,False,True,3.0,STAGED(rename-code-verified)
+INE464Z01017,Inflame Appliances Ltd.,2017,bse:541083,Inflame Appliances Ltd,True,False,,page-found-but-preFY-off-window earliest=2018
+INE180Z01019,Focus Suites Solutions & Services Ltd.,2017,,,False,False,,no-page/no-financials
+INE749Y01014,A & M Jumbo Bags Ltd.,2017,nse:PARAMPARA,Parampara Dairy Delights Ltd,False,True,0.22,STAGED(rename-code-verified)
+INE06MH01016,Sona Hi Sona Jewellers (Gujarat) Ltd.,2019,nse:GOLDKART,Goldkart Jewels Ltd,False,True,0.0,STAGED(rename-code-verified)
+INE02WG01024,Wonder Fibromats Ltd.,2019,bse:543449,Wonder Electricals Ltd,False,True,6.0,STAGED(rename-code-verified)
+INE056001014,City Pulse Multiplex Ltd.,2019,bse:542727,City Pulse Multiventures Ltd,False,True,0.59,STAGED(rename-code-verified)
+INE060601031,Earum Pharmaceuticals Ltd.,2019,bse:542724,Murae Organisor Ltd,False,True,2.0,STAGED(rename-code-verified)
+INE02GA01012,Anand Rayons Ltd.,2019,bse:542721,Anand Rayons Ltd,True,False,,no-page/no-financials
+INE00CU01013,Suich Industries Ltd.,2019,,,False,False,,no-page/no-financials
+INE06CG01019,White Organic Retail Ltd.,2019,bse:542667,Diva Organic Living Ltd,False,True,2.0,STAGED(rename-code-verified)
+INE757T01025,Artemis Electricals Ltd.,2019,bse:542670,Artemis Electricals &amp; Projects Ltd,False,True,10.19,STAGED(rename-code-verified)
+INE05QJ01015,G.K.P.Printing & Packaging Ltd.,2019,bse:542666,G K P Printing &amp; Packaging Ltd,True,False,,no-page/no-financials
+INE011201014,Jinaam's Dress Ltd.,2019,,,False,False,,no-page/no-financials
+INE03CM01014,Gleam Fabmat Ltd.,2018,bse:542477,Gleam Up Jwel Limited,False,False,,page-found-but-preFY-off-window earliest=2019
+INE02AR01019,Anmol India Ltd.,2018,bse:542437,Anmol India Ltd,True,False,,no-page/no-financials
+INE542W01025,K.P.I.Global Infrastructure Ltd.,2018,bse:542323,KPI Green Energy Ltd,False,True,7.0,STAGED(rename-code-verified)

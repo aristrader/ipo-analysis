@@ -1,0 +1,38 @@
+isin,listing_date,open,high,low,close,source,confidence,verified_against
+INE00KV01022,2018-10-08,35.0,35.0,33.25,33.25,own_prices,high,"own_prices + chittorgarh/ipocentral(open35,+34.61%)"
+INE00Y701026,2019-09-12,36.0,36.0,36.0,36.0,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE00Z501029,2018-10-10,34.1,35.0,32.75,33.7,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE01GN01025,2018-10-23,92.0,92.9,89.0,90.0,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE01KI01027,2018-10-11,40.5,42.5,40.5,42.4,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE028A01039,2006-02-06,230.0,237.3,230.0,233.7,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE02WG01024,2019-08-06,93.0,93.0,93.0,93.0,external_ipocentral_chittorgarh,medium,"ipocentral/chittorgarh(listed 93,+4.49%) [no full OHLC]"
+INE032Z01020,2018-04-25,60.0,63.0,57.0,63.0,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE06IR01021,2019-04-05,255.0,267.75,255.0,267.6,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE07S101038,2021-03-09,165.6,166.5,165.05,165.5,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE087Z01024,2018-04-27,55.75,57.0,53.0,57.0,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE098201036,2020-01-13,24.1,25.0,23.3,24.8,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE0A0S01028,2020-10-19,46.0,46.0,45.1,45.1,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE0ALR01029,2020-10-15,70.2,70.2,66.7,66.7,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE0APB01032,2019-11-27,53.0,55.65,51.5,51.5,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE0D6I01023,2020-07-06,101.95,106.9,101.95,106.9,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE0EEJ01023,2020-10-21,95.0,97.5,94.0,95.8,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE0LCW01025,2022-09-22,82.0,86.1,77.9,82.8,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE106T01025,2016-02-25,60.0,60.0,54.0,58.75,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE112X01025,2017-04-18,34.4,35.5,34.1,35.2,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE188Y01031,2017-11-24,113.0,129.6,113.0,129.6,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE262Z01023,2018-06-05,68.0,68.0,64.6,66.2,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE291W01037,2017-03-02,180.0,180.0,180.0,180.0,own_prices,high,"own_prices + chittorgarh/ipocentral(open180,close180,+20%)"
+INE324X01026,2018-03-15,83.0,83.0,68.05,70.55,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE338Y01016,2024-03-28,76.6,76.6,76.6,76.6,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE405Y01021,2017-10-10,27.3,29.6,26.3,26.3,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE434A01013,2006-02-07,91.9,91.9,90.0,90.35,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE581X01021,2017-06-23,50.0,52.0,43.7,50.15,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE593W01028,2017-04-13,54.0,54.0,54.0,54.0,own_prices,high,"own_prices + ipocentral/investorzone(open54,+20%)"
+INE632X01030,2017-07-18,41.9,48.0,41.9,48.0,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE652Z01025,2018-07-26,51.65,51.65,51.65,51.65,external_investorzone_chittorgarh,medium,"investorzone/chittorgarh(listed 51.65,+1.3%) [no full OHLC]"
+INE688Y01022,2018-09-03,89.9,94.35,89.5,94.35,own_prices,high,"own_prices + chittorgarh/ipocentral(open89.9,close94.35,+21.49%)"
+INE691Z01023,2018-07-11,21.1,21.3,21.0,21.2,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE813V01022,2020-02-06,102.0,102.0,98.1,99.75,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE964W01021,2017-04-18,72.0,72.05,70.2,72.0,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE972X01022,2017-08-22,71.9,73.0,66.55,70.35,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)
+INE997Y01027,2018-04-02,21.0,21.0,21.0,21.0,own_prices,medium,own_prices (raw bhavcopy-scale listing-day OHLC; not externally pinned)

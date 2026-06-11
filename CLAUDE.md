@@ -78,7 +78,8 @@ backtests + the method spine). 5. `docs/layer2.md` / `docs/layer3.md` — design
 
 ## Repo map
 - `scrapers/` — one file per SOURCE (chittorgarh, sharescart, screener, exchange_lists, bhavcopy, bhavcopy_ohlc,
-  nse_subscription, ipowatch, investorgain, indices, corp_actions, delisting, screener_prices, yahoo). Fetch raw only.
+  nse_subscription, ipowatch, investorgain, indices, corp_actions, delisting, screener_prices, yahoo,
+  live_board [live+upcoming IPO board → data/live/], announcements [NSE corp-announcement context feed → data/live/news/]). Fetch raw only.
 - `pipeline/` — numbered, run in order: `00` long-term spine · `01` base · `02` detail · `03` Sharescart enrich ·
   `03b` screener financials · `03c` NSE subscription · `03d` ipowatch sub+GMP · `03e` investorgain GMP ·
   `03f` sector/market-cap · `04` verify tickers · `05` reconcile · `06` validate tickers · `07` returns_summary ·

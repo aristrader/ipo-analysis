@@ -289,6 +289,14 @@ conventions + how-we-work pipeline + signal digest + current state/next + owner 
 Deliberately POINTS to (not duplicates) CLAUDE.md/STATUS.md/rules/index — respecting the anti-sprawl rule;
 the whole repo travels with the folder so pointing is correct + drift-free. Owner confirmed: keep it LOCAL, no
 external share-link publish (local-only/no-egress posture). Registered handoff/ in project_map DIRS. verify clean.
+COMPLETENESS AUDIT (owner pushed "are you 100% sure"): found + fixed 3 real gaps — (1) `.gitignore` `archive/`
+was over-broad, silently ignoring `docs/research/archive/` (36 small provenance docs / dead-ends) → root-anchored
+to `/archive/` so the research provenance now TRAVELS (29 docs added); (2) CLAUDE.md scraper list was missing
+`live_board`/`announcements` → added; (3) `docs/research/INDEX.md` is a stale snapshot (no live generator) →
+added an "as-of + use git log/task_log/rules for live" note; also softened handoff/README's "CLAUDE.md supersedes
+everything" → CLAUDE=conventions, STATUS/rules/git=live state. Swept all remaining gitignored paths: only data
+backups + .venv + caches + settings.local.json (the last captured verbatim in ENVIRONMENT.md) — nothing else
+info-bearing is excluded.
 
 ## 2026-06-11 — MIGRATION+: at-IPO predictor of eventual SME→mainboard migration  [path: HYPOTHESIS, unattended]
 scope: derived migration outcome (E3 tool) + at-IPO features; CENSORING is the trap (median TTM 3.7y, 0% in

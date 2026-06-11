@@ -1,0 +1,77 @@
+target,isin,company,page_name,slug,verify,result
+boom_sme,INE07T201019,Burger King India Ltd.,Restaurant Brands Asia Ltd,bse:543248,rename-code-verified,RECOVERED broad=Consumer Discretionary|sec=Consumer Services|mcap=3962.0
+boom_sme,INE0L0L01012,Modi's Navnirman Ltd.,Modis Navnirman Ltd,bse:543539,rename-code-verified,RECOVERED broad=Consumer Discretionary|sec=Realty|mcap=664.0
+boom_sme,INE670K01029,Macrotech Developers Ltd.,Lodha Developers Ltd,bse:543287,rename-code-verified,RECOVERED broad=Consumer Discretionary|sec=Realty|mcap=90165.0
+boom_sme,INE758T01015,Zomato Ltd.,Eternal Ltd,bse:543320,rename-code-verified,RECOVERED broad=Consumer Discretionary|sec=Consumer Services|mcap=240439.0
+boom_sme,INE382M01027,Barbeque-Nation Hospitality Ltd.,United Foodbrands Ltd,bse:543283,rename-code-verified,RECOVERED broad=Consumer Discretionary|sec=Consumer Services|mcap=1924.0
+boom_sme,INE0UIZ01018,Zinka Logistics Solutions Ltd.,Blackbuck Ltd,bse:544288,rename-code-verified,RECOVERED broad=Services|sec=Services|mcap=9411.0
+boom_sme,INE0GGO01015,Empyrean Cashews Ltd.,Krishival Foods Ltd,bse:544416,rename-code-verified,RECOVERED broad=Fast Moving Consumer Goods|sec=Fast Moving Consumer Goods|mcap=1050.0
+boom_sme,INE732I01021,Angel Broking Ltd.,Angel One Ltd,bse:543235,rename-code-verified,RECOVERED broad=Financial Services|sec=Financial Services|mcap=31008.0
+boom_sme,INE00ZE01026,Abans Holdings Ltd.,Abans Financial Services Ltd,bse:543712,rename-code-verified,RECOVERED broad=Financial Services|sec=Financial Services|mcap=1021.0
+boom_sme,INE035801013,Sah Polymers Ltd.,Aeroflex Neu Ltd,bse:543743,rename-code-verified,RECOVERED broad=Industrials|sec=Capital Goods|mcap=223.0
+boom_sme,INE961O01016,Rainbow Children's Medicare Ltd.,Rainbow Childrens Medicare Ltd,bse:543524,rename-code-verified,RECOVERED broad=Healthcare|sec=Healthcare|mcap=13816.0
+boom_sme,INE619A01035,Ruchi Soya Industries Ltd. FPO,Patanjali Foods Ltd,bse:500368,rename-code-verified,RECOVERED broad=Fast Moving Consumer Goods|sec=Fast Moving Consumer Goods|mcap=49471.0
+boom_sme,INE00YJ01010,Jaro Institute of Technology Management & Research Ltd.,Jaro Institute of Technol. Mgt. and Research Ltd,bse:544534,rename-code-verified,RECOVERED broad=Consumer Discretionary|sec=Consumer Services|mcap=1266.0
+boom_sme,INE03Q201024,Glenmark Life Sciences Ltd.,Alivus Life Sciences Ltd,bse:543322,rename-code-verified,RECOVERED broad=Healthcare|sec=Healthcare|mcap=12982.0
+boom_sme,INE699H01024,Adani Wilmar Ltd.,AWL Agri Business Ltd,bse:543458,rename-code-verified,RECOVERED broad=Fast Moving Consumer Goods|sec=Fast Moving Consumer Goods|mcap=24843.0
+boom_sme,INE00FF01025,Ami Organics Ltd.,Acutaas Chemicals Ltd,bse:543349,rename-code-verified,RECOVERED broad=Healthcare|sec=Healthcare|mcap=24876.0
+boom_sme,INE0LOJ01019,IKIO Lighting Ltd.,IKIO Technologies Ltd,bse:543923,rename-code-verified,RECOVERED broad=Consumer Discretionary|sec=Consumer Durables|mcap=1162.0
+boom_sme,INE00M901018,Interarch Building Products Ltd.,Interarch Building Solutions Ltd,bse:544232,rename-code-verified,RECOVERED broad=Industrials|sec=Construction|mcap=2834.0
+boom_sme,INE943P01029,Dr.Agarwal's Health Care Ltd.,Dr Agarwals Health Care Ltd,bse:544350,rename-code-verified,RECOVERED broad=Healthcare|sec=Healthcare|mcap=15260.0
+boom_sme,INE0M4D01010,Standard Glass Lining Technology Ltd.,Standard Engineering Technology Ltd,bse:544333,rename-code-verified,RECOVERED broad=Industrials|sec=Capital Goods|mcap=2774.0
+boom_sme,INE0FW001016,Markolines Traffic Controls Ltd.,Markolines Pavement Technologies Ltd,bse:543364,rename-code-verified,RECOVERED broad=Industrials|sec=Construction|mcap=375.0
+boom_sme,INE0NHL23019,Bharat Highways InvIT InvIT,Indus Infra Trust,bse:544137,rename-code-verified,RECOVERED broad=Services|sec=Services|mcap=5546.0
+boom_sme,INE0ALI01010,Advait Infratech Ltd.,Advait Energy Transitions Limited,bse:543230,rename-code-verified,RECOVERED broad=Industrials|sec=Capital Goods|mcap=2167.0
+boom_sme,INE0AQ201015,Schloss Bangalore Ltd.,Leela Palaces Hotels &amp; Resorts Ltd,bse:544408,rename-code-verified,RECOVERED broad=Consumer Discretionary|sec=Consumer Services|mcap=13697.0
+low,INE0DRT01018,Fabino Life Sciences Ltd.,,bse:543444,no-name-match[bse:543444→Fabino Enterprises Ltd],nomatch
+low,INE07L501010,DMR Hydroengineering & Infrastructures Ltd.,,bse:543410,no-name-match[bse:543410→DMR Engineering Ltd],nomatch
+low,INE0CWK01019,Adishakti Loha & Ispat Ltd.,,bse:543377,no-name-match[bse:543377→AFLOAT Enterprises Ltd],nomatch
+low,INE0HPK01012,DU Digital Technologies Ltd.,,nse:DUDIGITAL,no-name-match[nse:DUDIGITAL→404],nomatch
+low,INE0EMB01015,Rangoli Tradecomm Ltd.,,bse:543274,no-name-match[bse:543274→Suumaya Corporation Ltd],nomatch
+low,INE0K5F01014,Dhyaani Tile & Marblez Ltd.,,bse:543516,no-name-match[bse:543516→Dhyaani Tradeventtures Ltd],nomatch
+low,INE776C01039,GMR Infrastructure Ltd.,,bse:532754,no-name-match[bse:532754→GMR Airports Ltd|nse:GMRAIRPORT→GMR Airports Ltd],nomatch
+low,INE336C01016,Rathi Udyog Ltd. FPO,,bse:504903,no-name-match[bse:504903→Rathi Steel &amp; Power Ltd],nomatch
+low,INE438H01019,Deccan Aviation Ltd.,,bse:532747,no-name-match[bse:532747→Kingfisher Airlines Ltd|nse:AIRDECCAN→404],nomatch
+low,INE347H01012,JRG Securities Ltd.,,bse:532745,no-name-match[bse:532745→Inditrade Capital Ltd],nomatch
+low,INE475H01011,Reliance Petroleum Ltd.,,532743,name-direct-bse(Reliance Petroleum Ltd(merged)),RECOVERED fin 3yr
+low,INE296H01011,Emkay Share & Stock Brokers Ltd.,,bse:532737,no-name-match[bse:532737→Emkay Global Financial Services Ltd|nse:EMKAY→Emkay Global Financial Services L],nomatch
+longterm_sample,INE627H01017,Cambridge Technology Enterprises Ltd.,,532801,name-direct-bse(Cambridge Technology Enterprises Ltd),MATCH years=12 has_pat=True
+longterm_sample,INE255D01024,Gulshan Sugars & Chemicals Ltd. FPO,,bse:532457,no-name-match[bse:532457→Gulshan Polyols Ltd|nse:GULPOLY→Gulshan Polyols Ltd],nomatch
+longterm_sample,INE235G01011,Usher Agro Ltd.,,USHERAGRO,name-direct-nse(Usher Agro Ltd),MATCH years=0 has_pat=False
+longterm_sample,INE438H01019,Deccan Aviation Ltd.,,bse:532747,no-name-match[bse:532747→Kingfisher Airlines Ltd|nse:AIRDECCAN→404],nomatch
+longterm_sample,INE177H01039,Godawari Power & Ispat Ltd.,,532734,name-direct-bse(Godawari Power &amp; Ispat Ltd),MATCH years=12 has_pat=True
+longterm_sample,INE286H01012,Visa Steel Ltd.,,bse:532721,no-name-match[bse:532721→VISA Chrome Ltd|nse:VISASTEEL→404],nomatch
+longterm_sample,INE226H01026,Sadbhav Engineering Ltd.,,532710,name-direct-bse(Sadbhav Engineering Ltd),MATCH years=12 has_pat=True
+longterm_sample,INE283H01019,Royal Orchid Hotels Ltd.,,532699,name-direct-bse(Royal Orchid Hotels Ltd),MATCH years=12 has_pat=True
+longterm_sample,INE722H01024,Renaissance Jewellery Ltd.,,bse:532923,no-name-match[bse:532923→Renaissance Global Ltd|nse:RGL→Renaissance Global Ltd],nomatch
+longterm_sample,INE406H01016,Dhanus Technologies Ltd.,,532903,name-direct-bse(Dhanus Technologies Ltd),MATCH years=0 has_pat=False
+longterm_sample,INE056I01025,Refex Refrigerants Ltd.,,bse:532884,no-name-match[bse:532884→Refex Industries Ltd|nse:REFEX→Refex Industries Ltd],nomatch
+longterm_sample,INE221I01017,Celestial Labs Ltd.,,bse:532871,no-name-match[bse:532871→404|nse:CELESTIAL→Celestial Biolabs Ltd],nomatch
+longterm_sample,INE042H01019,Binani Cement Ltd.,,bse:532849,no-name-match[bse:532849→404|nse:BINANICEM→Ultratech Nathdwara Cement Ltd],nomatch
+longterm_sample,INE006I01046,Astral Poly Technik Ltd.,,bse:532830,no-name-match[bse:532830→Astral Ltd|nse:ASTRAL→Astral Ltd],nomatch
+longterm_sample,INE134E01011,Power Finance Corp.Ltd.,,532810,name-direct-bse(Power Finance Corporation Ltd),MATCH years=12 has_pat=True
+longterm_sample,INE213J01012,Chemcel Bio-tech Ltd.,,bse:533026,no-name-match[bse:533026→Chemcel Biotech Ltd],nomatch
+longterm_sample,INE450H01014,Anu's Laboratories Ltd.,,bse:532981,no-name-match[bse:532981→Anus Laboratories Ltd],nomatch
+longterm_sample,INE964H01014,Shriram EPC Ltd.,,bse:532945,no-name-match[bse:532945→SEPC Ltd|nse:SEPC→SEPC Ltd],nomatch
+longterm_sample,INE563J01010,Astec LifeSciences Ltd.,,533138,name-direct-bse(Astec Lifesciences Ltd),MATCH years=12 has_pat=True
+longterm_sample,INE688J01023,Excel Infoways Ltd.,,bse:533090,no-name-match[bse:533090→Landsmill Green Limited|nse:EXCEL→404],nomatch
+longterm_sample,INE482J01021,Gyscoal Alloys Ltd.,,bse:533275,no-name-match[bse:533275→Shah Metacorp Ltd|nse:SHAH→Shah Metacorp Ltd],nomatch
+longterm_sample,INE019J01013,Microsec Financial Services Ltd.,,bse:533259,no-name-match[bse:533259→Health X Platform Ltd|nse:SASTASUNDR→404],nomatch
+longterm_sample,INE028L21018,Standard Chartered PLC IDRS,,580001,name-direct-bse(Standard Chartered PLC),MATCH years=0 has_pat=False
+longterm_sample,INE141K01013,Texmo Pipes & Products Ltd.,,533164,name-direct-bse(Texmo Pipes &amp; Products Ltd),MATCH years=12 has_pat=True
+longterm_sample,INE060J01017,Flexituff International Ltd.,,533638,name-direct-bse(Flexituff Ventures International Ltd),MATCH years=12 has_pat=True
+longterm_sample,INE524L01026,Readymade Steel India Ltd.,,bse:533482,no-name-match[bse:533482→Kridhan Infra Ltd|nse:KRIDHANINF→Kridhan Infra Ltd],nomatch
+longterm_sample,INE045J01034,Fineotex Chemical Ltd.,,533333,name-direct-bse(Fineotex Chemical Ltd),MATCH years=12 has_pat=True
+longterm_sample,INE550L01013,Olympic Cards Ltd.,,534190,name-direct-bse(Olympic Cards Ltd),MATCH years=12 has_pat=True
+longterm_sample,INE264T01014,Capacit'e Infraprojects Ltd.,,bse:540710,no-name-match[bse:540710→Capacite Infraprojects Ltd|nse:CAPACITE→Capacite Infraprojects Ltd],nomatch
+longterm_sample,INE524N01014,Jupiter Infomedia Ltd.,,534623,name-direct-bse(Jupiter Infomedia Ltd),MATCH years=12 has_pat=True
+longterm_sample,INE326P01019,S R G Securities Finance Ltd.,,bse:536710,no-name-match[bse:536710→SRG Fingrow Finance Ltd],nomatch
+longterm_sample,INE583M01012,Bothra Metals & Alloys Ltd.,,535279,name-direct-bse(Bothra Metals &amp; Alloys Ltd),MATCH years=12 has_pat=True
+longterm_sample,INE011R01013,Atishay Infotech Ltd.,,538713,name-direct-bse(Atishay Ltd),MATCH years=12 has_pat=True
+longterm_sample,INE174Q01011,Women's Next Loungeries Ltd.,,bse:538128,no-name-match[bse:538128→404],nomatch
+longterm_sample,INE742R01013,OFS Technologies Ltd.,,bse:539570,no-name-match[bse:539570→404],nomatch
+longterm_sample,INE554R01020,Karnavati Finance Ltd.,,538928,name-direct-bse(Karnavati Finance Ltd),MATCH years=12 has_pat=True
+longterm_sample,INE564S01019,Vidli Restaurants Ltd.,,/company/id/1275181/,name-search(Vidli Restaurants Ltd Partly Paidup),MATCH years=0 has_pat=False
+longterm_sample,INE586X01012,Keerti Knowledge & Skills Ltd.,,nse:GTECJAINX,no-name-match[nse:GTECJAINX→G-Tec Janix Education Ltd],nomatch
+longterm_sample,INE01B501018,Add-Shop Promotions Ltd.,,bse:541865,no-name-match[bse:541865→Add-Shop E-Retail Ltd],nomatch
+longterm_sample,INE555Z01020,Tara Chand Logistic Solutions Ltd.,,nse:TARACHAND,no-name-match[nse:TARACHAND→Tara Chand Infralogistic Solutions Ltd],nomatch

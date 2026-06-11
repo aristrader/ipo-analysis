@@ -1,0 +1,10 @@
+isin,symbol,field,current_value,correct_value,source,confidence
+INE679V01027,AVL,corp_action_split,inferred 10.13x (not in feed),split 1:10 (FV 10->1) record_date 2024-08-27; factor 10.0,trendlyne/madefortrade/goodreturns + screener FV=1,high
+INE0LGX01024,INA,corp_action_split,inferred_split factor 7.845,split 1:10 (FV 10->1) record_date 2025-01-24; true factor 10.0 (inferred understated),goodreturns/trendlyne + screener FV=1,high
+INE732I01021,ANGELONE,corp_action_split,inferred_split factor 10.011,split 1:10 (FV 10->1) record_date 2026-02-26; factor 10.0,trendlyne/jmfinancial/businesstoday,high
+INE071Y01013,TTFL,corp_action_bonus,inferred_split factor 2.125,bonus 14:10 ex/record 2020-08-12; true factor 2.40 (inferred understated),trendlyne TTFL bonus + screener FV=10 (no split),high
+INE287C01037,MICEL,corp_action_split,inferred_split factor 2.766,split 5:1 (FV 10->2); true factor >=5.0 (inferred understated),screener FV=2,high
+INE728Z01015,,listing_open,chittorgarh listing_open 72.5 (xcheck flag),NSE SME listing open = 88.0 (bhavcopy correct; Chittorgarh wrong),topshare/hdfcsec/chittorgarh listing record,high
+INE813V01022,MCL,market_maker,missing,Pantomath Stock Brokers Pvt. Ltd.,chittorgarh detail page,high
+INE05FR01029,,market_maker,missing,NNM Securities Pvt. Ltd.,chittorgarh detail page,high
+INE00D001018,REXPIPES,market_maker,missing,New Berry Capitals Pvt. Ltd.,ipoplatform/chittorgarh,high
