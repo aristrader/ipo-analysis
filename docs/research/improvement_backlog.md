@@ -16,26 +16,50 @@
 ---
 
 ## QUICK / OWNED-DATA (no internet — safe to run anytime)
+### A1c — richer banker-QUALITY measure (replace the count-based legs)  ⚪ · M · score-touching · **owner-requested 2026-06-11**
+A1b still has two coarse pieces the owner flagged: (1) the thin-record SME leg STILL fires purely on banker IPO-COUNT
+(`freq<12`), and (2) the quality leg scores a banker on a single LIFETIME good/bad flag per past IPO — not on HOW those
+IPOs actually traded. Owner's spec: judge a banker on the QUALITY + SCALE of their book, not the count —
+- weight each past IPO by **issue size** (a banker who floated big, well-received issues ≠ one who did tiny ones);
+- use the **multi-horizon trajectory** of their past IPOs (how those names traded at **3m / 6m / 1y / 3y**), not one
+  lifetime endpoint — early horizons are most attributable to the banker;
+- **taper/cap the attribution around ~3y** (beyond that the company itself changes too much to credit the banker).
+Build a continuous banker-quality score from this, replacing both count-based legs. MUST go through the full pipeline
++ independent adversarial review + the evolve-only-if-robust bar (recall must not regress, cross-regime, placebo) BEFORE
+going live — same gate A1b passed. Honesty caveat to watch: multi-horizon needs enough matured priors per banker (thin
+on new SME shops) → likely a graceful fallback for unproven bankers. Source: A1b (`a1b_coverage_guard_2026-06-10.md`).
+
 ## OWNED-DATA, BIGGER
 ### C1 — deeper app polish / redesign pass  🟡 · M · needs the Playwright visual walk
 Night-1 shipped the honesty/nav fixes (median-first, n_floor, COMBINED→rank, sidebar search). Remaining: the broader
 navigation/redesign from `app_phase2_design.md` + `app_iteration_charter.md`. Design agents MUST load those briefs.
 
+## DISCUSSION THREADS — owner wants to expand these (scope before building)  ⚪ · owner 2026-06-11
+### NEWS+ — extend the announcement feed beyond display (DISCUSS first)
+D1/D4 shipped the display-only context feed (built, full history pulled). Owner: "a lot we can discuss and do."
+Open directions to scope WITH the owner before building (don't pick unilaterally):
+- **surface it in the app** — the last D1 piece: render filings + category chips under each IPO's price chart
+  (needs the app work + a visual walk). This is the obvious near-term win.
+- per-company **catalyst timeline** / "upcoming events" (board-meeting + event-calendar endpoints exist).
+- whether ANY of it can become a *signal* later (RUNG-2) — gated on forward-collected DATE+CATEGORY+DIRECTION and
+  the full 3-layer/cross-regime bar; the red-team's prior is "unlikely to clear it" for a daily/free tool. Keep honest.
+- D2 delivery-volume% (below) is the other news-adjacent idea.
+### MIGRATION+ — extend the SME→Mainboard migration work (DISCUSS first)
+E3 shipped the descriptive outcome class (333/1468 = 22.7% migrate; +170% vs −6%). Owner: "a lot we can discuss and
+improve." Directions to scope WITH the owner:
+- the PREDICTIVE question: an **early, at-IPO marker of EVENTUAL migration** (e.g. IPO-time profitability, issue size,
+  subscription, sector) — a look-ahead-SAFE signal, run through the 3-layer/placebo protocol. The real prize.
+- add `migrated_to_mainboard` + `migration_date` as substrate COLUMNS at the next pipeline-build (not a post-hoc edit).
+- migration as a positive scorecard/analog input IF an at-IPO predictor of it validates.
+- time-to-migration distribution + does an SME that migrates *keep* outperforming post-migration (or is the move spent)?
+
 ## NEEDS NETWORK / SCRAPING (a babysat session — NOT unattended-safe)
-### D1 — RUNG-1 explanatory NSE-announcement context feed (display-only)  ⚪ · M
-Dated, ISIN-keyed (free NSE API has `sm_isin`), category-tagged by local keyword taxonomy (NO LLM, NO egress).
-"Context, not signal" chip. The honest near-term news product. Spec is turnkey in `newsfeed_rnd_2026-06-09.md`.
 ### D2 — delivery-volume % conviction signal  🔬 · S-M · DEMOTED
 News R&D found it's boom-only (~2017+, no longterm coverage → can't clear cross-regime) + needs a NEW NSE delivery-
 bhavcopy pull + no peer-review support. Display-only ceiling at best. Lower priority than once thought.
-### D4 — start the NSE-announcement staging pull (forward-collect)  ⚪ · S
-The only way to start the ~18–36mo clock that makes any predictive news hypothesis testable later. Stage raw, don't interpret.
-### ~~E3 — SME→Mainboard migration~~  ✅ DONE 2026-06-10 (owned-data, no scraping)
-Turned out derivable WITHOUT a new source: SME-listed ISIN now on the NSE mainboard list (dated) or a non-SME BSE
-group. 333/1468 (22.7%) migrated; migrated vs trapped quantifies the bimodal dead-money trap (bad% 24 vs 43,
-multibagger 59 vs 23, median +170% vs −6%, both cohorts). DESCRIPTIVE only (selection-confounded + look-ahead →
-not a score input). `tools/research/sme_migration.py` + `sme_migration_2026-06-10.md`. FUTURE: early at-IPO marker
-of eventual migration (a clean predictive hypothesis); optional substrate column at next pipeline-build.
+
+> **DONE this session (2026-06-10):** D1 (feed engine + taxonomy), D4 (full-history pull, gitignored), E3
+> (SME→Mainboard migration outcome class — owned-data). See git log + `rules/index.md`.
 
 ## ANALYSIS EXTENSIONS (owned-data but hit known walls)
 ### E2 — unblock P/E-vs-sector for SME + EV/Sales for loss-makers  ⚪ · M
