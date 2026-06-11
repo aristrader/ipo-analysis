@@ -82,6 +82,10 @@ fusion · weak-subscription veto (2026-06-10: B1's tell was a young-cohort artif
 ---
 
 ## How to use this
-- **Pick from here.** Current do-firsts (quick, owned-data): **A1b** (proper banker fix), **I3** (weights hygiene),
-  **F2** (durable scorecard). Network items (D1/D4/E3) need a babysat session; H-full/G1/G2 are big-project decisions.
+- **Pick from here.** As of 2026-06-11 the quick/owned-data signal hunts are EXHAUSTED (A1/A1b/A1c, B1, E1,
+  H7, H-MVP, weak-sub all resolved — see git log + rules/index). What remains is: DISCUSSION items (scoring-
+  architecture, NEWS+, MIGRATION+) that need owner input first; APP/UX work (C1 + surfacing the news feed) that
+  needs the owner present for a Playwright visual walk; walled analysis extensions (E2, D2 — boom-only); and the
+  big GATED builds (Theme-H-full, G1, G2). The single best unattended-safe research bet left = **MIGRATION+**
+  (an early at-IPO marker of eventual SME→mainboard escape — a chance at a genuinely NEW validated signal).
 - When an item ships: record it in the git commit, put the signal verdict in `rules/index.md`, remove it from here. New idea → add here first.
