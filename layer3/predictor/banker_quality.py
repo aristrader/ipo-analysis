@@ -75,6 +75,17 @@ def _bad_value_weight(idx, t, ld_a, size_a, bad_a, H):
     return val, wt
 
 
+def _pop_value_weight(idx, t, ld_a, size_a, pop_a, H):
+    """Vectorized listing-pop value + weight for prior rows `idx`. NO maturity gate — a listing pop
+    is known on the prior's own listing day, so any prior that listed before t is immediately usable
+    (this is the 'pricing-discipline' track: does the banker tend to price to pop?)."""
+    ages = (t - ld_a[idx]).astype("timedelta64[D]").astype(float)
+    usable = ~np.isnan(pop_a[idx])
+    val = pop_a[idx][usable]
+    wt = np.log1p(np.maximum(0.0, size_a[idx][usable])) * (0.5 ** ((ages[usable] / 365.0) / H))
+    return val, wt
+
+
 def banker_quality_series(pool, panel, target="alpha", H=DEFAULT_H, k=DEFAULT_K,
                           taper=TAPER, asof_col="listing_date"):
     """PIT banker-quality per row in `pool`, using `panel` as the historical book.
@@ -87,10 +98,12 @@ def banker_quality_series(pool, panel, target="alpha", H=DEFAULT_H, k=DEFAULT_K,
     typ_a = panel["type"].astype(str).values
     size_a = pd.to_numeric(panel.get("issue_size_cr"), errors="coerce").fillna(0.0).values
     alpha_cols = {h: pd.to_numeric(panel.get(f"alpha_{h}"), errors="coerce").values for h in taper}
-    bad_a = None
+    bad_a = pop_a = None
     if target == "bad":
         from layer3.predictor.scorecard import _bad_outcome_mask
         bad_a = _bad_outcome_mask(panel).astype(float).values
+    elif target == "pop":
+        pop_a = pd.to_numeric(panel.get("adj_listing_gain_open"), errors="coerce").values
 
     pl_lm = pool["lead_manager"].astype(str).str.strip().values
     pl_ld = pd.to_datetime(pool[asof_col], errors="coerce").values
@@ -109,6 +122,9 @@ def banker_quality_series(pool, panel, target="alpha", H=DEFAULT_H, k=DEFAULT_K,
         if target == "alpha":
             sval, _sw = _alpha_value_weight(seg_idx, t, ld_a, size_a, alpha_cols, taper, H)
             bval, bwt = _alpha_value_weight(prior_idx, t, ld_a, size_a, alpha_cols, taper, H)
+        elif target == "pop":
+            sval, _sw = _pop_value_weight(seg_idx, t, ld_a, size_a, pop_a, H)
+            bval, bwt = _pop_value_weight(prior_idx, t, ld_a, size_a, pop_a, H)
         else:
             sval, _sw = _bad_value_weight(seg_idx, t, ld_a, size_a, bad_a, H)
             bval, bwt = _bad_value_weight(prior_idx, t, ld_a, size_a, bad_a, H)

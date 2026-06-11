@@ -12,22 +12,19 @@
 > **Done 2026-06-10 (babysat session):** D1/D4 (NSE announcement context feed + full-history pull), **A1b
 > (banker coverage-guard hybrid → PROMOTED LIVE by independent review — the ONE signal change that cleared the
 > bar: recovers recall + keeps the false-veto fix).**
+> **Done 2026-06-11:** A1c (richer banker-quality — built + tested + reviewed → NO live change: return DEAD
+> cross-regime, downside shelved-at-parity, pricing-discipline→pop real-but-display-only; `a1c_banker_quality_2026-06-11.md`).
 
 ---
 
 ## QUICK / OWNED-DATA (no internet — safe to run anytime)
-### A1c — richer banker-QUALITY measure (replace the count-based legs)  ⚪ · M · score-touching · **owner-requested 2026-06-11**
-A1b still has two coarse pieces the owner flagged: (1) the thin-record SME leg STILL fires purely on banker IPO-COUNT
-(`freq<12`), and (2) the quality leg scores a banker on a single LIFETIME good/bad flag per past IPO — not on HOW those
-IPOs actually traded. Owner's spec: judge a banker on the QUALITY + SCALE of their book, not the count —
-- weight each past IPO by **issue size** (a banker who floated big, well-received issues ≠ one who did tiny ones);
-- use the **multi-horizon trajectory** of their past IPOs (how those names traded at **3m / 6m / 1y / 3y**), not one
-  lifetime endpoint — early horizons are most attributable to the banker;
-- **taper/cap the attribution around ~3y** (beyond that the company itself changes too much to credit the banker).
-Build a continuous banker-quality score from this, replacing both count-based legs. MUST go through the full pipeline
-+ independent adversarial review + the evolve-only-if-robust bar (recall must not regress, cross-regime, placebo) BEFORE
-going live — same gate A1b passed. Honesty caveat to watch: multi-horizon needs enough matured priors per banker (thin
-on new SME shops) → likely a graceful fallback for unproven bankers. Source: A1b (`a1b_coverage_guard_2026-06-10.md`).
+### SCORING-ARCHITECTURE — discuss: one consolidated score vs multiple purpose-specific scores?  ⚪ · DISCUSS · owner 2026-06-11
+Open question to scope WITH the owner: should the tool keep ONE consolidated score, or split into MULTIPLE
+purpose-specific scores (e.g. an allottee/APPLY-pop score vs a from-listing/secondary-buyer alpha score vs a
+downside/wipeout-risk score) AND a consolidated roll-up? Motivation surfaced by A1c: signals behave very
+differently by HORIZON/role — e.g. pricing-discipline predicts the listing POP (allottee) but NOT sustained
+alpha; banker-downside predicts wipeouts but not returns. A single blended score can muddy "good for the
+allottee" vs "good for the secondary buyer." Discuss the UX + the validation implications before any build.
 
 ## OWNED-DATA, BIGGER
 ### C1 — deeper app polish / redesign pass  🟡 · M · needs the Playwright visual walk

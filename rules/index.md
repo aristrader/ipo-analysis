@@ -261,6 +261,17 @@ results are kept on purpose).
   +37.9pp 1y (N=94, IC −0.345, placebo p=0.000, CIs separate) — real, BUT reduces to n6's broad_sector pool (fine-industry
   matching empty: 13 MB / 0 SME), NOT incremental (resid-IC −0.166), no peer-proximity dose, STRUCTURALLY boom-only (zero
   longterm P/E — same wall as n6/E2). SME thin (N≤26), 3y untestable. Do NOT advance to the all-stocks panel on valuation. hmvp_relative_valuation_2026-06.md.
+- **A1c richer banker-quality measure: NO live change — coverage_guard (A1b) stays. 3 findings.** Built a transparent
+  PIT banker-quality (size+recency-weighted, segment-specific, horizon-tapered + strict maturity-gating, confidence-
+  shrinkage toward the PIT segment base = the principled "don't judge on count" fix). 3-lens diverge + independent review.
+  (1) **RETURN arm DEAD across ALL horizons (1m/3m/1y/3y)** — pooled rank-IC ~0, sign-flips, placebo p=0.10–0.95 →
+  confirms n12 "no clean banker→alpha" at every horizon. (2) **DOWNSIDE arm shelved at PARITY** — as a ranker
+  27.4% recall vs coverage_guard 24.6% (marginally better, strict-PIT, cleaner mechanism) but NOT a robust OOS
+  improvement → keep incumbent (revisit if a regime widens its edge; shelved-at-parity, NOT rejected-on-quality).
+  (3) **PRICING-DISCIPLINE → listing POP: REAL + cross-regime + placebo-clean (all 4 cells +, pooled IC +0.163,
+  p=0.0) but DISPLAY-ONLY** — predicts only the pop (allottee day-1, not sustained alpha; alpha_1m p=0.94), overlaps
+  GMP, and incrementality is only boom-verifiable (longterm GMP/sub coverage=0 — the pe_vs_sector/H-MVP wall). A
+  candidate APPLY-side context chip, not a scored signal. `a1c_banker_quality_2026-06-11.md` + `banker_quality.py`.
 - **E3 SME→Mainboard migration: DESCRIPTIVE outcome class (owned-data; NOT a score input).** Derivable WITHOUT scraping
   (`tools/research/sme_migration.py`): SME-listed IPO whose ISIN now sits on the NSE mainboard list (dated via its
   `DATE OF LISTING`) or a non-SME BSE group. **333/1468 SMEs (22.7%) migrated**; migrated vs trapped is bad% 23.7 vs 43.2,

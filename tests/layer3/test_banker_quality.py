@@ -80,6 +80,19 @@ def test_series_is_segment_specific_and_point_in_time():
     assert s.loc[scored] == pytest.approx(0.5, abs=1e-6)
 
 
+def test_pop_target_uses_listing_pop_no_maturity_gate():
+    # the pricing-discipline track: a prior's listing pop is usable immediately (no maturity wait).
+    # banker "B" has 2 prior SME IPOs with pop +0.3; scoring a 3rd SME IPO -> Q (k=0) == 0.3.
+    rows = [("B", "2023-10-01", "SME", 50, 0, 0, 0, 0),
+            ("B", "2023-11-01", "SME", 50, 0, 0, 0, 0),
+            ("B", "2024-01-01", "SME", 50, 0, 0, 0, 0)]
+    df = _frame(rows)
+    df["adj_listing_gain_open"] = [0.3, 0.3, 0.0]
+    s = bq.banker_quality_series(df, df, target="pop", k=0.0)
+    scored = df.index[df["listing_date"] == "2024-01-01"][0]
+    assert s.loc[scored] == pytest.approx(0.3, abs=1e-6)   # recent priors usable at once (pop known at listing)
+
+
 def test_series_empty_banker_returns_segment_base():
     # a brand-new banker with no priors -> Q equals the PIT segment base (shrinkage to base, W=0)
     rows = [("OLD", "2021-01-01", "SME", 50, 0.2, 0.2, 0.2, 0.2),

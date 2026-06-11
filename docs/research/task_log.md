@@ -299,8 +299,16 @@ PIT segment base is the principled "don't judge on count" fix; (6) CUT C/D/veloc
 (redundant/p-hack), BRLM infeasible (single-name field); the one orthogonal NEW dim = deterioration-trend.
 converge: spec `docs/superpowers/specs/2026-06-11-a1c-banker-quality-design.md` (IN: unified shrunk+maturity-
 gated+size/recency-weighted+segment track [downside + return arms] + deterioration; CUT the rest to descriptive).
-build: <in progress> · review: · tests: · verify:
-verdict: <pending>
+build: banker_quality.py (PIT, maturity-gated, shrunk; targets alpha/bad/pop) + a1c_banker_quality.py harness +
+test_banker_quality.py (8). commits 4418a1e + this. review: independent agent (a6ff97d) reproduced all numbers,
+PASSED the verdict (return DEAD, downside KEEP coverage_guard, implementation look-ahead-CLEAN — 3 leakage tests).
+THEN owner nudge ("test 1m/3m/1y horizons separately — short=listing pop, long=company") → extended the return arm
+to ALL horizons + a pricing-discipline (prior-pop-track) feature. tests: full suite green · verify: clean.
+verdict: NO live-score change (coverage_guard stays). (1) RETURN arm DEAD at every horizon (confirms n12). (2)
+DOWNSIDE arm competitive-but-not-robust → shelved at parity (cleaner reference). (3) NEW: pricing-discipline → POP
+is REAL + cross-regime + placebo-clean (pooled IC +0.163, all 4 cells +, p=0.0) BUT predicts only the pop, overlaps
+GMP, incrementality boom-only (longterm GMP wall) → DISPLAY-ONLY (APPLY-side context candidate). The owner's
+horizon-split surfaced finding (3) the 1y/3y-only test had missed. Honest, gate-passed. a1c_banker_quality_2026-06-11.md.
 
 ## 2026-06-10 — A1b: banker-flag coverage-guard hybrid → PROMOTED LIVE  [path: FULL, score-touching]
 The proper fix after A1's quality def was downgraded for halving recall. Built candidate (d) coverage-guard:

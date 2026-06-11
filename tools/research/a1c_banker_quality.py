@@ -65,39 +65,48 @@ def downside_arm(df):
             print(f"    {nm:16s}: {int(a1c[mask].sum())}/{int(mask.sum())} flagged")
 
 
-def return_arm(df, n_shuffle=100):
-    print("\n=== RETURN arm — banker-quality-alpha vs realized alpha (n12 re-test; presumed dead) ===")
-    q = bq.banker_quality_series(df, df, target="alpha")
-    for horizon in ("alpha_1y", "alpha_3y"):
-        print(f"  rank-IC(banker-Q, {horizon}) per cell:")
-        real_pooled = []
+def _arm(df, feature_target, outcomes, n_shuffle, label):
+    """For one banker-quality FEATURE, report per-cell rank-IC vs each OUTCOME horizon + a pooled
+    shuffle-banker-label placebo. Tests the horizon-split point: short horizons (pop/1m) are the
+    allottee/listing dynamic, long horizons (1y) the company's performance — different questions."""
+    print(f"\n  -- feature = banker-Q-{label} --")
+    q = bq.banker_quality_series(df, df, target=feature_target)
+    for outcome in outcomes:
+        oc = pd.to_numeric(df[outcome], errors="coerce")
+        cells, real_pooled = [], []
         for seg, co in PANELS:
             m = (df["type"] == seg) & (df["cohort"] == co)
-            ic = srho(q[m], pd.to_numeric(df.loc[m, horizon], errors="coerce"))
-            n = int((q[m].notna() & df.loc[m, horizon].notna()).sum())
-            print(f"    {seg}-{co:8s}: IC={ic} (n={n})")
+            ic = srho(q[m], oc[m]); n = int((q[m].notna() & oc[m].notna()).sum())
+            cells.append(f"{seg[:1]}{co[:1].upper()} {('%+.2f' % ic) if ic is not None else 'NA'}(n{n})")
             if ic is not None:
                 real_pooled.append(ic)
-        # pooled placebo: shuffle banker labels, recompute pooled mean-IC
-        pooled_real = float(np.mean(real_pooled)) if real_pooled else None
-        rng = np.random.default_rng(1)
-        null = []
-        d = df.copy()
-        base = d["lead_manager"].values.copy()
+        pooled = float(np.mean(real_pooled)) if real_pooled else None
+        # pooled placebo
+        rng = np.random.default_rng(1); null = []; d = df.copy(); base = d["lead_manager"].values.copy()
         for _ in range(n_shuffle):
             d["lead_manager"] = rng.permutation(base)
-            qs = bq.banker_quality_series(d, d, target="alpha")
+            qs = bq.banker_quality_series(d, d, target=feature_target)
             ics = [srho(qs[(d["type"] == s) & (d["cohort"] == c)],
-                        pd.to_numeric(d.loc[(d["type"] == s) & (d["cohort"] == c), horizon], errors="coerce"))
+                        pd.to_numeric(d.loc[(d["type"] == s) & (d["cohort"] == c), outcome], errors="coerce"))
                    for s, c in PANELS]
             ics = [x for x in ics if x is not None]
             if ics:
                 null.append(float(np.mean(ics)))
         null = np.array(null)
-        if pooled_real is not None and len(null):
-            p = float((np.abs(null) >= abs(pooled_real)).mean())
-            print(f"    POOLED mean-IC real={pooled_real:.3f} | null |mean|={np.abs(null).mean():.3f}"
-                  f"±{null.std():.3f} | p(|null|≥|real|)={p}")
+        p = float((np.abs(null) >= abs(pooled)).mean()) if (pooled is not None and len(null)) else None
+        same_sign = len({np.sign(x) for x in real_pooled}) == 1 if real_pooled else False
+        print(f"    {outcome:22s}: {' '.join(cells)} | pooled={None if pooled is None else round(pooled,3)} "
+              f"p={p} same-sign-cells={same_sign}")
+
+
+def return_arm(df, n_shuffle=100):
+    print("\n=== RETURN arm — does banker-quality predict outcomes ACROSS HORIZONS? (n12 re-test) ===")
+    print("  (short horizons = listing/allottee pop dynamic; long = company performance — tested separately)")
+    OUTCOMES = ["adj_listing_gain_open", "alpha_1m", "alpha_3m", "alpha_1y"]
+    # feature built from prior ALPHAS (the track-record arm) vs every horizon:
+    _arm(df, "alpha", OUTCOMES, n_shuffle, "alpha-track")
+    # feature built from prior LISTING POPS (the pricing-discipline arm) — natural short-horizon predictor:
+    _arm(df, "pop", ["adj_listing_gain_open", "alpha_1m"], n_shuffle, "pop-track")
 
 
 def main():
