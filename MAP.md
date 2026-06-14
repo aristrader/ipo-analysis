@@ -31,11 +31,11 @@
 - **cross-regime validation / OOS** → `layer3/validate.py`, `scripts/run_validation.py`, `scripts/run_oos.py`, `tests/layer3/test_validate.py`
 - **the app / UI** → `app.py`, `docs/research/app_phase2_design.md`, `docs/research/recommendations_system_discussion.md`, `docs/research/newsfeed_opportunity_map.md`, `docs/research/fujiyama_park_case.md`
 - **network / trusted sources / security policy** → `docs/research/trusted_sources.md`, `docs/playwright_on_off.md`, `thinktank/config/settings.local.json`
-- **how to work / execution pipeline** → `docs/research/execution_pipeline.md`, `docs/research/task_log.md`, `docs/research/hypothesis_protocol.md`
+- **how to work / execution pipeline** → `docs/research/execution_pipeline.md`, `docs/tracker/task_log.md`, `docs/research/hypothesis_protocol.md`
 - **test a hypothesis / research agent brief** → `docs/research/hypothesis_protocol.md`, `thinktank/rules/index.md`, `docs/research/phase2_playbooks.md`, `tools/research/`, `docs/research/tier1_wave1_verdicts.md`
 - **recommendations / calls ledger / live board** → `layer3/calls.py`, `scripts/run_calls.py`, `scrapers/live_board.py`, `data/master/calls_ledger.csv`, `tests/layer3/test_calls.py`, `tests/scrapers/test_live_board.py`, `docs/superpowers/specs/2026-06-07-calls-engine-design.md`, `docs/research/recommendations_system_discussion.md`
 - **what's done / what's next / project state** → `STATUS.md`, `CLAUDE.md`, `thinktank/rules/index.md`
-- **improvement backlog / what to build next** → `docs/research/improvement_backlog.md`, `docs/research/fujiyama_park_case.md`, `docs/research/INDEX.md`
+- **improvement backlog / what to build next** → `docs/tracker/improvement_backlog.md`, `docs/research/fujiyama_park_case.md`, `docs/research/INDEX.md`
 - **testing / verification / the showdown** → `tests/`, `tests/data/`, `tests/showdown/`, `tools/mutation/`, `pytest.ini`, `docs/research/showdown_audit.md`, `docs/research/showdown_pipeline_diff.md`, `docs/research/showdown_mutation.md`
 - **schema / what a column means** → `docs/schema.md`, `data/master/ipo_analysis.csv`
 - **DRHP financials recovery** → `tools/drhp/`, `docs/research/drhp_recovery.md`

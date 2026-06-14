@@ -188,7 +188,7 @@ CONTEXTS = {
         "docs/research/trusted_sources.md", "docs/playwright_on_off.md", "thinktank/config/settings.local.json",
     ],
     "how to work / execution pipeline": [
-        "docs/research/execution_pipeline.md", "docs/research/task_log.md",
+        "docs/research/execution_pipeline.md", "docs/tracker/task_log.md",
         "docs/research/hypothesis_protocol.md",
     ],
     "test a hypothesis / research agent brief": [
@@ -205,7 +205,7 @@ CONTEXTS = {
     ],
     "what's done / what's next / project state": ["STATUS.md", "CLAUDE.md", "thinktank/rules/index.md"],
     "improvement backlog / what to build next": [
-        "docs/research/improvement_backlog.md", "docs/research/fujiyama_park_case.md",
+        "docs/tracker/improvement_backlog.md", "docs/research/fujiyama_park_case.md",
         "docs/research/INDEX.md",   # map of all research docs (active + archived feeders)
     ],
     "testing / verification / the showdown": [
