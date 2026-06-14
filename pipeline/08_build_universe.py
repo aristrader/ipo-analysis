@@ -236,6 +236,37 @@ else:
 
 
 # ---------------------------------------------------------------------------
+# 3c. Chittorgarh KPI recovery (03g) — fill missing historical KPIs
+# ---------------------------------------------------------------------------
+KPI_COLS = ['face_value', 'kpi_pe_pre_ipo', 'kpi_market_cap_post_ipo', 'kpi_roe_pre_ipo', 'kpi_roce_pre_ipo', 'issue_expenses_cr']
+for c in KPI_COLS:
+    if c not in union_cols:
+        union_cols.append(c)
+
+KPI_RECOVERY_PATH = p('data/raw/chittorgarh/kpis_recovered.csv')
+kpi_filled = {c: 0 for c in KPI_COLS}
+if os.path.exists(KPI_RECOVERY_PATH):
+    kpi_map = {}
+    for r in csv.DictReader(open(KPI_RECOVERY_PATH)):
+        kpi_map[r['isin'].strip()] = r
+    
+    for isin in order:
+        rec = kpi_map.get(isin)
+        if not rec:
+            continue
+        r = rows_by_isin[isin]
+        for c in KPI_COLS:
+            if not (str(r.get(c, '')).strip()):
+                val = (rec.get(c) or '').strip()
+                if val:
+                    r[c] = val
+                    kpi_filled[c] += 1
+    print(f"[3c] chittorgarh KPIs (03g): filled " + ", ".join(f"{c}={kpi_filled[c]}" for c in KPI_COLS))
+else:
+    print(f"[3c] chittorgarh KPIs: {KPI_RECOVERY_PATH} not present (skipping)")
+
+
+# ---------------------------------------------------------------------------
 # 4. gmp_extra/found.csv — fill gmp_pct where empty (numeric gmp_pct rows only)
 # ---------------------------------------------------------------------------
 for c in ['gmp_pct', 'gmp_pct_src']:

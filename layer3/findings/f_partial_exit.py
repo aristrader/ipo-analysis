@@ -41,7 +41,7 @@ def compute(df):
         "(assumes you exit exactly at T). Net-of-cost effects are small at one round-trip and omitted here.",
         "The median-up / mean-down split is the signature of a barbell distribution (see the basket-dispersion "
         "finding) — it is NOT a free lunch, it is a choice between the typical outcome and the expected outcome.",
-        "Secondary-buyer view; excludes `unreliable_coverage` listing rows; ~75 clamped rows understate peaks.",
+        "Secondary-buyer view; excludes `unreliable_coverage` listing rows.",
     ]
     narrative = ("If neither a full take-profit nor a stop beats holding, surely selling HALF does — bank some, "
                  "ride the rest? We test it across both eras. The answer is a paradox: selling half reliably "

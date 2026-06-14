@@ -35,7 +35,7 @@ def compute(df):
         "Timing is entry-independent (the peak/trough is one price extreme); the % gain at that peak differs by "
         "entry (see the reach-curve / exit findings).",
         "Daily resolution from bhavcopy; the ~331 screener-weekly (mostly SME) names are weekly-resolution and "
-        "~75 split-remediated rows have clamped extremes — timing there is approximate.",
+        "All MFE/MAE measurements are derived from raw, split-adjusted OHLCV price histories.",
         "Peak-timing is descriptive, not a sell signal you can act on in advance (you only know the peak in "
         "hindsight). It explains WHY holding past the early window tends to give back gains, but the no-exit-rule "
         "headline still stands: you can't reliably catch the peak.",

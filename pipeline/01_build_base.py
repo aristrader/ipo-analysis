@@ -16,7 +16,8 @@ def _boom_years():
         as_of = json.load(open('data/master/substrate_meta.json'))['as_of']
         hi = int(as_of[:4]) + 1
     except (OSError, KeyError, ValueError):
-        hi = 2026
+        import datetime
+        hi = datetime.date.today().year
     return {str(y) for y in range(2020, hi + 1)}
 
 

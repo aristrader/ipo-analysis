@@ -400,7 +400,7 @@ def load_prices(isin: str) -> pd.DataFrame | None:
 
 @st.cache_data(show_spinner=False)
 def load_corp_actions() -> pd.DataFrame | None:
-    p = ROOT / "data/reference/corp_actions.csv"
+    p = ROOT / "data/reference/corp_actions_merged.csv"
     if not p.exists():
         return None
     return pd.read_csv(p)

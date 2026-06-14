@@ -161,6 +161,8 @@ DETAIL_COLS = [
     'sub_total_x',
     'listing_open', 'listing_high', 'listing_low', 'listing_close',
     'promoter_pre_shares', 'promoter_post_shares', 'objects_of_issue', 'detail_url',
+    'face_value', 'kpi_pe_pre_ipo', 'kpi_market_cap_post_ipo', 'kpi_roe_pre_ipo', 
+    'kpi_roce_pre_ipo', 'issue_expenses_cr'
 ]
 
 def _num(s):
@@ -217,6 +219,16 @@ def scrape_detail(scraper, row):
     rec['promoter_pre_shares']  = _num(kv.get('Share Holding Pre Issue', ''))
     rec['promoter_post_shares'] = _num(kv.get('Share Holding Post Issue', ''))
     rec['anchor_allocation_cr'] = _num(kv.get('Anchor Portion (₹ Cr.)', ''))
+    
+    # New KPIs
+    for k, v in kv.items():
+        k_low = k.lower()
+        if 'face value' in k_low: rec['face_value'] = rec['face_value'] or _num(v)
+        if 'p/e (x)' in k_low: rec['kpi_pe_pre_ipo'] = rec['kpi_pe_pre_ipo'] or _num(v)
+        if 'market cap' in k_low: rec['kpi_market_cap_post_ipo'] = rec['kpi_market_cap_post_ipo'] or _num(v)
+        if 'roe' in k_low: rec['kpi_roe_pre_ipo'] = rec['kpi_roe_pre_ipo'] or _num(v)
+        if 'roce' in k_low: rec['kpi_roce_pre_ipo'] = rec['kpi_roce_pre_ipo'] or _num(v)
+        if 'issue expenses' in k_low: rec['issue_expenses_cr'] = rec['issue_expenses_cr'] or _num(v)
 
     # Market maker — from "Reserved for Market Maker" row (firm name after the amount)
     mm = kv.get('Reserved for Market Maker', '')

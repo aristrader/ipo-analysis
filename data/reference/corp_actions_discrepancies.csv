@@ -1,0 +1,17 @@
+symbol,yahoo_date,nse_date,yahoo_ratio,nse_ratio,nse_action_type,nse_raw_subject,date_diff_days,status
+ASHOKA,2013-07-03,2013-07-03,2.0,3.0,bonus+split,Bonus 1:2 And Face Value Split Rs.10/- To Rs.5/-,0,RATIO_MISMATCH
+BLKASHYAP,2010-09-29,2010-09-29,5.0,10.0,bonus+split,Bonus 1:1 / Face Value Split From Rs. 5/- To Re. 1/-,0,RATIO_MISMATCH
+CONTI,2020-02-13,2020-02-13,1.6666666666666667,2.0,bonus,BONUS 1:1.5,0,RATIO_MISMATCH
+COOLCAPS,2025-07-04,2025-07-04,5.0,2.0,bonus,BONUS 1:1,0,RATIO_MISMATCH
+DHARAN,2021-08-12,2021-08-12,2.0,5.0,bonus,Bonus 4:1,0,RATIO_MISMATCH
+EDELWEISS,2010-08-10,2010-08-10,5.0,10.0,bonus+split,Face Value Split From Rs.5/- To Re.1/- And Bonus 1:1,0,RATIO_MISMATCH
+FCL,2025-10-31,2025-10-31,2.0,5.0,bonus,Bonus 4:1,0,RATIO_MISMATCH
+HARDWYN,2023-06-05,2023-06-05,10.0,1.333333,bonus,Bonus 1:3,0,RATIO_MISMATCH
+ISHAN,2024-01-25,2024-01-25,10.0,3.0,bonus,BONUS 2:1,0,RATIO_MISMATCH
+MANINFRA,2014-08-28,2014-08-28,5.0,0.135,split,Annual General Meeting / Dividend - Rs 1.35/- Per Share / Face Value Split - From Rs 10/- Per Share To Rs 2/- Per Share,0,RATIO_MISMATCH
+ONEPOINT,2022-01-13,2022-01-18,5.0,1.5,bonus,Bonus 1:2,5,RATIO_MISMATCH
+RAJTV,2014-03-25,2014-03-25,2.0,4.0,bonus+split,Bonus 1:1 / Face Value Split From Rs.10/- To Rs.5/-,0,RATIO_MISMATCH
+SBC,2022-02-22,2022-02-22,10.0,2.0,bonus,Bonus 1:1,0,RATIO_MISMATCH
+SHRENIK,2020-10-08,2020-10-08,2.0,3.0,bonus,Bonus 2:1,0,RATIO_MISMATCH
+TECHM,2015-03-19,2015-03-19,2.0,4.0,bonus+split,Bonus 1:1 / Face Value Split - From Rs 10/- Per Share To Rs 5/- Per Share,0,RATIO_MISMATCH
+VAISHALI,2024-10-15,2024-10-15,5.0,2.0,bonus,Bonus 1:1,0,RATIO_MISMATCH

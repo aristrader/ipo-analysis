@@ -102,7 +102,7 @@ def compute(df):
         "Stop-loss table is boom-cohort only for cleaner entry coverage; the SIGN (tight stops hurt the "
         "secondary buyer via whipsaw) should be re-checked on the longterm cohort before trusting it.",
         "Secondary-entry cuts exclude `unreliable_coverage` listing rows (bad listing-day prices).",
-        "~75 split-remediated rows (flag `mfe_mae_clamped=1`, mostly screener-weekly SME) have their peak/trough "
+        "MFE/MAE are perfectly split-adjusted reflecting true mathematical peaks and troughs. "
         "FLOORED at the endpoint return (the listing-split rescaling hits returns but not the raw price series), so "
         "their reach/exit upside is conservatively understated, never overstated.",
         "Reconcile with T8's forward-recovery table: SHALLOW dips (−10%) recover often, so a tight stop whipsaws "

@@ -1,0 +1,64 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.screener.in)",
+      "WebSearch",
+      "WebFetch(domain:portal.tradebrains.in)",
+      "WebFetch(domain:www.bseindia.com)",
+      "WebFetch(domain:www.nseindia.com)",
+      "WebFetch(domain:seylox.github.io)",
+      "WebFetch(domain:sebi.gov.in)",
+      "WebFetch(domain:www.sebi.gov.in)",
+      "WebFetch(domain:moneycontrol.com)",
+      "WebFetch(domain:www.moneycontrol.com)",
+      "WebFetch(domain:economictimes.indiatimes.com)",
+      "WebFetch(domain:livemint.com)",
+      "WebFetch(domain:www.livemint.com)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_close",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_type",
+      "mcp__playwright__browser_press_key",
+      "mcp__playwright__browser_hover",
+      "mcp__playwright__browser_select_option",
+      "mcp__playwright__browser_fill_form",
+      "mcp__playwright__browser_wait_for",
+      "mcp__playwright__browser_console_messages",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_navigate_back",
+      "mcp__playwright__browser_resize",
+      "mcp__playwright__browser_tabs",
+      "mcp__playwright__browser_handle_dialog",
+      "Bash(cp ~/.claude/projects/-Users-swapnilagarwal-IdeaProjects-TestingTesting/memory/*.md handoff/auto_memory/)",
+      "Bash(cp .claude/settings.local.json handoff/settings.local.json.backup)"
+    ],
+    "deny": [
+      "mcp__playwright__browser_run_code_unsafe",
+      "mcp__playwright__browser_file_upload",
+      "mcp__playwright__browser_network_request"
+    ]
+  },
+  "enabledMcpjsonServers": [
+    "playwright"
+  ],
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"$CLAUDE_PROJECT_DIR\" && .venv/bin/python verify.py --quiet",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "duckdb-skills@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true
+  }
+}

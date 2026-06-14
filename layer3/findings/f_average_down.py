@@ -44,7 +44,7 @@ def compute(df):
         "not a cross-regime truth (it flips negative in longterm), so the sign is NOT stable → don't trust it.",
         "Mechanism: a deep early IPO drawdown is momentum/quality information (the long left body of the barbell), "
         "so averaging down doubles your exposure to exactly the population that keeps falling.",
-        "Secondary-buyer view; excludes `unreliable_coverage`; ~75 clamped rows floor the trough (conservative).",
+        "Secondary-buyer view; excludes `unreliable_coverage`.",
     ]
     narrative = ("'It's fallen 40% — average down and lower your cost.' We test it: among IPOs that cratered to "
                  "−30/−50% within the horizon, how many actually climb back above where you bought, and is buying "

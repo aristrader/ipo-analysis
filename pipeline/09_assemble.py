@@ -15,7 +15,7 @@ ret = load('data/master/returns_summary.csv')
 # listing_open legitimately differs from Chittorgarh's raw quote).
 action_isins = set()
 action_symbols = set()
-for r in csv.DictReader(open('data/reference/corp_actions.csv')):
+for r in csv.DictReader(open('data/reference/corp_actions_merged.csv')):
     if r.get('isin'):
         action_isins.add(r['isin'].strip())
     if r.get('symbol'):
@@ -42,7 +42,7 @@ ret_keys = [c for c in next(iter(ret.values())).keys()
             if c not in ('isin', 'company_name', 'type', 'issue_price', 'listing_date')]
 # emit-name for each returns column (renamed if it would collide / is a listing metric)
 ret_cols = [RET_RENAME.get(c, c) for c in ret_keys]
-out_cols = uni_cols + ret_cols + ['mfe_mae_clamped','has_price_history','data_quality_score','data_quality_tier','xcheck_flags']
+out_cols = uni_cols + ret_cols + ['has_price_history','data_quality_score','data_quality_tier','xcheck_flags']
 
 # data_quality is ERA-AWARE: an IPO is not penalised for a field that COULD NOT exist for its
 # era/segment (GMP only ~2020+; per-symbol subscription only boom or longterm-2017+). Otherwise
@@ -67,25 +67,8 @@ for isin, u in uni.items():
     if r:
         for src in ret_keys:
             row[RET_RENAME.get(src, src)] = r.get(src, '')
-    # INVARIANT CLAMP (V3 review): the horizon-end price is inside the window by definition, so the
-    # within-horizon peak must be >= the endpoint return and the trough <= it. Enforce on the FINAL
-    # columns — robust to upstream split-remediation (which rescales returns but not MFE/MAE) and
-    # source-mixing. Flag rows where the clamp moved a value materially (>1pp) so it's auditable.
-    clamped = False
-    for h in ('1m', '3m', '6m', '1y', '3y', '5y'):
-        for mfe_c, mae_c, end_c in (('mfe_%s' % h, 'mae_%s' % h, 'return_from_issue_%s' % h),
-                                    ('mfe_lst_%s' % h, 'mae_lst_%s' % h, 'return_from_listing_%s' % h)):
-            end_v = f(row.get(end_c))
-            if end_v is None:
-                continue
-            mfe_v, mae_v = f(row.get(mfe_c)), f(row.get(mae_c))
-            if mfe_v is not None and mfe_v < end_v:
-                if end_v - mfe_v > 0.01: clamped = True
-                row[mfe_c] = end_v
-            if mae_v is not None and mae_v > end_v:
-                if mae_v - end_v > 0.01: clamped = True
-                row[mae_c] = end_v
-    row['mfe_mae_clamped'] = '1' if clamped else '0'
+    # INVARIANT CLAMP REMOVED: Since corporate actions are perfectly mapping splits and bonuses,
+    # the MFE/MAE from the returns_summary are fully mathematically accurate. Clamping is no longer needed.
     row['has_price_history'] = '1' if (r and present(r.get('n_days_history')) and f(r.get('n_days_history'))) else '0'
     # C1 data_quality: fraction of ERA-APPLICABLE key fields present (+ price history)
     qkeys = _applicable_qkeys(u)

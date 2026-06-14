@@ -64,8 +64,8 @@ DATA_PRODUCTS = {
     "data/master/longterm_sme.csv":   "2006-19 SME master",
     "data/master/delisting.csv":      "delisting status/date/reason/last_price (INPUT to step 07)",
     "data/master/review/":            "flag/review registers (gaps, ticker_conflicts, xcheck, ...)",
-    "data/master/calls_ledger.csv":   "the CALLS LEDGER: dated/graded recommendations (run_calls.py owns it)",
-    "data/master/forward_test_history.csv": "F2 credibility spine: append-only OOS were-we-right snapshot per refresh vintage (run_forward_test.py)",
+    "data/master/calls_ledger.csv":   "the CALLS LEDGER: dated/graded recommendations (scripts/run_calls.py owns it)",
+    "data/master/forward_test_history.csv": "F2 credibility spine: append-only OOS were-we-right snapshot per refresh vintage (scripts/run_forward_test.py)",
 }
 
 # live staging (scrapers/live_board.py writes here; NEVER feeds data/master directly)
@@ -89,13 +89,13 @@ DIRS = {
     "pipeline/": "numbered build steps (the DAG above) + helpers",
     "data/":     "raw/ reference/ prices/ master/ (master = the outputs)",
     "layer3/":   "UI-agnostic analysis engine; reads ipo_analysis.csv only",
-    "rules/":    "the rule/signal/strategy REGISTRY (index.md) — navigate logic here",
+    "thinktank/rules/":    "the rule/signal/strategy REGISTRY (index.md) — navigate logic here",
     "docs/":     "sources, schema, pipeline, strategies, layer2/3, research/",
     "tests/":    "layer3/ + pipeline/ + scrapers/ + data/ (substrate invariants) + showdown/ (SHOWDOWN=1 execution proofs)",
     "tools/":    "side tools (drhp/ = DRHP recovery; mutation/ = mutation validation; checks/ = schema gate; notify/ = telegram; refresh/; research/)",
     "report/":   "generated HTML (layer3_partA.html)",
     "archive/":  "superseded files + dataset backups (e.g. pre_drhp_20260601/)",
-    "handoff/":  "onboarding pack for a fresh account/session: README (read-order + conventions) + auto_memory/ (copied, won't-travel) + ENVIRONMENT.md (gitignored config to recreate)",
+    "thinktank/memory/":  "onboarding pack for a fresh account/session: README (read-order + conventions) + auto_memory/ (copied, won't-travel) + ENVIRONMENT.md (gitignored config to recreate)",
 }
 
 # ------------------------------------------------------------------- layer3 core
@@ -120,27 +120,27 @@ LAYER3 = {
 ENTRYPOINTS = {
     "PYTHONPATH=. python run_all.py":            "build the dataset (whole pipeline DAG; --from to resume)",
     "PYTHONPATH=. python run_layer3_report.py":  "build report/layer3_partA.html (29 findings)",
-    "PYTHONPATH=. python predict_ipo.py --type MB --sector ...": "score/evaluate a new IPO",
-    "PYTHONPATH=. python run_backtest.py":       "strategy backtests",
-    "PYTHONPATH=. python run_validation.py":     "cross-regime validation",
-    "PYTHONPATH=. python run_weights.py":        "derive data-informed weights",
+    "PYTHONPATH=. python scripts/predict_ipo.py --type MB --sector ...": "score/evaluate a new IPO",
+    "PYTHONPATH=. python scripts/run_backtest.py":       "strategy backtests",
+    "PYTHONPATH=. python scripts/run_validation.py":     "cross-regime validation",
+    "PYTHONPATH=. python scripts/run_weights.py":        "derive data-informed weights",
     "PYTHONPATH=. python -m pytest tests -q":    "run all tests",
     "PYTHONPATH=. streamlit run app.py":         "the interactive app (5 tabs)",
     "python verify.py":                          "structure/invariant checkpoint + regenerate MAP.md",
-    "PYTHONPATH=. python run_refresh.py":        "bring the dataset to today (dry-run; --apply executes)",
-    "PYTHONPATH=. python run_forward_test.py":   "score the never-seen post-refresh cohort (EARLY READ)",
-    "PYTHONPATH=. python run_calls.py":          "calls ledger: cursor walk/gap-fill (--backfill, --grade-only, --report)",
-    "PYTHONPATH=. python run_portfolio.py":      "₹1L paper-portfolio sim vs Nifty (--stock ISIN = per-stock growth)",
-    "PYTHONPATH=. python run_scorecard.py":      "were-we-right scorecard + score-ordering (--horizon 1m/3m/1y)",
+    "PYTHONPATH=. python scripts/run_refresh.py":        "bring the dataset to today (dry-run; --apply executes)",
+    "PYTHONPATH=. python scripts/run_forward_test.py":   "score the never-seen post-refresh cohort (EARLY READ)",
+    "PYTHONPATH=. python scripts/run_calls.py":          "calls ledger: cursor walk/gap-fill (--backfill, --grade-only, --report)",
+    "PYTHONPATH=. python scripts/run_portfolio.py":      "₹1L paper-portfolio sim vs Nifty (--stock ISIN = per-stock growth)",
+    "PYTHONPATH=. python scripts/run_scorecard.py":      "were-we-right scorecard + score-ordering (--horizon 1m/3m/1y)",
     "PYTHONPATH=. python scrapers/live_board.py": "fetch the live+upcoming IPO board -> data/live/",
     "PYTHONPATH=. python scrapers/announcements.py": "collect NSE corporate-announcement history -> data/live/news/ (D1/D4; --limit/--symbols)",
 }
 
-# ------------------------------------------------------- where the rules/state live
+# ------------------------------------------------------- where the thinktank/rules/state live
 RULES_AND_STATE = {
-    "rules/index.md":  "navigable REGISTRY: every signal/component/strategy — status (in-score/display-only/"
+    "thinktank/rules/index.md":  "navigable REGISTRY: every signal/component/strategy — status (in-score/display-only/"
                        "rejected) + WHY + backtest lift/N/cross-regime. Consult before re-testing any signal.",
-    "rules/README.md": "the registry entry template",
+    "thinktank/rules/README.md": "the registry entry template",
     "CLAUDE.md":       "conventions/decisions/repo-map (the brain; auto-loaded)",
     "STATUS.md":       "live 'where are we / what's next' (verify from ground truth, never memory)",
 }
@@ -151,11 +151,11 @@ CONTEXTS = {
     "score / evaluate a new IPO": [
         "layer3/predictor/scorecard.py", "layer3/predictor/weights.py",
         "layer3/predictor/predict.py", "layer3/predictor/analogs.py",
-        "rules/index.md", "predict_ipo.py", "tests/layer3/test_predictor.py",
+        "thinktank/rules/index.md", "scripts/predict_ipo.py", "tests/layer3/test_predictor.py",
     ],
     "add / edit a finding": [
         "layer3/findings/", "layer3/spine.py", "layer3/report.py",
-        "run_layer3_report.py", "tests/layer3/test_findings.py", "rules/index.md",
+        "scripts/run_layer3_report.py", "tests/layer3/test_findings.py", "thinktank/rules/index.md",
     ],
     "prices / returns / MFE-MAE / listing-day": [
         "pipeline/07_returns_summary.py", "scrapers/screener_prices_merge.py",
@@ -174,36 +174,36 @@ CONTEXTS = {
         "docs/research/newsfeed_rnd_2026-06-09.md", "docs/research/newsfeed_opportunity_map.md",
     ],
     "backtest a strategy": [
-        "layer3/backtest/", "run_backtest.py", "docs/strategies.md",
+        "layer3/backtest/", "scripts/run_backtest.py", "docs/strategies.md",
         "tests/layer3/test_backtest.py", "tests/layer3/test_score_backtest.py",
     ],
     "cross-regime validation / OOS": [
-        "layer3/validate.py", "run_validation.py", "run_oos.py", "tests/layer3/test_validate.py",
+        "layer3/validate.py", "scripts/run_validation.py", "scripts/run_oos.py", "tests/layer3/test_validate.py",
     ],
     "the app / UI": ["app.py", "docs/research/app_phase2_design.md",
                      "docs/research/recommendations_system_discussion.md",
                      "docs/research/newsfeed_opportunity_map.md",
                      "docs/research/fujiyama_park_case.md"],
     "network / trusted sources / security policy": [
-        "docs/research/trusted_sources.md", "docs/playwright_on_off.md", ".claude/settings.local.json",
+        "docs/research/trusted_sources.md", "docs/playwright_on_off.md", "thinktank/config/settings.local.json",
     ],
     "how to work / execution pipeline": [
         "docs/research/execution_pipeline.md", "docs/research/task_log.md",
         "docs/research/hypothesis_protocol.md",
     ],
     "test a hypothesis / research agent brief": [
-        "docs/research/hypothesis_protocol.md", "rules/index.md",
+        "docs/research/hypothesis_protocol.md", "thinktank/rules/index.md",
         "docs/research/phase2_playbooks.md", "tools/research/",
         "docs/research/tier1_wave1_verdicts.md",
     ],
     "recommendations / calls ledger / live board": [
-        "layer3/calls.py", "run_calls.py", "scrapers/live_board.py",
+        "layer3/calls.py", "scripts/run_calls.py", "scrapers/live_board.py",
         "data/master/calls_ledger.csv", "tests/layer3/test_calls.py",
         "tests/scrapers/test_live_board.py",
         "docs/superpowers/specs/2026-06-07-calls-engine-design.md",
         "docs/research/recommendations_system_discussion.md",
     ],
-    "what's done / what's next / project state": ["STATUS.md", "CLAUDE.md", "rules/index.md"],
+    "what's done / what's next / project state": ["STATUS.md", "CLAUDE.md", "thinktank/rules/index.md"],
     "improvement backlog / what to build next": [
         "docs/research/improvement_backlog.md", "docs/research/fujiyama_park_case.md",
         "docs/research/INDEX.md",   # map of all research docs (active + archived feeders)
@@ -216,9 +216,9 @@ CONTEXTS = {
     "schema / what a column means": ["docs/schema.md", "data/master/ipo_analysis.csv"],
     "DRHP financials recovery": ["tools/drhp/", "docs/research/drhp_recovery.md"],
     "refresh the data / new IPOs": [
-        "run_refresh.py", "tools/refresh/", "data/master/substrate_meta.json",
+        "scripts/run_refresh.py", "tools/refresh/", "data/master/substrate_meta.json",
         "data/reference/golden_numbers.json", "data/reference/manual_overrides.csv",
-        "layer3/forward_test.py", "run_forward_test.py", "docs/WORKFLOWS.md",
+        "layer3/forward_test.py", "scripts/run_forward_test.py", "docs/WORKFLOWS.md",
     ],
 }
 
@@ -234,12 +234,12 @@ TEST_ROUTING = [
     ("app.py", ["SHOWDOWN=1 PYTHONPATH=. pytest tests/showdown/test_app_smoke.py -q"]),
     ("layer3/calls.py", ["PYTHONPATH=. pytest tests/layer3/test_calls.py -q"]),
     ("layer3/portfolio.py", ["PYTHONPATH=. pytest tests/layer3/test_portfolio.py -q"]),
-    ("run_portfolio.py", ["PYTHONPATH=. pytest tests/layer3/test_portfolio.py -q"]),
+    ("scripts/run_portfolio.py", ["PYTHONPATH=. pytest tests/layer3/test_portfolio.py -q"]),
     ("layer3/calibration.py", ["PYTHONPATH=. pytest tests/layer3/test_calibration.py -q"]),
-    ("run_scorecard.py", ["PYTHONPATH=. pytest tests/layer3/test_calibration.py -q"]),
+    ("scripts/run_scorecard.py", ["PYTHONPATH=. pytest tests/layer3/test_calibration.py -q"]),
     ("tools/checks/schema_gate.py", ["PYTHONPATH=. pytest tests/checks -q"]),
     ("scrapers/live_board.py", ["PYTHONPATH=. pytest tests/scrapers/test_live_board.py -q"]),
-    ("run_calls.py", ["PYTHONPATH=. pytest tests/layer3/test_calls.py -q"]),
+    ("scripts/run_calls.py", ["PYTHONPATH=. pytest tests/layer3/test_calls.py -q"]),
     ("scrapers/live_board.py", ["PYTHONPATH=. pytest tests/scrapers/test_live_board.py -q"]),
     ("scrapers/announcements.py", ["PYTHONPATH=. pytest tests/layer3/test_news.py -q"]),
     ("layer3/news/*", ["PYTHONPATH=. pytest tests/layer3/test_news.py -q"]),
@@ -264,9 +264,9 @@ TEST_ROUTING = [
     ("scrapers/*", ["PYTHONPATH=. pytest tests/scrapers -q"]),
     ("data/master/*", ["PYTHONPATH=. pytest tests/data -q"]),
     ("app.py", ["SHOWDOWN=1 PYTHONPATH=. pytest tests/showdown/test_app_smoke.py -q"]),
-    ("run_refresh.py", ["PYTHONPATH=. pytest tests/pipeline/test_refresh_lib.py tests/data -q"]),
+    ("scripts/run_refresh.py", ["PYTHONPATH=. pytest tests/pipeline/test_refresh_lib.py tests/data -q"]),
     ("layer3/forward_test.py", ["PYTHONPATH=. pytest tests/layer3/test_forward_test.py -q"]),
-    ("run_forward_test.py", ["PYTHONPATH=. pytest tests/layer3/test_forward_test.py -q"]),
+    ("scripts/run_forward_test.py", ["PYTHONPATH=. pytest tests/layer3/test_forward_test.py -q"]),
     ("tools/refresh/*", ["PYTHONPATH=. pytest tests/pipeline/test_refresh_lib.py tests/data -q"]),
     ("project_map.py", ["PYTHONPATH=. pytest tests/test_project_map.py -q"]),
     ("verify.py", ["PYTHONPATH=. pytest tests/test_project_map.py -q"]),
@@ -277,7 +277,7 @@ TEST_ROUTING = [
 # --------------------------------------------------------------- INVARIANTS
 # Ground-truth facts the checkpoint re-derives and compares. STRUCTURAL facts are
 # literals; MOVABLE facts (rows / as-of / backup pointer) come from
-# data/master/substrate_meta.json, which only `run_refresh.py --apply` writes —
+# data/master/substrate_meta.json, which only `scripts/run_refresh.py --apply` writes —
 # so a refresh updates the rails as data, never as code edits.
 def _meta():
     import json

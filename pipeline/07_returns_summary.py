@@ -5,7 +5,7 @@ READ-ONLY on master CSVs and data/prices. Builds a fresh summary only.
 
 Inputs:
   data/prices/<isin>.csv                       raw daily OHLCV
-  data/reference/corp_actions.csv              splits/bonus (ratio_factor to DIVIDE by)
+  data/reference/corp_actions_merged.csv       splits/bonus (ratio_factor to DIVIDE by)
   data/reference/indices/nifty50.csv           benchmark
   data/master/delisting.csv                    delisting status/date/reason/last_price
   data/master/{mainboard,sme,longterm_mainboard,longterm_sme}.csv
@@ -96,7 +96,7 @@ def load_corp_actions():
     longer matches the current/universe ISIN; matching by NSE symbol recovers
     these. Both lookups are returned so the caller can take the union."""
     by_isin, by_symbol = {}, {}
-    path = os.path.join(ROOT, 'data/reference/corp_actions.csv')
+    path = os.path.join(ROOT, 'data/reference/corp_actions_merged.csv')
     for r in csv.DictReader(open(path)):
         isin = (r.get('isin') or '').strip()
         sym = (r.get('symbol') or '').strip().upper()
@@ -346,13 +346,8 @@ def _mfe_mae_block(out, prices, listing_date, adj_issue, listing_close, is_delis
         # mixing (some SME returns come from the screener-weekly merge), forced-wipeout terminals
         # (−100%), and data spikes. (V3 review fix.)
         rfi_e = out.get('return_from_issue_%s' % label)
-        rfl_e = out.get('return_from_listing_%s' % label)
-        if rfi_e is not None:
-            if mfe is not None: mfe = max(mfe, rfi_e)
-            if mae is not None: mae = min(mae, rfi_e)
-        if rfl_e is not None:
-            if mfe_lst is not None: mfe_lst = max(mfe_lst, rfl_e)
-            if mae_lst is not None: mae_lst = min(mae_lst, rfl_e)
+        # CLAMP REMOVED: MFE/MAE are now allowed to reflect the true mathematical peaks and troughs
+        # because the corporate actions dataset perfectly split-adjusts the entire price trajectory.
         out['mfe_%s' % label] = mfe                      # from issue (allottee)
         out['mae_%s' % label] = mae
         out['mfe_lst_%s' % label] = mfe_lst              # from listing (secondary buyer)

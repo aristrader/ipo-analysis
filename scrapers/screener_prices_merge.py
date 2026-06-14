@@ -114,7 +114,7 @@ def load_corp_actions():
     """Return (by_isin, by_symbol): isin/symbol -> list of (ex_date, ratio_factor).
     A face-value split often changes the ISIN, so match by NSE symbol too."""
     by_isin, by_symbol = {}, {}
-    path = os.path.join(ROOT, 'data/reference/corp_actions.csv')
+    path = os.path.join(ROOT, 'data/reference/corp_actions_merged.csv')
     for r in csv.DictReader(open(path)):
         isin = (r.get('isin') or '').strip()
         sym = (r.get('symbol') or '').strip().upper()
