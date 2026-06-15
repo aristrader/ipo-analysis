@@ -134,6 +134,17 @@ backtests + the method spine). 5. `docs/layer2.md` / `docs/layer3.md` — design
 - Both are wired into `project_map.py` CONTEXTS (verify.py asserts they exist; MAP.md lists them).
   When a brief's rules change, edit the .md — never re-teach in prompts.
 
+1. Use `verify.py` locally before committing. Read the generated `MAP.md` if stuck. 
+2. If `verify.py` crashes, fix the structural error. Do not ignore it.
+
+## Token Saving & Multi-Model Meta-Orchestration
+If you are Claude Code (or any expensive reasoning LLM) working on this repository, **do not waste tokens doing massive file reads of raw data or research archives.**
+Instead, you must leverage the local Gemini CLI (or Antigravity) as a background context engine. 
+- Use local scripts or ask the Gemini CLI to summarize massive directories (like `docs/research/` or the CSV datasets).
+- Request a "caveman" (minified) summary of the context.
+- Consume that compressed summary to perform your high-level architectural planning and Python coding.
+This prevents blowing out your context window and keeps costs low while leveraging your elite reasoning.
+
 ## Rules / predicates / strategies registry  (← navigable, AI-pickable)
 When Layer 3 is built, every rule/predicate/score-component/strategy lives in **`rules/`** as a structured entry
 (see `rules/README.md` for the template + index). Each carries: id, type, plain description, the predicate/logic,

@@ -62,9 +62,24 @@ Instead, the Assistant must act as the "Universal Cognitive Core" (as defined in
     * **The Plan:** Scrape corporate action data (Bonus issues and Splits) from a trusted site like Trendlyne or Screener. 
     * **Validation Gate:** Cross-reference the scraped corporate actions against our internal mathematical split guesses. Any discrepancies must be flagged for manual human review.
     * **Research Re-Review:** Once the true split and bonus data is integrated, re-run and re-review all past research outcomes to see how correcting these unrecorded splits impacts the historical alphas.
-* **Multi-Model Orchestration (Opus + Gemini):** Once the core LangGraph engine is tested and stable, integrate Claude Opus via the Anthropic API (or via Claude Code MCP integration) to act as the "Portfolio Manager/Architect". 
-    * **The Setup:** Route Step 1 (High Ideation) and Step 2 (Execution Planning) to Claude Opus for deep reasoning. Route Step 3 (Build) and Step 4 (Peer Review Board) to Gemini Pro to leverage its 2M context window and high rate limits for codebase scanning and parallel execution. 
-    * **Goal:** Achieve maximum intelligence at the planning phase while utilizing Gemini's massive context for cost-effective execution and validation.
+* **Multi-Model Orchestration & Antigravity CLI Integration (DEFERRED):** Explore integrating the absolute latest Anthropic Claude models for deep-reasoning steps via the Antigravity CLI. 
+    * *Status:* Deferred. We currently do not have the paid plan required to leverage Claude Pro API calls natively. We will stick to the current free-tier LLM integrations for now.
+* **App Development Think Tank (DEFERRED):** We have drafted a parallel `app_think_tank_architecture.md` specifically for frontend and web app development. 
+    * *Status:* Deferred. To keep things simple and avoid feature creep, we will NOT use the Think Tank for web/app development right now. Our strict focus remains entirely on the Backend Quantitative Research Think Tank.
+    * *TODO:* Once we resume frontend work, we must use the `app_think_tank_architecture.md` pipeline to redesign, improve, and expand our current Streamlit UI (`ui.py`) into a robust, premium "models app" interface.
+* **Model Viability, Subscriptions & Orchestration (CRITICAL BLOCKER):** 
+    * *The Core Problem:* The LangGraph orchestration requires **API access** to LLMs. Currently, we only have access to Gemini 3.1 Pro (and Flash). A consumer $20/month subscription to Claude Pro does **not** grant programmatic API access — Claude's API is billed separately per-token, which can become prohibitively expensive for a multi-agent looping pipeline (up to 35 calls per run).
+    * *The Strategic Dilemma:* Our pipeline design is robust, but it requires Frontier-level reasoning (Claude 3.5 Sonnet / Gemini Pro) for Ideation, Planning, and Code Generation. Flash models fail to detect spurious correlations. How do we execute this pipeline without racking up massive API bills?
+    * *Sub-items to resolve & discuss:*
+        1. **The Consumer "Copy-Paste" Orchestration Fallback:** Since we can't easily hook a $20/mo Claude Pro consumer account into a Python script, we need to design a "CLI Offload" mechanism. The Python script generates the exact prompt required, pauses, and says: *"Paste this into your Claude Pro web interface, then paste the response back here."* This allows us to use unlimited consumer tokens for the heaviest tasks.
+        2. **Mixed-Model Routing Strategy:**
+            * *Context Heavy Tasks (Planning/Data analysis):* Can we use Gemini 3.1 Pro via API (if we have an affordable/free tier for it) since it has a massive context window?
+            * *Crucial Reasoning / Ideation (Step 1) & Review (Step 4):* Manually offload to Claude 3.5 Sonnet via the consumer web UI using the copy-paste fallback.
+            * *Micro-Tasks (Triage, Step 4 Swarm Auditors, Recording):* Since the tasks are strictly broken down, can Gemini Flash (via API) handle them reliably?
+        3. **Orchestrator Redesign:** Does the LangGraph pipeline need to be re-architected to natively support these manual "Human-in-the-Loop" pauses where the LLM is actually a human ferrying data between the terminal and a browser?
+            * *Minor UI Polish:* Once the architecture is settled, redesign the Streamlit rendering for Checkpoint 1 (`ui.py`). Currently, the model either summarizes titles too aggressively or outputs massive paragraphs that break the grid readability. Need a clean `Title -> Expandable Details` UI component.
+        4. **Cost-Benefit Analysis:** Is it worth just paying for the Anthropic API for specific nodes (like the Final Judge) while keeping the looping Swarm on free-tier Gemini Flash?
+
 
 ## Advanced Upgrades (Post-V1 Refinements)
 * **Validation Engine Upgrades (`validate.py`):** The current "meat-cleaver" bucketing logic (comparing extreme medians) is highly robust for the project-building phase. Once the foundational system is complete, explore these advanced quant techniques to refine performance:

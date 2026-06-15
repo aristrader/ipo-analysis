@@ -88,3 +88,17 @@ fusion · weak-subscription veto (2026-06-10: B1's tell was a young-cohort artif
   big GATED builds (Theme-H-full, G1, G2). The single best unattended-safe research bet left = **MIGRATION+**
   (an early at-IPO marker of eventual SME→mainboard escape — a chance at a genuinely NEW validated signal).
 - When an item ships: record it in the git commit, put the signal verdict in `rules/index.md`, remove it from here. New idea → add here first.
+
+---
+
+## Technical Debt & Hacky Workarounds (Discovered 2026-06)
+
+*(Note: The MFE/MAE Clamping Hack was removed in `pipeline/07_returns_summary.py` and `pipeline/09_assemble.py` during this audit).*
+
+1. **Hardcoded Date/Year Limitations (`pipeline/01_build_base.py`)**: `_boom_years()` uses a hardcoded fallback year (`hi = 2026`). The current fallback will cause a bug in 2027. **Action:** Replace `hi = 2026` with dynamic logic.
+2. **Financial Data Dropped (`pipeline/03_enrich.py`)**: Screener financials for 2020-2022 are skipped, relies on legacy cached files and dumps the rest into `gaps.csv`. **Action:** Integrate real back-filling.
+3. **Brittle Search Workaround (`scrapers/corporate_actions_trendlyne_advanced.py`)**: Uses DuckDuckGo HTML parsing. **Action:** Replace with proper URL discovery or API call.
+4. **Incomplete Detail Scraper (`scrapers/chittorgarh.py`)**: Detail parsing phase is incomplete (market_maker, OFS, anchor, subscription, financials). **Action:** Implement detailed parsing.
+5. **Multi-Model Orchestration (`thinktank/orchestration/`)**: **Action:** Modify `nodes.py` and `graph.py` to support dual-agent UI pauses.
+6. **Hardcoded Timebombs (`scrapers/chittorgarh.py`)**: `YEARS` array, `2026-27` FY parameter, and `page <= 300` limit are hardcoded. **Action:** Make dynamic.
+7. **Silent Try-Except Data Drops (Multiple Files)**: Naked `try...except Exception:` blocks silently drop tickers instead of crashing. **Action:** Remove naked exceptions, handle known errors explicitly.

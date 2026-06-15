@@ -50,6 +50,8 @@ Top-down, FIRST match wins. Never self-rationalize into a lighter path.
 
 Confirm the inputs exist and are clean BEFORE designing. 2/3 of the Thread-C hypotheses were data-gated; the day-1 idea was forward-only. State the task + success criteria in one line. Open a `docs/research/task_log.md` entry (template in §Checkable Artifacts below).
 
+**The Logical Validity Gate:** The Triage Agent must evaluate the core premise. If the hypothesis relies on a logically impossible causal mechanism (e.g., "a company's name length physically alters market dynamics"), it MUST reject it as 'LOGICALLY SUSPECT' even if it is novel.
+
 ### Step 0b: History Check — Has This Been Done Before?
 
 Before any ideation, the agent MUST:
@@ -110,15 +112,22 @@ First-order screens ("undersubscribed → bad") are done and mostly dead. A test
 
 ---
 
+### Step 1.5: The Pre-Checkpoint Review Agent (CONVERGE)
+
+Before the human sees the massive brainstorm, an automated Review Agent executes an explicit **keep/cut test** on the raw 20-40 ideas:
+- **Rule:** Keep an item ONLY if (high owner value) AND (feasible with our owned data schema) AND (fits ethos).
+- **The Proxy Test:** Actively check if the hypothesis is a spurious correlation or proxy for a confounding variable (e.g., sector, market cap, issue size). If the proposed signal is likely just a noisy proxy for a known factor, mark it CUT.
+- **Output:** The agent outputs a pre-sorted `IN / CUT / OPEN` specification list. It must briefly justify why trivial or data-impossible ideas were moved to CUT.
+
+---
+
 ### ⏸️ HUMAN CHECKPOINT 1: The Pruning & Expansion
 
-The human reviews the generated ideas. The human acts as the Portfolio Manager:
-- **Pruning:** Discarding ideas that are uninteresting, already tested (cross-reference with `rules/index.md`), or data-gated (we don't have the columns).
-- **Expansion:** The human can manually add new ideas, inject their own domain knowledge, or tweak the AI's hypotheses if the AI missed a crucial angle. The human's domain intuition is the most valuable input in the system.
-- **Selection:** Selecting the final specific hypotheses (e.g., 3-8 ideas) to push forward to execution.
-- **Priority ordering:** Which ideas to test first (cheapest data requirement, highest expected insight).
-
-**CONVERGE** with an explicit keep/cut test — keep an item ONLY if (high owner value) AND (feasible now) AND (fits ethos); else CUT or OPEN-QUESTION. Output an `IN / CUT / OPEN` spec. Show the owner the dimensions surfaced.
+The human reviews the Review Agent's pre-sorted `IN / CUT / OPEN` list. The human acts as the Portfolio Manager:
+- **Review:** The human reads the sorted list, saving them the effort of reading 40 raw ideas.
+- **Move:** The human can drag ideas around—promoting a CUT idea to IN, or moving an IN idea to CUT if they disagree with the Review Agent.
+- **Expansion:** The human can manually add new ideas or inject their own domain knowledge.
+- **Selection:** The human selects the final specific hypotheses (e.g., 1-3 ideas) to push forward to execution.
 
 ---
 
@@ -224,27 +233,73 @@ Check output against the **DATA-TRUTH INVARIANTS** (§below).
 
 ---
 
-### ⏸️ HUMAN CHECKPOINT 2: Review of Results & Reasoning
+### Step 4.5: The Final Judge (STRUCTURE)
 
-The pipeline pauses. The human reviews the Single Dynamic Dossier containing:
-1. What was tested (from Step 1 + Step 2)
-2. The raw results (from Step 3)
-3. The Peer Review Board's verdicts with reasoning (from Step 4)
-4. For each idea: PASS (with causal explanation) / REJECT (with reason) / NEEDS MORE DATA
+After the three Swarm reviewers produce their combined feedback (which can be extremely long and dense), the Final Judge agent distills the noise into an actionable structure:
 
-The human can:
-- Accept a finding and promote it
-- Reject a finding the reviewers passed (override)
-- Request additional testing on a borderline result
-- Ask "why did this pass/fail?" and get the full reasoning chain
+1. **Verdict:** Declares a definitive `PASS` or `FAIL`. If there are ANY critical bugs, look-ahead traps, or falsification failures → `FAIL`. If all issues are minor suggestions → `PASS`.
+2. **Structured Issues:** Extracts each distinct unresolved issue into a numbered JSON array: `[{"id": 1, "description": "Short summary of issue"}]`. This is what the UI renders as separate input boxes so the human can give targeted directives per issue.
+
+**Why this step exists:** The raw Swarm feedback is a wall of text from 3 reviewers. Without the Final Judge, the human would have to manually parse thousands of words to understand what actually needs fixing. The Judge acts as the editorial layer between the Swarm's raw analysis and the Human Checkpoint.
+
+**Output:** `swarm_verdict` (PASS/FAIL) + `unresolved_issues` (JSON array) added to state.
 
 ---
 
-### Step 5: Fix → Re-Review Loop
+### Step 5: The Self-Correction Loop (BUILD → REVIEW → FIX, with Decaying Retries)
 
-Loop review↔fix until a pass finds ZERO new substantive findings.
+The pipeline does NOT stop after one Build→Review cycle. It enters a **decaying retry system** designed to maximize autonomous correction while preventing infinite grinding:
 
-**STOP RULE:** If a 3rd pass still finds new bugs → STOP and escalate to the owner (don't grind).
+**Phase A — Autonomous Inner Loop (2 cycles max):**
+Immediately after the Execution Plan is approved at Human Checkpoint 1, the system enters a tight loop:
+1. Step 3 (Build Agent) generates the code.
+2. Step 4 (Peer Review Swarm) reviews the code.
+3. Step 4.5 (Final Judge) issues a PASS/FAIL verdict.
+4. If FAIL: The Swarm's feedback is injected back into the Build Agent's prompt as `prior_swarm_feedback`, and the loop repeats.
+5. If PASS: The loop breaks immediately and proceeds to Human Checkpoint 2.
+
+This loop runs up to **2 times** autonomously. If it can't fix itself in 2 tries, a 3rd autonomous attempt rarely helps — human judgment is needed.
+
+**Phase B — Human-Guided Outer Loop (unlimited retries):**
+If the autonomous loop exhausts both cycles without a PASS, the pipeline pauses at Human Checkpoint 2. The human is presented with:
+- The full **Execution History** (Run 1, Run 2) showing how the code evolved and what the Swarm kept flagging.
+- A **per-issue directive text input** for each distinct unresolved issue from the Final Judge.
+
+The human types targeted directives (e.g., "Ignore the look-ahead warning on the SMA, we are using point-in-time data") and clicks **"Refine & Retry"**. This injects the human directives into the Build Agent's prompt and runs **2 more autonomous cycles**. The human can repeat this as many times as they want — there is no hard cap on human retries because the human is consciously deciding to spend the tokens each time.
+
+**Token Budget:** Each Build→Review cycle = 5 LLM calls (Build + 3 Reviewers + Final Judge). The happy path (PASS on first try) costs **9 total calls** (4 setup + 5 loop). The autonomous worst case costs **14 calls** (4 setup + 2×5 loop). Each human "Refine & Retry" click adds up to 10 more calls (2 inner cycles × 5).
+
+**STOP RULE:** The autonomous loop MUST stop after 2 cycles. The human loop has no artificial cap — the human decides when to stop and record a verdict.
+
+---
+
+### ⏸️ HUMAN CHECKPOINT 2: Review of Results & Reasoning
+
+The pipeline pauses and presents a structured interactive UI:
+
+**Execution History Panel:**
+The UI displays tabbed views for each Build→Review run (e.g., `Run 1 (FAIL)`, `Run 2 (FAIL)`, `Run 3 (PASS)`). Each tab shows:
+- The generated Python code for that run
+- The Peer Review Swarm's full feedback for that run
+- The Final Judge's verdict for that run
+
+This allows the human to trace exactly how the code evolved and what the Swarm kept flagging across iterations.
+
+**Human Interaction Layer:**
+If the final verdict is FAIL:
+- Each distinct unresolved issue from the Final Judge is rendered as a **separate text input box** (e.g., "Issue 1: GARCH model non-convergence risk" → [text input]).
+- The human can type a specific directive per issue (e.g., "Wrap in try-except and skip tickers with <50 observations").
+- A **"Refine & Retry"** button injects the directives and kicks the system back into the inner loop.
+
+If the final verdict is PASS:
+- The issues are still shown (for optional review), but framed as minor notes.
+- The human can proceed directly to recording the verdict.
+
+**Final Decision:**
+The human selects one of:
+- **PASS** — The code and logic are accepted. Proceed to Step 7 (Record).
+- **REJECT** — The hypothesis is killed. Proceed to Step 7 (Record with REJECT verdict).
+- **NEEDS REVISION** — Log the current state and defer to a future session.
 
 ---
 
@@ -264,8 +319,9 @@ Loop review↔fix until a pass finds ZERO new substantive findings.
 5. Update `project_map.py` if structure changed.
 6. Script stays in `tools/research/` (reproducibility).
 7. Commit with the pipeline trailer: `Pipeline: path=FULL diverge=3 review=agent tests=green`.
+8. **Write the full Execution History to the Single Dynamic Dossier.** The dossier must capture every Build→Review run (code, feedback, verdict) so the human can audit the full self-correction journey. Do not write only the final state — intermediate attempts are valuable diagnostic data.
 
-**DONE = ALL of:** criteria met · review clean (or placebo passed) · suite+verify green · docs updated · committed with trailer · task_log entry closed · verdict honest. Anything open → not done.
+**DONE = ALL of:** criteria met · review clean (or placebo passed) · suite+verify green · docs updated · committed with trailer · task_log entry closed · verdict honest · dossier contains full execution history. Anything open → not done.
 
 ---
 
@@ -329,35 +385,84 @@ As the pipeline progresses, each step APPENDS to this file under clear headers:
 ## Ideation Explosion (Step 1)
 ## ⏸️ Human Checkpoint 1 — Pruning Notes
 ## Execution Plan (Step 2)
-## Results (Step 3)
-## Peer Review (Step 4)
-## ⏸️ Human Checkpoint 2 — Decision
+## Execution History (Step 5 — Self-Correction Loop)
+### Run 1
+#### Generated Code
+#### Peer Review Feedback
+#### Verdict: FAIL
+### Run 2
+#### Generated Code
+#### Peer Review Feedback  
+#### Verdict: PASS
+## ⏸️ Human Checkpoint 2 — Decision & Directives
 ## Verdict & Registry Entry (Step 7)
 ```
 
-The human only ever needs to open ONE file to see the full journey of an idea from seed to verdict.
+The human only ever needs to open ONE file to see the full journey of an idea from seed to verdict, including every self-correction attempt.
 
 ---
 
 ## Model Routing Strategy
 
-| Step | Requirement | Model |
-|---|---|---|
-| Step 0 (Triage) | Fast classification | `gemini-2.5-flash` |
-| Step 0b (History Check) | File reading + matching | `gemini-2.5-flash` |
-| Step 1 (High Ideation) | Deep reasoning, chain-of-thought | `gemini-2.5-pro` or CLI offload (highest quality) |
-| Step 2 (Execution Planning) | Codebase reading + logic | `gemini-2.5-pro` or CLI offload |
-| Step 3 (Code Generation) | Code writing + testing | `gemini-2.5-pro` or CLI offload |
-| Step 4 (Peer Review Board) | Each reviewer: focused analysis | `gemini-2.5-flash` (parallelizable; 3 independent reviewers) |
-| Step 7 (Recording) | Documentation | `gemini-2.5-flash` |
+**Current Implementation:** All steps use a single model controlled by the `THINKTANK_MODEL` environment variable (default: `gemini-3.1-flash-lite`). This is a temporary testing configuration.
 
-**Rate-limit safety:** On the free tier, parallel `pro` calls may hit 429 errors. Use "CLI Offloading" (pasting complex logic into the Antigravity chat) as a fallback for Step 1 and Step 2.
+**Target Architecture (requires paid API subscriptions — see §Model Viability TODO in `setup.md`):**
+
+| Step | Requirement | Ideal Model Tier | Rationale |
+|---|---|---|---|
+| Step 0 (Triage) | Fast classification + logical validity check | Cheap/Fast (e.g., Flash) | Simple yes/no + brief reasoning |
+| Step 0b (History Check) | File reading + matching | Cheap/Fast | Pattern matching against existing docs |
+| Step 1 (High Ideation) | Deep reasoning, chain-of-thought | **Frontier** (Claude Sonnet / Gemini Pro) | Most valuable step — quality here determines everything downstream |
+| Step 1.5 (Review Agent) | Critical filtering + proxy detection | **Frontier** | Must detect spurious correlations and confounding variables |
+| Step 2 (Execution Planning) | Codebase reading + logic | **Frontier** | Must understand existing helpers and produce grounded plans |
+| Step 3 (Code Generation) | Code writing + testing | **Frontier** | Must write correct, idiomatic code using project conventions |
+| Step 4 (Peer Review Board) | Each reviewer: focused analysis | Mid-tier (parallelizable; 3 independent reviewers) | Can be cheaper since each reviewer has a narrow, focused task |
+| Step 4.5 (Final Judge) | Verdict + issue extraction | Mid-tier | Structured JSON extraction from existing text |
+| Step 7 (Recording) | Documentation | Cheap/Fast | Template-filling, no reasoning needed |
+
+**Key Insight from Testing (2026-06-15):** The free-tier `gemini-3.1-flash-lite` model successfully ran the full pipeline end-to-end, proving the orchestration framework works. However, it lacked the reasoning depth to:
+- Reject a fundamentally flawed hypothesis ("IPO name length affects stock price") at the Triage stage
+- Detect that "name length" is a spurious proxy for sector/market-cap at the Review stage
+- Push back on the premise even when placed in the Falsifier persona (it flagged issues but still let it through)
+
+A frontier model (Claude 3.5 Sonnet, Gemini 2.5 Pro) would have caught these at Step 0.
+
+**Rate-limit safety:** On the free tier, parallel calls may hit 429 errors. The `THINKTANK_MODEL` env var allows instant model swapping without code changes. See the **Model Viability & Subscriptions TODO** in `setup.md` for the plan to integrate paid API tiers.
 
 ---
 
 ## Future Integration (TODO — tracked in `setup.md`)
 - **File-Based IPC:** LangGraph writes `handoff.md` → Antigravity CLI processes it → writes `approved.md` → LangGraph resumes.
 - **LangGraph Studio / Web App Visualizer:** Once the engine is proven in the terminal, wrap it in a visual UI for graphical node-maps and clickable Approve/Reject buttons.
+- **Model Viability & Subscriptions:** Determine how to integrate frontier models (Claude, Gemini Pro) for production use. Map API subscriptions vs consumer Pro subscriptions. Route expensive steps (Ideation, Planning, Code Gen) to frontier models and cheap steps (Triage, Recording) to flash-tier models. See `setup.md` for full details.
+- **Per-Step Model Routing:** Replace the single `THINKTANK_MODEL` env var with a per-step routing config (e.g., `THINKTANK_MODEL_IDEATION`, `THINKTANK_MODEL_REVIEW`) so different steps can use different model tiers.
+
+---
+
+## State Schema (`ThinkTankState`)
+
+The LangGraph pipeline passes the following TypedDict between nodes:
+
+| Key | Type | Produced By | Consumed By | Purpose |
+|---|---|---|---|---|
+| `task_description` | `str` | Input | Step 0, 7 | The original user prompt |
+| `dossier_path` | `str` | Input | Step 7 | Output directory |
+| `prior_art_report` | `str` | Step 0 | Human, Step 7 | Summary of novelty/logical validity |
+| `raw_ideas` | `str` | Step 1 | Step 1.5, 7 | The 20-40 chained hypotheses |
+| `sorted_ideas` | `str` | Step 1.5 | Human Checkpoint 1 | `IN/CUT/OPEN` JSON array |
+| `approved_ideas` | `str` | Human | Step 2, 7 | Pruned list of ideas to test |
+| `execution_plan` | `str` | Step 2 | Step 3, 4, 7 | Codebase-grounded blueprint |
+| `code_execution_result`| `str` | Step 3 | Step 4, 5, 7 | Generated Python code |
+| `peer_review_feedback` | `str` | Step 4 | Step 4.5, 5, 7 | Combined swarm critique |
+| `swarm_verdict` | `str` | Step 4.5 | Step 5, Human Checkpoint 2 | `PASS` / `FAIL` |
+| `unresolved_issues` | `List[dict]` | Step 4.5 | Human Checkpoint 2 | `[{"id": 1, "description": "..."}]` |
+| `execution_history` | `List[dict]` | Step 5 | Human Checkpoint 2, 7 | Log of all self-correction loops |
+| `prior_swarm_feedback` | `str` | Step 5 | Step 3 | Feedback injected into next build |
+| `human_directives` | `str` | Human | Step 3 | User overrides per issue |
+| `human_retry_count` | `int` | Human | UI | Tracks manual interventions |
+| `final_verdict` | `str` | Human | Step 7 | `PASS` / `REJECT` / `NEEDS REVISION` |
+| `messages` | `List` | All | All | Chat transcript (append-only) |
+| `errors` | `List[str]` | All | All | System-level error log |
 
 ---
 
@@ -365,7 +470,10 @@ The human only ever needs to open ONE file to see the full journey of an idea fr
 
 > A non-trivial task is picked. Triage the path, then execute the steps in this document:
 > scope-data → history-check → diverge (parallel multi-lens agents, chain-of-thought explosion,
-> fixed output contract) → ⏸️ human prune/expand → plan (codebase-grounded) → build (TDD) →
-> peer review board (code + math + falsifier) → ⏸️ human review → fix-to-stop-rule → test+verify
-> → cleanup with task_log entry + pipeline commit trailer. Honor the DATA-TRUTH INVARIANTS and
-> STANDING CONSTRAINTS. If skipping a stage, say which and why up front.
+> fixed output contract) → ⏸️ human prune/expand → plan (codebase-grounded) → build →
+> peer review swarm (code + math + falsifier) → final judge (verdict + structured issues) →
+> self-correction loop (3 autonomous cycles, decaying to 2 human-guided retries) →
+> ⏸️ human review (per-issue directives, execution history) → test+verify
+> → cleanup with task_log entry + pipeline commit trailer + full execution history in dossier.
+> Honor the DATA-TRUTH INVARIANTS and STANDING CONSTRAINTS.
+> If skipping a stage, say which and why up front.
