@@ -83,7 +83,7 @@ winning source). Those `*_src` columns are listed once at the end of each group,
 
 | column | type | source |
 |---|---|---|
-| gmp_pct | float | sharescart (2023-2025 only; blank pre-2023) |
+| gmp_pct | float | sharescart (MB: 2020-2026; SME: 2023-2026 only. SME data is blank pre-2023 because the informal grey market did not track SMEs back then) |
 
 ## Listing (chittorgarh)
 

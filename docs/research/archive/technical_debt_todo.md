@@ -26,3 +26,13 @@
 - **Location:** `thinktank/orchestration/`
 - **Description:** Set up the dual-agent architecture (Claude Opus Architect + Gemini Pro Executor) using the underlying LangGraph state machine. This was deliberately postponed by the user.
 - **Action:** Modify `nodes.py` and `graph.py` to correctly route and pass state between the high-level Planner agent and the downstream Executor agent.
+
+## 6. NEW: More Hardcoded Timebombs & Caps
+- **Location:** `scrapers/chittorgarh.py`
+- **Description:** The scraper has `YEARS = [2020, 2021, 2022, 2023, 2024, 2025]` completely hardcoded. Additionally, `LIST_API` hardcodes `2026-27` as the FY parameter. Also, `while page <= 300` acts as a hardcoded pagination cap.
+- **Action:** Convert `YEARS` to dynamically scale, and implement robust pagination detection instead of an arbitrary 300-page limit.
+
+## 7. NEW: Silent Try-Except Data Drops
+- **Location:** Multiple (`07_returns_summary.py`, `02_detail.py`, `03_subscription.py`, `chittorgarh.py`)
+- **Description:** Found 7 instances where the pipeline wraps core logic in a `try...except Exception:` block and either executes a `continue`, `break`, or `pass`. For example, in `07_returns_summary.py`, any parsing anomaly will silently drop the entire ticker from the final summary instead of halting to fix the bug.
+- **Action:** Remove naked `Exception` catches. Explicitly handle known errors (e.g., `requests.exceptions.Timeout`) and let structural data bugs crash the build so they can be fixed.

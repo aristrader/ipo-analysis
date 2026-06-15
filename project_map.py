@@ -142,7 +142,7 @@ RULES_AND_STATE = {
                        "rejected) + WHY + backtest lift/N/cross-regime. Consult before re-testing any signal.",
     "thinktank/rules/README.md": "the registry entry template",
     "CLAUDE.md":       "conventions/decisions/repo-map (the brain; auto-loaded)",
-    "STATUS.md":       "live 'where are we / what's next' (verify from ground truth, never memory)",
+    "docs/tracker/STATUS.md":       "live 'where are we / what's next' (verify from ground truth, never memory)",
 }
 
 # ------------------------------------------------------------ CONTEXT INDEX
@@ -188,7 +188,7 @@ CONTEXTS = {
         "docs/research/trusted_sources.md", "docs/playwright_on_off.md", "thinktank/config/settings.local.json",
     ],
     "how to work / execution pipeline": [
-        "docs/research/execution_pipeline.md", "docs/research/task_log.md",
+        "docs/research/execution_pipeline.md", "docs/tracker/task_log.md",
         "docs/research/hypothesis_protocol.md",
     ],
     "test a hypothesis / research agent brief": [
@@ -203,9 +203,9 @@ CONTEXTS = {
         "docs/superpowers/specs/2026-06-07-calls-engine-design.md",
         "docs/research/recommendations_system_discussion.md",
     ],
-    "what's done / what's next / project state": ["STATUS.md", "CLAUDE.md", "thinktank/rules/index.md"],
+    "what's done / what's next / project state": ["docs/tracker/STATUS.md", "CLAUDE.md", "thinktank/rules/index.md"],
     "improvement backlog / what to build next": [
-        "docs/research/improvement_backlog.md", "docs/research/fujiyama_park_case.md",
+        "docs/tracker/improvement_backlog.md", "docs/research/fujiyama_park_case.md",
         "docs/research/INDEX.md",   # map of all research docs (active + archived feeders)
     ],
     "testing / verification / the showdown": [
