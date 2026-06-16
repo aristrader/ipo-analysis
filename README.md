@@ -2,12 +2,6 @@
 
 Indian IPO dataset (Mainboard + SME, 2006–2025, incl. delisted) for repeatable-pattern research. Not financial advice.
 
-> **Resume the main Claude Code session** (run from this directory):
-> ```
-> claude --resume 01820f2d-c29a-4f29-84ad-349ce26b70fa
-> ```
-> (or `claude --resume` and pick the top one; `claude -c` continues the most recent.)
-
 ## Start here (read in order)
 1. `CLAUDE.md` — the project brain (3-layer status, conventions, run order) — read first
 2. `docs/sources.md` — what each data site provides (free/premium/coverage)
@@ -43,7 +37,7 @@ PYTHONPATH=. python predict_ipo.py --type MB --sector Finance --mcap mid --profi
                                                 # score a NEW IPO vs historical analogs (--help for all options)
 PYTHONPATH=. python run_backtest.py             # strategy backtest vs the do-nothing baseline
 PYTHONPATH=. python run_validation.py           # cross-regime sign-validation
-PYTHONPATH=. pytest tests/layer3/ -q            # 77 tests
+PYTHONPATH=. pytest tests/layer3/ -q            # layer-3 suite (canonical counts: see MAP.md / `python verify.py`)
 ```
 Note: `alpha` = market-adjusted return measured from the LISTING price (the secondary-buyer's view); the
 allottee additionally captures the listing-day pop. Returns benchmarked to Nifty 50 (Smallcap-250 for small/micro).

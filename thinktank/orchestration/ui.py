@@ -226,4 +226,4 @@ if "execution_plan" in state:
             state["final_verdict"] = verdict
             res = step7_record(state)
             st.success(f"Verdict recorded: {verdict}. Dossier saved to: {res.get('dossier_path')}")
-            st.info("The docs/research/task_log.md has also been updated.")
+            st.info("The docs/tracker/task_log.md has also been updated.")

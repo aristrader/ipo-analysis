@@ -17,6 +17,7 @@ import csv
 import glob
 import hashlib
 import os
+import re
 import subprocess
 import sys
 
@@ -110,9 +111,9 @@ def pytest_collected():
         return f"<unreadable: {e}>"
 
 
-def regenerate_map():
+def regenerate_map(n_tests=None):
     with open(_p("MAP.md"), "w") as f:
-        f.write(M.render_map())
+        f.write(M.render_map(n_tests=n_tests))
 
 
 def check_schema():
@@ -127,9 +128,122 @@ def check_schema():
         return [f"schema gate skipped ({type(e).__name__})"]
 
 
+# ----------------------------------------------------- STRUCT-1: count-token guard
+# The volatile counts (findings/tests/rows) live ONLY in the generated MAP.md
+# CANONICAL FACTS block. Hand-docs must POINT there, never restate a literal. This
+# regex catches a reintroduced "<number> tests/findings/rows" (and "<n> substrate
+# rows"); it is deliberately narrow to avoid firing on legit prose (weights like
+# "0.269", component counts like "8 components", "00->09 steps", "2026").
+_COUNT_TOKEN = re.compile(r"\b\d{1,4}\s+(?:substrate\s+)?(tests|findings|rows)\b", re.I)
+
+
+def _scan_count_tokens(path):
+    """Return the offending '<n> <noun>' snippets found in a file (empty = clean)."""
+    full = _p(path) if not os.path.isabs(path) else path
+    if not os.path.exists(full):
+        return []
+    text = open(full, encoding="utf-8", errors="replace").read()
+    return [m.group(0) for m in _COUNT_TOKEN.finditer(text)]
+
+
+def check_doc_counts():
+    """DRIFT if a guarded hand-doc reintroduces a hardcoded count token."""
+    issues = []
+    for doc in M.GUARDED_DOCS:
+        for hit in _scan_count_tokens(doc):
+            issues.append(
+                f"hardcoded count in {doc}: {hit!r} — counts are canonical in MAP.md "
+                "(point to `python verify.py`), don't restate them")
+    return issues
+
+
+# ----------------------------------------------- FILE_KINDS rules (mechanism (b))
+# RULE B is deliberately SCOPED (the brief: "if a rule is too noisy, scope it down").
+# DD-7 verified the *dangerous* form — an archive doc cited AS THE LIVE/CURRENT source —
+# is absent; what's present are benign "superseded → see archive" / "lives in archive"
+# pointers (rules/index.md, STATUS.md, CLAUDE.md). We must NOT flag those. So RULE B
+# fires only on a LIVE-SOURCE directive: an archive path immediately preceded by phrasing
+# that presents it as the authoritative place to look NOW (e.g. "the current ... is",
+# "canonical ... :", "single source of truth"). Benign "see/in/lives in archive" is exempt.
+_LIVE_SOURCE_CUE = re.compile(
+    r"(?:current|canonical|single source(?: of truth)?|authoritative|the live)\b[^.\n]{0,40}$",
+    re.I)
+
+
+def _canonical_cites_archive(canonical_docs, archive_token, roots=None):
+    """RULE B helper: report CANONICAL docs that cite an ARCHIVED path AS A LIVE SOURCE
+    (not a benign 'see archive' pointer). `roots` lets tests point at a tmp dir."""
+    roots = roots or [ROOT]
+    issues = []
+    for doc in canonical_docs:
+        full = doc if os.path.isabs(doc) else _p(doc)
+        if not os.path.exists(full):
+            continue
+        text = open(full, encoding="utf-8", errors="replace").read()
+        idx = text.find(archive_token)
+        while idx != -1:
+            preceding = text[max(0, idx - 80):idx]
+            if _LIVE_SOURCE_CUE.search(preceding):
+                issues.append(
+                    f"CANONICAL {os.path.relpath(full, roots[0])} cites ARCHIVED "
+                    f"{archive_token} as a live source (RULE B)")
+                break
+            idx = text.find(archive_token, idx + 1)
+    return issues
+
+
+def _gen_cmd(gen):
+    """Runnable hint to (re)generate a GENERATED file from its FILE_KINDS generator.
+    `gen` is the generator's script path (or None). Derived here so the command is
+    never a second hand-maintained literal that could drift from the path."""
+    if not gen:
+        return "see project_map.FILE_KINDS"
+    if gen == "verify.py":
+        return "python verify.py"
+    return f"PYTHONPATH=. python {gen}"
+
+
+def check_file_kinds(file_kinds=None):
+    """FILE_KINDS enforcement (added to drift, never crashes):
+    RULE A — a GENERATED file must NOT live only under archive/; where its generator's
+             mapped write-path is known, the live mapped path must exist on disk.
+    RULE B — an ARCHIVED file must NOT be cited as a live source by a CANONICAL doc."""
+    fk = file_kinds if file_kinds is not None else M.FILE_KINDS
+    issues = []
+    # RULE A
+    for path, (kind, gen) in fk.items():
+        if kind not in ("GENERATED", "GENERATED_INDEX"):
+            continue
+        if "archive/" in path:
+            issues.append(f"RULE A: GENERATED {path} is mapped under archive/ — move to its live write-path")
+            continue
+        live = _p(path)
+        arch_candidate = _p(os.path.join("docs/research/archive", os.path.basename(path)))
+        if not os.path.exists(live):
+            if os.path.exists(arch_candidate):
+                # the dangerous form: the only copy is stranded in archive/ — a real drift.
+                issues.append(
+                    f"RULE A: GENERATED {path} missing at its mapped live path "
+                    "(a stale copy still sits in archive/) — "
+                    "generator write-path, mapped path, and disk must agree")
+            else:
+                # benign on a fresh clone: a build artifact whose generator hasn't run yet.
+                # KEEP the warning (visible drift) but make it ACTIONABLE — name the generator.
+                issues.append(
+                    f"RULE A: {path} (GENERATED) not present — generate via: {_gen_cmd(gen)}")
+    # RULE B — scan CANONICAL docs (default set) for any ARCHIVED file citation
+    canonical = [p for p, (k, _g) in fk.items() if k == "CANONICAL"]
+    archived = sorted(glob.glob(_p("docs/research/archive/*")))
+    for ap in archived:
+        token = os.path.relpath(ap, ROOT)
+        issues.extend(_canonical_cites_archive(canonical, token))
+    return issues
+
+
 def fast_drift():
     """All fast checks; returns a list of drift strings (empty = clean)."""
-    return check_paths() + check_unwired() + check_invariants() + check_schema()
+    return (check_paths() + check_unwired() + check_invariants() + check_schema()
+            + check_doc_counts() + check_file_kinds())
 
 
 # substantive code dirs whose changes mean "real task in progress / shipped"
@@ -210,7 +324,12 @@ def routing_lines(paths):
 
 def main():
     quiet = "--quiet" in sys.argv
-    regenerate_map()  # always keep MAP.md fresh
+    # Full mode embeds the exact pytest-collected count into MAP.md's CANONICAL FACTS
+    # block; the fast hook skips pytest (stays ~0.1s) and writes a "run verify.py" pointer.
+    n_tests = None if (quiet or "--route" in sys.argv) else pytest_collected()
+    if isinstance(n_tests, str):  # "<unreadable: ...>" — don't bake an error into MAP.md
+        n_tests = None
+    regenerate_map(n_tests=n_tests)  # always keep MAP.md fresh
     drift = fast_drift()
 
     if quiet:
@@ -239,7 +358,7 @@ def main():
     print(f"findings on disk : {count_findings()}")
     print(f"substrate rows   : {count_substrate_rows()}  (csv records)")
     print(f"AS_OF_DATE       : {config_as_of_date()}")
-    print(f"tests collected  : {pytest_collected()}")
+    print(f"tests collected  : {n_tests if n_tests is not None else pytest_collected()}")
     bak = data_backup_status()
     if bak:
         print(f"substrate vs backup: {bak}")

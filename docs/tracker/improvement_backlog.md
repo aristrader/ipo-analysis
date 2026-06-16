@@ -73,6 +73,54 @@ IPO tool's polish is fully done. Source: `archive/extension_roadmap.md`.
 Research-gated. EXIT side tested (no blanket take-profit beats hold); ENTRY side weak. Needs a new entry signal that
 survives the 3-layer protocol, or the news feed (D1/D2). Source: `archive/future_ideas.md`.
 
+### META-O — multi-model orchestration tournament (which model where?)  🔬 · L · owner 2026-06-16
+**Goal:** empirically decide *which model + which orchestration shape* to use *where*, instead of guessing. We have a
+think-tank/workflow orchestration that can route steps to different engines (Claude Opus / Sonnet, Gemini Pro / Flash
+via `agy`, GPT-OSS). Run the SAME task through many model-combination permutations (e.g. Flash-everywhere vs
+Opus-everywhere vs Opus-plans+Flash-reads vs Gemini-reads+Claude-edits), then **review/judge agents compare the outputs**
+to rank combos and map "task-type → best engine + role." Output = a decision table: for each orchestration step
+(scout/read, plan, build, review/judge), which model is the accuracy/cost/speed sweet spot, and where the
+multi-model orchestration actually earns its keep vs a single model.
+**Design notes (so we start right):**
+- Needs **gradeable benchmark tasks** — ones with a known/verifiable answer (a planted bug to find, a finding with a
+  recorded verdict, a known-correct analysis) so "accuracy" is measurable, not vibes.
+- Compare on **3 axes, not 1**: accuracy AND token-cost AND latency (the whole point of Flash/Gemini is cost; Opus is
+  accuracy — a 2%-better-but-10×-cost combo matters). agy/Gemini egress is free for this repo (owner) → exploit it.
+- The **`Workflow` tool is the natural harness** (fan the same task across configs + run judge panels). Explicit
+  multi-agent opt-in — fine for this when we run it.
+- Connects to **DOC-5** (the CLAUDE.md "multi-model meta-orchestration" section — currently aspirational; this is how we
+  decide what to actually wire in) and to the live `agy` context-engine experiment. SCOPE/run this as its own session;
+  not now (mid-audit). Recorded here so it isn't lost.
+- **PRIOR ART (this is NOT new — it extends an existing thread):** the orchestration design + open routing decisions
+  already live in `thinktank/orchestration/docs/think_tank_architecture.md` → **`## Model Routing Strategy`** (global
+  `THINKTANK_MODEL` today; per-step `THINKTANK_MODEL_<STEP>` routing is a pending TODO) + **`## Future Integration (TODO)`**
+  ("Model Viability & Subscriptions" = paid APIs vs consumer Pro; CLI File-Based IPC) — TODOs tracked in `docs/setup.md`.
+  META-O is the **empirical method** those open TODOs lack: a tournament that produces the routing decision table with data.
+  ⚠️ Documented evidence motivating this (think_tank_architecture.md, **"Key Insight from Testing 2026-06-15"**):
+  free-tier `gemini-3.1-flash-lite` RAN the pipeline end-to-end but **lacked the depth to reject flawed hypotheses / detect
+  spurious proxies** — i.e. lighter models produced work that needed cleanup (consistent with the current audit backlog).
+
+**OPEN DESIGN — extend this, THEN define the test + metrics (scaffolding, not final):**
+- **WHAT WE VARY (the config grid — keep it small & meaningful, not full cartesian):** model assigned to each
+  orchestration ROLE/step — scout/read · plan · build/generate · review/judge. Candidate engines per role: Claude Opus,
+  Claude Sonnet, Gemini Pro, Gemini Flash (+ flash-lite as the known-weak floor), GPT-OSS. Meaningful combos to seed:
+  all-Flash · all-Opus · Opus-plans+Flash-reads · Gemini-reads(agy)+Claude-edits · Pro-reasoning+Flash-mechanical.
+- **WHAT WE HOLD CONSTANT:** the task, the prompts, the input context, the harness — so only the model mix varies.
+- **METRICS TO DEFINE (candidates — refine into the final scorecard):**
+  1. **Accuracy / correctness** — needs gradeable benchmark tasks (planted bug found? finding-verdict matches recorded
+     truth? analysis correct?). Per-task pass/fail or graded score.
+  2. **Judgment quality** — did it REJECT flawed hypotheses / catch spurious proxies / refuse a bad call? (This is the
+     exact axis flash-lite failed — arguably the most important for reasoning steps; design tasks that probe it.)
+  3. **Cost** — tokens (and ₹/$ where APIs are paid; agy/Gemini = free for this repo, factor that in).
+  4. **Latency** — wall-clock per step / per task.
+  5. **Reliability/variance** — run each config N times; report spread, not a single sample (model output is noisy).
+- **METHOD/HARNESS:** the `Workflow` tool — fan the same task across configs, then a judge panel scores each output on
+  the metrics above; blind the judge to which config produced which output where possible. Output = a decision table
+  (role × engine → recommended pick, with the accuracy/cost/latency tradeoff shown).
+- **OPEN QUESTIONS to resolve before building:** which benchmark tasks (and how many) give real signal? how to grade
+  "judgment quality" objectively? do we judge with a frontier model, a panel, or against a fixed answer key? what's the
+  acceptable accuracy floor per role (e.g. a cheap model may be fine for read/scout but never for review)?
+
 ## KILLED — do NOT rabbit-hole
 Social sentiment · hosted-LLM headline polarity · RSS fuzzy ISIN-matching · F&O/options-OI · all-stocks TA+FA+news
 fusion · weak-subscription veto (2026-06-10: B1's tell was a young-cohort artifact, inverts on matured data) ·
