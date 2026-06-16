@@ -65,8 +65,9 @@ go one tier heavier, not lighter.
 ## STANDING CONSTRAINTS (always)
 Verify from GROUND TRUTH, never memory (`wc -l` LIES on the CSVs — count via csv/DuckDB). Env:
 `PYTHONPATH=. .venv/bin/python`; NO scipy/statsmodels (use the srho/Wilson/bootstrap pure-Python
-helpers). **GIT IS LOCAL-ONLY** — never add a remote / push. Company laptop: Playwright OFF by
-default (`docs/playwright_on_off.md`), Streamlit localhost-only, no secrets tracked.
+helpers). **GIT: branch + PR, push freely** to `origin` (github.com/aristrader/ipo-analysis); NEVER
+push directly to `main` without explicit owner approval. Company laptop: Playwright OFF by
+default (`docs/playwright_on_off.md`), Streamlit localhost-only, no secrets/keys/tokens in commits.
 
 ## THE CHECKABLE ARTIFACT (red-team #1 fix — makes "followed the pipeline" a FACT on disk)
 - **`docs/research/task_log.md`** — append-only, ONE entry per non-trivial task. Doubles as

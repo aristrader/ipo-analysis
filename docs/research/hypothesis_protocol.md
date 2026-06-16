@@ -66,4 +66,4 @@ capitulation flag) are monitoring/exit flags, never score inputs.
 1. Append the verdict + numbers to `docs/research/tier1_wave1_verdicts.md` (the ledger).
 2. Append a registry line to `rules/index.md` (so it's never re-tested blind).
 3. Update the Phase-2 block in `STATUS.md`.
-4. Script stays in `tools/research/` (reproducibility). Commit (git is LOCAL-ONLY — never push).
+4. Script stays in `tools/research/` (reproducibility). Commit on a branch and open a PR — push freely, but NEVER directly to `main` without owner approval.

@@ -52,8 +52,9 @@ data only; **NO machine learning** (small data + transparency → analog/compara
   conservative (don't change the live score). The tested-signal registry is `rules/index.md`.
 - **No look-ahead / no reverse-causation** (a feature that's secretly an outcome — e.g. CURRENT market cap).
   Point-in-time always.
-- **GIT IS LOCAL-ONLY** — `git init`'d for local history/rollback. **NEVER add a remote / push / connect to
-  GitHub** until the owner explicitly says so. (Standing owner instruction.)
+- **GIT: BRANCH + PR, PUSH FREELY** to `origin` (github.com/aristrader/ipo-analysis). Do work on branches;
+  push branches and open PRs freely. **NEVER push directly to `main`** without explicit owner approval.
+  No secrets/keys/tokens in commits. (Standing owner instruction, 2026-06-16.)
 - **NETWORK = DEFAULT-DENY, trusted-only, ZERO downloads.** Only allowlisted domains are fetchable; off-list
   source → STOP and ask. Read-only, no file downloads. Registry: `docs/research/trusted_sources.md`.
 - **Playwright = ALWAYS ON but localhost-pinned** (isolated/headless/version-locked to localhost:8501/8597-99
@@ -110,5 +111,5 @@ srho/Wilson/bootstrap helpers). Long pulls are resume-safe + rate-limited.
 Solo researcher, deeply hands-on about the domain, honesty-first. Does NOT review code → you are the quality
 gate (lean on independent review + conservative defaults). Wants the full multi-agent pipeline, not
 one-dimensional work. Thinks in movements/likelihoods, not single data points. Privacy/security-conscious
-(company laptop): local-only git, no egress, no downloads. Values honest "this doesn't work" verdicts over
+(company laptop): branch-and-PR git (no direct push to main), no egress, no downloads. Values honest "this doesn't work" verdicts over
 forced positives. Re-states the pipeline mandate when it's skipped — treat it as a hard default.

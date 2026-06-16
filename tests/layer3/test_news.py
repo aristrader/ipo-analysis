@@ -3,7 +3,7 @@
 These are the PURE, no-network units behind the NSE-announcement context feed. Discipline:
 category is a display label only (no polarity); `actionable_from` bakes in the 15:30-IST
 look-ahead rule; staging dedups on (sm_isin, an_dt, desc-hash) and stores attachment URLs only.
-Spec: docs/research/newsfeed_rnd_2026-06-09.md §2.
+Spec: docs/research/newsfeed/newsfeed_rnd_2026-06-09.md §2.
 """
 from datetime import datetime, date
 

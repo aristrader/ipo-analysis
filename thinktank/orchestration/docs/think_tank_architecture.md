@@ -191,7 +191,7 @@ A surviving signal enters the weighted score ONLY if it improves OOS top-quintil
   - Price files: `data/prices/<isin>.csv` (date,open,high,low,close,volume), already split/bonus adjusted; filter `date >= listing_date` and re-index to trading days from listing.
 - **Scripts:** Live in `tools/research/`. Copy conventions of existing ones (e.g., `wave2_substrate.py`, `wave2_pricepath.py`). Use `spine.py` functions.
 - **Data:** Load substrate via `spine.load_substrate()`.
-- **Git:** LOCAL-ONLY. Never push. Never add a remote. Company laptop: Playwright OFF by default, Streamlit localhost-only, no secrets tracked.
+- **Git:** Branch + PR, push freely to `origin` (github.com/aristrader/ipo-analysis); NEVER push directly to `main` without owner approval. Company laptop: Playwright OFF by default, Streamlit localhost-only, no secrets/keys/tokens in commits.
 
 ---
 
@@ -350,7 +350,7 @@ Check at REVIEW + VERIFY — the hard-won rules. Violating one = a wrong number.
 
 ## STANDING CONSTRAINTS (always)
 
-Verify from GROUND TRUTH, never memory (`wc -l` LIES on the CSVs — count via csv/DuckDB). Env: `PYTHONPATH=. .venv/bin/python`; NO scipy/statsmodels (use the srho/Wilson/bootstrap pure-Python helpers). **GIT IS LOCAL-ONLY** — never add a remote / push. Company laptop: Playwright OFF by default (`docs/playwright_on_off.md`), Streamlit localhost-only, no secrets tracked.
+Verify from GROUND TRUTH, never memory (`wc -l` LIES on the CSVs — count via csv/DuckDB). Env: `PYTHONPATH=. .venv/bin/python`; NO scipy/statsmodels (use the srho/Wilson/bootstrap pure-Python helpers). **GIT: branch + PR, push freely** to `origin` (github.com/aristrader/ipo-analysis); NEVER push directly to `main` without owner approval. Company laptop: Playwright OFF by default (`docs/playwright_on_off.md`), Streamlit localhost-only, no secrets/keys/tokens in commits.
 
 ---
 

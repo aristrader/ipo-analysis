@@ -200,7 +200,7 @@ Break into small, independently-testable sub-tasks. Builds are SEQUENTIAL (paral
   - `PYTHONPATH=. .venv/bin/python` (plain `python` doesn't exist on this box).
   - Streamlit apps: `PYTHONPATH=. .venv/bin/streamlit run <file> --server.headless true`
   - New packages: Install into `.venv` via `.venv/bin/pip install <package>`. Update `requirements.txt`.
-  - **GIT IS LOCAL-ONLY** — never add a remote / push. Company laptop: Streamlit localhost-only, no secrets tracked.
+  - **GIT: branch + PR, push freely** to `origin` (github.com/aristrader/ipo-analysis); NEVER push directly to `main` without owner approval. Company laptop: Streamlit localhost-only, no secrets/keys/tokens in commits.
 
 - **Aesthetics Mandate (non-negotiable):**
   - **Colors:** Never use generic red, blue, green. Use curated, harmonious color palettes with HSL-tailored values.
@@ -326,7 +326,7 @@ Check at REVIEW + VERIFY — the hard-won rules. Violating one = a bad user expe
 
 ## STANDING CONSTRAINTS (always)
 
-Env: `PYTHONPATH=. .venv/bin/python`; Streamlit localhost-only; no secrets in git; `.env` for all API keys (load via `python-dotenv`). **GIT IS LOCAL-ONLY** — never add a remote / push. No external network requests without explicit owner approval. Playwright OFF by default (`docs/playwright_on_off.md`).
+Env: `PYTHONPATH=. .venv/bin/python`; Streamlit localhost-only; no secrets/keys/tokens in commits; `.env` for all API keys (load via `python-dotenv`). **GIT: branch + PR, push freely** to `origin` (github.com/aristrader/ipo-analysis); NEVER push directly to `main` without owner approval. No external network requests without explicit owner approval. Playwright OFF by default (`docs/playwright_on_off.md`).
 
 ---
 

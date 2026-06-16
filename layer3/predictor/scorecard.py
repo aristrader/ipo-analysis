@@ -138,7 +138,7 @@ def liquidity(cohort):
 # record, exonerating the clean reputable banks while still catching genuinely-bad small shops.
 # A1 verdict: NEW improves cross-regime bad-outcome discrimination (3/4 panels positive vs the old
 # rule's 1/4 meaningful) AND un-vetoes 33/34 B1 missed winners → wired LIVE. See docs/research/
-# a1_banker_flag_2026-06.md. Toggle below lets the fold harness A/B the two defs.
+# signals/a1_banker_flag_2026-06.md. Toggle below lets the fold harness A/B the two defs.
 OBSCURE_FREQ_CUTOFF = 12      # the OLD rule's banker-IPO-count threshold (kept for A/B + ref)
 OBSCURE_MIN_PRIOR = 5         # min PIT prior IPOs by the banker before we trust its track record
 OBSCURE_BAD_RATE = 0.40       # PIT prior bad-outcome rate above which the banker is "bad"
@@ -156,7 +156,7 @@ OBSCURE_BAD_RATE = 0.40       # PIT prior bad-outcome rate above which the banke
 # LIVE = coverage_guard (A1b, 2026-06-10): independent adversarial review PROMOTED it — recall 24.6% (≈
 # legacy 25.4%, the −3 is a quality-improving swap: drops 48 reputable-MB false-vetoes, adds 45 genuine
 # small-shop SME catches), false-veto fixed (Nuvama/MorganStanley→0), 1y OOS better-3/worse-0, placebo-clean,
-# param-robust. See docs/research/a1b_coverage_guard_2026-06-10.md.
+# param-robust. See docs/research/signals/a1b_coverage_guard_2026-06-10.md.
 OBSCURE_BANKER_MODE = "coverage_guard"
 
 

@@ -1,10 +1,10 @@
-# Playwright (app-testing browser) — ALWAYS ON, localhost-pinned
+# Playwright (app-testing browser) — OFF by default, localhost-pinned when on
 
-**Owner rule (2026-06-10, supersedes the 2026-06-08 OFF-by-default rule): Playwright stays ENABLED.**
-Deemed safe because `.mcp.json` pins it to **localhost origins ONLY** + `--isolated` (fresh profile, no
-access to the real Chrome/Google account) + `--headless` + version-locked, and run_code_unsafe / file_upload /
-network_request are DENIED in settings. So there is **no external-network surface** — the only sites it can
-reach are the local Streamlit ports.
+**Owner rule (2026-06-16, reverts the 2026-06-10 ALWAYS-ON rule): Playwright is OFF by default.**
+Enable it only when actively testing/walking the Streamlit app, then disable again. When enabled it is safe
+because `.mcp.json` pins it to **localhost origins ONLY** + `--isolated` (fresh profile, no access to the real
+Chrome/Google account) + `--headless` + version-locked, and run_code_unsafe / file_upload / network_request
+are DENIED in settings — so there is **no external-network surface** (only the local Streamlit ports).
 
 **ONE-TIME setup to neutralise the residual** (the only concern the localhost pin does NOT cover — a leftover
 "Chrome for Testing" process can post macOS notifications): **System Settings → Notifications → "Google Chrome
@@ -12,9 +12,8 @@ for Testing" → Allow Notifications OFF.** Do this once and an idle/orphan test
 Also: prefer `browser_close` when a walk is done (tidy, not safety-critical now).
 
 ## Current state
-ENABLED. `.claude/settings.local.json` has `"enabledMcpjsonServers": ["playwright"]`. The MCP server loads each
-session; the chromium browser launches lazily on first navigate (localhost-pinned). The TURN-OFF steps below are
-kept only for the rare case you want it off (e.g. debugging a stray process).
+DISABLED. `.claude/settings.local.json` has `"disabledMcpjsonServers": ["playwright"]`. The MCP server does not
+load. Use the TURN ON steps below only when about to test/verify the Streamlit app, and TURN OFF again when done.
 
 ## TURN ON (only when about to test/verify the Streamlit app)
 1. Edit `.claude/settings.local.json`: change `"disabledMcpjsonServers"` → `"enabledMcpjsonServers"`

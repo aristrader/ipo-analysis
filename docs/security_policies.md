@@ -10,7 +10,7 @@ We rely on the existing configurations in [`.claude/settings.local.json`](file:/
 
 - **Network Whitelisting (Default-Deny)**: The agent can only fetch data from specific financial domains (e.g., `sebi.gov.in`, `bseindia.com`, `nseindia.com`, `screener.in`). Any attempt to fetch from a new domain requires manual user approval.
 - **Blocked Operations**: Unsafe code execution via the browser (`mcp__playwright__browser_run_code_unsafe`), direct browser network requests, and external file uploads are strictly denied.
-- **Local-Only Git**: Git history remains strictly on this machine. Git remotes are disabled to prevent data leakage.
+- **Git Remote (branch + PR)**: The repo has a GitHub remote (`origin` → `github.com/aristrader/ipo-analysis`). Work happens on branches that are pushed + opened as PRs; direct pushes to `main` require explicit owner approval. No secrets/keys/tokens are ever committed.
 
 ---
 
