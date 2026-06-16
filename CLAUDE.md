@@ -22,15 +22,15 @@ incl. delisted)** and turn them into (a) descriptive truths, (b) an analog-based
   CANONICAL RUN ORDER for Layer 2: `07_returns_summary` → `scrapers/screener_prices_merge` → `08_build_universe`
   → `09_assemble` (with `pipeline/listing_remediation.py` used inside 07 + the merge).
 - **Layer 3 — analysis.** ✅ BUILT (2026-05-31), reviewed + remediated. Engine in `layer3/` (UI-agnostic).
-  **Part A** (descriptive report): `layer3/spine.py` (method spine) + findings in `layer3/findings/` → `run_layer3_report.py` → `report/layer3_partA.html` (**29 findings**, **211 tests**).
+  **Part A** (descriptive report): `layer3/spine.py` (method spine) + findings in `layer3/findings/` → `run_layer3_report.py` → `report/layer3_partA.html` (canonical findings/tests counts → MAP.md / `python verify.py`).
   **Part B** (analog predictor + 8-component scorecard): `layer3/predictor/` → `predict_ipo.py --type MB --sector ...`.
   **Part C** (backtester vs do-nothing): `layer3/backtest/` → `run_backtest.py`. **Cross-regime validation:**
   `layer3/validate.py` → `run_validation.py` (VALIDATED: lasting-wealth, pop-fade; MIXED/not-robust: ofs-skin,
   profitable). **Data-informed scorecard weights:** `layer3/predictor/weights.py` → `run_weights.py` (point-in-time
   rank-IC, cross-regime; return/multibagger/downside carry weight, liquidity/quality→0; `predict_ipo.py --profile
-  data_informed`). Tests: **211 total** — `tests/layer3/` (94, incl. 5-traps) + `tests/pipeline/` (37) +
-  `tests/scrapers/` (32) + `tests/data/` (25, substrate invariants + weights files + GOLDEN headline numbers) + `tests/showdown/` (12, SHOWDOWN=1
-  execution proofs) + map (7). Mutation-validated 28/28 (`tools/mutation/`). Design: `docs/strategies.md`+`docs/layer3.md`; results:
+  data_informed`). Test suites: `tests/layer3/` (incl. 5-traps) + `tests/pipeline/` + `tests/scrapers/` +
+  `tests/data/` (substrate invariants + weights files + GOLDEN headline numbers) + `tests/showdown/` (SHOWDOWN=1
+  execution proofs) + map. Canonical total → MAP.md / `python verify.py`. Mutation-validated 28/28 (`tools/mutation/`). Design: `docs/strategies.md`+`docs/layer3.md`; results:
   `rules/index.md`. KEY: `alpha` is FROM-LISTING (secondary-buyer, vs Nifty); allottee additionally gets the pop.
   **Interactive app:** `app.py` (Streamlit, 5 tabs: report / score-a-new-IPO / explorer / backtester / validation+rules) →
   `PYTHONPATH=. streamlit run app.py`. Remaining (polish): DRHP-PDF financials, live-refresh commit path.
@@ -57,9 +57,12 @@ incl. delisted)** and turn them into (a) descriptive truths, (b) an analog-based
   these files"). Edit it whenever you add/move/retire a file, step, or signal.
 - **`MAP.md`** = human-readable navigation/tree/flow/context, **generated** from project_map.py (never hand-edit).
 - **`verify.py`** = the checkpoint: asserts every mapped path exists, the DAG is consistent, and invariants
-  (29 findings / 211 tests / 2384 rows / AS_OF_DATE / data-vs-backup) hold; regenerates MAP.md. It runs
+  (findings / tests / substrate rows / AS_OF_DATE / data-vs-backup — canonical values in MAP.md) hold; regenerates MAP.md. It runs
   **automatically each turn** via a `UserPromptSubmit` hook in `.claude/settings.local.json` (project-local,
   ~0.1s, silent unless drift → injects drift into context so I don't act on stale state).
+- **COUNTS RULE:** volatile counts (tests / findings / substrate-rows) live ONLY in the generated `MAP.md`
+  CANONICAL FACTS block (run `python verify.py`); never hardcode them in docs — verify.py's count-guard
+  enforces this for CLAUDE.md / STATUS.md / README.md.
 - **`docs/WORKFLOWS.md`** = "what to do when" rules. THREE STANDING PRINCIPLES: (1) verify before relying
   (ground truth, never memory; `wc -l` lies on the CSVs — count records via `csv`); (2) update `project_map.py`
   the moment structure changes; (3) suggest structural improvements. STANDING RULE: keep project_map + STATUS +
@@ -123,7 +126,7 @@ backtests + the method spine). 5. `docs/layer2.md` / `docs/layer3.md` — design
   caught a bug the honesty-fix itself introduced; placebo killed a hypothesis the falsifier passed.
   Do NOT one-dimension a substantive task; right-size per that doc, and if skipping a stage, say why.
   At the START of any non-trivial task, load that doc and run its "TASK-KICKOFF PROMPT". The per-turn
-  verify hook nudges WHEN code is in progress + a TRIPWIRE flags code committed without a task_log entry (the on-disk proof the pipeline ran). Log every non-trivial task in `docs/research/task_log.md`.
+  verify hook nudges WHEN code is in progress + a TRIPWIRE flags code committed without a task_log entry (the on-disk proof the pipeline ran). Log every non-trivial task in `docs/tracker/task_log.md`.
 
 ## Standing agent briefs (the "load the info" chain — plain .md, no skills; owner decision 2026-06-07)
 - **Any hypothesis/research agent** → MUST be pointed at `docs/research/hypothesis_protocol.md`

@@ -2,9 +2,12 @@
 
 > Navigation, data-flow, and a context index for this repo. Generated from `project_map.py`.
 
+## CANONICAL FACTS (generated — do not hand-edit; hand-docs must point here)
+> 29 findings · tests: run `python verify.py` · 2384 substrate rows · AS_OF 2026-06-06
+
 ## Navigate — to do X, start here
 - `PYTHONPATH=. python run_all.py` — build the dataset (whole pipeline DAG; --from to resume)
-- `PYTHONPATH=. python run_layer3_report.py` — build report/layer3_partA.html (29 findings)
+- `PYTHONPATH=. python run_layer3_report.py` — build report/layer3_partA.html (the descriptive findings)
 - `PYTHONPATH=. python scripts/predict_ipo.py --type MB --sector ...` — score/evaluate a new IPO
 - `PYTHONPATH=. python scripts/run_backtest.py` — strategy backtests
 - `PYTHONPATH=. python scripts/run_validation.py` — cross-regime validation
@@ -26,19 +29,19 @@
 - **prices / returns / MFE-MAE / listing-day** → `pipeline/07_returns_summary.py`, `scrapers/screener_prices_merge.py`, `pipeline/listing_remediation.py`, `tests/pipeline/test_returns_math.py`, `tests/pipeline/test_listing_remediation.py`
 - **build / fix the dataset (pipeline)** → `run_all.py`, `project_map.py`, `docs/pipeline.md`, `pipeline/`, `pipeline/lib.py`
 - **scrapers / data sources** → `scrapers/`, `scrapers/nse_session.py`, `docs/sources.md`, `tests/scrapers/`
-- **news / announcement context feed (D1/D4)** → `scrapers/announcements.py`, `layer3/news/taxonomy.py`, `layer3/news/staging.py`, `tests/layer3/test_news.py`, `data/live/news/`, `docs/research/newsfeed_rnd_2026-06-09.md`, `docs/research/newsfeed_opportunity_map.md`
+- **news / announcement context feed (D1/D4)** → `scrapers/announcements.py`, `layer3/news/taxonomy.py`, `layer3/news/staging.py`, `tests/layer3/test_news.py`, `data/live/news/`, `docs/research/newsfeed/newsfeed_rnd_2026-06-09.md`, `docs/research/newsfeed/newsfeed_opportunity_map.md`
 - **backtest a strategy** → `layer3/backtest/`, `scripts/run_backtest.py`, `docs/strategies.md`, `tests/layer3/test_backtest.py`, `tests/layer3/test_score_backtest.py`
 - **cross-regime validation / OOS** → `layer3/validate.py`, `scripts/run_validation.py`, `scripts/run_oos.py`, `tests/layer3/test_validate.py`
-- **the app / UI** → `app.py`, `docs/research/app_phase2_design.md`, `docs/research/recommendations_system_discussion.md`, `docs/research/newsfeed_opportunity_map.md`, `docs/research/fujiyama_park_case.md`
+- **the app / UI** → `app.py`, `docs/research/app_phase2_design.md`, `docs/research/recommendations_system_discussion.md`, `docs/research/newsfeed/newsfeed_opportunity_map.md`, `docs/research/fujiyama_park_case.md`
 - **network / trusted sources / security policy** → `docs/research/trusted_sources.md`, `docs/playwright_on_off.md`, `thinktank/config/settings.local.json`
 - **how to work / execution pipeline** → `docs/research/execution_pipeline.md`, `docs/tracker/task_log.md`, `docs/research/hypothesis_protocol.md`
-- **test a hypothesis / research agent brief** → `docs/research/hypothesis_protocol.md`, `rules/index.md`, `docs/research/phase2_playbooks.md`, `tools/research/`, `docs/research/tier1_wave1_verdicts.md`
+- **test a hypothesis / research agent brief** → `docs/research/hypothesis_protocol.md`, `rules/index.md`, `docs/research/phase2_playbooks.md`, `tools/research/`, `docs/research/signals/tier1_wave1_verdicts.md`
 - **recommendations / calls ledger / live board** → `layer3/calls.py`, `scripts/run_calls.py`, `scrapers/live_board.py`, `data/master/calls_ledger.csv`, `tests/layer3/test_calls.py`, `tests/scrapers/test_live_board.py`, `docs/superpowers/specs/2026-06-07-calls-engine-design.md`, `docs/research/recommendations_system_discussion.md`
 - **what's done / what's next / project state** → `docs/tracker/STATUS.md`, `CLAUDE.md`, `rules/index.md`
 - **improvement backlog / what to build next** → `docs/tracker/improvement_backlog.md`, `docs/research/fujiyama_park_case.md`, `docs/research/INDEX.md`
-- **testing / verification / the showdown** → `tests/`, `tests/data/`, `tests/showdown/`, `tools/mutation/`, `pytest.ini`, `docs/research/showdown_audit.md`, `docs/research/showdown_pipeline_diff.md`, `docs/research/showdown_mutation.md`
+- **testing / verification / the showdown** → `tests/`, `tests/data/`, `tests/showdown/`, `tools/mutation/`, `pytest.ini`, `docs/research/archive/showdown_audit.md`, `docs/research/archive/showdown_pipeline_diff.md`, `docs/research/showdown_mutation.md`
 - **schema / what a column means** → `docs/schema.md`, `data/master/ipo_analysis.csv`
-- **DRHP financials recovery** → `tools/drhp/`, `docs/research/drhp_recovery.md`
+- **DRHP financials recovery** → `tools/drhp/`, `docs/research/data/drhp_recovery.md`
 - **refresh the data / new IPOs** → `scripts/run_refresh.py`, `tools/refresh/`, `data/master/substrate_meta.json`, `data/reference/golden_numbers.json`, `data/reference/manual_overrides.csv`, `layer3/forward_test.py`, `scripts/run_forward_test.py`, `docs/WORKFLOWS.md`
 
 ## Flow — data pipeline (DAG, canonical order)
@@ -104,7 +107,7 @@ WEB SOURCES --scrapers/--> data/raw/ + data/reference/ + data/prices/
 ## Layer-3 engine
 - `layer3/config.py` — AS_OF_DATE, thresholds (DEAD_MONEY_RETURN, SEGMENTS, ...) — single source
 - `layer3/spine.py` — method engine: distributions, reach_curve, exit/stop strategies, gating
-- `layer3/findings/` — the 29 descriptive findings (one file each)
+- `layer3/findings/` — the descriptive findings (one file each)
 - `layer3/predictor/scorecard.py` — the score COMPONENTS (incl. wipeout_safety, risk gauge)
 - `layer3/predictor/weights.py` — data-informed weights (point-in-time rank-IC, cross-regime)
 - `layer3/predictor/analogs.py` — comparables / analog selection

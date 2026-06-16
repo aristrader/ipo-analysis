@@ -2,6 +2,12 @@ import csv
 import re
 import os
 
+# NOTE (2026-06-16): this is a DEAD ONE-OFF generator. `findings_file` below hardcodes a
+# `.gemini/antigravity-cli/...` brain path from a single past run that no longer exists, so
+# this script cannot be re-run. It is kept only so its OUTPUT path stays consistent: it
+# writes docs/research/unresolved_88_mismatches_audit.md (the live FILE_KINDS-mapped path),
+# which is the on-disk artifact of that one run. Do NOT try to run this; treat the .md as a
+# concluded GENERATED artifact at the live path. See docs/research/doc_drift_review_2026-06-16.md DD-1.
 xcheck_file = 'data/master/review/xcheck_review.csv'
 findings_file = '/Users/swapnilagarwal/.gemini/antigravity-cli/brain/5b8303f0-d3d8-48f9-92ec-1baa2e7aeb58/subagent_findings_88_stocks.md'
 

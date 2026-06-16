@@ -219,8 +219,8 @@ def step7_record(state: ThinkTankState) -> dict:
             
         f.write(f"## Verdict & Registry Entry (Step 7)\nVerdict: **{verdict}**\n")
         
-    # 2. Append to task_log.md
-    task_log_path = ROOT_DIR / "docs" / "research" / "task_log.md"
+    # 2. Append to task_log.md (canonical home is docs/tracker/, per project_map.py)
+    task_log_path = ROOT_DIR / "docs" / "tracker" / "task_log.md"
     if task_log_path.exists():
         with open(task_log_path, "a") as f:
             f.write(f"\n## {date_str} — {task}  [path: HYPOTHESIS]\n")

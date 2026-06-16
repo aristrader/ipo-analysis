@@ -8,7 +8,7 @@ What lives here:
 - **Standing briefs** (living guides): `execution_pipeline.md`, `hypothesis_protocol.md`, `app_phase2_design.md`,
   `trusted_sources.md`, `phase2_playbooks.md`, `app_iteration_charter.md`.
 - **Concluded research write-ups** — the evidence behind `rules/index.md`. Not to-do lists.
-- **Logs:** `task_log.md` (pipeline proof), `batch_run_2026-06-09.md`.
+- **Logs:** `docs/tracker/task_log.md` (pipeline proof), `batch_run_2026-06-09.md`.
 - **`archive/`** — superseded planning/ideation (the old NEXT/roadmap/feeder docs, replaced by
   `improvement_backlog.md`), old session logs, and build-era reviews. Kept for provenance, not current.
 

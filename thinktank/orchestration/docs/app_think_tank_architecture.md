@@ -58,7 +58,7 @@ Confirm the requirements exist and are clear BEFORE designing. State the task + 
 Before any ideation, the agent MUST:
 1. **Read `project_map.py`** — the master registry of all files, their purposes, and their locations. If a similar component already exists, REUSE or EXTEND it. Do not build a duplicate.
 2. **Read `docs/setup.md`** — the living backlog of future integration tasks. Check if this task is already tracked.
-3. **Read `docs/research/task_log.md`** — check if a prior session already attempted this.
+3. **Read `docs/tracker/task_log.md`** — check if a prior session already attempted this.
 4. **Scan the existing `app/` directory** — understand what pages, components, and styles already exist. New code must integrate cleanly with existing patterns.
 
 **Output:** A brief "Prior Art Report" confirming whether this feature is novel or extends an existing component. If prior art exists, state it and ask the human whether to reuse or rebuild.
@@ -302,7 +302,7 @@ Loop review↔fix until a pass finds ZERO new aesthetic, architectural, or secur
 
 ### Step 7: Record & Clean Up
 
-1. Append a task entry to `docs/research/task_log.md` (see §Checkable Artifacts).
+1. Append a task entry to `docs/tracker/task_log.md` (see §Checkable Artifacts).
 2. Update `docs/setup.md` if this resolves a tracked TODO.
 3. Update `project_map.py` if structure changed.
 4. Commit with the pipeline trailer: `Pipeline: path=FULL_STACK diverge=3 review=swarm tests=green`.
@@ -334,7 +334,7 @@ Env: `PYTHONPATH=. .venv/bin/python`; Streamlit localhost-only; no secrets/keys/
 
 Makes "followed the pipeline" a FACT on disk, not a claim.
 
-**`docs/research/task_log.md`** — append-only, ONE entry per non-trivial task. Template:
+**`docs/tracker/task_log.md`** — append-only, ONE entry per non-trivial task. Template:
 ```
 ## YYYY-MM-DD — <task one-liner>  [path: FULL_STACK|UI_COMPONENT|BACKEND|HOTFIX]
 scope: <requirements confirmed?>  · diverge: <lenses / agent ids>  · converge: <spec / IN-CUT>

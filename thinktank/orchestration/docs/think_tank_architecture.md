@@ -48,7 +48,7 @@ Top-down, FIRST match wins. Never self-rationalize into a lighter path.
 
 ### Step 0: Scope the Data First
 
-Confirm the inputs exist and are clean BEFORE designing. 2/3 of the Thread-C hypotheses were data-gated; the day-1 idea was forward-only. State the task + success criteria in one line. Open a `docs/research/task_log.md` entry (template in §Checkable Artifacts below).
+Confirm the inputs exist and are clean BEFORE designing. 2/3 of the Thread-C hypotheses were data-gated; the day-1 idea was forward-only. State the task + success criteria in one line. Open a `docs/tracker/task_log.md` entry (template in §Checkable Artifacts below).
 
 **The Logical Validity Gate:** The Triage Agent must evaluate the core premise. If the hypothesis relies on a logically impossible causal mechanism (e.g., "a company's name length physically alters market dynamics"), it MUST reject it as 'LOGICALLY SUSPECT' even if it is novel.
 
@@ -57,7 +57,7 @@ Confirm the inputs exist and are clean BEFORE designing. 2/3 of the Thread-C hyp
 Before any ideation, the agent MUST:
 1. **Read `rules/index.md`** — the master registry of ~60 tested signals with verdicts (in-score / display-only / rejected + WHY + the numbers). If the idea has already been tested and rejected, STOP. Do not re-test without new evidence.
 2. **Read `docs/research/improvement_backlog.md`** — the single living menu of what's left to do.
-3. **Read `docs/research/task_log.md`** — check if a prior session already attempted this.
+3. **Read `docs/tracker/task_log.md`** — check if a prior session already attempted this.
 4. **Check the KILLED list** in `improvement_backlog.md` — ideas explicitly marked as rabbit holes.
 5. **Substrate** = `data/master/ipo_analysis.csv` (load via `layer3/spine.py:load_substrate()`). Movable facts (row count, as-of) live in `data/master/substrate_meta.json` — never hardcode them.
 
@@ -314,7 +314,7 @@ The human selects one of:
 
 1. Append the verdict + numbers to `rules/index.md` (so it's never re-tested blind).
 2. Append the verdict to `docs/research/tier1_wave1_verdicts.md` (the ledger).
-3. Append a task entry to `docs/research/task_log.md` (see §Checkable Artifacts).
+3. Append a task entry to `docs/tracker/task_log.md` (see §Checkable Artifacts).
 4. Update `STATUS.md` (live state only; completed work leaves STATUS — history = git log).
 5. Update `project_map.py` if structure changed.
 6. Script stays in `tools/research/` (reproducibility).
@@ -358,7 +358,7 @@ Verify from GROUND TRUTH, never memory (`wc -l` LIES on the CSVs — count via c
 
 Makes "followed the pipeline" a FACT on disk, not a claim.
 
-**`docs/research/task_log.md`** — append-only, ONE entry per non-trivial task. Doubles as crash-resume (an agent died mid-task on 2026-06-08; a log survives that). Template:
+**`docs/tracker/task_log.md`** — append-only, ONE entry per non-trivial task. Doubles as crash-resume (an agent died mid-task on 2026-06-08; a log survives that). Template:
 ```
 ## YYYY-MM-DD — <task one-liner>  [path: FULL|LIGHT|HYPOTHESIS|HOTFIX]
 scope: <data confirmed?>  · diverge: <lenses / agent ids>  · converge: <spec / IN-CUT>

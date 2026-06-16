@@ -21,7 +21,7 @@ go one tier heavier, not lighter.
 ## THE STEPS (run ONCE per task at pickup — the per-turn hook is a reminder, not a restart)
 0. **SCOPE THE DATA FIRST.** Confirm the inputs exist/are clean BEFORE designing (2/3 Thread-C
    hypotheses were data-gated; the day-1 idea was forward-only). State the task + success criteria
-   in one line. Open a `docs/research/task_log.md` entry (template below).
+   in one line. Open a `docs/tracker/task_log.md` entry (template below).
 1. **DIVERGE — thinking agents (Task tool), 2-3 DISTINCT lenses, spawned in PARALLEL, wait for all.**
    Lenses: user-value · analytical-depth · RED-TEAM (for a hypothesis: expand-space · test-design ·
    falsifier). Each agent returns a FIXED contract: `PROPOSALS (each: what · feasibility-from-owned-
@@ -70,7 +70,7 @@ push directly to `main` without explicit owner approval. Company laptop: Playwri
 default (`docs/playwright_on_off.md`), Streamlit localhost-only, no secrets/keys/tokens in commits.
 
 ## THE CHECKABLE ARTIFACT (red-team #1 fix — makes "followed the pipeline" a FACT on disk)
-- **`docs/research/task_log.md`** — append-only, ONE entry per non-trivial task. Doubles as
+- **`docs/tracker/task_log.md`** — append-only, ONE entry per non-trivial task. Doubles as
   crash-resume (an agent died mid-task on 2026-06-08; a log survives that). Template:
   ```
   ## YYYY-MM-DD — <task one-liner>  [path: FULL|LIGHT|HYPOTHESIS|HOTFIX]

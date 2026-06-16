@@ -20,7 +20,7 @@ even though two things do **not** travel with a fresh login (see "What doesn't t
    display-only / rejected) + WHY + the numbers. **Consult before re-testing anything.**
 4. **`MAP.md`** — generated navigation/tree/flow + a CONTEXT INDEX ("working on X → open these files").
    Generated from `project_map.py` (never hand-edit MAP.md).
-5. **`docs/research/task_log.md`** — append-only proof-of-work log, one entry per non-trivial task
+5. **`docs/tracker/task_log.md`** — append-only proof-of-work log, one entry per non-trivial task
    (newest at the relevant spot). The narrative of what was built and why, with verdicts.
 6. **`docs/research/improvement_backlog.md`** — the single living menu of what's LEFT to do.
 7. **`docs/research/execution_pipeline.md`** — HOW to work (mandatory process; see §4).

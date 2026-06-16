@@ -8,9 +8,10 @@
 > "What is this / conventions" → `CLAUDE.md`. "Findings + tested-signal registry" → `rules/index.md`.
 > Quick check: `python verify.py` (counts, drift, data-vs-backup; regenerates MAP.md).
 
-_Canonical facts (re-derived by `verify.py` each turn): **29 findings, 219 tests**, mutation-validated
+_Canonical facts (findings / tests / substrate rows): re-derived by `verify.py` each turn — see the
+**CANONICAL FACTS** block at the top of `MAP.md` (run `python verify.py`). Mutation-validated
 28/28. Substrate = `data/master/ipo_analysis.csv`; movable facts in `data/master/substrate_meta.json`
-(**2384 rows, as-of 2026-06-06**; snapshot `archive/pre_refresh_20260606/`). Score = **8 components**;
+(as-of **2026-06-06**; snapshot `archive/pre_refresh_20260606/`). Score = **8 components**;
 `data_informed` weights: downside 0.269 · **crowded_window 0.260** · multibagger 0.201 · return 0.189 ·
 wipeout 0.080 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 2026 cohort). Banker wipeout-flag
 = `coverage_guard` (A1b, LIVE 2026-06-10). Git: remote `origin` (github.com/aristrader/ipo-analysis); branch + PR, never push `main` directly without owner OK._
@@ -25,7 +26,7 @@ wipeout 0.080 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 20
     review confirmed substrate-untouched + zero-download rails airtight. **History R&D: the default API returns FULL
     history (~2004→, delisted included) → one pull = the backfill, no paging.** Full pull running/seeded into the
     gitignored `data/live/news/` (regenerable, ~180MB; re-pull via the scraper). Render-join = by SYMBOL (sm_isin
-    can be pre-split). 22 tests.
+    can be pre-split). Tested (`tests/layer3/test_news.py`).
   - **A1b — banker wipeout-flag coverage-guard hybrid → PROMOTED LIVE** (`OBSCURE_BANKER_MODE="coverage_guard"`): the
     ONE signal change that cleared the bar. Recovers recall (24.6% ≈ legacy 25.4%, vs quality's 13.2%) WHILE keeping
     the false-veto fix; independent adversarial review promoted it (the −3 net recall is a quality-improving swap).
