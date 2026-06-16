@@ -4,7 +4,7 @@ Staging is a DISPLAY OVERLAY, NEVER the frozen substrate (`ipo_analysis.csv` sta
 survivorship-clean, point-in-time research base). Rows are keyed on (sm_isin, an_dt, desc-hash)
 so re-pulls are idempotent and forward-collection only ever appends genuinely new filings.
 Zero-download discipline: we keep the `attchmntFile` URL only — never the file.
-Spec: docs/research/newsfeed_rnd_2026-06-09.md §2d.
+Spec: docs/research/newsfeed/newsfeed_rnd_2026-06-09.md §2d.
 """
 import hashlib
 

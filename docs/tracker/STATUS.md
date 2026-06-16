@@ -13,7 +13,7 @@ _Canonical facts (re-derived by `verify.py` each turn): **29 findings, 219 tests
 (**2384 rows, as-of 2026-06-06**; snapshot `archive/pre_refresh_20260606/`). Score = **8 components**;
 `data_informed` weights: downside 0.269 · **crowded_window 0.260** · multibagger 0.201 · return 0.189 ·
 wipeout 0.080 (top-quintile lift +39.5pp in-sample; forward-tested OOS on the 2026 cohort). Banker wipeout-flag
-= `coverage_guard` (A1b, LIVE 2026-06-10). Git LOCAL-ONLY._
+= `coverage_guard` (A1b, LIVE 2026-06-10). Git: remote `origin` (github.com/aristrader/ipo-analysis); branch + PR, never push `main` directly without owner OK._
 
 ---
 

@@ -5,7 +5,7 @@ categories from keywords over its `desc` + `attchmntText`. POLARITY (good/bad) i
 NOT computed: keyword polarity botches the context-dependent cases ("resignation"/"results" cut
 both ways), and a local small-model is the only ethos-fit polarity path, which is blocked pending
 egress sign-off. Category is a DISPLAY label only — "context, not a signal".
-Spec: docs/research/newsfeed_rnd_2026-06-09.md §2b.
+Spec: docs/research/newsfeed/newsfeed_rnd_2026-06-09.md §2b.
 
 Also encodes the spine's look-ahead rule (§2c): an announcement disseminated at/after the
 15:30-IST market close is not actionable until the next trading session — so a move you see on

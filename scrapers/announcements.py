@@ -5,7 +5,7 @@ payload's `sm_isin`, locally category-tagged (no LLM, no polarity), look-ahead-s
 does the NETWORK + orchestration only; the pure logic (categorize / actionable_from / dedup) lives
 in `layer3/news/{taxonomy,staging}.py` and is unit-tested without a network.
 
-Discipline (docs/research/newsfeed_rnd_2026-06-09.md §2 + trusted_sources.md):
+Discipline (docs/research/newsfeed/newsfeed_rnd_2026-06-09.md §2 + trusted_sources.md):
 - Host www.nseindia.com (on the WebFetch allowlist); production pull = this curl_cffi scraper.
 - ZERO downloads — we GET the JSON API only; `attchmntFile` URLs are stored, never fetched.
 - Idempotent on (sm_isin, an_dt, desc-hash); re-runs only append. Resume-safe (loads + upserts).

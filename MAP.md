@@ -21,8 +21,8 @@
 - `PYTHONPATH=. python scrapers/announcements.py` — collect NSE corporate-announcement history -> data/live/news/ (D1/D4; --limit/--symbols)
 
 ## Context index — working on X? open these
-- **score / evaluate a new IPO** → `layer3/predictor/scorecard.py`, `layer3/predictor/weights.py`, `layer3/predictor/predict.py`, `layer3/predictor/analogs.py`, `thinktank/rules/index.md`, `scripts/predict_ipo.py`, `tests/layer3/test_predictor.py`
-- **add / edit a finding** → `layer3/findings/`, `layer3/spine.py`, `layer3/report.py`, `scripts/run_layer3_report.py`, `tests/layer3/test_findings.py`, `thinktank/rules/index.md`
+- **score / evaluate a new IPO** → `layer3/predictor/scorecard.py`, `layer3/predictor/weights.py`, `layer3/predictor/predict.py`, `layer3/predictor/analogs.py`, `rules/index.md`, `scripts/predict_ipo.py`, `tests/layer3/test_predictor.py`
+- **add / edit a finding** → `layer3/findings/`, `layer3/spine.py`, `layer3/report.py`, `scripts/run_layer3_report.py`, `tests/layer3/test_findings.py`, `rules/index.md`
 - **prices / returns / MFE-MAE / listing-day** → `pipeline/07_returns_summary.py`, `scrapers/screener_prices_merge.py`, `pipeline/listing_remediation.py`, `tests/pipeline/test_returns_math.py`, `tests/pipeline/test_listing_remediation.py`
 - **build / fix the dataset (pipeline)** → `run_all.py`, `project_map.py`, `docs/pipeline.md`, `pipeline/`, `pipeline/lib.py`
 - **scrapers / data sources** → `scrapers/`, `scrapers/nse_session.py`, `docs/sources.md`, `tests/scrapers/`
@@ -32,9 +32,9 @@
 - **the app / UI** → `app.py`, `docs/research/app_phase2_design.md`, `docs/research/recommendations_system_discussion.md`, `docs/research/newsfeed_opportunity_map.md`, `docs/research/fujiyama_park_case.md`
 - **network / trusted sources / security policy** → `docs/research/trusted_sources.md`, `docs/playwright_on_off.md`, `thinktank/config/settings.local.json`
 - **how to work / execution pipeline** → `docs/research/execution_pipeline.md`, `docs/tracker/task_log.md`, `docs/research/hypothesis_protocol.md`
-- **test a hypothesis / research agent brief** → `docs/research/hypothesis_protocol.md`, `thinktank/rules/index.md`, `docs/research/phase2_playbooks.md`, `tools/research/`, `docs/research/tier1_wave1_verdicts.md`
+- **test a hypothesis / research agent brief** → `docs/research/hypothesis_protocol.md`, `rules/index.md`, `docs/research/phase2_playbooks.md`, `tools/research/`, `docs/research/tier1_wave1_verdicts.md`
 - **recommendations / calls ledger / live board** → `layer3/calls.py`, `scripts/run_calls.py`, `scrapers/live_board.py`, `data/master/calls_ledger.csv`, `tests/layer3/test_calls.py`, `tests/scrapers/test_live_board.py`, `docs/superpowers/specs/2026-06-07-calls-engine-design.md`, `docs/research/recommendations_system_discussion.md`
-- **what's done / what's next / project state** → `docs/tracker/STATUS.md`, `CLAUDE.md`, `thinktank/rules/index.md`
+- **what's done / what's next / project state** → `docs/tracker/STATUS.md`, `CLAUDE.md`, `rules/index.md`
 - **improvement backlog / what to build next** → `docs/tracker/improvement_backlog.md`, `docs/research/fujiyama_park_case.md`, `docs/research/INDEX.md`
 - **testing / verification / the showdown** → `tests/`, `tests/data/`, `tests/showdown/`, `tools/mutation/`, `pytest.ini`, `docs/research/showdown_audit.md`, `docs/research/showdown_pipeline_diff.md`, `docs/research/showdown_mutation.md`
 - **schema / what a column means** → `docs/schema.md`, `data/master/ipo_analysis.csv`
@@ -93,7 +93,7 @@ WEB SOURCES --scrapers/--> data/raw/ + data/reference/ + data/prices/
 - `pipeline/` — numbered build steps (the DAG above) + helpers
 - `data/` — raw/ reference/ prices/ master/ (master = the outputs)
 - `layer3/` — UI-agnostic analysis engine; reads ipo_analysis.csv only
-- `thinktank/rules/` — the rule/signal/strategy REGISTRY (index.md) — navigate logic here
+- `rules/` — the rule/signal/strategy REGISTRY (index.md) — navigate logic here
 - `docs/` — sources, schema, pipeline, strategies, layer2/3, research/
 - `tests/` — layer3/ + pipeline/ + scrapers/ + data/ (substrate invariants) + showdown/ (SHOWDOWN=1 execution proofs)
 - `tools/` — side tools (drhp/ = DRHP recovery; mutation/ = mutation validation; checks/ = schema gate; notify/ = telegram; refresh/; research/)
@@ -118,8 +118,8 @@ WEB SOURCES --scrapers/--> data/raw/ + data/reference/ + data/prices/
 - `layer3/calibration.py` — were-we-right scorecard + Wilson CIs + score-ordering reliability (no scipy)
 
 ## Rules & state
-- `thinktank/rules/index.md` — navigable REGISTRY: every signal/component/strategy — status (in-score/display-only/rejected) + WHY + backtest lift/N/cross-regime. Consult before re-testing any signal.
-- `thinktank/rules/README.md` — the registry entry template
+- `rules/index.md` — navigable REGISTRY: every signal/component/strategy — status (in-score/display-only/rejected) + WHY + backtest lift/N/cross-regime. Consult before re-testing any signal.
+- `rules/README.md` — the registry entry template
 - `CLAUDE.md` — conventions/decisions/repo-map (the brain; auto-loaded)
 - `docs/tracker/STATUS.md` — live 'where are we / what's next' (verify from ground truth, never memory)
 

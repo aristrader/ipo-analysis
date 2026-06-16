@@ -23,7 +23,7 @@ incl. delisted)** and turn them into (a) descriptive truths, (b) an analog-based
   → `09_assemble` (with `pipeline/listing_remediation.py` used inside 07 + the merge).
 - **Layer 3 — analysis.** ✅ BUILT (2026-05-31), reviewed + remediated. Engine in `layer3/` (UI-agnostic).
   **Part A** (descriptive report): `layer3/spine.py` (method spine) + findings in `layer3/findings/` → `run_layer3_report.py` → `report/layer3_partA.html` (**29 findings**, **211 tests**).
-  **Part B** (analog predictor + 5-component scorecard): `layer3/predictor/` → `predict_ipo.py --type MB --sector ...`.
+  **Part B** (analog predictor + 8-component scorecard): `layer3/predictor/` → `predict_ipo.py --type MB --sector ...`.
   **Part C** (backtester vs do-nothing): `layer3/backtest/` → `run_backtest.py`. **Cross-regime validation:**
   `layer3/validate.py` → `run_validation.py` (VALIDATED: lasting-wealth, pop-fade; MIXED/not-robust: ofs-skin,
   profitable). **Data-informed scorecard weights:** `layer3/predictor/weights.py` → `run_weights.py` (point-in-time
@@ -102,8 +102,8 @@ backtests + the method spine). 5. `docs/layer2.md` / `docs/layer3.md` — design
 
 ## Non-negotiable conventions / decisions
 - **NETWORK = DEFAULT-DENY** (company laptop, owner 2026-06-08): only the WebFetch-allowlisted domains in `.claude/settings.local.json` are fetchable (no blanket WebFetch); read-only, ZERO downloads; off-list source → STOP and ask. Trusted-source registry + the expand-only-if-deemed-safe rule: `docs/research/trusted_sources.md`.
-- **GIT IS LOCAL-ONLY** — `git init`’d for local history/rollback only. NEVER add a remote / push / connect to GitHub until the user explicitly says so (their standing instruction, 2026-06-02).
-- **PLAYWRIGHT = ALWAYS ON, LOCALHOST-PINNED** (owner 2026-06-10, reversing the 2026-06-08 OFF-by-default rule — deemed safe because `.mcp.json` pins it to localhost origins ONLY / isolated / headless / version-locked + dangerous tools denied, so there is no external-network surface). `enabledMcpjsonServers` in `.claude/settings.local.json`. Residual to manage (NOT covered by the pin): leftover "Chrome for Testing" processes can trigger OS notifications — mitigation = one-time OS step (System Settings → Notifications → "Google Chrome for Testing" → OFF) + `browser_close` after use. Rationale/procedure: `docs/playwright_on_off.md`.
+- **GIT: BRANCH + PR, PUSH FREELY** (owner 2026-06-16, reversing the 2026-06-02 local-only rule — the repo now has a GitHub remote `origin` → `github.com/aristrader/ipo-analysis`). Do work on branches; push branches and open PRs freely. **NEVER push directly to `main` without explicit owner approval.** No secrets/keys/tokens in commits.
+- **PLAYWRIGHT = OFF by default** (owner 2026-06-16, reverting the 2026-06-10 ALWAYS-ON rule; config matches — `.claude/settings.local.json` has `disabledMcpjsonServers: ["playwright"]`). Turn ON only when actively doing an app/UI visual-walk (flip the key to `enabledMcpjsonServers` + restart the session), then turn OFF again when done. When ON it is safe: `.mcp.json` pins it to localhost origins ONLY / isolated / headless / version-locked + dangerous tools denied, so there is no external-network surface. Procedure: `docs/playwright_on_off.md`.
 - **ISIN is the primary key**; the ONLY automatic join key. Name-matching never merges (only flags).
   Exception: **corporate actions match by SYMBOL** (a face-value split changes the ISIN).
 - **Returns are ALPHA** vs Nifty 50 (+ Smallcap 250 where available, 2019+). Raw return is secondary.

@@ -44,7 +44,7 @@ catches most drift — these rules tell you what to update so it stays green.
   → `python verify.py` (PASS + MAP.md fresh) → `pytest tests -q` (all green) →
   record what happened in the git commit message, then **REMOVE the item from `STATUS.md`** (STATUS holds ONLY
   live state + what's next — completed work leaves STATUS (history = git log), never accumulate) →
-  commit (LOCAL-ONLY, no remote).
+  commit (on a branch; push the branch + open a PR freely — never push directly to `main` without owner approval).
 
 ## Change → tests routing (mechanical, every turn)
 - `project_map.TEST_ROUTING` maps changed files → the pytest commands to run. The per-turn hook
