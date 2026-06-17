@@ -43,6 +43,33 @@ def pull_yahoo(symbol, start='2006-01-01'):
     return out, drop_count
 
 
+def _parse_investing_rows(rows):
+    """Normalize investing.com historical rows -> ([(iso_date, close)], drop_count). Pure (no network).
+
+    Prefers the unambiguous ISO `rowDateTimestamp` + numeric `last_closeRaw`; falls back to the display
+    strings. NOTE: the old code did `dt[:11]` on 'Jun 17, 2026' (12 chars), chopping the year's last
+    digit, so EVERY 2-digit-day row failed to parse -> all dropped. Fixed by not truncating.
+    """
+    out, drop_count = [], 0
+    for row in rows:
+        dt = row.get('rowDateTimestamp') or row.get('rowDate') or row.get('date')
+        close = (row.get('last_closeRaw') or row.get('last_close')
+                 or row.get('close') or row.get('last'))
+        try:
+            if dt and 'T' in dt:                      # ISO 'YYYY-MM-DDT00:00:00Z'
+                iso = dt[:10]
+            elif dt and ',' in dt:                    # display 'Jun 17, 2026'
+                iso = datetime.datetime.strptime(dt.strip(), '%b %d, %Y').strftime('%Y-%m-%d')
+            elif dt:
+                iso = dt[:10]
+            else:
+                raise ValueError('no date')
+            out.append((iso, float(str(close).replace(',', ''))))
+        except Exception:
+            drop_count += 1
+    return out, drop_count
+
+
 def pull_investing(pair_id, start='2019-01-01'):
     """Fetch daily closes from investing.com for `pair_id`. Returns (rows, drop_count).
 
@@ -59,20 +86,7 @@ def pull_investing(pair_id, start='2019-01-01'):
     # Save raw API response before parsing
     ingest.save_raw('indices', f'investing_{pair_id}_{datetime.date.today()}.json', raw_text)
     payload = json.loads(raw_text)
-    rows = payload.get('data', [])
-    out = []
-    drop_count = 0
-    for row in rows:
-        # investing rows carry a date + last/close; normalize
-        dt = row.get('rowDate') or row.get('date')
-        close = row.get('last_close') or row.get('close') or row.get('last')
-        try:
-            iso = datetime.datetime.strptime(dt[:11], '%b %d, %Y').strftime('%Y-%m-%d') if dt and ',' in dt else dt[:10]
-            out.append((iso, float(str(close).replace(',', ''))))
-        except Exception:
-            drop_count += 1
-            continue
-    return out, drop_count
+    return _parse_investing_rows(payload.get('data', []))
 
 
 if __name__ == '__main__':
