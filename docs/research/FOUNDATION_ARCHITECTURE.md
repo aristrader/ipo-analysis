@@ -149,9 +149,11 @@ The registry IS the schema (generate the schema doc from it).
 stamps `derived`. These names are referenced from `columns.yaml`.
 
 ## 8. IDENTITY & MATCHING
-**ISIN = the only auto-join key; names only flag.** Record matched entity id+name on every join (auditable). Symbol/ISIN
+**ISIN = the only auto-join key; names only flag.** Record matched entity id+name on every join (auditable). **Concretely:** stamp `_src_entity_id` (the source's company key) and `_src_entity_name` (the source's company name) as spine columns per source-join. **Verify-time wrong-entity detector:** assert `_src_entity_name` matches the canonical company-name stem; mismatches → flag + manual review. This is what powers the Bajaj-class sweep (PLAN T3.3). Symbol/ISIN
 changes over time → the **identity-history golden file** (date-windowed; optional future upgrade to an official NSE ledger).
+**Identity-history golden file — concrete spec:** columns = `entity_id` (stable internal id), `symbol`, `isin`, `valid_from`, `valid_to` (NULL = current), `change_type` (face_value_split / name_change / symbol_change / isin_reissue), `source`, `verified`. **Lookup = point-in-time:** given `(symbol OR old_isin, as_of_date)`, return the ISIN valid at that date. **Fallback if no entry:** flag-and-SKIP (never guess by symbol). **T3.2 done-condition (the Phase-3 gate):** must cover at minimum (a) every face-value-split ISIN rename where a corp-action overlay entry carries the old ISIN (e.g. ROLEXRINGS old→new ISIN), and (b) every symbol in the 34 `manual_thinktank_audit` corrections. The 1,027 long-term unverified-identity rows are TRACKED via `isin_xchg_check` but are NOT a Phase-3 gate.
 Bajaj-type wrong-entity joins (name-keyed, 36× cap error) → swept out by enforcing ISIN-only joins.
+**Non-ISIN sources (screener, ipowatch, investorgain) — the bridge rule:** these carry no ISIN, so a join runs an identity-resolution PRE-step, NOT a name-merge: `(symbol or name-slug) → exchange-list ISIN lookup → confirm listing_date within N days → yields an ISIN` for the subsequent ISIN-keyed join. If resolution fails or is ambiguous → NULL the affected fields + stamp `error_out` (retryable). The corp-action SYMBOL match is the one carved-out exception (a face-value split changes the ISIN) and is governed separately by §9 + the pre-listing-date filter.
 **Malformed-key hazards (carry as build rules — splits_findings.md):** an `isin` not in valid INE… form is NOT a join key →
 treat as symbol-only (163 nse:sme rows store numeric codes e.g. NPST `409536`; 354 yfinance rows are empty-ISIN). Do NOT trust
 `action_type` for empty-ISIN yfinance rows (`03l` hardcodes `'split'`). Apply a **pre-listing-date filter** to symbol-only
@@ -174,7 +176,7 @@ default; whole-row `dirty` only when the error poisons the row. **Auto-apply HIG
 those are valid (data-quality handled here, not as a gate key). **This IS the resolution of R4 (whole-row quarantine too
 coarse):** a row bad for one metric is still usable by pipelines that don't need that metric — the coarse `quality=dirty`
 flag is only a worklist signal, the field-scoped view does the real gating, so no row is over-discarded. (At build, quantify
-how many rows each whole-row QUARANTINE rule removes before committing it.)
+how many rows each whole-row QUARANTINE rule removes before committing it. — this is PLAN Phase 6 / T6.1; see PLAN §4b.)
 
 ## 11. RULE REGISTRY (`rules.yaml`) + APPLICABILITY + SCORING
 A rule entry = **GATE** (`board` + `instrument_type` only) + **`required_fields`** + **PROPERTIES**
@@ -186,7 +188,7 @@ Migrate every hand-fix into the overlay (incl. orphaned Indiabulls Power) + reco
 from raw+golden+overlay → diff vs current → every mismatch is a bug → resolve. Must-pass targets: ROLEXRINGS/NPST/CANTABIL
 fakes gone, e6053e7 O-3 nulls hold, Indiabulls fix lands.
 **Baseline caveat (R5):** the migrated hand-fixes (34+21+16) lack a recorded `old_value`, so conflict-detection is INERT for
-exactly those legacy fixes until baselines are backfilled — backfill is step 1 of the campaign, not optional.
+exactly those legacy fixes until baselines are backfilled — backfill is step 1 of the campaign, not optional. (The 5 `verification_2026-05-31`-tagged corp-action rows: confirm at build whether they already carry an `old_value`; if not, ADD them to the backfill scope.)
 **Determinism fences (required for a reproducible rebuild — design §12.3):** pin raw snapshots; NO live network calls during
 rebuild (e.g. `06_validate_tickers.py` Yahoo); scrapers must NOT overwrite the raw cache (the ROLEXRINGS mechanism); no
 date/year timebombs (hardcoded `hi=2026`); no silent `try/except` drops. **Row-membership diff** (by ISIN set) is a first-class
@@ -218,7 +220,7 @@ Build = a separate live-data effort (P-4) — each source refreshes differently.
 
 | CR family | issues | what the rule does |
 |---|---|---|
-| **CR-I1 / CR-prov / CR-stamp** | I1, I1-x, I1-stamp, I1-enc, O-15 | 4-state `_prov`; numeric-parse zeros; validate-before-stamp; harden `mktcap_class` (0→null) |
+| **CR-I1 / CR-prov / CR-stamp** | I1, I1-x, I1-stamp, I1-enc, O-15 | 5-code `_prov` (4 missing-data states); numeric-parse zeros; validate-before-stamp; harden `mktcap_class` (0→null) |
 | **CR-O3 (cross-field)** | O-3, I1-x | `Σtranches ≈ total` else route tranche cells to missing (32+218 rows) |
 | **CR-O2recover / CR-MININV** | O-2, O-14 | derive `sub_total_x=sub_total_cr/issue_size_cr` (88) + `min_inv=lot×price` (18), status `derived`, validated; ALSO O-2 75/106 SME network-free recovery via `03d`-guard flip from ipowatch cache |
 | **CR-GMP** | O-4 | `gmp_pct=0` → NULL FIRST (so `gmp_deep_hunter` `.isna()` picks it up) → backfill from a NON-investorgain source (gated, OD-4). Offenders: Vivo/KN Agri/Krishna Defence/Timescan |
@@ -234,3 +236,5 @@ Build = a separate live-data effort (P-4) — each source refreshes differently.
 
 **Protected (do-NOT-correct):** the 67 Cat-2 ISINs — verified-genuine crashes (e.g. Aster Silicates −100% real delisting,
 Inox +604% real) — the corp-action fix must never invent a split for these.
+
+*Note: some CR pointers in the SPEC issue catalog (e.g. `CR-prov3`, `CR-mininv`, `CR-sf`, `CR-gap`) are not yet rolled into this summary table — the SPEC is authoritative for the full CR list; regenerate this table from the issue catalog at build.*

@@ -30,7 +30,7 @@
 
 ---
 
-## 2. DECISIONS (consolidated by theme; deduped from OD-1..8 + D1..D24 + R1..R6)
+## 2. DECISIONS (consolidated by theme; deduped from OD-1..8 + D1..D24 + R1..R6) *(Note: `R1–R6` and `G#` tags are design-run review-pass provenance labels; their substance is captured inline wherever cited — the tags need no separate lookup table.)*
 
 ### 2.1 Missing-data & provenance (the "I1" root fix)
 - **Treat `0`/blank field-by-field, 4 states, value-vs-code split** (OD-1, R2): value=NULL for missing ones (math skips them);
@@ -76,8 +76,8 @@
   Optional future (does NOT gate): upgrade to a vetted official NSE symbol-change ledger.
 
 ### 2.6 Overlay (the locking / reproducibility mechanism)
-- **One consolidated fixes-ledger on IMMUTABLE raw → recreatable substrate** (D15): merge the 3 scattered hand-fix files;
-  `raw + overlay = substrate`, idempotent, reconciliation-verified. Coherent with the golden catalogs (same store).
+- **One consolidated fixes-ledger on IMMUTABLE raw → recreatable substrate** (D15): merge the 3 scattered hand-fix files (the 3: `manual_overrides.csv` [3 market_maker rows], the `manual_thinktank_audit`/`verification_2026-05-31`-tagged corrections in `corp_actions_merged.csv`, and `drhp_recovered.csv` [16 DRHP financials]; NOTE per SPEC C.1 the corp-action fixes live in the 07-consumer overlay, NOT in manual_overrides.csv — confirm the full overlay surface at build);
+  `raw + golden + overlay = substrate`, idempotent, reconciliation-verified. The overlay ledger and the golden catalogs use the same registry/file representation but are DISTINCT layers (golden = read-only authoritative references; overlay = corrections).
 - **Ops: SET / DELETE-EVENT / ADD-EVENT / RECOMPUTE** (D16) — SET-only couldn't remove a fake split or add a missing one.
 - **Each fix records its OLD VALUE** (D15, R5) → conflict detection. **Conflict policy (D17, Option B):** source still broken → apply;
   source now matches fix → retire fix; source moved to a THIRD value → HOLD for owner review (never silently override).
@@ -122,6 +122,8 @@
 ---
 
 ## 3. EXECUTION PLAN — topo-sorted phases (dependencies respected)
+> Notation: `Ph1`–`Ph9` = phases (below); `P-1`–`P-4` = named artifacts/deliverables (golden files, lineage diagram, data-change rulebook, live-data) defined in §2/§4.
+
 > "First cleanup" (corp-action, OD-8) means first real cleanup CASE run through the foundation — so the foundation
 > framework (registry, provenance, identity, overlay) is built first, then corp-action is the first thing run through it.
 
@@ -156,12 +158,12 @@
 - **T3.3** Sweep existing data for wrong-entity joins (Bajaj + siblings). [O-12]
 
 ### PHASE 4 — Overlay (locking mechanism) — depends: T0.2
-- **T4.1** Consolidated overlay ledger (merge 3 hand-fix files); immutable raw + overlay = substrate; idempotent. [D15]
+- **T4.1** Consolidated overlay ledger (merge 3 hand-fix files (the 3: `manual_overrides.csv` [3 market_maker rows], the `manual_thinktank_audit`/`verification_2026-05-31`-tagged corrections in `corp_actions_merged.csv`, and `drhp_recovered.csv` [16 DRHP financials]; NOTE per SPEC C.1 the corp-action fixes live in the 07-consumer overlay, NOT in manual_overrides.csv — confirm the full overlay surface at build)); immutable raw + golden + overlay = substrate; idempotent. [D15]
 - **T4.2** Overlay ops (SET/DELETE-EVENT/ADD-EVENT/RECOMPUTE); old_value capture; fetch-time per value. [D16, D15]
 - **T4.3** Conflict policy (Option B: hold-for-review on 3-way move). [D17]
 
-### PHASE 5 — Corp-action cleanup (D-1) [GATE item — first cleanup through the foundation] — depends: P1, **P2** (board/instrument_type/quality + as-of), P3, P4
-- **T5.1** Golden files: corp-action events (fill 4-stock gap) + Cat-2 do-NOT-correct list. [P-1]
+### PHASE 5 — Corp-action cleanup (D-1) [GATE item — first cleanup through the foundation] — depends: Ph1, **Ph2** (board/instrument_type/quality + as-of), Ph3, Ph4 (Ph1 is needed because overlay conflict-detection and the corp-action `_prov` stamping both read provenance codes.)
+- **T5.1** Golden files: corp-action events (fill 4-stock gap) + Cat-2 do-NOT-correct list (the third golden file — identity-history — is already produced at T3.2; T5.1 produces only these two). [P-1]
 - **T5.2** Price-gap arbiter (source-agnostic). [OD-8]
 - **T5.3** D12/D13 dedicated deep-dive: ISIN-less corroboration-only + all failure modes + slack calibration. [D12, D13]
   *Concrete inputs already found (`splits_findings.md`):* root cause = `07_returns_summary.py:114-127` exact-`(ex_date,ratio)`
@@ -172,16 +174,17 @@
   `09_assemble.py:88-89` cross-source tripwire for corp-action stocks. Open: ROLEXRINGS ratio 19.96-vs-10.0 + overlay re-keying.
 - **T5.4** Source-reconcile dedup + fallback order; apply the fix through the foundation. [OD-8, P-1]
 
-### PHASE 6 — Cleaning-rules & rule registry — depends: T0.2, P1, **P2** (rule gate uses board/instrument_type; CR-* write `quality`)
+### PHASE 6 — Cleaning-rules & rule registry — depends: T0.2, Ph1, **Ph2** (rule gate uses board/instrument_type; CR-* write `quality`)
 - **T6.1** Declarative cleaning-rules model (CR-* from the issue catalog); per-class severity; auto-apply HIGH only. [D19, D20, OD-7]
 - **T6.2** Rule registry `rules.yaml` (gate + required_fields + properties) + meta-validator. [D21]
 
-### PHASE 7 — Reconciliation campaign [VERIFY GATE] — depends: P4, P5
-- **T7.1** Migrate ALL hand-fixes into the overlay (incl. orphaned Indiabulls Power) + reconstruct old_value baselines. [§3, R5]
-- **T7.2** Rebuild → diff vs current → resolve every mismatch. [§12, D18]
+### PHASE 7 — Reconciliation campaign [VERIFY GATE] — depends: Ph1, Ph2, Ph4, Ph5
+(Ph1 provenance codes are needed for overlay conflict-detection; Ph2 structural `quality` column is needed for the fake-removal verification.)
+- **T7.1** Migrate ALL hand-fixes into the overlay (incl. orphaned Indiabulls Power) + reconstruct old_value baselines. [PLAN §3, R5]
+- **T7.2** Rebuild → diff vs current → resolve every mismatch. [ARCH §12, D18]
 - **T7.3** Verify the §3 must-pass targets (ROLEXRINGS/NPST/CANTABIL/e6053e7/Indiabulls). [§3]
 
-### PHASE 8 — Generation & pre-coding finalization — depends: T0.2, P6
+### PHASE 8 — Generation & pre-coding finalization — depends: T0.2, Ph6
 - **T8.1** Generate schema view from `columns.yaml`; retire `docs/schema.md`. [D4]
 - **T8.2** Generate rules index from `rules.yaml`; retire hand-maintained `rules/index.md`. [D21]
 - **T8.3** P-2 lineage/architecture diagram (from registry + golden files; what links to what). [P-2]
@@ -197,14 +200,27 @@
 - **BL-1 — At-IPO market cap (proper D-3 cure).** No proxy/cheap fix. Steps on pickup: value-audit Chittorgarh `kpi_market_cap_post_ipo`
   (HDFC AMC ₹7.8cr error known) → source **shares outstanding** (R3, the shared blocker with EPS) → derive `market_cap_at_ipo_cr =
   issue_price × post-issue shares`. `market_cap_at_ipo_cr` + `shares_outstanding` = registry status `planned` (not shipped); 90 existing
-  longterm values preserved in source.
+  longterm values preserved in source. TRIGGER: pick up when a shares-outstanding source is designed/identified (the shared blocker with BL-2).
 - **BL-2 — EPS comparability (A1 vs A2) + usage check.** A1 (constant-share-base recompute) blocked on the same shares-outstanding (R3).
   Now: no EPS-trend/CAGR feature shipped; per-year EPS values kept. On pickup: check if EPS feeds a feature → A2 null-and-flag if no, A1 if yes.
+  TRIGGER: BL-1 complete (shares-outstanding available) AND owner signals intent to re-evaluate EPS-based features.
 - **BL-3 — POST-DEV cleanup** (only after the new foundation is proven): retire the old data + old data docs + hand-maintained
   `docs/schema.md`/`rules/index.md` (now generated). Prefer git history over a dump; one source of truth, no stale parallel copies.
-- **D14-optional** — official NSE symbol-change ledger upgrade (gated on a vetted trusted source).
+- **D14-optional** — official NSE symbol-change ledger upgrade (gated on a vetted trusted source). TRIGGER: once a free, vetted NSE symbol-change ledger is identified in docs/research/trusted_sources.md.
 - **P-4 — Live / upcoming data** — its own project; each source refreshes differently. Design the seam now (`upcoming` status,
   `announcements` feed), build later.
+- **BL-5 — Long-term (2006–19) backfill scope.** The big long-term backfills (1,498 band/lot · 1,027 identity · 1,886 face_value · 1,487 anchor) — decide per-bucket whether to refetch or accept honest-NULL (many are likely `Missing_data`, never published). Does NOT gate upper layers. TRIGGER: after the gated refetch mechanism (T1.4) is proven on the small high-value targets (18 MB-sub + 10 GMP).
+
+---
+
+## 4b. OPEN ITEMS — DECIDE/MEASURE AT BUILD (tracked so nothing floats)
+- **6 STAYS-FLAGGED corp-action stocks** (CMMIPL, COOLCAPS, SILVERTUC, VAISHALI, INDUSFILA, BANSAL) — disposition (leave flagged / quarantine / exclude from L3) decided in Phase 5 (T5.4) after looking at the actual price evidence.
+- **ROLEXRINGS ratio** (observed 19.96× vs claimed 10.0×) — adjudicate in Phase 5 (T5.3) from RHP/exchange evidence; may carry a second factor.
+- **Indiabulls Power (INE399K01017) bonus ratio** — unknown; must be sourced (RHP/exchange announcement) BEFORE T7.1 can migrate its orphaned fix. Prerequisite for Phase 7.
+- **Whole-row-QUARANTINE row-loss** — quantify how many rows each whole-row quarantine rule removes BEFORE committing it (Phase 6, T6.1).
+- **market_cap_class re-bucketing churn** — measure churn on the 67 dual-cap rows before binding the D-3 at-IPO basis; decide whether to re-calibrate class cut-points (Phase 5 pre-task).
+- **Canonical yfinance matcher** (69 vs 52) — run one matcher, pick the count, before the Phase-5 arbiter (Phase 3 T3.1 / Phase 5).
+- **OD-4 first refetch targets** (18 MB-subscription + 10 GMP rows) — gated on owner approval; wired via T1.4.
 
 ---
 

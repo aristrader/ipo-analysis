@@ -3,21 +3,21 @@
 consolidation had compressed away build-critical detail. This is the 3rd survivor doc: the FROZEN BUILD-SPEC we'd
 always intended to keep until build (the prior "§4 = frozen build-spec" decision). PLAN = what & in what order;
 ARCHITECTURE = what the system is; THIS = the concrete per-issue / per-source / per-hazard detail the build needs.
-Counts are draft-grade (re-verify at build). Sourced from the deleted issue-register + design §8 + task_14/17/19.*
+Counts are draft-grade (re-verify at build). Sourced from the deleted issue-register + ARCH §8 + task_14/17/19.*
 
 ---
 
-## PART A — SOURCING ROSTER & DETERMINISTIC FALLBACK ORDERS (recovered from design §8)
+## PART A — SOURCING ROSTER & DETERMINISTIC FALLBACK ORDERS (recovered from ARCH §8)
 
 ## 8. SOURCING PER FIELD + DETERMINISTIC FALLBACK ORDER
 
 ### 8.1 Principle: every field has an ORDERED source list + an explicit "absent" outcome
 A field is **resolved by walking an ordered list of candidate sources until one yields a value whose
-provenance state is PRESENT** (§6). The walk is deterministic (same inputs → same winner) and declared once in
-the registry (§9). When it exhausts without a present value, the field is **NULL with a `_prov` state**
-(`absent:fetchfail` if a source was tried and failed/placeholder; `absent:source` if no source covers that
+provenance state is PRESENT** (ARCH §6). The walk is deterministic (same inputs → same winner) and declared once in
+the registry (ARCH §9). When it exhausts without a present value, the field is **NULL with a `_prov` state**
+(`error_out` if a source was tried and failed/placeholder; `Missing_data` if no source covers that
 field for that era) — never `0`/`""`. This is the structural cure for I1: the fallback fires on *state ≠
-present*, not on a truthy check, so a stored `0` can never block the next source. (The encoding is §6's; this
+present*, not on a truthy check, so a stored `0` can never block the next source. (The encoding is ARCH §6's; this
 is the mechanism that consumes it — resolving the C2→C1 cross-reference.)
 
 ### 8.2 Source roster (roles only, from `docs/sources.md` + `scrapers/`)
@@ -35,10 +35,10 @@ is the mechanism that consumes it — resolving the C2→C1 cross-reference.)
 - **moneycontrol autosuggest** — ISIN↔ticker BRIDGE only (identity helper, not a field source).
 - **Corp-action sources** — `nse_corp_actions:equities/sme` (ISIN-carrying, authoritative) + `yfinance`
   (symbol-only, empty ISIN) → reconciled into `corp_actions_merged.csv` (task_14).
-- **Manual overlay catalogs** (the §11 ledger): `manual_overrides.csv` (3 market_maker rows),
+- **Manual overlay catalogs** (the ARCH §11 ledger): `manual_overrides.csv` (3 market_maker rows),
   `manual_thinktank_audit`/`verification_2026-05-31` tags in `corp_actions_merged.csv`, 88-audit Cat-1 (21
   split overrides), `drhp_recovered.csv` (16 DRHP financials). **Highest-priority source in the fallback
-  order** (an approved hand-fix wins) but conflict-flagged, not silent (§11).
+  order** (an approved hand-fix wins) but conflict-flagged, not silent (ARCH §11).
 - **Tested & NOT viable** (do not re-add): BSE official IPO API, ipocentral (the O-4 GMP-0 origin), trendlyne,
   moneycontrol financials.
 
@@ -48,20 +48,20 @@ derived/recovered → NULL+state.** Concrete orders:
 
 | Field group | Fallback order (stop at first PRESENT) | Coverage / notes |
 |---|---|---|
-| **Identity** (ISIN, nse_symbol, bse_code) | overlay → Exchange lists → Chittorgarh → moneycontrol bridge | ISIN 100% via Chittorgarh; exchange lists cross-check (§10). |
+| **Identity** (ISIN, nse_symbol, bse_code) | overlay → Exchange lists → Chittorgarh → moneycontrol bridge | ISIN 100% via Chittorgarh; exchange lists cross-check (ARCH §10). |
 | **Dates / band / min-inv / issue_price / issue_amount** | overlay → Chittorgarh → Sharescart | Chittorgarh spine; Sharescart fills boom band/lot/min-inv. issue_amount '--' from Sharescart → NULL not 0. |
 | **Subscription × — MB** | overlay → Sharescart → **NSE Public Issues** → ipowatch | NSE authoritative but cache overlaps 0/18 of MB 0-rows → residual needs re-scrape, else NULL (owner-decision 11). |
 | **Subscription × — SME** | overlay → Sharescart → **ipowatch** → *derived from `_cr`* (Option D) | 75/106 SME 0-rows fixable from ipowatch cache; +88 recoverable arithmetically (`prov=derived`). NSE NOT a SME source. |
 | **Subscription category split (QIB/NII/RII)** | overlay → Sharescart → NSE (MB) / ipowatch (SME) | gate completeness check to MB (SME QIB=0 legitimate). |
-| **GMP** | overlay → Sharescart → **investorgain** → ipowatch → gmp_deep_hunter (≤2022)/gmp_patcher (≥2025) | the 10 GMP-0 rows came via ipocentral/websearch (no in-repo scraper, NOT viable) → NULL + queue a fresh source; investorgain cache itself has `gmp_rs=0` → genuinely (a). |
+| **GMP** | overlay → Sharescart → **investorgain** → ipowatch → gmp_deep_hunter (≤2022)/gmp_patcher (≥2025) | the 10 GMP-0 rows came via ipocentral/websearch (no in-repo scraper, NOT viable) → NULL + mark `_prov=Missing_data` pending OD-4 owner approval to re-fetch from a new (non-investorgain) GMP source; investorgain cache itself has `gmp_rs=0` → genuinely source-never-published. |
 | **Financials (EPS/sales/PAT/margins)** | overlay (drhp_recovered) → Sharescart (`pre_ipo_*`) → Screener → Chittorgarh 3yr | Screener covers pre-listing FY 2020–22; use `pre_ipo_*` to avoid post-IPO contamination. |
-| **Market cap / sector** | (as-of-tagged) source per task_17 | AS-OF hazard (D-3): current cap ≠ at-IPO cap; the registry's as-of slot (§7/§9) is mandatory here. |
-| **Corp actions (split/bonus ratio + ex_date)** | overlay → `nse_corp_actions` (ISIN) → yfinance (symbol, corroboration-only — owner-decision 12) | Join + windowing is §10. |
+| **Market cap / sector** | (as-of-tagged) source per task_17 | AS-OF hazard (D-3): current cap ≠ at-IPO cap; the registry's as-of slot (ARCH §7/ARCH §9) is mandatory here. |
+| **Corp actions (split/bonus ratio + ex_date)** | overlay → `nse_corp_actions` (ISIN) → yfinance (symbol, corroboration-only — owner-decision 12) | Join + windowing is ARCH §10. |
 | **Daily prices (OHLCV)** | Bhavcopy (official, ISIN) → Screener → Yahoo | Bhavcopy authoritative incl. SME; Yahoo poor for SME. |
 
 ### 8.4 As-of is a SOURCING concern too
-Every time-varying field's source declaration names its as-of class (§7), so the fallback walk never mixes an
-at-IPO source with a live one. The attribute lives in the registry (§9) and is stamped at ingestion.
+Every time-varying field's source declaration names its as-of class (ARCH §7), so the fallback walk never mixes an
+at-IPO source with a live one. The attribute lives in the registry (ARCH §9) and is stamped at ingestion.
 
 ---
 
@@ -142,7 +142,7 @@ at-IPO source with a live one. The attribute lives in the registry (§9) and is 
 - **OD-6 — Non-equity handling (the standing STATUS.md decision):** exclude REIT/InvIT/IDR/FPO from equity
   financials & analyses, or analyze separately? Governs O-6 (REIT/InvIT sales), O-16(a) (Std Chartered IDR
   mislabel), and the `x-nonequity` rule. (task_16 OQ3; task_18 → task_05b; task_05b owns it.)
-- **OD-7 — EPS comparability (A1 vs A2):** will per-year/TTM EPS ever feed a feature (EPS-CAGR/trend)? If no →
+- **OD-7 [original design-run numbering; renumbered/folded into PLAN §2.9 + backlog BL-2] — EPS comparability (A1 vs A2):** will per-year/TTM EPS ever feed a feature (EPS-CAGR/trend)? If no →
   null-and-flag (A2, cheap) suffices; if yes → recompute on a constant share base (A1, BLOCKED on the unsolved
   share-count work). And validity-rule severity: route a financial validity failure to `quality==dirty` (whole row)
   or null only the offending derived field? (task_16 OQ1, OQ5.)
@@ -186,13 +186,13 @@ substrate WAS rebuilt at `26cd1fd` (same commit that merged the corrections) —
 > **Cross-file de-dup note:** I1 (0-vs-missing) is the systemic spine that recurs in task_15/16/17/18/19 — it is
 > registered ONCE as **I1** below, with the per-field instances cross-referenced. The corp-action family
 > (task_14 + task_20) is registered as **D-1/D-2/D-3-family** rows. The market-cap as-of leak (task_17 D-3) is its
-> own row. CR-* pointers refer to declarative cleaning rules to be authored in the design doc §13.
+> own row. CR-* pointers refer to declarative cleaning rules to be authored in ARCH §13.
 
 ### 4.1 SYSTEMIC / CROSS-CUTTING
 
 | ID | Title | Sev | Status | Root cause | Affected fields / counts | Resolution approach | Resolvable | Task(s) | CR-* |
 |---|---|---|---|---|---|---|---|---|---|
-| **I1** | 0-vs-missing: a blank / parse-fail / source-placeholder stored as `0` (or `''`), indistinguishable from a real zero; fallback guards treat `0` as present so they never fire | CRITICAL | open | TWO layers: (1) the SOURCE emits a placeholder `0` (e.g. sharescart `0x`); the parser (`parse_num`/`pfloat`/`fnum` all return None) does NOT mint it. (2) enrich/backfill steps treat `'0'` as truthy → copy it AND stamp a real `_src` (the provenance layer LIES). Multi-site: `03_enrich.py` for `sub_total_x`; GMP-backfill steps for `gmp_pct` | `sub_total_x` 124, `sub_qib_x` 341 (27 MB implausible / 314 SME real), `sub_nii_x` 156, `sub_retail_x` 157, `gmp_pct` 10, `net_sales_yr3` 13, `pre_ipo_net_sales` 17, `market_cap_cr` 7, `min_investment_rs` 18, `issue_amount_cr` (IDR) 1. NOT I1: `ofs_cr=0` (725 real fresh-issue), `borrowings=0` (real debt-free) | Field-aware validity routing + 3-state (really 4-state, +N/A-for-instrument) present/absent provenance; ONE compact registry-driven carrier (5 of 7 fields have no `_src` today); validity gate BEFORE any `_src` stamp, at every stamp site; distinguish (a)source-never-published / (b)fetch-parse-fail-or-placeholder / (c)real-zero — and (a)/(b) for BLANKS too (all 1129 `sub_total_x` blanks carry empty `_src`, equally ambiguous) | now (design) | task_19 (owner), 15, 16, 17, 18 | CR-I1, CR-prov3 |
+| **I1** | 0-vs-missing: a blank / parse-fail / source-placeholder stored as `0` (or `''`), indistinguishable from a real zero; fallback guards treat `0` as present so they never fire | CRITICAL | open | TWO layers: (1) the SOURCE emits a placeholder `0` (e.g. sharescart `0x`); the parser (`parse_num`/`pfloat`/`fnum` all return None) does NOT mint it. (2) enrich/backfill steps treat `'0'` as truthy → copy it AND stamp a real `_src` (the provenance layer LIES). Multi-site: `03_enrich.py` for `sub_total_x`; GMP-backfill steps for `gmp_pct` | `sub_total_x` 124, `sub_qib_x` 341 (27 MB implausible / 314 SME real), `sub_nii_x` 156, `sub_retail_x` 157, `gmp_pct` 10, `net_sales_yr3` 13, `pre_ipo_net_sales` 17, `market_cap_cr` 7, `min_investment_rs` 18, `issue_amount_cr` (IDR) 1. NOT I1: `ofs_cr=0` (725 real fresh-issue), `borrowings=0` (real debt-free) | Field-aware validity routing + 5-code `_prov` (`present`/`derived`/`Missing_data`/`error_out`/`N/A`; 4 of these are missing-data states, `present`+`derived` are not); ONE compact registry-driven carrier (5 of 7 fields have no `_src` today); validity gate BEFORE any `_src` stamp, at every stamp site; distinguish (a)source-never-published / (b)fetch-parse-fail-or-placeholder / (c)real-zero — and (a)/(b) for BLANKS too (all 1129 `sub_total_x` blanks carry empty `_src`, equally ambiguous) | now (design) | task_19 (owner), 15, 16, 17, 18 | CR-I1, CR-prov3 |
 | **I1-x** | Cross-field tranche-vs-total inconsistency (the real O-3): all 3 tranches `==0` while `sub_total_x` positive — a per-field predicate cannot express it | HIGH | open | sharescart captured the Total row but not per-category rows, wrote `0` for missing categories | 32 rows all-tranches-0-with-positive-total; 218 rows positive total + ≥1 zero tranche (audit said 3/214 — undercount) | Registry must support MULTI-COLUMN predicates: `Σ(tranches) ≈ total within tolerance, else route tranche cells to state-(b)`; gate SME QIB=0 as legitimate | now (design) | task_19, 15 | CR-O3 |
 | **I1-stamp** | Provenance laundering — enrich/backfill steps stamp a real `_src` on a placeholder `0` | HIGH | open | `if o.get(c): r[c]=o[c]` + `r[c+'_src']='sharescart' if o.get(c)` — `'0'` is truthy | all 124 `sub_total_x=0` carry `_src='sharescart'`; 10 `gmp_pct=0` carry `_src∈{ipocentral,websearch}` | Stamping POLICY: a value must pass its validity predicate before earning a source tag, applied at EVERY assemble/stamp site (not a one-file patch) | now (design) | task_19 | CR-stamp |
 | **I1-enc** | Inconsistent zero encoding across columns (`'0'` vs `'0.0'`) — any zero-vs-missing predicate must parse numerically, never string-match | MED | open | columns serialized differently (`sub_total_x`/`sub_nii_x`='0'; `net_sales_yr3`/`market_cap_cr`/`gmp_pct`='0.0'; mix for qib/retail) | caused task_20's own string-`=='0'` predicate bug (false "unreproducible" for O-5/6/8/15) | All I1 predicates parse numerically (`float(v)==0`) | now (design) | task_20, 15, 19 | CR-I1 |
@@ -201,7 +201,7 @@ substrate WAS rebuilt at `26cd1fd` (same commit that merged the corrections) —
 
 | ID | Title | Sev | Status | Root cause | Affected fields / counts | Resolution approach | Resolvable | Task(s) | CR-* |
 |---|---|---|---|---|---|---|---|---|---|
-| **D-1** | Over-count / fake returns — one corp-action event counted ≥2× → fabricated multibaggers | CRITICAL | open (overlay applied but defeated — see §3) | 3 root causes: (a) 03k/03l can't collapse one event reported by ≥2 sources on near-but-not-equal dates (7d/10d windows too tight; exact-float ratio equality at 03k L83; `action_type='split'` hardcoded at 03l L48); (b) 07 dedups only on exact `(ex_date,ratio)`; (c) `09_assemble.py:88-89` DISABLES the cross-source listing-price tripwire for any stock with a corp action | ROLEXRINGS +15,272% (10:1 counted 3×→×1000), NPST +16,127% (3:1 counted 2×→×9), CANTABIL +3,968%, GICL +948%, GNA +639%, PAVNAIND +297%; cluster predicate (rounded ratio, ≤90d, diff source) = 12 stocks; symbol-only-yf dup (predicate 3) = 13 symbols (ENGINERSIN, OPTOCIRCUI missed by 90d window) | Option A (price-gap detector, the source-agnostic arbiter) + Option B (source-reconcile de-dup, upstream complement) + Option C (override catalog, narrow fallback). Numeric-tolerance ratio compare at cluster step AND 03k L83. Re-enable the 09 cross-source tripwire for corp-action stocks. Resolution must be representable in the substrate (defer column set to task_03/05) | now (design); build needs the join fix | task_14, 20 | CR-D1, CR-gap |
+| **D-1** | Over-count / fake returns — one corp-action event counted ≥2× → fabricated multibaggers | CRITICAL | open (overlay applied but defeated — see §3) | 3 root causes: (a) 03k/03l can't collapse one event reported by ≥2 sources on near-but-not-equal dates (7d/10d windows too tight; exact-float ratio equality at 03k L83 (build-time: reconcile the exact line numbers by reading 03k — splits_findings §2c notes a 5% relative-tolerance compare already exists near L162-164, which may be a separate comparison site from the exact-equality bug; confirm both at build); `action_type='split'` hardcoded at 03l L48); (b) 07 dedups only on exact `(ex_date,ratio)`; (c) `09_assemble.py:88-89` DISABLES the cross-source listing-price tripwire for any stock with a corp action | ROLEXRINGS +15,272% (10:1 counted 3×→×1000), NPST +16,127% (3:1 counted 2×→×9), CANTABIL +3,968%, GICL +948%, GNA +639%, PAVNAIND +297%; cluster predicate (rounded ratio, ≤90d, diff source) = 12 stocks (NOTE: ≤90d is the detection/survey window used to enumerate this 12-stock set; the IMPLEMENTATION same-event collapse slack is ~30d per PLAN T5.3 / splits_findings §5 — do not implement a 90d collapse window); symbol-only-yf dup (predicate 3) = 13 symbols (ENGINERSIN, OPTOCIRCUI missed by 90d window) | Option A (price-gap detector, the source-agnostic arbiter) + Option B (source-reconcile de-dup, upstream complement) + Option C (override catalog, narrow fallback). Numeric-tolerance ratio compare at cluster step AND 03k L83. Re-enable the 09 cross-source tripwire for corp-action stocks. Resolution must be representable in the substrate (defer column set to task_03/05) | now (design); build needs the join fix | task_14, 20 | CR-D1, CR-gap |
 | **D-1-fp** | Naive cluster detector over-catches (ANGELONE false positive) | MED | open | ANGELONE's two 10.0 legs share the SAME ex_date 2026-02-26 → `actions_for` `(ex_date,ratio)` dedup already collapses them (adj 30.6 correct); cluster predicate still flags it | FP rate ≥1/12 (~8%), not 0 as round-1 claimed | Gate: same-ratio cluster is a bug ONLY when legs have DISTINCT ex_dates AND survive the dedup; disambiguate genuine repeats via price gap | now (design) | task_14 | CR-D1 |
 | **D-1-prec** | Float-precision miss (USASEEDS) — exact-equality ratio compare drops a real over-adjustment | MED | open | nse `1.428571` vs yfinance `1.4285714285714286` are different floats; exact equality (03k L83) misses the cluster | USASEEDS issue 120 → adj 58.8 (≈2.04× applied, should be ≈84) | Numeric tolerance (`abs(a−b)/b < 1e-3`) at the cluster step AND at 03k L83 | now (design) | task_14 | CR-D1 |
 | **D-2** | Reverse-split-as-divisor — Yahoo `ratio_factor<1` multiplies instead of divides (0.01 → ×100) | CRITICAL | open (folded into D-1) | NSE parser only emits factors ≥1; all sub-1 factors are yfinance, applied as divisors | 45 merged rows have `ratio_factor<1`; PATANJALI INE619A01035 compounds D-2 (0.01) WITH D-1 (5.0 + 3.0 legs) | Direction-normalized price-gap test (gap sign → split vs reverse-split; gap magnitude → ratio) | now (design) | task_14 | CR-D1 |
@@ -211,7 +211,7 @@ substrate WAS rebuilt at `26cd1fd` (same commit that merged the corrections) —
 | **D-1-compound** | `bonus+split` same-day compound rows are fragile to future split-out | MED | fixed-still-holds (today) | 31 `action_type='bonus+split'` rows carry a single pre-collapsed factor; correct now (0 live double-counts) but a future yfinance re-report of the separate legs would survive `(ex_date,ratio)` dedup and double-apply | 31 rows (e.g. ASHOKA 3.0, BAJFINANCE 10.0) | Cluster/arbiter must treat a `bonus+split` row + its constituent legs as ONE event | now (design) | task_14 | CR-D1 |
 | **D-1-sme-isin** | Malformed ISIN on nse:sme corp-action rows — a non-ISIN numeric code stored in the `isin` column | MED | open | 163 `nse_corp_actions:sme` rows (+1 equities) store e.g. NPST `409536`, USASEEDS `462637` instead of a real ISIN → match only by SYMBOL; ISIN-keyed dedup/overlay mis-keys them | 164 rows | Treat as symbol-only; feed to task_07 identity/matching; do not use as an ISIN join key | now (design) | task_14 | CR-id |
 | **D-1-action** | `action_type` corrupted for all 354 yfinance rows | MED | open | 03l L48 hardcodes `action_type='split'` for every yahoo_only row ("Yahoo calls everything a split") — a real yfinance bonus/dividend is stamped "split" | 354 empty-ISIN rows | Preserve/derive the original yfinance action_type so `action_type` stays trustworthy | now (design) | task_14 | CR-D1 |
-| **D-1-yftrust** | Empty-ISIN yfinance rows match purely by symbol — structural origin of the over-counts + reused-symbol hazard | HIGH | open (owner decision) | 354 yfinance rows carry NO ISIN; 52 match a substrate IPO symbol | 354 rows / 52 matching substrate symbols | OWNER CHOICE: demote empty-ISIN yfinance to CORROBORATION-ONLY (confirm but never CREATE an adjustment) vs keep as primary gap-fillers under the price-gap arbiter. NSE/ISIN-authoritative-only would kill most over-counts at source | needs-owner-decision | task_14 | CR-D1 |
+| **D-1-yftrust** | Empty-ISIN yfinance rows match purely by symbol — structural origin of the over-counts + reused-symbol hazard | HIGH | open (owner decision) | 354 yfinance rows carry NO ISIN; 52 match a substrate IPO symbol (OPEN build-time question: splits_findings §6 counts 69 via a different matcher — run ONE canonical matcher and pick the count before writing the arbiter) | 354 rows / 52 matching substrate symbols | OWNER CHOICE: demote empty-ISIN yfinance to CORROBORATION-ONLY (confirm but never CREATE an adjustment) vs keep as primary gap-fillers under the price-gap arbiter. NSE/ISIN-authoritative-only would kill most over-counts at source | needs-owner-decision | task_14 | CR-D1 |
 | **D-cov-gap** | Resolution-catalog coverage gap — over-adjusted/dup stocks missing from the 53-row evidence file | MED | open | SIKKO, RAJMET, MKPL (issue_adj<1, over-adjusted) + GICL (dup-split +948%) are NOT in `corp_action_external_evidence.csv` (53 rows) | 4 uncovered stocks | Materialize the missing override catalog from the evidence file; resolve the 4 uncovered cases | now (design) | task_14 | CR-D1 |
 
 ### 4.3 SUBSCRIPTION + GMP (task_15)
@@ -309,14 +309,14 @@ draft-grade.** This register is a consolidation for the owner's morning review, 
 
 ## PART C — TASK-FILE-ONLY BUILD HAZARDS (recovered from task_14 / task_17 / task_19 — these existed in NEITHER the register NOR the consolidated docs)
 
-### C.0 Tested & NOT viable sources (DO NOT re-add) — from design §8.3
+### C.0 Tested & NOT viable sources (DO NOT re-add) — from ARCH §8.3
 BSE official IPO API · ipocentral (the O-4 GMP-0 origin) · trendlyne · moneycontrol financials. Re-adding any wastes effort / re-introduces known-bad data.
 
 ### C.1 Corp-actions (task_14) — the highest-impact build inputs
 - **`issue_price_adj < Rs 1` over-adjustment detector (cleanest zero-FP signal):** exactly 8 rows, all genuine over-adjustments —
   HARDWYN 0.357, SBC 0.489, SIKKO 0.533, RAJMET 0.578, LAL 0.647, FCL 0.700, MKPL 0.778, ROLEXRINGS 0.900. Use as a second detector alongside the price-gap arbiter.
 - **Two DEPLOYED + re-audited remediations that HOLD** (must not be undone): (a) symbol+ISIN feed-matching fix (116→383 stocks fixed; IRCTC +59%→+697%);
-  (b) `pipeline/listing_remediation.py` inferred_split remediation. `listing_metrics_status` distribution: ok 1935 / unreliable_coverage 223 / recovered_bhavcopy 153 / inferred_split 57 / '' 16.
+  (b) `pipeline/listing_remediation.py` inferred_split remediation. `listing_metrics_status` distribution: ok 1935 / unreliable_coverage 223 / recovered_bhavcopy 153 / inferred_split 57 / '' 16 (DRAFT-grade, pre-26cd1fd-rebuild counts — re-verify against the current substrate at build; CLAUDE.md carries the post-rebuild figures).
 - **INTERACTION HAZARD — the still-active MFE/MAE scale-inversion clamp (~75 rows, flag `mfe_mae_clamped`):** any corp-action redesign that changes applied
   factors MUST re-derive both the inferred_split set AND the scale-inversion clamp, or it silently shifts which rows are clamped.
 - **53-row evidence catalog taxonomy:** buckets count-conflict 14 / ratio-conflict 17 / reverse-split 21; verdicts resolve-apply-once 28 / resolve-correct-ratio 17 /
