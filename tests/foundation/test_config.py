@@ -6,7 +6,8 @@ import foundation.config as cfg
 
 
 def test_output_root_defaults_to_data_build():
-    # default build-mode root sits beside the frozen 'data'
+    # INTENTIONAL: this asserts the real DEFAULT (build-beside-old). It must NOT be isolated/overridden
+    # — that's why the OUTPUT_ROOT isolation fixture lives in tests/scrapers/conftest.py, not here.
     assert cfg.OUTPUT_ROOT.name == "data_build"
     assert cfg.OUTPUT_ROOT.parent == cfg.REPO_ROOT
 

@@ -80,3 +80,22 @@ def investorgain_mod():
 def gmp_patcher_mod():
     """scrapers/gmp_patcher.py — GMP patch orchestrator."""
     return _load("scrapers/gmp_patcher.py", "scr_gmp_patcher")
+
+
+@pytest.fixture(scope="session")
+def bhavcopy_ohlc_mod():
+    """scrapers/bhavcopy_ohlc.py — per-ISIN daily OHLCV puller (parallel fetch)."""
+    return _load("scrapers/bhavcopy_ohlc.py", "scr_bhavcopy_ohlc")
+
+
+@pytest.fixture(autouse=True)
+def isolate_output_root(tmp_path, monkeypatch):
+    """ISOLATION (footgun fix): every scraper test writes to a throwaway temp dir, never the real
+    build tree (data_build/). Some scrapers call save_raw()/mark_done(), which resolve paths under
+    foundation.config.OUTPUT_ROOT at CALL time — rebinding it per test keeps those writes off any live
+    build and stops cross-test litter. Scoped to tests/scrapers/ on purpose: tests/foundation/
+    test_config.py deliberately asserts the real DEFAULT (data_build) and must NOT be isolated.
+    """
+    from foundation import config
+    monkeypatch.setattr(config, "OUTPUT_ROOT", tmp_path)
+    return tmp_path
