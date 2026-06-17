@@ -16,16 +16,19 @@ import csv
 import io
 import logging
 import os
+import sys
 import warnings
 import zipfile
 from datetime import datetime, timedelta
 
 import requests
 
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from foundation import config, ingest
+
 warnings.filterwarnings('ignore')
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_DIR = os.path.join(BASE_DIR, 'data', 'reference', 'bhavcopy')
 
 TOLERANCE = 10.0
 NSE_UDIFF_CUTOVER = datetime(2024, 7, 8)   # NSE switched to UDiFF format here
@@ -41,11 +44,17 @@ log = logging.getLogger(__name__)
 # ── Bhavcopy fetch + parse → {isin: open, 'SYM:'+symbol: open} ─────────────────
 
 def _cache_path(exchange, d):
-    return os.path.join(CACHE_DIR, f'{exchange}_{d.strftime("%Y%m%d")}.csv')
+    return config.reference_dir() / 'bhavcopy' / f'{exchange}_{d.strftime("%Y%m%d")}.csv'
 
 
 def fetch_nse(d):
-    """Return raw CSV text for NSE bhavcopy on date d, or None."""
+    """Return (text, status) for NSE bhavcopy on date d.
+
+    status is one of:
+      'ok'          — got real data
+      'holiday'     — HTTP 404; confirmed no file (market closed)
+      'fetch_error' — transient/network/blocked error; do not cache
+    """
     if d >= NSE_UDIFF_CUTOVER:
         url = f'https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_CM_0_0_0_{d.strftime("%Y%m%d")}_F_0000.csv.zip'
     else:
@@ -55,22 +64,36 @@ def fetch_nse(d):
         r = requests.get(url, headers={**H, 'Referer': 'https://www.nseindia.com/'}, timeout=30)
         if r.status_code == 200 and r.content[:2] == b'PK':
             z = zipfile.ZipFile(io.BytesIO(r.content))
-            return z.read(z.namelist()[0]).decode()
+            return z.read(z.namelist()[0]).decode(), 'ok'
+        if r.status_code == 404:
+            return None, 'holiday'
+        log.debug(f'NSE fetch {d.date()} HTTP {r.status_code}')
+        return None, 'fetch_error'
     except Exception as e:
         log.debug(f'NSE fetch {d.date()} err {e}')
-    return None
+        return None, 'fetch_error'
 
 
 def fetch_bse(d):
-    """Return raw CSV text for BSE bhavcopy on date d, or None."""
+    """Return (text, status) for BSE bhavcopy on date d.
+
+    status is one of:
+      'ok'          — got real data
+      'holiday'     — HTTP 404; confirmed no file (market closed)
+      'fetch_error' — transient/network/blocked error; do not cache
+    """
     url = f'https://www.bseindia.com/download/BhavCopy/Equity/BhavCopy_BSE_CM_0_0_0_{d.strftime("%Y%m%d")}_F_0000.CSV'
     try:
         r = requests.get(url, headers={**H, 'Referer': 'https://www.bseindia.com/'}, timeout=30)
         if r.status_code == 200 and len(r.content) > 1000 and b',' in r.content[:200]:
-            return r.text
+            return r.text, 'ok'
+        if r.status_code == 404:
+            return None, 'holiday'
+        log.debug(f'BSE fetch {d.date()} HTTP {r.status_code}')
+        return None, 'fetch_error'
     except Exception as e:
         log.debug(f'BSE fetch {d.date()} err {e}')
-    return None
+        return None, 'fetch_error'
 
 
 def parse_bhavcopy(text, exchange, d):
@@ -114,6 +137,11 @@ def parse_bhavcopy(text, exchange, d):
 def get_bhavcopy(exchange, d):
     """Cached fetch+parse. Returns {key: open} or {} if unavailable.
 
+    Cache behaviour:
+      - 'ok'          rows written with status='ok'; old files with no status column treated as 'ok'.
+      - 'holiday'     sentinel row written (key='', open='', status='holiday'); returns {}.
+      - 'fetch_error' nothing written; next run will retry.
+
     Args:
         exchange: 'NSE' or 'BSE'
         d: datetime.date or datetime object
@@ -122,17 +150,55 @@ def get_bhavcopy(exchange, d):
         Dict mapping ISIN or 'SYM:'+symbol to opening price string.
     """
     cp = _cache_path(exchange, d)
+
+    # ── read cache if present ──────────────────────────────────────────────────
     if os.path.exists(cp):
         with open(cp, encoding='utf-8') as f:
-            return {row['key']: row['open'] for row in csv.DictReader(f)}
-    text = fetch_nse(d) if exchange == 'NSE' else fetch_bse(d)
-    lookup = parse_bhavcopy(text, exchange, d) if text else {}
-    os.makedirs(CACHE_DIR, exist_ok=True)
+            rows = list(csv.DictReader(f))
+        if rows:
+            has_status = 'status' in rows[0]
+            if has_status:
+                # Holiday sentinel: single row with empty key and status='holiday'
+                if rows[0].get('status') == 'holiday' and rows[0].get('key') == '':
+                    return {}
+                return {row['key']: row['open'] for row in rows
+                        if row.get('status', 'ok') == 'ok' and row.get('key')}
+            else:
+                # Backward compat: old cache files have only key,open — treat as 'ok'
+                return {row['key']: row['open'] for row in rows if row.get('key')}
+        # Empty file (zero data rows after header) — treat as cache miss so we retry
+        # (this handles the poisoned-empty-file case from the old bug)
+
+    # ── fetch ─────────────────────────────────────────────────────────────────
+    text, status = fetch_nse(d) if exchange == 'NSE' else fetch_bse(d)
+
+    if status == 'fetch_error':
+        log.warning(f'bhavcopy {exchange} {d.date()}: transient/blocked fetch error — not caching, will retry next run')
+        return {}
+
+    cache_dir = config.reference_dir() / 'bhavcopy'
+    os.makedirs(cache_dir, exist_ok=True)
+
+    if status == 'holiday':
+        # Write a sentinel so we don't re-fetch confirmed holidays
+        with open(cp, 'w', newline='', encoding='utf-8') as f:
+            w = csv.DictWriter(f, fieldnames=['key', 'open', 'status'])
+            w.writeheader()
+            w.writerow({'key': '', 'open': '', 'status': 'holiday'})
+        return {}
+
+    # status == 'ok'
+    raw_name = f'{exchange}_{d.strftime("%Y%m%d")}.csv'
+    ingest.save_raw('bhavcopy', raw_name, text)
+
+    lookup = parse_bhavcopy(text, exchange, d)
+
     with open(cp, 'w', newline='', encoding='utf-8') as f:
-        w = csv.DictWriter(f, fieldnames=['key', 'open'])
+        w = csv.DictWriter(f, fieldnames=['key', 'open', 'status'])
         w.writeheader()
         for k, v in lookup.items():
-            w.writerow({'key': k, 'open': v})
+            w.writerow({'key': k, 'open': v, 'status': 'ok'})
+
     return lookup
 
 

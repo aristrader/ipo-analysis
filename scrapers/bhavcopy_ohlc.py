@@ -44,13 +44,23 @@ from datetime import datetime, timedelta
 
 import requests
 
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from foundation import config, ingest
+
 warnings.filterwarnings('ignore')
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PRICES_DIR = os.path.join(BASE_DIR, 'data', 'prices')
 MASTER_DIR = os.path.join(BASE_DIR, 'data', 'master')
-LOG_DIR = os.path.join(BASE_DIR, 'logs')
-MANIFEST = os.path.join(PRICES_DIR, '_days_done.csv')
+
+# Output paths from config (under OUTPUT_ROOT)
+def _prices_dir():
+    return config.prices_dir()
+
+def _log_dir():
+    return config.logs_dir()
+
+def _manifest():
+    return config.prices_dir() / '_days_done.csv'
 
 MASTER_FILES = ['mainboard', 'sme', 'longterm_mainboard', 'longterm_sme']
 
@@ -107,18 +117,27 @@ def _get_zip_text(url, referer):
 
 
 def fetch_nse(d):
-    """Raw NSE bhavcopy CSV text for date d, or None."""
+    """Raw NSE bhavcopy CSV text for date d, and a fetch_ok flag.
+
+    Returns (text, True) on success, (None, False) on any failure.
+    """
     if d >= NSE_UDIFF_CUTOVER:
         url = ('https://nsearchives.nseindia.com/content/cm/'
                f'BhavCopy_NSE_CM_0_0_0_{d.strftime("%Y%m%d")}_F_0000.csv.zip')
     else:
         url = ('https://archives.nseindia.com/content/historical/EQUITIES/'
                f'{d.year}/{MON[d.month-1]}/cm{d.strftime("%d")}{MON[d.month-1]}{d.year}bhav.csv.zip')
-    return _get_zip_text(url, 'https://www.nseindia.com/')
+    text = _get_zip_text(url, 'https://www.nseindia.com/')
+    return (text, True) if text is not None else (None, False)
 
 
 def fetch_bse(d):
-    """Raw BSE bhavcopy CSV text for date d, or None. Handles UDiFF and legacy."""
+    """Raw BSE bhavcopy CSV text for date d, and a fetch_ok flag.
+
+    Returns (text, True) on success, (None, False) on any fetch failure.
+    Note: a holiday/no-file is indistinguishable from a fetch error at BSE
+    (both may return non-200), so False always means "uncertain — retry".
+    """
     if d >= datetime(2024, 1, 1):
         url = ('https://www.bseindia.com/download/BhavCopy/Equity/'
                f'BhavCopy_BSE_CM_0_0_0_{d.strftime("%Y%m%d")}_F_0000.CSV')
@@ -126,15 +145,16 @@ def fetch_bse(d):
             r = requests.get(url, headers={**H, 'Referer': 'https://www.bseindia.com/'}, timeout=40)
             # real CSV is large; HTML error page is ~12.5 KB and starts with '<'
             if r.status_code == 200 and len(r.content) > 20000 and r.content[:1] != b'<':
-                return r.text
+                return r.text, True
         except Exception as e:
             log.debug(f'BSE UDiFF fetch {d.date()} err {e}')
-        return None
+        return None, False
     if d >= BSE_LEGACY_START:
         url = ('https://www.bseindia.com/download/BhavCopy/Equity/'
                f'EQ_ISINCODE_{d.strftime("%d%m%y")}.zip')
-        return _get_zip_text(url, 'https://www.bseindia.com/')
-    return None
+        text = _get_zip_text(url, 'https://www.bseindia.com/')
+        return (text, True) if text is not None else (None, False)
+    return None, False
 
 
 # ── parse one day's text → {isin: (o,h,l,c,v)} ───────────────────────────────
@@ -203,7 +223,7 @@ def parse_day(text, isin_set, sym2isin):
 # ── per-ISIN writer + manifest ───────────────────────────────────────────────
 
 def _isin_path(isin):
-    return os.path.join(PRICES_DIR, f'{isin}.csv')
+    return config.prices_dir() / f'{isin}.csv'
 
 
 def append_day(isin_ohlcv, date_str):
@@ -224,19 +244,36 @@ def append_day(isin_ohlcv, date_str):
 
 
 def load_done():
-    """Return set of (exchange, 'YYYY-MM-DD') already processed."""
+    """Return set of (exchange, 'YYYY-MM-DD') already processed successfully.
+
+    Rows with rows=-1 are fetch errors and are NOT included in done, so they
+    are retried on the next run.
+    """
     done = set()
-    if os.path.exists(MANIFEST):
-        with open(MANIFEST, encoding='utf-8') as f:
-            for r in csv.reader(f):
-                if len(r) >= 2:
-                    done.add((r[0], r[1]))
+    manifest = _manifest()
+    if os.path.exists(manifest):
+        with open(manifest, encoding='utf-8') as f:
+            for r in csv.DictReader(f):
+                # rows=-1 is the fetch-error sentinel — do not mark as done
+                try:
+                    n = int(r.get('rows', 0))
+                except (ValueError, TypeError):
+                    n = 0
+                if n >= 0:
+                    done.add((r['exchange'], r['date']))
     return done
 
 
 def mark_done(exchange, date_str, n_rows):
-    new = not os.path.exists(MANIFEST)
-    with open(MANIFEST, 'a', newline='', encoding='utf-8') as f:
+    """Record a processed (exchange, date) in the manifest.
+
+    n_rows >= 0  : success (0 = holiday / genuine no-data day)
+    n_rows == -1 : fetch error — resume will retry this (exchange, date)
+    """
+    manifest = _manifest()
+    new = not os.path.exists(manifest)
+    os.makedirs(manifest.parent, exist_ok=True)
+    with open(manifest, 'a', newline='', encoding='utf-8') as f:
         w = csv.writer(f)
         if new:
             w.writerow(['exchange', 'date', 'rows'])
@@ -254,8 +291,8 @@ def daterange(start, end):
 
 
 def run(start, end, exchanges=('NSE', 'BSE'), sleep=0.4):
-    os.makedirs(PRICES_DIR, exist_ok=True)
-    os.makedirs(LOG_DIR, exist_ok=True)
+    config.ensure(config.prices_dir())
+    config.ensure(config.logs_dir())
     _setup_logging()
 
     isin_set, sym2isin = load_universe()
@@ -272,10 +309,21 @@ def run(start, end, exchanges=('NSE', 'BSE'), sleep=0.4):
         seen_today = set()
         for exch in exchanges:
             if (exch, ds) in done:
-                # already processed; still mark its ISINs as seen so BSE won't
-                # double-write — but since manifest persists, just skip.
+                # already processed successfully; skip.
                 continue
-            text = fetchers[exch](d)
+            text, fetch_ok = fetchers[exch](d)
+            if not fetch_ok:
+                # fetch error (network/blocked/HTTP error) — mark with sentinel -1
+                # so resume logic retries this day next run
+                mark_done(exch, ds, -1)
+                log.warning(f'{ds} {exch}: fetch error — marked for retry (rows=-1)')
+                if sleep:
+                    time.sleep(sleep)
+                continue
+            # Save raw payload before parsing (honesty rule: raw always preserved)
+            if text:
+                raw_name = f'{exch}_{d.strftime("%Y%m%d")}.csv'
+                ingest.save_raw('bhavcopy_ohlc', raw_name, text)
             day = parse_day(text, isin_set, sym2isin) if text else {}
             if exch != exchanges[0] and day:
                 # for the secondary exchange, only add ISINs not already covered
@@ -287,7 +335,7 @@ def run(start, end, exchanges=('NSE', 'BSE'), sleep=0.4):
             mark_done(exch, ds, len(day))
             done.add((exch, ds))
             log.info(f'{ds} {exch}: {len(day)} universe rows'
-                     + ('' if text else ' (no file / holiday)'))
+                     + ('' if text else ' (holiday / no file)'))
             if sleep:
                 time.sleep(sleep)
     log.info('done')
@@ -297,7 +345,9 @@ def _setup_logging():
     if log.handlers:
         return
     log.setLevel(logging.INFO)
-    fh = logging.FileHandler(os.path.join(LOG_DIR, 'prices.log'))
+    log_path = config.logs_dir() / 'prices.log'
+    os.makedirs(log_path.parent, exist_ok=True)
+    fh = logging.FileHandler(log_path)
     fh.setFormatter(logging.Formatter('%(asctime)s %(message)s'))
     sh = logging.StreamHandler(sys.stdout)
     sh.setFormatter(logging.Formatter('%(asctime)s %(message)s'))

@@ -74,6 +74,13 @@ def parse_list_row(row, today):
         "gmp_rs": None, "gmp_pct": None,
         "sub_qib_x": None, "sub_nii_x": None, "sub_retail_x": None, "sub_total_x": None,
         "day_n": None,
+        # Honesty status fields: distinguish a fetch error from genuine no-data.
+        # sub_fetch_status: 'ok' | 'error:<ExcType>' | 'no_detail_url'
+        # gmp_fetch_status: 'ok' | 'error:<ExcType>' | 'not_attempted' (skipped because gmp already set)
+        # gmp_source: 'investorgain' | 'ipowatch' | None
+        "sub_fetch_status": None,
+        "gmp_fetch_status": None,
+        "gmp_source": None,
     }
 
 
@@ -136,6 +143,8 @@ def attach_gmp(entries, ig_rows):
             px = best.get("ipo_price") or e.get("price_band_high")
             if e["gmp_rs"] is not None and px:
                 e["gmp_pct"] = round(100.0 * float(e["gmp_rs"]) / float(px), 2)
+            if e["gmp_rs"] is not None:        # only claim attribution when real GMP was obtained
+                e["gmp_source"] = "investorgain"
     return entries
 
 
@@ -199,6 +208,16 @@ def append_gmp_history(entries, today, out_dir):
     return len(new)
 
 
+def _save_raw_sub(entry, html):
+    """Persist raw subscription HTML for one open IPO so the parse can be re-run offline."""
+    try:
+        from foundation import ingest  # noqa: PLC0415 — optional; not all envs have foundation
+        slug = entry.get("slug") or re.sub(r"[^a-z0-9]+", "_", entry["name"].lower())[:40]
+        ingest.save_raw("live_board_sub", f"{slug}_sub.html", html)
+    except Exception:  # noqa: BLE001 — save_raw failure must not abort the board fetch
+        pass
+
+
 def fetch_board(out_dir=LIVE_DIR, today=None):
     """The full fetch. Returns the board dict (also written to out_dir/board.json)."""
     import cloudscraper
@@ -229,6 +248,8 @@ def fetch_board(out_dir=LIVE_DIR, today=None):
     from scrapers import ipowatch
     for e in entries:
         if e["gmp_pct"] is not None:
+            # already set by investorgain; no need to try ipowatch
+            e["gmp_fetch_status"] = "not_attempted"
             continue
         try:
             m = ipowatch.match_and_extract(e["name"], e["open_date"], e["close_date"], None)
@@ -237,21 +258,32 @@ def fetch_board(out_dir=LIVE_DIR, today=None):
             if g is not None and px:
                 e["gmp_rs"] = float(g)
                 e["gmp_pct"] = round(100.0 * float(g) / float(px), 2)
-        except Exception:
-            pass
+                e["gmp_source"] = "ipowatch"
+            # fetch succeeded regardless of whether GMP data was present
+            e["gmp_fetch_status"] = "ok"
+        except Exception as _gmp_exc:
+            # fetch/parse failed — gmp_rs/gmp_pct remain None but the REASON is recorded
+            e["gmp_fetch_status"] = f"error:{type(_gmp_exc).__name__}"
         time.sleep(RATE)
     for e in entries:
         e["day_n"] = day_n(e, today)
-        if e["status"] == "open" and e.get("detail_url"):
-            try:
-                sub_url = e["detail_url"].replace("/ipo/", "/ipo_subscription/")
-                resp = sc.get(sub_url, headers=HDR, timeout=25)
-                s = parse_subscription_html(resp.text)
-                e.update(sub_qib_x=s["qib"], sub_nii_x=s["nii"],
-                         sub_retail_x=s["retail"], sub_total_x=s["total"])
-            except Exception:
-                pass
-            time.sleep(RATE)
+        if e["status"] == "open":
+            if not e.get("detail_url"):
+                e["sub_fetch_status"] = "no_detail_url"
+            else:
+                try:
+                    sub_url = e["detail_url"].replace("/ipo/", "/ipo_subscription/")
+                    resp = sc.get(sub_url, headers=HDR, timeout=25)
+                    # save raw subscription HTML so the parse can be re-run offline
+                    _save_raw_sub(e, resp.text)
+                    s = parse_subscription_html(resp.text)
+                    e.update(sub_qib_x=s["qib"], sub_nii_x=s["nii"],
+                             sub_retail_x=s["retail"], sub_total_x=s["total"])
+                    e["sub_fetch_status"] = "ok"
+                except Exception as _sub_exc:
+                    # sub_qib/nii/retail/total stay None; status records the error type
+                    e["sub_fetch_status"] = f"error:{type(_sub_exc).__name__}"
+                time.sleep(RATE)
     os.makedirs(out_dir, exist_ok=True)
     board = {"fetched_at": datetime.now().isoformat(timespec="seconds"),
              "open": [e for e in entries if e["status"] == "open"],

@@ -7,9 +7,21 @@ TWO independent agreements before trusting anything:
 If both don't hold, we return NO MATCH (acceptable — refine later). We never guess.
 
 Read post `content.rendered` via the REST API (the rendered front-end URL is sometimes stale-cached).
+
+gmp_status values (present in every matched result):
+  ok          — GMP table found and at least one numeric value parsed.
+  absent      — no GMP table found in the matched post HTML.
+  parse_fail  — GMP table present (header looks right) but no numeric values could be extracted.
 """
+import os
+import sys
 import urllib.request, urllib.parse, json, io, re, html as _html
 import pandas as pd
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from foundation import config, ingest
+
+_SOURCE = 'ipowatch'
 
 UA = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'}
 _BASE = 'https://ipowatch.in/wp-json/wp/v2/posts'
@@ -105,16 +117,30 @@ def parse_subscription(html):
 
 
 def parse_gmp_last(html):
-    """Latest non-empty GMP value (₹) from the GMP table (Date|GMP|Kostak|Subject); None if none."""
+    """Latest non-empty GMP value (₹) from the GMP table (Date|GMP|Kostak|Subject).
+
+    Returns (value_or_None, gmp_status) where gmp_status is one of:
+      'ok'         — GMP table found and at least one numeric value extracted.
+      'absent'     — no table with a GMP header found in this HTML.
+      'parse_fail' — a GMP-header table was found but no numeric value could be extracted.
+
+    Callers should record gmp_status to distinguish the 153-matched-but-no-GMP case.
+    """
     try:
         tabs = pd.read_html(io.StringIO(html))
-    except ValueError:
-        return None
+    except Exception:
+        # ValueError  — no tables found (pandas raises this on truly table-free HTML).
+        # XMLSyntaxError / OSError — lxml raises on empty or completely malformed HTML.
+        # Both mean: no GMP table present → 'absent'.
+        return None, 'absent'
+    saw_gmp_table = False
     for t in tabs:
         head = ' '.join(str(c) for c in t.columns) + ' ' + ' '.join(str(x) for x in t.iloc[0])
         if 'GMP' not in head.upper():
             continue
-        # GMP column is the 2nd column; rows are dated; take the last numeric ₹ value
+        saw_gmp_table = True
+        # Found a GMP-header table — attempt numeric extraction.
+        # GMP column is the 2nd column; rows are dated; take the last numeric ₹ value.
         vals = []
         for i in range(len(t)):
             cell = str(t.iloc[i, 1])
@@ -122,8 +148,9 @@ def parse_gmp_last(html):
             if mv:
                 vals.append(float(mv.group(1)))
         if vals:
-            return vals[-1]   # most recent (table is chronological top→bottom)
-    return None
+            return vals[-1], 'ok'   # most recent (table is chronological top→bottom)
+        # no numeric value in THIS gmp table — keep scanning later tables before giving up
+    return (None, 'parse_fail') if saw_gmp_table else (None, 'absent')
 
 
 def _named(posts, ours):
@@ -138,28 +165,46 @@ def _named(posts, ours):
     return out
 
 
-def _evaluate(named, our_dates):
-    """(matched_date, sub, gmp) across the named posts. matched_date is set only when a post's
-    Open/Close/Listing date EXACTLY equals one of ours (concrete corroboration)."""
-    matched_date, sub, gmp = None, None, None
+def _evaluate(named, our_dates, isin=None):
+    """(matched_date, sub, gmp, gmp_status) across the named posts.
+
+    matched_date is set only when a post's Open/Close/Listing date EXACTLY equals one of ours
+    (concrete corroboration). gmp_status is 'ok'/'absent'/'parse_fail'; None before any GMP post
+    is examined.
+
+    For each post that matches, raw HTML is saved via ingest.save_raw so it can be reprocessed
+    offline (root-cause fix for the 153-matched-but-undiagnosed-GMP-status rows).
+    """
+    matched_date, sub, gmp, gmp_status = None, None, None, None
     for p in named:
         html = p.get('content', {}).get('rendered', '')
         slug = p.get('slug', '')
+        pid = p.get('id', 'unknown')
         if matched_date is None:
             for k, v in parse_dates(html).items():
                 if v and v in our_dates:
-                    matched_date = f'{k}={v}'; break
+                    matched_date = f'{k}={v}'
+                    # Save raw HTML of the matched post for offline reprocessing.
+                    label = isin or 'unknown'
+                    ingest.save_raw(_SOURCE, f'{label}_{pid}.html', html)
+                    break
         if sub is None and 'subscription' in slug:
             sub = parse_subscription(html)
-        if gmp is None and ('gmp' in slug or 'grey-market' in slug or 'review' in slug):
-            gmp = parse_gmp_last(html)
-    return matched_date, sub, gmp
+        if gmp_status is None and ('gmp' in slug or 'grey-market' in slug or 'review' in slug):
+            gmp, gmp_status = parse_gmp_last(html)
+            ingest.save_raw(_SOURCE, f'{isin or "unknown"}_{pid}_gmp.html', html)  # preserve GMP post for offline reprocessing
+    return matched_date, sub, gmp, gmp_status
 
 
-def match_and_extract(company_name, open_date, close_date, listing_date):
-    """Return {sub_*, gmp_rs, evidence} for an IPO only if a post matches on NAME + an EXACT IPO date,
-    else None. Strict: both required. Escalates to targeted queries so the dates/subscription/GMP posts
-    are reliably surfaced (most rows resolve on the first, general query)."""
+def match_and_extract(company_name, open_date, close_date, listing_date, isin=None):
+    """Return {sub_*, gmp_rs, gmp_status, evidence} for an IPO only if a post matches on NAME +
+    an EXACT IPO date, else None. Strict: both required. Escalates to targeted queries so the
+    dates/subscription/GMP posts are reliably surfaced (most rows resolve on the first, general query).
+
+    gmp_status in the result is one of 'ok' / 'absent' / 'parse_fail' — distinguishing why gmp_rs
+    may be None for a matched post (the 153-matched-but-no-GMP ambiguity is now diagnosable).
+    When no GMP post was examined at all, gmp_status is omitted (sub-only match with no GMP slug).
+    """
     ours = tokens(company_name)
     if not ours:
         return None
@@ -169,30 +214,34 @@ def match_and_extract(company_name, open_date, close_date, listing_date):
     q = core_query(company_name)
     posts = search_posts(q)
     named = _named(posts, ours)
-    matched_date, sub, gmp = _evaluate(named, our_dates)
+    matched_date, sub, gmp, gmp_status = _evaluate(named, our_dates, isin=isin)
     # escalate if not yet corroborated OR we still have neither datum (the needed post may be missing)
     if matched_date is None or (sub is None and gmp is None):
         for extra in (f'{q} subscription', f'{q} gmp'):
             posts += search_posts(extra)
         named = _named(posts, ours)
-        matched_date, sub, gmp = _evaluate(named, our_dates)
+        matched_date, sub, gmp, gmp_status = _evaluate(named, our_dates, isin=isin)
     if matched_date is None:
         return None                              # no exact-date corroboration → reject
     if sub is None and gmp is None:
-        return None
+        return None    # no usable datum (a bare gmp_status with no value is NOT a match → don't inflate matched count)
     res = {'evidence': f'name+{matched_date}', 'gmp_rs': gmp}
+    if gmp_status is not None:
+        res['gmp_status'] = gmp_status
     if sub:
         res.update(sub)
     return res
 
 
 if __name__ == '__main__':
-    import csv, sys, os, time, threading
+    import csv, time, threading
     from concurrent.futures import ThreadPoolExecutor, as_completed
     WORKERS = int(sys.argv[1]) if len(sys.argv) > 1 else 3   # gentle: WP can throttle
-    os.makedirs('data/raw/ipowatch', exist_ok=True)
-    OUT = 'data/raw/ipowatch/matches.csv'
-    FIELDS = ['isin', 'matched', 'sub_qib_x', 'sub_nii_x', 'sub_retail_x', 'sub_total_x', 'gmp_rs', 'evidence']
+    config.ensure(config.raw_dir(_SOURCE))
+    config.ensure(config.logs_dir())
+    OUT = str(config.raw_dir(_SOURCE) / 'matches.csv')
+    FIELDS = ['isin', 'matched', 'sub_qib_x', 'sub_nii_x', 'sub_retail_x', 'sub_total_x',
+              'gmp_rs', 'gmp_status', 'evidence']
 
     done = set()
     if os.path.exists(OUT):
@@ -201,7 +250,8 @@ if __name__ == '__main__':
     # target: SME rows lacking subscription (for sub + GMP) OR any row lacking GMP
     targets = []
     for seg in ('mainboard', 'sme'):
-        for r in csv.DictReader(open(f'data/master/_base_{seg}.csv')):
+        src_path = config.src('master', f'_base_{seg}.csv')
+        for r in csv.DictReader(open(src_path)):
             if r['isin'] in done:
                 continue
             need_sub = seg == 'sme' and not (r.get('sub_total_x') or '').strip()
@@ -219,7 +269,8 @@ if __name__ == '__main__':
     def work(t):
         for attempt in range(3):
             try:
-                return t, match_and_extract(t['company'], t['open'], t['close'], t['listing'])
+                return t, match_and_extract(t['company'], t['open'], t['close'], t['listing'],
+                                            isin=t['isin'])
             except Exception:
                 time.sleep(0.8 * (attempt + 1))
         return t, None
@@ -233,13 +284,15 @@ if __name__ == '__main__':
                 row = {'isin': t['isin'], 'matched': 0}
                 if res:
                     counts['matched'] += 1
-                    row.update({'matched': 1, 'gmp_rs': res.get('gmp_rs'), 'evidence': res.get('evidence'),
+                    row.update({'matched': 1, 'gmp_rs': res.get('gmp_rs'),
+                                'gmp_status': res.get('gmp_status'),
+                                'evidence': res.get('evidence'),
                                 'sub_qib_x': res.get('sub_qib_x'), 'sub_nii_x': res.get('sub_nii_x'),
                                 'sub_retail_x': res.get('sub_retail_x'), 'sub_total_x': res.get('sub_total_x')})
                 w.writerow(row); f.flush()
                 if doneN % 20 == 0 or doneN == len(targets):
                     rate = doneN / (time.time() - t0 + 0.01)
-                    open('logs/ipowatch_progress.txt', 'w').write(
+                    (config.logs_dir() / 'ipowatch_progress.txt').write_text(
                         f"done={doneN}/{len(targets)} matched={counts['matched']} rate={rate:.2f}/s "
                         f"eta={(len(targets)-doneN)/rate:.0f}s\n")
                     print(f"  {doneN}/{len(targets)} matched={counts['matched']}", flush=True)

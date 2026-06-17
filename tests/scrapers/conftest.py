@@ -68,3 +68,15 @@ def nse_session_mod():
 def nse_subscription_mod():
     """scrapers/nse_subscription.py — delegates priming to nse_session."""
     return _load("scrapers/nse_subscription.py", "scr_nse_subscription")
+
+
+@pytest.fixture(scope="session")
+def investorgain_mod():
+    """scrapers/investorgain.py — GMP fetch + gmp_tracked honesty."""
+    return _load("scrapers/investorgain.py", "scr_investorgain")
+
+
+@pytest.fixture(scope="session")
+def gmp_patcher_mod():
+    """scrapers/gmp_patcher.py — GMP patch orchestrator."""
+    return _load("scrapers/gmp_patcher.py", "scr_gmp_patcher")

@@ -22,9 +22,12 @@ from datetime import datetime, date
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import screener  # reuse fetch_company, page_name, name_match, search_company
 
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from foundation import config, ingest
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT_DIR = os.path.join(ROOT, 'data/raw/screener_prices')
-LOG_PATH = os.path.join(OUT_DIR, '_resolve_log.csv')
+OUT_DIR = config.raw_dir('screener_prices')
+LOG_PATH = OUT_DIR / '_resolve_log.csv'
 UA = screener.UA
 
 
@@ -92,7 +95,10 @@ def resolve_company_id(nse_symbol, bse_code, company_name, sleep=1.5):
 def fetch_chart(company_id, sleep=1.5):
     """Return list of dicts {date, close, volume} sorted by date, from the chart API."""
     url = f'https://www.screener.in/api/company/{company_id}/chart/?q=Price-Volume&days=10000'
-    data = json.loads(_get(url))
+    raw = _get(url)
+    # Save raw payload before parsing (honesty rule: raw always preserved)
+    ingest.save_raw('screener_prices', f'{company_id}.json', raw)
+    data = json.loads(raw)
     time.sleep(sleep)
     ds = {d.get('metric'): d.get('values', []) for d in data.get('datasets', [])}
     price = ds.get('Price') or ds.get('Price on BSE') or ds.get('Price on NSE') or []
@@ -194,7 +200,7 @@ def main():
             cid, slug, nm, why = resolve_company_id(m['nse'], m['bse'], m['company_name'], sleep=delay)
             if cid:
                 pts = fetch_chart(cid, sleep=delay)
-                with open(os.path.join(OUT_DIR, isin + '.csv'), 'w', newline='') as fh:
+                with open(OUT_DIR / (isin + '.csv'), 'w', newline='') as fh:
                     w = csv.writer(fh)
                     w.writerow(['date', 'close', 'volume'])
                     for p in pts:
@@ -214,7 +220,7 @@ def main():
         log_f.flush()
         n += 1
         if n % 10 == 0 or n == len(todo):
-            open(os.path.join(ROOT, 'logs/screener_prices_progress.txt'), 'w').write(
+            open(config.logs_dir() / 'screener_prices_progress.txt', 'w').write(
                 f"done={n}/{len(todo)} resolved={counts['resolved']} noresolve={counts['noresolve']} "
                 f"error={counts['error']} consec_err={consec_err}\n")
             print(f"  {n}/{len(todo)} resolved={counts['resolved']} noresolve={counts['noresolve']} "

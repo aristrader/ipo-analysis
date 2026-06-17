@@ -5,6 +5,11 @@ page's <h1> company name matches ours (normalized) — BSE-SME pages don't expos
 old code-check wrongly rejected them. Delisted companies resolve via the search API → /company/id/<id>/.
 Annual figures only (₹ Crore; EPS in ₹). Quarterly tables skipped.
 """
+import os as _os
+import sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
+from foundation import config, ingest
+
 import urllib.request, urllib.error, urllib.parse, io, re, json, time
 import pandas as pd
 
@@ -34,8 +39,14 @@ def fetch_company(slug, consolidated=True):
         path = slug if slug.endswith('/') else slug + '/'
     else:
         path = f'/company/{slug}/consolidated/' if consolidated else f'/company/{slug}/'
+    url = 'https://www.screener.in' + path
     try:
-        return _get('https://www.screener.in' + path)
+        html = _get(url)
+        # Save raw company page before parsing
+        safe = re.sub(r'[^a-zA-Z0-9_\-]', '_', path.strip('/'))[:80]
+        suffix = '_consolidated' if consolidated else ''
+        ingest.save_raw('screener', f'{safe}{suffix}.html', html)
+        return html
     except urllib.error.HTTPError as e:
         if e.code == 404:
             return None
@@ -87,8 +98,13 @@ def name_match(a, b, allow_digitstrip=False):
 
 def search_company(name):
     q = urllib.parse.quote(' '.join(_norm_tokens(name)))
+    url = f'https://www.screener.in/api/company/search/?q={q}'
     try:
-        d = json.loads(_get(f'https://www.screener.in/api/company/search/?q={q}'))
+        raw = _get(url)
+        # Save raw search response
+        safe_q = re.sub(r'[^a-zA-Z0-9_]', '_', q)[:60]
+        ingest.save_raw('screener', f'search_{safe_q}.json', raw)
+        d = json.loads(raw)
         return d if isinstance(d, list) else []
     except Exception:
         return []
@@ -184,10 +200,10 @@ if __name__ == '__main__':
     import csv, sys, os
     DELAY = float(sys.argv[1]) if len(sys.argv) > 1 else 1.2   # between companies; resolve() also sleeps internally
     MAX_CONSEC_ERR = 10
-    os.makedirs('data/raw/screener', exist_ok=True)
-    FIN_PATH = 'data/raw/screener/financials.csv'
-    LOG_PATH = 'data/raw/screener/match_log.csv'
-    META_PATH = 'data/raw/screener/company_meta.csv'
+    config.ensure(config.raw_dir('screener'))
+    FIN_PATH  = str(config.raw_dir('screener') / 'financials.csv')
+    LOG_PATH  = str(config.raw_dir('screener') / 'match_log.csv')
+    META_PATH = str(config.raw_dir('screener') / 'company_meta.csv')
 
     done_isins = set()
     if os.path.exists(LOG_PATH):
@@ -248,7 +264,7 @@ if __name__ == '__main__':
         log_w.writerow([t['isin'], t['company'], slug, why, len(fin) if fin else 0])
         fin_f.flush(); log_f.flush()
         if done % 20 == 0 or done == len(targets):
-            open('logs/screener_fetch_progress.txt', 'w').write(
+            open(str(config.logs_dir() / 'screener_fetch_progress.txt'), 'w').write(
                 f"done={done}/{len(targets)} resolved={counts['resolved']} nomatch={counts['nomatch']} "
                 f"error={counts['error']} consec_err={consec_err}\n")
             print(f"  {done}/{len(targets)} resolved={counts['resolved']} nomatch={counts['nomatch']} error={counts['error']}", flush=True)

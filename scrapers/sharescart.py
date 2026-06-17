@@ -40,12 +40,15 @@ from bs4 import BeautifulSoup
 
 # ── Paths ──────────────────────────────────────────────────────────────────────
 BASE_DIR   = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-RAW_DIR    = os.path.join(BASE_DIR, 'data', 'raw')
-LOGS_DIR   = os.path.join(BASE_DIR, 'logs')
-MB_URLS    = os.path.join(RAW_DIR, 'mb_urls.csv')
-SME_URLS   = os.path.join(RAW_DIR, 'sme_urls.csv')
-MB_EVENTS  = os.path.join(RAW_DIR, 'mainboard_events.csv')
-SME_EVENTS = os.path.join(RAW_DIR, 'sme_events.csv')
+import sys as _sys
+_sys.path.insert(0, BASE_DIR)
+from foundation import config, ingest
+
+LOGS_DIR   = str(config.logs_dir())
+MB_URLS    = str(config.raw_dir('sharescart') / 'mb_urls.csv')
+SME_URLS   = str(config.raw_dir('sharescart') / 'sme_urls.csv')
+MB_EVENTS  = str(config.raw_dir('sharescart') / 'mainboard_events.csv')
+SME_EVENTS = str(config.raw_dir('sharescart') / 'sme_events.csv')
 
 API_URL    = 'https://www.sharescart.com/web-services/ipo-stocks-intermediary.php'
 YEARS      = [2023, 2024, 2025]
@@ -58,8 +61,8 @@ RATE_LIMIT = 0.5   # seconds between requests per worker
 # ── Logging setup ─────────────────────────────────────────────────────────────
 
 def setup_logging():
-    os.makedirs(LOGS_DIR, exist_ok=True)
-    log_file = os.path.join(LOGS_DIR, f'scraper_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log')
+    config.ensure(config.logs_dir())
+    log_file = str(config.logs_dir() / f'scraper_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log')
 
     fmt = '%(asctime)s [%(levelname)-7s] %(message)s'
     datefmt = '%Y-%m-%d %H:%M:%S'
@@ -267,7 +270,7 @@ def parse_list_rows(table_html):
 
 
 def run_list_phase(session):
-    os.makedirs(RAW_DIR, exist_ok=True)
+    config.ensure(config.raw_dir('sharescart'))
     mb_rows, sme_rows = [], []
 
     for year in YEARS:
@@ -296,8 +299,30 @@ def run_list_phase(session):
 
 # ── Phase 2: detail ───────────────────────────────────────────────────────────
 
+def _book_built_fields(price_band_low, issue_price):
+    """SC-1 fix: derive book_built and price_band_width_pct ONLY when price_band_low was found.
+
+    Returns (book_built, price_band_width_pct) as strings, or (None, None) when the source had no
+    price-band data — never fabricates 'False'/'0' as a hard default.
+    Pure function — no network; testable offline.
+    """
+    if price_band_low is None or issue_price is None:
+        return None, None
+    try:
+        low = float(price_band_low)
+        high = float(issue_price)
+    except (ValueError, TypeError):
+        return None, None
+    bb = str(low != high)
+    width = f'{(high - low) / low * 100:.2f}' if low > 0 else None
+    return bb, width
+
+
 def scrape_detail(session, url, list_row):
     r = _get(session, url)
+    # Save raw HTML before parsing
+    slug = url.rstrip('/').rsplit('/', 1)[-1] or 'unknown'
+    ingest.save_raw('sharescart', f'{slug}.html', r.text)
     soup = BeautifulSoup(r.text, 'lxml')
     rec = {col: None for col in SCHEMA_COLS}
 
@@ -355,14 +380,10 @@ def scrape_detail(session, url, list_row):
                 rec['issue_size_cr'] = m.group(1)
             break
 
-    # ── Derived ───────────────────────────────────────────────────────────────
-    if rec['price_band_low'] and rec['issue_price']:
-        low, high = float(rec['price_band_low']), float(rec['issue_price'])
-        rec['book_built'] = str(low != high)
-        rec['price_band_width_pct'] = f'{(high - low) / low * 100:.2f}' if low > 0 else '0'
-    else:
-        rec['book_built'] = 'False'
-        rec['price_band_width_pct'] = '0'
+    # ── Derived (SC-1 fix: only set when source had price-band data; never fabricate 'False'/'0') ──
+    rec['book_built'], rec['price_band_width_pct'] = _book_built_fields(
+        rec.get('price_band_low'), rec.get('issue_price')
+    )
 
     # ── Timetable ─────────────────────────────────────────────────────────────
     timeline = soup.find('div', class_='ipo-timeline')
@@ -662,7 +683,7 @@ def _read_csv(path):
 # ── Phase 2 runner ────────────────────────────────────────────────────────────
 
 def run_detail_phase(limit=None, workers=1):
-    os.makedirs(RAW_DIR, exist_ok=True)
+    config.ensure(config.raw_dir('sharescart'))
 
     for path in [MB_EVENTS, SME_EVENTS]:
         if os.path.exists(path):

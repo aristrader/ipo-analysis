@@ -132,9 +132,11 @@ def collect(symbols, out_path=STAGING_PATH, extra_params=None, sleep=_RATE, reco
 
     Re-primes the session on error and retries the symbol once. Flushes periodically so a
     mid-run interruption keeps progress. A symbol with no captured filings (0 rows = symbol drift /
-    no filing / wrong platform, OR a repeated transient failure) is "uncovered"; uncovered symbols
-    are recorded to MISSES_PATH so coverage gaps are flagged, never silent. `record_misses=False`
-    (subset/smoke runs) leaves the canonical misses file untouched so it isn't clobbered.
+    no filing / wrong platform) is recorded as reason='no_announcements_returned'; a symbol whose
+    fetch failed on both attempts is recorded as reason='fetch_failed'. These are DISTINCT: the
+    former is a genuine empty list from NSE; the latter is a network/HTTP error. Both are written
+    to MISSES_PATH so coverage gaps are flagged, never silent. `record_misses=False` (subset/smoke
+    runs) leaves the canonical misses file untouched so it isn't clobbered.
     Returns (n_symbols_done, n_rows_total, n_with_news, n_misses).
     """
     rows = load_staging(out_path)
@@ -144,28 +146,38 @@ def collect(symbols, out_path=STAGING_PATH, extra_params=None, sleep=_RATE, reco
     session = prime_session()
     done = with_news = 0
     covered = set(already)  # already-staged symbols count as covered (single source for miss classification)
+    fetch_failed = set()     # symbols that errored on BOTH attempts (network/HTTP, not genuine empty)
     aborted = False
     for i, sym in enumerate(symbols, 1):
         if sym in already:
             done += 1
             continue
         try:
+            sym_failed = False
             for attempt in (1, 2):
                 try:
                     raw = fetch_symbol(session, sym, extra_params=extra_params)
+                    # save raw payload so the per-symbol API response is always reprocessable
+                    _save_raw_announcements(sym, raw)
                     if raw:
                         with_news += 1
                         covered.add(sym)
+                    # a genuine empty list (0 filings from NSE) does NOT go in fetch_failed;
+                    # it goes in misses with reason='no_announcements_returned' (handled below)
                     rows = staging.upsert(rows, [staging.normalize(r) for r in raw])
                     print(f"  [{i}/{len(symbols)}] {sym:14s} -> {len(raw)} filings")
+                    sym_failed = False
                     break
                 except Exception as e:  # noqa: BLE001 — transient NSE/network; re-prime + retry once
+                    sym_failed = True
                     if attempt == 1:
                         print(f"  [{i}/{len(symbols)}] {sym:14s} -> error ({str(e)[:50]}); re-priming")
                         time.sleep(sleep * 2)
                         session = _safe_reprime(sleep)  # raises _NetworkDown on a real outage
                     else:
                         print(f"  [{i}/{len(symbols)}] {sym:14s} -> FAILED ({str(e)[:50]}); skipping")
+            if sym_failed:
+                fetch_failed.add(sym)
         except _NetworkDown as nd:
             print(f"\nNETWORK DOWN — {nd}\nflushing progress and stopping; re-run to resume from here.")
             aborted = True
@@ -176,20 +188,44 @@ def collect(symbols, out_path=STAGING_PATH, extra_params=None, sleep=_RATE, reco
         time.sleep(sleep)
     write_staging(rows, out_path)
     # only classify misses on a COMPLETE run (an abort would mislabel the un-reached tail as misses)
-    misses = [s for s in symbols if s not in covered]
     if record_misses and not aborted:
-        _write_misses(misses, MISSES_PATH)
-    return done, len(rows), with_news, len(misses)
+        # genuine empty: NSE returned 0 filings (not a fetch error, not already covered)
+        no_data = [s for s in symbols if s not in covered and s not in fetch_failed]
+        _write_misses(no_data, fetch_failed, MISSES_PATH)
+    n_misses = len([s for s in symbols if s not in covered])
+    return done, len(rows), with_news, n_misses
 
 
-def _write_misses(symbols, path=MISSES_PATH):
-    """Record symbols with no captured filings (drift / no-news / wrong-platform) for review."""
+def _save_raw_announcements(symbol, data):
+    """Persist the raw per-symbol API response (list of dicts) as JSON so reprocessing is offline-safe."""
+    import json
+    try:
+        from foundation import config, ingest  # noqa: PLC0415 — optional; not all envs have foundation
+        raw_bytes = json.dumps(data, ensure_ascii=False).encode()
+        ingest.save_raw("nse_announcements", f"{symbol}.json", raw_bytes)
+    except Exception:  # noqa: BLE001 — save_raw failure must not abort the fetch loop
+        pass
+
+
+def _write_misses(no_data_symbols, fetch_failed_symbols, path=MISSES_PATH):
+    """Record symbols with no captured filings for review, with a DISTINCT reason per failure kind.
+
+    - 'no_announcements_returned': NSE returned an empty list (genuine no-filings / symbol drift /
+      wrong platform) — the fetch itself succeeded.
+    - 'fetch_failed': network or HTTP error on both attempts — the fetch never completed; we do
+      NOT know whether NSE would have returned filings or not.
+
+    Keeping these separate is critical: a 'fetch_failed' symbol should be retried; a
+    'no_announcements_returned' symbol is likely genuinely absent and may need manual review.
+    """
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["nse_symbol", "reason"])
-        for s in symbols:
+        for s in sorted(no_data_symbols):
             w.writerow([s, "no_announcements_returned"])
+        for s in sorted(fetch_failed_symbols):
+            w.writerow([s, "fetch_failed"])
 
 
 def main():

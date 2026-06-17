@@ -35,10 +35,13 @@ import cloudscraper
 from bs4 import BeautifulSoup
 
 BASE_DIR  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-RAW_DIR   = os.path.join(BASE_DIR, 'data', 'raw')
-LOGS_DIR  = os.path.join(BASE_DIR, 'logs')
-URLS_CSV    = os.path.join(RAW_DIR, 'chittorgarh', 'urls.csv')
-DETAILS_CSV = os.path.join(RAW_DIR, 'chittorgarh', 'details.csv')
+import sys as _sys
+_sys.path.insert(0, BASE_DIR)
+from foundation import config, ingest
+
+LOGS_DIR  = str(config.logs_dir())
+URLS_CSV    = str(config.raw_dir('chittorgarh') / 'urls.csv')
+DETAILS_CSV = str(config.raw_dir('chittorgarh') / 'details.csv')
 
 LIST_API = ('https://webnodejs.chittorgarh.com/cloud/report/data-read/82/'
             '{page}/5/{year}/2026-27/0/all/0?search=&v=13-44')
@@ -56,7 +59,7 @@ LIST_COLS = [
 
 
 def setup_logging():
-    os.makedirs(LOGS_DIR, exist_ok=True)
+    config.ensure(config.logs_dir())
     ts = datetime.now().strftime('%Y%m%d_%H%M%S')
     lf = os.path.join(LOGS_DIR, f'chittorgarh_{ts}.log')
     logging.basicConfig(level=logging.INFO,
@@ -109,10 +112,14 @@ def pull_year(scraper, year):
     while page <= 300:
         url = LIST_API.format(page=page, year=year)
         try:
-            j = scraper.get(url, headers={'Referer': 'https://www.chittorgarh.com/'}, timeout=20).json()
+            resp = scraper.get(url, headers={'Referer': 'https://www.chittorgarh.com/'}, timeout=20)
+            raw_text = resp.text
+            j = resp.json()
         except Exception as e:
             log.warning(f'  {year} p{page} error: {e}')
             break
+        # Save raw list API payload before parsing
+        ingest.save_raw('chittorgarh', f'list_{year}_p{page}.json', raw_text)
         d = j.get('reportTableData') or []
         if not d:
             break
@@ -127,7 +134,7 @@ def pull_year(scraper, year):
 
 
 def run_list_phase(years):
-    os.makedirs(os.path.dirname(URLS_CSV), exist_ok=True)
+    config.ensure(config.raw_dir('chittorgarh'))
     scraper = cloudscraper.create_scraper()
     all_rows = []
     for y in years:
@@ -156,12 +163,13 @@ def run_list_phase(years):
 
 DETAIL_COLS = [
     'chittorgarh_id', 'isin', 'company_name', 'type',
+    'fetch_status',
     'market_maker', 'anchor_allocation_cr',
     'issue_size_cr', 'fresh_issue_cr', 'ofs_cr', 'ofs_pct',
     'sub_total_x',
     'listing_open', 'listing_high', 'listing_low', 'listing_close',
     'promoter_pre_shares', 'promoter_post_shares', 'objects_of_issue', 'detail_url',
-    'face_value', 'kpi_pe_pre_ipo', 'kpi_market_cap_post_ipo', 'kpi_roe_pre_ipo', 
+    'face_value', 'kpi_pe_pre_ipo', 'kpi_market_cap_post_ipo', 'kpi_roe_pre_ipo',
     'kpi_roce_pre_ipo', 'issue_expenses_cr'
 ]
 
@@ -179,6 +187,29 @@ def _cr_from_text(s):
     return m.group(1).replace(',', '') if m else None
 
 
+def _ofs_from_kv(kv):
+    """CG-1 fix: return (ofs_cr, ofs_pct) ONLY from source-published 'Offer for Sale' field.
+
+    Never derives ofs_cr from (total - fresh): that derivation belongs in the assembly step and must be
+    stamped 'derived'. Returns (None, None) when the source has no OFS field, so the caller writes None
+    rather than a fabricated 0.
+    Pure function — no network, no side-effects; testable offline.
+    """
+    total_cr = _cr_from_text(kv.get('Total Issue Size', ''))
+    ofs_raw = _cr_from_text(kv.get('Offer for Sale', ''))
+    if ofs_raw is None:
+        return None, None
+    ofs_pct = None
+    if total_cr is not None:
+        try:
+            t = float(total_cr)
+            if t > 0:
+                ofs_pct = f'{float(ofs_raw) / t * 100:.1f}'
+        except ValueError:
+            pass
+    return ofs_raw, ofs_pct
+
+
 def scrape_detail(scraper, row):
     rec = {c: None for c in DETAIL_COLS}
     rec.update({'chittorgarh_id': row.get('chittorgarh_id'), 'isin': row.get('isin'),
@@ -186,8 +217,17 @@ def scrape_detail(scraper, row):
                 'detail_url': row.get('detail_url')})
     url = row.get('detail_url')
     if not url:
+        # CG-2: distinguish no-URL from a fetch failure
+        rec['fetch_status'] = 'no_url'
         return rec
     r = scraper.get(url, headers={'Referer': 'https://www.chittorgarh.com/'}, timeout=25)
+    if r.status_code != 200:
+        rec['fetch_status'] = f'http_{r.status_code}'
+        return rec
+    # Save raw HTML before parsing
+    cid = row.get('chittorgarh_id') or 'unknown'
+    ingest.save_raw('chittorgarh', f'{cid}.html', r.text)
+    rec['fetch_status'] = 'ok'
     soup = BeautifulSoup(r.text, 'lxml')
     tables = soup.find_all('table')
 
@@ -199,22 +239,14 @@ def scrape_detail(scraper, row):
             if len(cells) == 2 and cells[0]:
                 kv.setdefault(cells[0].strip(), cells[1].strip())
 
-    # Issue size / fresh / OFS
+    # Issue size / fresh / OFS (CG-1: only publish what the source says; no derivation here)
     total_cr = _cr_from_text(kv.get('Total Issue Size', ''))
     fresh_cr = _cr_from_text(kv.get('Fresh Issue', '')) or _cr_from_text(kv.get('Fresh Issue (Ex Market Maker)', ''))
-    ofs_cr   = _cr_from_text(kv.get('Offer for Sale', ''))
+    ofs_cr, ofs_pct = _ofs_from_kv(kv)
     rec['issue_size_cr'] = total_cr
     rec['fresh_issue_cr'] = fresh_cr
-    if ofs_cr:
-        rec['ofs_cr'] = ofs_cr
-    elif total_cr and fresh_cr:
-        try:
-            o = float(total_cr) - float(fresh_cr)
-            rec['ofs_cr'] = f'{max(o, 0):.2f}'
-        except ValueError:
-            pass
-    if rec['ofs_cr'] and total_cr and float(total_cr) > 0:
-        rec['ofs_pct'] = f'{float(rec["ofs_cr"]) / float(total_cr) * 100:.1f}'
+    rec['ofs_cr'] = ofs_cr
+    rec['ofs_pct'] = ofs_pct
 
     rec['promoter_pre_shares']  = _num(kv.get('Share Holding Pre Issue', ''))
     rec['promoter_post_shares'] = _num(kv.get('Share Holding Post Issue', ''))
@@ -277,10 +309,10 @@ def scrape_detail(scraper, row):
 
 
 def run_detail_phase(workers):
-    os.makedirs(os.path.dirname(DETAILS_CSV), exist_ok=True)
+    config.ensure(config.raw_dir('chittorgarh'))
     rows = list(csv.DictReader(open(URLS_CSV, encoding='utf-8'))) if os.path.exists(URLS_CSV) else []
-    rows = [r for r in rows if r.get('detail_url')]
-    log.info(f'Detail phase: {len(rows)} pages, {workers} workers')
+    # Include rows without a detail_url so they get 'no_url' status
+    log.info(f'Detail phase: {len(rows)} rows, {workers} workers')
     scraper = cloudscraper.create_scraper()
     out, lock, done = [], threading.Lock(), [0]
 
@@ -288,9 +320,10 @@ def run_detail_phase(workers):
         try:
             rec = scrape_detail(scraper, row)
         except Exception as e:
+            # CG-2: exception path → 'error_out', not all-None/indistinguishable
             rec = {c: None for c in DETAIL_COLS}
             rec.update({'chittorgarh_id': row.get('chittorgarh_id'), 'isin': row.get('isin'),
-                        'company_name': row.get('company_name')})
+                        'company_name': row.get('company_name'), 'fetch_status': 'error_out'})
             log.warning(f'  ERR {row.get("company_name","")[:30]}: {str(e)[:50]}')
         with lock:
             out.append(rec); done[0] += 1

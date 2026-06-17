@@ -25,8 +25,10 @@ Usage:
 import csv
 import glob
 import io
+import json
 import logging
 import os
+import sys
 import time
 from datetime import datetime, timedelta as _timedelta
 
@@ -34,6 +36,8 @@ import cloudscraper
 from curl_cffi import requests as cr
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, BASE_DIR)
+from foundation import ingest
 MASTER_DIR = os.path.join(BASE_DIR, 'data', 'master')
 BHAVCOPY_DIR = os.path.join(BASE_DIR, 'data', 'reference', 'bhavcopy')
 OUT_PATH = os.path.join(MASTER_DIR, 'delisting.csv')
@@ -88,17 +92,39 @@ def load_universe():
     return uni
 
 
+# ── Pure helpers ─────────────────────────────────────────────────────────────
+
+def bse_fail_flags(failed_tiers):
+    """Return a sorted list of 'bse_fetch_failed:<Tier>' flag strings for the given
+    failed tier names.  Pure function — extracted for testability.
+
+    These flags are appended to source_flags for ISINs that had no BSE match AND
+    at least one BSE tier failed all retries.  They distinguish:
+      - status='unknown' because genuinely not in BSE  (no bse_fetch_failed flags)
+      - status='unknown' because we couldn't ask BSE   (has bse_fetch_failed flags)
+    """
+    return ['bse_fetch_failed:' + t for t in sorted(failed_tiers)]
+
+
 # ── Source 1: BSE ListofScripData ────────────────────────────────────────────
 
 def fetch_bse_status():
-    """Snapshot all three BSE statuses. Returns two maps:
-        by_isin: {ISIN: status}   by_code: {SCRIP_CD: status}
-    where status in {active, suspended, delisted}. Also returns
-    {ISIN_or_CODE -> bse company name} for fallback naming."""
+    """Snapshot all three BSE statuses. Returns:
+        by_isin:      {ISIN: status}   (status in {active, suspended, delisted})
+        by_code:      {SCRIP_CD: status}
+        names:        {ISIN_or_CD:CODE -> bse company name} for fallback naming
+        failed_tiers: set of tier names (e.g. {'Suspended'}) that failed all retries
+
+    failed_tiers is non-empty when network/API errors prevented a full snapshot;
+    callers stamp 'bse_fetch_failed:<tier>' on affected ISINs so a fetch failure
+    is distinguishable from a genuine BSE absence (status='unknown' because not
+    listed on BSE vs status='unknown' because we couldn't ask BSE).
+    """
     s = cr.Session(impersonate='chrome')
     s.get('https://www.bseindia.com/', timeout=30)        # prime cookies
     hdr = {'Referer': 'https://www.bseindia.com/', 'Origin': 'https://www.bseindia.com'}
     by_isin, by_code, names = {}, {}, {}
+    failed_tiers = set()
     # Active first, then Suspended, then Delisted, so the most "terminal" status
     # wins if a scrip code happens to appear in multiple lists.
     for status in ['Active', 'Suspended', 'Delisted']:
@@ -118,8 +144,12 @@ def fetch_bse_status():
             s = cr.Session(impersonate='chrome')
             s.get('https://www.bseindia.com/', timeout=30)
         if not isinstance(rows, list):
-            log.error('BSE %s: no rows', status)
+            log.error('BSE %s: no rows after all retries — marking tier as failed', status)
+            failed_tiers.add(status)
             continue
+        # Save raw API payload so the file can be reprocessed offline (Rule 2).
+        raw_name = f'bse_listofscripdata_{status.lower()}.json'
+        ingest.save_raw('bse_delisting', raw_name, json.dumps(rows, ensure_ascii=False))
         st = _BSE_STATUS[status.lower()]
         for row in rows:
             isin = (row.get('ISIN_NUMBER') or '').strip()
@@ -134,8 +164,9 @@ def fetch_bse_status():
                 if nm:
                     names.setdefault('CD:' + code, nm)
         log.info('BSE %s: %d rows', status, len(rows))
-    log.info('BSE totals: %d isins, %d codes', len(by_isin), len(by_code))
-    return by_isin, by_code, names
+    log.info('BSE totals: %d isins, %d codes, failed_tiers=%s',
+             len(by_isin), len(by_code), failed_tiers or 'none')
+    return by_isin, by_code, names, failed_tiers
 
 
 # ── Source 2: NSE delisted.csv ───────────────────────────────────────────────
@@ -260,7 +291,7 @@ def build():
     log.info('=== delisting build start ===')
 
     uni = load_universe()
-    bse_isin, bse_code, bse_names = fetch_bse_status()
+    bse_isin, bse_code, bse_names, bse_failed_tiers = fetch_bse_status()
     nse_del = fetch_nse_delisted()
     bhav = build_bhavcopy_index()
     cache_lo, cache_hi = _cache_bounds(bhav)
@@ -292,6 +323,12 @@ def build():
         elif code and code in bse_code:
             status = bse_code[code]
             flags.append('bse_code:' + status)
+        elif bse_failed_tiers:
+            # BSE had no data for this ISIN/code AND at least one tier failed to
+            # fetch.  We cannot tell "genuinely not in BSE" from "we failed to ask
+            # BSE for this tier" — stamp every failed tier so the ambiguity is
+            # visible rather than silently absorbed into status='unknown'.
+            flags.extend(bse_fail_flags(bse_failed_tiers))
 
         # --- 2. NSE delisted.csv (date + reason), matched by symbol ---
         delist_date = ''

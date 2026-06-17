@@ -69,28 +69,40 @@ def classify(subject):
 
 
 _RS = re.compile(r'(?:rs|re)\.?\s*([0-9]+(?:\.[0-9]+)?)', re.I)
-_BONUS = re.compile(r'bonus\s*([0-9]+)\s*:\s*([0-9]+)', re.I)
+# Also match a bare integer face value like '10/-' (no Rs/Re prefix),
+# e.g. 'Face Value Split From 10/- To Face Value 2/-' (SHARONBIO).
+_FV_BARE = re.compile(r'\b([0-9]+(?:\.[0-9]+)?)\s*/[-–]', re.I)
+# Widen to allow an optional dash/dash separator between 'Bonus' and the ratio,
+# e.g. 'Bonus - 1:1' (HINDZINC) as well as the normal 'Bonus 4:1'.
+_BONUS = re.compile(r'bonus\s*[-–]?\s*([0-9]+)\s*:\s*([0-9]+)', re.I)
 
 
 def parse_split_factor(subject):
-    """SPLIT: 'From Rs 10 To Rs 2' -> 10/2 = 5.0. Returns float or None.
+    """SPLIT: extract old and new face values -> old/new = price multiplier. Returns float or None.
 
-    Reads the two face values (old, new) directly from the subject text, which is the
-    authoritative form; faceVal in the row is the *post-split* value only.
+    Primary: Rs/Re-prefixed values e.g. 'From Rs 10 To Rs 2' -> 10/2 = 5.0.
+    Fallback: bare integer followed by /- e.g. '10/- To ... 2/-' -> also 5.0.
+    This covers SHARONBIO ('Face Value Split From 10/- To Face Value 2/-').
     """
     nums = _RS.findall(subject or '')
-    if len(nums) < 2:
-        return None
-    old, new = float(nums[0]), float(nums[1])
-    if new <= 0 or old <= 0:
-        return None
-    return round(old / new, 6)
+    if len(nums) >= 2:
+        old, new = float(nums[0]), float(nums[1])
+        if old > 0 and new > 0:
+            return round(old / new, 6)
+    # Fallback: bare face-value tokens with /- suffix (no Rs/Re)
+    bare = _FV_BARE.findall(subject or '')
+    if len(bare) >= 2:
+        old, new = float(bare[0]), float(bare[1])
+        if old > 0 and new > 0:
+            return round(old / new, 6)
+    return None
 
 
 def parse_bonus_factor(subject):
     """BONUS 'a:b' -> (a + b) / b. Returns float or None.
 
     'Bonus 4:1' (4 new for every 1 held) -> 5.0. Handles spaces e.g. 'Bonus 1: 1'.
+    Also handles an optional separator before the ratio, e.g. 'Bonus - 1:1' (HINDZINC).
     Returns None for non-ratio "bonus" subjects (e.g. debenture scheme-of-arrangement).
     """
     m = _BONUS.search(subject or '')
@@ -131,10 +143,11 @@ def parse_row(row):
     else:  # bonus+split: combined multiplier is the product of both legs
         bf = parse_bonus_factor(subject)
         sf = parse_split_factor(subject)
-        if bf is None and sf is None:
+        # Both legs must parse; a missing leg is NOT a silent 1.0 — surface as parse-fail.
+        if bf is None or sf is None:
             factor = None
         else:
-            factor = round((bf or 1.0) * (sf or 1.0), 6)
+            factor = round(bf * sf, 6)
     if factor is None:
         return None
     return {
@@ -149,11 +162,14 @@ def parse_row(row):
 
 if __name__ == '__main__':
     import csv
+    import json
     import os
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from foundation import config, ingest
 
-    os.makedirs('data/reference', exist_ok=True)
-    os.makedirs('logs', exist_ok=True)
-    LOG = open('logs/corp_actions.log', 'w')
+    config.ensure(config.reference_dir())
+    config.ensure(config.logs_dir())
+    LOG = open(config.logs_dir() / 'corp_actions.log', 'w')
 
     def log(msg):
         line = f'{time.strftime("%H:%M:%S")} {msg}'
@@ -194,6 +210,9 @@ if __name__ == '__main__':
                 continue
 
             raw_counts[(index, year)] = len(rows)
+            # Save raw API payload so the file can be reprocessed offline (Rule 2).
+            raw_name = f'corp_actions_{index}_{year}.json'
+            ingest.save_raw('nse_corp_actions', raw_name, json.dumps(rows, ensure_ascii=False))
             kept = 0
             for row in rows:
                 rec = parse_row(row)
@@ -219,7 +238,7 @@ if __name__ == '__main__':
 
     fields = ['isin', 'symbol', 'action_type', 'raw_subject',
               'ratio_factor', 'ex_date', 'source']
-    with open('data/reference/corp_actions.csv', 'w', newline='') as f:
+    with open(config.reference_dir() / 'corp_actions.csv', 'w', newline='') as f:
         w = csv.DictWriter(f, fieldnames=fields)
         w.writeheader()
         w.writerows(deduped)
