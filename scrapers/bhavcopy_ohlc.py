@@ -43,6 +43,7 @@ import zipfile
 from datetime import datetime, timedelta
 
 import requests
+from concurrent.futures import ThreadPoolExecutor
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from foundation import config, ingest
@@ -290,7 +291,25 @@ def daterange(start, end):
         d += timedelta(days=1)
 
 
-def run(start, end, exchanges=('NSE', 'BSE'), sleep=0.4):
+def _fetch_day(d, exchanges, fetchers, done, sleep):
+    """Fetch (NO writes) one day's raw text for each exchange. Network-only — safe to run in parallel.
+
+    Returns (d, ds, {exch: (text, fetch_ok) or None}); None means 'already done in a prior run'.
+    Reads `done` only (never mutates it) — every (exch, day) is unique per run, so no double-fetch.
+    """
+    ds = d.strftime('%Y-%m-%d')
+    out = {}
+    for exch in exchanges:
+        if (exch, ds) in done:
+            out[exch] = None
+            continue
+        out[exch] = fetchers[exch](d)
+        if sleep:
+            time.sleep(sleep)
+    return d, ds, out
+
+
+def run(start, end, exchanges=('NSE', 'BSE'), sleep=0.1, workers=6):
     config.ensure(config.prices_dir())
     config.ensure(config.logs_dir())
     _setup_logging()
@@ -301,43 +320,44 @@ def run(start, end, exchanges=('NSE', 'BSE'), sleep=0.4):
 
     fetchers = {'NSE': fetch_nse, 'BSE': fetch_bse}
     days = list(daterange(start, end))
-    log.info(f'window {start.date()}..{end.date()}: {len(days)} weekdays x {len(exchanges)} exch')
+    log.info(f'window {start.date()}..{end.date()}: {len(days)} weekdays x {len(exchanges)} exch, '
+             f'{workers} parallel fetch workers')
 
-    for d in days:
-        ds = d.strftime('%Y-%m-%d')
-        # NSE first (preferred), then BSE fills the gaps for that day.
-        seen_today = set()
-        for exch in exchanges:
-            if (exch, ds) in done:
-                # already processed successfully; skip.
-                continue
-            text, fetch_ok = fetchers[exch](d)
-            if not fetch_ok:
-                # fetch error (network/blocked/HTTP error) — mark with sentinel -1
-                # so resume logic retries this day next run
-                mark_done(exch, ds, -1)
-                log.warning(f'{ds} {exch}: fetch error — marked for retry (rows=-1)')
-                if sleep:
-                    time.sleep(sleep)
-                continue
-            # Save raw payload before parsing (honesty rule: raw always preserved)
-            if text:
-                raw_name = f'{exch}_{d.strftime("%Y%m%d")}.csv'
-                ingest.save_raw('bhavcopy_ohlc', raw_name, text)
-            day = parse_day(text, isin_set, sym2isin) if text else {}
-            if exch != exchanges[0] and day:
-                # for the secondary exchange, only add ISINs not already covered
-                # by the primary exchange THIS day (avoid 2 rows same date/isin)
-                day = {k: v for k, v in day.items() if k not in seen_today}
-            seen_today.update(day.keys())
-            if day:
-                append_day(day, ds)
-            mark_done(exch, ds, len(day))
-            done.add((exch, ds))
-            log.info(f'{ds} {exch}: {len(day)} universe rows'
-                     + ('' if text else ' (holiday / no file)'))
-            if sleep:
-                time.sleep(sleep)
+    # PARALLEL fetch (network = the bottleneck) + SINGLE-THREADED, date-ORDERED processing & writes:
+    # ex.map yields in input (date) order, so per-ISIN files stay sorted and there are NO concurrent
+    # write races — append_day / mark_done run only here, in the main thread. Chunked to bound memory.
+    CHUNK = 250
+    processed = 0
+    for i in range(0, len(days), CHUNK):
+        chunk = days[i:i + CHUNK]
+        with ThreadPoolExecutor(max_workers=workers) as ex:
+            for d, ds, results in ex.map(
+                    lambda dd: _fetch_day(dd, exchanges, fetchers, done, sleep), chunk):
+                seen_today = set()           # NSE first (preferred), BSE fills that day's gaps
+                for exch in exchanges:
+                    res = results.get(exch)
+                    if res is None:
+                        continue             # already done in a prior run
+                    text, fetch_ok = res
+                    if not fetch_ok:
+                        mark_done(exch, ds, -1)   # sentinel: resume retries this (exch, day)
+                        log.warning(f'{ds} {exch}: fetch error — marked for retry (rows=-1)')
+                        continue
+                    if text:                 # save raw before parsing (honesty: raw always preserved)
+                        ingest.save_raw('bhavcopy_ohlc', f'{exch}_{d.strftime("%Y%m%d")}.csv', text)
+                    day = parse_day(text, isin_set, sym2isin) if text else {}
+                    if exch != exchanges[0] and day:
+                        # secondary exchange: only ISINs the primary didn't cover this day
+                        day = {k: v for k, v in day.items() if k not in seen_today}
+                    seen_today.update(day.keys())
+                    if day:
+                        append_day(day, ds)
+                    mark_done(exch, ds, len(day))
+                    log.info(f'{ds} {exch}: {len(day)} universe rows'
+                             + ('' if text else ' (holiday / no file)'))
+                processed += 1
+                if processed % 200 == 0:
+                    log.info(f'progress: {processed}/{len(days)} days')
     log.info('done')
 
 
@@ -363,10 +383,12 @@ def main():
     ap.add_argument('--sleep', type=float, default=0.1,
                     help='seconds between requests (archives are static + tolerant; measured 2026-06-18: '
                          '6 rapid no-delay pulls all HTTP 200)')
+    ap.add_argument('--workers', type=int, default=6,
+                    help='parallel day-fetch workers (fetch is parallel; writes stay single-threaded)')
     a = ap.parse_args()
     start = datetime.strptime(a.start, '%Y-%m-%d')
     end = datetime.strptime(a.end, '%Y-%m-%d')
-    run(start, end, tuple(x.strip().upper() for x in a.exchanges.split(',')), a.sleep)
+    run(start, end, tuple(x.strip().upper() for x in a.exchanges.split(',')), a.sleep, a.workers)
 
 
 if __name__ == '__main__':
