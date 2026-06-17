@@ -1,28 +1,51 @@
-"""foundation/ingest.py — the scraper honesty layer (structural fix for the I1 / fetch-fail class).
+"""foundation/ingest.py — the scraper HONESTY layer: collect data without lying or losing it.
 
-Every scraper uses these helpers so it CANNOT fabricate and ALWAYS preserves the source's answer:
-  * fetch()      -> a structured Fetch result that DISTINGUISHES ok / http_error / network_error / blocked /
-                    empty, with per-source polite pacing + retry/backoff. (honesty rule 2)
-  * save_raw()   -> persist the raw payload so reprocessing is always possible offline. (honesty rule 3 +
-                    the root cause of the audit's "needs-refetch" findings: old scrapers saved only parsed CSV)
-  * num/text/pct/ratio_parts/ratios_equal -> parse helpers that return None for missing — they NEVER mint a
-                    0 / 'N/A' placeholder, and compare ratios with numeric tolerance. (honesty rule 1)
+Every scraper uses these helpers, which enforce the three honesty rules the data audit was built on:
 
-Pacing/limits come from docs/research/scraper_rate_limits.md (measured 2026-06-17).
+    Rule 1  Never invent a value.   -> num()/text() return None for missing, never a fake 0/'N/A'.
+    Rule 2  Tell apart the outcomes.-> fetch() distinguishes ok / http_error / network_error / blocked / empty,
+                                       so "the site failed us" is never recorded as "the site had no data".
+    Rule 3  Keep the original.      -> save_raw() persists the raw payload BEFORE parsing, so the source's
+                                       real answer is never thrown away (the #1 root cause we found).
+
+Quick reference
+---------------
+    from foundation import ingest
+
+    r = ingest.fetch(url, source="screener")     # -> Fetch(status, text, ...); r.ok / r.retryable
+    ingest.save_raw("screener", "INFY.html", r.text)   # persist raw under OUTPUT_ROOT/raw/screener/raw/
+
+    ingest.num("0")      ->  0.0        # a REAL zero survives
+    ingest.num("")       ->  None       # missing stays missing (never minted as 0)
+    ingest.num("2.5x")   ->  2.5        # strips commas / ₹ / trailing x or %
+    ingest.text(" - ")   ->  None       # placeholder text -> None
+    ingest.ratio_parts("1:10")        -> (1.0, 10.0)
+    ingest.ratios_equal(1.428571, 1.4285714)  -> True   # relative tolerance, not exact float ==
+
+Pacing per source comes from docs/research/scraper_rate_limits.md (measured 2026-06-17).
 """
 import time
 from dataclasses import dataclass
 
 from foundation import config
 
-# --- fetch outcome vocabulary -----------------------------------------------------
-OK = "ok"                    # 2xx with a usable payload
-HTTP_ERROR = "http_error"    # got a response, non-2xx and not a known block code (e.g. genuine 404) -> NOT retryable
-NETWORK_ERROR = "network_error"  # request never completed (timeout/DNS/conn reset) -> retryable
-BLOCKED = "blocked"          # 403/429/503 or challenge -> rate-limited / bot-blocked -> retryable (later)
-EMPTY = "empty"              # 2xx but no payload; caller decides whether that's genuine no_data
 
-# per-source politeness (measured) — screener capped at 2 parallel per owner
+# ═════════════════════════════════════════════════════════════════════════════
+# 1. FETCH  (Rule 2: distinguish the outcomes; pace politely)
+# ═════════════════════════════════════════════════════════════════════════════
+
+# The five outcomes a fetch can have:
+OK = "ok"                    # 2xx with a usable payload
+EMPTY = "empty"              # 2xx but no payload (caller decides if that's genuine "no data")
+HTTP_ERROR = "http_error"    # a real response, non-2xx and not a block (e.g. genuine 404) -> NOT retryable
+BLOCKED = "blocked"          # 403/429/503 or a challenge page -> rate-limited / bot-blocked -> retry later
+NETWORK_ERROR = "network_error"  # request never completed (timeout/DNS/conn reset)    -> retryable
+
+_BLOCK_CODES = {403, 429, 503}
+DEFAULT_UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+              "(KHTML, like Gecko) Chrome/120.0 Safari/537.36")
+
+# How hard we may hit each source (measured). screener is owner-capped at 2 parallel.
 SOURCE_LIMITS = {
     "screener":     {"max_parallel": 2, "delay": 0.7},
     "nse":          {"max_parallel": 4, "delay": 0.3},
@@ -34,22 +57,21 @@ SOURCE_LIMITS = {
     "yahoo":        {"max_parallel": 2, "delay": 0.8},  # paced; prefer the yfinance library for splits/history
 }
 DEFAULT_LIMIT = {"max_parallel": 2, "delay": 0.5}
-_BLOCK_CODES = {403, 429, 503}
-DEFAULT_UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
-              "(KHTML, like Gecko) Chrome/120.0 Safari/537.36")
 
 
 def limit_for(source):
+    """Politeness limits for a source (falls back to a conservative default)."""
     return SOURCE_LIMITS.get(source, DEFAULT_LIMIT)
 
 
 @dataclass
 class Fetch:
-    status: str
+    """The result of a fetch — carries WHICH outcome happened, so callers never guess."""
+    status: str               # one of OK / EMPTY / HTTP_ERROR / BLOCKED / NETWORK_ERROR
     url: str
     http_code: int = None
     text: str = None
-    error: str = None
+    error: str = None         # repr of the problem when not OK
 
     @property
     def ok(self):
@@ -57,63 +79,73 @@ class Fetch:
 
     @property
     def retryable(self):
-        # transient / our-side failures are retryable; a clean http_error (genuine 404) is not
+        # transient / our-side failures are worth retrying; a clean http_error (e.g. genuine 404) is not
         return self.status in (NETWORK_ERROR, BLOCKED)
 
 
 def fetch(url, session=None, source=None, headers=None, timeout=20, retries=3, backoff=2.0, pace=True):
-    """Fetch a URL, returning a structured Fetch that distinguishes failure kinds (honesty rule 2).
+    """GET a URL and return a Fetch describing the outcome — NEVER raises for HTTP/network problems.
 
-    NEVER raises for HTTP/network problems — returns a Fetch with the right status so the caller records
-    fetch_error vs no_data instead of silently minting a placeholder. Retries network/blocked with backoff.
+    The caller inspects .status (or .ok / .retryable) and records the right thing — a fetch failure
+    instead of a fabricated value. Network/blocked outcomes are retried with backoff; a genuine HTTP
+    error (like 404) returns immediately.
     """
-    import requests  # local import so parse-helper users don't need requests installed
+    import requests  # local import so the parse-helper users below don't need requests installed
     sess = session or requests.Session()
-    h = {"User-Agent": DEFAULT_UA}
+    hdrs = {"User-Agent": DEFAULT_UA}
     if headers:
-        h.update(headers)
+        hdrs.update(headers)
     lim = limit_for(source)
     last = None
     for attempt in range(retries):
         try:
-            r = sess.get(url, headers=h, timeout=timeout)
+            r = sess.get(url, headers=hdrs, timeout=timeout)
             if r.status_code in _BLOCK_CODES:
                 last = Fetch(BLOCKED, url, r.status_code, error="block %s" % r.status_code)
             elif not (200 <= r.status_code < 300):
-                return Fetch(HTTP_ERROR, url, r.status_code, text=r.text)   # genuine http error -> stop
+                return Fetch(HTTP_ERROR, url, r.status_code, text=r.text)   # genuine error -> stop
             elif not r.text or not r.text.strip():
                 return Fetch(EMPTY, url, r.status_code, text=r.text)
             else:
                 return Fetch(OK, url, r.status_code, text=r.text)
         except requests.RequestException as e:
             last = Fetch(NETWORK_ERROR, url, error="%s: %s" % (type(e).__name__, e))
-        time.sleep((backoff ** attempt) * lim["delay"])  # back off before retrying blocked/network
+        time.sleep((backoff ** attempt) * lim["delay"])   # back off before retrying blocked/network
     if pace:
         time.sleep(lim["delay"])
     return last
 
 
+# ═════════════════════════════════════════════════════════════════════════════
+# 2. SAVE RAW  (Rule 3: keep the source's original answer)
+# ═════════════════════════════════════════════════════════════════════════════
 def save_raw(source, name, content, subdir="raw"):
-    """Persist a raw payload so reprocessing is always possible offline (honesty rule 3).
+    """Persist a raw payload so it's always reprocessable offline.
 
-    Writes under OUTPUT_ROOT/raw/<source>/<subdir>/<name>; returns the path. Accepts str or bytes.
+    Writes to OUTPUT_ROOT/raw/<source>/<subdir>/<name>; returns the path. Accepts str or bytes.
     """
-    d = config.raw_dir(source) / subdir
-    d.mkdir(parents=True, exist_ok=True)
-    p = d / name
-    mode = "wb" if isinstance(content, (bytes, bytearray)) else "w"
-    kw = {} if mode == "wb" else {"encoding": "utf-8"}
-    with open(p, mode, **kw) as f:
-        f.write(content)
-    return p
+    folder = config.raw_dir(source) / subdir
+    folder.mkdir(parents=True, exist_ok=True)
+    path = folder / name
+    if isinstance(content, (bytes, bytearray)):
+        with open(path, "wb") as f:
+            f.write(content)
+    else:
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(content)
+    return path
 
 
-# --- parse helpers: return None for missing, NEVER mint a placeholder (honesty rule 1) ---
+# ═════════════════════════════════════════════════════════════════════════════
+# 3. PARSE HELPERS  (Rule 1: missing -> None, never a minted placeholder)
+# ═════════════════════════════════════════════════════════════════════════════
+
+# Strings that mean "no value" — these become None, not '' or 0.
 _MISSING = {"", "-", "–", "—", "n/a", "na", "nan", "none", "null", "--"}
 
 
 def text(x):
-    """Strip to a clean string, or None if missing/placeholder. Never returns ''."""
+    """Clean string, or None if missing/placeholder. Never returns ''."""
     if x is None:
         return None
     s = str(x).strip()
@@ -121,9 +153,9 @@ def text(x):
 
 
 def num(x):
-    """Parse a number, or None if missing/unparseable. NEVER mints 0 for a missing value.
+    """Number, or None if missing/unparseable — NEVER mints 0 for a missing value.
 
-    A real '0' parses to 0.0; only genuine absence -> None. Strips commas, rupee sign, a trailing x/%.
+    A real '0' parses to 0.0; only genuine absence -> None. Strips commas, ₹/Rs, a trailing x or %.
     """
     s = text(x)
     if s is None:
@@ -137,7 +169,7 @@ def num(x):
 
 
 def pct(x):
-    """Percentage parse — None if missing; never 0-mint."""
+    """A percentage value — None if missing; never 0-minted. (Same parsing as num.)"""
     return num(x)
 
 
@@ -147,16 +179,16 @@ def ratio_parts(x):
     if s is None or ":" not in s:
         return None
     a, _, b = s.partition(":")
-    an, bn = num(a), num(b)
-    if an is None or bn is None:
+    a_num, b_num = num(a), num(b)
+    if a_num is None or b_num is None:
         return None
-    return (an, bn)
+    return (a_num, b_num)
 
 
 def ratios_equal(r1, r2, tol=0.01):
-    """Compare two ratio factors with RELATIVE tolerance (not exact float equality).
+    """Are two ratio factors equal within RELATIVE tolerance? (not exact float ==).
 
-    Fixes the USASEEDS-class bug (1.428571 vs 1.4285714 are the same ratio). None never equals anything.
+    Fixes the USASEEDS-class bug: 1.428571 and 1.4285714 are the same ratio. None equals nothing.
     """
     if r1 is None or r2 is None:
         return False

@@ -127,7 +127,7 @@ def fetch_chart(company_id, sleep=1.5):
 def load_masters():
     m = {}
     for f in ['mainboard', 'sme', 'longterm_mainboard', 'longterm_sme']:
-        path = os.path.join(ROOT, 'data/master', f + '.csv')
+        path = config.src('master', f + '.csv')
         if not os.path.exists(path):
             continue
         for r in csv.DictReader(open(path)):
@@ -146,10 +146,10 @@ def load_masters():
 def build_fixset():
     """ISINs where first data date in data/prices/<isin>.csv is >30 days after listing_date."""
     fix = []
-    for r in csv.DictReader(open(os.path.join(ROOT, 'data/master/returns_summary.csv'))):
+    for r in csv.DictReader(open(config.src('master', 'returns_summary.csv'))):
         isin = r['isin']
         ld = pdate(r['listing_date'])
-        p = os.path.join(ROOT, 'data/prices', isin + '.csv')
+        p = config.src('prices', isin + '.csv')
         if not os.path.exists(p) or ld is None:
             continue
         dates = [pdate(pr['date']) for pr in csv.DictReader(open(p))]

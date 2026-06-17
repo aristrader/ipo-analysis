@@ -1,7 +1,9 @@
 """Authoritative symbol↔ISIN maps from cached NSE/BSE reference lists."""
-import csv, os
+import csv, os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from foundation import config
 
-REF = 'data/reference'
+REF = str(config.src('reference'))
 
 def load():
     """Load symbol↔ISIN maps from cached exchange lists.

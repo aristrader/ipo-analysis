@@ -3,6 +3,9 @@ import pandas as pd
 import os
 import argparse
 import concurrent.futures
+import sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from foundation import config
 
 def fetch_corporate_actions(symbols):
     all_splits = []
@@ -24,8 +27,8 @@ def fetch_corporate_actions(symbols):
             print(f"Error fetching data for {symbol}: {e}")
             return None
 
-    # Use 20 concurrent workers to max out the safe API limit
-    with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+    # Use 4 concurrent workers (Yahoo 429s under bursts; measured safe limit)
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
         results = list(executor.map(process_symbol, symbols))
         
     for result in results:
@@ -45,7 +48,7 @@ def fetch_corporate_actions(symbols):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Fetch historical Corporate Actions (Splits and Bonuses) using yfinance.")
     parser.add_argument("--symbols", nargs="+", default=["RELIANCE.NS"], help="List of stock symbols to fetch (e.g., RELIANCE.NS TCS.NS)")
-    parser.add_argument("--output", type=str, default="data/raw/yfinance_splits_sample.csv", help="Output CSV file path")
+    parser.add_argument("--output", type=str, default=str(config.raw_dir() / 'yfinance_splits_sample.csv'), help="Output CSV file path")
     
     args = parser.parse_args()
     

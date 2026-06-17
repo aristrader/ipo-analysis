@@ -21,3 +21,4 @@ tools/notify/.notified
 tools/notify/.health_state
 tools/notify/.last_run
 .env
+data_build/

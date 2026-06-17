@@ -212,8 +212,10 @@ if __name__ == '__main__':
 
     # target: rows lacking financials (pre_ipo_pat empty) across BOTH cohorts (boom _base + long-term)
     targets, seen = [], set()
-    for path in ('data/master/_base_mainboard.csv', 'data/master/_base_sme.csv',
-                 'data/master/longterm_mainboard.csv', 'data/master/longterm_sme.csv'):
+    for path in (config.src('master', '_base_mainboard.csv'),
+                 config.src('master', '_base_sme.csv'),
+                 config.src('master', 'longterm_mainboard.csv'),
+                 config.src('master', 'longterm_sme.csv')):
         if not os.path.exists(path):
             continue
         for r in csv.DictReader(open(path)):

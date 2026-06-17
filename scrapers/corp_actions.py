@@ -251,7 +251,7 @@ if __name__ == '__main__':
     log(f'DONE total={len(deduped)} (pre-dedupe={len(records)}) '
         f'split={n_split} bonus={n_bonus} with_isin={n_isin} span={span} '
         f'failed={failed}')
-    print(f'\n-> data/reference/corp_actions.csv '
+    print(f'\n-> {config.reference_dir() / "corp_actions.csv"} '
           f'rows={len(deduped)} split={n_split} bonus={n_bonus} '
           f'with_isin={n_isin} span=[{span}] failed={failed}')
     LOG.close()
