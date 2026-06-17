@@ -30,6 +30,20 @@
 
 ---
 
+## 1b. BUILD-OUTPUT & PHYSICAL-LAYOUT STRATEGY (owner-approved 2026-06-17)
+Build the new foundation *beside* the old, keep the old frozen for comparison, then swap and retire the old.
+- **Old `data/` = frozen baseline** during the build — read-only; it is the reconciliation diff target (Phase 7 needs it).
+- **New data outputs → a separate root** (e.g. `data_build/`) chosen by **ONE config value** (`output_root`, in the
+  time-partition / build config — NOT hardcoded paths). Old + new coexist for side-by-side compare; final swap = flip that
+  one config back to `data/` + retire old (BL-3). (Consistent with the config-driven north star.)
+- **New code → new namespaces** (`registry/`/`overlay/`/`golden/`/generic assembly) that don't collide with the old
+  `pipeline/`/`scrapers/`; the **git branch** isolates everything and keeps the old reversible. Scrapers are fixed *in place*
+  (T0.1). No `_new` parallel code copies. Old `pipeline/` retired at BL-3.
+- **Docs: NO `docs_new` parallel tree** (drift risk). Generated docs (schema ← `columns.yaml`, rules index ← `rules.yaml`)
+  write to their FINAL paths; old hand-maintained docs retired at BL-3. The branch provides the safety net.
+
+---
+
 ## 2. DECISIONS (consolidated by theme; deduped from OD-1..8 + D1..D24 + R1..R6) *(Note: `R1–R6` and `G#` tags are design-run review-pass provenance labels; their substance is captured inline wherever cited — the tags need no separate lookup table.)*
 
 ### 2.1 Missing-data & provenance (the "I1" root fix)

@@ -138,6 +138,10 @@ NOT mean a trustworthy at-IPO cap exists. Until BL-1, the predictor has **no at-
 ONE ISIN-keyed spine (L5) = source of truth. `mainboard`/`sme`/`clean`/`dirty`/`non-equity`/`cohort`/per-pipeline =
 derived `WHERE`-filter views (L6), materialized where readability helps. Reclassify = change one cell → all views update.
 No separate source files, no row-moving.
+**Physical build layout (transition):** during the build the new spine+views write to a separate output root set by ONE
+config value (`output_root`, e.g. `data_build/`); the old `data/` stays frozen as the Phase-7 reconciliation baseline.
+Final swap = flip `output_root` back to `data/` + retire the old (BL-3). New code lives in new namespaces
+(`registry/`/`overlay/`/`golden/`); no `_new` code/doc copies (the git branch is the isolation). See PLAN §1b.
 
 ## 7. COLUMN REGISTRY (`columns.yaml`) + LIFECYCLE
 Declarative YAML: per column = name, dtype, ordered sources, parser/validator BY NAME, as-of class, applicability,
