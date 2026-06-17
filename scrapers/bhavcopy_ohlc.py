@@ -51,7 +51,7 @@ from foundation import config, ingest
 warnings.filterwarnings('ignore')
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MASTER_DIR = os.path.join(BASE_DIR, 'data', 'master')
+MASTER_DIR = str(config.src('master'))          # READ: frozen universe baseline
 
 # Output paths from config (under OUTPUT_ROOT)
 def _prices_dir():

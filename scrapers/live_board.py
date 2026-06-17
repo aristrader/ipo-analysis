@@ -20,8 +20,9 @@ import time
 from datetime import date, datetime
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from foundation import config
 
-LIVE_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "live")
+LIVE_DIR = str(config.out('live'))                                   # WRITE: new build tree
 LIST_API = ("https://webnodejs.chittorgarh.com/cloud/report/data-read/82/"
             "{page}/5/{year}/2026-27/0/all/0?search=&v=13-44")
 HDR = {"Referer": "https://www.chittorgarh.com/"}

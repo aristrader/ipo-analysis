@@ -37,11 +37,11 @@ from curl_cffi import requests as cr
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, BASE_DIR)
-from foundation import ingest
-MASTER_DIR = os.path.join(BASE_DIR, 'data', 'master')
-BHAVCOPY_DIR = os.path.join(BASE_DIR, 'data', 'reference', 'bhavcopy')
-OUT_PATH = os.path.join(MASTER_DIR, 'delisting.csv')
-LOG_PATH = os.path.join(BASE_DIR, 'logs', 'delisting.log')
+from foundation import config, ingest
+MASTER_DIR = str(config.src('master'))          # READ: frozen universe baseline
+BHAVCOPY_DIR = str(config.src('reference', 'bhavcopy'))  # READ: frozen bhavcopy cache
+OUT_PATH = str(config.master_dir() / 'delisting.csv')    # WRITE: new build tree
+LOG_PATH = str(config.logs_dir() / 'delisting.log')
 
 UNIVERSE_FILES = ['mainboard', 'sme', 'longterm_mainboard', 'longterm_sme']
 
@@ -386,6 +386,7 @@ def build():
             'source_flags': '+'.join(flags),
         })
 
+    config.ensure(config.master_dir())
     with open(OUT_PATH, 'w', newline='', encoding='utf-8') as f:
         w = csv.DictWriter(f, fieldnames=OUT_FIELDS)
         w.writeheader()

@@ -23,8 +23,19 @@ import pytest
 SCRAPERS_DIR = Path(__file__).resolve().parent.parent.parent / "scrapers"
 EXCLUDE = {"screener_prices_merge.py"}
 
-# The pattern we are guarding against in non-documentation code
+# The pattern we are guarding against in non-documentation code.
+# Form 1: path-joined string, e.g. 'data/raw/...' or 'data/master'
 _HARDCODED_RE = re.compile(r"data/(raw|reference|master|prices|live)")
+
+# Form 2: split-arg form — a 'data' or "data" string literal immediately followed
+# (ignoring whitespace) by a comma and then a raw/master/reference/prices/live
+# string literal, e.g. os.path.join(..., 'data', 'master', ...).
+# Must NOT match dict access like .get('data', [...]) — those have a list/non-string
+# after the comma.  We guard by requiring the second arg to be one of the known
+# data-subdirectory names (quotes required).
+_SPLIT_ARG_RE = re.compile(
+    r"""['"]data['"]\s*,\s*['"](raw|master|reference|prices|live)['"]"""
+)
 
 
 def _code_string_literals(source: str):
@@ -64,6 +75,43 @@ def _code_string_literals(source: str):
             yield node.lineno, node.value
 
 
+def _code_lines_stripped_comments(source: str):
+    """Yield (lineno, stripped_line) for every source line that is not a pure comment
+    and is not inside a multi-line string (docstring).  Used to scan for the split-arg
+    form which spans a raw source substring rather than a single AST node value.
+
+    We strip single-line comments (# ...) and skip the body of docstrings (collected
+    from the AST the same way as _code_string_literals does).
+    """
+    # Collect (start_lineno, end_lineno) ranges of docstring nodes
+    docstring_ranges: list[tuple[int, int]] = []
+    try:
+        tree = ast.parse(source)
+    except SyntaxError:
+        return
+
+    for node in ast.walk(tree):
+        body = getattr(node, "body", None)
+        if body and isinstance(body, list) and body:
+            first = body[0]
+            if (
+                isinstance(first, ast.Expr)
+                and isinstance(first.value, ast.Constant)
+                and isinstance(first.value.value, str)
+            ):
+                docstring_ranges.append((first.lineno, first.end_lineno))
+
+    def _in_docstring(lineno: int) -> bool:
+        return any(start <= lineno <= end for start, end in docstring_ranges)
+
+    for lineno, line in enumerate(source.splitlines(), start=1):
+        if _in_docstring(lineno):
+            continue
+        # strip trailing inline comment
+        stripped = line.split("#")[0]
+        yield lineno, stripped
+
+
 def collect_violations():
     """Return list of (filename, lineno, matched_string) for every violation."""
     violations = []
@@ -71,9 +119,17 @@ def collect_violations():
         if py_file.name in EXCLUDE:
             continue
         source = py_file.read_text(encoding="utf-8")
+
+        # Form 1: path-joined string literals  ('data/master', 'data/raw/...')
         for lineno, value in _code_string_literals(source):
             if _HARDCODED_RE.search(value):
                 violations.append((py_file.name, lineno, value))
+
+        # Form 2: split-arg form  ('data', 'master') in executable code lines
+        for lineno, line in _code_lines_stripped_comments(source):
+            if _SPLIT_ARG_RE.search(line):
+                violations.append((py_file.name, lineno, line.strip()))
+
     return violations
 
 

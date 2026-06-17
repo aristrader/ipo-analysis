@@ -90,7 +90,12 @@ def test_daywise_append_dedupes(tmp_path):
 
 
 def test_outputs_never_target_data_master():
-    assert "data/master" not in lb.LIVE_DIR and lb.LIVE_DIR.endswith("data/live")
+    # After the config repoint, LIVE_DIR is under OUTPUT_ROOT (e.g. data_build/live),
+    # NOT the old frozen data/live.  The invariant is: (a) no write to data/master,
+    # (b) the path ends in /live (under whichever root config resolves to).
+    from pathlib import Path
+    assert "data/master" not in lb.LIVE_DIR
+    assert Path(lb.LIVE_DIR).name == "live"
 
 
 # --- honesty status fields: parse_list_row must initialise them to None ---

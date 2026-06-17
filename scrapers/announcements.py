@@ -41,6 +41,7 @@ from nse_session import prime_nse_session
 _ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, _ROOT)  # repo root, for `layer3.news`
 from layer3.news import staging
+from foundation import config
 
 _REFERER = "https://www.nseindia.com/companies-listing/corporate-filings-announcements"
 _HDR = {"Referer": _REFERER, "Accept": "application/json"}
@@ -48,10 +49,10 @@ _API = "https://www.nseindia.com/api/corporate-announcements"
 _RATE = 1.0  # seconds between requests (match the project's NSE pulls)
 _FLUSH_EVERY = 25  # persist staging every N symbols so a crash keeps progress
 
-STAGING_DIR = os.path.join(_ROOT, "data", "live", "news")
+STAGING_DIR = str(config.out('live', 'news'))                        # WRITE: new build tree
 STAGING_PATH = os.path.join(STAGING_DIR, "announcements_staging.csv")
 MISSES_PATH = os.path.join(STAGING_DIR, "coverage_misses.csv")  # 0-row symbols (drift / no-filing)
-SUBSTRATE = os.path.join(_ROOT, "data", "master", "ipo_analysis.csv")
+SUBSTRATE = str(config.src('master', 'ipo_analysis.csv'))            # READ: frozen baseline
 
 
 class _NetworkDown(Exception):
