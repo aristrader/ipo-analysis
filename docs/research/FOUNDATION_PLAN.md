@@ -186,6 +186,16 @@ Build the new foundation *beside* the old, keep the old frozen for comparison, t
   Soya etc.); 517/1897 rows have no usable ISIN (354 yfinance empty + 163 nse:sme malformed numeric codes); arbiter input
   already exists (`corp_action_corroboration_review.csv` 259 rows / `corp_action_external_evidence.csv` 53). Re-enable the
   `09_assemble.py:88-89` cross-source tripwire for corp-action stocks. Open: ROLEXRINGS ratio 19.96-vs-10.0 + overlay re-keying.
+  - **⏸ DEFERRED FROM THE 2026-06-18 RE-FETCH — PICK UP HERE:** the **yfinance corp-action re-fetch**
+    (`scrapers/corporate_actions_yfinance.py`) was intentionally NOT run in the foundation re-fetch. Reason:
+    yfinance is **corroboration-only** (NSE `corp_actions` is the primary, ISIN-keyed source and WAS freshly
+    pulled — 1,483 rows), and the arbiter/corroboration logic that *consumes* yfinance is built right here in
+    Phase 5 — so pulling it earlier bought nothing. **To pick up:** (1) wire the scraper to read the universe
+    NSE symbols (+`.NS`/`.BO`) from the frozen baseline instead of its CLI `--symbols` default; (2) run it
+    paced — `max_workers` already cut 20→4, output already repointed to `config.raw_dir()`, and the `yfinance`
+    library handles Yahoo's crumb; (3) feed its output into the corroboration step above + the canonical-matcher
+    decision (§4b "Canonical yfinance matcher"). It is intentionally absent from `foundation/refetch.py` (see the
+    comment there) — add it as a Phase-5 corroboration step when this is built.
 - **T5.4** Source-reconcile dedup + fallback order; apply the fix through the foundation. [OD-8, P-1]
 
 ### PHASE 6 — Cleaning-rules & rule registry — depends: T0.2, Ph1, **Ph2** (rule gate uses board/instrument_type; CR-* write `quality`)
