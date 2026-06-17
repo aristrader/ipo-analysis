@@ -213,14 +213,15 @@ Build = a separate live-data effort (P-4) — each source refreshes differently.
 ---
 
 ## 15. CLEANING-RULE (CR-*) BUILD-SPEC — distilled from the issue catalog
-*This is the frozen build-spec: each issue family becomes one or more CR-* cleaning rules authored in `rules.yaml`/the
-cleaning model. Counts are draft-grade (re-verify at build).*
+*This is the COMPRESSED index. The FULL per-issue detail + fix mechanics + task-file build hazards live in
+**`FOUNDATION_BUILD_SPEC.md`** (the frozen build-spec — read it at build). Counts are draft-grade (re-verify at build).*
 
 | CR family | issues | what the rule does |
 |---|---|---|
 | **CR-I1 / CR-prov / CR-stamp** | I1, I1-x, I1-stamp, I1-enc, O-15 | 4-state `_prov`; numeric-parse zeros; validate-before-stamp; harden `mktcap_class` (0→null) |
 | **CR-O3 (cross-field)** | O-3, I1-x | `Σtranches ≈ total` else route tranche cells to missing (32+218 rows) |
-| **CR-O2recover / CR-MININV** | O-2, O-14 | derive `sub_total_x=sub_total_cr/issue_size_cr` (88) + `min_inv=lot×price` (18), status `derived`, validated |
+| **CR-O2recover / CR-MININV** | O-2, O-14 | derive `sub_total_x=sub_total_cr/issue_size_cr` (88) + `min_inv=lot×price` (18), status `derived`, validated; ALSO O-2 75/106 SME network-free recovery via `03d`-guard flip from ipowatch cache |
+| **CR-GMP** | O-4 | `gmp_pct=0` → NULL FIRST (so `gmp_deep_hunter` `.isna()` picks it up) → backfill from a NON-investorgain source (gated, OD-4). Offenders: Vivo/KN Agri/Krishna Defence/Timescan |
 | **CR-D1 family** | D-1 + 11 sub-issues, D-2, D-cov-gap | price-gap arbiter, numeric-tolerance ratio, reverse-split sign, window-scope, ISIN-less corroboration-only, golden override |
 | **CR-EPS** | O-5/7, O-5b | EPS share-base: A2 null-and-flag non-comparable; sign-consistency (eps↔pat) validity (deferred recompute = BL-2) |
 | **CR-SF / CR-margin / CR-pe** | O-9, O-10, O-6b | shareholder-funds denominator validity (sf≤0/tiny → quarantine ROE/DE); tiny-sales margin; loss-maker P/E → null |
