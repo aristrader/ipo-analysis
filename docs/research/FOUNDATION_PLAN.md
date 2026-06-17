@@ -234,6 +234,7 @@ Build the new foundation *beside* the old, keep the old frozen for comparison, t
 - **P-4 — Live / upcoming data** — its own project; each source refreshes differently. Design the seam now (`upcoming` status,
   `announcements` feed), build later.
 - **BL-5 — Long-term (2006–19) backfill scope.** The big long-term backfills (1,498 band/lot · 1,027 identity · 1,886 face_value · 1,487 anchor) — decide per-bucket whether to refetch or accept honest-NULL (many are likely `Missing_data`, never published). Does NOT gate upper layers. TRIGGER: after the gated refetch mechanism (T1.4) is proven on the small high-value targets (18 MB-sub + 10 GMP).
+- **BL-6 — Column-registry hardening (from the T0.2 design review).** The registry (`foundation/registry/`) validates the FLAGS today; the companion-column *generation + enforcement* belongs to later phases: (a) every `prov: true` column must get a generated `<name>_prov` column — enforce in **Phase 1** (provenance); (b) every `as_of: current` column must get a generated `<name>_asof` companion — enforce in **Phase 2 / T2.3** (as-of). Nice-to-have when the registry grows: list-valued `applicability` (compound scoping, e.g. equity+ipo) and validating `sources` names against the canonical scraper list. None gate Phase 1.
 
 ---
 
