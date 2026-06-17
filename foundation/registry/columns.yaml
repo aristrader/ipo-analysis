@@ -1,5 +1,8 @@
 # foundation/registry/columns.yaml — THE column registry (T0.2).
 #
+# PLAIN VERSION: the master list of every data column. To add/change a column, copy an entry below and
+# reuse an existing parser/validator NAME (see foundation/registry/__init__.py) — the checker flags mistakes.
+#
 # Every column in the dataset declares itself here. The meta-validator (foundation/registry/__init__.py)
 # checks this file each run; the schema doc + lineage are GENERATED from it (Phase 8). A non-coder can add
 # a column by copying an entry and reusing an existing named parser/validator.
