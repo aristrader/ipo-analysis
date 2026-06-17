@@ -54,8 +54,8 @@ STEPS = [
         "pre-IPO financials + sector / market-cap"),
     ("screener_prices",    ["scrapers/screener_prices.py"],
         "weekly price gap-fill (listing-era)"),
-    ("bhavcopy_ohlc",      ["scrapers/bhavcopy_ohlc.py", "--start", "2006-01-01", "--end", TODAY],
-        "daily OHLCV bhavcopy 2006..today  <-- LONG POLE (hours)"),
+    ("bhavcopy_ohlc",      ["scrapers/bhavcopy_ohlc.py", "--start", "2006-01-01", "--end", TODAY, "--sleep", "0.1"],
+        "daily OHLCV bhavcopy 2006..today  <-- LONG POLE (archives tolerant; sleep 0.1)"),
 ]
 # NOTE: corporate_actions_yfinance is intentionally NOT run here — it needs an explicit symbol list and
 # Yahoo throttles bursts; yfinance is corroboration-only (the NSE corp_actions step above is primary).

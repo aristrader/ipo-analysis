@@ -360,7 +360,9 @@ def main():
     ap.add_argument('--start', required=True, help='YYYY-MM-DD')
     ap.add_argument('--end', required=True, help='YYYY-MM-DD')
     ap.add_argument('--exchanges', default='NSE,BSE', help='comma list, primary first')
-    ap.add_argument('--sleep', type=float, default=0.4, help='seconds between requests')
+    ap.add_argument('--sleep', type=float, default=0.1,
+                    help='seconds between requests (archives are static + tolerant; measured 2026-06-18: '
+                         '6 rapid no-delay pulls all HTTP 200)')
     a = ap.parse_args()
     start = datetime.strptime(a.start, '%Y-%m-%d')
     end = datetime.strptime(a.end, '%Y-%m-%d')
