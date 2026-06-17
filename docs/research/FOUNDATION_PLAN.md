@@ -217,6 +217,15 @@ Build the new foundation *beside* the old, keep the old frozen for comparison, t
 ### ▶ DATA-LAYER COMPLETION GATE — data layer complete AND verified → only now move up.
 
 ### PHASE 9 — Upper layers (out of this design's scope) — re-point Layer 2/3 onto the new substrate; re-point genuinely-sound findings; rebuild anything that stood on a data hack.
+- **⚠ CLOBBER GUARD (do NOT skip):** the OLD pipeline still writes to the FROZEN baseline via hardcoded paths —
+  `screener_prices_merge.py` + `pipeline/07_returns_summary` / `08_build_universe` / `09_assemble` / `04_verify` /
+  `03b` / `03l` / `03_enrich` / `06_validate_tickers` all write to `data/master|reference/...`. They are NOT run
+  by `foundation/refetch.py` (so the re-fetch is safe), but **`run_all.py` / any old pipeline step run before it's
+  repointed to `config` (OUTPUT_ROOT) will OVERWRITE the frozen baseline.** So: repoint EVERY old pipeline writer
+  to `config` (read inputs via `config.src`, write outputs via `config.master_dir()`/etc.) BEFORE running it — and
+  extend the `test_repoint_completeness` guard to cover `pipeline/` + `screener_prices_merge.py` (today it scans
+  only `scrapers/` and excludes the merge). Root cause to avoid repeating: a single config knob only protects code
+  that actually routes through it; hardcoded `os.path.join(..,'data','master')` paths silently bypass it.
 
 ---
 
