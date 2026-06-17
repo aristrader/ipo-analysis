@@ -1,0 +1,295 @@
+# foundation/registry/columns.yaml — THE column registry (T0.2).
+#
+# Every column in the dataset declares itself here. The meta-validator (foundation/registry/__init__.py)
+# checks this file each run; the schema doc + lineage are GENERATED from it (Phase 8). A non-coder can add
+# a column by copying an entry and reusing an existing named parser/validator.
+#
+# Per-column fields:
+#   dtype         str | float | int | bool | date | enum
+#   family        schema family (A..K, see FOUNDATION_ARCHITECTURE.md §2)
+#   sources       ordered source names (first = preferred); [] for derived/config-computed
+#   parser        named function in PARSERS (foundation/registry/__init__.py); null = no parse step
+#   validator     named function in VALIDATORS; null = no validity check
+#   as_of         static | at_ipo (predictor-legal) | current (display-only, needs an _asof companion)
+#   prov          true if this column carries a companion _prov code (ambiguous fields only)
+#   applicability all | ipo | equity | sme | mainboard | non_equity   (WHERE-filter scope)
+#   status        active (materialized) | planned (backlog stub) | retired (needs retired_reason)
+#   description   one line
+#
+# This is a SEED (structural columns + a representative set across families). Grow it as each phase
+# materializes its columns — do NOT hand-maintain docs/schema.md; generate from here.
+
+meta:
+  prov_codes: [present, derived, Missing_data, error_out, "N/A"]
+  as_of_classes: [static, at_ipo, current]
+
+columns:
+
+  # ── Structural columns (the 5 partitions) ─────────────────────────────────
+  board:
+    dtype: enum
+    family: A
+    sources: [chittorgarh]
+    parser: parse_text
+    validator: null
+    as_of: static
+    prov: false
+    applicability: all
+    status: active
+    allowed_values: [MB, SME]
+    description: "MB / SME. Renamed from the overloaded 'type'."
+  instrument_type:
+    dtype: enum
+    family: A
+    sources: [chittorgarh, isin]
+    parser: parse_text
+    validator: null
+    as_of: static
+    prov: false
+    applicability: all
+    status: active
+    allowed_values: [equity, fpo, reit, invit, idr]
+    description: "equity / fpo / reit / invit / idr. Gates equity-only analyses."
+  universe_type:
+    dtype: enum
+    family: A
+    sources: []
+    parser: parse_passthrough
+    validator: null
+    as_of: static
+    prov: false
+    applicability: all
+    status: planned
+    allowed_values: [ipo, listed-stock]
+    description: "ipo / listed-stock seam. Reserved for the future non-IPO universe."
+  quality:
+    dtype: enum
+    family: K
+    sources: []
+    parser: parse_passthrough
+    validator: null
+    as_of: static
+    prov: false
+    applicability: all
+    status: active
+    allowed_values: [clean, dirty]
+    description: "clean / dirty. The trust partition (set by cleaning rules)."
+  cohort:
+    dtype: enum
+    family: A
+    sources: [time_partition_config]
+    parser: parse_passthrough
+    validator: null
+    as_of: static
+    prov: false
+    applicability: all
+    status: active
+    allowed_values: [boom, longterm]
+    description: "boom / longterm. Config-derived view over listing_date (not stored truth)."
+
+  # ── A. Identity ───────────────────────────────────────────────────────────
+  isin:
+    dtype: str
+    family: A
+    sources: [exchange_lists, chittorgarh]
+    parser: parse_text
+    validator: validate_isin
+    as_of: static
+    prov: false
+    applicability: all
+    status: active
+    description: "Primary key — INE-form ISIN; the ONLY auto-join key."
+  company_name:
+    dtype: str
+    family: A
+    sources: [chittorgarh, exchange_lists]
+    parser: parse_text
+    validator: null
+    as_of: static
+    prov: false
+    applicability: all
+    status: active
+    description: "Display name. Name-matching only FLAGS, never joins."
+  nse_symbol:
+    dtype: str
+    family: A
+    sources: [exchange_lists, chittorgarh]
+    parser: parse_text
+    validator: null
+    as_of: static
+    prov: false
+    applicability: all
+    status: active
+    description: "NSE trading symbol (corp-actions match by symbol, the one ISIN-rule exception)."
+
+  # ── B. Offer mechanics (ipo-only) ─────────────────────────────────────────
+  issue_price:
+    dtype: float
+    family: B
+    sources: [chittorgarh]
+    parser: parse_num
+    validator: validate_positive
+    as_of: at_ipo
+    prov: false
+    applicability: ipo
+    status: active
+    description: "Final issue price (Rs). issue_price_adj derived for split/bonus anchoring."
+  ofs_cr:
+    dtype: float
+    family: B
+    sources: [chittorgarh]
+    parser: parse_num
+    validator: validate_nonneg
+    as_of: at_ipo
+    prov: true
+    applicability: ipo
+    status: active
+    description: "Offer-for-sale (Rs cr) — source-published ONLY; derivation is a separate 'derived' step."
+  min_investment_rs:
+    dtype: float
+    family: B
+    sources: [chittorgarh, sharescart]
+    parser: parse_num
+    validator: validate_positive
+    as_of: at_ipo
+    prov: true
+    applicability: ipo
+    status: active
+    description: "Min retail application (Rs). Recoverable = lot_size_shares x issue_price (CR-MININV)."
+
+  # ── C. Timetable (ipo-only) ───────────────────────────────────────────────
+  listing_date:
+    dtype: date
+    family: C
+    sources: [exchange_lists, chittorgarh]
+    parser: parse_text
+    validator: null
+    as_of: static
+    prov: false
+    applicability: ipo
+    status: active
+    description: "Listing date — anchors the cohort split + as-of cutoffs."
+
+  # ── D. Demand (ipo-only) ──────────────────────────────────────────────────
+  sub_total_x:
+    dtype: float
+    family: D
+    sources: [nse_subscription, ipowatch, chittorgarh]
+    parser: parse_num
+    validator: validate_nonneg
+    as_of: at_ipo
+    prov: true
+    applicability: ipo
+    status: active
+    description: "Total subscription (x). SME 0x can be REAL; MB 0x = masked-missing (board disambiguates)."
+  gmp_pct:
+    dtype: float
+    family: D
+    sources: [investorgain, ipowatch]
+    parser: parse_pct
+    validator: null
+    as_of: at_ipo
+    prov: true
+    applicability: ipo
+    status: active
+    description: "Grey-market premium (%). A source placeholder 0 is missing, not a real 0 (gmp_tracked)."
+
+  # ── G. Listing-day outcomes ───────────────────────────────────────────────
+  adj_listing_gain_pct:
+    dtype: float
+    family: G
+    sources: [bhavcopy_ohlc, screener_prices]
+    parser: parse_num
+    validator: null
+    as_of: at_ipo
+    prov: false
+    applicability: ipo
+    status: active
+    description: "Split/bonus-adjusted listing-day gain vs issue_price (use this, not raw listing_open)."
+  listing_metrics_status:
+    dtype: enum
+    family: G
+    sources: []
+    parser: parse_passthrough
+    validator: null
+    as_of: static
+    prov: false
+    applicability: ipo
+    status: active
+    allowed_values: [ok, inferred_split, recovered_bhavcopy, unreliable_coverage]
+    description: "ok / inferred_split / recovered_bhavcopy / unreliable_coverage. Excl. unreliable from pop analysis."
+
+  # ── H. Financials (equity-only) ───────────────────────────────────────────
+  pat_ttm_cr:
+    dtype: float
+    family: H
+    sources: [screener]
+    parser: parse_num
+    validator: null
+    as_of: at_ipo
+    prov: false
+    applicability: equity
+    status: active
+    description: "Trailing-12m PAT (Rs cr). Loss (negative) is REAL, not missing."
+  pre_ipo_eps:
+    dtype: float
+    family: H
+    sources: [screener]
+    parser: parse_num
+    validator: null
+    as_of: at_ipo
+    prov: false
+    applicability: equity
+    status: retired
+    retired_reason: "Non-comparable share base (D5). Reconsider only if BL-2 EPS work proves it useful."
+    description: "[RETIRED] pre-IPO EPS — never re-add without BL-2."
+
+  # ── I. Market cap ─────────────────────────────────────────────────────────
+  market_cap_at_ipo_cr:
+    dtype: float
+    family: I
+    sources: [chittorgarh]
+    parser: parse_num
+    validator: validate_positive
+    as_of: at_ipo
+    prov: false
+    applicability: ipo
+    status: planned
+    description: "[PLANNED, BL-1] issue_price x post-issue shares — blocked on shares_outstanding."
+  market_cap_current_cr:
+    dtype: float
+    family: I
+    sources: [screener, yahoo]
+    parser: parse_num
+    validator: validate_positive
+    as_of: current
+    prov: false
+    applicability: all
+    status: active
+    description: "Current market cap (display-only; carries _asof). NEVER feeds the predictor."
+
+  # ── J. Returns / outcomes ─────────────────────────────────────────────────
+  alpha_1y:
+    dtype: float
+    family: J
+    sources: [bhavcopy_ohlc, indices]
+    parser: parse_num
+    validator: null
+    as_of: current
+    prov: false
+    applicability: all
+    status: active
+    description: "1y return minus benchmark (Nifty50 / Smallcap250). FROM-LISTING (secondary-buyer)."
+
+  # ── K. Quality / provenance ───────────────────────────────────────────────
+  data_quality_tier:
+    dtype: enum
+    family: K
+    sources: []
+    parser: parse_passthrough
+    validator: null
+    as_of: static
+    prov: false
+    applicability: all
+    status: active
+    description: "Per-row data-quality tier (derived from cleaning-rule outcomes)."
