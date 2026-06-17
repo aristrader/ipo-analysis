@@ -17,6 +17,127 @@
 
 ---
 
+## 🔴 D-1 CORP-ACTION FIX — ⛔ NOT BUILD-READY (R11 2nd-adversarial 2026-06-17 found B1-HIGH small-bonus-drop + B2-MED coverage-boundary). NEXT: fold the `detect_gap` ROOT redesign (ratio-aware + structured return → resolves B1+B2+NIT-1) → targeted re-verify → THEN build. 🚦 HELD.
+The split/bonus over-counting bug (ROLEXRINGS fake +15,272%). **Design:** `docs/superpowers/specs/2026-06-16-d1-corp-action-fix-design.md`.
+**Plan:** `docs/superpowers/plans/2026-06-16-d1-corp-action-fix.md` (10 TDD tasks; reviewed, 1 bug fixed). Principle = "price disposes".
+Fixes D-1 + D-2 + T-2 + T-4 in one effort; T-3 re-derive is a follow-up. **Confidence invariant:** final values ONLY for
+confidently-resolved stocks; everything unsure → flag+null (never guess). **Execution: subagent-driven TDD, gated on owner go.**
+
+### D-1 FOLLOW-UP TODOs — SEPARATE later tasks, NOT part of the D-1 build
+> These (TODO-D1a–f) are distinct tasks that **follow** the D-1 build (the plan's Tasks 0–12); **none are part of that build.**
+> They're grouped here only because D-1 enables/seeds them. Each is picked up later, on its own. (TODO-D1c — the reproducibility
+> OVERLAY — is its own foundational *campaign*, see its note; the D-1 build uses a targeted patch precisely to avoid needing it now.)
+- **TODO-D1a — STRICT: resolve all flagged corp-action rows.** They will move the numbers materially; **many may be GENUINE
+  WIPEOUTS** (not data errors). Classify each: real wipeout (−100%) / data error / real split w/ missing price data. Carry
+  per-stock context (price gap vs sources, why uncertain, likely resolution). Source: the override table + the unresolved set +
+  Wave-1 evidence (`data/master/review/corp_action_external_evidence.csv`, esp. the 6 STAYS-FLAGGED: CMMIPL, INDUSFILA, BANSAL,
+  COOLCAPS, SILVERTUC, VAISHALI). Pick-up-and-finish, don't re-investigate.
+- **TODO-D1b — re-derive downstream after the flagged rows are resolved** (bundle w/ D1a). *Targeted* re-derivation of the analysis
+  layer (weights, goldens, findings, forward-test, backtests) on the corrected substrate — NOT a naive full pipeline rebuild
+  (only safe once D1c exists). Also covers T-3 (re-derive `scorecard_weights.json` + re-bless goldens).
+- **TODO-D1c — reproducibility: the remediation-OVERLAY system (the real fix; until it exists we're stuck doing targeted patches).**
+  **Problem:** `data/master/ipo_analysis.csv` is NOT reproducible from the pipeline — after the last full run, **manual hand-fixes +
+  DRHP staging + `data/reference/manual_overrides.csv`** were layered on top. So **any future full pipeline re-run silently WIPES those
+  hand-fixes**, and we'd have to re-apply them by hand every time — error-prone, doesn't scale (this is exactly why D-1 uses a *targeted patch*, not a re-run).
+  **Goal:** `fresh pipeline output + applied overlay = the substrate`, **reproducibly** — i.e. **DETERMINISTIC / IDEMPOTENT
+  END-TO-END: re-running the whole thing produces the EXACT same substrate every time** (definite rules, no hand-step,
+  no drift). This is a SEPARATE problem from the D-1 corp-action pipeline fix (D-1 = a targeted patch that avoids re-running).
+  **The hard parts (owner-flagged 2026-06-17 — design for ALL of these):**
+  1. **Capture** every post-pipeline hand-fix in a structured, machine-applicable form (not prose): target row (key = symbol∪ISIN) + column,
+     old→new value, REASON/provenance, date. (The D-1 Task-8 manual-remediation INVENTORY is the first catalog of these — build the overlay ON it.)
+  2. **ORDER / sequencing** — hand-fixes can be **order-dependent** (fix B builds on fix A's output; two fixes touch the same cell). The overlay
+     must record + replay them in a **deterministic order**, not as an unordered bag — re-running the pipeline then re-applying must reproduce the exact substrate.
+  3. **Idempotency** — applying the overlay twice == applying it once (no double-application / corruption).
+  4. **Conflict detection** — when a fresh pipeline run now produces a value a hand-fix was overriding: policy = the hand-fix (a correction) usually
+     wins, BUT **flag** when the underlying pipeline value changed, so an obsolete hand-fix gets re-reviewed instead of silently masking newly-correct data.
+  5. **Provenance + retire-ability** — each overlay entry records WHY it exists, so once the pipeline itself is fixed to emit the right value, that entry can be retired.
+  **Sequencing:** D-1's Task-8 inventory → this todo formalizes that catalog into the ordered/idempotent/conflict-aware overlay + apply-step.
+  Once it exists, TODO-D1b's re-derive can become a **safe full re-run** instead of a targeted re-derive.
+  **PRIORITY + PROCESS (owner 2026-06-17): this is FIRST among the big foundational items — when undertaken it is a FOCUSED CAMPAIGN that
+  STOPS all other development** (no concurrent data changes while reconciling). The flow: (1) build the overlay system → (2) create the overlay
+  file (seeded from the Task-8 inventory) → (3) regenerate the substrate fresh (`pipeline output + overlay`) → (4) **DIFF against the current
+  substrate**: **EVERY mismatch is a BUG — in the NEW data (a pipeline/regen error) OR the OLD data (a stale/incorrect hand-fix)** — and each gets a
+  **REVIEW + RESOLUTION** (never auto-accepted; classify which side is wrong, fix it). (5) Only once **every mismatch is resolved and the data is
+  TRUSTED** do we declare the reproducible `pipeline + overlay = substrate` setup LIVE. NB: this reconciliation is itself the mechanism that surfaces
+  latent data bugs in BOTH directions — so it doubles as a full data-integrity sweep. Do NOT rush it; data correctness is the whole point.
+- **TODO-D1d — live corp-action capture (when we go live).** Wire the rebuilt `03h/03j/03k/03l` into `run_refresh.py`; store a
+  **`corp_actions_as_of`** watermark in `substrate_meta.json`; live-capture pulls from **watermark − ~1 month** (overlap buffer).
+  Interim safety net = the Phase-2 continuity guard (flags an un-captured split as an unexplained jump).
+- **TODO-D1e — broader data-integrity checks (separate flag-only batch).** implied-shares cross-check (O-12), price-band invariant
+  (O-13), date-ordering (O-11), EPS reconciliation (O-5/O-7), systemic 0→NaN at load (I1). Flag, never auto-fix.
+- **TODO-D1f — Wave-2 corp-action web evidence (deferred, NOT skipped).** phantom (84 stocks) + single-source (56) — optional
+  labeling; the price-disposes logic already handles these by construction (no gap → reject; gap → accept). Run later for tidiness.
+
+## 🧹 LOW-BUCKET CLEANUP QUEUE (decided 2026-06-17 — ready to execute as branch→TDD→review→PR)
+- **SR-1** — `think_tank_architecture.md` "supersedes" claim → **reframe** to WIP/forward-looking ("intended unified arch; once operational it supersedes; until then `execution_pipeline.md` + `hypothesis_protocol.md` remain canonical"). Standing briefs stay canonical. (Ties to META-O.)
+- **SR-8/9** — fix 3 LIVE wrong `improvement_backlog` paths (`docs/research/` → `docs/tracker/`) in STATUS.md, thinktank/memory/README.md, think_tank_architecture.md. LEAVE the historical `task_log.md:40` (git holds the move history). Bundles w/ SR-1 on think_tank_architecture.md.
+- **SR-10** — **regenerate** `docs/research/INDEX.md` via a simple generator (`os.walk` + first-line description + active/archived grouping; wired into verify.py like MAP.md). Do NOT auto-infer semantic categories (those live in backlog/rules/git). Replaces the stale hand-maintained snapshot.
+
+## 🧹 DOC-ALIGNMENT — anti-sprawl consolidation (owner 2026-06-17) · QUEUED: discovery-first, fix-after-D-1
+**The problem (owner, in their words):** "too many docs, too many places, things scattered — it should all be aligned properly."
+The 2026-06 audit + D-1 work spun up many docs; state is now spread across overlapping surfaces and some info is duplicated/stale.
+
+**Canonical-home map (the TARGET — one home per info type):** open work → THIS file (`improvement_backlog.md`) · signal/strategy
+verdicts → `rules/index.md` · history → **git log** (never duplicate) · repo structure/DAG → `project_map.py` (→ generated `MAP.md`) ·
+live "where are we" → `docs/tracker/STATUS.md` · conventions/decisions → `CLAUDE.md` · per-task execution proof → `docs/tracker/task_log.md` ·
+research-doc index → `docs/research/INDEX.md` (should be GENERATED, see SR-10).
+
+**Known issues to fix (seed list — the discovery pass will complete it):**
+- TEMP/working docs to consolidate-then-archive once their threads close: `alignment_audit_2026-06-16.md`, `structure_review_2026-06-16.md`,
+  `doc_drift_review_2026-06-16.md`, `doc_alignment_audit_2026-06-17.md`, and the **full D-1 review/evidence trail (~10 docs!):**
+  `d1_plan_review`, `d1_plan_rereview`, `d1_join_strategy`, `d1_plan_final_verify`, `d1_final_implementability`, `d1_final_correctness`,
+  `d1_plan_targeted_reverify`, `d1_adversarial`, `d1_remediation_inventory` (+ any further re-verify) — all under `docs/research/`.
+  **AFTER D-1 ships: archive the WHOLE `d1_*` review trail** (their verdicts/history → git log + the merged code); **KEEP only the spec + plan**
+  as the durable design record (or archive those too once merged). D-1 alone spun up **~11 docs** — this consolidation is NON-optional, it's the
+  poster child for the DATA & RULES ARCHITECTURE + DOC-ALIGNMENT need. (Delete/merge/fix each: review docs → archive; verdicts → git/rules; nothing duplicated.)
+- `INDEX.md` stale + hand-maintained → **regenerate** (SR-10, decided). `MAP.md` → already generated; keep it the only structure map.
+- "supersedes" confusion (SR-1, decided) · wrong-path refs (SR-8/9, decided) · orphan transition doc `claude_transition_and_open_threads.md` (SR-5).
+- DUPLICATION to hunt: the same fact (counts, status, verdicts, paths) stated in >1 place; anything in a doc that belongs in git log / rules / project_map.
+
+**Plan: discovery FIRST (find, don't fix), then fix after D-1 + low-bucket land.**
+- ✅ **DISCOVERY pass DONE (2026-06-17):** catalog at `docs/research/doc_alignment_audit_2026-06-17.md` — **DA-1…DA-14** (most prior SR/DD
+  items already fixed by PRs #2/#3; verify.py PASSES). Top new: DA-1 INDEX.md badly drifted (lists 6 archived as active, misses ~37 subdir docs →
+  regenerate = SR-10), DA-2 CLAUDE.md cites 5 run-scripts at root but they're in `scripts/`, DA-3 CLAUDE.md "8-component" (line 26) vs a 5-item
+  list (line 116) — residual of the DOC-2 fix, DA-4 README "STATUS.md (root)", DA-8 setup.md dups thinktank arch, DA-9 PRODUCT.md overlaps CLAUDE.md.
+  Temp-docs-to-archive identified (structure_review + doc_drift_review archivable now; alignment_audit keep till its 14 items close; 4 D-1 docs after D-1;
+  claude_transition = orphan, harvest its 3 open architectural decisions → here, then delete). (Catalog is itself a temp doc the fix consumes.)
+- ⏳ **FIX pass (after D-1):** action the catalog — move each scattered/duplicated bit to its canonical home, regenerate INDEX/MAP, archive/delete the
+  spent working docs, retire `alignment_audit` once ALL its items close. Goal: a reader lands in ONE place per question, nothing duplicated/stale.
+
+## 🧭 GROUND-UP REVIEW / RE-BASE — whole-repo consolidation (owner 2026-06-17; the capstone, after the active churn settles)
+**Why:** the 2026-06 audit + D-1 + the review-heavy iterations created a LOT of churn — ~11 D-1 review docs, made-then-superseded edits,
+duplicated/stale lines across files. Real bugs got caught, but cruft accumulated. Time to step back and look at the ENTIRE thing (files, lines,
+code, docs), keep only what's needed, and **redesign from the base step by step — laying the proven existing work over a clean base.**
+**Scope:** whole repo, not just docs (so it SUBSUMES DOC-ALIGNMENT + extends the DATA & RULES ARCHITECTURE repo-wide). Prune dead/redundant
+docs+code+lines; consolidate to one home per info-type; reorganize into a clean structure; keep the validated substrate/findings/pipeline/scrapers/D-1 fix.
+**NOT a rewrite-from-scratch** — don't throw away validated work; layer the clean base over it (same philosophy as roadmap #1's overlay).
+**Guardrails:** the test suite + `verify.py` + git history = the net — prune aggressively but nothing leaves with tests red.
+**Timing:** AFTER the active churn settles (can't clean mid-edit) — finish D-1 + low-bucket + doc-alignment → roadmap #1 (reproducibility) → then (or interleaved) this re-base. **Run as its own brainstorm→spec→build campaign** (compute-heavy → Opus). Cross-ref: `roadmap.md`, DOC-ALIGNMENT, DATA & RULES ARCHITECTURE.
+
+## 🗺 POST-D-1 ROADMAP → **see `docs/tracker/roadmap.md`** (the dedicated home: the 3 high-priority items + time budget + model)
+In brief, priority order: **1) pipelining/reproducibility** (TODO-D1c + DATA & RULES ARCHITECTURE umbrella below) → **2) pull latest data** (TODO-D1d)
+→ **3) think-tank orchestration** (META-O + `think_tank_architecture.md`). All compute-heavy → **highest Claude (Opus)**. Budget: ~3 days, 4h/day + 5h nights. Full detail + timing nuance in `roadmap.md`.
+
+## 🏛 DATA & RULES ARCHITECTURE — the UNIFYING design (owner 2026-06-17; connects the scattered data TODOs — design as a whole, not point-fixes)
+**The insight (owner):** the corp-action fix, the overlay, the live-capture, and the data-integrity checks are all FACETS of one
+missing thing — a coherent architecture for HOW data goes in, HOW rules are defined, WHICH data matches which entity, WHICH
+hypothesis/check applies to which data, how OLD data gets cleaned, and how NEW data is classified/fixed in-place once live.
+Worth a dedicated **brainstorm→spec** (like D-1), not scattered patches. The pieces (already captured — CONNECT them under this):
+- **Ingestion** — scrapers → pipeline → substrate (exists); + live-capture for new IPOs/actions → **TODO-D1d**.
+- **Identity / matching** ("which data matches what") — ISIN is the primary key, BUT corp actions need **symbol∪substrate-ISIN + a
+  trading-date window + collision handling** (the D-1 join-strategy learnings — **promote from a D-1 detail to a STANDING matching principle**).
+- **Rules / applicability** ("what check/hypothesis applies to which data") — data-integrity checks → **TODO-D1e**; hypothesis-applicability
+  by cohort/era/quality-tier (min-N + `data_quality_tier` gating, already a convention) — make the data↔rule mapping explicit.
+- **Layering / overlay** ("rules/fixes on file over file") — hand-fixes layered OVER pipeline output (`pipeline output + ordered overlay
+  = substrate`) → **TODO-D1c** (the reproducibility spine).
+- **Old-data cleanup** — the reconciliation campaign (regenerate → diff → every mismatch is a bug → review+resolve → trust) → **TODO-D1c**.
+- **New-data handling (once live)** — classify + apply rules/fixes **IN-PLACE as data arrives**, so we never re-accumulate a hand-fix backlog
+  → **TODO-D1d** + the live system. (Owner: do the classify/rules/fixes then-and-there for new records.)
+**Sequencing:** design AFTER D-1 (D-1 + its follow-ups surface the concrete requirements); run as brainstorm→spec since it's foundational.
+Until then, D1c/D1d/D1e are the concrete pieces and THIS umbrella keeps them coherent. Connects to META-O (model routing) + DOC-ALIGNMENT (one home per info type).
+
+---
+
 ## QUICK / OWNED-DATA (no internet — safe to run anytime)
 ### SCORING-ARCHITECTURE — discuss: one consolidated score vs multiple purpose-specific scores?  ⚪ · DISCUSS · owner 2026-06-11
 Open question to scope WITH the owner: should the tool keep ONE consolidated score, or split into MULTIPLE
@@ -72,6 +193,16 @@ IPO tool's polish is fully done. Source: `archive/extension_roadmap.md`.
 ### G2 — Swing-trade buy/sell calls  🔬 · L
 Research-gated. EXIT side tested (no blanket take-profit beats hold); ENTRY side weak. Needs a new entry signal that
 survives the 3-layer protocol, or the news feed (D1/D2). Source: `archive/future_ideas.md`.
+
+### ORCHESTRATION — open architecture decisions (harvested from `claude_transition_…md` Part 2 via SR-5, 2026-06-17; for roadmap #3 / META-O)
+The think-tank/orchestration campaign (roadmap #3) must resolve these 3 paused decisions before/while running META-O:
+1. **Master-orchestrator architecture (core):** pivot was **Claude Code CLI as master orchestrator + Gemini as a backend tool** (away
+   from the manual copy-paste handoff in `thinktank/orchestration/ui.py`). OPEN: does Claude Code **replace `graph.py`**, or **write a
+   wrapper** that calls the Claude API (reasoning) + Gemini API (context)? **Where do the API keys live?** (Ties to META-O's routing table + DOC-5.)
+2. **Human-in-the-loop UI:** `ui.py` runs a synchronous `for i in range(2):` loop that BYPASSES `graph.py`'s node/edge structure. OPEN:
+   rebuild **pause → give directive → resume** cleanly in the Streamlit app. **(Same area as the failing T-5 test — fix together.)**
+3. **Execution-pipeline testing:** the hypothesis-vs-data logic is functional but needs **rigorous testing once the dual-model orchestration is wired.**
+(Once recorded here, `claude_transition_and_open_threads.md` is safe to delete — see the cleanup checklist in `session_handoff_2026-06-17.md`.)
 
 ### META-O — multi-model orchestration tournament (which model where?)  🔬 · L · owner 2026-06-16
 **Goal:** empirically decide *which model + which orchestration shape* to use *where*, instead of guessing. We have a

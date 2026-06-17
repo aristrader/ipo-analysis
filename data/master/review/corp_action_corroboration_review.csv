@@ -1,0 +1,260 @@
+isin,symbol,ex_date,observed_gap,gap_dir,yahoo_count,yahoo_ratio,nse_count,nse_ratio,cumulative_applied_factor,bucket,current_return_from_issue,outcome_class,note
+INE00FF01025,ACUTAAS,2025-04-25,,edge,1,2.0,1,2.0,2.0,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE645S01024,ROLEXRINGS,2025-09-19,19.96,down,1,10.0,0,,1000.0,count-conflict,152.72,multibagger,"3 merged entries (ratio 10.0) on ['2025-09-19', '2025-10-03', '2025-10-17'] span 28d collapse to ONE real event (>10d apart -> slipped dedup window)"
+INE645S01024,ROLEXRINGS,,,,3,,1,,1000.0,STOCK-FLAG,152.72,multibagger,cumulative factor >100x
+INE07O001026,EASEMYTRIP,2022-11-21,7.2066,down,1,4.0,2,3.0,32.0,ratio-conflict,0.15,flat,
+INE07O001026,EASEMYTRIP,2022-11-21,7.2066,down,1,4.0,2,3.0,32.0,ratio-conflict,0.15,flat,
+INE619A01035,PATANJALI,2007-10-29,,edge,1,5.0,0,,0.15,phantom,0.94,winner,source(s) claim event but raw price shows no ~ratio gap
+INE619A01035,PATANJALI,2019-11-14,,edge,1,0.01,0,,0.15,reverse-split,0.94,winner,
+INE619A01035,PATANJALI,2025-09-11,3.0088,down,1,3.0,1,3.0,0.15,agree-all,0.94,winner,
+INE0PPK01015,ORIENTTECH,2026-01-05,0.9647,up,1,1.1,1,1.1,1.1,phantom,0.4,winner,source(s) claim event but raw price shows no ~ratio gap
+INE0Y8W01025,AHCL,2026-04-24,9.0605,down,1,2.0,2,3.5,10.0,ratio-conflict,,,
+INE0Y8W01025,AHCL,2026-04-24,9.0605,down,1,2.0,2,3.5,10.0,ratio-conflict,,,
+INE0E4I01027,,2025-02-14,,edge,0,,0,,10.0,single-source,,,
+INE0I7D01019,FOCE,2026-03-02,2.5262,down,0,,1,2.4,2.4,single-source,5.29,multibagger,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE0JM501013,NRL,2022-02-22,1.0912,down,1,1.1,1,1.1,3.3,phantom,2.88,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE0FFK01017,NPST,2024-01-22,0.9689,up,2,3.0,1,3.0,9.0,count-conflict,161.27,multibagger,"2 merged entries (ratio 3.0) on ['2024-01-22', '2024-02-02'] span 11d collapse to ONE real event (>10d apart -> slipped dedup window)"
+INE0CJD01029,KMEW,2025-12-22,,edge,1,2.0,1,2.0,2.0,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE07S101038,PAVNAIND,2022-08-17,1.0,up,1,2.0,0,,40.0,count-conflict,2.97,multibagger,"2 merged entries (ratio 2.0) on ['2022-08-17', '2022-09-05'] span 19d collapse to ONE real event (>10d apart -> slipped dedup window)"
+INE07S101038,PAVNAIND,2025-09-01,12.863,down,1,10.0,1,10.0,40.0,agree-all,2.97,multibagger,
+INE0L2Y01011,ARHAM,2024-05-03,1.9047,down,0,,1,2.0,2.0,single-source,5.76,multibagger,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE0MJQ01020,PRITIKA,2025-02-14,0.6207,up,1,2.0,1,2.0,2.0,reverse-split,3.45,multibagger,
+INE0KY201021,,2024-02-05,,edge,0,,0,,12.5,single-source,,,
+INE0KY201021,,2024-02-05,,edge,0,,0,,12.5,single-source,,,
+INE0LGX01024,INA,2025-01-24,,edge,0,,1,10.0,10.0,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE0LCW01025,ISHAN,2024-01-25,28.5619,down,1,10.0,2,6.5,30.0,ratio-conflict,-0.78,loser,
+INE0LCW01025,ISHAN,2024-01-25,28.5619,down,1,10.0,2,6.5,30.0,ratio-conflict,-0.78,loser,
+INE0CBM01019,USASEEDS,2025-09-26,0.9597,up,1,1.4286,0,,2.0408,count-conflict,0.63,winner,"2 merged entries (ratio 1.4285714285714286) on ['2025-09-26', '2025-10-10'] span 14d collapse to ONE real event (>10d apart -> slipped dedup window)"
+INE0G1L01017,LEMERITE,2026-05-29,,edge,1,5.0,1,5.0,5.0,phantom,1.67,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE0J5801029,JSLL,2025-06-12,2.585,down,1,5.0,0,,9.0,single-source,36.79,multibagger,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE0HS001028,COOLCAPS,2025-07-04,3.8673,down,1,5.0,2,3.5,10.0,ratio-conflict,5.04,multibagger,
+INE0HS001028,COOLCAPS,2025-07-04,3.8673,down,1,5.0,2,3.5,10.0,ratio-conflict,5.04,multibagger,
+INE0QJ901011,DIGIKORE,2025-10-10,0.9766,up,1,2.0,0,,4.0,count-conflict,0.33,winner,"2 merged entries (ratio 2.0) on ['2025-10-10', '2025-10-24'] span 14d collapse to ONE real event (>10d apart -> slipped dedup window)"
+INE0N7S01028,MOS,2025-08-08,3.1293,down,1,5.0,1,5.0,20.0,agree-all,3.37,multibagger,
+INE0N7S01028,MOS,2025-09-26,1.118,down,1,2.0,0,,20.0,count-conflict,3.37,multibagger,"2 merged entries (ratio 2.0) on ['2025-09-26', '2025-10-14'] span 18d collapse to ONE real event (>10d apart -> slipped dedup window)"
+INE00TV01023,,2024-11-22,,edge,0,,0,,10.0,single-source,,,
+INE0LS001014,USHAFIN,2025-08-19,1.9306,down,0,,1,2.0,2.0,single-source,-0.6,loser,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE0YRN01025,DHARIWAL,2026-02-06,,edge,0,,1,5.0,5.0,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE338Y01016,OMFURN,2023-10-06,1.1443,down,1,1.2,1,1.2,1.2,phantom,-0.28,loser,source(s) claim event but raw price shows no ~ratio gap
+INE538H01016,SHREEASHTA,2009-08-20,10.9081,down,0,,1,10.0,50.0,single-source,-1.0,wipeout,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE538H01016,SHREEASHTA,2010-02-01,4.9693,down,0,,1,5.0,50.0,single-source,-1.0,wipeout,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE846H01021,NISSAN,2010-09-27,10.5263,down,0,,1,10.0,10.0,single-source,-0.42,loser,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE818H01020,LTFOODS,2017-02-07,,edge,1,10.0,0,,10.0,phantom,67.72,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE803H01014,RUCHIRA,2022-10-10,1.0392,down,1,1.1,1,1.1,1.1,phantom,4.39,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE255D01024,GULPOLY,2016-12-27,5.0101,down,1,5.0,0,,6.0,single-source,,,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE255D01024,GULPOLY,2023-06-21,1.1415,down,1,1.2,1,1.2,6.0,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE785C01048,LITL,2010-01-04,9.926,down,0,,1,10.0,10.0,single-source,-1.0,wipeout,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE318D01020,ZENITHSTL,2010-08-11,,edge,1,1.2,1,1.2,1.2,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE285H01022,ATLANTAA,2010-11-08,,edge,1,5.0,1,5.0,5.0,phantom,0.36,winner,source(s) claim event but raw price shows no ~ratio gap
+INE776C01039,GMRAIRPORT,2007-09-28,,edge,1,5.0,1,5.0,10.0,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE776C01039,GMRAIRPORT,2009-10-01,,edge,1,2.0,1,2.0,10.0,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE418H01029,ALLCARGO,2009-11-19,5.1639,down,1,5.0,0,,40.0,single-source,,,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE424H01027,SUNTV,2007-07-23,4.0283,down,1,2.0,0,,2.0,single-source,,,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE808B01016,OPTOCIRCUI,2003-11-10,,edge,1,1.2,0,,15.5142,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE808B01016,OPTOCIRCUI,2004-10-20,,edge,1,1.3,0,,15.5142,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE808B01016,OPTOCIRCUI,2005-08-16,,edge,1,1.5,0,,15.5142,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE224B01024,,2009-04-24,,no-data,0,,1,10.0,12.0,phantom,-0.12,flat,source(s) claim event but raw price shows no ~ratio gap
+INE224B01024,,2010-10-20,,no-data,0,,1,1.2,12.0,phantom,-0.12,flat,source(s) claim event but raw price shows no ~ratio gap
+INE343H01029,SOLARINDS,2016-07-13,4.997,down,1,5.0,0,,5.0,single-source,,,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE305H01010,SUNILHITEC,2016-12-01,19.0376,down,0,,1,20.0,20.0,single-source,-0.93,wipeout,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE199G01027,JAGRAN,2006-11-02,1.1692,down,0,,1,1.2,6.0,phantom,0.25,winner,source(s) claim event but raw price shows no ~ratio gap
+INE533D01032,RAJRILTD,2013-03-04,,edge,1,10.0,0,,0.1,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE533D01032,RAJRILTD,2021-10-25,,edge,1,0.01,0,,0.1,reverse-split,,,
+INE763I01026,TARIL,2013-06-13,,edge,1,1.1111,1,1.1111,22.2222,phantom,14.35,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE763I01026,TARIL,2017-09-28,,edge,1,10.0,1,10.0,22.2222,phantom,14.35,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE817H01014,BURNPUR,2025-01-30,,edge,1,0.2,0,,0.2,reverse-split,-0.45,loser,
+INE234I01028,KAUSHALYA,2024-01-12,0.01,up,1,0.01,0,,0.01,reverse-split,-0.85,loser,
+INE742F01042,ADANIPORTS,2010-09-23,,edge,1,5.0,1,5.0,5.0,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE406H01016,DHANUS,2011-08-29,3.4933,down,0,,1,3.4,3.4,single-source,-1.0,wipeout,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE930H01031,KPRMILL,2016-11-29,1.965,down,1,2.0,0,,10.0,single-source,47.29,multibagger,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE022I01019,ASIANTILES,2020-11-09,0.9913,up,1,5.0,0,,5.0,phantom,2.06,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE105I01020,SELMC,2021-03-09,,edge,1,0.001,0,,0.001,reverse-split,-1.0,wipeout,
+INE414I01018,IVRPRIME,2010-05-20,,edge,0,,1,1.5,1.5,phantom,-0.67,loser,source(s) claim event but raw price shows no ~ratio gap
+INE225I01026,ZYLOG,2012-06-29,2.0762,down,0,,1,2.0,2.0,single-source,-1.0,wipeout,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE800H01010,OMAXE,2013-11-11,1.1372,down,1,1.2564,1,1.2564,1.2564,phantom,-0.7,loser,source(s) claim event but raw price shows no ~ratio gap
+INE191I01012,HDIL,2008-08-21,1.3316,down,1,1.2857,0,,1.2857,single-source,-0.99,wipeout,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE090A01021,ICICIBANK,2017-06-20,1.1027,down,1,1.1,1,1.1,5.5,phantom,6.38,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE287C01037,MICEL,2008-06-27,,edge,1,5.0,1,5.0,1.25,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE287C01037,MICEL,2021-06-24,,edge,1,0.25,0,,1.25,reverse-split,,,
+INE517H01028,ADVANTA,2013-07-05,4.9947,down,0,,1,5.0,5.0,single-source,4.03,multibagger,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE628H01015,ORBITCORP,2010-06-29,2.0232,down,0,,1,2.0,2.0,single-source,-1.0,wipeout,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE004I01017,ABHISHEK,2024-05-10,,edge,1,0.025,0,,0.0006,count-conflict,,,"2 merged entries (ratio 0.025) on ['2024-05-10', '2024-05-24'] span 14d collapse to ONE real event (>10d apart -> slipped dedup window); REVERSE split"
+INE961H01010,EVINIX,2008-04-29,9.72,down,0,,1,10.0,10.0,single-source,-1.0,wipeout,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE025I01012,INDUSFILA,2026-01-29,,edge,2,0.1368,0,,0.0026,reverse-split,-1.0,wipeout,
+INE025I01012,INDUSFILA,2026-02-09,,edge,2,0.1368,0,,0.0026,reverse-split,-1.0,wipeout,
+INE018I01017,MINDTREE,2014-06-03,1.9673,down,0,,1,2.0,4.0,single-source,31.32,multibagger,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE018I01017,MINDTREE,2016-03-09,2.2598,down,0,,1,2.0,4.0,single-source,31.32,multibagger,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE886H01027,TV18BRDCST,2008-02-21,,edge,0,,1,5.0,5.0,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE774I01031,RMMIL,2010-09-15,,edge,1,10.0,0,,1.0,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE774I01031,RMMIL,2012-06-14,,edge,1,0.1,0,,1.0,reverse-split,,,
+INE655I01024,BIRLACOT,2009-10-23,9.2632,down,0,,1,10.0,12.0,single-source,-0.89,loser,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE655I01024,BIRLACOT,2010-09-29,1.2222,down,0,,1,1.2,12.0,single-source,-0.89,loser,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE955I01044,SEJALLTD,2010-10-21,,edge,1,10.0,0,,0.003,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE955I01044,SEJALLTD,2011-11-09,,edge,1,0.1,0,,0.003,reverse-split,,,
+INE955I01044,SEJALLTD,2021-05-07,,edge,1,0.003,0,,0.003,reverse-split,,,
+INE878I01022,BAFNAPH,2019-08-26,,edge,1,0.1,0,,0.1,reverse-split,,,
+INE778I01024,,2010-02-25,,edge,0,,0,,2.0,single-source,,,
+INE615H01020,TITAGARH,2015-04-23,,edge,1,5.0,1,5.0,5.0,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE181G01025,AJRINFRA,2009-10-26,,edge,1,5.0,1,5.0,5.1471,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE181G01025,AJRINFRA,2013-01-23,,edge,1,1.0294,1,1.0294,5.1471,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE474I01012,TULSI,2011-01-07,1.0413,down,1,1.1,1,1.1,1.1,phantom,-0.99,wipeout,source(s) claim event but raw price shows no ~ratio gap
+INE634I01029,KNRCON,2016-12-12,0.9798,up,1,5.0,0,,10.0,phantom,6.67,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE008I01026,COX&KINGS,2011-06-21,1.9208,down,0,,1,2.0,2.0,single-source,-0.99,wipeout,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE542F01020,SWANDEF,2023-03-17,,edge,1,0.0036,0,,0.0,reverse-split,,,
+INE542F01020,SWANDEF,2023-07-14,,edge,1,0.0036,0,,0.0,reverse-split,,,
+INE294G01026,ROML,2018-06-28,,edge,1,0.05,0,,0.05,reverse-split,,,
+INE688J01023,EXCEL,2018-01-23,2.9101,down,0,,1,3.0,45.0,single-source,-0.53,loser,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE688J01023,EXCEL,2022-09-28,13.5385,down,0,,2,5.75,45.0,single-source,-0.53,loser,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE688J01023,EXCEL,2022-09-28,13.5385,down,0,,2,5.75,45.0,single-source,-0.53,loser,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE378J01013,CMAHENDRA,2015-06-18,1.9444,down,0,,1,2.0,2.0,single-source,-1.0,wipeout,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE268L01046,SHEKHAWATI,2013-04-10,,edge,1,10.0,1,10.0,1.0,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE268L01046,SHEKHAWATI,2024-08-28,,edge,1,0.1,0,,1.0,reverse-split,,,
+INE482J01021,SHAH,2016-10-13,,edge,1,10.0,1,10.0,10.0,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE043K01029,BSLIMITED,2013-09-30,2.2179,down,0,,1,2.0,20.0,single-source,-0.97,wipeout,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE043K01029,BSLIMITED,2014-01-21,9.8125,down,0,,1,10.0,20.0,single-source,-0.97,wipeout,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE068L01024,CANTABIL,2023-10-20,0.9857,up,1,5.0,0,,25.0,count-conflict,39.68,multibagger,"2 merged entries (ratio 5.0) on ['2023-10-20', '2023-11-02'] span 13d collapse to ONE real event (>10d apart -> slipped dedup window)"
+INE528K01029,GALLISPAT,2018-08-07,10.0119,down,0,,1,10.0,10.0,single-source,11.83,multibagger,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE866K01023,WAAREEINDO,2022-06-27,,edge,1,0.01,0,,0.01,reverse-split,,,
+INE933K01021,BAJAJCON,2011-05-05,,edge,1,5.0,1,5.0,5.0,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE510A01028,ENGINERSIN,1999-11-22,,edge,1,3.0,0,,12.0,phantom,0.64,winner,source(s) claim event but raw price shows no ~ratio gap
+INE510A01028,ENGINERSIN,2010-05-06,5.7661,down,1,2.0,0,,12.0,single-source,0.64,winner,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE087J01028,GBGLOBAL,2019-02-14,,edge,1,0.1,0,,0.001,reverse-split,,,
+INE087J01028,GBGLOBAL,2021-06-03,,edge,1,0.01,0,,0.001,reverse-split,,,
+INE495J01015,PRADIP,2013-02-12,1.0906,down,0,,1,1.2,1.2,phantom,-0.99,wipeout,source(s) claim event but raw price shows no ~ratio gap
+INE949H01023,MANINFRA,2014-08-28,5.2431,down,1,5.0,1,0.135,0.2025,reverse-split,-0.91,wipeout,
+INE733E01010,NTPC,2019-03-19,1.1851,down,1,1.2,1,1.2,1.2,phantom,1.15,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE544K01018,AQUA,2010-10-01,10.0102,down,0,,1,10.0,10.0,single-source,-1.0,wipeout,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE486J01014,INFINITE,2017-11-01,1.0258,down,0,,1,1.0385,1.0385,phantom,1.98,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE899L01030,UEL,2012-12-21,,edge,1,10.0,0,,0.0945,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE899L01030,UEL,2023-11-03,,edge,1,0.0015,0,,0.0945,reverse-split,,,
+INE899L01030,UEL,2024-09-20,1.1905,down,1,1.25,1,1.25,0.0945,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE023M01027,SETUINFRA,2012-12-13,,edge,1,10.0,1,10.0,10.0,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE878H01024,INVENTURE,2012-05-22,4.2492,down,1,4.0,0,,40.0,single-source,-0.68,loser,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE590L01019,VASWANI,2011-09-29,,edge,0,,1,1.25,1.25,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE045J01034,FCL,2025-10-31,15.1585,down,1,2.0,2,3.5,100.0,ratio-conflict,57.19,multibagger,
+INE045J01034,FCL,2025-10-31,15.1585,down,1,2.0,2,3.5,100.0,ratio-conflict,57.19,multibagger,
+INE081A01020,TATASTEEL,2004-08-11,,edge,1,1.5,0,,15.0,phantom,2.39,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE213M01024,VKSPL,2013-05-03,3.6897,down,0,,1,3.5,35.0,single-source,-1.0,wipeout,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE934S01014,GNA,2023-08-11,0.9957,up,1,2.0,0,,4.0,count-conflict,6.39,multibagger,"2 merged entries (ratio 2.0) on ['2023-08-11', '2023-09-01'] span 21d collapse to ONE real event (>10d apart -> slipped dedup window)"
+INE483S01020,INFIBEAM,2017-08-31,9.9378,down,0,,1,10.0,40.0,single-source,0.3,winner,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE483S01020,INFIBEAM,2021-03-18,2.3353,down,0,,1,2.0,40.0,single-source,0.3,winner,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE483S01020,INFIBEAM,2022-03-14,2.0814,down,0,,1,2.0,40.0,single-source,0.3,winner,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE597J01018,SHALBY,2022-12-22,1.0523,down,1,1.2,0,,1.2,phantom,-0.16,flat,source(s) claim event but raw price shows no ~ratio gap
+INE278R01034,DHARAN,2020-07-02,,edge,1,5.0,1,5.0,100.0,phantom,-0.92,wipeout,source(s) claim event but raw price shows no ~ratio gap
+INE278R01034,DHARAN,2021-08-12,,edge,1,2.0,2,3.5,100.0,phantom,-0.92,wipeout,source(s) claim event but raw price shows no ~ratio gap
+INE278R01034,DHARAN,2021-08-12,,edge,1,2.0,2,3.5,100.0,phantom,-0.92,wipeout,source(s) claim event but raw price shows no ~ratio gap
+INE430N01022,VISHWARAJ,2021-09-08,1.0146,down,1,5.0,0,,25.0,count-conflict,1.36,multibagger,"2 merged entries (ratio 5.0) on ['2021-09-08', '2021-10-21'] span 43d collapse to ONE real event (>10d apart -> slipped dedup window)"
+INE918N01018,VETO,2013-09-06,0.917,up,0,,1,1.1,1.1,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE121N01019,THEJO,2013-09-11,2.0,down,0,,1,2.0,6.0,single-source,,,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE279P01036,,2016-12-08,,edge,0,,0,,10.0,single-source,,,
+INE899O01018,,2011-12-16,,edge,0,,0,,3.0,single-source,,,
+INE191O01010,,2014-07-01,,edge,0,,0,,2.8,single-source,,,
+INE552Q01018,,2015-03-01,,edge,0,,0,,10.0,single-source,,,
+INE755Q01025,VISHAL,2020-12-16,1.531,down,0,,1,1.5,4.5,single-source,,,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE755Q01025,VISHAL,2022-03-10,3.0286,down,0,,1,3.0,4.5,single-source,,,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE849M01017,,2011-07-25,,edge,0,,0,,2.2,single-source,,,
+INE849M01017,,2012-03-20,,edge,0,,0,,2.2,single-source,,,
+INE012Q01039,RNBDENIMS,2026-04-02,,edge,1,2.0,2,1.75,3.0,phantom,2.05,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE012Q01039,RNBDENIMS,2026-04-02,,edge,1,2.0,2,1.75,3.0,phantom,2.05,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE084Q01012,RACE,2013-11-01,,edge,0,,0,,21.0,single-source,,,
+INE782L01012,SANCO,2016-08-10,1.0919,down,1,1.2,1,1.2,1.2,phantom,-0.81,loser,source(s) claim event but raw price shows no ~ratio gap
+INE382T01014,FOURTHDIM,2017-02-02,1.9056,down,0,,1,2.0,2.0,single-source,-0.09,flat,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE541R01019,,2016-04-08,,edge,0,,0,,3.999,single-source,,,
+INE541R01019,,2018-10-06,1.2483,down,0,,0,,3.999,single-source,,,"merged-only, price-confirmed (likely yahoo gap-fill; STRICT would flag)"
+INE541R01019,,2024-07-12,1.143,down,0,,0,,3.999,single-source,,,
+INE976R01033,AGIIL,2025-02-07,,edge,1,2.0,1,2.0,10.0,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE976R01033,AGIIL,2025-10-10,,edge,1,5.0,1,5.0,10.0,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE908V01012,LIBAS,2021-04-06,1.1881,down,1,1.2,1,1.2,2.16,phantom,-0.61,loser,source(s) claim event but raw price shows no ~ratio gap
+INE908V01012,LIBAS,2021-09-21,1.1474,down,1,1.2,1,1.2,2.16,phantom,-0.61,loser,source(s) claim event but raw price shows no ~ratio gap
+INE679V01027,AVL,2024-08-27,,edge,0,,1,10.0,10.0,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE947T01022,GICL,2021-03-18,1.1953,down,1,1.25,1,1.25,10.0,phantom,9.48,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE947T01022,GICL,2022-08-19,0.9577,up,1,2.0,0,,10.0,phantom,9.48,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE947T01022,GICL,2025-10-15,1.0793,down,1,2.0,0,,10.0,phantom,9.48,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE448V01019,ALCODIS,2024-10-14,1.1413,down,0,,1,1.25,1.25,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE700V01021,,2018-10-12,,edge,0,,0,,6.0,single-source,,,
+INE700V01021,,2023-10-27,,edge,0,,0,,6.0,single-source,,,
+INE704V01015,DIRL,2018-01-09,,edge,0,,1,2.0,2.0,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE696V01013,JAIPURKURT,2019-04-30,,edge,1,2.5,0,,2.5,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE239T01016,KKVAPOW,2018-07-19,1.3156,down,0,,1,1.25,1.7188,single-source,2.29,multibagger,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE239T01016,KKVAPOW,2021-10-14,1.314,down,0,,1,1.25,1.7188,single-source,2.29,multibagger,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE239T01016,KKVAPOW,2025-09-26,1.1579,down,1,1.1,1,1.1,1.7188,phantom,2.29,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE671T01028,,2018-09-19,,edge,0,,0,,10.5,single-source,,,
+INE671T01028,,2022-06-14,1.05,down,0,,0,,10.5,single-source,,,
+INE912T01018,RPEL,2024-11-14,0.9931,up,1,2.0,0,,4.0,count-conflict,,,"2 merged entries (ratio 2.0) on ['2024-11-14', '2024-11-29'] span 15d collapse to ONE real event (>10d apart -> slipped dedup window)"
+INE359U01028,LANCER,2022-12-16,1.9717,down,0,,1,2.0,2.0,single-source,0.74,winner,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE030U01025,,2017-02-02,,edge,0,,0,,4.0,single-source,,,
+INE030U01025,,2020-10-07,2.0071,down,0,,0,,4.0,single-source,,,"merged-only, price-confirmed (likely yahoo gap-fill; STRICT would flag)"
+INE820Y01021,AJOONI,2021-03-10,1.0588,down,1,1.1111,1,1.1111,5.5556,phantom,-0.28,loser,source(s) claim event but raw price shows no ~ratio gap
+INE840Y01029,ONEPOINT,2022-01-18,7.1642,down,1,5.0,2,3.25,11.25,ratio-conflict,8.84,multibagger,
+INE840Y01029,ONEPOINT,2022-01-18,7.1642,down,1,5.0,2,3.25,11.25,ratio-conflict,8.84,multibagger,
+INE486Y01013,TOUCHWOOD,2019-08-22,2.3898,down,1,2.5,0,,2.5,single-source,3.4,multibagger,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE715Y01031,SHRADHA,2020-09-16,1.0,up,1,1.05,1,1.05,5.25,phantom,1.62,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE625X01026,SILVERTUC,2026-03-06,5.2672,down,1,2.0,2,3.5,10.0,ratio-conflict,13.78,multibagger,
+INE669Y01022,,2021-07-08,,edge,0,,0,,4.0,count-conflict,,,"2 merged entries (ratio 2.0) on ['2021-07-08', '2021-08-17'] span 40d collapse to ONE real event (>10d apart -> slipped dedup window)"
+INE188Y01031,VERTOZ,2024-07-05,19.043,down,1,2.0,2,6.0,4.0,ratio-conflict,0.43,winner,
+INE188Y01031,VERTOZ,2024-07-05,19.043,down,1,2.0,2,6.0,4.0,ratio-conflict,0.43,winner,
+INE188Y01031,VERTOZ,2025-06-25,0.3744,up,1,0.1,0,,4.0,reverse-split,0.43,winner,
+INE376Y01016,MILTON,2019-10-14,1.0992,down,1,1.1,1,1.1,1.1,phantom,0.31,winner,source(s) claim event but raw price shows no ~ratio gap
+INE319Y01016,FORGE,2021-10-07,,edge,0,,2,3.375,8.75,phantom,1.41,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE319Y01016,FORGE,2021-10-07,,edge,0,,2,3.375,8.75,phantom,1.41,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE351Y01019,BETA,2025-03-26,0.9923,up,1,1.05,0,,1.05,phantom,17.12,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE289S01013,CMMIPL,2025-04-15,1.0,up,2,0.01,0,,0.0001,count-conflict,-1.0,wipeout,"2 merged entries (ratio 0.01) on ['2025-04-15', '2025-04-24'] span 9d collapse to ONE real event (>10d apart -> slipped dedup window); REVERSE split"
+INE375Y01018,RELIABLE,2019-10-03,1.1893,down,1,1.2,1,1.2,1.2,phantom,2.06,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE405Y01021,GOLDSTAR,2023-01-20,17.1323,down,1,1.8,2,5.9,22.5,ratio-conflict,5.97,multibagger,
+INE405Y01021,GOLDSTAR,2023-01-20,17.1323,down,1,1.8,2,5.9,22.5,ratio-conflict,5.97,multibagger,
+INE405Y01021,GOLDSTAR,2023-07-19,1.1978,down,1,1.25,1,1.25,22.5,phantom,5.97,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE070Y01015,INNOVATIVE,2024-06-26,,edge,1,0.035,0,,0.035,reverse-split,-0.87,loser,
+INE973X01012,,2020-01-02,1.9574,down,0,,0,,2.0,single-source,0.11,flat,"merged-only, price-confirmed (likely yahoo gap-fill; STRICT would flag)"
+INE864X01013,DPWIRES,2023-11-08,1.0799,down,1,1.1429,1,1.1429,1.1429,phantom,1.76,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE071Y01013,,2020-08-12,1.0048,down,0,,1,2.4,2.4,phantom,1.99,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE972X01022,VAISHALI,2024-10-15,7.3118,down,1,5.0,2,3.5,16.0,ratio-conflict,0.62,winner,
+INE972X01022,VAISHALI,2024-10-15,7.3118,down,1,5.0,2,3.5,16.0,ratio-conflict,0.62,winner,
+INE586X01012,GTECJAINX,2020-07-01,,edge,1,3.1,0,,3.1,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE562X01013,UNIVASTU,2025-08-29,0.9786,up,1,1.5,0,,9.0,phantom,16.88,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE632X01030,SHRENIK,2020-10-08,5.4632,down,1,2.0,2,2.5,30.0,ratio-conflict,-0.72,loser,
+INE632X01030,SHRENIK,2020-10-08,5.4632,down,1,2.0,2,2.5,30.0,ratio-conflict,-0.72,loser,
+INE413X01035,,2022-03-01,,edge,0,,0,,1.2,single-source,,,
+INE413X01035,,2022-11-28,,edge,0,,0,,1.2,single-source,,,
+INE413X01035,,2024-01-05,,edge,0,,0,,1.2,reverse-split,,,
+INE668X01018,BANSAL,2025-04-11,,edge,1,0.01,0,,0.0001,reverse-split,-0.94,wipeout,
+INE668X01018,BANSAL,2025-06-16,,edge,1,0.01,0,,0.0001,reverse-split,-0.94,wipeout,
+INE581X01021,GLOBE,2021-08-03,14.3271,down,1,3.0,2,4.0,15.0,ratio-conflict,-0.33,loser,
+INE581X01021,GLOBE,2021-08-03,14.3271,down,1,3.0,2,4.0,15.0,ratio-conflict,-0.33,loser,
+INE442V01012,,2021-05-08,3.7526,down,0,,0,,3.0,single-source,10.13,multibagger,"merged-only, price-confirmed (likely yahoo gap-fill; STRICT would flag)"
+INE02EZ01022,AXITA,2023-12-22,1.1992,down,1,1.3333,1,1.3333,19.5555,phantom,1.57,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE02EZ01022,AXITA,2026-02-13,1.0697,down,1,1.1,1,1.1,19.5555,phantom,1.57,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE01KI01027,VINNY,2022-05-26,1.0475,down,1,1.1,1,1.1,25.3,phantom,-0.32,loser,source(s) claim event but raw price shows no ~ratio gap
+INE01KI01027,VINNY,2023-02-24,21.9213,down,1,2.3,2,6.15,25.3,ratio-conflict,-0.32,loser,
+INE01KI01027,VINNY,2023-02-24,21.9213,down,1,2.3,2,6.15,25.3,ratio-conflict,-0.32,loser,
+INE01II01013,SILGO,2021-01-07,1.1957,down,1,1.25,1,1.25,1.25,phantom,1.66,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE01A501027,,2025-04-02,,edge,0,,0,,4.0,count-conflict,,,"2 merged entries (ratio 2.0) on ['2025-04-02', '2025-04-21'] span 19d collapse to ONE real event (>10d apart -> slipped dedup window)"
+INE688Y01022,DANGEE,2022-09-06,14.5295,down,1,1.5,2,5.75,15.0,ratio-conflict,-0.32,loser,
+INE688Y01022,DANGEE,2022-09-06,14.5295,down,1,1.5,2,5.75,15.0,ratio-conflict,-0.32,loser,
+INE721Z01010,AARON,2019-08-29,1.0647,down,1,1.1,1,1.1,4.2,phantom,11.75,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE00IK01029,OSWALSEEDS,2024-02-02,1.1555,down,1,1.2,1,1.2,6.0,phantom,1.55,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE00LM01029,SONAMLTD,2022-07-14,,edge,1,2.0,1,2.0,4.0,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE255Z01019,E2E,2026-06-05,,edge,1,10.0,1,10.0,10.0,phantom,74.68,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE256Z01025,AKSHAR,2024-02-15,1.1467,down,2,1.2,1,1.2,12.0,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE032Z01020,BSHSL,2019-10-22,1.0221,down,1,1.2,1,1.2,16.0,phantom,24.76,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE032Z01020,BSHSL,2020-08-27,1.1217,down,1,1.3333,1,1.3333,16.0,phantom,24.76,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE626Z01029,HARDWYN,2023-06-05,12.1742,down,1,10.0,2,5.6667,28.0,ratio-conflict,67.35,multibagger,
+INE626Z01029,HARDWYN,2023-06-05,12.1742,down,1,10.0,2,5.6667,28.0,ratio-conflict,67.35,multibagger,
+INE997Y01027,MITTAL,2021-08-31,1.0091,down,1,1.1,1,1.1,18.3333,phantom,-0.13,flat,source(s) claim event but raw price shows no ~ratio gap
+INE568Z01015,URAVIDEF,2022-07-11,,edge,1,2.0,1,2.0,2.0,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE155Z01011,MACPOWER,2020-06-30,1.0,up,1,1.02,1,1.02,1.02,phantom,6.33,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE324X01026,SARVESHWAR,2023-09-15,29.6224,down,2,3.0,2,6.5,30.0,ratio-conflict,0.33,winner,
+INE324X01026,SARVESHWAR,2023-09-15,29.6224,down,2,3.0,2,6.5,30.0,ratio-conflict,0.33,winner,
+INE740X01023,LAL,2024-03-28,15.1776,down,1,1.5455,2,5.7727,15.4546,ratio-conflict,10.62,multibagger,
+INE740X01023,LAL,2024-03-28,15.1776,down,1,1.5455,2,5.7727,15.4546,ratio-conflict,10.62,multibagger,
+INE749Y01014,PARAMPARA,2019-07-01,,edge,0,,1,4.0,4.0,phantom,,,source(s) claim event but raw price shows no ~ratio gap
+INE880Y01017,SOLEX,2024-09-20,1.1649,down,1,1.25,1,1.25,1.25,phantom,25.68,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE098201036,VCL,2021-12-27,1.6338,down,0,,1,1.6667,16.6667,single-source,0.0,flat,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE098201036,VCL,2022-03-28,4.8651,down,0,,1,5.0,16.6667,single-source,0.0,flat,single-source but PRICE-CONFIRMED (STRICT mode would flag)
+INE02WG01024,WEL,2021-10-06,,edge,1,1.6,1,1.6,16.0,phantom,16.0,multibagger,source(s) claim event but raw price shows no ~ratio gap
+INE04AK01028,SBC,2022-02-22,19.0323,down,1,10.0,2,6.0,45.0,ratio-conflict,74.89,multibagger,
+INE04AK01028,SBC,2022-02-22,19.0323,down,1,10.0,2,6.0,45.0,ratio-conflict,74.89,multibagger,
+INE757T01025,AEPL,2016-01-01,,edge,0,,0,,87.78,single-source,,,
+INE757T01025,AEPL,2018-06-01,,edge,0,,0,,87.78,single-source,,,
+INE757T01025,AEPL,2019-03-01,,edge,0,,0,,87.78,single-source,,,
+INE757T01025,AEPL,2023-03-31,,edge,0,,0,,87.78,single-source,,,
+INE00UG01014,KHFM,2021-12-16,0.9903,up,1,1.0333,1,1.0333,1.0333,phantom,0.79,winner,source(s) claim event but raw price shows no ~ratio gap
