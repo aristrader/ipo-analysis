@@ -1,7 +1,17 @@
 # HANDOVER — Data-Foundation Rebuild (read this FIRST to resume)
 
-**Last worked:** 2026-06-18. **Status:** paused mid-discussion (owner stepping away). Nothing is lost —
-everything is on disk; this doc is the single entry point to pick up from the exact spot.
+**Last worked:** 2026-06-18. **Status:** paused mid-discussion (owner stepping away **~3 months, until ~Sept 2026**).
+Nothing is lost — everything is on disk; this doc is the single entry point to pick up from the exact spot.
+
+> **⏸ 3-MONTH PAUSE — durability note (read this):** The **committed git state is fully durable** — the frozen
+> baseline substrate (`data/`), all code, and all 13 handover docs are in git on `night-run-consolidation`
+> (head incl. commit `0c56069`). **BUT `data_build/` (~3.5 GB fresh raw, gitignored) is LOCAL-ONLY** — if this
+> machine is wiped/changed before resuming, **back it up**, or accept re-fetching it via `foundation/refetch.py`.
+> ⚠ Re-fetching after months gives *slightly different* data: NSE's corp-action endpoint is a **rolling window**,
+> so a later re-fetch will drop even more recent events (reinforces the ISS-11 union-merge-against-frozen need),
+> and "current"-as-of fields (prices, current market cap) advance. None of this blocks resuming — the analysis
+> substrate is the committed frozen `data/`; `data_build/` is only the raw for the eventual rebuild. Just don't
+> assume a fresh re-fetch reproduces the 2026-06-18 snapshot exactly.
 
 ---
 
