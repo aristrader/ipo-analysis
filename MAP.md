@@ -3,7 +3,7 @@
 > Navigation, data-flow, and a context index for this repo. Generated from `project_map.py`.
 
 ## CANONICAL FACTS (generated — do not hand-edit; hand-docs must point here)
-> 29 findings · 375 tests · 2384 substrate rows · AS_OF 2026-06-06
+> 29 findings · 621 tests · 2384 substrate rows · AS_OF 2026-06-06
 
 ## Navigate — to do X, start here
 - `PYTHONPATH=. python run_all.py` — build the dataset (whole pipeline DAG; --from to resume)

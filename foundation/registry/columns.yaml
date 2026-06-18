@@ -179,7 +179,7 @@ columns:
     family: D
     sources: [nse_subscription, ipowatch, chittorgarh]
     parser: parse_num
-    validator: validate_nonneg
+    validator: subscription_x_valid
     as_of: at_ipo
     prov: true
     applicability: ipo
@@ -190,7 +190,7 @@ columns:
     family: D
     sources: [investorgain, ipowatch]
     parser: parse_pct
-    validator: null
+    validator: validate_gmp_nonzero
     as_of: at_ipo
     prov: true
     applicability: ipo

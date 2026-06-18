@@ -389,3 +389,43 @@ Removed DONE.md (redundant with git log; content preserved in git history). Repo
 docs keep their dated DONE.md citations (recoverable via git log by date). Earlier this session: archived 6 feeder
 planning docs + old session log → docs/research/archive/, generated docs/research/INDEX.md (map of all docs),
 backlog stripped to OPEN-only, lean README → INDEX, doc-discipline locked in CLAUDE.md. verify exit 0.
+
+## 2026-06-18 — Foundation Phase 1 / T1.1: the `_prov` provenance-encoding engine (the I1 fix)  [path: FULL, TDD + review]
+BUILT `foundation/provenance.py` — the mechanism that records HOW we know each value, separate from
+the value, so a `0`/blank is never again ambiguous. Five codes (`present`/`derived`/`Missing_data`/
+`error_out`/`N/A`; present+derived carry a value, the other three are NULL). Core = `classify()`
+(decision tree: not-applicable→N/A; our fetch fail [network/blocked]→error_out [retryable, THE refetch
+worklist, R2/G2]; HTTP-error/empty→Missing_data; parser crash→error_out; parser→None→Missing_data;
+parsed-but-fails-validity→Missing_data; passes→present) + `classify_column()` (registry-driven by
+parser/validator NAME) + `derived()` (T1.3 stamp, bypasses validation by design). VALIDATE-BEFORE-STAMP:
+a value earns `present` only after passing its check — kills "provenance laundering".
+TDD: 36 tests written first (red), then impl (green). Right-sized the pipeline: skipped multi-lens
+DIVERGE (design already locked in FOUNDATION_PLAN §2.1/T1.1) → TDD build → independent adversarial
+review (superpowers:code-reviewer) → fix.
+REVIEW caught the key hole (not a style nit): the headline I1 fix worked ONLY via a hand-passed
+validator — the REGISTRY path Phase 2 will actually use still laundered placeholder zeros
+(`sub_total_x`→validate_nonneg accepted MB `0.00x`→0.0 as present; `gmp_pct`→null accepted 0). FIXED
+for real: added context-aware named validators to the registry (`subscription_x_valid` — board
+disambiguates real SME 0 from masked-missing MB 0x; `validate_gmp_nonzero` — source 0 = placeholder,
+negative GMP is real) and repointed both columns in columns.yaml. Also hardened per review: non-bool
+validator return now RAISES (never coerce truthy garbage into present); validator exceptions propagate
+loud (code bug ≠ data state); EMPTY 2xx bucketed directly as Missing_data (never trusts stale raw).
+Added registry-path tests (the review's #1 priority), non-bool/raise/EMPTY/derived-bypass/passthrough.
+TESTS: tests/foundation 70 passed (36 new provenance). Full foundation+scrapers 288 passed. registry
+assert_valid OK. verify.py exit 0 (no structural drift). NOTE: 9 PRE-EXISTING tests/data failures
+(substrate-integrity trough/peak + weights derivation) confirmed to fail on the clean pre-T1.1 tree too
+(stash-verified) — 2026-06-06 refresh fallout on the OLD Layer-2/3 substrate, untouched by T1.1.
+The real ofs_cr=0 protection (725 rows) holds: classify_column('ofs_cr','0')→present,0.0.
+NEXT: T1.2 (cross-field validity predicates, Σtranches vs total) — on owner go.
+
+## 2026-06-18 — Foundation rebuild PAUSED (owner stepping away) + full handover  [path: research/handover]
+After T1.1 (provenance engine) was built + reviewed, did a deep research + 2-agent review pass that surfaced
+**40 tracked issues** (data-quality/sourcing/leakage), and held a discussion phase splitting them into
+Claude-handles (Bucket A) vs owner-decides (Bucket B). Owner paused the project. ALL state is captured in
+`docs/research/phase_prep/` (13 files): `HANDOVER.md` (the cold-start resume doc — read first), `10_issue_tracker.md`
+(the 40-issue queue with locked + pending decisions), `11_sourcing_trust_map.md` (per-field where-to-source/trust),
+`09_t1_1_corrected_rules.md` (the T1.1 subscription-rule correction + gate-vs-match principle), and findings 01–08.
+Key insight banked: **gate vs match** (the provenance gate only rejects the impossible / marks doubt as
+Missing_data; promoting an uncertain value to present belongs to the cross-source match). T1.1 is UNCOMMITTED +
+needs correction (ISS-1). NO data re-pull needed (all on disk). Resume pointer set in project memory →
+`HANDOVER.md`. This commit is a WIP preserve so a clean checkout later loses nothing.

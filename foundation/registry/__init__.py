@@ -63,6 +63,30 @@ def _validate_isin(v):
     return isinstance(v, str) and len(v) == 12 and v[:3] == "INE" and v.isalnum()
 
 
+def _subscription_x_valid(v, context=None):
+    """sub_total_x validity: a 0 is REAL for SME (genuine no-demand) but MASKED-MISSING for MB.
+
+    Context-aware — board disambiguates (per columns.yaml). A 0 with no board context cannot be
+    trusted, so it fails closed (-> Missing_data); Phase-2 assembly always threads `board`. Negative
+    subscription is never valid. None passes (classify() already nulls a missing value upstream).
+    """
+    if v is None:
+        return True
+    if v < 0:
+        return False
+    if v == 0:
+        return (context or {}).get("board") == "SME"
+    return True
+
+
+def _validate_gmp_nonzero(v):
+    """gmp_pct validity: a source 0 is a placeholder (never published), not a real premium.
+
+    Negative GMP (a grey-market discount) is REAL and valid; only 0 is rejected. None passes.
+    """
+    return v is None or v != 0
+
+
 PARSERS = {
     "parse_text": ingest.text,            # strip; '' / placeholders -> None
     "parse_num": ingest.num,              # number or None; never mints 0
@@ -78,6 +102,8 @@ VALIDATORS = {
     "validate_isin": _validate_isin,
     "validate_nonneg": lambda v: v is None or v >= 0,
     "validate_positive": lambda v: v is None or v > 0,
+    "subscription_x_valid": _subscription_x_valid,   # context-aware (board): MB 0x = masked-missing
+    "validate_gmp_nonzero": _validate_gmp_nonzero,    # source 0 = placeholder; negative GMP is real
 }
 
 # ── allowed vocabularies (the meta-validator enforces these) ─────────────────────
